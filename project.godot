@@ -24,6 +24,10 @@ window/size/viewport_height=1080
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [input]
 
 up={

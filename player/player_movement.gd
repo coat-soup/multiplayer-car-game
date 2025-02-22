@@ -25,12 +25,17 @@ signal jump_land
 
 var debug_mode = false
 
-
+func _enter_tree() -> void:
+	set_multiplayer_authority(str(name).to_int())
 
 func _ready():
+	if not is_multiplayer_authority(): return
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera.current = true
 
 func _input(_event: InputEvent) -> void:
+	if not is_multiplayer_authority(): return
 	if Input.is_key_pressed(KEY_SEMICOLON):
 		debug_mode = !debug_mode
 		if debug_mode:
@@ -40,13 +45,16 @@ func _input(_event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not is_multiplayer_authority(): return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * sensetivity)
 		camera_pivot.rotate_x(-event.relative.y * sensetivity)
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
+	
 	# gravity
 	if not is_on_floor() and !debug_mode:
 		velocity += get_gravity() * delta

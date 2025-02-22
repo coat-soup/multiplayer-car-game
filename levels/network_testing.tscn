@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bknx5waew7h7a"]
+[gd_scene load_steps=10 format=3 uid="uid://fjs02dvqh52d"]
 
-[ext_resource type="Script" path="res://system/game_manager.gd" id="1_oqphg"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_armmp"]
-[ext_resource type="PackedScene" uid="uid://cyk67kv73er43" path="res://player/player.tscn" id="2_p25ui"]
-[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/car_base.tscn" id="4_2pn4i"]
-[ext_resource type="PackedScene" uid="uid://dqp1i2nc4cx44" path="res://vehicles/joint_test.tscn" id="4_rtj0t"]
+[ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
+[ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
+[ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,7 +20,7 @@ glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gmg0p"]
 render_priority = 0
-shader = ExtResource("2_armmp")
+shader = ExtResource("2_2nf1g")
 shader_parameter/world_uv = false
 shader_parameter/object_uv = false
 shader_parameter/object_uv_scale = Vector2(1, 1)
@@ -45,7 +44,7 @@ shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_khg7y"]
 render_priority = 0
-shader = ExtResource("2_armmp")
+shader = ExtResource("2_2nf1g")
 shader_parameter/world_uv = false
 shader_parameter/object_uv = false
 shader_parameter/object_uv_scale = Vector2(1, 1)
@@ -68,7 +67,14 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [node name="Root" type="Node3D"]
-script = ExtResource("1_oqphg")
+script = ExtResource("1_b5jgp")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
+script = ExtResource("2_4gblq")
+ui = NodePath("../UI")
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
 
 [node name="World" type="Node3D" parent="."]
 
@@ -154,13 +160,34 @@ material = SubResource("ShaderMaterial_khg7y")
 
 [node name="Entities" type="Node3D" parent="."]
 
-[node name="JointTest" parent="." instance=ExtResource("4_rtj0t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2031, 8.68515, -31.4546)
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+script = ExtResource("4_8l0fg")
 
-[node name="Body" parent="." instance=ExtResource("4_2pn4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.3309, 1.44977, -8.24686)
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 879.0
+offset_top = 476.0
+offset_right = 1079.0
+offset_bottom = 576.0
 
-[node name="Player" parent="Body" instance=ExtResource("2_p25ui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336132, 3.01478, -0.202471)
-platform_floor_layers = 4294967294
-speed = 0.0
+[node name="Host" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "HOST
+"
+
+[node name="Join" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

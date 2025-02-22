@@ -1,25 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=7 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
+[ext_resource type="Script" path="res://player/player_network_manager.gd" id="2_yagft"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybx0f"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_cp4tc"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybx0f"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ubgm6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("CameraPivot:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
 script = ExtResource("1_u3ln2")
 
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("third_person_models")]
+script = ExtResource("2_yagft")
+third_person_models = [NodePath("../CameraPivot/FaceModel")]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_765p8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.103251, 0, 0, 0, 0.188333, 0, 0, 0, 0.356786, 0, -0.625118, -0.440982)
-mesh = SubResource("BoxMesh_cp4tc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ybx0f")
@@ -28,3 +40,23 @@ shape = SubResource("CapsuleShape3D_ybx0f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
+
+[node name="FaceModel" type="Node3D" parent="CameraPivot"]
+
+[node name="Eyes" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
+transform = Transform3D(0.53311, 0, 0, 0, 0.27028, 0, 0, 0, 0.200378, 0, -0.167882, -0.420097)
+mesh = SubResource("BoxMesh_cp4tc")
+skeleton = NodePath("../../../MeshInstance3D")
+
+[node name="Eyes2" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
+transform = Transform3D(0.0553542, 0, 0, 0, 0.0553542, 0, 0, 0, 0.880138, -0.611887, -0.532021, -0.376919)
+mesh = SubResource("BoxMesh_cp4tc")
+skeleton = NodePath("../../../MeshInstance3D")
+
+[node name="Eyes3" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
+transform = Transform3D(0.0553542, 0, 0, 0, 0.0553542, 0, 0, 0, 0.880138, 0.612, -0.532, -0.377)
+mesh = SubResource("BoxMesh_cp4tc")
+skeleton = NodePath("../../../MeshInstance3D")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["player"]]
+replication_config = SubResource("SceneReplicationConfig_ubgm6")
