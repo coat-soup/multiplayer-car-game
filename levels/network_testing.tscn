@@ -185,6 +185,11 @@ layout_mode = 2
 text = "JOIN
 "
 
+[node name="LobbyIDTextField" type="TextEdit" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "LOBBY ID"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("..")

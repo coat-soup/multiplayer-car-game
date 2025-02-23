@@ -25,9 +25,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
 script = ExtResource("1_u3ln2")
 
-[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("third_person_models")]
+[node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
 script = ExtResource("2_yagft")
 third_person_models = [NodePath("../CameraPivot/FaceModel")]
+username_label = NodePath("UsernameLabel")
+
+[node name="UsernameLabel" type="Label3D" parent="NetworkManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36817, 0)
+billboard = 1
+text = "STEAM USER"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 0

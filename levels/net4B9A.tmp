@@ -1,0 +1,197 @@
+[gd_scene load_steps=10 format=3 uid="uid://fjs02dvqh52d"]
+
+[ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
+[ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
+[ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0xu5t"]
+sky_material = SubResource("ProceduralSkyMaterial_gm8k2")
+
+[sub_resource type="Environment" id="Environment_recut"]
+background_mode = 2
+sky = SubResource("Sky_0xu5t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmg0p"]
+render_priority = 0
+shader = ExtResource("2_2nf1g")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_khg7y"]
+render_priority = 0
+shader = ExtResource("2_2nf1g")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 5
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_b5jgp")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
+script = ExtResource("2_4gblq")
+ui = NodePath("../UI")
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_recut")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Blockout" type="Node3D" parent="World"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.5, 0)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(100, 31, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -14.1554, -0.886848, -34)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(33, 10, 10)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2272, 0, 10.3654)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(1.29375, 0, 0, 0, 1.29375, 0, 0, 0, 1.29375, -24.7526, 0, 12.5998)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(1.29375, 0, 0, 0, 1.29375, 0, 0, 0, 1.29375, -22.0502, 0, 12.7875)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -24.212, 0, 10.0997)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -23.8907, -0.229135, 11.53)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -22.5456, -0.365658, 10.477)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="World/Blockout"]
+transform = Transform3D(3.7154, 0, 0, 0, 2.00678, 0, 0, 0, 3.7154, -25.4402, -0.365658, 11.0293)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/Blockout"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -38.4327, 0, 0)
+use_collision = true
+height = 8.26643
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="World/Blockout"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -38.4327, 0, 1.44015)
+use_collision = true
+height = 8.26643
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="World/Blockout"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -38.4327, 0, 2.8718)
+use_collision = true
+height = 8.26643
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="World/Blockout"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -38.4327, 0, -1.93304)
+use_collision = true
+height = 8.26643
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+script = ExtResource("4_8l0fg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 879.0
+offset_top = 476.0
+offset_right = 1079.0
+offset_bottom = 576.0
+
+[node name="Host" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "HOST
+"
+
+[node name="Join" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="LobbyIdText" type="TextEdit" parent="UI/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "lobby id"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]
