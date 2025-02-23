@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bknx5waew7h7a"]
+[gd_scene load_steps=10 format=3 uid="uid://bknx5waew7h7a"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_oqphg"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_armmp"]
-[ext_resource type="PackedScene" uid="uid://cyk67kv73er43" path="res://player/player.tscn" id="2_p25ui"]
 [ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/car_base.tscn" id="4_2pn4i"]
 [ext_resource type="PackedScene" uid="uid://dqp1i2nc4cx44" path="res://vehicles/joint_test.tscn" id="4_rtj0t"]
 
@@ -158,9 +157,4 @@ material = SubResource("ShaderMaterial_khg7y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2031, 8.68515, -31.4546)
 
 [node name="Body" parent="." instance=ExtResource("4_2pn4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.3309, 1.44977, -8.24686)
-
-[node name="Player" parent="Body" instance=ExtResource("2_p25ui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336132, 3.01478, -0.202471)
-platform_floor_layers = 4294967294
-speed = 0.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26947, 4.50145, -7.50374)

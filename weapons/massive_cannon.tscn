@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://b8at3wds2wf86"]
+
+[ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://weapons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
+[ext_resource type="Script" path="res://weapons/cannon_controller.gd" id="2_g2jg0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2xyfk"]
+height = 0.304745
+radius = 2.22922
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0kiod"]
+size = Vector3(3.3, 0.16, 2.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_js57a"]
+size = Vector3(1.74927, 1, 1.90497)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hidmy"]
+size = Vector3(2, 0.16, 1.959)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_e6uqf"]
+height = 7.41824
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ip4v0"]
+size = Vector3(2.12775, 1.88727, 5.68536)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_02dn1"]
+properties/0/path = NodePath("Yaw:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Yaw/Pitch:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="massive_cannon" instance=ExtResource("1_mnts8")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+script = ExtResource("2_g2jg0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+shape = SubResource("CylinderShape3D_2xyfk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Yaw" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0103149, 0.147334, -0.00012207)
+shape = SubResource("BoxShape3D_0kiod")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Yaw/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835395, 1.02184, 2.00014)
+shape = SubResource("BoxShape3D_js57a")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Yaw/StaticBody3D" index="2"]
+transform = Transform3D(1, -8.11558e-10, -6.2538e-10, 1.02449e-09, 0.784895, 0.619628, -1.20083e-11, -0.619628, 0.784895, -0.0241088, 0.876029, 3.7306)
+shape = SubResource("BoxShape3D_hidmy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Yaw/Pitch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.845556, -1.88017, -1.99645)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/Pitch/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.876808, 3.2183, -4.99952)
+shape = SubResource("CylinderShape3D_e6uqf")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Yaw/Pitch/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.876808, 3.2183, 1.51183)
+shape = SubResource("BoxShape3D_ip4v0")
+
+[node name="Camera3D" type="Camera3D" parent="Yaw/Pitch" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70781, 1.21923, 0.430433)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="2"]
+replication_config = SubResource("SceneReplicationConfig_02dn1")

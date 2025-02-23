@@ -31,7 +31,7 @@ third_person_models = [NodePath("../CameraPivot/FaceModel")]
 username_label = NodePath("UsernameLabel")
 
 [node name="UsernameLabel" type="Label3D" parent="NetworkManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.36817, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26044, 0)
 billboard = 1
 text = "STEAM USER"
 

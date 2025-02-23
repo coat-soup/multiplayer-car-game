@@ -12,7 +12,7 @@ func _ready() -> void:
 	center_of_mass_mode = CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = mass_marker.position
 	
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

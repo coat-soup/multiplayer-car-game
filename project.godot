@@ -24,6 +24,10 @@ window/size/viewport_height=1080
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 player=""
