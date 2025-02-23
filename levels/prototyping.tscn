@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_oqphg"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_armmp"]
-[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/car_base.tscn" id="4_2pn4i"]
-[ext_resource type="PackedScene" uid="uid://dqp1i2nc4cx44" path="res://vehicles/joint_test.tscn" id="4_rtj0t"]
+[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/scenes/car_base.tscn" id="4_2pn4i"]
+[ext_resource type="PackedScene" uid="uid://dqp1i2nc4cx44" path="res://vehicles/scenes/joint_test.tscn" id="4_rtj0t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

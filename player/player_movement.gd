@@ -109,3 +109,11 @@ func _physics_process(delta: float) -> void:
 
 func bob_calc(time : float) -> float:
 	return BOB_AMP * sin(time * BOB_FREQ)
+
+@rpc("call_local", "any_peer")
+func add_velocity_impulse(vel):
+	if is_multiplayer_authority():
+		velocity += vel
+		print("yeeted " + str(vel))
+	else:
+		print(name + " isnt auth, not yeeting")

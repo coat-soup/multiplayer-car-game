@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://khld0gaej8py"]
+
+[ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_r53e8"]
+[ext_resource type="Script" path="res://cannons/scripts/cannon_shell.gd" id="2_6t2uq"]
+[ext_resource type="PackedScene" uid="uid://bfmg7wnuki035" path="res://cannons/explosion_particles.tscn" id="3_8t2t6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mcjt0"]
+albedo_color = Color(0.629675, 0.629675, 0.629675, 1)
+metallic = 1.0
+roughness = 0.45
+
+[node name="shell" instance=ExtResource("1_r53e8")]
+script = ExtResource("2_6t2uq")
+radius = 4
+speed = 100.0
+drop_rate = 10.0
+particles = ExtResource("3_8t2t6")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_mcjt0")

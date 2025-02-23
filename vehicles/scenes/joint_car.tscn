@@ -1,0 +1,220 @@
+[gd_scene load_steps=10 format=3 uid="uid://yrhrbqwd2swc"]
+
+[ext_resource type="Script" path="res://vehicles/script/joint_car_test.gd" id="1_qm3e3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwdqh"]
+size = Vector3(5, 0.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_30bqt"]
+size = Vector3(5, 0.5, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pml64"]
+friction = 3.0
+rough = true
+bounce = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t2aw7"]
+height = 0.4
+radius = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s13oo"]
+top_radius = 0.8
+bottom_radius = 0.8
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckphd"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5na18"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6boer"]
+radius = 0.001
+
+[node name="JointCar" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("mass_marker", "traction_wheels", "steering_wheels")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_qm3e3")
+steering_power = 2.0
+engine_power = 15.0
+mass_marker = NodePath("CenterOfMass")
+traction_wheels = [NodePath("../WheelJoint3"), NodePath("../WheelJoint4")]
+steering_wheels = [NodePath("../TurnJoint"), NodePath("../TurnJoint2")]
+
+[node name="Body" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_kwdqh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/Body"]
+mesh = SubResource("BoxMesh_30bqt")
+
+[node name="CenterOfMass" type="Node3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.981762, -1.11699, 0)
+
+[node name="Camera3D" type="Camera3D" parent="RigidBody3D"]
+transform = Transform3D(1.30045e-07, 0.221821, -0.975087, -9.69609e-09, 0.975087, 0.221821, 1, -1.93922e-08, 1.28956e-07, -7.52578, 2.84028, 0)
+
+[node name="Wheel" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 2)
+physics_material_override = SubResource("PhysicsMaterial_pml64")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_t2aw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel/CollisionShape3D"]
+transform = Transform3D(-1, -8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 3.55271e-15, -8.74228e-08, -2.68657e-16, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_s13oo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ckphd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wheel/CollisionShape3D"]
+transform = Transform3D(1.666, 0, -3.32405e-23, 0, 0.242, 1.68847e-37, 1.39142e-22, -1.02666e-37, 0.398, -4.2828e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wheel/CollisionShape3D"]
+transform = Transform3D(0.239662, -8.88178e-16, -1.77636e-15, 8.88178e-16, 0.265626, -7.7647e-23, 2.00163e-23, 0, 0.398, 1.02405e-08, 0.244072, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wheel/CollisionShape3D"]
+transform = Transform3D(-7.28232e-08, -1.02666e-37, 0.398, 0, 0.242, 1.68847e-37, -1.666, 4.2039e-45, -1.73971e-08, -4.2828e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="Wheel2" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, -2)
+physics_material_override = SubResource("PhysicsMaterial_pml64")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel2"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_t2aw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel2/CollisionShape3D"]
+transform = Transform3D(-1, -8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 3.55271e-15, -8.74228e-08, -2.68657e-16, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_s13oo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ckphd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wheel2/CollisionShape3D"]
+transform = Transform3D(1.666, 0, -3.32405e-23, 0, 0.242, 1.68847e-37, 1.39142e-22, -1.02666e-37, 0.398, -4.28273e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wheel2/CollisionShape3D"]
+transform = Transform3D(0.239662, -8.88178e-16, -1.77636e-15, 8.88178e-16, 0.265626, -7.7647e-23, 2.00163e-23, 0, 0.398, -1.1097e-08, -0.244072, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wheel2/CollisionShape3D"]
+transform = Transform3D(-7.28232e-08, -1.02666e-37, 0.398, 0, 0.242, 1.68847e-37, -1.666, 4.2039e-45, -1.73971e-08, -4.28273e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="Wheel3" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 1.5)
+physics_material_override = SubResource("PhysicsMaterial_pml64")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel3"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_t2aw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel3/CollisionShape3D"]
+transform = Transform3D(-1, -8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 3.55271e-15, -8.74228e-08, -2.68657e-16, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_s13oo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ckphd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wheel3/CollisionShape3D"]
+transform = Transform3D(1.666, 0, -3.32405e-23, 0, 0.242, 1.68847e-37, 1.39142e-22, -1.02666e-37, 0.398, -4.28273e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wheel3/CollisionShape3D"]
+transform = Transform3D(-7.28232e-08, -1.02666e-37, 0.398, 0, 0.242, 1.68847e-37, -1.666, 4.2039e-45, -1.73971e-08, -4.28273e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="Wheel4" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -1.5)
+physics_material_override = SubResource("PhysicsMaterial_pml64")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wheel4"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_t2aw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wheel4/CollisionShape3D"]
+transform = Transform3D(-1, -8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 3.55271e-15, -8.74228e-08, -2.68657e-16, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_s13oo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ckphd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wheel4/CollisionShape3D"]
+transform = Transform3D(1.666, 0, -3.32405e-23, 0, 0.242, 1.68847e-37, 1.39142e-22, -1.02666e-37, 0.398, -4.2828e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wheel4/CollisionShape3D"]
+transform = Transform3D(-7.28232e-08, -1.02666e-37, 0.398, 0, 0.242, 1.68847e-37, -1.666, 4.2039e-45, -1.73971e-08, -4.2828e-10, 0, 0)
+mesh = SubResource("BoxMesh_5na18")
+
+[node name="WheelJoint" type="JoltGeneric6DOFJoint3D" parent="."]
+linear_limit_y/upper = 1.0
+linear_limit_y/lower = -1.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 3.0
+angular_limit_z/enabled = false
+angular_motor_y/enabled = true
+node_a = NodePath("../TurnJoint/TurnJointBody")
+node_b = NodePath("../Wheel")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="WheelJoint2" type="JoltGeneric6DOFJoint3D" parent="."]
+linear_limit_y/upper = 1.0
+linear_limit_y/lower = -1.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 3.0
+angular_limit_z/enabled = false
+angular_motor_y/enabled = true
+node_a = NodePath("../TurnJoint2/TurnJointBody2")
+node_b = NodePath("../Wheel2")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="WheelJoint3" type="JoltGeneric6DOFJoint3D" parent="."]
+linear_limit_y/upper = 1.0
+linear_limit_y/lower = -1.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 3.0
+angular_limit_z/enabled = false
+angular_motor_z/enabled = true
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../Wheel3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1.5)
+
+[node name="WheelJoint4" type="JoltGeneric6DOFJoint3D" parent="."]
+linear_limit_y/upper = 1.0
+linear_limit_y/lower = -1.0
+linear_spring_y/enabled = true
+linear_spring_y/frequency = 3.0
+angular_limit_z/enabled = false
+angular_motor_z/enabled = true
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../Wheel4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1.5)
+
+[node name="TurnJoint" type="JoltGeneric6DOFJoint3D" parent="."]
+angular_limit_y/upper = 0.523599
+angular_limit_y/lower = -0.523599
+angular_motor_y/enabled = true
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("TurnJointBody")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 2)
+
+[node name="TurnJointBody" type="RigidBody3D" parent="TurnJoint"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnJoint/TurnJointBody"]
+shape = SubResource("SphereShape3D_6boer")
+
+[node name="TurnJoint2" type="JoltGeneric6DOFJoint3D" parent="."]
+angular_limit_y/upper = 0.523599
+angular_limit_y/lower = -0.523599
+angular_motor_y/enabled = true
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("TurnJointBody2")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, -2)
+
+[node name="TurnJointBody2" type="RigidBody3D" parent="TurnJoint2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurnJoint2/TurnJointBody2"]
+shape = SubResource("SphereShape3D_6boer")
