@@ -7,12 +7,19 @@ const PLAYER = preload("res://player/player.tscn")
 var lobby_id = 0
 var steam_peer = SteamMultiplayerPeer.new()
 
+const PORT = 6969
+var enet_peer : ENetMultiplayerPeer
+const LOCAL_DEBUG := true
+
 func _ready() -> void:
 	OS.set_environment("SteamAppID", str(480))
 	OS.set_environment("SteamGameID", str(480))
 	Steam.steamInitEx()
 	
 	steam_peer.lobby_created.connect(_on_lobby_created)
+	
+	if LOCAL_DEBUG:
+		enet_peer = ENetMultiplayerPeer.new()
 
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
@@ -21,6 +28,10 @@ func _process(_delta: float) -> void:
 func _on_host_pressed() -> void:
 	steam_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC)
 	multiplayer.multiplayer_peer = steam_peer
+	
+	if LOCAL_DEBUG:
+		enet_peer.create_server(PORT)
+		multiplayer.multiplayer_peer = enet_peer
 	
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
@@ -33,8 +44,12 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
-	steam_peer.connect_lobby(ui.get_lobby_id())
-	multiplayer.multiplayer_peer = steam_peer
+	if not LOCAL_DEBUG:
+		steam_peer.connect_lobby(ui.get_lobby_id())
+		multiplayer.multiplayer_peer = steam_peer
+	else:
+		enet_peer.create_client("localhost", PORT)
+		multiplayer.multiplayer_peer = enet_peer
 	
 	$Camera3D.queue_free()
 	ui.toggle_network_menu(false)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=8 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
 [ext_resource type="Script" path="res://player/player_network_manager.gd" id="2_yagft"]
+[ext_resource type="Script" path="res://player/player_interaction_manager.gd" id="3_h4ya3"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
@@ -23,6 +24,7 @@ properties/2/replication_mode = 1
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_u3ln2")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
@@ -66,3 +68,7 @@ skeleton = NodePath("../../../MeshInstance3D")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["player"]]
 replication_config = SubResource("SceneReplicationConfig_ubgm6")
+
+[node name="InteractionManager" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("3_h4ya3")
+camera = NodePath("../CameraPivot/Camera")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8at3wds2wf86"]
+[gd_scene load_steps=13 format=3 uid="uid://b8at3wds2wf86"]
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://weapons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://weapons/cannon_controller.gd" id="2_g2jg0"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="3_e6mtt"]
+[ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2xyfk"]
 height = 0.304745
@@ -22,6 +24,9 @@ height = 7.41824
 [sub_resource type="BoxShape3D" id="BoxShape3D_ip4v0"]
 size = Vector3(2.12775, 1.88727, 5.68536)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_fh25b"]
+size = Vector3(1.0752, 1.521, 1.63397)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_02dn1"]
 properties/0/path = NodePath("Yaw:rotation")
 properties/0/spawn = true
@@ -30,9 +35,10 @@ properties/1/path = NodePath("Yaw/Pitch:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="massive_cannon" instance=ExtResource("1_mnts8")]
+[node name="massive_cannon" node_paths=PackedStringArray("control_manager") instance=ExtResource("1_mnts8")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 script = ExtResource("2_g2jg0")
+control_manager = NodePath("Controllable")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
 
@@ -67,5 +73,22 @@ shape = SubResource("BoxShape3D_ip4v0")
 [node name="Camera3D" type="Camera3D" parent="Yaw/Pitch" index="13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70781, 1.21923, 0.430433)
 
+[node name="Interact" type="StaticBody3D" parent="Yaw" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881239, 2.22047, 1.94155)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_e6mtt")
+prompt_text = "Control cannon"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/Interact" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0375977, 0.0471194, 0.00546265)
+shape = SubResource("BoxShape3D_fh25b")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="2"]
 replication_config = SubResource("SceneReplicationConfig_02dn1")
+
+[node name="Controllable" type="Node" parent="." index="3" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
+script = ExtResource("4_gnget")
+camera = NodePath("../Yaw/Pitch/Camera3D")
+interactable = NodePath("../Yaw/Interact")
+synchronizer = NodePath("../MultiplayerSynchronizer")
