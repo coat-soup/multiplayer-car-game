@@ -32,6 +32,7 @@ import/blender/enabled=false
 
 player=""
 ui=""
+"network manager"=""
 
 [input]
 

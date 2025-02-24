@@ -1,0 +1,736 @@
+[gd_scene load_steps=12 format=3 uid="uid://fjs02dvqh52d"]
+
+[ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
+[ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
+[ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
+[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="5_ijex1"]
+[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/scenes/car_base.tscn" id="6_kc7ag"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0xu5t"]
+sky_material = SubResource("ProceduralSkyMaterial_gm8k2")
+
+[sub_resource type="Environment" id="Environment_recut"]
+background_mode = 2
+sky = SubResource("Sky_0xu5t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmg0p"]
+render_priority = 0
+shader = ExtResource("2_2nf1g")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_khg7y"]
+render_priority = 0
+shader = ExtResource("2_2nf1g")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 5
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_b5jgp")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
+script = ExtResource("2_4gblq")
+ui = NodePath("../UI")
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_recut")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Blockout" type="Node3D" parent="World"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.5, 0)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(300, 31, 300)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -40.0099, -0.886848, -71.0751)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(33, 10, 13.5728)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.991445, 0.130526, 0, -0.130526, 0.991445, 0, 0, 0, 1, -30.1793, -2.18108, -90.0751)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(52.8309, 10, 13.5728)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0, 1, -43.7059, -7.28837, -51.4717)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(33, 24.7837, 13.5728)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -43.7059, -7.28837, -31.4717)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(33, 24.7837, 13.5728)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1.7528, 34.9818, -1.01321, -129.903)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(41.8931, 12.6445, 13.5728)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926, 0, 8.44439e-08, 2.26267e-08, -1.7528, -37.0407, -1.01321, -129.903)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(41.8931, 12.6445, 13.5728)
+
+[node name="BallBumps" type="Node3D" parent="World/Blockout"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.2272, 0, 10.3654)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.29375, 0, 0, 0, 1.29375, 0, 0, 0, 1.29375, -24.7526, 0, 12.5998)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.29375, 0, 0, 0, 1.29375, 0, 0, 0, 1.29375, -22.0502, 0, 12.7875)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -24.212, 0, 10.0997)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -23.8907, -0.229135, 11.53)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(2.00678, 0, 0, 0, 2.00678, 0, 0, 0, 2.00678, -22.5456, -0.365658, 10.477)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(3.7154, 0, 0, 0, 2.00678, 0, 0, 0, 3.7154, -25.4402, -0.365658, 11.0293)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D8" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -26.0465, 0, 8.65564)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D9" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.29375, 0, -1.13103e-07, 0, 1.29375, 0, 1.13103e-07, 0, -1.29375, -22.5211, 0, 6.42124)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D10" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.29375, 0, -1.13103e-07, 0, 1.29375, 0, 1.13103e-07, 0, -1.29375, -25.2235, 0, 6.23354)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D11" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -23.0617, 0, 8.92134)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D12" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -23.383, -0.229135, 7.49104)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D13" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -24.7281, -0.365658, 8.54404)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D14" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-3.7154, 0, -3.24811e-07, 0, 2.00678, 0, 3.24811e-07, 0, -3.7154, -21.8335, -0.365658, 7.99174)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D15" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -22.1609, 0, 14.3236)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D16" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.29375, 0, -1.13103e-07, 0, 1.29375, 0, 1.13103e-07, 0, -1.29375, -18.6355, 0, 12.0892)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D17" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.29375, 0, -1.13103e-07, 0, 1.29375, 0, 1.13103e-07, 0, -1.29375, -21.3379, 0, 11.9015)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D18" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -19.1761, 0, 14.5893)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D19" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -19.4974, -0.229135, 13.159)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D20" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.00678, 0, -1.75438e-07, 0, 2.00678, 0, 1.75438e-07, 0, -2.00678, -20.8425, -0.365658, 14.212)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D21" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-3.7154, 0, -3.24811e-07, 0, 2.00678, 0, 3.24811e-07, 0, -3.7154, -17.9479, -0.365658, 13.6597)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D22" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.655901, 0, -0.754847, 0, 1, 0, 0.754847, 0, -0.655901, -19.313, 0, 11.781)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D23" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.848572, 0, -0.976583, 0, 1.29375, 0, 0.976583, 0, -0.848572, -18.6873, 0, 7.65433)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D24" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.848572, 0, -0.976583, 0, 1.29375, 0, 0.976583, 0, -0.848572, -20.6015, 0, 9.57112)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D25" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.31625, 0, -1.51481, 0, 2.00678, 0, 1.51481, 0, -1.31625, -17.1547, 0, 9.70222)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D26" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.31625, 0, -1.51481, 0, 2.00678, 0, 1.51481, 0, -1.31625, -18.4451, -0.229135, 9.00662)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D27" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.31625, 0, -1.51481, 0, 2.00678, 0, 1.51481, 0, -1.31625, -18.5325, -0.365658, 10.7126)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D28" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-2.43693, 0, -2.80456, 0, 2.00678, 0, 2.80456, 0, -2.43693, -17.0508, -0.365658, 8.16539)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D29" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.266868, 0, 0.963733, 0, 1, 0, -0.963733, 0, 0.266868, -22.9421, 9.53674e-07, 19.5783)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D30" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.345261, 0, 1.24683, 0, 1.29375, 0, -1.24683, 0, 0.345261, -21.7295, 9.53674e-07, 23.5721)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D31" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.345261, 0, 1.24683, 0, 1.29375, 0, -1.24683, 0, 0.345261, -20.8274, 9.53674e-07, 21.0178)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D32" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.535546, 0, 1.934, 0, 2.00678, 0, -1.934, 0, 0.535546, -23.9947, 9.53674e-07, 22.3839)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D33" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.535546, 0, 1.934, 0, 2.00678, 0, -1.934, 0, 0.535546, -22.5305, -0.229134, 22.456)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D34" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.535546, 0, 1.934, 0, 2.00678, 0, -1.934, 0, 0.535546, -23.1863, -0.365657, 20.8786)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D35" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.991523, 0, 3.58065, 0, 2.00678, 0, -3.58065, 0, 0.991523, -23.4266, -0.365657, 23.8156)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D36" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.266868, 0, -0.963733, 0, 1, 0, 0.963733, 0, -0.266868, -25.8759, 9.53674e-07, 23.7665)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D37" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.345261, 0, -1.24683, 0, 1.29375, 0, 1.24683, 0, -0.345261, -27.0885, 9.53674e-07, 19.7726)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D38" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.345261, 0, -1.24683, 0, 1.29375, 0, 1.24683, 0, -0.345261, -27.9905, 9.53674e-07, 22.3269)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D39" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -24.8233, 9.53674e-07, 20.9608)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D40" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -26.2875, -0.229134, 20.8888)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D41" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -25.6316, -0.365657, 22.4661)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D42" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.991522, 0, -3.58065, 0, 2.00678, 0, 3.58065, 0, -0.991522, -25.3914, -0.365657, 19.5291)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D43" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.266868, 0, -0.963733, 0, 1, 0, 0.963733, 0, -0.266868, -19.3766, 9.53674e-07, 21.5344)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D44" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.345261, 0, -1.24683, 0, 1.29375, 0, 1.24683, 0, -0.345261, -20.5892, 9.53674e-07, 17.5406)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D45" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.345261, 0, -1.24683, 0, 1.29375, 0, 1.24683, 0, -0.345261, -21.4913, 9.53674e-07, 20.0949)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D46" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -18.324, 9.53674e-07, 18.7288)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D47" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -19.7882, -0.229134, 18.6567)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D48" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.535546, 0, -1.934, 0, 2.00678, 0, 1.934, 0, -0.535546, -19.1323, -0.365657, 20.2341)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D49" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.991522, 0, -3.58065, 0, 2.00678, 0, 3.58065, 0, -0.991522, -18.8921, -0.365657, 17.2971)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D50" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.552432, 0, -0.833558, 0, 1, 0, 0.833558, 0, 0.552432, -21.0669, 9.53674e-07, 18.1113)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D51" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.714709, 0, -1.07842, 0, 1.29375, 0, 1.07842, 0, 0.714709, -24.877, 9.53674e-07, 16.407)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D52" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.714709, 0, -1.07842, 0, 1.29375, 0, 1.07842, 0, 0.714709, -23.5406, 9.53674e-07, 18.7633)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D53" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.10861, 0, -1.67277, 0, 2.00678, 0, 1.67277, 0, 1.10861, -22.4944, 9.53674e-07, 15.4765)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D54" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.10861, 0, -1.67277, 0, 2.00678, 0, 1.67277, 0, 1.10861, -23.5091, -0.229134, 16.5345)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D55" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.10861, 0, -1.67277, 0, 2.00678, 0, 1.67277, 0, 1.10861, -21.8883, -0.365657, 17.074)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D56" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(2.05251, 0, -3.097, 0, 2.00678, 0, 3.097, 0, 2.05251, -23.9477, -0.365657, 14.9662)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D57" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.36317, 0, -0.931723, 0, 1, 0, 0.931723, 0, -0.36317, -29.6023, 9.53674e-07, 16.4876)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D58" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.469851, 0, -1.20542, 0, 1.29375, 0, 1.20542, 0, -0.469851, -30.4038, 9.53674e-07, 12.3915)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D59" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.469851, 0, -1.20542, 0, 1.29375, 0, 1.20542, 0, -0.469851, -31.5601, 9.53674e-07, 14.8412)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D60" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.728802, 0, -1.86976, 0, 2.00678, 0, 1.86976, 0, -0.728802, -28.2707, 9.53674e-07, 13.8031)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D61" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.728802, 0, -1.86976, 0, 2.00678, 0, 1.86976, 0, -0.728802, -29.72, -0.229134, 13.583)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D62" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.728802, 0, -1.86976, 0, 2.00678, 0, 1.86976, 0, -0.728802, -29.2274, -0.365657, 15.2187)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D63" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.34932, 0, -3.46172, 0, 2.00678, 0, 3.46172, 0, -1.34932, -28.6908, -0.365657, 12.3212)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D64" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.36317, 0, 0.931723, 0, 1, 0, -0.931723, 0, 0.36317, -26.259, 9.53674e-07, 12.6183)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D65" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.469851, 0, 1.20542, 0, 1.29375, 0, -1.20542, 0, 0.469851, -25.4575, 9.53674e-07, 16.7145)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D66" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.469851, 0, 1.20542, 0, 1.29375, 0, -1.20542, 0, 0.469851, -24.3012, 9.53674e-07, 14.2648)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D67" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -27.5906, 9.53674e-07, 15.3028)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D68" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -26.1412, -0.229134, 15.5229)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D69" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -26.6338, -0.365657, 13.8873)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D70" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.34932, 0, 3.46172, 0, 2.00678, 0, -3.46172, 0, 1.34932, -27.1705, -0.365657, 16.7848)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D71" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.36317, 0, 0.931723, 0, 1, 0, -0.931723, 0, 0.36317, -32.9511, 9.53674e-07, 14.1802)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D72" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.469851, 0, 1.20542, 0, 1.29375, 0, -1.20542, 0, 0.469851, -32.1495, 9.53674e-07, 18.2763)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D73" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.469851, 0, 1.20542, 0, 1.29375, 0, -1.20542, 0, 0.469851, -30.9932, 9.53674e-07, 15.8266)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D74" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -34.2826, 9.53674e-07, 16.8647)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D75" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -32.8333, -0.229134, 17.0848)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D76" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(0.728802, 0, 1.86976, 0, 2.00678, 0, -1.86976, 0, 0.728802, -33.3259, -0.365657, 15.4491)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D77" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(1.34932, 0, 3.46172, 0, 2.00678, 0, -3.46172, 0, 1.34932, -33.8625, -0.365657, 18.3466)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D78" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.465105, 0, 0.885256, 0, 1, 0, -0.885256, 0, -0.465105, -31.6164, 9.53674e-07, 17.757)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D79" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.60173, 0, 1.1453, 0, 1.29375, 0, -1.1453, 0, -0.60173, -27.9987, 9.53674e-07, 19.8387)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D80" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.60173, 0, 1.1453, 0, 1.29375, 0, -1.1453, 0, -0.60173, -29.0894, 9.53674e-07, 17.3591)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D81" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.933363, 0, 1.77651, 0, 2.00678, 0, -1.77651, 0, -0.933363, -30.4634, 9.53674e-07, 20.5229)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D82" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.933363, 0, 1.77651, 0, 2.00678, 0, -1.77651, 0, -0.933363, -29.3466, -0.229134, 19.5732)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D83" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-0.933363, 0, 1.77651, 0, 2.00678, 0, -1.77651, 0, -0.933363, -30.9044, -0.365657, 18.8722)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGSphere3D84" type="CSGSphere3D" parent="World/Blockout/BallBumps"]
+transform = Transform3D(-1.72805, 0, 3.28908, 0, 2.00678, 0, -3.28908, 0, -1.72805, -29.0692, -0.365657, 21.1778)
+use_collision = true
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="SpeedBumps" type="Node3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7713, 3.8147e-06, 61.0369)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 0.379268)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 1.81942)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 3.25107)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, -1.55377)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 6.714)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 8.15415)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 9.5858)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -62.4197, 0, 4.78096)
+use_collision = true
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 0.379268)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 1.81942)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D11" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 3.25107)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D12" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, -1.55377)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D13" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 6.714)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D14" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 8.15415)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D15" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 9.5858)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="CSGCylinder3D16" type="CSGCylinder3D" parent="World/Blockout/SpeedBumps"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -81.4197, 0, 4.78096)
+use_collision = true
+radius = 1.0
+height = 16.0
+material = SubResource("ShaderMaterial_khg7y")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="." groups=["ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+script = ExtResource("4_8l0fg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 476.0
+offset_right = 1058.0
+offset_bottom = 586.0
+
+[node name="Host" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "HOST
+"
+
+[node name="Join" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="LobbyIDTextField" type="TextEdit" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "LOBBY ID"
+
+[node name="HUD" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InteractText" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 913.0
+offset_right = 1210.0
+offset_bottom = 936.0
+pivot_offset = Vector2(250, 0)
+text = "INTERACT TEXT"
+horizontal_alignment = 1
+
+[node name="ChatBox" type="Label" parent="UI/HUD"]
+visible = false
+layout_mode = 0
+offset_top = -2179.0
+offset_right = 600.0
+offset_bottom = 821.0
+pivot_offset = Vector2(0, 3000)
+vertical_alignment = 2
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="massive_cannon" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07, -5.1262)
+
+[node name="massive_cannon2" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 28.4864, -1.90735e-06, -34.877)
+
+[node name="massive_cannon3" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 90.8584, -1.90735e-06, 26.1711)
+
+[node name="Body" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8019, 6.79492, -4.79422)
+
+[connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

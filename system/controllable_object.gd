@@ -1,4 +1,4 @@
-extends Node
+extends RemoteTransform3D
 
 class_name Controllable
 
@@ -42,8 +42,12 @@ func take_control(player_id : String):
 	ui.display_chat_message("%s (auth: %s) taking control of cannon" % [player.name, str(player.is_multiplayer_authority())])
 	
 	using_player = player
+	#using_player.reparent(interactable)
+	remote_path = get_path_to(using_player)
+	player.position = Vector3.ZERO
 	
 	if is_multiplayer_authority():
+		using_player.hide()
 		ui.display_chat_message("true auth, doing cam")
 		control_started.emit()
 		camera.current = true
@@ -65,4 +69,7 @@ func un_controll():
 	else:
 		ui.display_chat_message("no auth, doing nothing")
 	
+	using_player.show()
+	#using_player.reparent(get_tree().get_root())
+	remote_path = ""
 	using_player = null

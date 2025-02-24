@@ -11,6 +11,9 @@ extends Node3D
 
 @export var barrel_end : Node3D
 
+@export var fire_rate := 1.2
+var fire_timer := 0.0
+
 @export_group("Pitch")
 @export_range(-360, 360) var p_min := -30
 @export_range(-360, 360) var p_max := 40
@@ -31,11 +34,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		pitch_obj.rotate_x(-event.relative.y * sensetivity)
 		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 	
-	if event.is_action_pressed("primary_fire"):
+	if event.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
+	
+
+func _process(delta: float) -> void:
+	if fire_timer > 0:
+		fire_timer -= delta
+
 
 @rpc("any_peer", "call_local")
 func fire_cannon():
+	fire_timer = 1 / fire_rate
+	
 	var shell_obj = shell.instantiate()
 	get_tree().get_root().add_child(shell_obj)
 	shell_obj.global_position = barrel_end.global_position

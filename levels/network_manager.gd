@@ -1,5 +1,7 @@
 extends Node
 
+class_name NetworkManager
+
 @export var ui : UIManager
 
 const PLAYER = preload("res://player/player.tscn")
@@ -11,6 +13,7 @@ const PORT = 6969
 var enet_peer : ENetMultiplayerPeer
 const LOCAL_DEBUG := false
 
+
 func _ready() -> void:
 	OS.set_environment("SteamAppID", str(480))
 	OS.set_environment("SteamGameID", str(480))
@@ -20,6 +23,7 @@ func _ready() -> void:
 	
 	if LOCAL_DEBUG:
 		enet_peer = ENetMultiplayerPeer.new()
+
 
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
@@ -61,6 +65,7 @@ func _on_lobby_created(connected, id):
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName()+"'s lobby"))
 		Steam.setLobbyJoinable(id, true)
 		print("Lobby created! ID: %s" % id)
+
 
 func add_player(peer_id):
 	var player = PLAYER.instantiate()

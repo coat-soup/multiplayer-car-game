@@ -40,7 +40,7 @@ properties/1/replication_mode = 1
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 script = ExtResource("2_g2jg0")
 shell = ExtResource("3_fqi0e")
-control_manager = NodePath("Controllable")
+control_manager = NodePath("Yaw/Controllable")
 barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
@@ -79,7 +79,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.025
 [node name="Camera3D" type="Camera3D" parent="Yaw/Pitch" index="14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70781, 1.21923, 0.430433)
 
-[node name="Interact" type="StaticBody3D" parent="Yaw" index="9"]
+[node name="Controllable" type="RemoteTransform3D" parent="Yaw" index="9" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881239, 2.22047, 1.94155)
+script = ExtResource("4_gnget")
+camera = NodePath("../Pitch/Camera3D")
+interactable = NodePath("../Interact")
+synchronizer = NodePath("../../MultiplayerSynchronizer")
+
+[node name="Interact" type="StaticBody3D" parent="Yaw" index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881239, 2.22047, 1.94155)
 collision_layer = 4
 collision_mask = 0
@@ -92,9 +99,3 @@ shape = SubResource("BoxShape3D_fh25b")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="2"]
 replication_config = SubResource("SceneReplicationConfig_02dn1")
-
-[node name="Controllable" type="Node" parent="." index="3" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
-script = ExtResource("4_gnget")
-camera = NodePath("../Yaw/Pitch/Camera3D")
-interactable = NodePath("../Yaw/Interact")
-synchronizer = NodePath("../MultiplayerSynchronizer")

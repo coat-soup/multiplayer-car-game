@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://fjs02dvqh52d"]
+[gd_scene load_steps=12 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="5_ijex1"]
+[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/scenes/car_base.tscn" id="6_kc7ag"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -70,7 +71,7 @@ shader_parameter/albedo_alpha = 0.5
 [node name="Root" type="Node3D"]
 script = ExtResource("1_b5jgp")
 
-[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui")]
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
 script = ExtResource("2_4gblq")
 ui = NodePath("../UI")
 
@@ -92,7 +93,91 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.5, 0)
 material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
-size = Vector3(300, 31, 300)
+size = Vector3(600, 31, 600)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.1623, -1.50002, 238.834)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(233.857, 31, 150)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.913, 22.5, 263.284)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(89.4512, 31, 73.9268)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -231.988, 16.9016, 84.2474)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -194.988, 16.9016, 138.247)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.988, 16.9016, 62.2474)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -119.988, 16.9016, 123.247)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -155.988, 16.9016, 222.247)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -221.988, 16.9016, 200.247)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 139.012, 16.9016, -81.7526)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176.012, 16.9016, -27.7526)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192.587, 16.9016, -86.9475)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 251.012, 16.9016, -42.7526)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 215.012, 16.9016, 56.2474)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.4518, 16.9016, 87.212)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(21.7575, 42.1968, 25.8545)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="World/Blockout"]
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -40.0099, -0.886848, -71.0751)
@@ -129,6 +214,18 @@ transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926,
 material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
 size = Vector3(41.8931, 12.6445, 13.5728)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926, 0, 8.44439e-08, 2.26267e-08, -1.7528, -48.5655, -0.374638, 193.276)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(55.3487, 14.9277, 20.9636)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(-4.22219e-08, -1.13134e-08, 1.7528, -0.258819, 0.965926, 8.30218e-16, -0.965926, -0.258819, -7.66177e-08, 157.435, -0.374638, 139.007)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(55.3487, 14.9277, 20.9636)
 
 [node name="BallBumps" type="Node3D" parent="World/Blockout"]
 
@@ -727,6 +824,27 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 28.4864, -1.90735e-06, 
 
 [node name="massive_cannon3" parent="." instance=ExtResource("5_ijex1")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 90.8584, -1.90735e-06, 26.1711)
+
+[node name="Body" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8019, 6.79492, -4.79422)
+
+[node name="Body2" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.8019, 6.79492, -4.79422)
+
+[node name="Body3" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.8019, 6.79492, -4.79422)
+
+[node name="Body4" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.8019, 6.79492, -56.7942)
+
+[node name="Body5" parent="." instance=ExtResource("6_kc7ag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.8019, 6.79492, -56.7942)
+
+[node name="massive_cannon4" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -19.3523, 14, 167.538)
+
+[node name="massive_cannon5" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(-0.35, 0, -0.606218, 0, 0.7, 0, 0.606218, 0, -0.35, -245.236, 3.8147e-06, -223.771)
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]
