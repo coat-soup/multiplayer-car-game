@@ -47,7 +47,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 		
 		var v := collider as VehicleController
 		if v:
-			v.apply_impulse_rpc.rpc_id(v.get_multiplayer_authority(), (30 * (v.global_position - position).normalized()), position)
+			v.apply_impulse_rpc.rpc_id(v.get_multiplayer_authority(), (15 * (v.global_position - position).normalized()), position)
 	
 	
 	spawn_particles_for_time(position, particles, parent, 1.0)

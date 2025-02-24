@@ -7,7 +7,8 @@ extends Node3D
 @export var shell : PackedScene
 
 @export var control_manager : Controllable
-@export var sensetivity := 0.0001
+@export var sensetivity := 0.0075
+@export var turn_speed := 1.0
 
 @export var barrel_end : Node3D
 
@@ -18,29 +19,44 @@ var fire_timer := 0.0
 @export_range(-360, 360) var p_min := -30
 @export_range(-360, 360) var p_max := 40
 
+var virtual_joystick_value = Vector2.ZERO
+@export var do_joystick := true
 
 var ui : UIManager
 
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
+	
+	control_manager.control_started.connect(on_controlled)
+	control_manager.control_ended.connect(on_uncontrolled)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not control_manager.using_player: return
 	if not control_manager.is_multiplayer_authority(): return
-
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		yaw_obj.rotate_y(-event.relative.x * sensetivity)
-		pitch_obj.rotate_x(-event.relative.y * sensetivity)
-		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 	
 	if event.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
 	
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if do_joystick:
+			virtual_joystick_value += Vector2(event.relative.x, event.relative.y) * sensetivity
+			virtual_joystick_value = virtual_joystick_value.limit_length(1)
+			ui.update_virtual_joystick(virtual_joystick_value)
+		else:
+			yaw_obj.rotate_y(-event.relative.x * sensetivity)
+			pitch_obj.rotate_x(-event.relative.y * sensetivity)
+			pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+
 
 func _process(delta: float) -> void:
 	if fire_timer > 0:
 		fire_timer -= delta
+	
+	if do_joystick and control_manager.is_multiplayer_authority() and virtual_joystick_value.length() > 0.1:
+		yaw_obj.rotate_y(-virtual_joystick_value.x * turn_speed * delta)
+		pitch_obj.rotate_x(-virtual_joystick_value.y * turn_speed * delta)
+		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 
 
 @rpc("any_peer", "call_local")
@@ -52,3 +68,12 @@ func fire_cannon():
 	shell_obj.global_position = barrel_end.global_position
 	shell_obj.global_rotation = barrel_end.global_rotation
 	shell_obj._ready()
+
+
+func on_controlled():
+	if do_joystick and control_manager.is_multiplayer_authority():
+		ui.toggle_virtual_joystick(true)
+	
+func on_uncontrolled():
+	if control_manager.is_multiplayer_authority():
+		ui.toggle_virtual_joystick(false)
