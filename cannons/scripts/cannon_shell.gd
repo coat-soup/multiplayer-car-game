@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	var space_state = get_world_3d().direct_space_state
 
 	var end = global_position + velocity * delta
-	var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask([1,2]))
+	var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask([1,2,6]))
 	query.exclude = [self]
 
 	var result := space_state.intersect_ray(query)

@@ -13,6 +13,8 @@ static func layer_mask(layers: Array) -> int:
 # 2 player (player should only ever have this)
 # 3 interactable
 # 4 vehicle component
+# 5 vehicle physics body (should only interact with default)
+# 6 fine vehicle collision (walls, floor, cannon, etc)
 
 
 static func get_player_from_id(id: String, source : Node) -> Node3D:
@@ -29,6 +31,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = radius
 	collision_shape.transform.origin = position
+	collision_shape.collision_mask = layer_mask([1,2,4,5])
 
 	var results = space_state.intersect_shape(collision_shape)
 

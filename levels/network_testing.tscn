@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://fjs02dvqh52d"]
+[gd_scene load_steps=12 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="5_ijex1"]
+[ext_resource type="PackedScene" uid="uid://dm8rx4npceh8y" path="res://vehicles/scenes/truck_car.tscn" id="7_xldfw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -201,6 +202,12 @@ transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 
 material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
 size = Vector3(33, 24.7837, 13.5728)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.448491, 0.221035, 0.866025, -0.44207, 0.896981, -1.40607e-08, -0.776808, -0.382844, 0.5, -2.91207, -1.59095, 8.86112)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(10.3839, 7.31128, 3.26101)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="World/Blockout"]
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1.7528, 34.9818, -1.01321, -129.903)
@@ -837,6 +844,9 @@ spawn_path = NodePath("..")
 
 [node name="massive_cannon" parent="." instance=ExtResource("5_ijex1")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07, -5.1262)
+
+[node name="Body2" parent="." instance=ExtResource("7_xldfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99687, 1.69209, 11.3634)
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

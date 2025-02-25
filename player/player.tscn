@@ -27,7 +27,8 @@ properties/3/replication_mode = 1
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
-collision_mask = 3
+collision_mask = 35
+platform_on_leave = 1
 script = ExtResource("1_u3ln2")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]

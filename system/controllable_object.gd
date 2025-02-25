@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if using_player and is_multiplayer_authority() and (event.is_action_pressed("jump") or event.is_action_pressed("interact")):
+	if using_player and is_multiplayer_authority() and (event.is_action_pressed("interact") or event.is_action_pressed("interact")):
 		un_controll.rpc()
 
 
