@@ -2,13 +2,13 @@ extends Node3D
 
 @onready var yaw_obj: Node3D = $Yaw
 @onready var pitch_obj: Node3D = $Yaw/Pitch
-@onready var camera: Camera3D = $Yaw/Pitch/Camera3D
+@onready var camera: Camera3D = $Camera3D
 
 @export var shell : PackedScene
 
 @export var control_manager : Controllable
-@export var sensetivity := 0.0075
-@export var turn_speed := 1.0
+@export var sensetivity := 0.005
+@export var turn_speed := 1.5
 
 @export var barrel_end : Node3D
 
@@ -44,9 +44,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			virtual_joystick_value = virtual_joystick_value.limit_length(1)
 			ui.update_virtual_joystick(virtual_joystick_value)
 		else:
-			yaw_obj.rotate_y(-event.relative.x * sensetivity)
-			pitch_obj.rotate_x(-event.relative.y * sensetivity)
-			pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+			camera.global_rotation.y += (-event.relative.x * sensetivity)
+			camera.global_rotation.x += (-event.relative.y * sensetivity)
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 
 
 func _process(delta: float) -> void:
@@ -57,6 +57,13 @@ func _process(delta: float) -> void:
 		yaw_obj.rotate_y(-virtual_joystick_value.x * turn_speed * delta)
 		pitch_obj.rotate_x(-virtual_joystick_value.y * turn_speed * delta)
 		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+		
+	elif control_manager.is_multiplayer_authority():
+		camera.rotation.z = 0
+		yaw_obj.rotation.y += clamp(wrapf(camera.rotation.y - yaw_obj.rotation.y, -PI, PI) * 10, -1, 1) * delta * turn_speed
+		pitch_obj.rotation.x += clamp(wrapf(camera.rotation.x - pitch_obj.rotation.x, -PI, PI) * 10, -1, 1) * delta * turn_speed
+		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+		return
 
 
 @rpc("any_peer", "call_local")
@@ -77,3 +84,7 @@ func on_controlled():
 func on_uncontrolled():
 	if control_manager.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(false)
+
+
+static func pushv(val, deadzone = 0.1) -> float:
+	return val if abs(val) <= deadzone else 1.0 if val > 0.0 else -1.0

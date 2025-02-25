@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://fjs02dvqh52d"]
+[gd_scene load_steps=11 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="5_ijex1"]
-[ext_resource type="PackedScene" uid="uid://bx15bj7dw2qhh" path="res://vehicles/scenes/car_base.tscn" id="6_kc7ag"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -838,12 +837,6 @@ spawn_path = NodePath("..")
 
 [node name="massive_cannon" parent="." instance=ExtResource("5_ijex1")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07, -5.1262)
-
-[node name="massive_cannon2" parent="." instance=ExtResource("5_ijex1")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 38.0411, -3.8147e-06, -0.932289)
-
-[node name="Body" parent="." instance=ExtResource("6_kc7ag")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.443, 0.222867, 4.3094)
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]
