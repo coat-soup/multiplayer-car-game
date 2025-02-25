@@ -847,6 +847,7 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07,
 
 [node name="Body2" parent="." instance=ExtResource("7_xldfw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99687, 1.69209, 11.3634)
+engine_power = 150.0
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]
