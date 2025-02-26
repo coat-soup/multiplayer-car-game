@@ -11,7 +11,7 @@ var steam_peer = SteamMultiplayerPeer.new()
 
 const PORT = 6969
 var enet_peer : ENetMultiplayerPeer
-const LOCAL_DEBUG := true
+const LOCAL_DEBUG := false
 
 
 func _ready() -> void:

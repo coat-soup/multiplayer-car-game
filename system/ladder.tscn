@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw0axgpyrynkn"]
+
+[ext_resource type="Script" path="res://system/interactable.gd" id="1_77n6r"]
+[ext_resource type="Script" path="res://system/ladder.gd" id="1_ee1q8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x47i4"]
+size = Vector3(0.2, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1an52"]
+size = Vector3(0.2, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dli60"]
+albedo_color = Color(0.76845, 0.418223, 3.85046e-07, 1)
+
+[node name="Ladder" type="Node3D"]
+script = ExtResource("1_ee1q8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_77n6r")
+prompt_text = "Climb ladder"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_x47i4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_1an52")
+surface_material_override/0 = SubResource("StandardMaterial3D_dli60")
+
+[node name="ExitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.230537, 1.9072, 0)
+
+[connection signal="interacted" from="StaticBody3D" to="." method="_on_static_body_3d_interacted"]

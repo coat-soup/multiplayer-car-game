@@ -203,12 +203,6 @@ material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
 size = Vector3(33, 24.7837, 13.5728)
 
-[node name="CSGBox3D24" type="CSGBox3D" parent="World/Blockout"]
-transform = Transform3D(0.448491, 0.221035, 0.866025, -0.44207, 0.896981, -1.40607e-08, -0.776808, -0.382844, 0.5, -2.91207, -1.59095, 8.86112)
-material_override = SubResource("ShaderMaterial_gmg0p")
-use_collision = true
-size = Vector3(10.3839, 7.31128, 3.26101)
-
 [node name="CSGBox3D3" type="CSGBox3D" parent="World/Blockout"]
 transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1.7528, 34.9818, -1.01321, -129.903)
 material_override = SubResource("ShaderMaterial_gmg0p")
@@ -220,6 +214,18 @@ transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926,
 material_override = SubResource("ShaderMaterial_gmg0p")
 use_collision = true
 size = Vector3(41.8931, 12.6445, 13.5728)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1.7528, 76.9929, -12.0047, -227.602)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(100, 50, 13.5728)
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="World/Blockout"]
+transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926, 0, 8.44439e-08, 2.26267e-08, -1.7528, -76.5545, -12.0047, -227.602)
+material_override = SubResource("ShaderMaterial_gmg0p")
+use_collision = true
+size = Vector3(100, 50, 13.5728)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="World/Blockout"]
 transform = Transform3D(-0.965926, -0.258819, -1.53235e-07, -0.258819, 0.965926, 0, 8.44439e-08, 2.26267e-08, -1.7528, -48.5655, -0.374638, 193.276)
@@ -810,6 +816,7 @@ text = "INTERACT TEXT"
 horizontal_alignment = 1
 
 [node name="ChatBox" type="Label" parent="UI/HUD"]
+visible = false
 layout_mode = 0
 offset_top = -2179.0
 offset_right = 600.0
@@ -848,6 +855,18 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07,
 [node name="Body2" parent="." instance=ExtResource("7_xldfw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99687, 1.69209, 11.3634)
 engine_power = 150.0
+
+[node name="Body" parent="." instance=ExtResource("7_xldfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4458, 5.90334, -20.442)
+
+[node name="Body3" parent="." instance=ExtResource("7_xldfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9219, 6.9652, 21.2334)
+
+[node name="Body4" parent="." instance=ExtResource("7_xldfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -165.094, 0.222867, 21.2269)
+
+[node name="massive_cannon2" parent="." instance=ExtResource("5_ijex1")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -17.0571, 14, 169.266)
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

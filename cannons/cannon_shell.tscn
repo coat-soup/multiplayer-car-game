@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://khld0gaej8py"]
+[gd_scene load_steps=7 format=3 uid="uid://khld0gaej8py"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_r53e8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_shell.gd" id="2_6t2uq"]
 [ext_resource type="PackedScene" uid="uid://bfmg7wnuki035" path="res://cannons/explosion_particles.tscn" id="3_8t2t6"]
-[ext_resource type="Script" path="res://system/start_particles_on_spawn.gd" id="4_u4l0a"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hyn28"]
 direction = Vector3(0, 0, 1)
@@ -36,11 +35,6 @@ particles = ExtResource("3_8t2t6")
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 0)
 
-[node name="MuzzleParticles" type="GPUParticles3D" parent="." index="1" instance=ExtResource("3_8t2t6")]
-emitting = false
-amount = 32
-one_shot = true
-explosiveness = 1.0
+[node name="MuzzleParticles" parent="." index="1" instance=ExtResource("3_8t2t6")]
 process_material = SubResource("ParticleProcessMaterial_hyn28")
 draw_pass_1 = SubResource("QuadMesh_wmr8l")
-script = ExtResource("4_u4l0a")
