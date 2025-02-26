@@ -18,6 +18,8 @@ var ui : UIManager
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	interactable.interacted.connect(on_interact)
+	
+	print_thing()
 
 
 func _input(event: InputEvent) -> void:
@@ -27,7 +29,7 @@ func _input(event: InputEvent) -> void:
 
 func on_interact(player):
 	if using_player:
-		ui.display_chat_message.rpc("%s attempting control of cannon. %s already in control" % [player.name, using_player.name])
+		ui.display_chat_message.rpc("%s attempting control of %s. %s already in control" % [player.name, get_owner().name, using_player.name])
 		return
 	take_control.rpc(str(player.name))
 
@@ -36,10 +38,11 @@ func on_interact(player):
 func take_control(player_id : String):
 	var player = Util.get_player_from_id(str(player_id), self)
 	
-	get_owner().set_multiplayer_authority(str(player.name).to_int())
-	set_multiplayer_authority(str(player.name).to_int())
+	get_owner().set_multiplayer_authority(str(player.name).to_int(), false)
+	synchronizer.set_multiplayer_authority(str(player.name).to_int(), false)
+	set_multiplayer_authority(str(player.name).to_int(), false)
 	
-	ui.display_chat_message("%s (auth: %s) taking control of cannon" % [player.name, str(player.is_multiplayer_authority())])
+	ui.display_chat_message("%s (auth: %s) taking control of %s" % [player.name, str(player.is_multiplayer_authority()), get_owner().name])
 	
 	using_player = player
 	#using_player.reparent(interactable)
@@ -56,9 +59,10 @@ func take_control(player_id : String):
 		ui.display_chat_message("no auth, no cam")
 
 
+
 @rpc("any_peer", "call_local")
 func un_controll():
-	ui.display_chat_message("%s (auth: %s) exiting cannon" % [using_player.name, str(using_player.is_multiplayer_authority())])
+	ui.display_chat_message("%s (auth: %s) exiting %s" % [using_player.name, str(using_player.is_multiplayer_authority()), get_owner().name])
 	
 	if is_multiplayer_authority():
 		ui.display_chat_message("true auth, proper exit")
@@ -73,3 +77,9 @@ func un_controll():
 	#using_player.reparent(get_tree().get_root())
 	remote_path = ""
 	using_player = null
+
+
+func print_thing():
+	print(get_owner().name, " player: ", using_player)
+	await get_tree().create_timer(0.5).timeout
+	print_thing()

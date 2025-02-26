@@ -6,6 +6,7 @@ class_name PlayerMovement
 @onready var camera: Camera3D = $CameraPivot/Camera
 
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var floorcast: RayCast3D = $Floorcast
 
 @export var speed = 5.0
 @export var jump_velocity = 4.5
@@ -26,6 +27,9 @@ signal jump_land
 var debug_mode = false
 
 var active := true
+
+var floor_obj : Node3D
+
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
@@ -60,22 +64,23 @@ func _physics_process(delta: float) -> void:
 	# gravity
 	if not is_on_floor() and !debug_mode:
 		velocity += get_gravity() * delta
-		
+	
 	# input
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if debug_mode:
 		velocity.y = (int(Input.is_key_pressed(KEY_SPACE)) - int(Input.is_key_pressed(KEY_CTRL))) * speed
 	
 	# jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		if input_dir.y < 0 or input_dir == Vector2.ZERO:
-			jump_start.emit()
-			velocity.y = jump_velocity
+		jump_start.emit()
+		velocity.y = jump_velocity
 		
 		
 	elif is_on_floor():
+		handle_floor_attachment()
+		
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -117,3 +122,22 @@ func add_velocity_impulse(vel):
 		print("yeeted " + str(vel))
 	else:
 		print(name + " isnt auth, not yeeting")
+
+
+func handle_floor_attachment():
+	if not multiplayer.has_multiplayer_peer() or multiplayer.multiplayer_peer.get_connection_status() != multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
+		return
+	if floorcast.is_colliding():
+		#print(floorcast.get_collider().get_owner().get_owner())
+		var new_obj = floorcast.get_collider().get_owner().get_owner() as Node3D
+		if floor_obj != new_obj:
+			set_parent_to_vehicle.rpc(new_obj.get_path())
+			floor_obj = new_obj
+	elif floor_obj:
+		floor_obj = null
+		set_parent_to_vehicle.rpc("")
+
+
+@rpc("any_peer", "call_local")
+func set_parent_to_vehicle(node_name: String):
+	reparent(get_tree().root.get_node(node_name) if node_name != "" else get_tree().root)

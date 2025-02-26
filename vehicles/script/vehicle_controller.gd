@@ -24,6 +24,8 @@ func _ready() -> void:
 	center_of_mass_mode = CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = mass_marker.position
 	
+	controllable.control_ended.connect(on_uncontrolled)
+	
 	for child in get_children():
 		var wheel = child as VehicleWheel3D
 		if wheel:
@@ -42,7 +44,6 @@ func _process(delta: float) -> void:
 	
 	steering = move_toward(steering, Input.get_axis("right", "left") * steering_power * clamp(1 - (forward_speed-top_speed*turn_loss_speed_range.x)/(top_speed*turn_loss_speed_range.y), 0.0, 1.0), delta * 2.5)
 	engine_force = Input.get_axis("down", "up") * engine_power * (0 if forward_speed >= top_speed else 1)
-	print("speed: ", forward_speed)
 	
 	var speed_drift = 1 - clampf((forward_speed - top_speed*speed_drift_range.x) / top_speed*speed_drift_range.y, 0, 1)
 	var sideways_drift = 1 - clampf((abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))) - 90*side_drift_range.x)/90*side_drift_range.y, 0.0, 1.0)
@@ -57,9 +58,13 @@ func _process(delta: float) -> void:
 			drift *= front_wheel_drift_factor
 		
 		wheel.wheel_friction_slip = min(grip, drift)
-	print("sidewaysf: ", sideways_drift, "   speed drift: ", speed_drift)
 
 
 @rpc("any_peer", "call_local")
 func apply_impulse_rpc(force : Vector3, position : Vector3):
 	apply_impulse(force, position)
+
+
+func on_uncontrolled():
+	engine_force = 0
+	steering = 0

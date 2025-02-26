@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8at3wds2wf86"]
+[gd_scene load_steps=15 format=3 uid="uid://b8at3wds2wf86"]
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://cannons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_g2jg0"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="3_e6mtt"]
 [ext_resource type="PackedScene" uid="uid://khld0gaej8py" path="res://cannons/cannon_shell.tscn" id="3_fqi0e"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="4_b6a1x"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0kiod"]
@@ -21,6 +22,30 @@ height = 7.41824
 [sub_resource type="BoxShape3D" id="BoxShape3D_ip4v0"]
 size = Vector3(2.12775, 1.88727, 5.68536)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fcqn"]
+render_priority = 0
+shader = ExtResource("4_b6a1x")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 3
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_fh25b"]
 size = Vector3(1.0752, 1.521, 1.63397)
 
@@ -33,7 +58,6 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="massive_cannon" node_paths=PackedStringArray("control_manager", "barrel_end") instance=ExtResource("1_mnts8")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 script = ExtResource("2_g2jg0")
 shell = ExtResource("3_fqi0e")
 control_manager = NodePath("Yaw/Controllable")
@@ -41,9 +65,10 @@ barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
 do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
-transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0.862254, 3.0994, 2.42688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.959971, 2.27068, 1.52687)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Yaw" index="0"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 collision_layer = 32
 collision_mask = 0
 
@@ -60,7 +85,7 @@ transform = Transform3D(1, -8.11558e-10, -6.2538e-10, 1.02449e-09, 0.784895, 0.6
 shape = SubResource("BoxShape3D_hidmy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Yaw/Pitch" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.845556, -1.88017, -1.99645)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.598153, -1.31265, -1.44775)
 collision_layer = 32
 collision_mask = 0
 
@@ -72,6 +97,9 @@ shape = SubResource("CylinderShape3D_e6uqf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.876808, 3.2183, 1.51183)
 shape = SubResource("BoxShape3D_ip4v0")
 
+[node name="Cube_008" parent="Yaw/Pitch" index="4"]
+surface_material_override/0 = SubResource("ShaderMaterial_3fcqn")
+
 [node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="13"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 1.36356, -10.8881)
 
@@ -82,14 +110,14 @@ update_rotation = false
 update_scale = false
 
 [node name="Controllable" type="RemoteTransform3D" parent="Yaw" index="9" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881239, 2.22047, 1.94155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.974497, 1.75667, 1.33074)
 script = ExtResource("4_gnget")
 camera = NodePath("../../Camera3D")
 interactable = NodePath("../Interact")
 synchronizer = NodePath("../../MultiplayerSynchronizer")
 
 [node name="Interact" type="StaticBody3D" parent="Yaw" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.881239, 2.22047, 1.94155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.974497, 1.75667, 1.33074)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("3_e6mtt")

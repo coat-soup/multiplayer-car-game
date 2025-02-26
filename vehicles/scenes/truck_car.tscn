@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dm8rx4npceh8y"]
+[gd_scene load_steps=17 format=3 uid="uid://dm8rx4npceh8y"]
 
 [ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_plp81"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_kfp6f"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="4_fhtls"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_swatl"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="5_qxs3t"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="7_k6y0h"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
 friction = 0.5
@@ -24,6 +25,54 @@ albedo_color = Color(0.938343, 0.364917, 1.92523e-07, 1)
 top_radius = 1.4
 bottom_radius = 1.4
 height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nyjhf"]
+render_priority = 0
+shader = ExtResource("7_k6y0h")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8b4gj"]
+render_priority = 0
+shader = ExtResource("7_k6y0h")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8cnm3"]
 properties/0/path = NodePath(".:position")
@@ -52,7 +101,7 @@ mass_marker = NodePath("MassMarker")
 controllable = NodePath("truck model/Interactable/Controllable")
 
 [node name="massive_cannon" parent="." instance=ExtResource("2_kfp6f")]
-transform = Transform3D(0.7, 0, 1.22392e-07, 0, 0.7, 0, -1.22392e-07, 0, 0.7, 0, 2.34852, -4.40939)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 2.34852, -3.78236)
 
 [node name="MainBodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.80206, 0.63234)
@@ -99,11 +148,12 @@ suspension_stiffness = 10.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel1" type="MeshInstance3D" parent="Wheel1"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel1"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_nyjhf")
 
 [node name="Wheel2" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57368, -0.125364, 6.06853)
@@ -118,11 +168,12 @@ suspension_stiffness = 10.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel3" type="MeshInstance3D" parent="Wheel2"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel2"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel3" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.57368, -0.125364, 3.06853)
@@ -137,11 +188,12 @@ suspension_stiffness = 10.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel1" type="MeshInstance3D" parent="Wheel3"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel3"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel4" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.57368, -0.125364, 3.06853)
@@ -156,11 +208,12 @@ suspension_stiffness = 10.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel3" type="MeshInstance3D" parent="Wheel4"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel4"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel5" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57368, -0.125364, -5.31708)
@@ -174,11 +227,12 @@ suspension_stiffness = 5.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel2" type="MeshInstance3D" parent="Wheel5"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel5"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel6" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57368, -0.125364, -5.31708)
@@ -192,11 +246,12 @@ suspension_stiffness = 5.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel4" type="MeshInstance3D" parent="Wheel6"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel6"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel7" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57368, -0.125364, -8.31708)
@@ -210,11 +265,12 @@ suspension_stiffness = 5.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel2" type="MeshInstance3D" parent="Wheel7"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel7"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Wheel8" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57368, -0.125364, -8.31708)
@@ -228,11 +284,12 @@ suspension_stiffness = 5.0
 damping_compression = 0.88
 damping_relaxation = 1.0
 
-[node name="Wheel4" type="MeshInstance3D" parent="Wheel8"]
+[node name="WheelModel" type="MeshInstance3D" parent="Wheel8"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
+surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 2.30982e-14, 8.74227e-08, 2.82225e-08, 0.946458, 0.322828, -8.27419e-08, 0.322828, -0.946458, -4.76837e-07, 11.4711, -18.1863)

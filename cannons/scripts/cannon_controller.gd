@@ -33,7 +33,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not control_manager.using_player: return
-	if not control_manager.is_multiplayer_authority(): return
+	if not control_manager.is_multiplayer_authority():
+		print("control not auth")
+		return
 	
 	if event.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()

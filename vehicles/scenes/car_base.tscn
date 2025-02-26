@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bx15bj7dw2qhh"]
+[gd_scene load_steps=13 format=3 uid="uid://bx15bj7dw2qhh"]
 
 [ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_0mrqo"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_uqjre"]
+[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="3_bg8x5"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="3_npomd"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_lr0jb"]
 
@@ -44,7 +45,7 @@ physics_material_override = SubResource("PhysicsMaterial_l7i2k")
 center_of_mass_mode = 1
 script = ExtResource("1_0mrqo")
 mass_marker = NodePath("MassMarker")
-controllable = NodePath("CollisionShape3D/Controllable")
+controllable = NodePath("CollisionShape3D/Interactable/Controllable")
 
 [node name="massive_cannon" parent="." instance=ExtResource("2_uqjre")]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0.827163, -2.00379)
@@ -53,6 +54,9 @@ transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.432437, 0.0774262)
 shape = SubResource("BoxShape3D_x74tc")
 
+[node name="Ladder" parent="CollisionShape3D" instance=ExtResource("3_bg8x5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00552, -0.308043, 1.01256)
+
 [node name="Body" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00837034, -0.0532489)
 layers = 2
@@ -60,17 +64,17 @@ gi_mode = 2
 mesh = SubResource("BoxMesh_8pcnc")
 skeleton = NodePath("../..")
 
-[node name="Controllable" type="RemoteTransform3D" parent="CollisionShape3D" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500058, 3.29016)
-script = ExtResource("4_lr0jb")
-camera = NodePath("../../Camera3D")
-interactable = NodePath("../Interactable")
-synchronizer = NodePath("../../MultiplayerSynchronizer")
-
 [node name="Interactable" type="StaticBody3D" parent="CollisionShape3D"]
-transform = Transform3D(0.432927, 0, 0, 0, 0.432927, 0, 0, 0, 0.432927, 0, 0.50755, 3.70395)
+transform = Transform3D(0.432927, 0, 0, 0, 0.432927, 0, 0, 0, 0.432927, 0, 0.915864, 3.45422)
 script = ExtResource("3_npomd")
 prompt_text = "Control vehicle"
+
+[node name="Controllable" type="RemoteTransform3D" parent="CollisionShape3D/Interactable" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
+transform = Transform3D(2.30986, 0, 0, 0, 2.30986, 0, 0, 0, 2.30986, 0, -0.0173054, -0.955796)
+script = ExtResource("4_lr0jb")
+camera = NodePath("../../../Camera3D")
+interactable = NodePath("..")
+synchronizer = NodePath("../../../MultiplayerSynchronizer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape3D/Interactable"]
 shape = SubResource("BoxShape3D_bhonr")

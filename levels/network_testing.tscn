@@ -816,7 +816,6 @@ text = "INTERACT TEXT"
 horizontal_alignment = 1
 
 [node name="ChatBox" type="Label" parent="UI/HUD"]
-visible = false
 layout_mode = 0
 offset_top = -2179.0
 offset_right = 600.0
@@ -850,23 +849,10 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="massive_cannon" parent="." instance=ExtResource("5_ijex1")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.336445, -9.53674e-07, -5.1262)
-
-[node name="Body2" parent="." instance=ExtResource("7_xldfw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99687, 1.69209, 11.3634)
-engine_power = 150.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336445, 0.0550286, -5.1262)
 
 [node name="Body" parent="." instance=ExtResource("7_xldfw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4458, 5.90334, -20.442)
-
-[node name="Body3" parent="." instance=ExtResource("7_xldfw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9219, 6.9652, 21.2334)
-
-[node name="Body4" parent="." instance=ExtResource("7_xldfw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -165.094, 0.222867, 21.2269)
-
-[node name="massive_cannon2" parent="." instance=ExtResource("5_ijex1")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -17.0571, 14, 169.266)
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -1.55775, 2.14637, 10.8392)
 
 [connection signal="pressed" from="UI/VBoxContainer/Host" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

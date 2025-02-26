@@ -28,14 +28,14 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(1.0).timeout
 	request_sync_username.rpc_id(str(get_owner().name).to_int())
-	
+	#try_sync()
 
 func try_sync(n := 0):
-	if true:
+	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
 		request_sync_username.rpc_id(str(get_owner().name).to_int())
 		print("Synching username")
-	elif n < 10:
-		await get_tree().create_timer(1.0).timeout
+	elif n < 20:
+		await get_tree().create_timer(0.2).timeout
 		try_sync(n + 1)
 	else:
 		if ui:
@@ -47,7 +47,7 @@ func try_sync(n := 0):
 func sync_username(new_username: String) -> void:
 	username = new_username
 	username_label.text = username
-	if ui:
+	if ui and false:
 		ui.display_chat_message("username synced to " + username)
 
 
@@ -55,5 +55,5 @@ func sync_username(new_username: String) -> void:
 func request_sync_username():
 	if is_multiplayer_authority():
 		sync_username.rpc(username)
-		if ui:
+		if ui and false:
 			ui.display_chat_message("username sync request received")
