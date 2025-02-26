@@ -18,8 +18,6 @@ var ui : UIManager
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	interactable.interacted.connect(on_interact)
-	
-	print_thing()
 
 
 func _input(event: InputEvent) -> void:
@@ -77,9 +75,3 @@ func un_controll():
 	#using_player.reparent(get_tree().get_root())
 	remote_path = ""
 	using_player = null
-
-
-func print_thing():
-	print(get_owner().name, " player: ", using_player)
-	await get_tree().create_timer(0.5).timeout
-	print_thing()

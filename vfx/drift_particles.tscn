@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2hx7lh4r87c7"]
+
+[sub_resource type="Gradient" id="Gradient_d8pxw"]
+offsets = PackedFloat32Array(0.345455, 1)
+colors = PackedColorArray(0.0110876, 0.0110876, 0.0110876, 1, 0.478935, 0.37224, 0.348976, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mqggo"]
+gradient = SubResource("Gradient_d8pxw")
+
+[sub_resource type="Curve" id="Curve_im0vg"]
+_data = [Vector2(0.246377, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6aiwc"]
+curve = SubResource("Curve_im0vg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_28rqy"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(-1, 1, 0)
+spread = 10.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+gravity = Vector3(0, -5, 0)
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_6aiwc")
+color_ramp = SubResource("GradientTexture1D_mqggo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2gxi"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_33lo3"]
+material = SubResource("StandardMaterial3D_t2gxi")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_28rqy")
+draw_pass_1 = SubResource("SphereMesh_33lo3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dm8rx4npceh8y"]
+[gd_scene load_steps=18 format=3 uid="uid://dm8rx4npceh8y"]
 
 [ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_plp81"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_kfp6f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_swatl"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="5_qxs3t"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="7_k6y0h"]
+[ext_resource type="PackedScene" uid="uid://c2hx7lh4r87c7" path="res://vfx/drift_particles.tscn" id="8_bet1m"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
 friction = 0.5
@@ -87,6 +88,21 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("Wheel2:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:handbrake")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Wheel5/DriftParticles:emitting")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Wheel6/DriftParticles:emitting")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("Wheel7/DriftParticles:emitting")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Wheel8/DriftParticles:emitting")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [node name="Body" type="VehicleBody3D" node_paths=PackedStringArray("mass_marker", "controllable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
@@ -131,7 +147,6 @@ synchronizer = NodePath("../../../MultiplayerSynchronizer")
 shape = SubResource("BoxShape3D_bhonr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="truck model/Interactable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_wuyru")
 surface_material_override/0 = SubResource("StandardMaterial3D_jjduv")
 
@@ -234,6 +249,10 @@ gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
 surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
+[node name="DriftParticles" parent="Wheel5" instance=ExtResource("8_bet1m")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 0, -1.37587, 0)
+emitting = false
+
 [node name="Wheel6" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57368, -0.125364, -5.31708)
 use_as_traction = true
@@ -252,6 +271,10 @@ layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
 surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
+
+[node name="DriftParticles" parent="Wheel6" instance=ExtResource("8_bet1m")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0, -1.37587, 0)
+emitting = false
 
 [node name="Wheel7" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57368, -0.125364, -8.31708)
@@ -272,6 +295,10 @@ gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
 surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 
+[node name="DriftParticles" parent="Wheel7" instance=ExtResource("8_bet1m")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 0, -1.37587, 0)
+emitting = false
+
 [node name="Wheel8" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.57368, -0.125364, -8.31708)
 use_as_traction = true
@@ -290,6 +317,10 @@ layers = 2
 gi_mode = 2
 mesh = SubResource("CylinderMesh_1wxvd")
 surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
+
+[node name="DriftParticles" parent="Wheel8" instance=ExtResource("8_bet1m")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0, -1.37587, 0)
+emitting = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 2.30982e-14, 8.74227e-08, 2.82225e-08, 0.946458, 0.322828, -8.27419e-08, 0.322828, -0.946458, -4.76837e-07, 11.4711, -18.1863)

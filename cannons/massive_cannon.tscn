@@ -65,7 +65,7 @@ barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
 do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.959971, 2.27068, 1.52687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11592, 2.53535, 1.82795)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Yaw" index="0"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -101,7 +101,7 @@ shape = SubResource("BoxShape3D_ip4v0")
 surface_material_override/0 = SubResource("ShaderMaterial_3fcqn")
 
 [node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="13"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 1.36356, -10.8881)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 0.941027, -7.58346)
 
 [node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="14"]
 transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 1.70781, 1.21923, 0.430433)

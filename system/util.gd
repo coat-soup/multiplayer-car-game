@@ -61,4 +61,4 @@ static func spawn_particles_for_time(position: Vector3, particles: PackedScene, 
 	particles_obj.position = position
 	parent.add_child(particles_obj)
 	await particles_obj.get_tree().create_timer(time).timeout
-	particles_obj.queue_free()
+	#particles_obj.queue_free()
