@@ -11,7 +11,9 @@ var steam_peer = SteamMultiplayerPeer.new()
 
 const PORT = 6969
 var enet_peer : ENetMultiplayerPeer
-const LOCAL_DEBUG := true
+var LOCAL_DEBUG := true
+
+const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 func _ready() -> void:
@@ -21,8 +23,7 @@ func _ready() -> void:
 	
 	steam_peer.lobby_created.connect(_on_lobby_created)
 	
-	if LOCAL_DEBUG:
-		enet_peer = ENetMultiplayerPeer.new()
+	enet_peer = ENetMultiplayerPeer.new()
 
 
 func _process(_delta: float) -> void:
@@ -33,9 +34,17 @@ func _on_host_pressed() -> void:
 	steam_peer.create_lobby(SteamMultiplayerPeer.LOBBY_TYPE_PUBLIC)
 	multiplayer.multiplayer_peer = steam_peer
 	
-	if LOCAL_DEBUG:
-		enet_peer.create_server(PORT)
-		multiplayer.multiplayer_peer = enet_peer
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+	
+	$Camera3D.queue_free()
+	add_player(multiplayer.get_unique_id())
+	ui.toggle_network_menu(false)
+
+
+func _on_host_local_pressed() -> void:
+	enet_peer.create_server(PORT)
+	multiplayer.multiplayer_peer = enet_peer
 	
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
@@ -48,8 +57,8 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
-	if not LOCAL_DEBUG:
-		steam_peer.connect_lobby(ui.get_lobby_id())
+	if ui.get_lobby_id() != "":
+		steam_peer.connect_lobby(parse_lobby_code(ui.get_lobby_id()))
 		multiplayer.multiplayer_peer = steam_peer
 	else:
 		enet_peer.create_client("localhost", PORT)
@@ -57,14 +66,14 @@ func _on_join_pressed() -> void:
 	
 	$Camera3D.queue_free()
 	ui.toggle_network_menu(false)
-	
+
 
 func _on_lobby_created(connected, id):
 	if connected:
 		lobby_id = id
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName()+"'s lobby"))
 		Steam.setLobbyJoinable(id, true)
-		print("Lobby created! ID: %s" % id)
+		print("Lobby created! ID: %s" % codify_lobby_id(id))
 
 
 func add_player(peer_id):
@@ -79,3 +88,26 @@ func remove_player(peer_id):
 	for player in players:
 		if player.name == str(peer_id):
 			player.queue_free()
+
+
+static func codify_lobby_id(id: int) -> String:
+	var code = ""
+	var num : int = id
+	
+	while num > 0:
+		var remainder = num % ALPHABET.length()
+		code = ALPHABET[remainder] + code
+		num = num / ALPHABET.length()
+	
+	return code
+
+
+static func parse_lobby_code(code: String) -> int:
+	code = code.to_upper()
+	var id = 0
+	for i in range(code.length()):
+		var char = code[i]
+		var value = ALPHABET.find(char)
+		id = id * ALPHABET.length() + value
+	
+	return id

@@ -10,12 +10,13 @@ class_name UIManager
 
 var chats : Array[String] = []
 
+
 func toggle_network_menu(value : bool):
 	$VBoxContainer.visible = value
 
 
-func get_lobby_id() -> int:
-	return int(lobby_id_text_field.text)
+func get_lobby_id() -> String:
+	return lobby_id_text_field.text
 
 
 func set_interact_text(text: String = "", prefix_key := false):
