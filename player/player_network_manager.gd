@@ -1,5 +1,7 @@
 extends Node
 
+class_name PlayerNetworkManager
+
 @export var third_person_models: Array[Node3D]
 @export var username_label: Label3D
 var username: String = ""

@@ -97,6 +97,7 @@ static func codify_lobby_id(id: int) -> String:
 	while num > 0:
 		var remainder = num % ALPHABET.length()
 		code = ALPHABET[remainder] + code
+		@warning_ignore("integer_division")
 		num = num / ALPHABET.length()
 	
 	return code
@@ -106,8 +107,8 @@ static func parse_lobby_code(code: String) -> int:
 	code = code.to_upper()
 	var id = 0
 	for i in range(code.length()):
-		var char = code[i]
-		var value = ALPHABET.find(char)
+		var c = code[i]
+		var value = ALPHABET.find(c)
 		id = id * ALPHABET.length() + value
 	
 	return id

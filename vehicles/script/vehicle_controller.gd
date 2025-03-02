@@ -75,8 +75,8 @@ func _process(delta: float) -> void:
 
 
 @rpc("any_peer", "call_local")
-func apply_impulse_rpc(force : Vector3, position : Vector3):
-	apply_impulse(force, position)
+func apply_impulse_rpc(force : Vector3, pos : Vector3):
+	apply_impulse(force, pos)
 
 
 func on_uncontrolled():

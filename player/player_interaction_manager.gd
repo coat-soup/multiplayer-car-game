@@ -3,7 +3,7 @@ extends Node
 @export var camera : Camera3D
 @export var max_distance := 3.0
 
-@onready var player: PlayerMovement = $".."
+@onready var player: Player = $".."
 
 var ui : UIManager
 
@@ -20,6 +20,8 @@ func _process(_delta: float) -> void:
 	if not player.is_multiplayer_authority(): return
 	
 	do_raycast()
+	if target_interactable and not target_interactable.active:
+		return
 	if target_interactable and Input.is_action_just_pressed("interact"):
 		target_interactable.interact(player)
 		

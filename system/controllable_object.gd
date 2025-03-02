@@ -10,7 +10,7 @@ signal control_ended
 
 @export var synchronizer : MultiplayerSynchronizer
 
-var using_player : PlayerMovement = null
+var using_player : Player = null
 
 var ui : UIManager
 

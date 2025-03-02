@@ -859,15 +859,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336445, 0.0550286, -5.1262)
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -1.55775, 2.14637, 10.8392)
 
 [node name="RigidBody3D" parent="." instance=ExtResource("7_c87xb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29223, 0.507183, -6.04985)
-ground_offset = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29223, 1.50718, -6.04985)
 
 [node name="RigidBody3D3" parent="." instance=ExtResource("7_c87xb")]
-transform = Transform3D(0.769333, 0, 0, 0, 0.263775, 0, 0, 0, 0.263775, 8.29223, 0.101534, -6.04985)
-ground_offset = 0.132
+transform = Transform3D(0.769333, 0, 0, 0, 0.263775, 0, 0, 0, 0.263775, 8.29223, 1.50718, -6.04985)
 
 [node name="RigidBody3D2" parent="." instance=ExtResource("7_c87xb")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 6.29223, 0.185007, -6.04985)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 6.29223, 1.50718, -6.04985)
 
 [connection signal="pressed" from="UI/VBoxContainer/HostSteam" to="NetworkManager" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/VBoxContainer/HostLocal" to="NetworkManager" method="_on_host_local_pressed"]

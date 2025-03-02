@@ -43,9 +43,9 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			continue
 		damaged.append(collider)
 		
-		var player = collider as PlayerMovement
+		var player = collider as Player
 		if player:
-			player.add_velocity_impulse.rpc(30 * (player.global_position - position).normalized())
+			player.movement_manager.add_velocity_impulse.rpc(30 * (player.global_position - position).normalized())
 			print("Hit player " + player.name)
 		
 		var v := collider as VehicleController

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cikqdvle0enf2"]
+
+[ext_resource type="Script" path="res://equipment/equipment.gd" id="1_8l865"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="1_d5llg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oxcjw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_017hq"]
+albedo_color = Color(0.315825, 0.350522, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gh4ll"]
+
+[node name="RigidBody3D" type="Node3D" node_paths=PackedStringArray("interactable")]
+script = ExtResource("1_8l865")
+interactable = NodePath("StaticBody3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_oxcjw")
+surface_material_override/0 = SubResource("StandardMaterial3D_017hq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_d5llg")
+prompt_text = "Equip item"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_gh4ll")
