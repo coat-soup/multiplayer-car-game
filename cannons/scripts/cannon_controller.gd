@@ -24,6 +24,8 @@ var virtual_joystick_value = Vector2.ZERO
 
 var ui : UIManager
 
+@onready var firing_audio: AudioStreamPlayer3D = $Yaw/Pitch/BarrelEnd/FiringAudio
+
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	
@@ -71,6 +73,8 @@ func _process(delta: float) -> void:
 @rpc("any_peer", "call_local")
 func fire_cannon():
 	fire_timer = 1 / fire_rate
+	
+	firing_audio.play()
 	
 	var shell_obj = shell.instantiate()
 	get_tree().get_root().add_child(shell_obj)

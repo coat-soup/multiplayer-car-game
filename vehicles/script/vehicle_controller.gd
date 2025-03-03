@@ -2,6 +2,9 @@ extends VehicleBody3D
 
 class_name VehicleController
 
+signal crashed
+signal suspension_impacted
+
 @export_category("Stats")
 @export var steering_power := 0.8
 @export var engine_power := 150.0
@@ -22,7 +25,7 @@ var wheels : Array[VehicleWheel3D]
 var drift_particles : Array[GPUParticles3D] = []
 
 @export var handbrake := false
-
+var forward_speed : float
 
 func _ready() -> void:
 	center_of_mass_mode = CENTER_OF_MASS_MODE_CUSTOM
@@ -46,7 +49,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var forward_speed = linear_velocity.project(global_basis.z).length()
+	forward_speed = linear_velocity.project(global_basis.z).length()
 	
 	if not controllable.using_player: return
 	if not controllable.is_multiplayer_authority(): return
@@ -72,6 +75,17 @@ func _process(delta: float) -> void:
 		
 		if drift_particles[i]:
 			drift_particles[i].emitting = drift < grip*0.5 and forward_speed > 10 and wheels[i].is_in_contact()
+
+
+func _physics_process(delta: float) -> void:
+	if not controllable.is_multiplayer_authority(): return
+	
+	var collision = KinematicCollision3D.new()
+	if test_move(transform, linear_velocity * delta, collision):
+		if linear_velocity.length() > 10:
+			print("crashed into ", collision.get_collider())
+			crashed.emit()
+	
 
 
 @rpc("any_peer", "call_local")

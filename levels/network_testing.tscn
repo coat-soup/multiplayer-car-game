@@ -858,7 +858,7 @@ spawn_path = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.336445, 0.0550286, -5.1262)
 
 [node name="Body" parent="." instance=ExtResource("7_xldfw")]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -1.55775, 2.14637, 10.8392)
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -1.55775, 3.70022, 10.8392)
 
 [node name="RigidBody3D" parent="." instance=ExtResource("7_c87xb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29223, 0.507183, -6.04985)

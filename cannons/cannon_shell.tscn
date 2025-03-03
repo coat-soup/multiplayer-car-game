@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://khld0gaej8py"]
+[gd_scene load_steps=13 format=3 uid="uid://khld0gaej8py"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_r53e8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_shell.gd" id="2_6t2uq"]
 [ext_resource type="PackedScene" uid="uid://bfmg7wnuki035" path="res://vfx/explosion_particles.tscn" id="3_8t2t6"]
 [ext_resource type="Script" path="res://system/start_particles_on_spawn.gd" id="4_u4l0a"]
+[ext_resource type="AudioStream" uid="uid://u2jyqk1nf5fk" path="res://sfx/explosion.wav" id="5_fws3g"]
 
 [sub_resource type="Gradient" id="Gradient_i2y04"]
 offsets = PackedFloat32Array(0.1, 0.454545)
@@ -57,3 +58,8 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_3u2xa")
 draw_pass_1 = SubResource("SphereMesh_dql1y")
 script = ExtResource("4_u4l0a")
+
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("5_fws3g")
+unit_size = 600.0
+max_distance = 600.0

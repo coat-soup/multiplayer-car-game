@@ -49,6 +49,8 @@ func handle_impact():
 		return
 	active = false
 	
+	$ExplosionAudio.play()
+
 	if is_multiplayer_authority():
 		impacted.emit()
 		if radius > 0:

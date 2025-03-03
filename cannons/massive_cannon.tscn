@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8at3wds2wf86"]
+[gd_scene load_steps=16 format=3 uid="uid://b8at3wds2wf86"]
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://cannons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_g2jg0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://khld0gaej8py" path="res://cannons/cannon_shell.tscn" id="3_fqi0e"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="4_b6a1x"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
+[ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="5_j0v2g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0kiod"]
 size = Vector3(3.3, 0.16, 2.7)
@@ -102,6 +103,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_3fcqn")
 
 [node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="13"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 0.941027, -7.58346)
+
+[node name="FiringAudio" type="AudioStreamPlayer3D" parent="Yaw/Pitch/BarrelEnd" index="0"]
+stream = ExtResource("5_j0v2g")
+unit_size = 250.0
+max_distance = 250.0
+max_polyphony = 3
 
 [node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="14"]
 transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 1.70781, 1.21923, 0.430433)
