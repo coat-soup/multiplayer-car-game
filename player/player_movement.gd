@@ -59,6 +59,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if not player.active or not is_multiplayer_authority(): return
 	
+	player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
+	
 	# gravity
 	if not player.is_on_floor() and !debug_mode:
 		player.velocity += player.get_gravity() * delta
@@ -140,4 +142,4 @@ func handle_floor_attachment():
 
 @rpc("any_peer", "call_local")
 func set_parent_to_vehicle(node_name: String):
-	reparent(get_tree().root.get_node(node_name) if node_name != "" else get_tree().root)
+	player.reparent(get_tree().root.get_node(node_name) if node_name != "" else get_tree().root)

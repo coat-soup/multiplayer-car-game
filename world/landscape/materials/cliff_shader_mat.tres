@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://badauipfvwr83"]
+
+[ext_resource type="Shader" uid="uid://d2yymiu2wtaqe" path="res://world/landscape/materials/cliff_shader.tres" id="1_gdyin"]
+[ext_resource type="Texture2D" uid="uid://dclaf8lb36jpc" path="res://world/landscape/textures/cliff_n.png" id="2_rbtuc"]
+[ext_resource type="Texture2D" uid="uid://beygn233gbvcf" path="res://world/landscape/textures/cliff.png" id="2_xolql"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gdyin")
+shader_parameter/triplanar_scale = Vector3(0.02, 0.02, 0.05)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.5
+shader_parameter/Texture = ExtResource("2_xolql")
+shader_parameter/Normal = ExtResource("2_rbtuc")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cin2wv7vb4ktm"]
+
+[ext_resource type="PackedScene" uid="uid://dn0r4hwwiak12" path="res://world/landscape/models/large_cliffs_long_01.glb" id="1_vtf2l"]
+[ext_resource type="Material" uid="uid://badauipfvwr83" path="res://world/landscape/materials/cliff_shader_mat.tres" id="2_l232g"]
+
+[node name="large_cliffs_long_01" instance=ExtResource("1_vtf2l")]
+
+[node name="CliffsLong_01" parent="." index="0"]
+material_override = ExtResource("2_l232g")

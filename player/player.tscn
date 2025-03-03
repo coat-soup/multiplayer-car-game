@@ -26,7 +26,7 @@ properties/3/path = NodePath("NetworkManager/UsernameLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
 collision_mask = 35
@@ -35,6 +35,7 @@ script = ExtResource("1_wogeu")
 network_manager = NodePath("NetworkManager")
 movement_manager = NodePath("MovementManager")
 equipment_manager = NodePath("CameraPivot/EquipmentManager")
+camera = NodePath("CameraPivot/Camera")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
 script = ExtResource("2_yagft")
@@ -95,5 +96,5 @@ camera = NodePath("../CameraPivot/Camera")
 
 [node name="Floorcast" type="RayCast3D" parent="MovementManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991744, 0)
-target_position = Vector3(0, -0.1, 0)
+target_position = Vector3(0, -0.3, 0)
 collision_mask = 32

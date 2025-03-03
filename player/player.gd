@@ -6,6 +6,7 @@ class_name Player
 #@export var interaction_manager : InteractionManager
 @export var movement_manager : PlayerMovement
 @export var equipment_manager : EquipmentManager
+@export var camera : Camera3D
 
 var active : bool = true
 

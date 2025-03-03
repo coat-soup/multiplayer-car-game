@@ -12,12 +12,12 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_0xu5t"]
+[sub_resource type="Sky" id="Sky_y2rht"]
 sky_material = SubResource("ProceduralSkyMaterial_gm8k2")
 
 [sub_resource type="Environment" id="Environment_recut"]
 background_mode = 2
-sky = SubResource("Sky_0xu5t")
+sky = SubResource("Sky_y2rht")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -75,6 +75,7 @@ script = ExtResource("1_b5jgp")
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
 script = ExtResource("2_4gblq")
 ui = NodePath("../UI")
+spawn_position = Vector3(0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
@@ -771,13 +772,14 @@ material = SubResource("ShaderMaterial_khg7y")
 
 [node name="Entities" type="Node3D" parent="."]
 
-[node name="UI" type="Control" parent="." groups=["ui"]]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("network_manager") groups=["ui"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 1
 script = ExtResource("4_8l0fg")
+network_manager = NodePath("../NetworkManager")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 0
@@ -868,7 +870,3 @@ ground_offset = 0.132
 
 [node name="RigidBody3D2" parent="." instance=ExtResource("7_c87xb")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 6.29223, 0.185007, -6.04985)
-
-[connection signal="pressed" from="UI/VBoxContainer/HostSteam" to="NetworkManager" method="_on_host_pressed"]
-[connection signal="pressed" from="UI/VBoxContainer/HostLocal" to="NetworkManager" method="_on_host_local_pressed"]
-[connection signal="pressed" from="UI/VBoxContainer/Join" to="NetworkManager" method="_on_join_pressed"]

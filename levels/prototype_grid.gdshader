@@ -65,7 +65,7 @@ vec3 srgb_to_linear(vec3 color) {
 float grid_structure(vec3 uv, float width, float mult) {
 	vec3 uvDDX = dFdx(uv);
 	vec3 uvDDY = dFdy(uv);
-	
+
 	vec3 uv_deriv = vec3(
 		length(vec2(uvDDX.x, uvDDY.x)),
 		length(vec2(uvDDX.y, uvDDY.y)),
@@ -73,12 +73,12 @@ float grid_structure(vec3 uv, float width, float mult) {
 	);
 	uv_deriv = max(uv_deriv, EPSILON);
 	vec3 line_AA = uv_deriv * 1.5;
-	
+
 	vec3 width_value = 1.0 - vec3(width);
-	
+
 	vec3 target_width = width > 0.5 ? width_value : 1.0 - width_value;
 	vec3 draw_width = clamp(target_width, uv_deriv, vec3(0.5));
-	
+
 	vec3 grid_uv = abs(fract(uv * mult) * 2.0 - 1.0);
 	grid_uv = width > 0.5 ? 1.0 - grid_uv : grid_uv;
 	// Blend normal sides
@@ -86,17 +86,17 @@ float grid_structure(vec3 uv, float width, float mult) {
 	vec3 blend_normal = abs(normalize(cross(dFdy(uv), dFdx(uv))));
 	vec3 blend_factor = smoothstep(blend_value - EPSILON, blend_value + EPSILON, blend_normal);
 	blend_factor = width > 0.5 ? 1.0 - blend_factor : blend_factor;
-	
+
 	vec3 grid_normal_a = width > 0.5 ? vec3(-1.0) : grid_uv;
 	vec3 grid_normal_b = width > 0.5 ? grid_uv : vec3(1.0);
-	
+
 	grid_uv = mix(grid_normal_a, grid_normal_b, blend_factor);
-	
+
 	vec3 grid_base = smoothstep(draw_width + line_AA, draw_width - line_AA, grid_uv);
 	grid_base *= clamp(target_width / draw_width, EPSILON, 1.0);
 	grid_base = mix(grid_base, target_width, clamp(uv_deriv * 2.0 - 1.0, EPSILON, 1.0));
 	grid_base = width > 0.5 ? 1.0 - grid_base : grid_base;
-	
+
 	return mix(mix(grid_base.x, 1.0, grid_base.y), 1.0, grid_base.z);
 }
 
@@ -111,51 +111,51 @@ float checkered_grid(vec3 uv, float subdivide) {
 	// Filter AA
 	vec3 smooth_uv = abs(fract(uv - subdivide) * 2.0 - 1.0);
 	smooth_uv = mix(smooth_uv, vec3(1.0), blend_factor);
-	
+
 	vec3 uv_deriv = fwidth(uv);
 	uv_deriv = max(uv_deriv, EPSILON);
 	vec3 uv_AA = uv_deriv * 4.0;
-	
+
 	float smooth_value = 1.0;
 	float smooth_edge = smoothstep(0.0, uv_AA.x * smooth_value, smooth_uv.x);
 	smooth_edge *= smoothstep(0.0, uv_AA.y * smooth_value, smooth_uv.y);
 	smooth_edge *= smoothstep(0.0, uv_AA.z * smooth_value, smooth_uv.z);
-	
+
 	vec3 moire_step = smoothstep(vec3(1.0), vec3(0.0), uv_deriv);
 	float moire_range = (moire_step.x * moire_step.y * moire_step.z);
 	// Applay AA/Moire blend color
 	board = mix(0.0, board, smooth_edge);
 	board = mix(0.05, board, moire_range);
-	
+
 	return board;
 }
 
 vec4 triplanar_texture(sampler2D tex, vec3 uv, bool sub) {
 	uv = sub ? uv : uv * 0.5 + 0.5;
-	
+
 	vec4 albedo_x = texture(tex, object_uv ? uv.xy : uv.zy);
 	vec4 albedo_y = texture(tex, object_uv ? uv.xy : uv.xz);
 	vec4 albedo_z = texture(tex, uv.xy);
-	
+
 	vec3 tri_normal = vec3(0.0);
 	vec2 blend_normal = abs(normalize(vertex_normal.xz));
 	tri_normal.xz = max(vec2(0.0), blend_normal - 0.67);
 	tri_normal.xz /= max(0.00001, dot(tri_normal.xz, vec2(1.0)));
-	
+
 	tri_normal.y = clamp((abs(vertex_normal.y) - 0.675) * 80.0, 0.0, 1.0);
 	tri_normal.xz *= (1.0 - tri_normal.y);
-	
+
 	vec4 albedo = (
-		albedo_x * tri_normal.x + 
+		albedo_x * tri_normal.x +
 		albedo_y * tri_normal.y +
 		albedo_z * tri_normal.z
-	); 
+	);
 	return albedo;
 }
 
 void vertex() {
 	vertex_normal = NORMAL;
-	
+
 	vertex_uv = mix(VERTEX, (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz, float(world_uv));
 	vertex_uv = mix(vertex_uv, vec3(UV * object_uv_scale, 0.0), float(object_uv));
 	vertex_uv *= vec3(1.0, -1.0, 1.0);
@@ -163,7 +163,7 @@ void vertex() {
 
 void fragment() {
 	vec3 base_uv = vertex_uv * grid_scale;
-	
+
 	// Base Grid
 	float base_grid = grid_structure(base_uv, grid_width, 0.5);
 	// Inside Grid
@@ -177,33 +177,33 @@ void fragment() {
 	vec3 checker_uv = mix(base_uv / 2.0, base_uv, float(sub_checkered_grid));
 	float checkerboard = 0.0;
 	checkerboard = checkered ? checkered_grid(checker_uv, sub_checkered_grid ? 0.5 : 0.0) : 0.0;
-	
+
 	// Albedo texture(triplanar)
 	vec4 albedo = triplanar_texture(
 			albedo_texture,
 			use_inside_uv ? inside_uv - 0.5 - (0.5 - inside_factor) : base_uv,
 			use_inside_uv
 	);
-	
+
 	// Color
 	vec3 color = base_color;
 	color = preset_color != 0 ? srgb_to_linear(PRESET_COLORS[preset_color - 1]) : color;
-	
+
 	// Grayscale
 	if (use_albedo_color == false) {
 		float gray = dot(albedo.rgb, vec3(0.299, 0.587, 0.114));
-		albedo.rgb = vec3(gray); 
+		albedo.rgb = vec3(gray);
 	}
-	
+
 	// Applay texture/base color/checkered
 	vec3 board = mix(color, checkered_color, checkerboard * checkered_blend_color);
 	albedo.rgb = use_albedo_color ? albedo.rgb : albedo.rgb * board;
-	
+
 	// Mix Color
 	vec3 grid_a = mix(board, mix(board, albedo.rgb, albedo.a), albedo_alpha);
 	vec3 grid_b = mix(grid_a, inside_color.rgb, inside_grid * inside_color.a);
 	vec3 grid = mix(grid_b, grid_color.rgb, base_grid * grid_color.a);
-	
+
 	ALBEDO = grid;
 	METALLIC = metalic;
 	ROUGHNESS = roughness;

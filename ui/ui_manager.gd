@@ -6,9 +6,21 @@ class_name UIManager
 @onready var interact_text: Label = $HUD/InteractText
 @onready var chat_box: Label = $HUD/ChatBox
 
+@onready var host_steam: Button = $VBoxContainer/HostSteam
+@onready var host_local: Button = $VBoxContainer/HostLocal
+@onready var join: Button = $VBoxContainer/Join
+
 @onready var virtual_joystick: Control = $HUD/VirtualJoystick
 
 var chats : Array[String] = []
+
+@export var network_manager : NetworkManager
+
+
+func _ready():
+	host_steam.pressed.connect(network_manager._on_host_pressed)
+	host_local.pressed.connect(network_manager._on_host_local_pressed)
+	join.pressed.connect(network_manager._on_join_pressed)
 
 
 func toggle_network_menu(value : bool):

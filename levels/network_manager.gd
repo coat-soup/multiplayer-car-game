@@ -15,6 +15,8 @@ var LOCAL_DEBUG := true
 
 const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+@export var spawn_position := Vector3.ZERO
+
 
 func _ready() -> void:
 	OS.set_environment("SteamAppID", str(480))
@@ -81,6 +83,7 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	print("playername: " + player.name)
 	get_owner().add_child(player)
+	player.global_position = spawn_position
 
 
 func remove_player(peer_id):

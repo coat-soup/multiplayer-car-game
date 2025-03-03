@@ -1,0 +1,224 @@
+[gd_scene load_steps=20 format=3 uid="uid://b1k1yyld5gvfc"]
+
+[ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
+[ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
+[ext_resource type="Texture2D" uid="uid://bhnm6fkb1enkj" path="res://world/landscape/textures/sand.png" id="2_kmc41"]
+[ext_resource type="Script" path="res://ui/ui_manager.gd" id="2_lcqnc"]
+[ext_resource type="Texture2D" uid="uid://cet5xuwgrtvjn" path="res://world/landscape/textures/sand_n.png" id="3_dmf72"]
+[ext_resource type="PackedScene" uid="uid://c65ohp1b05ybs" path="res://world/landscape/scenes/large_cliffs_01.tscn" id="4_ormrn"]
+[ext_resource type="PackedScene" uid="uid://dm8rx4npceh8y" path="res://vehicles/scenes/truck_car.tscn" id="4_snrwr"]
+[ext_resource type="PackedScene" uid="uid://cin2wv7vb4ktm" path="res://world/landscape/scenes/large_cliffs_long_01.tscn" id="5_bmq6k"]
+
+[sub_resource type="Gradient" id="Gradient_y6mu4"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_frx4h"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fki7n"]
+seamless = true
+color_ramp = SubResource("Gradient_y6mu4")
+noise = SubResource("FastNoiseLite_frx4h")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_43j71"]
+_shader_parameters = {
+"blend_sharpness": 0.87,
+"height_blending": true,
+"macro_variation1": Color(1, 1, 1, 1),
+"macro_variation2": Color(1, 1, 1, 1),
+"noise1_angle": 0.0,
+"noise1_offset": Vector2(0.5, 0.5),
+"noise1_scale": 0.04,
+"noise2_scale": 0.076,
+"noise3_scale": 0.225,
+"noise_texture": SubResource("NoiseTexture2D_fki7n"),
+"vertex_normals_distance": 128.0
+}
+texture_filtering = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mtar"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 85.0
+distance_fade_max_distance = 75.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_mampa"]
+material_override = SubResource("StandardMaterial3D_4mtar")
+generated_type = 1
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_rno0h"]
+name = "sand"
+albedo_color = Color(1, 0.582557, 0.481578, 1)
+albedo_texture = ExtResource("2_kmc41")
+normal_texture = ExtResource("3_dmf72")
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_psw3n"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_mampa")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_rno0h")])
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2k6qc"]
+sky_top_color = Color(0.249937, 0.483387, 0.699983, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_0xu5t"]
+sky_material = SubResource("ProceduralSkyMaterial_2k6qc")
+
+[sub_resource type="Environment" id="Environment_hy12o"]
+background_mode = 2
+sky = SubResource("Sky_0xu5t")
+tonemap_mode = 3
+glow_enabled = true
+fog_enabled = true
+fog_density = 0.0004
+fog_aerial_perspective = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.999053, 0.793761, 0.543531, 1)
+
+[node name="DesertLevel" type="Node3D"]
+script = ExtResource("1_2svl5")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Terrain3D" type="Terrain3D" parent="World"]
+data_directory = "res://world/landscape/desert_terrain_data"
+material = SubResource("Terrain3DMaterial_43j71")
+assets = SubResource("Terrain3DAssets_psw3n")
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="Props" type="Node3D" parent="World"]
+
+[node name="large_cliffs_01" parent="World" instance=ExtResource("4_ormrn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.21, -3.54086, -67.2314)
+
+[node name="large_cliffs_02" parent="World" instance=ExtResource("4_ormrn")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 98.2096, -3.54086, 387.769)
+
+[node name="large_cliffs_long_01" parent="World" instance=ExtResource("5_bmq6k")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -200.958, 7.55243, 5.29967)
+
+[node name="large_cliffs_long_02" parent="World" instance=ExtResource("5_bmq6k")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -216.925, 0.109619, 262.729)
+
+[node name="large_cliffs_long_03" parent="World" instance=ExtResource("5_bmq6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 275.019, 0.109619, 286.945)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_hy12o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 400.0
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
+script = ExtResource("1_2gcb8")
+ui = NodePath("../UI")
+spawn_position = Vector3(0, 10, 0)
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("network_manager") groups=["ui"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 1
+script = ExtResource("2_lcqnc")
+network_manager = NodePath("../NetworkManager")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 476.0
+offset_right = 1058.0
+offset_bottom = 586.0
+
+[node name="HostSteam" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "HOST STEAM"
+
+[node name="HostLocal" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "HOST LOCAL"
+
+[node name="Join" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="LobbyIDTextField" type="TextEdit" parent="UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "LOBBY ID"
+
+[node name="HUD" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InteractText" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 913.0
+offset_right = 1210.0
+offset_bottom = 936.0
+pivot_offset = Vector2(250, 0)
+text = "INTERACT TEXT"
+horizontal_alignment = 1
+
+[node name="ChatBox" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_top = -2179.0
+offset_right = 600.0
+offset_bottom = 821.0
+pivot_offset = Vector2(0, 3000)
+vertical_alignment = 2
+
+[node name="VirtualJoystick" type="Control" parent="UI/HUD"]
+visible = false
+anchors_preset = 0
+offset_left = 947.0
+offset_top = 517.0
+offset_right = 947.0
+offset_bottom = 517.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/HUD/VirtualJoystick"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+
+[node name="Line2D" type="Line2D" parent="UI/HUD/VirtualJoystick"]
+position = Vector2(10, 10)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="Body" parent="." instance=ExtResource("4_snrwr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.72534, 3.9483, 15.5353)
+
+[node name="Body2" parent="." instance=ExtResource("4_snrwr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -80.0743, 6.16807, 91.5985)
