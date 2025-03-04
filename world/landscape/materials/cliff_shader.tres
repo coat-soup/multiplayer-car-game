@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=45 format=3 uid="uid://d2yymiu2wtaqe"]
+[gd_resource type="VisualShader" load_steps=50 format=3 uid="uid://d2yymiu2wtaqe"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_h8c4y"]
 default_input_values = [0, 1.0, 1, 0.0]
@@ -130,12 +130,22 @@ op_type = 4
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_x1y3k"]
 constant = Color(0.741176, 0.321569, 0.0784314, 1)
 
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_jksnv"]
+varying_name = "WorldPos"
+varying_type = 4
+
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_d8c5w"]
 default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, 1.0]
 op_type = 4
 
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_v863v"]
+operator = 3
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_pcd13"]
+constant = 50.0
+
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_iffif"]
-constant = Color(0.891182, 0.29402, 0, 1)
+constant = Color(0.717647, 0.231373, 0, 1)
 
 [sub_resource type="VisualShaderNodeVaryingSetter" id="VisualShaderNodeVaryingSetter_1r2nk"]
 varying_name = "WorldPos"
@@ -148,6 +158,11 @@ input_name = "vertex"
 input_name = "model_matrix"
 
 [sub_resource type="VisualShaderNodeTransformVecMult" id="VisualShaderNodeTransformVecMult_iuewe"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_qn0a7"]
+input_name = "node_position_world"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_srb0s"]
 
 [resource]
 code = "shader_type spatial;
@@ -204,8 +219,20 @@ void vertex() {
 }
 
 void fragment() {
+// VaryingGetter:47
+	vec3 n_out47p0 = var_WorldPos;
+
+
+// FloatConstant:51
+	float n_out51p0 = 50.000000;
+
+
+// VectorOp:50
+	vec3 n_out50p0 = n_out47p0 / vec3(n_out51p0);
+
+
 // TextureParameterTriplanar:17
-	vec4 n_out17p0 = triplanar_texture(Texture, triplanar_power_normal, triplanar_pos);
+	vec4 n_out17p0 = triplanar_texture(Texture, triplanar_power_normal, n_out50p0);
 
 
 // ColorConstant:2
@@ -213,7 +240,7 @@ void fragment() {
 
 
 // ColorConstant:6
-	vec4 n_out6p0 = vec4(0.891182, 0.294020, 0.000000, 1.000000);
+	vec4 n_out6p0 = vec4(0.717647, 0.231373, 0.000000, 1.000000);
 
 
 // FloatConstant:16
@@ -368,7 +395,7 @@ void fragment() {
 
 
 // TextureParameterTriplanar:19
-	vec4 n_out19p0 = triplanar_texture(Normal, triplanar_power_normal, triplanar_pos);
+	vec4 n_out19p0 = triplanar_texture(Normal, triplanar_power_normal, n_out50p0);
 
 
 // Mix:22
@@ -385,16 +412,21 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-162.013, 119.907)
 varyings/WorldPos = "0,4"
 nodes/vertex/2/node = SubResource("VisualShaderNodeVaryingSetter_1r2nk")
-nodes/vertex/2/position = Vector2(100, -40)
+nodes/vertex/2/position = Vector2(0, -60)
 nodes/vertex/3/node = SubResource("VisualShaderNodeInput_xnrv1")
-nodes/vertex/3/position = Vector2(-520, 40)
+nodes/vertex/3/position = Vector2(-1060, 40)
 nodes/vertex/4/node = SubResource("VisualShaderNodeInput_sj3xj")
-nodes/vertex/4/position = Vector2(-500, -80)
+nodes/vertex/4/position = Vector2(-880, -100)
 nodes/vertex/5/node = SubResource("VisualShaderNodeTransformVecMult_iuewe")
-nodes/vertex/5/position = Vector2(-160, -60)
-nodes/vertex/connections = PackedInt32Array(4, 0, 5, 0, 3, 0, 5, 1, 5, 0, 2, 0)
+nodes/vertex/5/position = Vector2(-520, -60)
+nodes/vertex/6/node = SubResource("VisualShaderNodeInput_qn0a7")
+nodes/vertex/6/position = Vector2(-1060, 160)
+nodes/vertex/7/node = SubResource("VisualShaderNodeVectorOp_srb0s")
+nodes/vertex/7/position = Vector2(-180, 20)
+nodes/vertex/connections = PackedInt32Array(4, 0, 5, 0, 6, 0, 7, 1, 3, 0, 5, 1, 5, 0, 7, 0, 5, 0, 2, 0)
 nodes/fragment/0/position = Vector2(2360, 300)
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_5y481")
 nodes/fragment/2/position = Vector2(160, 260)
@@ -471,9 +503,15 @@ nodes/fragment/42/position = Vector2(880, 880)
 nodes/fragment/43/node = SubResource("VisualShaderNodeColorConstant_5bw6g")
 nodes/fragment/43/position = Vector2(180, 920)
 nodes/fragment/44/node = SubResource("VisualShaderNodeColorConstant_q1su0")
-nodes/fragment/44/position = Vector2(240, 1480)
+nodes/fragment/44/position = Vector2(220, 1320)
 nodes/fragment/45/node = SubResource("VisualShaderNodeMix_nexkj")
 nodes/fragment/45/position = Vector2(1103.23, 1049.45)
 nodes/fragment/46/node = SubResource("VisualShaderNodeColorConstant_x1y3k")
 nodes/fragment/46/position = Vector2(180, 1940)
-nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 5, 0, 6, 0, 5, 1, 10, 0, 5, 2, 4, 1, 11, 1, 11, 0, 12, 1, 13, 0, 10, 1, 12, 0, 13, 1, 15, 0, 11, 0, 16, 0, 12, 0, 17, 0, 20, 0, 20, 0, 0, 0, 21, 0, 0, 3, 22, 0, 0, 9, 19, 0, 22, 1, 24, 0, 27, 1, 23, 0, 28, 1, 27, 0, 23, 1, 25, 0, 24, 0, 26, 0, 27, 0, 30, 0, 33, 1, 29, 0, 34, 1, 33, 0, 29, 1, 31, 0, 30, 0, 32, 0, 33, 0, 36, 0, 39, 1, 35, 0, 40, 1, 39, 0, 35, 1, 37, 0, 36, 0, 38, 0, 39, 0, 5, 0, 41, 0, 41, 0, 42, 0, 43, 0, 41, 1, 44, 0, 42, 1, 28, 0, 41, 2, 34, 0, 42, 2, 4, 1, 24, 1, 4, 1, 30, 1, 4, 1, 36, 1, 42, 0, 45, 0, 46, 0, 45, 1, 40, 0, 45, 2, 45, 0, 20, 1)
+nodes/fragment/47/node = SubResource("VisualShaderNodeVaryingGetter_jksnv")
+nodes/fragment/47/position = Vector2(720, 40)
+nodes/fragment/50/node = SubResource("VisualShaderNodeVectorOp_v863v")
+nodes/fragment/50/position = Vector2(940, 60)
+nodes/fragment/51/node = SubResource("VisualShaderNodeFloatConstant_pcd13")
+nodes/fragment/51/position = Vector2(680, 160)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 5, 0, 10, 0, 5, 2, 4, 1, 11, 1, 11, 0, 12, 1, 13, 0, 10, 1, 12, 0, 13, 1, 15, 0, 11, 0, 16, 0, 12, 0, 17, 0, 20, 0, 21, 0, 0, 3, 22, 0, 0, 9, 19, 0, 22, 1, 24, 0, 27, 1, 23, 0, 28, 1, 27, 0, 23, 1, 25, 0, 24, 0, 26, 0, 27, 0, 30, 0, 33, 1, 29, 0, 34, 1, 33, 0, 29, 1, 31, 0, 30, 0, 32, 0, 33, 0, 36, 0, 39, 1, 35, 0, 40, 1, 39, 0, 35, 1, 37, 0, 36, 0, 38, 0, 39, 0, 5, 0, 41, 0, 41, 0, 42, 0, 43, 0, 41, 1, 28, 0, 41, 2, 34, 0, 42, 2, 4, 1, 24, 1, 4, 1, 30, 1, 4, 1, 36, 1, 42, 0, 45, 0, 46, 0, 45, 1, 40, 0, 45, 2, 45, 0, 20, 1, 20, 0, 0, 0, 47, 0, 50, 0, 50, 0, 17, 1, 51, 0, 50, 1, 44, 0, 42, 1, 6, 0, 5, 1, 50, 0, 19, 1)

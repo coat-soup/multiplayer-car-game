@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dra3q6hm6ypcq"]
+
+[ext_resource type="PackedScene" uid="uid://bmgt7mbcpqpp" path="res://world/landscape/models/small_rocks_02.glb" id="1_lb3yd"]
+[ext_resource type="Material" uid="uid://badauipfvwr83" path="res://world/landscape/materials/cliff_shader_mat.tres" id="2_s0ovw"]
+
+[node name="small_rocks_02" instance=ExtResource("1_lb3yd")]
+
+[node name="rock_02" parent="." index="0"]
+material_override = ExtResource("2_s0ovw")

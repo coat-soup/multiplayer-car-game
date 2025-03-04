@@ -7,7 +7,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_gdyin")
-shader_parameter/triplanar_scale = Vector3(0.02, 0.02, 0.05)
+shader_parameter/triplanar_scale = Vector3(0, 0, 0)
 shader_parameter/triplanar_offset = null
 shader_parameter/triplanar_sharpness = 0.5
 shader_parameter/Texture = ExtResource("2_xolql")

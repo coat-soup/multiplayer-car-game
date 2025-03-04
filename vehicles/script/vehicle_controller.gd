@@ -63,8 +63,6 @@ func _process(delta: float) -> void:
 	
 	var speed_drift = 1 - clampf((forward_speed - top_speed*speed_drift_range.x) / top_speed*speed_drift_range.y, 0, 1)
 	var sideways_drift = 1 - clampf((abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))) - side_drift_range.x)/((side_drift_range.y*(0.1 + 1 - linear_velocity.length()/top_speed))-side_drift_range.x), 00, 1.0)
-	print(1 - sideways_drift)
-	print(abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))), " / ", ((side_drift_range.y*(0.1 + 1 - linear_velocity.length()/top_speed))-side_drift_range.x))
 	
 	for i in range(wheels.size()):
 		var drift = grip
@@ -90,7 +88,6 @@ func _physics_process(delta: float) -> void:
 	var collision = KinematicCollision3D.new()
 	if test_move(transform, linear_velocity * delta, collision):
 		if linear_velocity.length() > 10:
-			print("crashed into ", collision.get_collider())
 			crashed.emit()
 	
 
