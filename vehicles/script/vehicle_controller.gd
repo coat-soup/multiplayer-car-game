@@ -14,7 +14,7 @@ signal suspension_impacted
 @export var front_wheel_drift_factor := 1.4
 @export var turn_loss_speed_range := Vector2(0.33, 1.0) ## Will go from 100% at x*top_speed to 0% at y*top_speed
 @export var speed_drift_range := Vector2(0.5, 1.5) ## Will go from 0% speed_drift at x*top_speed to 100% at y*top_speed
-@export var side_drift_range := Vector2(0.5, 3) ## Will go from 0% side_drift at 90*x degrees to 100% at 90*y degrees
+@export var side_drift_range := Vector2(5, 90) ## Will go from 0% side_drift at x degrees to 100% at y degrees
 
 @export_category("References")
 @export var mass_marker: Node3D
@@ -58,17 +58,19 @@ func _process(delta: float) -> void:
 	
 	handbrake = Input.is_action_pressed("jump")
 	
-	steering = move_toward(steering, Input.get_axis("right", "left") * steering_power * clamp(1 - (forward_speed-top_speed*turn_loss_speed_range.x)/(top_speed*turn_loss_speed_range.y), 0.0, 1.0), delta * 2.5)
+	steering = move_toward(steering, Input.get_axis("right", "left") * steering_power * (clamp(1 - (forward_speed-top_speed*turn_loss_speed_range.x)/(top_speed*turn_loss_speed_range.y), 0.0, 1.0) if not handbrake else 1), delta * 2.5)
 	engine_force = Input.get_axis("down", "up") * engine_power * (0 if forward_speed >= top_speed else 1)
 	
 	var speed_drift = 1 - clampf((forward_speed - top_speed*speed_drift_range.x) / top_speed*speed_drift_range.y, 0, 1)
-	var sideways_drift = 1 - clampf((abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))) - 90*side_drift_range.x)/90*side_drift_range.y, 0.0, 1.0)
+	var sideways_drift = 1 - clampf((abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))) - side_drift_range.x)/((side_drift_range.y*(0.1 + 1 - linear_velocity.length()/top_speed))-side_drift_range.x), 00, 1.0)
+	print(1 - sideways_drift)
+	print(abs(rad_to_deg(linear_velocity.normalized().signed_angle_to(global_basis.z, global_basis.y))), " / ", ((side_drift_range.y*(0.1 + 1 - linear_velocity.length()/top_speed))-side_drift_range.x))
 	
 	for i in range(wheels.size()):
 		var drift = grip
 		if handbrake:
-			drift = 1
-		else:
+			drift = 0.0
+		elif forward_speed > 5:
 			drift *= (speed_drift + sideways_drift) / 2
 		if wheels[i].use_as_steering:
 			drift *= front_wheel_drift_factor
@@ -76,8 +78,10 @@ func _process(delta: float) -> void:
 		wheels[i].wheel_friction_slip = min(grip, drift)
 		
 		if drift_particles[i]:
-			is_slipping = drift < grip*0.5 and forward_speed > 10 and wheels[i].is_in_contact()
+			is_slipping = drift < grip*0.5 and linear_velocity.length() > 10 and wheels[i].is_in_contact()
 			drift_particles[i].emitting = is_slipping
+			
+	try_drift_cheese(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -99,3 +103,10 @@ func apply_impulse_rpc(force : Vector3, pos : Vector3):
 func on_uncontrolled():
 	engine_force = 0
 	steering = 0
+
+func try_drift_cheese(delta : float):
+	if handbrake:
+		apply_torque(global_basis.y * Input.get_axis("right", "left") * delta * linear_velocity.length() * 2000)
+		if linear_velocity.length() < top_speed:
+			#apply_force(global_basis.z * engine_force * delta * 100)
+			print(engine_force)

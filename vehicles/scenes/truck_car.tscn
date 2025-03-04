@@ -113,13 +113,20 @@ properties/8/replication_mode = 1
 
 [node name="Body" type="VehicleBody3D" node_paths=PackedStringArray("mass_marker", "controllable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
-collision_layer = 8
+collision_layer = 16
 collision_mask = 17
 mass = 60.0
 physics_material_override = SubResource("PhysicsMaterial_l7i2k")
+gravity_scale = 1.7
 center_of_mass_mode = 1
 script = ExtResource("1_plp81")
+steering_power = 0.88
 engine_power = 100.0
+top_speed = 60.0
+front_wheel_drift_factor = 1.0
+turn_loss_speed_range = Vector2(0.2, 1)
+speed_drift_range = Vector2(0.5, 1.2)
+side_drift_range = Vector2(2, 50)
 mass_marker = NodePath("MassMarker")
 controllable = NodePath("truck model/Interactable/Controllable")
 
@@ -167,8 +174,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 10.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel1"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -187,8 +194,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 10.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel2"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -207,8 +214,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 10.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel3"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -227,8 +234,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 10.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel4"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -246,8 +253,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 5.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel5"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -269,8 +276,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 5.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel6"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -292,8 +299,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 5.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel7"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -315,8 +322,8 @@ wheel_rest_length = 0.5
 wheel_friction_slip = 6.0
 suspension_travel = 2.0
 suspension_stiffness = 5.0
-damping_compression = 0.88
-damping_relaxation = 1.0
+damping_compression = 0.3
+damping_relaxation = 0.5
 
 [node name="WheelModel" type="MeshInstance3D" parent="Wheel8"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
