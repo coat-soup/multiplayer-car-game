@@ -27,6 +27,8 @@ var drift_particles : Array[GPUParticles3D] = []
 @export var handbrake := false
 var forward_speed : float
 
+var is_slipping := false
+
 func _ready() -> void:
 	center_of_mass_mode = CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = mass_marker.position
@@ -38,11 +40,11 @@ func _ready() -> void:
 		if wheel:
 			wheels.append(wheel)
 			grip = wheel.wheel_friction_slip
-			var particles = wheel.get_node_or_null("DriftParticles")
-			if particles:
-				drift_particles.append(particles as GPUParticles3D)
-			else:
-				drift_particles.append(null)
+			drift_particles.append(wheel.get_node_or_null("DriftParticles") as GPUParticles3D)
+			
+	for p in drift_particles:
+		if p:
+			p.reparent(p.get_parent().get_parent())
 	
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -74,7 +76,8 @@ func _process(delta: float) -> void:
 		wheels[i].wheel_friction_slip = min(grip, drift)
 		
 		if drift_particles[i]:
-			drift_particles[i].emitting = drift < grip*0.5 and forward_speed > 10 and wheels[i].is_in_contact()
+			is_slipping = drift < grip*0.5 and forward_speed > 10 and wheels[i].is_in_contact()
+			drift_particles[i].emitting = is_slipping
 
 
 func _physics_process(delta: float) -> void:

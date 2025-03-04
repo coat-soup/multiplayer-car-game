@@ -2,7 +2,7 @@
 
 [sub_resource type="Gradient" id="Gradient_d8pxw"]
 offsets = PackedFloat32Array(0.345455, 1)
-colors = PackedColorArray(0.0110876, 0.0110876, 0.0110876, 1, 0.478935, 0.37224, 0.348976, 1)
+colors = PackedColorArray(0.728843, 0.0707739, 1.92523e-07, 1, 0.478935, 0.37224, 0.348976, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_mqggo"]
 gradient = SubResource("Gradient_d8pxw")
@@ -18,12 +18,12 @@ curve = SubResource("Curve_im0vg")
 emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector3(-1, 1, 0)
-spread = 10.0
+spread = 50.0
 initial_velocity_min = 3.0
 initial_velocity_max = 6.0
-gravity = Vector3(0, -5, 0)
-scale_min = 0.8
-scale_max = 1.2
+gravity = Vector3(0, -2, 0)
+scale_min = 1.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_6aiwc")
 color_ramp = SubResource("GradientTexture1D_mqggo")
 
