@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://yrhrbqwd2swc"]
 
-[ext_resource type="Script" path="res://vehicles/script/joint_car_test.gd" id="1_qm3e3"]
+[ext_resource type="Script" path="res://vehicles/scripts/joint_car_test.gd" id="1_qm3e3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kwdqh"]
 size = Vector3(5, 0.5, 2)

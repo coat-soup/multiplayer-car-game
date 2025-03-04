@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b1w86ol2ow4tg"]
 
-[ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_yaryb"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_yaryb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2a2mo"]
 size = Vector3(5, 0.5, 2)

@@ -5,10 +5,14 @@ class_name VehicleController
 signal crashed
 signal suspension_impacted
 
+var camera_sensetivity := 0.005
+@export var camera_pivot : Node3D
+
 @export_category("Stats")
 @export var steering_power := 0.8
 @export var engine_power := 150.0
 @export var top_speed := 40.0
+@export var air_control := 500.0
 
 @export_category("Handling")
 @export var front_wheel_drift_factor := 1.4
@@ -33,7 +37,8 @@ func _ready() -> void:
 	center_of_mass_mode = CENTER_OF_MASS_MODE_CUSTOM
 	center_of_mass = mass_marker.position
 	
-	controllable.control_ended.connect(on_uncontrolled)
+	if controllable:
+		controllable.control_ended.connect(on_uncontrolled)
 	
 	for child in get_children():
 		var wheel = child as VehicleWheel3D
@@ -49,14 +54,27 @@ func _ready() -> void:
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not controllable or not controllable.using_player: return
+	if not controllable.is_multiplayer_authority(): return
+	
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		camera_pivot.rotate_y(-event.relative.x * camera_sensetivity)
+		camera_pivot.rotation.x += (event.relative.y * camera_sensetivity)
+		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(60))
+		camera_pivot.rotation.z = 0
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	forward_speed = linear_velocity.project(global_basis.z).length()
 	
-	if not controllable.using_player: return
+	if not controllable or not controllable.using_player: return
 	if not controllable.is_multiplayer_authority(): return
 	
 	handbrake = Input.is_action_pressed("jump")
+	
+	if not exists_wheel_on_ground():
+		do_air_control(delta)
 	
 	steering = move_toward(steering, Input.get_axis("right", "left") * steering_power * (clamp(1 - (forward_speed-top_speed*turn_loss_speed_range.x)/(top_speed*turn_loss_speed_range.y), 0.0, 1.0) if not handbrake else 1), delta * 2.5)
 	engine_force = Input.get_axis("down", "up") * engine_power * (0 if forward_speed >= top_speed else 1)
@@ -75,7 +93,7 @@ func _process(delta: float) -> void:
 		
 		wheels[i].wheel_friction_slip = min(grip, drift)
 		
-		if drift_particles[i]:
+		if i < drift_particles.size() and drift_particles[i]:
 			is_slipping = drift < grip*0.5 and linear_velocity.length() > 10 and wheels[i].is_in_contact()
 			drift_particles[i].emitting = is_slipping
 			
@@ -83,7 +101,8 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not controllable.is_multiplayer_authority(): return
+	if not controllable: return
+	if controllable.is_multiplayer_authority(): return
 	
 	var collision = KinematicCollision3D.new()
 	if test_move(transform, linear_velocity * delta, collision):
@@ -98,8 +117,10 @@ func apply_impulse_rpc(force : Vector3, pos : Vector3):
 
 
 func on_uncontrolled():
+	camera_pivot.rotation = Vector3.ZERO
 	engine_force = 0
 	steering = 0
+
 
 func try_drift_cheese(delta : float):
 	if handbrake:
@@ -107,3 +128,17 @@ func try_drift_cheese(delta : float):
 		if linear_velocity.length() < top_speed:
 			#apply_force(global_basis.z * engine_force * delta * 100)
 			print(engine_force)
+
+
+func do_air_control(delta):
+	var rot_input := Vector2(Input.get_axis("right", "left"),  Input.get_axis("down", "up")) * air_control
+	print("doing air control with ", rot_input)
+	apply_torque(global_basis.y * rot_input.x * delta * 100)
+	apply_torque(global_basis.x * rot_input.y * delta * 100)
+
+
+func exists_wheel_on_ground() -> bool:
+	for wheel in wheels:
+		if wheel.is_in_contact():
+			return true
+	return false

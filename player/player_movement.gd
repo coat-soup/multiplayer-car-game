@@ -130,8 +130,11 @@ func handle_floor_attachment():
 	if not multiplayer.has_multiplayer_peer() or multiplayer.multiplayer_peer.get_connection_status() != multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
 		return
 	if floorcast.is_colliding():
-		#print(floorcast.get_collider().get_owner().get_owner())
-		var new_obj = floorcast.get_collider().get_owner().get_owner() as Node3D
+		var vc = floorcast.get_collider()
+		while (vc as VehicleController) == null:
+			vc = vc.get_parent()
+		
+		var new_obj = vc as VehicleController
 		if floor_obj != new_obj:
 			set_parent_to_vehicle.rpc(new_obj.get_path())
 			floor_obj = new_obj

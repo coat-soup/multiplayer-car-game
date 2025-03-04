@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	engine_sound.pitch_scale =  0.6 + controller.forward_speed/controller.top_speed
 	
 	tire_sounds.pitch_scale =  0.8 + (controller.forward_speed/controller.top_speed) * 0.3
-	tire_sounds.stream_paused = not exists_wheel_on_ground() or abs(controller.forward_speed) < 0.5
+	tire_sounds.stream_paused = not controller.exists_wheel_on_ground() or abs(controller.forward_speed) < 0.5
 	tire_sounds.volume_db = (controller.forward_speed/controller.top_speed) * 5
 	
 	drift_sounds.pitch_scale =  0.8 + (controller.forward_speed/controller.top_speed) * 0.3
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	for i in range(controller.wheels.size()):
 		if i < trail_particles.size() and trail_particles[i]:
 			trail_particles[i].emitting = controller.wheels[i].is_in_contact()
-			trail_particles[i].amount_ratio = controller.forward_speed/controller.top_speed
+			trail_particles[i].amount_ratio = min(1, (controller.forward_speed)/20)
 
 
 func _physics_process(delta: float) -> void:
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	if impact_cooldown > 0:
 		impact_cooldown -= delta
 	
-	if squeak_cooldown <= 0 and prev_vel.y - controller.linear_velocity.y < -0.2 and exists_wheel_on_ground():
+	if squeak_cooldown <= 0 and prev_vel.y - controller.linear_velocity.y < -0.2 and controller.exists_wheel_on_ground():
 		play_suspension_squeak()
 
 	prev_vel = controller.linear_velocity
@@ -71,10 +71,3 @@ func play_suspension_squeak():
 	
 	squeak_sounds.pitch_scale = randf_range(1, 1.2)
 	squeak_sounds.play()
-
-
-func exists_wheel_on_ground() -> bool:
-	for wheel in controller.wheels:
-		if wheel.is_in_contact():
-			return true
-	return false

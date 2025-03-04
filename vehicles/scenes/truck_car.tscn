@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://dm8rx4npceh8y"]
 
-[ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_plp81"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_plp81"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_kfp6f"]
 [ext_resource type="PackedScene" uid="uid://babxyff8abmit" path="res://vehicles/models/truck.tscn" id="3_fj0wf"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="4_fhtls"]
@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="7_k6y0h"]
 [ext_resource type="PackedScene" uid="uid://c2hx7lh4r87c7" path="res://vfx/drift_particles.tscn" id="8_bet1m"]
 [ext_resource type="PackedScene" uid="uid://dfv6kqfnpyxv2" path="res://vfx/tire_particles.tscn" id="8_m1c0t"]
-[ext_resource type="Script" path="res://vehicles/scenes/vehicle_FX_manager.gd" id="9_r6p1r"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_FX_manager.gd" id="9_r6p1r"]
 [ext_resource type="AudioStream" uid="uid://b86c4whv48nqi" path="res://sfx/engine.wav" id="10_oov02"]
 [ext_resource type="AudioStream" uid="uid://c827rm2y3kexa" path="res://sfx/car_crash.mp3" id="11_1i6rx"]
 [ext_resource type="AudioStream" uid="uid://dp8k2w5mnhcgy" path="res://sfx/tires_turning.wav" id="11_tgbp1"]
@@ -89,29 +89,11 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Wheel1:rotation")
+properties/2/path = NodePath(".:handbrake")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("Wheel2:rotation")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-properties/4/path = NodePath(".:handbrake")
-properties/4/spawn = true
-properties/4/replication_mode = 1
-properties/5/path = NodePath("Wheel5/DriftParticles:emitting")
-properties/5/spawn = true
-properties/5/replication_mode = 1
-properties/6/path = NodePath("Wheel6/DriftParticles:emitting")
-properties/6/spawn = true
-properties/6/replication_mode = 1
-properties/7/path = NodePath("Wheel7/DriftParticles:emitting")
-properties/7/spawn = true
-properties/7/replication_mode = 1
-properties/8/path = NodePath("Wheel8/DriftParticles:emitting")
-properties/8/spawn = true
-properties/8/replication_mode = 1
 
-[node name="Body" type="VehicleBody3D" node_paths=PackedStringArray("mass_marker", "controllable")]
+[node name="Body" type="VehicleBody3D" node_paths=PackedStringArray("camera_pivot", "mass_marker", "controllable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
 collision_layer = 16
 collision_mask = 17
@@ -120,6 +102,7 @@ physics_material_override = SubResource("PhysicsMaterial_l7i2k")
 gravity_scale = 1.7
 center_of_mass_mode = 1
 script = ExtResource("1_plp81")
+camera_pivot = NodePath("CameraPivot")
 steering_power = 0.88
 engine_power = 100.0
 top_speed = 60.0
@@ -153,7 +136,7 @@ prompt_text = "Control vehicle"
 [node name="Controllable" type="RemoteTransform3D" parent="truck model/Interactable" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
 transform = Transform3D(2.30986, 0, 2.46419e-13, 0, 2.30986, 0, -2.46419e-13, 0, 2.30986, 0, 0, 0)
 script = ExtResource("4_swatl")
-camera = NodePath("../../../Camera3D")
+camera = NodePath("../../../CameraPivot/SpringArm3D/Camera3D")
 interactable = NodePath("..")
 synchronizer = NodePath("../../../MultiplayerSynchronizer")
 
@@ -336,8 +319,16 @@ surface_material_override/0 = SubResource("ShaderMaterial_8b4gj")
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 0, -1.37587, 0)
 emitting = false
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 2.30982e-14, 8.74227e-08, 2.82225e-08, 0.946458, 0.322828, -8.27419e-08, 0.322828, -0.946458, -4.76837e-07, 11.4711, -18.1863)
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(-1, 8.88734e-15, 8.74227e-08, 2.82225e-08, 0.946458, 0.322828, -8.27419e-08, 0.322828, -0.946458, -1.62073e-06, 7.2469, -5.8019)
+collision_mask = 9
+spring_length = 13.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+transform = Transform3D(1, -1.77636e-15, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
 
 [node name="MassMarker" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, -1.18113, 1.38699)
@@ -392,25 +383,25 @@ max_distance = 100.0
 [node name="Particles" type="Node3D" parent="."]
 
 [node name="TireTrailParticles1" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.57368, -1.55853, 5.11715)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, -9.41194)
 
 [node name="TireTrailParticles2" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.57368, -1.55853, 5.11715)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, -9.41194)
 
 [node name="TireTrailParticles3" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.57368, -1.55853, 2.11715)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, -6.41194)
 
 [node name="TireTrailParticles4" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.57368, -1.55853, 2.11715)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, -6.41194)
 
 [node name="TireTrailParticles5" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.57368, -1.55853, -6.26846)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, 1.97367)
 
 [node name="TireTrailParticles6" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.57368, -1.55853, -6.26846)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, 1.97367)
 
 [node name="TireTrailParticles7" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.57368, -1.55853, -9.26846)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, 4.97367)
 
 [node name="TireTrailParticles8" parent="Particles" instance=ExtResource("8_m1c0t")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.57368, -1.55853, -9.26846)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, 4.97367)

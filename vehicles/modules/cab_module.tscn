@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://k515kwg26oey"]
+
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_ag7kx"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="2_j8rw6"]
+[ext_resource type="Script" path="res://system/controllable_object.gd" id="3_a4qmb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_inpj2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3bwgh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02oeh"]
+albedo_color = Color(0.938343, 0.364917, 1.92523e-07, 1)
+
+[node name="CabModule" type="Node3D" node_paths=PackedStringArray("steering_wheel")]
+script = ExtResource("1_ag7kx")
+steering_wheel = NodePath("Interactable/Controllable")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+transform = Transform3D(-1.89238e-08, 0, 0.432927, 0, 0.432927, 0, -0.432927, 0, -1.89238e-08, 0, 0.866709, 2.26909)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_j8rw6")
+prompt_text = "Control vehicle"
+
+[node name="Controllable" type="RemoteTransform3D" parent="Interactable" node_paths=PackedStringArray("interactable")]
+transform = Transform3D(2.30986, 0, 2.46419e-13, 0, 2.30986, 0, -2.46419e-13, 0, 2.30986, 0, 0, 0)
+script = ExtResource("3_a4qmb")
+interactable = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("BoxShape3D_inpj2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable"]
+mesh = SubResource("BoxMesh_3bwgh")
+surface_material_override/0 = SubResource("StandardMaterial3D_02oeh")

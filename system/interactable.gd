@@ -18,4 +18,3 @@ func interact(source: Node3D):
 		return
 	
 	interacted.emit(source)
-	print(source.name + " interacted with " + get_owner().name)

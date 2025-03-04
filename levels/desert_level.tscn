@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=24 format=3 uid="uid://b1k1yyld5gvfc"]
 
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://btmt77p6wpppk" path="res://world/landscape/scenes/small_rocks_01.tscn" id="6_6qmt5"]
 [ext_resource type="PackedScene" uid="uid://dra3q6hm6ypcq" path="res://world/landscape/scenes/small_rocks_02.tscn" id="7_3xeob"]
 [ext_resource type="PackedScene" uid="uid://c47woga3h3hd" path="res://world/landscape/scenes/small_rocks_03.tscn" id="8_y2qs8"]
+[ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
 
 [sub_resource type="Gradient" id="Gradient_y6mu4"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -279,6 +280,12 @@ transform = Transform3D(0.470157, 0.0258374, -0.070219, -0.0263744, 0.471923, -0
 [node name="small_rocks_11" parent="World/Props" instance=ExtResource("6_6qmt5")]
 transform = Transform3D(1, 0, 0, 0, 1.37993, 0, 0, 0, 1, -14.2074, 14.5029, 186.205)
 
+[node name="small_rocks_16" parent="World/Props" instance=ExtResource("6_6qmt5")]
+transform = Transform3D(-0.150892, 0.332269, -1.29563, -1.31782, -0.0380452, 0.148352, 0, 1.79957, 0.24236, 288.395, 2.13235, -10.2836)
+
+[node name="small_rocks_17" parent="World/Props" instance=ExtResource("6_6qmt5")]
+transform = Transform3D(0.734152, 1.81613, -0.674038, -1.42299, 1.15004, 0.0773863, 0.401962, 0.754233, 1.50503, 943.693, 15.3125, -27.3893)
+
 [node name="small_rocks_12" parent="World/Props" instance=ExtResource("6_6qmt5")]
 transform = Transform3D(0.202069, 0, 0.979371, 0, 1, 0, -0.979371, 0, 0.202069, -42.9078, 4.31908, 127.438)
 
@@ -394,3 +401,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.7253
 
 [node name="Body2" parent="." instance=ExtResource("4_snrwr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -80.0743, 6.16807, 91.5985)
+
+[node name="Body3" parent="." instance=ExtResource("12_mtjk6")]
+transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -6.76982, 9.54204, -2.11791)
+air_control = 800.0

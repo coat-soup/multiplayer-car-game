@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://fadl7ewe4vnv"]
 
-[ext_resource type="Script" path="res://vehicles/script/vehicle_controller.gd" id="1_nrcpj"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_nrcpj"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_nruwo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]

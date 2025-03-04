@@ -14,6 +14,7 @@ var using_player : Player = null
 
 var ui : UIManager
 
+@onready var root_owner : Node = get_owner()
 
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
@@ -27,7 +28,7 @@ func _input(event: InputEvent) -> void:
 
 func on_interact(player):
 	if using_player:
-		ui.display_chat_message.rpc("%s attempting control of %s. %s already in control" % [player.name, get_owner().name, using_player.name])
+		ui.display_chat_message.rpc("%s attempting control of %s. %s already in control" % [player.name, root_owner.name, using_player.name])
 		return
 	take_control.rpc(str(player.name))
 
@@ -36,11 +37,11 @@ func on_interact(player):
 func take_control(player_id : String):
 	var player = Util.get_player_from_id(str(player_id), self)
 	
-	get_owner().set_multiplayer_authority(str(player.name).to_int(), false)
+	root_owner.set_multiplayer_authority(str(player.name).to_int(), false)
 	synchronizer.set_multiplayer_authority(str(player.name).to_int(), false)
 	set_multiplayer_authority(str(player.name).to_int(), false)
 	
-	ui.display_chat_message("%s (auth: %s) taking control of %s" % [player.name, str(player.is_multiplayer_authority()), get_owner().name])
+	ui.display_chat_message("%s (auth: %s) taking control of %s" % [player.name, str(player.is_multiplayer_authority()), root_owner.name])
 	
 	using_player = player
 	#using_player.reparent(interactable)
@@ -60,7 +61,7 @@ func take_control(player_id : String):
 
 @rpc("any_peer", "call_local")
 func un_controll():
-	ui.display_chat_message("%s (auth: %s) exiting %s" % [using_player.name, str(using_player.is_multiplayer_authority()), get_owner().name])
+	ui.display_chat_message("%s (auth: %s) exiting %s" % [using_player.name, str(using_player.is_multiplayer_authority()), root_owner.name])
 	
 	if is_multiplayer_authority():
 		ui.display_chat_message("true auth, proper exit")

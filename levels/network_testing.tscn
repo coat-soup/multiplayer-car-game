@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://fjs02dvqh52d"]
+[gd_scene load_steps=14 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="5_ijex1"]
 [ext_resource type="PackedScene" uid="uid://cikqdvle0enf2" path="res://equipment/test_equipment.tscn" id="7_c87xb"]
 [ext_resource type="PackedScene" uid="uid://dm8rx4npceh8y" path="res://vehicles/scenes/truck_car.tscn" id="7_xldfw"]
+[ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="8_823hk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -870,3 +871,6 @@ ground_offset = 0.132
 
 [node name="RigidBody3D2" parent="." instance=ExtResource("7_c87xb")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 6.29223, 0.185007, -6.04985)
+
+[node name="Body2" parent="." instance=ExtResource("8_823hk")]
+transform = Transform3D(-0.780594, 0, -0.625038, 0, 1, 0, 0.625038, 0, -0.780594, 11.8034, 2.44947, 0.714901)

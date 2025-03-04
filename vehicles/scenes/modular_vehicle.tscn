@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=3 uid="uid://dfv5q1rqef88i"]
+
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_3aanq"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module_manager.gd" id="7_hi2a1"]
+[ext_resource type="PackedScene" uid="uid://06mcvx83ivov" path="res://vehicles/modules/vehicle_flatbed_module.tscn" id="8_6sted"]
+[ext_resource type="PackedScene" uid="uid://bnu5wdqrii2mc" path="res://vehicles/modules/cannon_module.tscn" id="8_sm5no"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_FX_manager.gd" id="9_7lh2j"]
+[ext_resource type="PackedScene" uid="uid://k515kwg26oey" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
+[ext_resource type="AudioStream" uid="uid://b86c4whv48nqi" path="res://sfx/engine.wav" id="10_t80r1"]
+[ext_resource type="AudioStream" uid="uid://dp8k2w5mnhcgy" path="res://sfx/tires_turning.wav" id="11_1xp7q"]
+[ext_resource type="AudioStream" uid="uid://dnm1s3yn6a1rg" path="res://sfx/sand_drift.wav" id="12_bjgp2"]
+[ext_resource type="AudioStream" uid="uid://c827rm2y3kexa" path="res://sfx/car_crash.mp3" id="13_787ia"]
+[ext_resource type="AudioStream" uid="uid://ctsk2l0y8uhto" path="res://sfx/suspension.wav" id="14_a7hjv"]
+[ext_resource type="PackedScene" uid="uid://dfv6kqfnpyxv2" path="res://vfx/tire_particles.tscn" id="15_uwmsm"]
+[ext_resource type="PackedScene" uid="uid://bph8abo3fn77q" path="res://vehicles/modules/vehicle_wheel_module.tscn" id="16_8et1q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
+friction = 0.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8cnm3"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:handbrake")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Body" type="VehicleBody3D" node_paths=PackedStringArray("camera_pivot", "mass_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00169557, 0.222867, -0.0955184)
+collision_layer = 16
+collision_mask = 17
+mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_l7i2k")
+gravity_scale = 1.7
+center_of_mass_mode = 1
+script = ExtResource("1_3aanq")
+camera_pivot = NodePath("CameraPivot")
+steering_power = 0.88
+engine_power = 100.0
+top_speed = 60.0
+front_wheel_drift_factor = 1.0
+turn_loss_speed_range = Vector2(0.2, 1)
+speed_drift_range = Vector2(0.5, 1.2)
+side_drift_range = Vector2(2, 50)
+mass_marker = NodePath("MassMarker")
+
+[node name="Modules" type="Node3D" parent="." node_paths=PackedStringArray("camera", "synchronizer")]
+script = ExtResource("7_hi2a1")
+camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
+synchronizer = NodePath("../MultiplayerSynchronizer")
+
+[node name="VehicleModule" parent="Modules" instance=ExtResource("16_8et1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="VehicleModule2" parent="Modules" instance=ExtResource("16_8et1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+do_steering = true
+
+[node name="VehicleModule4" parent="Modules" instance=ExtResource("8_6sted")]
+
+[node name="VehicleModule3" parent="Modules" instance=ExtResource("8_sm5no")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.32483)
+
+[node name="VehicleModule5" parent="Modules" instance=ExtResource("10_oqtvt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26986, 6)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(-1, 8.88734e-15, 8.74227e-08, 2.82225e-08, 0.946458, 0.322828, -8.27419e-08, 0.322828, -0.946458, -1.62073e-06, 7.2469, -5.8019)
+collision_mask = 9
+spring_length = 13.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+transform = Transform3D(1, -1.77636e-15, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="MassMarker" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, -1.18113, 1.38699)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8cnm3")
+
+[node name="FXManager" type="Node3D" parent="."]
+script = ExtResource("9_7lh2j")
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="FXManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.80028, -7.30881)
+stream = ExtResource("10_t80r1")
+volume_db = -10.0
+unit_size = 50.0
+autoplay = true
+max_distance = 200.0
+
+[node name="TireSounds" type="AudioStreamPlayer3D" parent="FXManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.649635, -8.31728)
+stream = ExtResource("11_1xp7q")
+unit_size = 100.0
+max_db = 5.0
+autoplay = true
+max_distance = 100.0
+
+[node name="DriftSounds" type="AudioStreamPlayer3D" parent="FXManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.439146, -6.71233)
+stream = ExtResource("12_bjgp2")
+volume_db = 28.952
+unit_size = 40.0
+autoplay = true
+max_distance = 40.0
+
+[node name="ImpactSounds" type="AudioStreamPlayer3D" parent="FXManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.56166)
+stream = ExtResource("13_787ia")
+volume_db = -5.0
+unit_size = 80.0
+max_db = 2.0
+max_distance = 100.0
+max_polyphony = 2
+
+[node name="SqueakSounds" type="AudioStreamPlayer3D" parent="FXManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23938, -0.638879)
+stream = ExtResource("14_a7hjv")
+volume_db = -5.0
+unit_size = 80.0
+max_db = 2.0
+max_distance = 100.0
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="TireTrailParticles1" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, -9.41194)
+
+[node name="TireTrailParticles2" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, -9.41194)
+
+[node name="TireTrailParticles3" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, -6.41194)
+
+[node name="TireTrailParticles4" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, -6.41194)
+
+[node name="TireTrailParticles5" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, 1.97367)
+
+[node name="TireTrailParticles6" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, 1.97367)
+
+[node name="TireTrailParticles7" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.5, -1.5149, 4.97367)
+
+[node name="TireTrailParticles8" parent="Particles" instance=ExtResource("15_uwmsm")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4.5, -1.5149, 4.97367)
