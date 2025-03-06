@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=27 format=3 uid="uid://b1k1yyld5gvfc"]
 
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dra3q6hm6ypcq" path="res://world/landscape/scenes/small_rocks_02.tscn" id="7_3xeob"]
 [ext_resource type="PackedScene" uid="uid://c47woga3h3hd" path="res://world/landscape/scenes/small_rocks_03.tscn" id="8_y2qs8"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
+[ext_resource type="Shader" path="res://vfx/post_processing_shader.gdshader" id="13_5iaee"]
 
 [sub_resource type="Gradient" id="Gradient_y6mu4"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -94,6 +95,17 @@ fog_aerial_perspective = 1.0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 volumetric_fog_albedo = Color(0.999053, 0.793761, 0.543531, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_6vh6q"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pynt"]
+render_priority = 0
+shader = ExtResource("13_5iaee")
+shader_parameter/_ColorCount = 32
+shader_parameter/_Spread = 0.05
+shader_parameter/_BayerLevel = 0
 
 [node name="DesertLevel" type="Node3D"]
 script = ExtResource("1_2svl5")
@@ -405,3 +417,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -80.07
 [node name="Body3" parent="." instance=ExtResource("12_mtjk6")]
 transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -6.76982, 9.54204, -2.11791)
 air_control = 800.0
+
+[node name="PostProcessing" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0189, -31.4828)
+extra_cull_margin = 10000.0
+mesh = SubResource("QuadMesh_6vh6q")
+surface_material_override/0 = SubResource("ShaderMaterial_3pynt")
