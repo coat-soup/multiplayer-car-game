@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=28 format=3 uid="uid://b1k1yyld5gvfc"]
 
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c47woga3h3hd" path="res://world/landscape/scenes/small_rocks_03.tscn" id="8_y2qs8"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
 [ext_resource type="Shader" path="res://vfx/post_processing_shader.gdshader" id="13_5iaee"]
+[ext_resource type="PackedScene" uid="uid://chg41ge62ovwo" path="res://world/foliage/scenes/cactus_tall.tscn" id="14_dgsuv"]
 
 [sub_resource type="Gradient" id="Gradient_y6mu4"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -423,3 +424,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0189, -31.4828)
 extra_cull_margin = 10000.0
 mesh = SubResource("QuadMesh_6vh6q")
 surface_material_override/0 = SubResource("ShaderMaterial_3pynt")
+
+[node name="CactusTall2" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37368, 0.720076, 37.6987)
+
+[node name="CactusTall" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9197, 2.24367, 117.183)

@@ -889,6 +889,7 @@ transform = Transform3D(-0.780594, 0, -0.625038, 0, 1, 0, 0.625038, 0, -0.780594
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0189, -31.4828)
+visible = false
 extra_cull_margin = 100.0
 mesh = SubResource("QuadMesh_2w07e")
 surface_material_override/0 = SubResource("ShaderMaterial_7s75o")
