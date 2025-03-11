@@ -60,9 +60,9 @@ func _on_host_local_pressed() -> void:
 
 func _on_join_pressed() -> void:
 	if ui.get_lobby_id() != "":
-		steam_peer.connect_lobby(parse_lobby_code(ui.get_lobby_id()))
+		steam_peer.connect_lobby(int(ui.get_lobby_id()))
 		multiplayer.multiplayer_peer = steam_peer
-	else:
+	else: 
 		enet_peer.create_client("localhost", PORT)
 		multiplayer.multiplayer_peer = enet_peer
 	
@@ -75,8 +75,9 @@ func _on_lobby_created(connected, id):
 		lobby_id = id
 		Steam.setLobbyData(lobby_id, "name", str(Steam.getPersonaName()+"'s lobby"))
 		Steam.setLobbyJoinable(id, true)
-		print("Lobby created! ID: %s" % codify_lobby_id(id))
-
+		print("Lobby created! ID: %s" % id)
+		ui.display_chat_message("Lobby created! ID: %s" % id)
+ 
 
 func add_player(peer_id):
 	var player = PLAYER.instantiate()
@@ -86,7 +87,7 @@ func add_player(peer_id):
 	player.global_position = spawn_position
 
 
-func remove_player(peer_id):
+func remove_player(peer_id): 	
 	var players = get_tree().get_nodes_in_group("player")
 	for player in players:
 		if player.name == str(peer_id):

@@ -14,7 +14,7 @@ var controller : VehicleController
 
 
 func setup():
-	if steering_wheel:
+	if steering_wheel:		
 		module_manager.setup_cab_controllable(steering_wheel)
 	
 	for child in get_children():

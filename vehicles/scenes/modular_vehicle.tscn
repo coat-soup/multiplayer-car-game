@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dfv5q1rqef88i"]
+[gd_scene load_steps=17 format=3 uid="uid://dfv5q1rqef88i"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_3aanq"]
+[ext_resource type="PackedScene" uid="uid://b7ol67t27hm1k" path="res://vehicles/modules/flatbed_module.tscn" id="4_r20sf"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module_manager.gd" id="7_hi2a1"]
-[ext_resource type="PackedScene" uid="uid://06mcvx83ivov" path="res://vehicles/modules/vehicle_flatbed_module.tscn" id="8_6sted"]
+[ext_resource type="PackedScene" uid="uid://db1lg5byv55mb" path="res://vehicles/modules/wheel_module_left.tscn" id="7_oy6iv"]
+[ext_resource type="PackedScene" uid="uid://1r7todw71qx7" path="res://vehicles/modules/wheel_module_right.tscn" id="8_ht0lm"]
 [ext_resource type="PackedScene" uid="uid://bnu5wdqrii2mc" path="res://vehicles/modules/cannon_module.tscn" id="8_sm5no"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_FX_manager.gd" id="9_7lh2j"]
 [ext_resource type="PackedScene" uid="uid://k515kwg26oey" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
@@ -12,7 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://c827rm2y3kexa" path="res://sfx/car_crash.mp3" id="13_787ia"]
 [ext_resource type="AudioStream" uid="uid://ctsk2l0y8uhto" path="res://sfx/suspension.wav" id="14_a7hjv"]
 [ext_resource type="PackedScene" uid="uid://dfv6kqfnpyxv2" path="res://vfx/tire_particles.tscn" id="15_uwmsm"]
-[ext_resource type="PackedScene" uid="uid://bph8abo3fn77q" path="res://vehicles/modules/vehicle_wheel_module.tscn" id="16_8et1q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
 friction = 0.5
@@ -52,20 +53,34 @@ script = ExtResource("7_hi2a1")
 camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
 synchronizer = NodePath("../MultiplayerSynchronizer")
 
-[node name="VehicleModule" parent="Modules" instance=ExtResource("16_8et1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+[node name="FlatbedModule" parent="Modules" instance=ExtResource("4_r20sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="VehicleModule2" parent="Modules" instance=ExtResource("16_8et1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
-do_steering = true
-
-[node name="VehicleModule4" parent="Modules" instance=ExtResource("8_6sted")]
+[node name="FlatbedModule2" parent="Modules" instance=ExtResource("4_r20sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
 
 [node name="VehicleModule3" parent="Modules" instance=ExtResource("8_sm5no")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1.32483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3.56745)
 
 [node name="VehicleModule5" parent="Modules" instance=ExtResource("10_oqtvt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26986, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
+
+[node name="WheelModuleLeft2" parent="Modules" instance=ExtResource("7_oy6iv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -6)
+
+[node name="WheelModuleLeft" parent="Modules" instance=ExtResource("8_ht0lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -6)
+
+[node name="FlatbedModule3" parent="Modules" instance=ExtResource("4_r20sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
+
+[node name="WheelModuleLeft3" parent="Modules" instance=ExtResource("7_oy6iv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 6)
+do_steering = true
+
+[node name="WheelModuleLeft4" parent="Modules" instance=ExtResource("8_ht0lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 6)
+do_steering = true
 
 [node name="CameraPivot" type="Node3D" parent="."]
 

@@ -1,25 +1,29 @@
-[gd_scene load_steps=28 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=33 format=3 uid="uid://b1k1yyld5gvfc"]
 
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
 [ext_resource type="Texture2D" uid="uid://bhnm6fkb1enkj" path="res://world/landscape/textures/sand.png" id="2_kmc41"]
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="2_lcqnc"]
+[ext_resource type="Shader" path="res://vfx/terrain_shader.gdshader" id="2_rcxq2"]
 [ext_resource type="Texture2D" uid="uid://cet5xuwgrtvjn" path="res://world/landscape/textures/sand_n.png" id="3_dmf72"]
 [ext_resource type="PackedScene" uid="uid://c65ohp1b05ybs" path="res://world/landscape/scenes/large_cliffs_01.tscn" id="4_ormrn"]
 [ext_resource type="PackedScene" uid="uid://dm8rx4npceh8y" path="res://vehicles/scenes/truck_car.tscn" id="4_snrwr"]
+[ext_resource type="Texture2D" uid="uid://bva0s1o57egse" path="res://world/landscape/textures/salt.png" id="5_1uck5"]
 [ext_resource type="PackedScene" uid="uid://cin2wv7vb4ktm" path="res://world/landscape/scenes/large_cliffs_long_01.tscn" id="5_bmq6k"]
 [ext_resource type="PackedScene" uid="uid://btmt77p6wpppk" path="res://world/landscape/scenes/small_rocks_01.tscn" id="6_6qmt5"]
+[ext_resource type="Texture2D" uid="uid://bmxpyamyxrls3" path="res://world/landscape/textures/salt_n.png" id="6_6463b"]
 [ext_resource type="PackedScene" uid="uid://dra3q6hm6ypcq" path="res://world/landscape/scenes/small_rocks_02.tscn" id="7_3xeob"]
 [ext_resource type="PackedScene" uid="uid://c47woga3h3hd" path="res://world/landscape/scenes/small_rocks_03.tscn" id="8_y2qs8"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
 [ext_resource type="Shader" path="res://vfx/post_processing_shader.gdshader" id="13_5iaee"]
 [ext_resource type="PackedScene" uid="uid://chg41ge62ovwo" path="res://world/foliage/scenes/cactus_tall.tscn" id="14_dgsuv"]
+[ext_resource type="PackedScene" uid="uid://cd1jh6wm80v5e" path="res://world/foliage/models/peenor.glb" id="15_tu7tu"]
 
-[sub_resource type="Gradient" id="Gradient_y6mu4"]
+[sub_resource type="Gradient" id="Gradient_tukec"]
 offsets = PackedFloat32Array(0.2, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_frx4h"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eqwaw"]
 noise_type = 2
 frequency = 0.03
 cellular_jitter = 3.0
@@ -31,10 +35,10 @@ domain_warp_fractal_type = 2
 domain_warp_fractal_lacunarity = 1.5
 domain_warp_fractal_gain = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fki7n"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q2gmp"]
 seamless = true
-color_ramp = SubResource("Gradient_y6mu4")
-noise = SubResource("FastNoiseLite_frx4h")
+color_ramp = SubResource("Gradient_tukec")
+noise = SubResource("FastNoiseLite_eqwaw")
 
 [sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_43j71"]
 _shader_parameters = {
@@ -47,10 +51,11 @@ _shader_parameters = {
 "noise1_scale": 0.04,
 "noise2_scale": 0.076,
 "noise3_scale": 0.225,
-"noise_texture": SubResource("NoiseTexture2D_fki7n"),
+"noise_texture": SubResource("NoiseTexture2D_q2gmp"),
 "vertex_normals_distance": 128.0
 }
 texture_filtering = 1
+shader_override = ExtResource("2_rcxq2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mtar"]
 transparency = 4
@@ -72,9 +77,16 @@ albedo_color = Color(1, 0.582557, 0.481578, 1)
 albedo_texture = ExtResource("2_kmc41")
 normal_texture = ExtResource("3_dmf72")
 
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_tx0mu"]
+name = "salt"
+id = 1
+albedo_color = Color(0.93408, 0.93408, 0.93408, 1)
+albedo_texture = ExtResource("5_1uck5")
+normal_texture = ExtResource("6_6463b")
+
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_psw3n"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_mampa")])
-texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_rno0h")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_rno0h"), SubResource("Terrain3DTextureAsset_tx0mu")])
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2k6qc"]
 sky_top_color = Color(0.249937, 0.483387, 0.699983, 1)
@@ -430,3 +442,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37368, 0.720076, 37.6987)
 
 [node name="CactusTall" parent="." instance=ExtResource("14_dgsuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9197, 2.24367, 117.183)
+
+[node name="peenor" parent="." instance=ExtResource("15_tu7tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.332, 4.05935, -96.7156)
+
+[node name="peenor2" parent="peenor" instance=ExtResource("15_tu7tu")]
+transform = Transform3D(0.301804, 0, -0.95337, 0, 1, 0, 0.95337, 0, 0.301804, 13.3229, 181.207, -5.10665)

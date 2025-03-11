@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://1r7todw71qx7"]
+
+[ext_resource type="PackedScene" uid="uid://cvopkjr0dee22" path="res://vehicles/models/WheelModule.glb" id="1_mehgj"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="2_wm4cm"]
+[ext_resource type="PackedScene" uid="uid://cvcuf46sfu4yb" path="res://vehicles/scenes/wheel_model.tscn" id="3_3d2wt"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_duojl"]
+points = PackedVector3Array(-3.47859, -0.296427, -0.79886, -3.28791, -0.487146, -0.79886, -3.47859, -0.296427, 0.798861, -2.02532, 0.396077, -0.79886, -3.28791, -0.487146, 0.798861, 3.28723, -0.487146, -0.79886, -2.02532, 0.396077, 0.798861, 2.02464, 0.396077, -0.79886, 3.28723, -0.487146, 0.798861, 3.47859, -0.296427, -0.79886, 2.02464, 0.396077, 0.798861, 3.47859, -0.296427, 0.798861)
+
+[node name="WheelModuleLeft" instance=ExtResource("1_mehgj")]
+script = ExtResource("2_wm4cm")
+
+[node name="Wheel1" type="VehicleWheel3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475953, -2.62466, 1.5574)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+wheel_radius = 1.4
+wheel_rest_length = 0.5
+wheel_friction_slip = 6.0
+suspension_travel = 2.0
+suspension_stiffness = 10.0
+damping_compression = 0.3
+damping_relaxation = 0.5
+
+[node name="WheelModel2" parent="Wheel1" index="0" instance=ExtResource("3_3d2wt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Wheel3" type="VehicleWheel3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.476, -2.625, -1.557)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+wheel_radius = 1.4
+wheel_rest_length = 0.5
+wheel_friction_slip = 6.0
+suspension_travel = 2.0
+suspension_stiffness = 10.0
+damping_compression = 0.3
+damping_relaxation = 0.5
+script = ExtResource("2_wm4cm")
+
+[node name="WheelModel2" parent="Wheel3" index="0" instance=ExtResource("3_3d2wt")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Cube_012" parent="." index="2"]
+transform = Transform3D(-8.74228e-08, 0, -1, 0, 1, 0, 1, 0, -8.74228e-08, 0.624025, -1.09903, 0.06735)
+
+[node name="Cube_014" parent="." index="3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.19533, -0.577965, -0.0827846)
+
+[node name="Cylinder_010" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.35317, -1.64129)
+
+[node name="Cube_015" parent="." index="5"]
+transform = Transform3D(-0.872324, 0.488928, 8.74228e-08, 0.488928, 0.872324, 0, -7.6261e-08, 4.27435e-08, -1, 1.98714, -1.73101, -1.64129)
+
+[node name="Cylinder_014" parent="." index="6"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, -1.64129)
+
+[node name="Cylinder_015" parent="." index="7"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.38576, -2.64763, -1.64129)
+
+[node name="Cylinder_016" parent="." index="8"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, -1.64129)
+
+[node name="Cylinder_017" parent="." index="9"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, -1.64129)
+
+[node name="Cube_016" parent="." index="10"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.77614, -1.75632, -0.0827844)
+
+[node name="Cylinder_018" parent="." index="11"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, -1.64129)
+
+[node name="Cylinder_019" parent="." index="12"]
+transform = Transform3D(-0.707107, 0.707107, 8.74228e-08, 0.707107, 0.707107, 0, -6.18172e-08, 6.18172e-08, -1, 2.49559, -2.23094, -1.64129)
+
+[node name="Icosphere" parent="." index="13"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.07467, -2.64192, -1.64129)
+
+[node name="Cylinder_020" parent="." index="14"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.35317, 1.56022)
+
+[node name="Cube_017" parent="." index="15"]
+transform = Transform3D(-0.872324, 0.488928, 8.74228e-08, 0.488928, 0.872324, 0, -7.6261e-08, 4.27435e-08, -1, 1.98714, -1.73101, 1.56022)
+
+[node name="Cylinder_021" parent="." index="16"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, 1.56022)
+
+[node name="Cylinder_022" parent="." index="17"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.38576, -2.64763, 1.56022)
+
+[node name="Cylinder_023" parent="." index="18"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, 1.56022)
+
+[node name="Cylinder_024" parent="." index="19"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, 1.56022)
+
+[node name="Cylinder_025" parent="." index="20"]
+transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, 1.56022)
+
+[node name="Cylinder_026" parent="." index="21"]
+transform = Transform3D(-0.707107, 0.707107, 8.74228e-08, 0.707107, 0.707107, 0, -6.18172e-08, 6.18172e-08, -1, 2.49559, -2.23094, 1.56022)
+
+[node name="Icosphere_001" parent="." index="22"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.07467, -2.64192, 1.56022)
+
+[node name="Walkable" type="StaticBody3D" parent="." index="23"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.957338, -1.295, -0.0827846)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walkable" index="0"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.333313, 0.19597, -0.150135)
+shape = SubResource("ConvexPolygonShape3D_duojl")

@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func setup_cab_controllable(controllable : Controllable):
 	controllable.camera = camera
-	controllable.synchronizer = synchronizer
+	controllable.synchronizer = synchronizer 
 	controllable.root_owner = controller
 	controller.controllable = controllable
 	controllable.control_ended.connect(controller.on_uncontrolled)
