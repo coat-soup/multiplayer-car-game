@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://1r7todw71qx7"]
+[gd_scene load_steps=8 format=3 uid="uid://1r7todw71qx7"]
 
 [ext_resource type="PackedScene" uid="uid://cvopkjr0dee22" path="res://vehicles/models/WheelModule.glb" id="1_mehgj"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="2_wm4cm"]
 [ext_resource type="PackedScene" uid="uid://cvcuf46sfu4yb" path="res://vehicles/scenes/wheel_model.tscn" id="3_3d2wt"]
+[ext_resource type="Texture2D" uid="uid://cmadt4m72xgsg" path="res://vehicles/textures/wheel_module.png" id="4_wo3vx"]
+[ext_resource type="Texture2D" uid="uid://dsq1bbswn4jig" path="res://vehicles/textures/wheel_module_n.png" id="5_qp253"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21k32"]
+albedo_texture = ExtResource("4_wo3vx")
+normal_enabled = true
+normal_texture = ExtResource("5_qp253")
+texture_filter = 0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_duojl"]
 points = PackedVector3Array(-3.47859, -0.296427, -0.79886, -3.28791, -0.487146, -0.79886, -3.47859, -0.296427, 0.798861, -2.02532, 0.396077, -0.79886, -3.28791, -0.487146, 0.798861, 3.28723, -0.487146, -0.79886, -2.02532, 0.396077, 0.798861, 2.02464, 0.396077, -0.79886, 3.28723, -0.487146, 0.798861, 3.47859, -0.296427, -0.79886, 2.02464, 0.396077, 0.798861, 3.47859, -0.296427, 0.798861)
@@ -45,66 +53,87 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Cube_012" parent="." index="2"]
 transform = Transform3D(-8.74228e-08, 0, -1, 0, 1, 0, 1, 0, -8.74228e-08, 0.624025, -1.09903, 0.06735)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cube_014" parent="." index="3"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.19533, -0.577965, -0.0827846)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_010" parent="." index="4"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.35317, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cube_015" parent="." index="5"]
 transform = Transform3D(-0.872324, 0.488928, 8.74228e-08, 0.488928, 0.872324, 0, -7.6261e-08, 4.27435e-08, -1, 1.98714, -1.73101, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_014" parent="." index="6"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_015" parent="." index="7"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.38576, -2.64763, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_016" parent="." index="8"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_017" parent="." index="9"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cube_016" parent="." index="10"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.77614, -1.75632, -0.0827844)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_018" parent="." index="11"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_019" parent="." index="12"]
 transform = Transform3D(-0.707107, 0.707107, 8.74228e-08, 0.707107, 0.707107, 0, -6.18172e-08, 6.18172e-08, -1, 2.49559, -2.23094, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Icosphere" parent="." index="13"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.07467, -2.64192, -1.64129)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_020" parent="." index="14"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.35317, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cube_017" parent="." index="15"]
 transform = Transform3D(-0.872324, 0.488928, 8.74228e-08, 0.488928, 0.872324, 0, -7.6261e-08, 4.27435e-08, -1, 1.98714, -1.73101, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_021" parent="." index="16"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_022" parent="." index="17"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.38576, -2.64763, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_023" parent="." index="18"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_024" parent="." index="19"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.85265, -2.07096, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_025" parent="." index="20"]
 transform = Transform3D(-3.57628e-07, -1, 8.74228e-08, -1, 3.57628e-07, 0, -3.12648e-14, -8.74228e-08, -1, 1.51099, -2.64763, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Cylinder_026" parent="." index="21"]
 transform = Transform3D(-0.707107, 0.707107, 8.74228e-08, 0.707107, 0.707107, 0, -6.18172e-08, 6.18172e-08, -1, 2.49559, -2.23094, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Icosphere_001" parent="." index="22"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.07467, -2.64192, 1.56022)
+surface_material_override/0 = SubResource("StandardMaterial3D_21k32")
 
 [node name="Walkable" type="StaticBody3D" parent="." index="23"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.957338, -1.295, -0.0827846)

@@ -1,9 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://k515kwg26oey"]
+[gd_scene load_steps=13 format=3 uid="uid://k515kwg26oey"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_ag7kx"]
 [ext_resource type="PackedScene" uid="uid://d0jxhnjrfyeud" path="res://vehicles/models/CabModule.glb" id="1_f1g04"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="2_j8rw6"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="3_a4qmb"]
+[ext_resource type="Texture2D" uid="uid://dw4wv8hgj7obv" path="res://vehicles/textures/cab.png" id="3_jdc1i"]
+[ext_resource type="Texture2D" uid="uid://ortvkba0m0jo" path="res://vehicles/textures/cab_n.png" id="4_rtmq2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucijh"]
+albedo_texture = ExtResource("3_jdc1i")
+normal_enabled = true
+normal_texture = ExtResource("4_rtmq2")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gdapd"]
 
@@ -22,16 +30,49 @@ size = Vector3(6, 5.02368, 7.02875)
 script = ExtResource("1_ag7kx")
 steering_wheel = NodePath("Interactable/Controllable")
 
-[node name="Cube_021" parent="." index="10"]
-visible = false
+[node name="Cube_011" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
 
-[node name="Cube_022" parent="." index="11"]
-visible = false
+[node name="Cube_012" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
 
-[node name="Cube_023" parent="." index="12"]
-visible = false
+[node name="Cube_013" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
 
-[node name="Interactable" type="StaticBody3D" parent="." index="17"]
+[node name="Cube_014" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_015" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_016" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_017" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_018" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_019" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_020" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_024" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_025" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Cube_026" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Plane" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
+
+[node name="Interactable" type="StaticBody3D" parent="." index="14"]
 transform = Transform3D(-1.89238e-08, 0, 0.432927, 0, 0.432927, 0, -0.432927, 0, -1.89238e-08, 1.29203, 1.19767, 3.32751)
 collision_layer = 4
 collision_mask = 4
@@ -50,7 +91,7 @@ shape = SubResource("BoxShape3D_gdapd")
 mesh = SubResource("BoxMesh_jimg0")
 surface_material_override/0 = SubResource("StandardMaterial3D_opi3n")
 
-[node name="Walkable" type="StaticBody3D" parent="." index="18"]
+[node name="Walkable" type="StaticBody3D" parent="." index="15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.295, 0)
 collision_layer = 32
 collision_mask = 0
@@ -59,6 +100,6 @@ collision_mask = 0
 transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.295, 0)
 shape = SubResource("ConcavePolygonShape3D_tq1yv")
 
-[node name="MainBodyCollision" type="CollisionShape3D" parent="." index="19"]
+[node name="MainBodyCollision" type="CollisionShape3D" parent="." index="16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32137, 0.672089)
 shape = SubResource("BoxShape3D_7x1x3")

@@ -1,5 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvcuf46sfu4yb"]
+[gd_scene load_steps=5 format=3 uid="uid://cvcuf46sfu4yb"]
 
 [ext_resource type="PackedScene" uid="uid://ceoie6pyqcv1i" path="res://vehicles/models/Wheel.glb" id="1_w51vt"]
+[ext_resource type="Texture2D" uid="uid://bqyj0623s58ss" path="res://vehicles/textures/wheel.png" id="2_f1vgn"]
+[ext_resource type="Texture2D" uid="uid://b6vcqjisjucgi" path="res://vehicles/textures/wheel_n.png" id="3_u7cdv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nf85r"]
+albedo_texture = ExtResource("2_f1vgn")
+normal_enabled = true
+normal_scale = 5.32
+normal_texture = ExtResource("3_u7cdv")
+texture_filter = 0
 
 [node name="WheelModel" instance=ExtResource("1_w51vt")]
+
+[node name="Cube_011" parent="Wheel" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nf85r")
+
+[node name="Cylinder_009" parent="Wheel" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nf85r")
+
+[node name="Cylinder_011" parent="Wheel" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nf85r")
