@@ -56,7 +56,7 @@ func handle_impact():
 		if radius > 0:
 			Util.explode_at_point(global_position, damage, radius, particles, get_tree().get_root())
 		elif hit_obj != null:
-			pass
+			Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 			# do damage to direct hit
 	else:
 		Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)

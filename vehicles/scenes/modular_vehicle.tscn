@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfv5q1rqef88i"]
+[gd_scene load_steps=18 format=3 uid="uid://dfv5q1rqef88i"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_3aanq"]
+[ext_resource type="PackedScene" uid="uid://itrvqdxsmitv" path="res://vehicles/modules/autocannon_module.tscn" id="4_0vw06"]
 [ext_resource type="PackedScene" uid="uid://b7ol67t27hm1k" path="res://vehicles/modules/flatbed_module.tscn" id="4_r20sf"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module_manager.gd" id="7_hi2a1"]
 [ext_resource type="PackedScene" uid="uid://db1lg5byv55mb" path="res://vehicles/modules/wheel_module_left.tscn" id="7_oy6iv"]
@@ -56,11 +57,14 @@ synchronizer = NodePath("../MultiplayerSynchronizer")
 [node name="FlatbedModule" parent="Modules" instance=ExtResource("4_r20sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
+[node name="AutocannonModule" parent="Modules" instance=ExtResource("4_0vw06")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 6, 6)
+
 [node name="FlatbedModule2" parent="Modules" instance=ExtResource("4_r20sf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
 
 [node name="VehicleModule3" parent="Modules" instance=ExtResource("8_sm5no")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3.56745)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3)
 
 [node name="VehicleModule5" parent="Modules" instance=ExtResource("10_oqtvt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)

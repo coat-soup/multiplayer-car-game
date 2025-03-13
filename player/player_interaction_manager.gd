@@ -18,6 +18,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not player.is_multiplayer_authority(): return
+	if not player.active:
+		ui.set_interact_text("")
+		return
 	
 	do_raycast()
 	if target_interactable and not target_interactable.active:

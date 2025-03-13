@@ -9,6 +9,7 @@ extends Node3D
 @export var control_manager : Controllable
 @export var sensetivity := 0.005
 @export var turn_speed := 1.5
+@export var full_auto := false
 
 @export var barrel_end : Node3D
 
@@ -39,7 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("control not auth")
 		return
 	
-	if event.is_action_pressed("primary_fire") and fire_timer <= 0:
+	if !full_auto and event.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -57,12 +58,18 @@ func _process(delta: float) -> void:
 	if fire_timer > 0:
 		fire_timer -= delta
 	
-	if do_joystick and control_manager.is_multiplayer_authority() and virtual_joystick_value.length() > 0.1:
+	if not control_manager.using_player: return
+	if not control_manager.is_multiplayer_authority(): return
+	
+	if full_auto and Input.is_action_pressed("primary_fire") and fire_timer <= 0:
+		fire_cannon.rpc()
+	
+	if do_joystick and virtual_joystick_value.length() > 0.1:
 		yaw_obj.rotate_y(-virtual_joystick_value.x * turn_speed * delta)
 		pitch_obj.rotate_x(-virtual_joystick_value.y * turn_speed * delta)
 		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 		
-	elif control_manager.is_multiplayer_authority():
+	else:
 		camera.rotation.z = 0
 		yaw_obj.rotation.y += clamp(wrapf(camera.rotation.y - yaw_obj.rotation.y, -PI, PI) * 10, -1, 1) * delta * turn_speed
 		pitch_obj.rotation.x += clamp(wrapf(camera.rotation.x - pitch_obj.rotation.x, -PI, PI) * 10, -1, 1) * delta * turn_speed

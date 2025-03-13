@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://itrvqdxsmitv"]
+
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_lpl8c"]
+[ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="2_rppvn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]
+size = Vector3(3, 2.456, 3)
+
+[node name="AutocannonModule" type="Node3D"]
+script = ExtResource("1_lpl8c")
+
+[node name="autocannon" parent="." instance=ExtResource("2_rppvn")]
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.029, 0)
+shape = SubResource("BoxShape3D_0cuh6")

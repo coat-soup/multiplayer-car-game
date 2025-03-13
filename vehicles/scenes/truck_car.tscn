@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://dm8rx4npceh8y"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_controller.gd" id="1_plp81"]
-[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon.tscn" id="2_kfp6f"]
+[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon/massive_cannon.tscn" id="2_kfp6f"]
 [ext_resource type="PackedScene" uid="uid://babxyff8abmit" path="res://vehicles/models/truck.tscn" id="3_fj0wf"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="4_fhtls"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_swatl"]

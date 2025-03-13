@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://cxb87aa4s0d0k"]
+
+[ext_resource type="PackedScene" uid="uid://v6ld2t0h2oos" path="res://cannons/autocannon/autocannon.glb" id="1_gtjru"]
+[ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_c1g2y"]
+[ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="2_sgksp"]
+[ext_resource type="Script" path="res://system/controllable_object.gd" id="3_6v6u1"]
+[ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://cannons/autocannon_shell.tscn" id="3_ri3vl"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="4_1tp4y"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="7_ca76a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohirr"]
+size = Vector3(1.0752, 1.33081, 1.2496)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gv51k"]
+height = 0.94106
+radius = 0.340809
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2qn1b"]
+size = Vector3(0.5, 0.2, 4.327)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ri51i"]
+size = Vector3(1, 1.15552, 3.35034)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4p7fa"]
+render_priority = 0
+shader = ExtResource("7_ca76a")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 3
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_062ux"]
+properties/0/path = NodePath("Yaw:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Yaw/Pitch:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="autocannon" node_paths=PackedStringArray("control_manager", "barrel_end") instance=ExtResource("1_gtjru")]
+script = ExtResource("2_c1g2y")
+shell = ExtResource("3_ri3vl")
+control_manager = NodePath("Yaw/Pitch/Controllable")
+turn_speed = 3.0
+full_auto = true
+barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
+fire_rate = 3.0
+do_joystick = false
+
+[node name="Camera3D" type="Camera3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06532, 1.76757)
+
+[node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="0"]
+transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 0, 0.882133, 1.76757)
+remote_path = NodePath("../../../Camera3D")
+update_rotation = false
+update_scale = false
+
+[node name="Controllable" type="RemoteTransform3D" parent="Yaw/Pitch" index="1" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
+transform = Transform3D(1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, 1, 0, 0.37992, 1.39245)
+script = ExtResource("3_6v6u1")
+camera = NodePath("../../../Camera3D")
+interactable = NodePath("../Interact")
+synchronizer = NodePath("../../../MultiplayerSynchronizer")
+
+[node name="Interact" type="StaticBody3D" parent="Yaw/Pitch" index="2"]
+transform = Transform3D(1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, 1, 0, 0.441227, 1.23283)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_1tp4y")
+prompt_text = "Control cannon"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/Pitch/Interact" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.048, 0.198)
+shape = SubResource("BoxShape3D_ohirr")
+
+[node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="3"]
+transform = Transform3D(-1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, -1, 0, 0.05, -3.57588)
+
+[node name="FiringAudio" type="AudioStreamPlayer3D" parent="Yaw/Pitch/BarrelEnd" index="0"]
+stream = ExtResource("2_sgksp")
+unit_size = 250.0
+max_distance = 250.0
+max_polyphony = 3
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Yaw/Pitch" index="4"]
+transform = Transform3D(0.7, 0, -3.0598e-08, 0, 0.7, 0, 3.0598e-08, 0, 0.7, 0, -1.183, 0.0159394)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/Pitch/StaticBody3D2" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.777386, 2.25188, 0.735205)
+shape = SubResource("CylinderShape3D_gv51k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Yaw/Pitch/StaticBody3D2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78699, -2.87506)
+shape = SubResource("BoxShape3D_2qn1b")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Yaw/Pitch/StaticBody3D2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76204, 0.824097)
+shape = SubResource("BoxShape3D_ri51i")
+
+[node name="Cube_008" parent="Yaw/Pitch" index="11"]
+material_override = SubResource("ShaderMaterial_4p7fa")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="5"]
+replication_config = SubResource("SceneReplicationConfig_062ux")
