@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8at3wds2wf86"]
+[gd_scene load_steps=17 format=3 uid="uid://b8at3wds2wf86"]
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://cannons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_g2jg0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://khld0gaej8py" path="res://cannons/cannon_shell.tscn" id="3_fqi0e"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="4_b6a1x"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
+[ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="4_sn25g"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="5_j0v2g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0kiod"]
@@ -58,11 +59,12 @@ properties/1/path = NodePath("Yaw/Pitch:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="massive_cannon" node_paths=PackedStringArray("control_manager", "barrel_end") instance=ExtResource("1_mnts8")]
+[node name="massive_cannon" node_paths=PackedStringArray("control_manager", "barrel_end", "crosshair") instance=ExtResource("1_mnts8")]
 script = ExtResource("2_g2jg0")
 shell = ExtResource("3_fqi0e")
 control_manager = NodePath("Yaw/Controllable")
 barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
+crosshair = NodePath("Yaw/Pitch/Crosshair")
 do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
@@ -85,7 +87,12 @@ shape = SubResource("BoxShape3D_js57a")
 transform = Transform3D(1, -8.11558e-10, -6.2538e-10, 1.02449e-09, 0.784895, 0.619628, -1.20083e-11, -0.619628, 0.784895, -0.0241088, 0.876029, 3.7306)
 shape = SubResource("BoxShape3D_hidmy")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Yaw/Pitch" index="0"]
+[node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70781, 1.21923, -7.1744)
+modulate = Color(1, 1, 1, 0.313726)
+texture = ExtResource("4_sn25g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Yaw/Pitch" index="1"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.598153, -1.31265, -1.44775)
 collision_layer = 32
 collision_mask = 0
@@ -98,10 +105,10 @@ shape = SubResource("CylinderShape3D_e6uqf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.876808, 3.2183, 1.51183)
 shape = SubResource("BoxShape3D_ip4v0")
 
-[node name="Cube_008" parent="Yaw/Pitch" index="4"]
+[node name="Cube_008" parent="Yaw/Pitch" index="5"]
 surface_material_override/0 = SubResource("ShaderMaterial_3fcqn")
 
-[node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="13"]
+[node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="14"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 0.941027, -7.58346)
 
 [node name="FiringAudio" type="AudioStreamPlayer3D" parent="Yaw/Pitch/BarrelEnd" index="0"]
@@ -110,7 +117,7 @@ unit_size = 250.0
 max_distance = 250.0
 max_polyphony = 3
 
-[node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="14"]
+[node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="15"]
 transform = Transform3D(1.42857, 0, 0, 0, 1.42857, 0, 0, 0, 1.42857, 1.70781, 1.21923, 0.430433)
 remote_path = NodePath("../../../Camera3D")
 update_rotation = false

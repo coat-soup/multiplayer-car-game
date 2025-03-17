@@ -52,7 +52,7 @@ material = SubResource("StandardMaterial3D_0wbao")
 [node name="shell" instance=ExtResource("1_ygs1v")]
 script = ExtResource("2_22o70")
 speed = 100.0
-drop_rate = 20.0
+drop_rate = 10.0
 particles = ExtResource("3_argpk")
 
 [node name="Cube" parent="." index="0"]

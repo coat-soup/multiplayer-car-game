@@ -12,6 +12,7 @@ extends Node3D
 @export var full_auto := false
 
 @export var barrel_end : Node3D
+@export var crosshair : Node3D
 
 @export var fire_rate := 1.2
 var fire_timer := 0.0
@@ -32,6 +33,8 @@ func _ready() -> void:
 	
 	control_manager.control_started.connect(on_controlled)
 	control_manager.control_ended.connect(on_uncontrolled)
+	
+	crosshair.visible = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -93,8 +96,11 @@ func fire_cannon():
 func on_controlled():
 	if do_joystick and control_manager.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(true)
+	if control_manager.is_multiplayer_authority():
+		crosshair.visible = true
 	
 func on_uncontrolled():
+	crosshair.visible = false
 	if control_manager.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(false)
 
