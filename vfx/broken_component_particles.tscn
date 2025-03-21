@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://bobaaamn634ry"]
+
+[sub_resource type="Curve" id="Curve_vxwyx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.166667, 0.604396), 0.0, 0.0, 0, 0, Vector2(0.724638, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.032967), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_bkrja"]
+curve = SubResource("Curve_vxwyx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e81r4"]
+lifetime_randomness = 0.3
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, 3, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_bkrja")
+color = Color(0.548963, 0.548963, 0.548963, 1)
+turbulence_noise_speed_random = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfoks"]
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_mgxnc"]
+material = SubResource("StandardMaterial3D_pfoks")
+
+[sub_resource type="Curve" id="Curve_c4r67"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rcu5e"]
+curve = SubResource("Curve_c4r67")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_teksj"]
+lifetime_randomness = 0.3
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_rcu5e")
+color = Color(0.831644, 0.673837, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w00r8"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_mk2ph"]
+material = SubResource("StandardMaterial3D_w00r8")
+
+[node name="BrokenComponentParticles" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_e81r4")
+draw_pass_1 = SubResource("QuadMesh_mgxnc")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+amount = 3
+amount_ratio = 0.2476
+lifetime = 0.3
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_teksj")
+draw_pass_1 = SubResource("QuadMesh_mk2ph")

@@ -16,6 +16,7 @@ var ui : UIManager
 
 @onready var root_owner : Node = get_owner()
 
+
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	interactable.interacted.connect(on_interact)
@@ -61,6 +62,7 @@ func take_control(player_id : String):
 
 @rpc("any_peer", "call_local")
 func un_controll():
+	if not using_player: return
 	ui.display_chat_message("%s (auth: %s) exiting %s" % [using_player.name, str(using_player.is_multiplayer_authority()), root_owner.name])
 	
 	if is_multiplayer_authority():

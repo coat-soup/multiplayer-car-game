@@ -27,9 +27,17 @@ var virtual_joystick_value = Vector2.ZERO
 var ui : UIManager
 
 @onready var firing_audio: AudioStreamPlayer3D = $Yaw/Pitch/BarrelEnd/FiringAudio
+@export var module : VehicleModule
+
 
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
+	
+	if not module:
+		module = get_parent() as VehicleModule
+	if module:
+		module.broken.connect(on_broken)
+		module.fixed.connect(on_fixed)
 	
 	control_manager.control_started.connect(on_controlled)
 	control_manager.control_ended.connect(on_uncontrolled)
@@ -107,3 +115,15 @@ func on_uncontrolled():
 
 static func pushv(val, deadzone = 0.1) -> float:
 	return val if abs(val) <= deadzone else 1.0 if val > 0.0 else -1.0
+
+
+func on_broken():
+	control_manager.un_controll.rpc()
+	print("kicking player")
+	
+	control_manager.interactable.toggle_active.rpc(false)
+
+
+func on_fixed():
+	control_manager.interactable.toggle_active.rpc(true)
+	pass

@@ -1,16 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://itrvqdxsmitv"]
+[gd_scene load_steps=5 format=3 uid="uid://itrvqdxsmitv"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_lpl8c"]
 [ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="2_rppvn"]
+[ext_resource type="Script" path="res://system/health.gd" id="3_adfel"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]
 size = Vector3(3, 2.456, 3)
 
-[node name="AutocannonModule" type="Node3D"]
+[node name="AutocannonModule" type="Node3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_lpl8c")
+health = NodePath("Hitbox/Health")
 
 [node name="autocannon" parent="." instance=ExtResource("2_rppvn")]
 
 [node name="MainBodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.029, 0)
+shape = SubResource("BoxShape3D_0cuh6")
+
+[node name="Hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("3_adfel")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.029, 0)
 shape = SubResource("BoxShape3D_0cuh6")

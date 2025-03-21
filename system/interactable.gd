@@ -18,3 +18,8 @@ func interact(source: Node3D):
 		return
 	
 	interacted.emit(source)
+
+
+@rpc("any_peer", "call_local")
+func toggle_active(value: bool):
+	active = value

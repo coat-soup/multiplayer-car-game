@@ -31,7 +31,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = radius
 	collision_shape.transform.origin = position
-	collision_shape.collision_mask = layer_mask([1,2,4,5])
+	collision_shape.collision_mask = layer_mask([1,2,4,5,6])
 
 	var results = space_state.intersect_shape(collision_shape)
 
@@ -39,8 +39,11 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 	
 	for result in results:
 		var collider = result.collider
-		if damaged.has(collider):
-			continue
+		if !damaged.has(collider):
+			print(collider.name)
+			var health = collider.get_node_or_null("Health") as Health
+			if health:
+				health.take_damage.rpc(damage, null)
 		damaged.append(collider)
 		
 		var player = collider as Player

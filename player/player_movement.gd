@@ -132,6 +132,7 @@ func handle_floor_attachment():
 	if floorcast.is_colliding():
 		var vc = floorcast.get_collider()
 		while (vc as VehicleController) == null:
+			if not vc: return # redundancy because it doesn't work sometimes apparently
 			vc = vc.get_parent()
 		
 		var new_obj = vc as VehicleController
