@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://de7f7i08xc1rx"]
+
+[ext_resource type="PackedScene" uid="uid://by41frjh5n3nl" path="res://vehicles/models/EngineModule.glb" id="1_c5d4d"]
+[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="2_7flph"]
+[ext_resource type="Script" path="res://system/health.gd" id="2_ly4r2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6mha6"]
+size = Vector3(4.24219, 2.23145, 3.97687)
+
+[node name="EngineModule" node_paths=PackedStringArray("health") instance=ExtResource("1_c5d4d")]
+script = ExtResource("2_7flph")
+health = NodePath("Hitbox/Health")
+
+[node name="Walkable" type="StaticBody3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.295, 0)
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walkable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121094, 2.22199, -0.155609)
+shape = SubResource("BoxShape3D_6mha6")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81563, 0)
+shape = SubResource("BoxShape3D_6mha6")
+
+[node name="Hitbox" type="StaticBody3D" parent="." index="4"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox" index="0"]
+script = ExtResource("2_ly4r2")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81563, 0)
+shape = SubResource("BoxShape3D_6mha6")
