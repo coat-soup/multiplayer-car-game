@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	if result:
 		global_position = result.position
 		hit_obj = result.collider
-		handle_impact.rpc()
+		handle_impact()#.rpc()
 
 
 @rpc("any_peer", "call_local")
@@ -59,10 +59,11 @@ func handle_impact():
 			Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 			var health = hit_obj.get_node_or_null("Health") as Health
 			if health:
-				health.take_damage.rpc(damage, self)
+				health.take_damage.rpc(damage, "")
 	else:
 		Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 	
 	# delay for rpc connection bc not using spawnsync
-	await get_tree().create_timer(1.0).timeout
+	visible = false
+	await get_tree().create_timer(5.0).timeout
 	queue_free()

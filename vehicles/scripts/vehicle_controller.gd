@@ -28,6 +28,8 @@ var grip := 10.5
 var wheels : Array[VehicleWheel3D]
 var drift_particles : Array[GPUParticles3D] = []
 
+var engines : Array[EngineModule]
+
 @export var handbrake := false
 var forward_speed : float
 
@@ -64,6 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(60))
 		camera_pivot.rotation.z = 0
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	forward_speed = linear_velocity.project(global_basis.z).length()
@@ -98,6 +101,15 @@ func _process(delta: float) -> void:
 			drift_particles[i].emitting = is_slipping
 			
 	try_drift_cheese(delta)
+
+
+func update_engine_stats():
+	engine_power = 0
+	top_speed = 0
+	for e in engines:
+		engine_power += e.get_power()
+		top_speed += e.get_speed()
+	top_speed /= len(engines)
 
 
 func _physics_process(delta: float) -> void:

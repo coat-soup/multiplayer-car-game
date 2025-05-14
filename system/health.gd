@@ -11,7 +11,11 @@ signal died
 
 
 @rpc("any_peer", "call_local")
-func take_damage(amount: float, source : Node):
+func take_damage(amount: float, source : String):
+	if cur_health <= 0:
+		print("already dead")
+		return
+	
 	print("taking damage")
 	took_damage.emit()
 	
@@ -24,7 +28,7 @@ func take_damage(amount: float, source : Node):
 
 
 @rpc("any_peer", "call_local")
-func heal(amount: float, source : Node):
+func heal(amount: float, source : String):
 	healed.emit()
 	
 	cur_health = min(max_health, cur_health + amount)

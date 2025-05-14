@@ -430,6 +430,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -80.07
 [node name="Body3" parent="." instance=ExtResource("12_mtjk6")]
 transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -6.76982, 9.54204, -2.11791)
 air_control = 800.0
+handbrake = false
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0189, -31.4828)

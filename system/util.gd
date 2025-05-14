@@ -43,7 +43,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			print(collider.name)
 			var health = collider.get_node_or_null("Health") as Health
 			if health:
-				health.take_damage.rpc(damage, null)
+				health.take_damage.rpc(damage, "")
 		damaged.append(collider)
 		
 		var player = collider as Player
