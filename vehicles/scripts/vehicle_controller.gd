@@ -16,7 +16,7 @@ var camera_sensetivity := 0.005
 
 @export_category("Handling")
 @export var front_wheel_drift_factor := 1.4
-@export var turn_loss_speed_range := Vector2(0.33, 1.0) ## Will go from 100% at x*top_speed to 0% at y*top_speed
+@export var turn_loss_speed_range := Vector2(0.33, 2.0) ## Will go from 100% at x*top_speed to 0% at y*top_speed
 @export var speed_drift_range := Vector2(0.5, 1.5) ## Will go from 0% speed_drift at x*top_speed to 100% at y*top_speed
 @export var side_drift_range := Vector2(5, 90) ## Will go from 0% side_drift at x degrees to 100% at y degrees
 
@@ -104,12 +104,14 @@ func _process(delta: float) -> void:
 
 
 func update_engine_stats():
+	var n = len(engines)
 	engine_power = 0
 	top_speed = 0
 	for e in engines:
 		engine_power += e.get_power()
 		top_speed += e.get_speed()
-	top_speed /= len(engines)
+	top_speed /= n
+	engine_power *= (2 * n) / (n + 1) # 1 engine = 100% power, 2 engines = 133% power, 3 engines = 150%, 4 engines = 160%, etc
 
 
 func _physics_process(delta: float) -> void:

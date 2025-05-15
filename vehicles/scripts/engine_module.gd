@@ -1,8 +1,8 @@
 extends VehicleModule
 class_name EngineModule
 
-@export var power := 150.0
-@export var speed := 40.0
+@export var power := 100.0
+@export var speed := 60.0
 
 
 func setup():

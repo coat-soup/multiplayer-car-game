@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://de7f7i08xc1rx"]
+[gd_scene load_steps=9 format=3 uid="uid://de7f7i08xc1rx"]
 
 [ext_resource type="PackedScene" uid="uid://by41frjh5n3nl" path="res://vehicles/models/EngineModule.glb" id="1_c5d4d"]
 [ext_resource type="Script" path="res://vehicles/scripts/engine_module.gd" id="2_brx83"]
 [ext_resource type="Script" path="res://system/health.gd" id="2_ly4r2"]
+[ext_resource type="Texture2D" uid="uid://dbekijfhjr8w8" path="res://vehicles/textures/engine_module.png" id="3_vspsr"]
+[ext_resource type="Texture2D" uid="uid://c88oxxa7r885y" path="res://vehicles/textures/engine_module_n.png" id="4_lyd5h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rdh6"]
+albedo_texture = ExtResource("3_vspsr")
+normal_enabled = true
+normal_texture = ExtResource("4_lyd5h")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bhpv"]
 size = Vector3(4.00232, 2.04535, 3.76773)
@@ -13,6 +21,39 @@ size = Vector3(4.24219, 2.23145, 3.97687)
 [node name="EngineModule" node_paths=PackedStringArray("health") instance=ExtResource("1_c5d4d")]
 script = ExtResource("2_brx83")
 health = NodePath("Hitbox/Health")
+
+[node name="Cube_012" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_019" parent="Cube_012" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_020" parent="Cube_012" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_016" parent="Cube_012" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_017" parent="Cube_012" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_018" parent="Cube_012" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_019" parent="Cube_012" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_020" parent="Cube_012" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_021" parent="Cube_012" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_022" parent="Cube_012" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_011" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
 
 [node name="Walkable" type="StaticBody3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.295, 0)
@@ -37,3 +78,51 @@ script = ExtResource("2_ly4r2")
 [node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81563, 0)
 shape = SubResource("BoxShape3D_6mha6")
+
+[node name="Cylinder_009" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_010" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_011" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_013" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_014" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_016" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_012" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_013" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cube_017" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_014" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_015" parent="." index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_023" parent="." index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_024" parent="." index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_025" parent="." index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_026" parent="." index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
+
+[node name="Cylinder_027" parent="." index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5rdh6")
