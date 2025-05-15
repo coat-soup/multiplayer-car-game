@@ -25,6 +25,7 @@ var is_broken := false
 func setup():
 	if health:
 		health.died.connect(on_break)
+		health.healed.connect(on_fixed)
 	
 	if steering_wheel:
 		module_manager.setup_cab_controllable(steering_wheel)
@@ -50,3 +51,15 @@ func on_break():
 	broken_particles = BROKEN_COMPONENT_PARTICLES.instantiate()
 	add_child(broken_particles)
 	broken_particles.position = Vector3.ZERO
+
+
+func on_fixed():
+	if not is_broken: return
+	
+	if not health or health.cur_health >= health.max_health/2.0:
+			is_broken = false
+			fixed.emit()
+			
+			if broken_particles:
+				broken_particles.queue_free()
+				broken_particles = null

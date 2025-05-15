@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://fjs02dvqh52d"]
+[gd_scene load_steps=18 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="8_823hk"]
 [ext_resource type="Shader" path="res://vfx/post_processing_shader.gdshader" id="9_4o55m"]
 [ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="10_7xoj1"]
+[ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="10_p13sb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -896,3 +897,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_7s75o")
 
 [node name="autocannon" parent="." instance=ExtResource("10_7xoj1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4523, -2.38419e-06, -1.60746)
+
+[node name="Wrench" parent="." instance=ExtResource("10_p13sb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.03942, 9.53674e-07, -6.08262)

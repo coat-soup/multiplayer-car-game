@@ -16,6 +16,8 @@ var chats : Array[String] = []
 
 @export var network_manager : NetworkManager
 
+var prompting := false
+
 
 func _ready():
 	host_steam.pressed.connect(network_manager._on_host_pressed)
@@ -32,8 +34,18 @@ func get_lobby_id() -> String:
 
 
 func set_interact_text(text: String = "", prefix_key := false):
+	if prompting: return
 	var prefix = InputMap.action_get_events("interact")[0].as_text().split(" ")[0]
 	interact_text.text = (("["+prefix+"] ") if prefix_key else "") + text
+
+
+func display_prompt(prompt: String, time := 2.0):
+	interact_text.text = prompt
+	prompting = true
+	await get_tree().create_timer(time).timeout
+	if interact_text.text == prompt:
+		interact_text.text = ""
+		prompting = false
 
 
 @rpc("any_peer", "call_local")
