@@ -1,34 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://bw0axgpyrynkn"]
+[gd_scene load_steps=7 format=3 uid="uid://bw0axgpyrynkn"]
 
+[ext_resource type="PackedScene" uid="uid://xb0fsqckhk7j" path="res://vehicles/models/Ladder.glb" id="1_8punn"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="1_77n6r"]
 [ext_resource type="Script" path="res://system/ladder.gd" id="1_ee1q8"]
+[ext_resource type="Texture2D" uid="uid://c3bfgehturk3u" path="res://vehicles/textures/ladder.png" id="3_u2egp"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x47i4"]
-size = Vector3(0.2, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wfpn"]
+albedo_texture = ExtResource("3_u2egp")
+texture_filter = 0
 
-[sub_resource type="BoxMesh" id="BoxMesh_1an52"]
-size = Vector3(0.2, 1, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_2l34r"]
+size = Vector3(0.2, 2.29689, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dli60"]
-albedo_color = Color(0.76845, 0.418223, 3.85046e-07, 1)
-
-[node name="Ladder" type="Node3D"]
+[node name="Ladder" instance=ExtResource("1_8punn")]
 script = ExtResource("1_ee1q8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Cylinder_009" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8wfpn")
+
+[node name="Cube_011" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8wfpn")
+
+[node name="Cylinder_010" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8wfpn")
+
+[node name="Cylinder_011" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8wfpn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517105, 0)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_77n6r")
 prompt_text = "Climb ladder"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_x47i4")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.168447, 0)
+shape = SubResource("BoxShape3D_2l34r")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_1an52")
-surface_material_override/0 = SubResource("StandardMaterial3D_dli60")
-
-[node name="ExitPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.230537, 1.9072, 0)
+[node name="ExitPoint" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.230537, 2.16981, 0)
 
 [connection signal="interacted" from="StaticBody3D" to="." method="_on_static_body_3d_interacted"]
