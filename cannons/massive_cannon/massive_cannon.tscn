@@ -1,13 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8at3wds2wf86"]
+[gd_scene load_steps=18 format=3 uid="uid://b8at3wds2wf86"]
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://cannons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_g2jg0"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="3_e6mtt"]
 [ext_resource type="PackedScene" uid="uid://khld0gaej8py" path="res://cannons/cannon_shell.tscn" id="3_fqi0e"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="4_b6a1x"]
+[ext_resource type="Texture2D" uid="uid://wdhhcfk1obsl" path="res://cannons/massive_cannon/massive_cannon.png" id="4_5r6hc"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="4_sn25g"]
+[ext_resource type="Texture2D" uid="uid://c28bex575vdv7" path="res://cannons/massive_cannon/massive_cannon_n.png" id="5_14run"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="5_j0v2g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vor7y"]
+albedo_texture = ExtResource("4_5r6hc")
+normal_enabled = true
+normal_texture = ExtResource("5_14run")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0kiod"]
 size = Vector3(3.3, 0.16, 2.7)
@@ -23,30 +30,6 @@ height = 7.41824
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ip4v0"]
 size = Vector3(2.12775, 1.88727, 5.68536)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fcqn"]
-render_priority = 0
-shader = ExtResource("4_b6a1x")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 3
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fh25b"]
 size = Vector3(1.0752, 1.521, 1.63397)
@@ -70,6 +53,9 @@ do_joystick = false
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11592, 2.53535, 1.82795)
 
+[node name="Cylinder" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Yaw" index="0"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 collision_layer = 32
@@ -86,6 +72,27 @@ shape = SubResource("BoxShape3D_js57a")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Yaw/StaticBody3D" index="2"]
 transform = Transform3D(1, -8.11558e-10, -6.2538e-10, 1.02449e-09, 0.784895, 0.619628, -1.20083e-11, -0.619628, 0.784895, -0.0241088, 0.876029, 3.7306)
 shape = SubResource("BoxShape3D_hidmy")
+
+[node name="Cube" parent="Yaw" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_001" parent="Yaw" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_006" parent="Yaw" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_007" parent="Yaw" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_013" parent="Yaw" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_001" parent="Yaw" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_006" parent="Yaw" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
 
 [node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70781, 1.21923, -7.1744)
@@ -105,8 +112,41 @@ shape = SubResource("CylinderShape3D_e6uqf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.876808, 3.2183, 1.51183)
 shape = SubResource("BoxShape3D_ip4v0")
 
+[node name="Cube_002" parent="Yaw/Pitch" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_003" parent="Yaw/Pitch" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_005" parent="Yaw/Pitch" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
 [node name="Cube_008" parent="Yaw/Pitch" index="5"]
-surface_material_override/0 = SubResource("ShaderMaterial_3fcqn")
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_009" parent="Yaw/Pitch" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_010" parent="Yaw/Pitch" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_011" parent="Yaw/Pitch" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cube_012" parent="Yaw/Pitch" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_002" parent="Yaw/Pitch" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_003" parent="Yaw/Pitch" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_004" parent="Yaw/Pitch" index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
+
+[node name="Cylinder_005" parent="Yaw/Pitch" index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vor7y")
 
 [node name="BarrelEnd" type="Node3D" parent="Yaw/Pitch" index="14"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0257748, 0.941027, -7.58346)
