@@ -60,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
 
 [node name="EquipmentManager" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384345, -0.804248, -0.802137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384345, -0.558265, -0.802137)
 script = ExtResource("5_wjl74")
 player = NodePath("../..")
 

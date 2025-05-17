@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccapb8n1iqflw"]
+
+[ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mcc30"]
+[ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="4_v0mk4"]
+[ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="5_aaevu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
+size = Vector3(0.11, 0.396811, 0.621127)
+
+[sub_resource type="Animation" id="Animation_42rna"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jauo7"]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pistol:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.213633), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ep00v"]
+_data = {
+"RESET": SubResource("Animation_42rna"),
+"fire": SubResource("Animation_jauo7")
+}
+
+[node name="Pistol" type="Node3D" node_paths=PackedStringArray("anim", "interactable")]
+script = ExtResource("1_mcc30")
+anim = NodePath("AnimationPlayer")
+equipment_name = "Pistol"
+interactable = NodePath("StaticBody3D")
+
+[node name="pistol" parent="." instance=ExtResource("2_ox50e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_v0mk4")
+prompt_text = "Equip Wrench"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0400014, 0.0034674)
+shape = SubResource("BoxShape3D_yrpc2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ep00v")
+}
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_aaevu")
