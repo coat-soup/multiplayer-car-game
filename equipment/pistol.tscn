@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ccapb8n1iqflw"]
 
-[ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mcc30"]
+[ext_resource type="Script" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
 [ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="4_v0mk4"]
 [ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="5_aaevu"]
@@ -45,9 +45,8 @@ _data = {
 "fire": SubResource("Animation_jauo7")
 }
 
-[node name="Pistol" type="Node3D" node_paths=PackedStringArray("anim", "interactable")]
-script = ExtResource("1_mcc30")
-anim = NodePath("AnimationPlayer")
+[node name="Pistol" type="Node3D" node_paths=PackedStringArray("interactable")]
+script = ExtResource("1_p8mvk")
 equipment_name = "Pistol"
 interactable = NodePath("StaticBody3D")
 
@@ -71,3 +70,6 @@ libraries = {
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_aaevu")
+
+[node name="BarrelEnd" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.086442, -0.33081)

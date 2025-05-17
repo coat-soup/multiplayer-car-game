@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=11 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_wogeu"]
 [ext_resource type="Script" path="res://player/player_network_manager.gd" id="2_yagft"]
 [ext_resource type="Script" path="res://player/player_interaction_manager.gd" id="3_h4ya3"]
 [ext_resource type="Script" path="res://player/equipment_manager.gd" id="5_wjl74"]
+[ext_resource type="Script" path="res://system/health.gd" id="6_3dm8w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
@@ -26,7 +27,7 @@ properties/3/path = NodePath("NetworkManager/UsernameLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera", "health") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 collision_layer = 2
 collision_mask = 35
@@ -36,6 +37,7 @@ network_manager = NodePath("NetworkManager")
 movement_manager = NodePath("MovementManager")
 equipment_manager = NodePath("CameraPivot/EquipmentManager")
 camera = NodePath("CameraPivot/Camera")
+health = NodePath("Health")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
 script = ExtResource("2_yagft")
@@ -98,3 +100,6 @@ camera = NodePath("../CameraPivot/Camera")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991744, 0)
 target_position = Vector3(0, -0.3, 0)
 collision_mask = 32
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_3dm8w")

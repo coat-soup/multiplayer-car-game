@@ -13,15 +13,16 @@ signal died
 @rpc("any_peer", "call_local")
 func take_damage(amount: float, source : String):
 	if cur_health <= 0:
-		print("already dead")
 		return
 	
-	print("taking damage")
-	took_damage.emit()
+	#print(get_owner().name, " taking ", str(amount), " damage")
 	
 	cur_health -= min(amount, cur_health)
+	took_damage.emit()
 	
 	if not is_multiplayer_authority(): return
+	
+	#print("health is now: ", cur_health)
 	
 	if cur_health <= 0:
 		die.rpc()

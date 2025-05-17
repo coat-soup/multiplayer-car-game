@@ -6,7 +6,6 @@ signal triggered
 
 @export var equipment_name : String
 @export var interactable : Interactable
-@export var rigid_body : RigidBody3D
 
 @export var ground_offset := 0.2
 
@@ -15,6 +14,7 @@ var held_by_auth := false
 var held_player : Player = null
 
 @export var interact_holdable := true
+
 
 func _ready():
 	interactable.prompt_text = "Equip " + equipment_name
@@ -26,13 +26,12 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if equipped and held_by_auth and held_player.active and event.is_action_pressed("primary_fire"):
 		triggered.emit()
-		print(name, " triggered")
 
 
 func try_equip(source):
-	held_player = source as Player
-	if held_player:
-		held_player.equipment_manager.equip_item(self)
+	source = source as Player
+	if source:
+		source.equipment_manager.equip_item(self)
 
 
 @rpc("any_peer", "call_local")

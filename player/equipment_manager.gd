@@ -17,17 +17,18 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("drop item"):
-		drop_equipment(cur_slot)
+		drop_equipment.rpc(cur_slot)
 	
 	var scroll_dir = int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)) - int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP))
 	if scroll_dir != 0:
 		swap_to_item((cur_slot + scroll_dir) % items.size())
 
+
 func equip_item(equipment: Equipment):
 	var slot = first_available_slot() if items[cur_slot] else cur_slot
 	
 	if items[slot]:
-		drop_equipment(slot)
+		drop_equipment.rpc(slot)
 		print("dropping", items[slot])
 	
 	print("equipping ", equipment)
@@ -46,6 +47,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 		items[slot] = equipment
 		
 		equipment.reparent(self)
+		equipment.held_player = player
 		equipment.position = Vector3.ZERO
 		equipment.rotation = Vector3.ZERO
 		
@@ -59,11 +61,13 @@ func handle_equip(scene_path : NodePath, slot : int):
 @rpc("any_peer", "call_local")
 func drop_equipment(slot: int):
 	if items[slot]:
-		items[slot].set_parent_to_scene_path.rpc("")
+		items[slot].reparent(get_tree().get_root())
+		items[slot].held_player = null
 		items[slot].equipped = false
 		items[slot].held_by_auth = false
 		items[slot].visible = true
 		items[slot].interactable.active = true
+		items[slot].raycast_position()
 		items[slot] = null
 
 

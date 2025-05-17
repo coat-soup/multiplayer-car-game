@@ -15,8 +15,8 @@ func setup():
 
 
 func get_power() -> float:
-	return power if !is_broken else 0
+	return power if !is_broken else 0.0
 
 
 func get_speed() -> float:
-	return speed if !is_broken else 0
+	return speed if !is_broken else 0.0

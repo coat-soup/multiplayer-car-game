@@ -331,9 +331,8 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 directional_shadow_max_distance = 400.0
 
-[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
+[node name="NetworkManager" type="Node" parent="." groups=["network manager"]]
 script = ExtResource("1_2gcb8")
-ui = NodePath("../UI")
 spawn_position = Vector3(0, 10, 0)
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]

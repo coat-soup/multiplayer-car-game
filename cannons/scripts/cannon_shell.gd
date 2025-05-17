@@ -1,4 +1,5 @@
 extends Node3D
+class_name CannonShell
 
 signal impacted
 
@@ -9,6 +10,9 @@ signal impacted
 @export var drop_rate := 1.0
 
 @export var particles : PackedScene
+
+var layer_mask := [1,2,3,6]
+var ignore_list : Array[RID] = [self]
 
 var velocity := Vector3.ZERO
 
@@ -21,27 +25,24 @@ func _ready():
 	velocity = transform.basis.z * speed
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
+	if active:
+		var space_state = get_world_3d().direct_space_state
+
+		var end = global_position + velocity * delta
+		var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask(layer_mask))
+		query.exclude = ignore_list
+
+		var result := space_state.intersect_ray(query)
+		
+		if result:
+			global_position = result.position
+			hit_obj = result.collider
+			handle_impact()#.rpc()
+	
 	position += velocity * delta
 	velocity.y -= drop_rate * delta
 	look_at(global_position - velocity)
-	
-	if not active:
-		return
-	
-	var space_state = get_world_3d().direct_space_state
-
-	var end = global_position + velocity * delta
-	var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask([1,2,4,6]))
-	query.exclude = [self]
-
-	var result := space_state.intersect_ray(query)
-	
-	if result:
-		global_position = result.position
-		hit_obj = result.collider
-		handle_impact()#.rpc()
-
 
 @rpc("any_peer", "call_local")
 func handle_impact():

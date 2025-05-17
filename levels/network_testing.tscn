@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_b5jgp"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
 [ext_resource type="Script" path="res://levels/network_manager.gd" id="2_4gblq"]
-[ext_resource type="Script" path="res://ui/ui_manager.gd" id="4_8l0fg"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_h2y7w"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon/massive_cannon.tscn" id="5_ijex1"]
 [ext_resource type="PackedScene" uid="uid://cikqdvle0enf2" path="res://equipment/test_equipment.tscn" id="7_c87xb"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="8_823hk"]
@@ -87,9 +87,8 @@ shader_parameter/_BayerLevel = 0
 [node name="Root" type="Node3D"]
 script = ExtResource("1_b5jgp")
 
-[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ui") groups=["network manager"]]
+[node name="NetworkManager" type="Node" parent="." groups=["network manager"]]
 script = ExtResource("2_4gblq")
-ui = NodePath("../UI")
 spawn_position = Vector3(0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
@@ -787,83 +786,8 @@ material = SubResource("ShaderMaterial_khg7y")
 
 [node name="Entities" type="Node3D" parent="."]
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("network_manager") groups=["ui"]]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 1
-script = ExtResource("4_8l0fg")
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("4_h2y7w")]
 network_manager = NodePath("../NetworkManager")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = 858.0
-offset_top = 476.0
-offset_right = 1058.0
-offset_bottom = 586.0
-
-[node name="HostSteam" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "HOST STEAM"
-
-[node name="HostLocal" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "HOST LOCAL"
-
-[node name="Join" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "JOIN
-"
-
-[node name="LobbyIDTextField" type="TextEdit" parent="UI/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-placeholder_text = "LOBBY ID"
-
-[node name="HUD" type="Control" parent="UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="InteractText" type="Label" parent="UI/HUD"]
-layout_mode = 0
-offset_left = 710.0
-offset_top = 913.0
-offset_right = 1210.0
-offset_bottom = 936.0
-pivot_offset = Vector2(250, 0)
-text = "INTERACT TEXT"
-horizontal_alignment = 1
-
-[node name="ChatBox" type="Label" parent="UI/HUD"]
-layout_mode = 0
-offset_top = -2179.0
-offset_right = 600.0
-offset_bottom = 821.0
-pivot_offset = Vector2(0, 3000)
-vertical_alignment = 2
-
-[node name="VirtualJoystick" type="Control" parent="UI/HUD"]
-visible = false
-anchors_preset = 0
-offset_left = 947.0
-offset_top = 517.0
-offset_right = 947.0
-offset_bottom = 517.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="UI/HUD/VirtualJoystick"]
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-mouse_filter = 2
-
-[node name="Line2D" type="Line2D" parent="UI/HUD/VirtualJoystick"]
-position = Vector2(10, 10)
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
@@ -903,4 +827,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4523, -2.38419e-06, -1.607
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.06833, 9.53674e-07, -6.08262)
 
 [node name="Pistol" parent="." instance=ExtResource("11_8ij4i")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.48727, 0.0691571, -5.9817)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10697, 0.420487, -6.29016)

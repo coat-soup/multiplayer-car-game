@@ -2,7 +2,7 @@ extends Node
 
 class_name NetworkManager
 
-@export var ui : UIManager
+@onready var ui : UIManager = get_tree().get_first_node_in_group("ui")
 
 const PLAYER = preload("res://player/player.tscn")
 

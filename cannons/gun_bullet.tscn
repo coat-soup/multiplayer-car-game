@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://fbwa111or64h"]
+
+[ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_0b4r6"]
+[ext_resource type="Script" path="res://cannons/scripts/cannon_shell.gd" id="2_sm41t"]
+[ext_resource type="PackedScene" uid="uid://61gee2tf6ccy" path="res://vfx/bullet_impact.tscn" id="3_tjnrr"]
+[ext_resource type="Script" path="res://system/start_particles_on_spawn.gd" id="4_bjmly"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hjih"]
+albedo_color = Color(0.803426, 0.823189, 0.815776, 1)
+emission_enabled = true
+emission = Color(0.778856, 0.740769, 0.682438, 1)
+emission_energy_multiplier = 3.53
+
+[sub_resource type="Gradient" id="Gradient_xxgxr"]
+offsets = PackedFloat32Array(0.1, 0.454545)
+colors = PackedColorArray(0.111197, 0.111197, 0.111197, 1, 0.529067, 0.529067, 0.529067, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ayvb"]
+gradient = SubResource("Gradient_xxgxr")
+
+[sub_resource type="Curve" id="Curve_k8nb8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15942, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mlqjf"]
+curve = SubResource("Curve_k8nb8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yfifa"]
+direction = Vector3(0, 0, 1)
+spread = 90.0
+flatness = 0.663
+initial_velocity_min = 2.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 2, 0)
+damping_min = 5.0
+damping_max = 8.0
+scale_min = 0.2
+scale_curve = SubResource("CurveTexture_mlqjf")
+color_ramp = SubResource("GradientTexture1D_7ayvb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8e36"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.856394, 0.784084, 0, 1)
+emission_enabled = true
+emission = Color(0.91227, 0.670797, 1.54018e-06, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dql1y"]
+material = SubResource("StandardMaterial3D_i8e36")
+
+[sub_resource type="Animation" id="Animation_5snys"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.015),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.25, 2.28937, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_dvtov"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25, 2.28937, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6itn"]
+_data = {
+"RESET": SubResource("Animation_dvtov"),
+"new_animation": SubResource("Animation_5snys")
+}
+
+[node name="shell" instance=ExtResource("1_0b4r6")]
+script = ExtResource("2_sm41t")
+speed = 300.0
+drop_rate = 10.0
+particles = ExtResource("3_tjnrr")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(0.25, 0, 0, 0, -1.00072e-07, -0.25, 0, 2.28937, -1.09278e-08, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_3hjih")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
+visible = false
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yfifa")
+draw_pass_1 = SubResource("SphereMesh_dql1y")
+script = ExtResource("4_bjmly")
+
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="." index="2"]
+visible = false
+unit_size = 600.0
+max_distance = 600.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_l6itn")
+}
+autoplay = "new_animation"

@@ -9,6 +9,7 @@ class_name UIManager
 @onready var host_steam: Button = $VBoxContainer/HostSteam
 @onready var host_local: Button = $VBoxContainer/HostLocal
 @onready var join: Button = $VBoxContainer/Join
+@onready var health_bar: ProgressBar = $HUD/HealthBar
 
 @onready var virtual_joystick: Control = $HUD/VirtualJoystick
 
@@ -66,3 +67,7 @@ func toggle_virtual_joystick(value: bool):
 func update_virtual_joystick(value: Vector2):
 	virtual_joystick.get_child(0).position = value * 100
 	(virtual_joystick.get_child(1) as Line2D).set_point_position(1, value * 100)
+
+
+func update_health_bar(value: float):
+	health_bar.value = value
