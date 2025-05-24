@@ -40,9 +40,10 @@ func _physics_process(delta: float) -> void:
 			hit_obj = result.collider
 			handle_impact()#.rpc()
 	
-	position += velocity * delta
+	global_position += velocity * delta
 	velocity.y -= drop_rate * delta
 	look_at(global_position - velocity)
+
 
 @rpc("any_peer", "call_local")
 func handle_impact():

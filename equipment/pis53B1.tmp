@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccapb8n1iqflw"]
+[gd_scene load_steps=9 format=3 uid="uid://ccapb8n1iqflw"]
 
 [ext_resource type="Script" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
 [ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
@@ -22,18 +22,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("pistol:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_jauo7"]
 resource_name = "fire"
@@ -51,26 +39,10 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.213633), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_gb502"]
-resource_name = "reload"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("pistol:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0), Vector3(31.4159, -3.14159, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep00v"]
 _data = {
 "RESET": SubResource("Animation_42rna"),
-"fire": SubResource("Animation_jauo7"),
-"reload": SubResource("Animation_gb502")
+"fire": SubResource("Animation_jauo7")
 }
 
 [node name="Pistol" type="Node3D" node_paths=PackedStringArray("barrel_end", "interactable")]
@@ -80,7 +52,7 @@ equipment_name = "Pistol"
 interactable = NodePath("StaticBody3D")
 
 [node name="pistol" parent="." instance=ExtResource("2_ox50e")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="BarrelEnd" type="Node3D" parent="pistol"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.89203e-08, 0.086442, 0.33081)

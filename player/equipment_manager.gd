@@ -51,8 +51,12 @@ func handle_equip(scene_path : NodePath, slot : int):
 		equipment.position = Vector3.ZERO
 		equipment.rotation = Vector3.ZERO
 		
+		equipment.on_pickedup()
+		
 		if slot != cur_slot:
 			equipment.visible = false
+		else:
+			equipment.on_held()
 		
 	else:
 		print("could not find equipment")
@@ -68,6 +72,9 @@ func drop_equipment(slot: int):
 		items[slot].visible = true
 		items[slot].interactable.active = true
 		items[slot].raycast_position()
+		if slot == cur_slot:
+			items[slot].on_unheld()
+		items[slot].on_dropped()
 		items[slot] = null
 
 
@@ -87,6 +94,7 @@ func toggle_item_visibility(slot : int, value : bool):
 func swap_to_item(slot):
 	if items[cur_slot]:
 		toggle_item_visibility.rpc(cur_slot, false)
+		items[cur_slot].on_unheld()
 		items[cur_slot].held_by_auth = false
 	
 	cur_slot = slot
@@ -95,6 +103,8 @@ func swap_to_item(slot):
 	if items[cur_slot]:
 		toggle_item_visibility.rpc(cur_slot, true)
 		items[cur_slot].held_by_auth = true
+		items[cur_slot].on_held()
+
 
 @rpc("any_peer", "call_local")
 func sync_cur_slot(slot : int):

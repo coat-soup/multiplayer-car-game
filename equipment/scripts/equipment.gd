@@ -24,8 +24,17 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-	if equipped and held_by_auth and held_player.active and event.is_action_pressed("primary_fire"):
-		triggered.emit()
+	if equipped and held_by_auth and held_player.active:
+		var button = -1
+		if event.is_action_pressed("primary_fire"):
+			button = 0
+		if event.is_action_pressed("secondary_fire"):
+			button = 0
+		elif event.is_action_pressed("reload"):
+			button = 3
+		
+		if button != -1:
+			triggered.emit(button)
 
 
 func try_equip(source):
@@ -60,5 +69,17 @@ func raycast_position():
 		self.reparent.call_deferred(result.collider as Node)
 
 
-func on_triggered():
+func on_held():
+	pass
+
+func on_unheld():
+	pass
+
+func on_dropped():
+	pass
+
+func on_pickedup():
+	pass
+
+func on_triggered(button : int):
 	pass

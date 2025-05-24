@@ -11,8 +11,9 @@ const WRENCH_BONK_PARTICLES = preload("res://vfx/wrench_bonk_particles.tscn")
 var on_cooldown := false
 @onready var ui = get_tree().get_first_node_in_group("ui") as UIManager
 
-func on_triggered():
-	if on_cooldown: return
+
+func on_triggered(button : int):
+	if on_cooldown or button != 0: return
 	anim.play("wrench_swing")
 	print("wrenching")
 	var space_state = get_world_3d().direct_space_state

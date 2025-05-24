@@ -11,6 +11,8 @@ class_name UIManager
 @onready var join: Button = $VBoxContainer/Join
 @onready var health_bar: ProgressBar = $HUD/HealthBar
 
+@onready var ammo_counter: Label = $AmmoCounter
+
 @onready var virtual_joystick: Control = $HUD/VirtualJoystick
 
 var chats : Array[String] = []
@@ -71,3 +73,10 @@ func update_virtual_joystick(value: Vector2):
 
 func update_health_bar(value: float):
 	health_bar.value = value
+
+
+func update_ammo_counter(ammo : int, max_ammo : int):
+	ammo_counter.text = str(ammo) + "|" + str(max_ammo)
+
+func hide_ammo_counter():
+	ammo_counter.text = ""
