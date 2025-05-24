@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4edtsm7wqfui"]
+
+[ext_resource type="PackedScene" uid="uid://q5h3qbb1sjmk" path="res://world/landscape/models/rocks_stack_01.glb" id="1_c5n6k"]
+[ext_resource type="Material" uid="uid://badauipfvwr83" path="res://world/landscape/materials/cliff_shader_mat.tres" id="2_f4qt1"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q4x8b"]
+points = PackedVector3Array(-0.800756, -0.18276, 3.6244, 0.25227, -6.62782, 3.5858, 0.867607, 0.0847607, 3.31567, 0.828988, 1.1303, 3.13701, -1.02346, 1.01004, 3.20419, -3.07802, -0.18767, 2.28801, -2.59141, -14.9946, 2.91833, 1.99658, -7.23895, 3.01981, 1.83824, -2.15604, 3.05983, 2.59776, -21.42, 2.10364, 3.28776, -1.8198, 2.04932, 2.29267, 1.28002, 1.91354, 1.29113, 1.81997, -1.61108, -2.51418, 1.01004, 2.03932, -3.65989, 0.0258579, 0.228415, -4.4001, -8.06605, -0.810676, -4.15293, -15.1222, 0.953062, -4.75282, -20.7476, -0.590566, -1.52809, -21.3489, 1.92069, 2.93375, -6.09523, 2.55386, -1.14962, -23.2534, 0.811563, 2.45487, -23.1577, 1.00023, 6.01044, -20.9414, -0.0788822, 4.42318, -5.67554, 0.580019, 3.73833, -1.3142, 0.124077, 3.25816, 0.548628, -0.0946035, 2.7561, 1.30456, 0.0797691, 2.20127, 1.24566, -1.81975, 0.843148, 1.36101, -2.71448, -0.930775, 1.40519, -2.77451, -2.47427, 1.29965, -1.9198, -3.07287, 1.1303, 0.0897741, -4.41297, -7.92125, -3.80932, -4.55844, -8.86616, -3.92509, -5.84318, -19.8444, -4.47108, -3.08961, -1.60382, -3.00463, -4.15551, -8.84653, -5.65309, -4.92017, -22.4312, -4.86985, -3.96627, -22.9761, -1.43099, 5.77229, -21.6164, -7.67553, 5.47106, -22.7233, -0.936453, 6.7146, -22.122, -4.23524, 7.30806, -20.1659, -3.70784, 5.1621, -7.34694, -2.06273, 5.71436, -10.4345, -2.63873, 5.78387, -8.25013, -5.88607, 2.66728, 0.582989, -2.11275, 1.19201, 0.774427, -3.00177, 4.05758, -12.6532, -10.2583, 0.420908, -7.06469, -7.12526, -2.10738, -7.46229, -6.70648, -4.36405, -18.9608, -8.25725, -3.64444, -21.825, -8.19436, -3.9225, -7.81326, -5.43298, -1.00415, -17.6846, -10.9758, -2.19235, -8.62073, -7.05522, 2.97623, -21.2924, -9.94381, 3.02, -17.9128, -10.6985, 6.23315, -19.459, -7.5812, 5.71951, -12.6949, -8.35015, 5.26766, -7.23895, -5.63308, -0.612808, -21.3685, -10.1482)
+
+[node name="rocks_stack_01" instance=ExtResource("1_c5n6k")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_002" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_003" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_004" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_005" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_006" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_007" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_008" parent="." index="8"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="Cube_009" parent="." index="9"]
+surface_material_override/0 = ExtResource("2_f4qt1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(0.624758, 0.151501, -0.76598, -0.0351407, 0.985457, 0.166249, 0.780027, -0.0769482, 0.620996, -0.69371, 22.7395, 0.408101)
+shape = SubResource("ConvexPolygonShape3D_q4x8b")

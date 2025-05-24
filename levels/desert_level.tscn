@@ -1,9 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=37 format=3 uid="uid://b1k1yyld5gvfc"]
 
-[ext_resource type="Script" path="res://levels/network_manager.gd" id="1_2gcb8"]
+[ext_resource type="Script" path="res://system/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
 [ext_resource type="Texture2D" uid="uid://bhnm6fkb1enkj" path="res://world/landscape/textures/sand.png" id="2_kmc41"]
-[ext_resource type="Script" path="res://ui/ui_manager.gd" id="2_lcqnc"]
 [ext_resource type="Shader" path="res://vfx/terrain_shader.gdshader" id="2_rcxq2"]
 [ext_resource type="Texture2D" uid="uid://cet5xuwgrtvjn" path="res://world/landscape/textures/sand_n.png" id="3_dmf72"]
 [ext_resource type="PackedScene" uid="uid://c65ohp1b05ybs" path="res://world/landscape/scenes/large_cliffs_01.tscn" id="4_ormrn"]
@@ -14,10 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://bmxpyamyxrls3" path="res://world/landscape/textures/salt_n.png" id="6_6463b"]
 [ext_resource type="PackedScene" uid="uid://dra3q6hm6ypcq" path="res://world/landscape/scenes/small_rocks_02.tscn" id="7_3xeob"]
 [ext_resource type="PackedScene" uid="uid://c47woga3h3hd" path="res://world/landscape/scenes/small_rocks_03.tscn" id="8_y2qs8"]
+[ext_resource type="PackedScene" uid="uid://b4edtsm7wqfui" path="res://world/landscape/scenes/rocks_stack_01.tscn" id="12_jtjrn"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
 [ext_resource type="Shader" path="res://vfx/post_processing_shader.gdshader" id="13_5iaee"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="14_dbygt"]
 [ext_resource type="PackedScene" uid="uid://chg41ge62ovwo" path="res://world/foliage/scenes/cactus_tall.tscn" id="14_dgsuv"]
 [ext_resource type="PackedScene" uid="uid://cd1jh6wm80v5e" path="res://world/foliage/models/peenor.glb" id="15_tu7tu"]
+[ext_resource type="PackedScene" uid="uid://bluc870pqpnhm" path="res://world/landscape/scenes/ribcage_full.tscn" id="20_1hj3b"]
+[ext_resource type="PackedScene" uid="uid://cavw7bisehwie" path="res://world/landscape/scenes/ribcage_half.tscn" id="21_fvel4"]
+[ext_resource type="PackedScene" uid="uid://c23dwtuett6cr" path="res://world/landscape/scenes/ribcage_broken.tscn" id="22_w0thw"]
 
 [sub_resource type="Gradient" id="Gradient_tukec"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -323,6 +327,57 @@ transform = Transform3D(0.0938077, 0.392325, -1.53435, -0.223882, 1.34202, 0.399
 [node name="small_rocks_04" parent="World/Props" instance=ExtResource("8_y2qs8")]
 transform = Transform3D(2.78499, 0, 0, 0, 2.78499, 0, 0, 0, 2.78499, 258.152, 108.822, 55.9013)
 
+[node name="rocks_stack_01" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(4.37364, 0, 0, 0, 4.37364, 0, 0, 0, 4.37364, -82.5039, -0.497658, -461.12)
+
+[node name="rocks_stack_02" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(1.13198, 0, 4.22461, 0, 4.37364, 0, -4.22461, 0, 1.13198, -182.522, -0.497658, -431.231)
+
+[node name="rocks_stack_03" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(1.39749, 0, 5.21551, 0, 5.3995, 0, -5.21551, 0, 1.39749, -55.5225, -0.497658, -562.231)
+
+[node name="rocks_stack_04" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(-3.73844, 0, 2.22084, 0, 5.58309, 0, -1.6501, 0, -5.03152, -214.722, -0.497673, -539.955)
+
+[node name="rocks_stack_05" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(0.502207, 0, 3.86601, 0, 3.99513, 0, -3.4692, 0, 0.55965, -288.793, -0.497673, -571.911)
+
+[node name="large_cliffs_04" parent="World/Props" instance=ExtResource("4_ormrn")]
+transform = Transform3D(0.283557, 0, -0.329618, 0, 0.434802, 0, 0.329618, 0, 0.283557, -367.057, -10.6988, -757.437)
+
+[node name="large_cliffs_05" parent="World/Props" instance=ExtResource("4_ormrn")]
+transform = Transform3D(0.283557, 0, -0.329618, 0, 0.434802, 0, 0.329618, 0, 0.283557, -429.261, -10.6988, -723.338)
+
+[node name="large_cliffs_06" parent="World/Props" instance=ExtResource("4_ormrn")]
+transform = Transform3D(0.388953, 0, -0.452136, 0, 0.596416, 0, 0.452136, 0, 0.388953, -424.224, 16.8323, -786.549)
+
+[node name="small_rocks_18" parent="World/Props" instance=ExtResource("7_3xeob")]
+transform = Transform3D(0.258819, -0.965926, -4.2222e-08, 0, -4.37114e-08, 1, -0.965926, -0.258819, -1.13133e-08, -299.433, 24.0819, -744.672)
+
+[node name="rocks_stack_06" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(1.88147, 0, 0, 0, 1.88147, 0, 0, 0, 1.88147, -398.703, 102.681, -718.718)
+
+[node name="rocks_stack_07" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(1.6251, 0, 0, 0, 1.6251, 0, 0, 0, 1.6251, -444.301, -2.62202, -632.692)
+
+[node name="rocks_stack_08" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(2.20345, 0, 0, 0, 2.20345, 0, 0, 0, 2.20345, -281.362, -1.47921, -794.665)
+
+[node name="small_rocks_19" parent="World/Props" instance=ExtResource("6_6qmt5")]
+transform = Transform3D(-1.84767, 0.20449, -1.15223, 1.11605, 0.177551, -1.91369, -0.0462075, -3.88842, -0.147977, -27.7792, -4.73209, -783.992)
+
+[node name="small_rocks_20" parent="World/Props" instance=ExtResource("6_6qmt5")]
+transform = Transform3D(2.01986, 0.234499, -0.881761, 0.921158, 0.619929, 1.77542, 0.412494, -2.53266, 0.352936, 3.49194, -4.73209, -783.992)
+
+[node name="rocks_stack_09" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(2.639, 0, 0, 0, 2.639, 0, 0, 0, 2.639, 4.3298, -1.31253, -859)
+
+[node name="rocks_stack_10" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.04027, 62.6261, -857.838)
+
+[node name="rocks_stack_11" parent="World/Props" instance=ExtResource("12_jtjrn")]
+transform = Transform3D(2.09195, 0, 0, 0, 2.09195, 0, 0, 0, 2.09195, -53.5651, 130.383, -557.072)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_hy12o")
 
@@ -338,87 +393,12 @@ spawn_position = Vector3(0, 10, 0)
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("network_manager") groups=["ui"]]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 1
-script = ExtResource("2_lcqnc")
-network_manager = NodePath("../NetworkManager")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = 858.0
-offset_top = 476.0
-offset_right = 1058.0
-offset_bottom = 586.0
-
-[node name="HostSteam" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "HOST STEAM"
-
-[node name="HostLocal" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "HOST LOCAL"
-
-[node name="Join" type="Button" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "JOIN
-"
-
-[node name="LobbyIDTextField" type="TextEdit" parent="UI/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-placeholder_text = "LOBBY ID"
-
-[node name="HUD" type="Control" parent="UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="InteractText" type="Label" parent="UI/HUD"]
-layout_mode = 0
-offset_left = 710.0
-offset_top = 913.0
-offset_right = 1210.0
-offset_bottom = 936.0
-pivot_offset = Vector2(250, 0)
-text = "INTERACT TEXT"
-horizontal_alignment = 1
-
-[node name="ChatBox" type="Label" parent="UI/HUD"]
-layout_mode = 0
-offset_top = -2179.0
-offset_right = 600.0
-offset_bottom = 821.0
-pivot_offset = Vector2(0, 3000)
-vertical_alignment = 2
-
-[node name="VirtualJoystick" type="Control" parent="UI/HUD"]
-visible = false
-anchors_preset = 0
-offset_left = 947.0
-offset_top = 517.0
-offset_right = 947.0
-offset_bottom = 517.0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="UI/HUD/VirtualJoystick"]
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-mouse_filter = 2
-
-[node name="Line2D" type="Line2D" parent="UI/HUD/VirtualJoystick"]
-position = Vector2(10, 10)
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("..")
+
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("14_dbygt")]
+network_manager = NodePath("../NetworkManager")
 
 [node name="Body" parent="." instance=ExtResource("4_snrwr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.72534, 3.9483, 15.5353)
@@ -440,10 +420,34 @@ surface_material_override/0 = SubResource("ShaderMaterial_3pynt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37368, 0.720076, 37.6987)
 
 [node name="CactusTall" parent="." instance=ExtResource("14_dgsuv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9197, 2.24367, 117.183)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9197, 0.24367, 117.183)
 
 [node name="peenor" parent="." instance=ExtResource("15_tu7tu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.332, 4.05935, -96.7156)
 
 [node name="peenor2" parent="peenor" instance=ExtResource("15_tu7tu")]
 transform = Transform3D(0.301804, 0, -0.95337, 0, 1, 0, 0.95337, 0, 0.301804, 13.3229, 181.207, -5.10665)
+
+[node name="ribcage_full" parent="." instance=ExtResource("20_1hj3b")]
+transform = Transform3D(0.863807, 0, 1.49074, 0, 1.72293, 0, -1.49074, 0, 0.863807, 209.103, 2.44243, -438.071)
+
+[node name="ribcage_full3" parent="." instance=ExtResource("20_1hj3b")]
+transform = Transform3D(0.740314, 0.230598, 1.27762, -0.013596, 1.47204, -0.25781, -1.2982, 0.116085, 0.731283, 246.557, -0.462117, -416.393)
+
+[node name="ribcage_full4" parent="." instance=ExtResource("20_1hj3b")]
+transform = Transform3D(0.706951, 0, 0.834405, 0, 1.09362, 0, -0.834405, 0, 0.706951, 282.439, -3.85833, -395.984)
+
+[node name="ribcage_half" parent="." instance=ExtResource("21_fvel4")]
+transform = Transform3D(0.82303, 0, 1.43291, 0, 1.65246, 0, -1.43291, 0, 0.82303, 228.675, 0.853224, -426.851)
+
+[node name="ribcage_broken" parent="." instance=ExtResource("22_w0thw")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 297.728, -3.28652, -379.143)
+
+[node name="ribcage_half2" parent="." instance=ExtResource("21_fvel4")]
+transform = Transform3D(-0.209707, -0.534378, 0.207133, 0.545109, -0.254085, -0.103627, 0.176977, 0.149404, 0.564623, 102.094, 2.08812, 260.845)
+
+[node name="ribcage_half3" parent="." instance=ExtResource("21_fvel4")]
+transform = Transform3D(-0.201304, -0.503016, 0.28088, 0.541794, -0.266458, -0.0888899, 0.195903, 0.220039, 0.534459, 98.5864, 3.34229, 253.119)
+
+[node name="ribcage_half4" parent="." instance=ExtResource("21_fvel4")]
+transform = Transform3D(0.138774, -0.489994, -0.264014, -0.532644, -0.195872, 0.0835524, -0.16152, 0.224935, -0.502366, 94.7886, 4.55316, 245.802)

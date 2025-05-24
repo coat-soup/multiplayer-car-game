@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://in5wlklvbwe8"]
+
+[ext_resource type="Texture2D" uid="uid://crle1fcyh4pr0" path="res://world/landscape/textures/bone.png" id="1_c2s7o"]
+[ext_resource type="Texture2D" uid="uid://x2twa2u3ep75" path="res://world/landscape/textures/bone_n.png" id="2_2hitk"]
+
+[resource]
+albedo_color = Color(0.985255, 0.939789, 0.890128, 1)
+albedo_texture = ExtResource("1_c2s7o")
+normal_enabled = true
+normal_scale = 0.35
+normal_texture = ExtResource("2_2hitk")
+texture_filter = 0

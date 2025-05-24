@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c5o0cpgpi4qsm"]
+
+[ext_resource type="Shader" uid="uid://bntvrs5gun2jx" path="res://world/landscape/materials/triplanar_shader.tres" id="1_chcte"]
+[ext_resource type="Texture2D" uid="uid://x2twa2u3ep75" path="res://world/landscape/textures/bone_n.png" id="2_p6d13"]
+[ext_resource type="Texture2D" uid="uid://crle1fcyh4pr0" path="res://world/landscape/textures/bone.png" id="3_8hhvh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_chcte")
+shader_parameter/triplanar_scale = Vector3(0, 0, 0)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.5
+shader_parameter/Texture = ExtResource("3_8hhvh")
+shader_parameter/Normal = ExtResource("2_p6d13")
