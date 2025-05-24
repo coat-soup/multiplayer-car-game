@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxb87aa4s0d0k"]
+[gd_scene load_steps=16 format=3 uid="uid://cxb87aa4s0d0k"]
 
 [ext_resource type="PackedScene" uid="uid://v6ld2t0h2oos" path="res://cannons/autocannon/autocannon.glb" id="1_gtjru"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_c1g2y"]
@@ -6,8 +6,15 @@
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="3_6v6u1"]
 [ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://cannons/autocannon_shell.tscn" id="3_ri3vl"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="4_1tp4y"]
+[ext_resource type="Texture2D" uid="uid://brrchc8gfkb5x" path="res://cannons/autocannon/autocannon.png" id="4_lfnvq"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="4_ulasb"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="7_ca76a"]
+[ext_resource type="Texture2D" uid="uid://bicy3jnjvley2" path="res://cannons/autocannon/autocannon_n.png" id="5_o1p3j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtjja"]
+albedo_texture = ExtResource("4_lfnvq")
+normal_enabled = true
+normal_texture = ExtResource("5_o1p3j")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ohirr"]
 size = Vector3(1.0752, 1.33081, 1.2496)
@@ -21,30 +28,6 @@ size = Vector3(0.5, 0.2, 4.327)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ri51i"]
 size = Vector3(1, 1.15552, 3.35034)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4p7fa"]
-render_priority = 0
-shader = ExtResource("7_ca76a")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 3
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_062ux"]
 properties/0/path = NodePath("Yaw:rotation")
@@ -67,6 +50,21 @@ do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06532, 1.76757)
+
+[node name="Cylinder_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_002" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube" parent="Yaw" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_001" parent="Yaw" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
 
 [node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.882133, -3.98421)
@@ -123,8 +121,71 @@ shape = SubResource("BoxShape3D_2qn1b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76204, 0.824097)
 shape = SubResource("BoxShape3D_ri51i")
 
+[node name="Cube_002" parent="Yaw/Pitch" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_003" parent="Yaw/Pitch" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_004" parent="Yaw/Pitch" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_005" parent="Yaw/Pitch" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_006" parent="Yaw/Pitch" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_007" parent="Yaw/Pitch" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
 [node name="Cube_008" parent="Yaw/Pitch" index="12"]
-material_override = SubResource("ShaderMaterial_4p7fa")
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_010" parent="Yaw/Pitch" index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_011" parent="Yaw/Pitch" index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cube_012" parent="Yaw/Pitch" index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_003" parent="Yaw/Pitch" index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_004" parent="Yaw/Pitch" index="17"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_005" parent="Yaw/Pitch" index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_006" parent="Yaw/Pitch" index="19"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_007" parent="Yaw/Pitch" index="20"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_008" parent="Yaw/Pitch" index="21"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_009" parent="Yaw/Pitch" index="22"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_010" parent="Yaw/Pitch" index="23"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_011" parent="Yaw/Pitch" index="24"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_012" parent="Yaw/Pitch" index="25"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_013" parent="Yaw/Pitch" index="26"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
+
+[node name="Cylinder_014" parent="Yaw/Pitch" index="27"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="5"]
 replication_config = SubResource("SceneReplicationConfig_062ux")
