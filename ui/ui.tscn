@@ -5,32 +5,44 @@
 
 [node name="UI" type="Control" groups=["ui"]]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_hp8fa")
 
 [node name="HUD" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="InteractText" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 710.0
-offset_top = 913.0
-offset_right = 1210.0
-offset_bottom = 936.0
+offset_left = 1016.0
+offset_top = 1213.0
+offset_right = 1516.0
+offset_bottom = 1255.0
 pivot_offset = Vector2(250, 0)
+theme_override_font_sizes/font_size = 30
 text = "INTERACT TEXT"
 horizontal_alignment = 1
 
 [node name="ChatBox" type="Label" parent="HUD"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = -2179.0
-offset_right = 600.0
-offset_bottom = 821.0
+offset_right = -1320.0
+offset_bottom = -259.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(0, 3000)
 vertical_alignment = 2
 
@@ -58,10 +70,10 @@ width = 2.0
 [node name="HealthBar" type="ProgressBar" parent="HUD"]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 0
-offset_left = 872.0
-offset_top = 1041.0
-offset_right = 1072.0
-offset_bottom = 1068.0
+offset_left = 1073.0
+offset_top = 1337.0
+offset_right = 1473.0
+offset_bottom = 1387.0
 step = 1.0
 value = 100.0
 show_percentage = false
@@ -69,46 +81,58 @@ show_percentage = false
 [node name="Crosshair" type="TextureRect" parent="HUD"]
 modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
-offset_left = 944.0
-offset_top = 524.0
-offset_right = 976.0
-offset_bottom = 556.0
+offset_left = 1280.0
+offset_top = 720.0
+offset_right = 1312.0
+offset_bottom = 752.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(16, 16)
 mouse_filter = 2
 texture = ExtResource("2_5fnut")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 858.0
-offset_top = 428.0
-offset_right = 1058.0
-offset_bottom = 573.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -100.0
+offset_right = 125.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HostSteam" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "HOST STEAM"
 
 [node name="HostLocal" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "HOST LOCAL"
 
 [node name="Join" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "JOIN
 "
 
 [node name="LobbyIDTextField" type="TextEdit" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 placeholder_text = "LOBBY ID"
 
 [node name="AmmoCounter" type="Label" parent="."]
 custom_minimum_size = Vector2(134.19, 0)
 layout_mode = 0
-offset_left = 1712.0
-offset_top = 997.0
-offset_right = 1846.19
-offset_bottom = 1039.0
-theme_override_font_sizes/font_size = 30
+offset_left = 2301.0
+offset_top = 1302.0
+offset_right = 2436.0
+offset_bottom = 1371.0
+theme_override_font_sizes/font_size = 50
+text = "
+"
 horizontal_alignment = 2

@@ -7,6 +7,7 @@ extends Equipment
 @onready var reload_time := 1.7
 
 var can_fire := true
+var reloading := false
 
 const GUN_BULLET = preload("res://cannons/gun_bullet.tscn")
 @export var barrel_end: Node3D
@@ -18,7 +19,7 @@ const MUZZLE_FLASH = preload("res://vfx/muzzle_flash.tscn")
 # 0 = primary, 1 = secondary, 2 = middle mouse, 3 = reload
 func on_triggered(button : int):
 	if button == 0:
-		if !can_fire: return
+		if reloading or !can_fire: return
 		
 		fire.rpc()
 		
@@ -29,7 +30,7 @@ func on_triggered(button : int):
 	elif button == 1:
 		#TODO : ADS
 		pass
-	elif button == 3:
+	elif button == 3 and !reloading:
 		if cur_ammo < mag_size:
 			reload.rpc()
 
@@ -58,12 +59,16 @@ func fire():
 
 @rpc("any_peer", "call_local")
 func reload():
+	if reloading:
+		return
+	reloading = true
 	can_fire = false
 	anim.speed_scale = 1.0/reload_time
 	anim.play("reload")
 	
 	await get_tree().create_timer(reload_time).timeout
 	
+	reloading = false
 	can_fire = true
 	anim.speed_scale = 1.0
 	cur_ammo = mag_size

@@ -55,9 +55,14 @@ func take_control(player_id : String):
 		control_started.emit()
 		camera.current = true
 		using_player.active = false
+		using_player.health.died.connect(on_player_died)
 	else:
 		ui.display_chat_message("no auth, no cam")
+	interactable.active = false
 
+
+func on_player_died():
+	un_controll.rpc()
 
 
 @rpc("any_peer", "call_local")
@@ -71,6 +76,7 @@ func un_controll():
 		camera.current = false
 		using_player.camera.current = true
 		using_player.active = true
+		using_player.health.died.disconnect(on_player_died)
 	else:
 		ui.display_chat_message("no auth, doing nothing")
 	
@@ -78,3 +84,6 @@ func un_controll():
 	#using_player.reparent(get_tree().get_root())
 	remote_path = ""
 	using_player = null
+	
+	await get_tree().create_timer(0.5).timeout
+	interactable.active = true

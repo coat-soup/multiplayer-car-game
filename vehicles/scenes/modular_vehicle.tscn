@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bnu5wdqrii2mc" path="res://vehicles/modules/cannon_module.tscn" id="8_sm5no"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_FX_manager.gd" id="9_7lh2j"]
 [ext_resource type="PackedScene" uid="uid://ccapb8n1iqflw" path="res://equipment/pistol.tscn" id="9_yct11"]
-[ext_resource type="PackedScene" uid="uid://k515kwg26oey" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
+[ext_resource type="PackedScene" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
 [ext_resource type="AudioStream" uid="uid://b86c4whv48nqi" path="res://sfx/engine.wav" id="10_t80r1"]
 [ext_resource type="AudioStream" uid="uid://dp8k2w5mnhcgy" path="res://sfx/tires_turning.wav" id="11_1xp7q"]
 [ext_resource type="AudioStream" uid="uid://dnm1s3yn6a1rg" path="res://sfx/sand_drift.wav" id="12_bjgp2"]

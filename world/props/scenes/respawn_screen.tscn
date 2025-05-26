@@ -1,17 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://svn47mpibhxt"]
+[gd_scene load_steps=9 format=3 uid="uid://svn47mpibhxt"]
 
 [ext_resource type="PackedScene" uid="uid://dutog183422g5" path="res://world/props/models/respawn_screen.glb" id="1_i8yil"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="2_3qh68"]
 [ext_resource type="Texture2D" uid="uid://d4fuofm8oj7nb" path="res://world/props/textures/respawn_screen.png" id="2_71w6g"]
+[ext_resource type="Script" path="res://world/props/scenes/respawn_console.gd" id="2_v44hs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gucg"]
 albedo_texture = ExtResource("2_71w6g")
+texture_filter = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y8tkn"]
+load_path = "res://.godot/imported/respawn_screen.png-0ccdb5a0b3b691c50d68cfde7366f443.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pgcj2"]
+albedo_texture = SubResource("CompressedTexture2D_y8tkn")
 texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ieqsv"]
 size = Vector3(0.485, 0.475, 0.290937)
 
 [node name="respawn_screen" instance=ExtResource("1_i8yil")]
+script = ExtResource("2_v44hs")
 
 [node name="Cube" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
@@ -20,7 +29,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
 surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
 
 [node name="Cube_003" parent="." index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
+surface_material_override/0 = SubResource("StandardMaterial3D_pgcj2")
 
 [node name="Interactable" type="StaticBody3D" parent="." index="3"]
 collision_layer = 4
@@ -31,3 +40,8 @@ prompt_text = "Set Spawn"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0595313)
 shape = SubResource("BoxShape3D_ieqsv")
+
+[node name="RespawnPoint" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.766765)
+
+[connection signal="interacted" from="Interactable" to="." method="_on_interactable_interacted"]
