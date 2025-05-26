@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://o0hwfbu4wrfy"]
+
+[ext_resource type="Texture2D" uid="uid://c75unhgwwbqeh" path="res://equipment/textures/wrench.png" id="1_nx4cc"]
+[ext_resource type="Texture2D" uid="uid://b7oocruh01ok3" path="res://equipment/textures/wrench_n.png" id="2_wqyac"]
+
+[resource]
+albedo_texture = ExtResource("1_nx4cc")
+normal_enabled = true
+normal_texture = ExtResource("2_wqyac")
+texture_filter = 0

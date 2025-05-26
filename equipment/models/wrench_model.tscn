@@ -1,28 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctosmn6mjroqq"]
+[gd_scene load_steps=3 format=3 uid="uid://ctosmn6mjroqq"]
 
 [ext_resource type="PackedScene" uid="uid://c8e5dm3neirpv" path="res://equipment/models/wrench.glb" id="1_4167h"]
-[ext_resource type="Texture2D" uid="uid://c75unhgwwbqeh" path="res://equipment/textures/wrench.png" id="2_v44pr"]
-[ext_resource type="Texture2D" uid="uid://b7oocruh01ok3" path="res://equipment/textures/wrench_n.png" id="3_ogsgx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3iw61"]
-albedo_texture = ExtResource("2_v44pr")
-normal_enabled = true
-normal_texture = ExtResource("3_ogsgx")
-texture_filter = 0
+[ext_resource type="Material" uid="uid://o0hwfbu4wrfy" path="res://equipment/textures/wrench_mat.tres" id="2_ut68m"]
 
 [node name="wrench" instance=ExtResource("1_4167h")]
 
 [node name="Cube" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3iw61")
+surface_material_override/0 = ExtResource("2_ut68m")
 
 [node name="Cube_001" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3iw61")
+surface_material_override/0 = ExtResource("2_ut68m")
 
 [node name="Cube_002" parent="." index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3iw61")
+surface_material_override/0 = ExtResource("2_ut68m")
 
 [node name="Cylinder" parent="." index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3iw61")
+surface_material_override/0 = ExtResource("2_ut68m")
 
 [node name="Cube_004" parent="." index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3iw61")
+surface_material_override/0 = ExtResource("2_ut68m")

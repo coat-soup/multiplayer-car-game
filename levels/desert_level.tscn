@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b1k1yyld5gvfc"]
+[gd_scene load_steps=35 format=3 uid="uid://b1k1yyld5gvfc"]
 
 [ext_resource type="Script" path="res://system/network_manager.gd" id="1_2gcb8"]
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
@@ -60,19 +60,10 @@ _shader_parameters = {
 texture_filtering = 1
 shader_override = ExtResource("2_rcxq2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mtar"]
-transparency = 4
-cull_mode = 2
-vertex_color_use_as_albedo = true
-backlight_enabled = true
-backlight = Color(0.5, 0.5, 0.5, 1)
-distance_fade_mode = 1
-distance_fade_min_distance = 85.0
-distance_fade_max_distance = 75.0
-
 [sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_mampa"]
-material_override = SubResource("StandardMaterial3D_4mtar")
-generated_type = 1
+name = "cactus_tall"
+density = 4.94587
+scene_file = ExtResource("14_dgsuv")
 
 [sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_rno0h"]
 name = "sand"
@@ -561,17 +552,36 @@ network_manager = NodePath("../NetworkManager")
 [node name="Body3" parent="." instance=ExtResource("12_mtjk6")]
 transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -6.76982, 2.31385, -2.11791)
 
+[node name="Body5" parent="." instance=ExtResource("12_mtjk6")]
+transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -17.3869, 1.85928, -1138.04)
+
+[node name="Body8" parent="." instance=ExtResource("12_mtjk6")]
+transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -7.55058, 1.85928, -1133.12)
+
+[node name="Body6" parent="." instance=ExtResource("12_mtjk6")]
+transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -27.2232, 1.85928, -1142.97)
+
+[node name="Body7" parent="." instance=ExtResource("12_mtjk6")]
+transform = Transform3D(0.894209, 0, -0.44765, 0, 1, 0, 0.44765, 0, 0.894209, -37.9537, 1.85928, -1148.34)
+
 [node name="Body4" parent="." instance=ExtResource("12_mtjk6")]
 transform = Transform3D(0.44765, 0, 0.894209, 0, 1, 0, -0.894209, 0, 0.44765, -37.6577, 2.81059, 59.5825)
 
 [node name="PostProcessing" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.0189, -31.4828)
+visible = false
 extra_cull_margin = 10000.0
 mesh = SubResource("QuadMesh_6vh6q")
 surface_material_override/0 = SubResource("ShaderMaterial_3pynt")
 
 [node name="CactusTall2" parent="." instance=ExtResource("14_dgsuv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37368, 0.720076, 37.6987)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37368, 0.175595, 37.6987)
+
+[node name="CactusTall3" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.3157, 8.42327, 141.183)
+
+[node name="CactusTall4" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.130577, 0, 0.795039, 0, 0.80569, 0, -0.795039, 0, -0.130577, -81.3727, 7.78454, 139.342)
 
 [node name="CactusTall" parent="." instance=ExtResource("14_dgsuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9197, 0.24367, 117.183)
@@ -581,3 +591,54 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.332, 4.05935, -96.7156)
 
 [node name="peenor2" parent="peenor" instance=ExtResource("15_tu7tu")]
 transform = Transform3D(0.301804, 0, -0.95337, 0, 1, 0, 0.95337, 0, 0.301804, 13.3229, 181.207, -5.10665)
+
+[node name="CactusTall5" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8685, 0.15044, -766.247)
+
+[node name="CactusTall6" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(0.47633, 0, -0.879266, 0, 1, 0, 0.879266, 0, 0.47633, -39.5771, 0.126721, -759.817)
+
+[node name="CactusTall7" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.810338, 0, 0.585962, 0, 1, 0, -0.585962, 0, -0.810338, -47.5254, -0.0212364, -795.859)
+
+[node name="CactusTall8" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.48, 15.0549, -320.074)
+
+[node name="CactusTall9" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.873798, 0, -0.48629, 0, 1, 0, 0.48629, 0, -0.873798, 408.552, 48.7215, 256.458)
+
+[node name="CactusTall10" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-1.24788, 0, -0.694476, 0, 1.42811, 0, 0.694476, 0, -1.24788, 413.328, 49.6742, 285.554)
+
+[node name="CactusTall11" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(0.285081, 0, -0.553117, 0, 0.622262, 0, 0.553117, 0, 0.285081, 414.748, 49.3484, 282.923)
+
+[node name="CactusTall12" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.618724, 0, -0.785609, 0, 1, 0, 0.785609, 0, -0.618724, 458.436, 13.8367, 228.502)
+
+[node name="CactusTall13" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.524, 12.9176, 929.183)
+
+[node name="CactusTall14" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.632795, 0, -1.40908, 0, 1.54465, 0, 1.40908, 0, -0.632795, 67.9328, 0.40476, 937.527)
+
+[node name="CactusTall15" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -409.102, 1.55772, 725.153)
+
+[node name="CactusTall16" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.151554, 0, -0.988449, 0, 1, 0, 0.988449, 0, -0.151554, -422.485, 1.87726, 739.931)
+
+[node name="CactusTall17" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.304204, 0, 0.519958, 0, 0.602409, 0, -0.519958, 0, -0.304204, -408.744, 1.64364, 731.96)
+
+[node name="CactusTall18" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.589321, 0, -0.124888, 0, 0.602409, 0, 0.124888, 0, -0.589321, -407.273, 1.4567, 715.651)
+
+[node name="CactusTall19" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(0.449428, 0, 0.893317, 0, 1, 0, -0.893317, 0, 0.449428, -377.874, 5.63509, 90.3625)
+
+[node name="CactusTall20" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(0.846308, 0, -1.0432, 0, 1.34332, 0, 1.0432, 0, 0.846308, -374.012, 4.82505, 78.6244)
+
+[node name="CactusTall21" parent="." instance=ExtResource("14_dgsuv")]
+transform = Transform3D(-0.587799, 0, 0.809007, 0, 1, 0, -0.809007, 0, -0.587799, -497.975, 12.8215, -279.333)

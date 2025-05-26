@@ -15,12 +15,15 @@ var held_player : Player = null
 
 @export var interact_holdable := true
 
+@export var raycast_on_startup := true
+
 
 func _ready():
 	interactable.prompt_text = "Equip " + equipment_name
 	interactable.interacted.connect(try_equip)
 	triggered.connect(on_triggered)
-	raycast_position()
+	if raycast_on_startup:
+		raycast_position()
 
 
 func _input(event: InputEvent) -> void:

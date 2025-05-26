@@ -34,6 +34,7 @@ text = "INTERACT TEXT"
 horizontal_alignment = 1
 
 [node name="ChatBox" type="Label" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,13 +79,24 @@ step = 1.0
 value = 100.0
 show_percentage = false
 
-[node name="Crosshair" type="TextureRect" parent="HUD"]
+[node name="CrosshairHolder" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="TextureRect" parent="HUD/CrosshairHolder"]
 modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
-offset_left = 1280.0
-offset_top = 720.0
-offset_right = 1312.0
-offset_bottom = 752.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(16, 16)
 mouse_filter = 2

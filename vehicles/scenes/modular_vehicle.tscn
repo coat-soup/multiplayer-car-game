@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bnu5wdqrii2mc" path="res://vehicles/modules/cannon_module.tscn" id="8_sm5no"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_FX_manager.gd" id="9_7lh2j"]
 [ext_resource type="PackedScene" uid="uid://ccapb8n1iqflw" path="res://equipment/pistol.tscn" id="9_yct11"]
-[ext_resource type="PackedScene" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
+[ext_resource type="PackedScene" uid="uid://k515kwg26oey" path="res://vehicles/modules/cab_module.tscn" id="10_oqtvt"]
 [ext_resource type="AudioStream" uid="uid://b86c4whv48nqi" path="res://sfx/engine.wav" id="10_t80r1"]
 [ext_resource type="AudioStream" uid="uid://dp8k2w5mnhcgy" path="res://sfx/tires_turning.wav" id="11_1xp7q"]
 [ext_resource type="AudioStream" uid="uid://dnm1s3yn6a1rg" path="res://sfx/sand_drift.wav" id="12_bjgp2"]
@@ -77,9 +77,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
 
 [node name="Wrench" parent="Modules/CabModule" instance=ExtResource("4_0k7qh")]
 transform = Transform3D(-2.18557e-08, -0.866025, 0.5, 1, 1.91069e-15, 4.37114e-08, -3.78552e-08, 0.5, 0.866025, -1.79714, 1.06213, -2.03441)
+raycast_on_startup = false
+
+[node name="Wrench2" parent="Modules/CabModule" instance=ExtResource("4_0k7qh")]
+transform = Transform3D(0.901935, -0.199707, -0.382923, 0.237467, 0.969922, 0.0534848, 0.360724, -0.139171, 0.92223, -2.32232, 1.45123, -2.14484)
+raycast_on_startup = false
+
+[node name="Wrench3" parent="Modules/CabModule" instance=ExtResource("4_0k7qh")]
+transform = Transform3D(0.581871, -0.186117, 0.791699, 0.237467, 0.969922, 0.0534848, -0.77784, 0.156881, 0.608566, -2.27579, 0.476445, 2.63565)
+raycast_on_startup = false
 
 [node name="Pistol" parent="Modules/CabModule" instance=ExtResource("9_yct11")]
 transform = Transform3D(-4.00863e-08, -0.917067, 0.398733, 1, -4.37114e-08, 0, 1.74292e-08, 0.398733, 0.917067, -1.86803, 1.08509, -0.934412)
+raycast_on_startup = false
+
+[node name="Pistol3" parent="Modules/CabModule" instance=ExtResource("9_yct11")]
+transform = Transform3D(-1.00577e-07, -0.334547, -0.942379, -1, 8.75073e-08, 7.56615e-08, 5.71528e-08, 0.942379, -0.334547, -0.588919, 1.46435, 3.6845)
+raycast_on_startup = false
+
+[node name="Pistol2" parent="Modules/CabModule" instance=ExtResource("9_yct11")]
+transform = Transform3D(-4.00863e-08, -0.917067, 0.398733, -1, 8.85306e-09, -8.01725e-08, 6.99936e-08, -0.398733, -0.917067, -1.52078, 1.08509, -1.47479)
+raycast_on_startup = false
 
 [node name="WheelModuleLeft2" parent="Modules" instance=ExtResource("7_oy6iv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, -6)
