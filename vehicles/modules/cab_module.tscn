@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://k515kwg26oey"]
+[gd_scene load_steps=20 format=3 uid="uid://k515kwg26oey"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_ag7kx"]
 [ext_resource type="PackedScene" uid="uid://d0jxhnjrfyeud" path="res://vehicles/models/CabModule.glb" id="1_f1g04"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dw4wv8hgj7obv" path="res://vehicles/textures/cab.png" id="3_jdc1i"]
 [ext_resource type="Texture2D" uid="uid://ortvkba0m0jo" path="res://vehicles/textures/cab_n.png" id="4_rtmq2"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="7_mbb51"]
+[ext_resource type="PackedScene" uid="uid://cafdmu62a50mc" path="res://world/props/scenes/wall_light.tscn" id="8_gnthv"]
+[ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="8_xr5td"]
+[ext_resource type="PackedScene" uid="uid://bc5v0sgyhebqd" path="res://world/props/scenes/cab_bench.tscn" id="8_xsko3"]
+[ext_resource type="PackedScene" uid="uid://bpt5llfs30ml2" path="res://world/props/scenes/steering_wheel.tscn" id="11_2imqb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ucijh"]
 albedo_texture = ExtResource("3_jdc1i")
@@ -15,6 +19,7 @@ normal_texture = ExtResource("4_rtmq2")
 texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gdapd"]
+size = Vector3(1, 2.33106, 3.24583)
 
 [sub_resource type="BoxMesh" id="BoxMesh_jimg0"]
 
@@ -80,7 +85,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
 surface_material_override/0 = SubResource("StandardMaterial3D_ucijh")
 
 [node name="Interactable" type="StaticBody3D" parent="." index="14"]
-transform = Transform3D(-1.89238e-08, 0, 0.432927, 0, 0.432927, 0, -0.432927, 0, -1.89238e-08, 1.29203, 1.19767, 3.32751)
+transform = Transform3D(-1.89238e-08, 0, 0.432927, 0, 0.432927, 0, -0.432927, 0, -1.89238e-08, 1.06328, 1.36703, 2.83195)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("2_j8rw6")
@@ -92,9 +97,11 @@ script = ExtResource("3_a4qmb")
 interactable = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" index="1"]
+transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 0, 0.0146506, -0.408821)
 shape = SubResource("BoxShape3D_gdapd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable" index="2"]
+visible = false
 mesh = SubResource("BoxMesh_jimg0")
 surface_material_override/0 = SubResource("StandardMaterial3D_opi3n")
 
@@ -130,3 +137,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
 [node name="Ladder4" parent="Ladder" index="8" instance=ExtResource("7_mbb51")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="Interior" type="Node3D" parent="." index="18"]
+
+[node name="respawn_screen" parent="Interior" index="0" instance=ExtResource("8_xr5td")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.43163, 1.43614, -0.836899)
+
+[node name="cab_bench" parent="Interior" index="1" instance=ExtResource("8_xsko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55995, 0.974012, -1.43575)
+
+[node name="wall_light" parent="Interior" index="2" instance=ExtResource("8_gnthv")]
+transform = Transform3D(-4.37114e-08, -8.74228e-08, -1, 0, -1, 8.74228e-08, -1, 3.82137e-15, 4.37114e-08, -1, 3.113, 2.528)
+
+[node name="wall_light2" parent="Interior" index="3" instance=ExtResource("8_gnthv")]
+transform = Transform3D(-4.37114e-08, -8.74228e-08, -1, 0, -1, 8.74228e-08, -1, 3.82137e-15, 4.37114e-08, 1, 3.113, 2.528)
+
+[node name="wall_light3" parent="Interior" index="4" instance=ExtResource("8_gnthv")]
+transform = Transform3D(-4.37114e-08, -8.74228e-08, -1, 0, -1, 8.74228e-08, -1, 3.82137e-15, 4.37114e-08, -1, 3.113, -0.472)
+
+[node name="wall_light4" parent="Interior" index="5" instance=ExtResource("8_gnthv")]
+transform = Transform3D(-4.37114e-08, -8.74228e-08, -1, 0, -1, 8.74228e-08, -1, 3.82137e-15, 4.37114e-08, 1, 3.113, -0.472)
+
+[node name="steering_wheel" parent="Interior" index="6" instance=ExtResource("11_2imqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3.56458)

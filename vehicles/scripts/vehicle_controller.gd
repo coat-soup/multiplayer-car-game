@@ -12,7 +12,7 @@ var camera_sensetivity := 0.005
 @export var steering_power := 0.8
 @export var engine_power := 150.0
 @export var top_speed := 40.0
-@export var air_control := 500.0
+@export var air_control := Vector2(500.0, 0.0)
 
 @export_category("Handling")
 @export var front_wheel_drift_factor := 1.4

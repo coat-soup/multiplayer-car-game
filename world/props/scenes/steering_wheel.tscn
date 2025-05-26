@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpt5llfs30ml2"]
+
+[ext_resource type="PackedScene" uid="uid://clb0vb2kcma3d" path="res://world/props/models/steering_wheel.glb" id="1_pgcgu"]
+[ext_resource type="Texture2D" uid="uid://c72ccjagroceg" path="res://world/props/textures/steering_wheel.png" id="2_5evnv"]
+[ext_resource type="Texture2D" uid="uid://rl7ybslo71o0" path="res://world/props/textures/steering_wheel_n.png" id="3_wiyho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7g72l"]
+albedo_texture = ExtResource("2_5evnv")
+normal_enabled = true
+normal_texture = ExtResource("3_wiyho")
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r0pvl"]
+points = PackedVector3Array(3.53642, 0.408387, 0.313606, 3.53642, 0.0513771, 0.771531, 3.53642, 0.408387, 0.0661987, -1.41436, 0.408387, 0.313606, 3.53642, -3.67761e-05, 0.771531, -1.41436, 0.0513771, 0.7714, 3.53642, -0.791865, 0.561274, 3.22966, 0.408387, -0.275322, -1.41436, 0.408387, 0.0661987, 3.53642, -0.996008, 0.672203, -1.41436, -3.67761e-05, 0.7714, -1.41436, -0.996008, 0.672203, 3.08912, -0.996008, 0.551628, 1.05473, 0.408387, -0.56014, -1.41436, -0.791865, 0.561274, -1.12117, 0.408387, -0.272455, -0.981122, -0.996008, 0.552801, 1.05473, -0.996008, 0.406677)
+
+[node name="steering_wheel" instance=ExtResource("1_pgcgu")]
+
+[node name="Cube_003" parent="Dash" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cube_004" parent="Dash" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cube_006" parent="Dash/Throttle" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cube_007" parent="Dash/Throttle" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cylinder_002" parent="Dash/Throttle/Cube_007" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cube_008" parent="Dash/Throttle" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Circle" parent="Dash/Wheel" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cube" parent="Dash/Wheel" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cylinder" parent="Dash/Wheel" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="Cylinder_001" parent="Dash/Wheel" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7g72l")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, 1.05676, 0.000236154, -0.000138521)
+shape = SubResource("ConvexPolygonShape3D_r0pvl")

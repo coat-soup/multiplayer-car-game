@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cafdmu62a50mc"]
+
+[ext_resource type="PackedScene" uid="uid://bis7oyw47pkoh" path="res://world/props/models/wall_light.glb" id="1_ntqqt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8sxx"]
+albedo_color = Color(0.369772, 0.330408, 0.323788, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4topv"]
+emission_enabled = true
+emission = Color(1, 0.885366, 0.38388, 1)
+
+[node name="wall_light" instance=ExtResource("1_ntqqt")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u8sxx")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4topv")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.839737, 0.766113, 7.70092e-07, 1)
+light_energy = 5.114
+spot_angle = 72.43

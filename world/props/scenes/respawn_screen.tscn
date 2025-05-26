@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://svn47mpibhxt"]
+
+[ext_resource type="PackedScene" uid="uid://dutog183422g5" path="res://world/props/models/respawn_screen.glb" id="1_i8yil"]
+[ext_resource type="Script" path="res://system/interactable.gd" id="2_3qh68"]
+[ext_resource type="Texture2D" uid="uid://d4fuofm8oj7nb" path="res://world/props/textures/respawn_screen.png" id="2_71w6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gucg"]
+albedo_texture = ExtResource("2_71w6g")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ieqsv"]
+size = Vector3(0.485, 0.475, 0.290937)
+
+[node name="respawn_screen" instance=ExtResource("1_i8yil")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
+
+[node name="Cube_003" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2gucg")
+
+[node name="Interactable" type="StaticBody3D" parent="." index="3"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_3qh68")
+prompt_text = "Set Spawn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0595313)
+shape = SubResource("BoxShape3D_ieqsv")
