@@ -65,3 +65,10 @@ static func spawn_particles_for_time(position: Vector3, particles: PackedScene, 
 	parent.add_child(particles_obj)
 	await particles_obj.get_tree().create_timer(time).timeout
 	#particles_obj.queue_free()
+
+
+static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Vector3:
+	const G = 10.0
+	var direction = planet.position - pos
+	var force = G * planet.mass / (direction.length() ** 2)
+	return direction.normalized() * force
