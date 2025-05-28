@@ -13,7 +13,8 @@ var camera_sensetivity := 0.005
 
 @export var mass := 400.0
 
-var input_dir := Vector3.ZERO
+var directional_input := Vector3.ZERO
+@export var rotation_input := Vector3.ZERO
 
 var planets : Array[Planet]
 
@@ -23,11 +24,17 @@ var planets : Array[Planet]
 @onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
 @onready var velocity_synchroniser: MultiplayerSynchronizer = $"../VelocitySynchroniser"
 
+@export var virtual_joystick_value = Vector2.ZERO
+var turn_speed := 0.2
+var roll_speed := 0.2
+var rotation_accel := 1.0
+
 
 func _ready() -> void:
 	for i in get_tree().get_nodes_in_group("planet"):
 		planets.append(i as Planet)
 	controllable.control_started.connect(on_controlled)
+	controllable.control_ended.connect(on_uncontrolled)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -35,6 +42,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not controllable.is_multiplayer_authority(): return
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		virtual_joystick_value += Vector2(event.relative.x, event.relative.y) * camera_sensetivity
+		virtual_joystick_value = virtual_joystick_value.limit_length(1)
+		ui.update_virtual_joystick(virtual_joystick_value)
+		
+		return
 		camera_pivot.rotate_y(-event.relative.x * camera_sensetivity)
 		camera_pivot.rotation.x += (event.relative.y * camera_sensetivity)
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(60))
@@ -50,9 +62,9 @@ func _process(delta: float) -> void:
 		ship.velocity = velocity_sync
 		ui.display_chat_message("Receiving synced velocity " + str(ship.velocity))
 	
-	var input_dir_relative = (ship.global_basis * input_dir).normalized()
-	veldebug.global_position = ship.global_position + input_dir_relative * 10
-	var v_input = ship.velocity + acceleration * input_dir_relative * delta
+	var directional_input_relative = (ship.global_basis * directional_input).normalized()
+	veldebug.global_position = ship.global_position + directional_input_relative * 10
+	var v_input = ship.velocity + acceleration * directional_input_relative * delta
 	if v_input.length() < max_speed:
 		ship.velocity = v_input
 	
@@ -60,12 +72,21 @@ func _process(delta: float) -> void:
 		ship.velocity += Util.get_gravitational_acceleration(ship.global_position, planet) * delta
 		rotate_ship_in_orbit(delta, planet)
 	
+	
 	if not controllable.is_multiplayer_authority(): return
+	
+	var joystick : Vector2 = virtual_joystick_value if virtual_joystick_value.length() > 0.1 else Vector2.ZERO
+	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("roll_right", "roll_left") * int(controllable.using_player != null)), rotation_accel * delta)
+	
+	ship.rotate_object_local(Vector3.UP, -rotation_input.x * turn_speed * delta)
+	ship.rotate_object_local(Vector3.RIGHT, rotation_input.y * turn_speed * delta)
+	ship.rotate_object_local(Vector3.FORWARD, rotation_input.z * roll_speed * delta)
+	
 	ship.move_and_slide()
 	
 	if not controllable.is_multiplayer_authority(): return
 	if not controllable or not controllable.using_player: return
-	input_dir = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
+	directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
 
 
 func rotate_ship_in_orbit(delta: float, planet : Planet):
@@ -84,3 +105,11 @@ func rotate_ship_in_orbit(delta: float, planet : Planet):
 
 func on_controlled():
 	velocity_synchroniser.set_multiplayer_authority(str(controllable.using_player.name).to_int(), false)
+
+	if controllable.is_multiplayer_authority():
+		ui.toggle_virtual_joystick(true)
+
+	
+func on_uncontrolled():
+	if controllable.is_multiplayer_authority():
+		ui.toggle_virtual_joystick(false)

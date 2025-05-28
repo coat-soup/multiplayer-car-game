@@ -40,6 +40,12 @@ shader_parameter/albedo_alpha = 0.5
 properties/0/path = NodePath("MovementManager:velocity_sync")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("MovementManager:rotation_input")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("MovementManager:virtual_joystick_value")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")

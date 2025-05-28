@@ -10,7 +10,7 @@ const TRAJECTORY_MARKER = preload("res://system/scenes/trajectory_marker.tscn")
 var markers : Array[Node3D]
 
 @export var spacing := 1.0
-@export var n_markers := 30
+@export var n_markers := 60
 
 
 func _ready() -> void:
