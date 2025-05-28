@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf6omujhtc7g7"]
+
+[ext_resource type="Script" path="res://ship/systems/radar/radar_signature.gd" id="1_pcmq1"]
+[ext_resource type="PackedScene" uid="uid://18iftbslw8ny" path="res://ship/systems/radar/radar_marker.tscn" id="2_wmsyq"]
+
+[node name="RadarSignature" type="Node3D" groups=["radar signature"]]
+script = ExtResource("1_pcmq1")
+
+[node name="RadarMarker" parent="." instance=ExtResource("2_wmsyq")]

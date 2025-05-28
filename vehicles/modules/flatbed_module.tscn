@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b7ol67t27hm1k"]
 
 [ext_resource type="PackedScene" uid="uid://cpdvf0whhd0kb" path="res://vehicles/models/FlatbedModule.glb" id="1_ln2ns"]
-[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="2_0mv13"]
+[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="2_0mv13"]
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="2_oh4hb"]
 [ext_resource type="Texture2D" uid="uid://dwki4cotptun8" path="res://vehicles/textures/flatbed.png" id="3_tx6ru"]
 [ext_resource type="Texture2D" uid="uid://b5gci0km35e8t" path="res://vehicles/textures/flatbed_n.png" id="4_cd4nv"]

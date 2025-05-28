@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://svn47mpibhxt"]
 
 [ext_resource type="PackedScene" uid="uid://dutog183422g5" path="res://world/props/models/respawn_screen.glb" id="1_i8yil"]
-[ext_resource type="Script" path="res://system/interactable.gd" id="2_3qh68"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_3qh68"]
 [ext_resource type="Texture2D" uid="uid://d4fuofm8oj7nb" path="res://world/props/textures/respawn_screen.png" id="2_71w6g"]
 [ext_resource type="Script" path="res://world/props/scenes/respawn_console.gd" id="2_v44hs"]
 

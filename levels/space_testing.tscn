@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://blh5vmbo3xtwo"]
+[gd_scene load_steps=11 format=3 uid="uid://blh5vmbo3xtwo"]
 
-[ext_resource type="Script" path="res://system/game_manager.gd" id="1_fir5i"]
-[ext_resource type="Script" path="res://system/network_manager.gd" id="2_4wxfc"]
+[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_fir5i"]
+[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_4wxfc"]
 [ext_resource type="PackedScene" uid="uid://ccqbvtqs600cl" path="res://ship/ship.tscn" id="3_1oyru"]
 [ext_resource type="PackedScene" uid="uid://i0yyb6e6t373" path="res://ship/ship_movement_clone.tscn" id="4_cl32f"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_diix6"]
-[ext_resource type="PackedScene" uid="uid://nma732l6b6uk" path="res://system/trajectory_visualiser.tscn" id="6_jj5qf"]
 [ext_resource type="PackedScene" uid="uid://dcc3ntnqh7ln7" path="res://world/planets/planet.tscn" id="6_p460g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gm8k2"]
@@ -60,11 +59,6 @@ network_manager = NodePath("../NetworkManager")
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../ShipHolder/Ship")
 
-[node name="TrajectoryVisualiser" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("6_jj5qf")]
-ship = NodePath("../ShipHolder/Ship")
-spacing = 0.3
-n_markers = 300
-
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(0.875266, -0.10166, -0.472838, -0.238089, 0.760421, -0.604214, 0.420979, 0.641425, 0.641366, 0, 2.12476, 0)
 
@@ -75,3 +69,7 @@ shape = SubResource("BoxShape3D_kbb1s")
 
 [node name="Planet" parent="." instance=ExtResource("6_p460g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -527.921, 0)
+
+[node name="Planet2" parent="." instance=ExtResource("6_p460g")]
+transform = Transform3D(0.571263, 0, 0, 0, 0.571263, 0, 0, 0, 0.571263, -328.703, 168.466, 998.978)
+mass = 30000.0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://18iftbslw8ny"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqth0"]
+shading_mode = 0
+albedo_color = Color(0, 0, 1, 1)
+
+[node name="RadarMarker" type="Node3D"]
+
+[node name="Visual" type="CSGSphere3D" parent="."]
+material = SubResource("StandardMaterial3D_cqth0")

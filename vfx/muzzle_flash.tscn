@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cop0dgto5g0fa"]
 
-[ext_resource type="Script" path="res://system/start_particles_on_spawn.gd" id="1_pyhxq"]
+[ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="1_pyhxq"]
 [ext_resource type="AudioStream" uid="uid://cdahjbdctxbvf" path="res://sfx/pistol_shot.wav" id="2_uj00a"]
 
 [sub_resource type="Gradient" id="Gradient_xt5ug"]

@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcc3ntnqh7ln7"]
+[gd_scene load_steps=5 format=3 uid="uid://dcc3ntnqh7ln7"]
 
-[ext_resource type="Script" path="res://system/planet.gd" id="1_ofno8"]
+[ext_resource type="Script" path="res://system/scripts/planet.gd" id="1_ofno8"]
+[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_0wn14"]
+[ext_resource type="Material" uid="uid://gihwiqdg76f2" path="res://ship/systems/radar/marker_materials/radar_marker_planet.tres" id="3_8568g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idnws"]
 albedo_color = Color(0.559272, 0.35875, 0.214298, 1)
 
 [node name="Planet" type="Node3D" groups=["planet"]]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 script = ExtResource("1_ofno8")
+
+[node name="RadarSignature" parent="." instance=ExtResource("2_0wn14")]
+transform = Transform3D(710.956, 0, 0, 0, 710.956, 0, 0, 0, 710.956, 0, 0, 0)
+visible = false
+marker_mat = ExtResource("3_8568g")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 use_collision = true

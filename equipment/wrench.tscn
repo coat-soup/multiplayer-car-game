@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bn5nh1kddwt62"]
 
 [ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
-[ext_resource type="Script" path="res://system/interactable.gd" id="2_bfpxh"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
 [ext_resource type="PackedScene" uid="uid://c8e5dm3neirpv" path="res://equipment/models/wrench.glb" id="2_gkggd"]
 [ext_resource type="PackedScene" uid="uid://ctosmn6mjroqq" path="res://equipment/models/wrench_model.tscn" id="3_yo5ni"]
 [ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="4_um0c8"]

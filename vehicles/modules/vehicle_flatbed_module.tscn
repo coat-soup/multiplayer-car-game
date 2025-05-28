@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://06mcvx83ivov"]
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_opurk"]
-[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/ladder.tscn" id="2_a0cah"]
+[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="2_a0cah"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_73j62"]
 size = Vector3(6, 1, 6)

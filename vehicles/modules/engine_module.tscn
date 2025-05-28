@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://by41frjh5n3nl" path="res://vehicles/models/EngineModule.glb" id="1_c5d4d"]
 [ext_resource type="Script" path="res://vehicles/scripts/engine_module.gd" id="2_brx83"]
-[ext_resource type="Script" path="res://system/health.gd" id="2_ly4r2"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_ly4r2"]
 [ext_resource type="Texture2D" uid="uid://dbekijfhjr8w8" path="res://vehicles/textures/engine_module.png" id="3_vspsr"]
 [ext_resource type="Texture2D" uid="uid://c88oxxa7r885y" path="res://vehicles/textures/engine_module_n.png" id="4_lyd5h"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=3 uid="uid://b1k1yyld5gvfc"]
 
-[ext_resource type="Script" path="res://system/network_manager.gd" id="1_2gcb8"]
-[ext_resource type="Script" path="res://system/game_manager.gd" id="1_2svl5"]
+[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="1_2gcb8"]
+[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_2svl5"]
 [ext_resource type="Texture2D" uid="uid://bhnm6fkb1enkj" path="res://world/landscape/textures/sand.png" id="2_kmc41"]
 [ext_resource type="Shader" path="res://vfx/terrain_shader.gdshader" id="2_rcxq2"]
 [ext_resource type="Texture2D" uid="uid://cet5xuwgrtvjn" path="res://world/landscape/textures/sand_n.png" id="3_dmf72"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_lpl8c"]
 [ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="2_rppvn"]
-[ext_resource type="Script" path="res://system/health.gd" id="3_adfel"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="3_adfel"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]
 size = Vector3(3, 2.456, 3)

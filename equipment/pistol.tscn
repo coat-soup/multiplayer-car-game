@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
 [ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
-[ext_resource type="Script" path="res://system/interactable.gd" id="4_v0mk4"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_v0mk4"]
 [ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="5_aaevu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]

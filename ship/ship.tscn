@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccqbvtqs600cl"]
+[gd_scene load_steps=12 format=3 uid="uid://ccqbvtqs600cl"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://bpt5llfs30ml2" path="res://world/props/scenes/steering_wheel.tscn" id="3_lxb4i"]
-[ext_resource type="Script" path="res://system/controllable_object.gd" id="4_ygd72"]
-[ext_resource type="Script" path="res://system/interactable.gd" id="5_fc0ek"]
+[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
+[ext_resource type="PackedScene" uid="uid://bodxwf6u75vxl" path="res://ship/systems/radar/holotable.tscn" id="7_uxitm"]
+[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="8_neyn7"]
+[ext_resource type="Material" uid="uid://x223y683bm5w" path="res://ship/systems/radar/marker_materials/radar_marker_friendly.tres" id="9_t5bjm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
 render_priority = 0
@@ -71,9 +74,23 @@ controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
 
 [node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0609, 1.85816, 10.8629)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, 0, 16.7006, -41.3735)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 current = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+
+[node name="Holotable" parent="." node_paths=PackedStringArray("main_ship") instance=ExtResource("7_uxitm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.470349, 6.08205)
+main_ship = NodePath("..")
+
+[node name="Holotable2" parent="." node_paths=PackedStringArray("main_ship") instance=ExtResource("7_uxitm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0960926, 0.92714, 12.5587)
+main_ship = NodePath("..")
+
+[node name="RadarSignature" parent="." instance=ExtResource("8_neyn7")]
+transform = Transform3D(37.9823, 0, 0, 0, 30.6432, 0, 0, 0, 81.6803, 0, 0, 0)
+visible = false
+marker_mat = ExtResource("9_t5bjm")

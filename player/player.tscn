@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://player/player_network_manager.gd" id="2_yagft"]
 [ext_resource type="Script" path="res://player/player_interaction_manager.gd" id="3_h4ya3"]
 [ext_resource type="Script" path="res://player/equipment_manager.gd" id="5_wjl74"]
-[ext_resource type="Script" path="res://system/health.gd" id="6_3dm8w"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="6_3dm8w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 

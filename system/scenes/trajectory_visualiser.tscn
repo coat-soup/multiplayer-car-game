@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nma732l6b6uk"]
 
-[ext_resource type="Script" path="res://system/trajectory_visualiser.gd" id="1_ux60u"]
+[ext_resource type="Script" path="res://system/scripts/trajectory_visualiser.gd" id="1_ux60u"]
 
 [node name="TrajectoryVisualiser" type="Node3D"]
 script = ExtResource("1_ux60u")

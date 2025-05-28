@@ -38,6 +38,7 @@ ui=""
 "network manager"=""
 planet=""
 ship=""
+"radar signature"=""
 
 [input]
 

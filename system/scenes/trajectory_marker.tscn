@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7cuuhi4daaif"]
+
+[ext_resource type="Material" uid="uid://otpfulanbylh" path="res://ship/systems/radar/marker_materials/radar_marker_trajectory.tres" id="1_816d8"]
+
+[node name="TrajectoryMarker" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material = ExtResource("1_816d8")

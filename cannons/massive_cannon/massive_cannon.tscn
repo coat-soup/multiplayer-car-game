@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bop8uqrotuyrh" path="res://cannons/massive_cannon/massive_cannon.glb" id="1_mnts8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_g2jg0"]
-[ext_resource type="Script" path="res://system/interactable.gd" id="3_e6mtt"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_e6mtt"]
 [ext_resource type="PackedScene" uid="uid://khld0gaej8py" path="res://cannons/cannon_shell.tscn" id="3_fqi0e"]
 [ext_resource type="Texture2D" uid="uid://wdhhcfk1obsl" path="res://cannons/massive_cannon/massive_cannon.png" id="4_5r6hc"]
-[ext_resource type="Script" path="res://system/controllable_object.gd" id="4_gnget"]
+[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_gnget"]
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="4_sn25g"]
 [ext_resource type="Texture2D" uid="uid://c28bex575vdv7" path="res://cannons/massive_cannon/massive_cannon_n.png" id="5_14run"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="5_j0v2g"]

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_r53e8"]
 [ext_resource type="Script" path="res://cannons/scripts/cannon_shell.gd" id="2_6t2uq"]
 [ext_resource type="PackedScene" uid="uid://bfmg7wnuki035" path="res://vfx/explosion_particles.tscn" id="3_8t2t6"]
-[ext_resource type="Script" path="res://system/start_particles_on_spawn.gd" id="4_u4l0a"]
+[ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="4_u4l0a"]
 [ext_resource type="AudioStream" uid="uid://u2jyqk1nf5fk" path="res://sfx/explosion.wav" id="5_fws3g"]
 
 [sub_resource type="Gradient" id="Gradient_i2y04"]
