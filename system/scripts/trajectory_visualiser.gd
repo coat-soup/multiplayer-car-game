@@ -1,8 +1,7 @@
 extends Node3D
-class_name TrajectorVisualiser
+class_name TrajectoryVisualiser
 
-@export var target : CharacterBody3D
-@export var ship : ShipManager
+@export var target : ShipMovementManager
 
 var planets : Array[Planet]
 
@@ -23,17 +22,10 @@ func _ready() -> void:
 		add_child(markers[i])
 
 
-func _process(_delta: float) -> void:
-	return
-	if target:
-		update_markers()
-	elif ship:
-		target = ship.movement_clone
-
 
 func update_markers(visual_scale : float = 1.0, marker_scale : float = 1.0):
 	var marker_pos := target.global_position
-	var velocity := target.velocity
+	var velocity := target.velocity_sync
 	var looped := false
 	for i in range(len(markers)):
 		if not looped:

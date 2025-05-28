@@ -100,5 +100,5 @@ transform = Transform3D(37.9823, 0, 0, 0, 30.6432, 0, 0, 0, 81.6803, 0, 0, 0)
 visible = false
 marker_mat = ExtResource("9_t5bjm")
 
-[node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tds0y")

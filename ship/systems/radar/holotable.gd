@@ -3,7 +3,7 @@ extends Node
 @onready var marker_holder: Node3D = $MarkerHolder
 const RADAR_MARKER = preload("res://ship/systems/radar/radar_marker.tscn")
 
-@onready var trajectory_visualiser: TrajectorVisualiser = $MarkerHolder/TrajectoryVisualiser
+@onready var trajectory_visualiser: TrajectoryVisualiser = $MarkerHolder/TrajectoryVisualiser
 
 var center_point = Vector3.ZERO
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 		markers.append(marker)
 		signatures[-1].set_marker_colour(marker)
 	
-	trajectory_visualiser.target = main_ship.movement_clone
+	trajectory_visualiser.target = main_ship.movement_manager
 	
 	update_markers()
 	update_trajectory()

@@ -15,6 +15,7 @@ var using_player : Player = null
 var ui : UIManager
 
 @onready var root_owner : Node = get_owner()
+@export var transfer_auth := true
 
 
 func _ready() -> void:
@@ -52,13 +53,13 @@ func take_control(player_id : String):
 	if is_multiplayer_authority():
 		using_player.hide()
 		ui.display_chat_message("true auth, doing cam")
-		control_started.emit()
 		camera.current = true
 		using_player.active = false
 		using_player.health.died.connect(on_player_died)
 	else:
 		ui.display_chat_message("no auth, no cam")
 	interactable.active = false
+	control_started.emit()
 
 
 func on_player_died():
@@ -72,7 +73,6 @@ func un_controll():
 	
 	if is_multiplayer_authority():
 		ui.display_chat_message("true auth, proper exit")
-		control_ended.emit()
 		camera.current = false
 		using_player.camera.current = true
 		using_player.active = true
@@ -84,6 +84,7 @@ func un_controll():
 	#using_player.reparent(get_tree().get_root())
 	remote_path = ""
 	using_player = null
+	control_ended.emit()
 	
 	await get_tree().create_timer(0.5).timeout
 	interactable.active = true

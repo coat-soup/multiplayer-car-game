@@ -18,11 +18,16 @@ var input_dir := Vector3.ZERO
 var planets : Array[Planet]
 
 @onready var veldebug: CSGSphere3D = $"../CSGSphere3D"
+@export var velocity_sync : Vector3
+
+@onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
+@onready var velocity_synchroniser: MultiplayerSynchronizer = $"../VelocitySynchroniser"
 
 
 func _ready() -> void:
 	for i in get_tree().get_nodes_in_group("planet"):
 		planets.append(i as Planet)
+	controllable.control_started.connect(on_controlled)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -37,6 +42,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	if controllable.is_multiplayer_authority():
+		print("SETTING VEL")
+		velocity_sync = ship.velocity
+		ui.display_chat_message("Setting velocity " + str(velocity_sync))
+	else:
+		ship.velocity = velocity_sync
+		ui.display_chat_message("Receiving synced velocity " + str(ship.velocity))
+	
 	var input_dir_relative = (ship.global_basis * input_dir).normalized()
 	veldebug.global_position = ship.global_position + input_dir_relative * 10
 	var v_input = ship.velocity + acceleration * input_dir_relative * delta
@@ -47,11 +60,11 @@ func _process(delta: float) -> void:
 		ship.velocity += Util.get_gravitational_acceleration(ship.global_position, planet) * delta
 		rotate_ship_in_orbit(delta, planet)
 	
+	if not controllable.is_multiplayer_authority(): return
 	ship.move_and_slide()
 	
-	if not controllable or not controllable.using_player: return
 	if not controllable.is_multiplayer_authority(): return
-	
+	if not controllable or not controllable.using_player: return
 	input_dir = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
 
 
@@ -67,3 +80,7 @@ func rotate_ship_in_orbit(delta: float, planet : Planet):
 		var orbit_axis = to_planet.cross(ship.velocity).normalized()
 		if orbit_axis != Vector3.ZERO:
 			ship.rotate(orbit_axis, angle_delta)
+
+
+func on_controlled():
+	velocity_synchroniser.set_multiplayer_authority(str(controllable.using_player.name).to_int(), false)
