@@ -1,6 +1,8 @@
 extends Node3D
+class_name ShipMovementManager
 
-@export var ship : ShipManager
+@export var ship_manager : ShipManager
+var ship : CharacterBody3D
 @export var controllable : Controllable
 
 var camera_sensetivity := 0.005

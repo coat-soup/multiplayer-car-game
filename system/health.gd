@@ -11,7 +11,7 @@ signal died
 
 
 @rpc("any_peer", "call_local")
-func take_damage(amount: float, source : String):
+func take_damage(amount: float, _source : String):
 	if cur_health <= 0:
 		return
 	
@@ -29,7 +29,7 @@ func take_damage(amount: float, source : String):
 
 
 @rpc("any_peer", "call_local")
-func heal(amount: float, source : String):
+func heal(amount: float, _source : String):
 	healed.emit()
 	
 	cur_health = min(max_health, cur_health + amount)

@@ -84,5 +84,5 @@ func on_dropped():
 func on_pickedup():
 	pass
 
-func on_triggered(button : int):
+func on_triggered(_button : int):
 	pass

@@ -30,6 +30,9 @@ var debug_mode = false
 
 var floor_obj : Node3D
 
+var on_ship := true
+@export var ship_gravity := 9.8
+@onready var ship : ShipManager = get_tree().get_first_node_in_group("ship") as ShipManager
 
 func _ready():
 	if not player.active or not is_multiplayer_authority(): return
@@ -62,43 +65,48 @@ func _physics_process(delta: float) -> void:
 	player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
 	
 	# gravity
-	if not player.is_on_floor() and !debug_mode:
-		player.velocity += player.get_gravity() * delta
+	if not player.is_on_floor() and !debug_mode and on_ship:
+		player.velocity += -ship.global_basis.y * ship_gravity * delta
+	
+	if on_ship:
+		player.up_direction = ship.global_basis.y
 	
 	# input
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (player.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (player.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if debug_mode:
-		player.velocity.y = (int(Input.is_key_pressed(KEY_SPACE)) - int(Input.is_key_pressed(KEY_CTRL))) * speed
+	
+	var adjusted_local_velocity = ship.global_basis.inverse() * player.velocity
 	
 	# jump
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		jump_start.emit()
-		player.velocity.y = jump_velocity
-		
+		adjusted_local_velocity.y = jump_velocity
+		#player.velocity += ship.global_basis.y * jump_velocity
 		
 	elif player.is_on_floor():
-		handle_floor_attachment()
+		#handle_floor_attachment()
 		
 		if direction:
-			player.velocity.x = direction.x * speed
-			player.velocity.z = direction.z * speed
+			adjusted_local_velocity.x = direction.x * speed
+			adjusted_local_velocity.z = direction.z * speed
 		else:
-			player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 10)
-			player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 10)
+			adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 10)
+			adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 10)
 		
 		if landing:
 			landing = false
-			if player.velocity.y < 1:
+			if adjusted_local_velocity.y < 1:
 				jump_land.emit()
 	else:
-		player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 2)
-		player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 2)
+		adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 2)
+		adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 2)
 		
 		if !landing:
 			landing = true
-
+	
+	player.velocity = ship.global_basis * adjusted_local_velocity
+	
 	# viewbob
 	t_bob += delta * player.velocity.length() * float(player.is_on_floor())
 	var b : float = bob_calc(t_bob)

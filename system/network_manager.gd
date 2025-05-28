@@ -16,6 +16,7 @@ var LOCAL_DEBUG := true
 const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 @export var spawn_position := Vector3.ZERO
+@export var ship : ShipManager
 
 
 func _ready() -> void:
@@ -83,7 +84,8 @@ func add_player(peer_id):
 	var player = PLAYER.instantiate()
 	player.name = str(peer_id)
 	print("playername: " + player.name)
-	get_owner().add_child(player)
+	ship.add_child(player)
+	#add_child(player)
 	player.global_position = spawn_position
 
 

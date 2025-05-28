@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var target : CharacterBody3D
+@export var ship : ShipManager
 
 var planets : Array[Planet]
 
@@ -21,8 +22,11 @@ func _ready() -> void:
 		add_child(markers[i])
 
 
-func _process(delta: float) -> void:
-	update_markers()
+func _process(_delta: float) -> void:
+	if target:
+		update_markers()
+	elif ship:
+		target = ship.movement_clone
 
 
 func update_markers():

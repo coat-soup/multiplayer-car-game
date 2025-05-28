@@ -1,0 +1,114 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcc3ntnqh7ln7"]
+
+[ext_resource type="Script" path="res://system/planet.gd" id="1_ofno8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idnws"]
+albedo_color = Color(0.559272, 0.35875, 0.214298, 1)
+
+[node name="Planet" type="Node3D" groups=["planet"]]
+script = ExtResource("1_ofno8")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 354.906
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 351, 0)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 208, 267.507, 0)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.12941, -0.224144, 0.965926, -0.866025, 0.5, 0, -0.482963, -0.836516, -0.258819, -8.99884, 162.494, 329.012)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, -7.19671e-09, -3.72529e-08, 0, 1, -336.199, 57.8882, 51.2434)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, -7.19671e-09, -3.72529e-08, 0, 1, -237.71, -70.7578, -218.829)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, -7.19671e-09, -3.72529e-08, 0, 1, 70.6624, -70.7578, -333.387)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.0823735, 0.996511, 0.0134718, -0.995644, -0.0828792, 0.0427098, 0.0436773, -0.00989495, 0.998997, 330.907, -70.7579, -24.195)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.0823735, 0.996511, 0.0134718, -0.995644, -0.0828792, 0.0427098, 0.0436773, -0.00989495, 0.998997, 177.889, -70.7579, 293.161)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.0823735, 0.996511, 0.0134718, -0.995644, -0.0828792, 0.0427098, 0.0436773, -0.00989495, 0.998997, -207.293, -170.646, 208.002)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.0823735, 0.996511, 0.0134718, -0.995644, -0.0828792, 0.0427098, 0.0436773, -0.00989495, 0.998997, -93.5943, 242.109, -243.459)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")
+
+[node name="CSGCylinder3D11" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-0.0823735, 0.996511, 0.0134718, -0.995644, -0.0828792, 0.0427098, 0.0436773, -0.00989495, 0.998997, 223.624, 30.6201, -271.779)
+use_collision = true
+collision_layer = 17
+collision_mask = 17
+radius = 31.4976
+height = 24.4354
+material = SubResource("StandardMaterial3D_idnws")

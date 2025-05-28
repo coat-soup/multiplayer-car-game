@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccqbvtqs600cl"]
+[gd_scene load_steps=9 format=3 uid="uid://ccqbvtqs600cl"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://bpt5llfs30ml2" path="res://world/props/scenes/steering_wheel.tscn" id="3_lxb4i"]
 [ext_resource type="Script" path="res://system/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://system/interactable.gd" id="5_fc0ek"]
-[ext_resource type="Script" path="res://ship/ship_movement.gd" id="5_hfqvi"]
+[ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
 render_priority = 0
@@ -31,41 +31,28 @@ shader_parameter/use_inside_uv = false
 shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
-size = Vector3(20, 2, 30)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_30ssg"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
-[node name="Ship" type="CharacterBody3D"]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
+movement_manager = NodePath("MovementManager")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("ShaderMaterial_51rqv")
+use_collision = true
 size = Vector3(20, 2, 30)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_kpdi5")
 
 [node name="Helm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13)
 
 [node name="steering_wheel" parent="Helm" instance=ExtResource("3_lxb4i")]
 
-[node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
+[node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.47777)
 script = ExtResource("4_ygd72")
 camera = NodePath("../../CameraPivot/Camera3D")
 interactable = NodePath("../Interactable")
-synchronizer = NodePath("../../MultiplayerSynchronizer")
 
 [node name="Interactable" type="StaticBody3D" parent="Helm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03949, 0.346772, -0.987443)
@@ -77,18 +64,16 @@ prompt_text = "Steer Ship"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Helm/Interactable"]
 shape = SubResource("BoxShape3D_fbly5")
 
-[node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship", "controllable", "camera_pivot")]
+[node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager", "controllable", "camera_pivot")]
 script = ExtResource("5_hfqvi")
-ship = NodePath("..")
+ship_manager = NodePath("..")
 controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_30ssg")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, 0, 16.7006, -41.3735)
+current = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]

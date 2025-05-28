@@ -111,7 +111,7 @@ func update_engine_stats():
 		engine_power += e.get_power()
 		top_speed += e.get_speed()
 	top_speed /= n
-	engine_power *= (2 * n) / (n + 1) # 1 engine = 100% power, 2 engines = 133% power, 3 engines = 150%, 4 engines = 160%, etc
+	engine_power *= (2.0 * n) / (n + 1.0) # 1 engine = 100% power, 2 engines = 133% power, 3 engines = 150%, 4 engines = 160%, etc
 
 
 func _physics_process(delta: float) -> void:

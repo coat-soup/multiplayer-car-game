@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://blh5vmbo3xtwo"]
+[gd_scene load_steps=11 format=3 uid="uid://blh5vmbo3xtwo"]
 
 [ext_resource type="Script" path="res://system/game_manager.gd" id="1_fir5i"]
 [ext_resource type="Script" path="res://system/network_manager.gd" id="2_4wxfc"]
 [ext_resource type="PackedScene" uid="uid://ccqbvtqs600cl" path="res://ship/ship.tscn" id="3_1oyru"]
-[ext_resource type="PackedScene" uid="uid://i0yyb6e6t373" path="res://ship/ship_movement_clone.tscn" id="4_cl32f"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_diix6"]
 [ext_resource type="PackedScene" uid="uid://nma732l6b6uk" path="res://system/trajectory_visualiser.tscn" id="6_jj5qf"]
 [ext_resource type="PackedScene" uid="uid://dcc3ntnqh7ln7" path="res://world/planets/planet.tscn" id="6_p460g"]
@@ -29,18 +28,10 @@ script = ExtResource("1_fir5i")
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship") groups=["network manager"]]
 script = ExtResource("2_4wxfc")
 spawn_position = Vector3(0, 0, 5)
-ship = NodePath("../ShipHolder/Ship")
+ship = NodePath("../Ship")
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
-
-[node name="ShipHolder" type="Node3D" parent="."]
-
-[node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("3_1oyru")]
-root = NodePath("..")
-movement_clone = NodePath("../ShipMovementClone")
-
-[node name="ShipMovementClone" parent="ShipHolder" instance=ExtResource("4_cl32f")]
 
 [node name="World" type="Node3D" parent="."]
 
@@ -51,6 +42,8 @@ environment = SubResource("Environment_recut")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
+[node name="Ship" parent="." instance=ExtResource("3_1oyru")]
+
 [node name="Entities" type="Node3D" parent="."]
 
 [node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("4_diix6")]
@@ -58,10 +51,10 @@ network_manager = NodePath("../NetworkManager")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
-spawn_path = NodePath("../ShipHolder/Ship")
+spawn_path = NodePath("..")
 
 [node name="TrajectoryVisualiser" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("6_jj5qf")]
-ship = NodePath("../ShipHolder/Ship")
+ship = NodePath("../Ship")
 spacing = 0.3
 n_markers = 300
 
