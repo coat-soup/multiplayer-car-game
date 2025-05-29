@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccqbvtqs600cl"]
+[gd_scene load_steps=18 format=3 uid="uid://ccqbvtqs600cl"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
@@ -52,9 +53,14 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
+main_target_component = NodePath("MainTargetComponent")
+
+[node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
+script = ExtResource("2_i8s7e")
+ship = NodePath("..")
 
 [node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)

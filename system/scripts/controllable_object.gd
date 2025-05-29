@@ -11,6 +11,7 @@ signal control_ended
 @export var synchronizer : MultiplayerSynchronizer
 
 var using_player : Player = null
+var ai_override := false
 
 var ui : UIManager
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blh5vmbo3xtwo"]
+[gd_scene load_steps=14 format=3 uid="uid://blh5vmbo3xtwo"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_fir5i"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_4wxfc"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_diix6"]
 [ext_resource type="Shader" path="res://vfx/space_sky.gdshader" id="5_vb6jv"]
 [ext_resource type="PackedScene" uid="uid://b6icnbs8qfg2f" path="res://enemies/station_mockup.tscn" id="7_jqffu"]
+[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon/massive_cannon.tscn" id="8_3iykb"]
+[ext_resource type="Script" path="res://enemies/ai_cannon_controller.gd" id="9_snq25"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
 shader = ExtResource("5_vb6jv")
@@ -78,3 +80,10 @@ transform = Transform3D(0.875266, -0.10166, -0.472838, -0.238089, 0.760421, -0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_kbb1s")
+
+[node name="massive_cannon" parent="." instance=ExtResource("8_3iykb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2326, 1.21448, 4.97448)
+
+[node name="AICannonController" type="Node" parent="massive_cannon" node_paths=PackedStringArray("cannon_controller")]
+script = ExtResource("9_snq25")
+cannon_controller = NodePath("..")

@@ -46,6 +46,8 @@ full_auto = true
 barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
 crosshair = NodePath("Yaw/Pitch/Crosshair")
 fire_rate = 3.0
+p_min = -90
+p_max = 90
 do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]

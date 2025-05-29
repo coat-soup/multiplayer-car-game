@@ -1,4 +1,5 @@
 extends Node3D
+class_name CannonController
 
 @onready var yaw_obj: Node3D = $Yaw
 @onready var pitch_obj: Node3D = $Yaw/Pitch
@@ -28,6 +29,7 @@ var ui : UIManager
 @onready var firing_audio: AudioStreamPlayer3D = $Yaw/Pitch/BarrelEnd/FiringAudio
 @export var module : VehicleModule
 @export var ship : ShipManager
+var found_bullet_speed : float = 100
 
 
 func _ready() -> void:
@@ -63,12 +65,31 @@ func _unhandled_input(event: InputEvent) -> void:
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 
 
+func ai_camera_input(dir : Vector2):
+	camera.rotation.y += (-dir.x * sensetivity)
+	camera.rotation.x += (-dir.y * sensetivity)
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+
+
+func ai_camera_lookat(global_pos : Vector3):
+	camera.look_at(global_pos)
+
+
+func ai_try_fire() -> bool:
+	if fire_timer <= 0:
+		fire_cannon.rpc()
+		return true
+	else: return false
+
+
 func _process(delta: float) -> void:
 	if fire_timer > 0:
 		fire_timer -= delta
 	
-	if not control_manager.using_player: return
-	if not control_manager.is_multiplayer_authority(): return
+	if not (control_manager.using_player or control_manager.ai_override): return
+	if not control_manager.is_multiplayer_authority():
+		print("control not auth")
+		return
 	
 	if full_auto and Input.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
@@ -97,6 +118,7 @@ func fire_cannon():
 	shell_obj.global_position = barrel_end.global_position
 	shell_obj.global_rotation = barrel_end.global_rotation
 	shell_obj.ui = ui
+	found_bullet_speed = shell_obj.speed
 	shell_obj._ready()
 	
 	if control_manager.is_multiplayer_authority():

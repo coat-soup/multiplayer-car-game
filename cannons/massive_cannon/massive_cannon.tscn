@@ -48,6 +48,8 @@ shell = ExtResource("3_fqi0e")
 control_manager = NodePath("Yaw/Controllable")
 barrel_end = NodePath("Yaw/Pitch/BarrelEnd")
 crosshair = NodePath("Yaw/Pitch/Crosshair")
+p_min = -90
+p_max = 90
 do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]

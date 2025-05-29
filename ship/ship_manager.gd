@@ -4,7 +4,7 @@ class_name ShipManager
 @export var root : Node
 @export var movement_clone : CharacterBody3D
 @export var movement_manager : ShipMovementManager
-
+@export var main_target_component : ShipComponent
 
 func _ready() -> void:
 	movement_clone.global_position = global_position

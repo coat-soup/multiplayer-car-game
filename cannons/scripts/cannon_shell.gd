@@ -7,7 +7,7 @@ signal impacted
 @export var radius := 0 ## 0 for direct impact, >0 for explosion
 
 @export var speed := 10.0
-@export var drop_rate := 1.0
+@export var lifetime := 10.0
 
 @export var particles : PackedScene
 
@@ -24,9 +24,11 @@ var fired_from_auth := false
 
 var ui : UIManager
 
+
 func _ready():
 	velocity = transform.basis.z * speed
-
+	await get_tree().create_timer(lifetime).timeout
+	handle_impact()
 
 func _physics_process(delta: float) -> void:	
 	if active:

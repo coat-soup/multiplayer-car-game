@@ -43,7 +43,6 @@ material = SubResource("StandardMaterial3D_0wbao")
 script = ExtResource("2_6t2uq")
 radius = 4
 speed = 400.0
-drop_rate = 10.0
 particles = ExtResource("3_8t2t6")
 
 [node name="Cube" parent="." index="0"]
