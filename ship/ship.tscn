@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
-[ext_resource type="PackedScene" uid="uid://bpt5llfs30ml2" path="res://world/props/scenes/steering_wheel.tscn" id="3_lxb4i"]
+[ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
@@ -35,6 +35,7 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
+size = Vector3(1, 1.89404, 0.78833)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tds0y"]
 properties/0/path = NodePath("MovementManager:velocity_sync")
@@ -60,7 +61,9 @@ size = Vector3(20, 2, 30)
 [node name="Helm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13)
 
-[node name="steering_wheel" parent="Helm" instance=ExtResource("3_lxb4i")]
+[node name="HelmModel" parent="Helm" node_paths=PackedStringArray("controller") instance=ExtResource("3_28ont")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.945758, 0)
+controller = NodePath("../../MovementManager")
 
 [node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.47777)
@@ -69,13 +72,14 @@ camera = NodePath("../../CameraPivot/Camera3D")
 interactable = NodePath("../Interactable")
 
 [node name="Interactable" type="StaticBody3D" parent="Helm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03949, 0.346772, -0.987443)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.347, -0.987)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("5_fc0ek")
 prompt_text = "Steer Ship"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Helm/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27374e-13, -0.447021, -0.843628)
 shape = SubResource("BoxShape3D_fbly5")
 
 [node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager", "controllable", "camera_pivot")]
@@ -85,7 +89,7 @@ controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
 
 [node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0609, 1.85816, 10.8629)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8497, 11.3441)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
@@ -98,7 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.470349, 6.08205)
 main_ship = NodePath("..")
 
 [node name="Holotable2" parent="." node_paths=PackedStringArray("main_ship") instance=ExtResource("7_uxitm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0960926, 0.92714, 12.5587)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72708, 0.373095, 13.6899)
 main_ship = NodePath("..")
 
 [node name="RadarSignature" parent="." instance=ExtResource("8_neyn7")]

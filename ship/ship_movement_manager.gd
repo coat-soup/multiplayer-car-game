@@ -29,6 +29,10 @@ var turn_speed := 0.2
 var roll_speed := 0.2
 var rotation_accel := 1.0
 
+@export var maneouvre_mode := false
+var freelook := false
+var camera_recenter_speed := 5.0
+
 
 func _ready() -> void:
 	for i in get_tree().get_nodes_in_group("planet"):
@@ -37,20 +41,27 @@ func _ready() -> void:
 	controllable.control_ended.connect(on_uncontrolled)
 
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("freelook"):
+		freelook = true
+	elif Input.is_action_just_released("freelook"):
+		freelook = false
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not controllable or not controllable.using_player: return
 	if not controllable.is_multiplayer_authority(): return
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		virtual_joystick_value += Vector2(event.relative.x, event.relative.y) * camera_sensetivity
-		virtual_joystick_value = virtual_joystick_value.limit_length(1)
-		ui.update_virtual_joystick(virtual_joystick_value)
-		
-		return
-		camera_pivot.rotate_y(-event.relative.x * camera_sensetivity)
-		camera_pivot.rotation.x += (event.relative.y * camera_sensetivity)
-		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-30), deg_to_rad(60))
-		camera_pivot.rotation.z = 0
+		if freelook:
+			camera_pivot.rotate_y(-event.relative.x * camera_sensetivity)
+			camera_pivot.rotation.x += (event.relative.y * camera_sensetivity)
+			camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			camera_pivot.rotation.z = 0
+		else:
+			virtual_joystick_value += Vector2(event.relative.x, event.relative.y) * camera_sensetivity
+			virtual_joystick_value = virtual_joystick_value.limit_length(1)
+			ui.update_virtual_joystick(virtual_joystick_value)
 
 
 func _process(delta: float) -> void:
@@ -68,25 +79,38 @@ func _process(delta: float) -> void:
 	if v_input.length() < max_speed:
 		ship.velocity = v_input
 	
+	var main_planet := planets[0]
+	var max_grav := 0.0
 	for planet in planets:
-		ship.velocity += Util.get_gravitational_acceleration(ship.global_position, planet) * delta
-		rotate_ship_in_orbit(delta, planet)
+		var grav_force = Util.get_gravitational_acceleration(ship.global_position, planet) * delta
+		ship.velocity += grav_force
+		if grav_force.length() > max_grav:
+			main_planet = planet
+			max_grav = grav_force.length()
+	rotate_ship_in_orbit(delta, main_planet)
 	
 	
 	if not controllable.is_multiplayer_authority(): return
 	
 	var joystick : Vector2 = virtual_joystick_value if virtual_joystick_value.length() > 0.1 else Vector2.ZERO
-	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("roll_right", "roll_left") * int(controllable.using_player != null)), rotation_accel * delta)
+	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("right", "left") * int(controllable.using_player != null)), rotation_accel * delta)
 	
 	ship.rotate_object_local(Vector3.UP, -rotation_input.x * turn_speed * delta)
-	ship.rotate_object_local(Vector3.RIGHT, rotation_input.y * turn_speed * delta)
+	ship.rotate_object_local(Vector3.RIGHT, -rotation_input.y * turn_speed * delta)
 	ship.rotate_object_local(Vector3.FORWARD, rotation_input.z * roll_speed * delta)
 	
 	ship.move_and_slide()
 	
 	if not controllable.is_multiplayer_authority(): return
 	if not controllable or not controllable.using_player: return
-	directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
+	
+	if maneouvre_mode:
+		directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
+	else:
+		directional_input = Vector3(0,0, Input.get_axis("down", "up"))
+	
+	if not freelook:
+		camera_pivot.rotation = camera_pivot.rotation.lerp(Vector3.ZERO, delta * camera_recenter_speed)
 
 
 func rotate_ship_in_orbit(delta: float, planet : Planet):
@@ -107,6 +131,7 @@ func on_controlled():
 	velocity_synchroniser.set_multiplayer_authority(str(controllable.using_player.name).to_int(), false)
 
 	if controllable.is_multiplayer_authority():
+		return
 		ui.toggle_virtual_joystick(true)
 
 	
