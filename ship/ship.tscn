@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccqbvtqs600cl"]
+[gd_scene load_steps=17 format=3 uid="uid://ccqbvtqs600cl"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
+[ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
+[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon/massive_cannon.tscn" id="6_ipu57"]
 [ext_resource type="PackedScene" uid="uid://bodxwf6u75vxl" path="res://ship/systems/radar/holotable.tscn" id="7_uxitm"]
+[ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="7_y4m28"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="8_neyn7"]
 [ext_resource type="Material" uid="uid://x223y683bm5w" path="res://ship/systems/radar/marker_materials/radar_marker_friendly.tres" id="9_t5bjm"]
+[ext_resource type="PackedScene" uid="uid://cafdmu62a50mc" path="res://world/props/scenes/wall_light.tscn" id="13_2eybb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
 render_priority = 0
@@ -51,6 +55,9 @@ properties/2/replication_mode = 1
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
+
+[node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -110,5 +117,28 @@ transform = Transform3D(37.9823, 0, 0, 0, 30.6432, 0, 0, 0, 81.6803, 0, 0, 0)
 visible = false
 marker_mat = ExtResource("9_t5bjm")
 
+[node name="massive_cannon" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("6_ipu57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62378, 0, 10.1275)
+ship = NodePath("..")
+
+[node name="autocannon" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("7_y4m28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58804, 0, -1.97827)
+ship = NodePath("..")
+
 [node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tds0y")
+
+[node name="wall_light" parent="." instance=ExtResource("13_2eybb")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -6.87613, 5, -0.174829)
+
+[node name="wall_light2" parent="." instance=ExtResource("13_2eybb")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.03901, 5, 8.45885)
+
+[node name="wall_light3" parent="." instance=ExtResource("13_2eybb")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 5.97936, 5, 6.86543)
+
+[node name="wall_light4" parent="." instance=ExtResource("13_2eybb")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 7.03136, 5, -1.80696)
+
+[node name="wall_light5" parent="." instance=ExtResource("13_2eybb")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.80825, 5, -10.3002)

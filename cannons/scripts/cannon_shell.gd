@@ -20,6 +20,9 @@ var hit_obj : Node3D
 
 var active = true
 
+var fired_from_auth := false
+
+var ui : UIManager
 
 func _ready():
 	velocity = transform.basis.z * speed
@@ -41,8 +44,8 @@ func _physics_process(delta: float) -> void:
 			handle_impact()#.rpc()
 	
 	global_position += velocity * delta
-	velocity.y -= drop_rate * delta
-	look_at(global_position - velocity)
+	#velocity.y -= drop_rate * delta
+	#look_at(global_position - velocity)
 
 
 @rpc("any_peer", "call_local")
@@ -56,12 +59,13 @@ func handle_impact():
 	if is_multiplayer_authority():
 		impacted.emit()
 		if radius > 0:
-			Util.explode_at_point(global_position, damage, radius, particles, get_tree().get_root())
+			Util.explode_at_point(global_position, damage, radius, particles, get_tree().get_root(), ui)
 		elif hit_obj != null:
 			Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 			var health = hit_obj.get_node_or_null("Health") as Health
 			if health:
 				health.take_damage.rpc(damage, "")
+				ui.flash_hitmarker()
 	else:
 		Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 	

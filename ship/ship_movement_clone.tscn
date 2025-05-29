@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://i0yyb6e6t373"]
+[gd_scene load_steps=5 format=3 uid="uid://i0yyb6e6t373"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_tp68i"]
 
@@ -29,9 +29,6 @@ shader_parameter/albedo_alpha = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
 size = Vector3(20, 2, 30)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vs4jr"]
-albedo_color = Color(0.531384, 7.46027e-06, 0.364513, 1)
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6r31v"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -55,11 +52,6 @@ size = Vector3(20, 2, 30)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_kpdi5")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.46214, 6.86526, -0.828568)
-size = Vector3(4.82789, 1, 7.73389)
-material = SubResource("StandardMaterial3D_vs4jr")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_6r31v")

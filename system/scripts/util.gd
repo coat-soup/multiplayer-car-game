@@ -24,7 +24,7 @@ static func get_player_from_id(id: String, source : Node) -> Node3D:
 	return null
 
 
-static func explode_at_point(position: Vector3, damage: float, radius: float, particles: PackedScene, parent: Node):
+static func explode_at_point(position: Vector3, damage: float, radius: float, particles: PackedScene, parent: Node, ui : UIManager):
 	var space_state = parent.get_world_3d().direct_space_state
 
 	var collision_shape = PhysicsShapeQueryParameters3D.new()
@@ -44,6 +44,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			var health = collider.get_node_or_null("Health") as Health
 			if health:
 				health.take_damage.rpc(damage, "")
+				ui.flash_hitmarker()
 		damaged.append(collider)
 		
 		var player = collider as Player

@@ -17,7 +17,6 @@ extends Node3D
 @export var fire_rate := 1.2
 var fire_timer := 0.0
 
-@export_group("Pitch")
 @export_range(-360, 360) var p_min := -30
 @export_range(-360, 360) var p_max := 40
 
@@ -28,6 +27,7 @@ var ui : UIManager
 
 @onready var firing_audio: AudioStreamPlayer3D = $Yaw/Pitch/BarrelEnd/FiringAudio
 @export var module : VehicleModule
+@export var ship : ShipManager
 
 
 func _ready() -> void:
@@ -47,9 +47,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not control_manager.using_player: return
-	if not control_manager.is_multiplayer_authority():
-		print("control not auth")
-		return
+	if not control_manager.is_multiplayer_authority(): return
 	
 	if !full_auto and event.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
@@ -60,8 +58,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			virtual_joystick_value = virtual_joystick_value.limit_length(1)
 			ui.update_virtual_joystick(virtual_joystick_value)
 		else:
-			camera.global_rotation.y += (-event.relative.x * sensetivity)
-			camera.global_rotation.x += (-event.relative.y * sensetivity)
+			camera.rotation.y += (-event.relative.x * sensetivity)
+			camera.rotation.x += (-event.relative.y * sensetivity)
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
 
 
@@ -94,11 +92,18 @@ func fire_cannon():
 	
 	firing_audio.play()
 	
-	var shell_obj = shell.instantiate()
+	var shell_obj = shell.instantiate() as CannonShell
 	get_tree().get_root().add_child(shell_obj)
 	shell_obj.global_position = barrel_end.global_position
 	shell_obj.global_rotation = barrel_end.global_rotation
+	shell_obj.ui = ui
 	shell_obj._ready()
+	
+	if control_manager.is_multiplayer_authority():
+		shell_obj.fired_from_auth = true
+	
+	if ship:
+		shell_obj.velocity += ship.movement_manager.velocity_sync
 
 
 func on_controlled():

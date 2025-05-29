@@ -21,4 +21,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4topv")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 light_color = Color(0.839737, 0.766113, 7.70092e-07, 1)
 light_energy = 5.114
-spot_angle = 72.43
+spot_range = 20.0
+spot_angle = 58.3632

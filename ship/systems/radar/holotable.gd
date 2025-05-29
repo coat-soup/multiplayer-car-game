@@ -31,6 +31,8 @@ func _ready() -> void:
 
 func update_markers():
 	for i in range(len(markers)):
+		if not is_instance_valid(signatures[i]):
+			continue
 		markers[i].position = (signatures[i].global_position - center_point) * map_scale
 		markers[i].basis = signatures[i].global_basis
 		markers[i].scale = signatures[i].scale * signatures[i].get_parent_node_3d().scale * map_scale

@@ -15,6 +15,8 @@ class_name UIManager
 
 @onready var virtual_joystick: Control = $HUD/VirtualJoystick
 
+@onready var hitmarker: TextureRect = $HUD/CrosshairHolder/Hitmarker
+
 var chats : Array[String] = []
 
 @export var network_manager : NetworkManager
@@ -78,5 +80,13 @@ func update_health_bar(value: float):
 func update_ammo_counter(ammo : int, max_ammo : int):
 	ammo_counter.text = str(ammo) + "|" + str(max_ammo)
 
+
 func hide_ammo_counter():
 	ammo_counter.text = ""
+
+
+func flash_hitmarker():
+	display_chat_message("Hit")
+	hitmarker.visible = true
+	await get_tree().create_timer(0.1).timeout
+	hitmarker.visible = false

@@ -9,7 +9,7 @@ var camera_sensetivity := 0.005
 @export var camera_pivot : Node3D
 
 @export var acceleration := 10.0
-@export var max_speed := 200.0
+@export var max_speed := 20.0
 
 @export var mass := 400.0
 
@@ -64,22 +64,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			ui.update_virtual_joystick(virtual_joystick_value)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if controllable.is_multiplayer_authority():
-		print("SETTING VEL")
 		velocity_sync = ship.velocity
-		ui.display_chat_message("Setting velocity " + str(velocity_sync))
 	else:
 		ship.velocity = velocity_sync
-		ui.display_chat_message("Receiving synced velocity " + str(ship.velocity))
 	
 	var directional_input_relative = (ship.global_basis * directional_input).normalized()
 	veldebug.global_position = ship.global_position + directional_input_relative * 10
 	var v_input = ship.velocity + acceleration * directional_input_relative * delta
 	if v_input.length() < max_speed:
 		ship.velocity = v_input
+	else:
+		var orthogonal = directional_input_relative - ship.velocity.normalized() * directional_input_relative.dot(ship.velocity.normalized())
+		ship.velocity = ship.velocity + acceleration * orthogonal.normalized() * delta
 	
-	var main_planet := planets[0]
+	var main_planet := planets[0] if len(planets) > 0 else null
 	var max_grav := 0.0
 	for planet in planets:
 		var grav_force = Util.get_gravitational_acceleration(ship.global_position, planet) * delta
@@ -87,7 +87,8 @@ func _process(delta: float) -> void:
 		if grav_force.length() > max_grav:
 			main_planet = planet
 			max_grav = grav_force.length()
-	rotate_ship_in_orbit(delta, main_planet)
+	if main_planet:
+		rotate_ship_in_orbit(delta, main_planet)
 	
 	
 	if not controllable.is_multiplayer_authority(): return

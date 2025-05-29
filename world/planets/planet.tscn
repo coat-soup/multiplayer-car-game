@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcc3ntnqh7ln7"]
+[gd_scene load_steps=6 format=3 uid="uid://dcc3ntnqh7ln7"]
 
 [ext_resource type="Script" path="res://system/scripts/planet.gd" id="1_ofno8"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_0wn14"]
 [ext_resource type="Material" uid="uid://gihwiqdg76f2" path="res://ship/systems/radar/marker_materials/radar_marker_planet.tres" id="3_8568g"]
+[ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="4_v7nh6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idnws"]
 albedo_color = Color(0.559272, 0.35875, 0.214298, 1)
@@ -120,3 +121,23 @@ collision_mask = 17
 radius = 31.4976
 height = 24.4354
 material = SubResource("StandardMaterial3D_idnws")
+
+[node name="EnemyGroundAsset" parent="." instance=ExtResource("4_v7nh6")]
+
+[node name="EnemyGroundAsset2" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4987, 363.218, 7.05197)
+
+[node name="EnemyGroundAsset3" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4265, 221.853, -250.785)
+
+[node name="EnemyGroundAsset4" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -189.638, 100.553, -258.368)
+
+[node name="EnemyGroundAsset5" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -279.304, 196.11, -35.0684)
+
+[node name="EnemyGroundAsset6" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -274.546, -205.011, 19.6065)
+
+[node name="EnemyGroundAsset7" parent="." instance=ExtResource("4_v7nh6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156799, -235.473, 249.295)
