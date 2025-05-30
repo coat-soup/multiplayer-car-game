@@ -27,7 +27,7 @@ var virtual_joystick_value = Vector2.ZERO
 var ui : UIManager
 
 @onready var firing_audio: AudioStreamPlayer3D = $Yaw/Pitch/BarrelEnd/FiringAudio
-@export var module : VehicleModule
+@export var ship_component : ShipComponent
 @export var ship : ShipManager
 var found_bullet_speed : float = 100
 
@@ -35,11 +35,11 @@ var found_bullet_speed : float = 100
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	
-	if not module:
-		module = get_parent() as VehicleModule
-	if module:
-		module.broken.connect(on_broken)
-		module.fixed.connect(on_fixed)
+	if not ship_component:
+		ship_component = get_parent() as ShipComponent
+	if ship_component:
+		ship_component.broken.connect(on_broken)
+		ship_component.fixed.connect(on_fixed)
 	
 	control_manager.control_started.connect(on_controlled)
 	control_manager.control_ended.connect(on_uncontrolled)
@@ -133,7 +133,8 @@ func on_controlled():
 		ui.toggle_virtual_joystick(true)
 	if control_manager.is_multiplayer_authority():
 		crosshair.visible = true
-	
+
+
 func on_uncontrolled():
 	crosshair.visible = false
 	if control_manager.is_multiplayer_authority():

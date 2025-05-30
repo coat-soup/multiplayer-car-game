@@ -12,6 +12,7 @@ signal triggered
 var equipped := false
 var held_by_auth := false
 var held_player : Player = null
+var prev_parent : Node3D = null
 
 @export var interact_holdable := true
 
@@ -32,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("primary_fire"):
 			button = 0
 		if event.is_action_pressed("secondary_fire"):
-			button = 0
+			button = 1
 		elif event.is_action_pressed("reload"):
 			button = 3
 		
@@ -59,17 +60,19 @@ func set_parent_to_scene_path(path : String, zero_transform := false):
 
 func raycast_position():
 	var space_state = get_world_3d().direct_space_state
-
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position - Vector3.UP * 100, Util.layer_mask([1,6]))
+	
+	if not prev_parent: prev_parent = self
+	
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position - prev_parent.global_basis.y * 100, Util.layer_mask([1,6]))
 	#query.exclude = [self]
 
 	var result := space_state.intersect_ray(query)
 	
 	if result:
-		global_position = result.position + Vector3.UP * ground_offset
+		global_position = result.position + prev_parent.global_basis.y * ground_offset
 		if result.normal.dot(global_basis.z) > 0.001:
 			look_at(position + result.normal, global_basis.z)
-		self.reparent.call_deferred(result.collider as Node)
+		self.reparent.call_deferred(result.collider as Node3D)
 
 
 func on_held():

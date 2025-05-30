@@ -26,15 +26,15 @@ static func get_player_from_id(id: String, source : Node) -> Node3D:
 
 static func explode_at_point(position: Vector3, damage: float, radius: float, particles: PackedScene, parent: Node, ui : UIManager):
 	var space_state = parent.get_world_3d().direct_space_state
-
+	
 	var collision_shape = PhysicsShapeQueryParameters3D.new()
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = radius
 	collision_shape.transform.origin = position
 	collision_shape.collision_mask = layer_mask([1,2,4,5,6])
-
+	
 	var results = space_state.intersect_shape(collision_shape)
-
+	
 	var damaged : Array[Node3D] = []
 	
 	for result in results:

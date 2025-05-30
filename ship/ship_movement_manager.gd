@@ -42,9 +42,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("freelook"):
+	if event.is_action_pressed("freelook"):
 		freelook = true
-	elif Input.is_action_just_released("freelook"):
+	elif event.is_action_released("freelook"):
 		freelook = false
 
 
@@ -132,8 +132,8 @@ func on_controlled():
 	velocity_synchroniser.set_multiplayer_authority(str(controllable.using_player.name).to_int(), false)
 
 	if controllable.is_multiplayer_authority():
-		return
-		ui.toggle_virtual_joystick(true)
+		pass
+		#ui.toggle_virtual_joystick(true)
 
 	
 func on_uncontrolled():

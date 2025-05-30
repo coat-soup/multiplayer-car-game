@@ -48,6 +48,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 		
 		equipment.reparent(self)
 		equipment.held_player = player
+		equipment.prev_parent = player # for transform
 		equipment.position = Vector3.ZERO
 		equipment.rotation = Vector3.ZERO
 		
