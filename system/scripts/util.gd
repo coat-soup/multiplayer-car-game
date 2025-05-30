@@ -73,3 +73,8 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 	var direction = planet.position - pos
 	var force = G * planet.mass / (direction.length() ** 2)
 	return direction.normalized() * force
+
+
+static func random_point_in_sphere(radius : float) -> Vector3:
+	return (Vector3.UP * randf_range(0, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
+	

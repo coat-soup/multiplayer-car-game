@@ -1,0 +1,95 @@
+[gd_scene load_steps=16 format=3 uid="uid://dgokpns7ftbi"]
+
+[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
+[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
+[ext_resource type="Script" path="res://missions/mission_manager.gd" id="3_eba62"]
+[ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="3_rvx0j"]
+[ext_resource type="Script" path="res://missions/mission_objective.gd" id="4_1yqln"]
+[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="4_vmead"]
+[ext_resource type="Script" path="res://missions/search_and_destroy_mission.gd" id="5_8a36v"]
+[ext_resource type="Shader" path="res://vfx/space_sky.gdshader" id="5_grtg3"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="6_nkvd6"]
+[ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="6_q13v8"]
+
+[sub_resource type="Resource" id="Resource_al2gk"]
+script = ExtResource("5_8a36v")
+target_component = ExtResource("6_q13v8")
+num_to_spawn = 3
+spread = 10.0
+title = "Search and Destroy"
+reward = 2000
+difficulty = 1
+objectives = Array[ExtResource("4_1yqln")]([])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
+shader = ExtResource("5_grtg3")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(1, 0.949229, 0.874823, 1)
+shader_parameter/star_hue_offset = 0.23
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_y2rht"]
+sky_material = SubResource("ShaderMaterial_hv1i0")
+
+[sub_resource type="Environment" id="Environment_recut"]
+background_mode = 2
+sky = SubResource("Sky_y2rht")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kbb1s"]
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_kqwcw")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship") groups=["network manager"]]
+script = ExtResource("2_8udqw")
+spawn_position = Vector3(0, 0, 5)
+ship = NodePath("../ShipHolder/Ship")
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
+
+[node name="MissionManager" type="Node" parent="." node_paths=PackedStringArray("ship")]
+script = ExtResource("3_eba62")
+ship = NodePath("../ShipHolder/Ship")
+current_mission = SubResource("Resource_al2gk")
+
+[node name="ShipHolder" type="Node3D" parent="."]
+
+[node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("3_rvx0j")]
+root = NodePath("..")
+movement_clone = NodePath("../ShipMovementClone")
+
+[node name="ShipMovementClone" parent="ShipHolder" instance=ExtResource("4_vmead")]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_recut")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("6_nkvd6")]
+network_manager = NodePath("../NetworkManager")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("../ShipHolder/Ship")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(0.875266, -0.10166, -0.472838, -0.238089, 0.760421, -0.604214, 0.420979, 0.641425, 0.641366, 0, 2.12476, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_kbb1s")

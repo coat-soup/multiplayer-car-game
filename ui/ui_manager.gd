@@ -2,13 +2,13 @@ extends Control
 
 class_name UIManager
 
-@onready var lobby_id_text_field: TextEdit = $VBoxContainer/LobbyIDTextField
+@onready var lobby_id_text_field: TextEdit = $NetworkPanel/LobbyIDTextField
 @onready var interact_text: Label = $HUD/InteractText
 @onready var chat_box: Label = $HUD/ChatBox
 
-@onready var host_steam: Button = $VBoxContainer/HostSteam
-@onready var host_local: Button = $VBoxContainer/HostLocal
-@onready var join: Button = $VBoxContainer/Join
+@onready var host_steam: Button = $NetworkPanel/HostSteam
+@onready var host_local: Button = $NetworkPanel/HostLocal
+@onready var join: Button = $NetworkPanel/Join
 @onready var health_bar: ProgressBar = $HUD/HealthBar
 
 @onready var ammo_counter: Label = $AmmoCounter
@@ -20,6 +20,9 @@ class_name UIManager
 var chats : Array[String] = []
 
 @export var network_manager : NetworkManager
+
+@onready var mission_title_label: Label = $HUD/MissionPanel/MissionTitleLabel
+@onready var mission_objectives_label: Label = $HUD/MissionPanel/MissionObjectivesLabel
 
 var prompt_time_remaining := 0.0
 
@@ -38,7 +41,7 @@ func _process(delta: float) -> void:
 
 
 func toggle_network_menu(value : bool):
-	$VBoxContainer.visible = value
+	$NetworkPanel.visible = value
 
 
 func get_lobby_id() -> String:
@@ -93,3 +96,14 @@ func flash_hitmarker():
 	hitmarker.visible = true
 	await get_tree().create_timer(0.1).timeout
 	hitmarker.visible = false
+
+
+func display_mission(mission : Mission):
+	mission_title_label.text = mission.title
+	mission_objectives_label.text = ""
+	for objective in mission.objectives:
+		mission_objectives_label.text += objective.description_text + "\n"
+	display_chat_message("New mission: " + str(mission.title))
+
+func display_mission_completed(mission : Mission):
+	mission_objectives_label.text = "Completed"
