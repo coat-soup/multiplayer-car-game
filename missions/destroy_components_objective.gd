@@ -4,7 +4,7 @@ class_name DestroyComponentsObjective
 var components_to_destroy : Array[ShipComponent]
 
 
-func setup(mission : Mission):
+func setup(_mission : Mission):
 	for component in components_to_destroy:
 		component.broken.connect(check_completed)
 

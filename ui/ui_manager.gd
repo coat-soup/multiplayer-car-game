@@ -106,5 +106,5 @@ func display_mission(mission : Mission):
 	display_chat_message("New mission: " + str(mission.title))
 
 
-func display_mission_completed(mission : Mission):
+func display_mission_completed(_mission : Mission):
 	mission_objectives_label.text = "Completed"

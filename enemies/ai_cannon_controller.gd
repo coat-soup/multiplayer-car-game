@@ -2,12 +2,13 @@ extends Node
 class_name AICannonController
 
 @export var cannon_controller : CannonController
+@export var cannon_component : ShipComponent
 @export var target : ShipComponent
 @export var fire_angle := 5.0
 
 @export var spread := 0.1 # lateral radius per distance unit
 
-@export var sight_range := 50.0
+@export var sight_range := 400.0
 
 var spread_offset := Vector3.ZERO
 
@@ -15,6 +16,11 @@ var distance_to_target := 0.0
 
 
 func _ready() -> void:
+	if not cannon_controller:
+		for child in cannon_component.get_children():
+			cannon_controller = child as CannonController
+			if cannon_controller: break
+	
 	cannon_controller.control_manager.ai_override = true
 	cannon_controller.control_manager.interactable.active = false
 	target = (get_tree().get_first_node_in_group("ship") as ShipManager).main_target_component

@@ -33,7 +33,7 @@ func take_damage(amount: float, source_id : int):
 
 
 @rpc("any_peer", "call_local")
-func heal(amount: float, source_id : int):
+func heal(amount: float, _source_id : int):
 	healed.emit()
 	
 	cur_health = min(max_health, cur_health + amount)

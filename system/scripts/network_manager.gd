@@ -17,6 +17,7 @@ const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 @export var spawn_position := Vector3.ZERO
 @export var ship : ShipManager
+@export var level_manager : LevelManager
 
 
 func _ready() -> void:
@@ -40,6 +41,8 @@ func _on_host_pressed() -> void:
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
+	level_manager.setup(multiplayer)
+	
 	$Camera3D.queue_free()
 	add_player(multiplayer.get_unique_id())
 	ui.toggle_network_menu(false)
@@ -51,6 +54,7 @@ func _on_host_local_pressed() -> void:
 	
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
+	level_manager.setup(multiplayer)
 	
 	#upnp_setup()
 	

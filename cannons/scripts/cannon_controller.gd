@@ -48,6 +48,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if control_manager.ai_override: return
 	if not control_manager.using_player: return
 	if not control_manager.is_multiplayer_authority(): return
 	
@@ -89,7 +90,7 @@ func _process(delta: float) -> void:
 	if not (control_manager.using_player or control_manager.ai_override): return
 	if not control_manager.is_multiplayer_authority(): return
 	
-	if full_auto and Input.is_action_pressed("primary_fire") and fire_timer <= 0:
+	if not control_manager.ai_override and full_auto and Input.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
 	
 	if do_joystick and virtual_joystick_value.length() > 0.1:
@@ -117,7 +118,7 @@ func fire_cannon():
 	shell_obj.global_rotation = barrel_end.global_rotation
 	shell_obj.ui = ui
 	found_bullet_speed = shell_obj.speed
-	shell_obj.source = control_manager.using_player.name.to_int()
+	shell_obj.source = control_manager.using_player.name.to_int() if not control_manager.ai_override else -1
 	shell_obj._ready()
 	
 	if control_manager.is_multiplayer_authority():

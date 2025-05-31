@@ -8,7 +8,7 @@ signal on_completed
 var completed : bool = false
 
 
-func setup(mission : Mission):
+func setup(_mission : Mission):
 	pass
 
 

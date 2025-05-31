@@ -101,11 +101,10 @@ script = ExtResource("5_hfqvi")
 ship_manager = NodePath("..")
 controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
-acceleration = 300.0
-max_speed = 300.0
+acceleration = 100.0
+max_speed = 100.0
 turn_speed = 1.0
 roll_speed = 1.0
-rotation_accel = 5.0
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8497, 11.3441)

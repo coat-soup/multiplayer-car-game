@@ -9,15 +9,15 @@
 [ext_resource type="Script" path="res://missions/search_and_destroy_mission.gd" id="5_8a36v"]
 [ext_resource type="Shader" path="res://vfx/space_sky.gdshader" id="5_grtg3"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="6_nkvd6"]
-[ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="6_q13v8"]
 [ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="7_7qkik"]
+[ext_resource type="PackedScene" uid="uid://c67a7v47cve4u" path="res://enemies/satellite_01.tscn" id="8_b06m1"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://enemies/station_mockup_2.tscn" id="8_ybjgi"]
 
 [sub_resource type="Resource" id="Resource_al2gk"]
 script = ExtResource("5_8a36v")
-target_component = ExtResource("6_q13v8")
+target_component = ExtResource("8_b06m1")
 num_to_spawn = 3
-spread = 10.0
+spread = 50.0
 title = "Search and Destroy"
 reward = 2000
 difficulty = 1
@@ -49,17 +49,19 @@ glow_enabled = true
 [node name="Root" type="Node3D"]
 script = ExtResource("1_kqwcw")
 
-[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship") groups=["network manager"]]
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager") groups=["network manager"]]
 script = ExtResource("2_8udqw")
 spawn_position = Vector3(0, 0, 5)
 ship = NodePath("../ShipHolder/Ship")
+level_manager = NodePath("../LevelManager")
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
 
-[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("mission_manager", "ship")]
+[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship")]
 script = ExtResource("7_7qkik")
 friendly_station = ExtResource("8_ybjgi")
+network_manager = NodePath("../NetworkManager")
 mission_manager = NodePath("../MissionManager")
 ship = NodePath("../ShipHolder/Ship")
 
@@ -92,7 +94,7 @@ shadow_enabled = true
 [node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("6_nkvd6")]
 network_manager = NodePath("../NetworkManager")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../ShipHolder/Ship")
 
