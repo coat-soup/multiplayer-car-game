@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2s5an1qhg1si"]
+
+[ext_resource type="PackedScene" uid="uid://bv1p65pnew75r" path="res://enemies/station_mockup_2.glb" id="1_kninq"]
+[ext_resource type="Script" path="res://system/scripts/POI.gd" id="2_lj330"]
+[ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="2_ol42j"]
+[ext_resource type="PackedScene" uid="uid://cvsblvva5sf3y" path="res://ship/components/turrets/autocannon_component.tscn" id="3_15wrm"]
+[ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="4_p4ke1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ga5r"]
+size = Vector3(130, 30, 157.39)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vgrqn"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="station_mockup_2" node_paths=PackedStringArray("docking_area") instance=ExtResource("1_kninq")]
+script = ExtResource("2_lj330")
+POI_name = "Friendly Station"
+docking_area = NodePath("Area3D")
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="EnemyGroundAsset" parent="." index="1" instance=ExtResource("2_ol42j")]
+transform = Transform3D(1.96165, 0, 0, 0, 3.98903, 0, 0, 0, 1.96165, 0, 215.127, 0)
+
+[node name="EnemyGroundAsset4" parent="." index="2" instance=ExtResource("2_ol42j")]
+transform = Transform3D(6.70854, 0, 0, 0, 3.24796, 0, 0, 0, 6.70854, 0, -339.347, 0)
+
+[node name="EnemyGroundAsset2" parent="." index="3" instance=ExtResource("2_ol42j")]
+transform = Transform3D(3.47235, 3.73217e-09, -0.295125, -1.27882e-08, 1, 1.25397e-09, 1.07255, -1.59623e-10, 0.955459, 108.221, 1.90735e-06, -283.659)
+
+[node name="EnemyGroundAsset3" parent="." index="4" instance=ExtResource("2_ol42j")]
+transform = Transform3D(2.81949, 3.73217e-09, -0.63096, -1.01568e-08, 1, 2.47869e-09, 2.29305, -1.59623e-10, 0.775815, 177.216, 1.90735e-06, -249.312)
+
+[node name="AutocannonComponent" parent="." index="5" instance=ExtResource("3_15wrm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -101.16, 26.7814, 362.344)
+
+[node name="AutocannonComponent2" parent="." index="6" instance=ExtResource("3_15wrm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 96.8402, 26.7814, 362.344)
+
+[node name="AutocannonComponent3" parent="." index="7" instance=ExtResource("3_15wrm")]
+transform = Transform3D(1, -8.9407e-08, 8.74228e-08, -8.9407e-08, -1, -5.32907e-15, 8.74228e-08, 0, -1, 96.8402, -26.7746, 362.344)
+
+[node name="AutocannonComponent4" parent="." index="8" instance=ExtResource("3_15wrm")]
+transform = Transform3D(1, -8.9407e-08, 8.74228e-08, -8.9407e-08, -1, -5.32907e-15, 8.74228e-08, 0, -1, -101.16, -26.7746, 362.344)
+
+[node name="RailgunComponent" parent="." index="9" instance=ExtResource("4_p4ke1")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0.213495, -497.549, -0.080272)
+
+[node name="RailgunComponent2" parent="." index="10" instance=ExtResource("4_p4ke1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 77.698, -70.986)
+
+[node name="RailgunComponent3" parent="." index="11" instance=ExtResource("4_p4ke1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 77.698, 94.014)
+
+[node name="AutocannonComponent5" parent="." index="12" instance=ExtResource("3_15wrm")]
+transform = Transform3D(-2.98023e-08, 0.917401, -0.397965, -1, -4.52425e-08, -3.04089e-09, 0, 0.397965, 0.917401, 185.995, -2.44766, -228.342)
+
+[node name="AutocannonComponent6" parent="." index="13" instance=ExtResource("3_15wrm")]
+transform = Transform3D(9.81438e-08, -0.867323, -0.497746, 1, 1.3395e-07, 9.86349e-09, 6.21318e-08, -0.497746, 0.867323, 82.0758, -2.44765, -273.426)
+
+[node name="Area3D" type="Area3D" parent="." index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 286.367)
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.3052)
+shape = SubResource("BoxShape3D_0ga5r")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="15"]
+replication_config = SubResource("SceneReplicationConfig_vgrqn")

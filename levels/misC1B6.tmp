@@ -57,18 +57,17 @@ ship = NodePath("../ShipHolder/Ship")
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
 
-[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("mission_manager", "ship")]
-script = ExtResource("7_7qkik")
-friendly_station = ExtResource("8_ybjgi")
-mission_manager = NodePath("../MissionManager")
-ship = NodePath("../ShipHolder/Ship")
-
-[node name="MissionManager" type="Node" parent="." node_paths=PackedStringArray("ship", "ui", "level_manager")]
+[node name="MissionManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager")]
 script = ExtResource("3_eba62")
 ship = NodePath("../ShipHolder/Ship")
-mission_template = SubResource("Resource_al2gk")
-ui = NodePath("../UI")
+current_mission = SubResource("Resource_al2gk")
 level_manager = NodePath("../LevelManager")
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("ship")]
+script = ExtResource("7_7qkik")
+friendly_station = ExtResource("8_ybjgi")
+ship = NodePath("../ShipHolder/Ship")
+level_size = null
 
 [node name="ShipHolder" type="Node3D" parent="."]
 

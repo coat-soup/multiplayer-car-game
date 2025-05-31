@@ -59,6 +59,7 @@ shape = SubResource("CapsuleShape3D_ybx0f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
+far = 10000.0
 
 [node name="EquipmentManager" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384345, -0.558265, -0.802137)

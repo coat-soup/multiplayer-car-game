@@ -52,6 +52,7 @@ do_joystick = false
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06532, 1.76757)
+far = 10000.0
 
 [node name="Cylinder_001" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_rtjja")

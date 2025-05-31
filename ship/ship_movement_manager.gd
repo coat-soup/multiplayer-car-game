@@ -25,13 +25,13 @@ var planets : Array[Planet]
 @onready var velocity_synchroniser: MultiplayerSynchronizer = $"../VelocitySynchroniser"
 
 @export var virtual_joystick_value = Vector2.ZERO
-var turn_speed := 0.2
-var roll_speed := 0.2
-var rotation_accel := 1.0
+@export var turn_speed := 0.2
+@export var roll_speed := 0.2
+@export var rotation_accel := 1.0
 
 @export var maneouvre_mode := false
 var freelook := false
-var camera_recenter_speed := 5.0
+@export var camera_recenter_speed := 5.0
 
 
 func _ready() -> void:

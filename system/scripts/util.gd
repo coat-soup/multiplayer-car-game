@@ -43,7 +43,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			print(collider.name)
 			var health = collider.get_node_or_null("Health") as Health
 			if health:
-				health.take_damage.rpc(damage, "")
+				health.take_damage.rpc(damage, source_id)
 		damaged.append(collider)
 		
 		var player = collider as Player
@@ -74,6 +74,6 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 	return direction.normalized() * force
 
 
-static func random_point_in_sphere(radius : float) -> Vector3:
-	return (Vector3.UP * randf_range(0, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
+static func random_point_in_sphere(radius : float, min_radius : float = 0.0) -> Vector3:
+	return (Vector3.UP * randf_range(min_radius, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
 	
