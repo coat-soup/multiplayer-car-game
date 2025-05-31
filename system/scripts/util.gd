@@ -17,14 +17,14 @@ static func layer_mask(layers: Array) -> int:
 # 6 fine vehicle collision (walls, floor, cannon, etc)
 
 
-static func get_player_from_id(id: String, source : Node) -> Node3D:
+static func get_player_from_id(id: String, source : Node) -> Player:
 	for player in source.get_tree().get_nodes_in_group("player"):
 		if player.name == id:
-			return player
+			return player as Player
 	return null
 
 
-static func explode_at_point(position: Vector3, damage: float, radius: float, particles: PackedScene, parent: Node, ui : UIManager):
+static func explode_at_point(position: Vector3, damage: float, radius: float, particles: PackedScene, parent: Node, source_id : int):
 	var space_state = parent.get_world_3d().direct_space_state
 	
 	var collision_shape = PhysicsShapeQueryParameters3D.new()
@@ -44,7 +44,6 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			var health = collider.get_node_or_null("Health") as Health
 			if health:
 				health.take_damage.rpc(damage, "")
-				ui.flash_hitmarker()
 		damaged.append(collider)
 		
 		var player = collider as Player

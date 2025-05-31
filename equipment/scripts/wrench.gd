@@ -21,7 +21,7 @@ func on_triggered(button : int):
 	if health:
 		print("Trying repair on:" + health.name)
 		ui.display_prompt("Health: " + str(min(health.max_health, health.cur_health + heal_amount)))
-		health.heal.rpc(heal_amount, "")
+		health.heal.rpc(heal_amount, held_player.name.to_int())
 		
 		audio.pitch_scale = randf_range(0.9,1.1)
 		audio.play()

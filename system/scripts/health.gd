@@ -11,7 +11,7 @@ signal died
 
 
 @rpc("any_peer", "call_local")
-func take_damage(amount: float, _source : String):
+func take_damage(amount: float, source_id : int):
 	if cur_health <= 0:
 		return
 	
@@ -19,6 +19,10 @@ func take_damage(amount: float, _source : String):
 	
 	cur_health -= min(amount, cur_health)
 	took_damage.emit()
+	
+	var player : Player = Util.get_player_from_id(str(source_id), self)
+	if player and player.is_multiplayer_authority():
+		player.ui.flash_hitmarker()
 	
 	if not is_multiplayer_authority(): return
 	
@@ -29,7 +33,7 @@ func take_damage(amount: float, _source : String):
 
 
 @rpc("any_peer", "call_local")
-func heal(amount: float, _source : String):
+func heal(amount: float, source_id : int):
 	healed.emit()
 	
 	cur_health = min(max_health, cur_health + amount)

@@ -11,7 +11,7 @@ signal impacted
 
 @export var particles : PackedScene
 
-var layer_mask := [1,2,3,6]
+var layer_mask := [1,2,4,6]
 var ignore_list : Array[RID] = [self]
 
 var velocity := Vector3.ZERO
@@ -23,12 +23,14 @@ var active = true
 var fired_from_auth := false
 
 var ui : UIManager
+var source : int
 
 
 func _ready():
 	velocity = transform.basis.z * speed
 	await get_tree().create_timer(lifetime).timeout
 	handle_impact()
+
 
 func _physics_process(delta: float) -> void:	
 	if active:
@@ -61,13 +63,12 @@ func handle_impact():
 	if is_multiplayer_authority():
 		impacted.emit()
 		if radius > 0:
-			Util.explode_at_point(global_position, damage, radius, particles, get_tree().get_root(), ui)
+			Util.explode_at_point(global_position, damage, radius, particles, get_tree().get_root(), source)
 		elif hit_obj != null:
 			Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 			var health = hit_obj.get_node_or_null("Health") as Health
 			if health:
-				health.take_damage.rpc(damage, "")
-				ui.flash_hitmarker()
+				health.take_damage.rpc(damage, source)
 	else:
 		Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 	

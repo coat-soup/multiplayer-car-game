@@ -87,9 +87,7 @@ func _process(delta: float) -> void:
 		fire_timer -= delta
 	
 	if not (control_manager.using_player or control_manager.ai_override): return
-	if not control_manager.is_multiplayer_authority():
-		print("control not auth")
-		return
+	if not control_manager.is_multiplayer_authority(): return
 	
 	if full_auto and Input.is_action_pressed("primary_fire") and fire_timer <= 0:
 		fire_cannon.rpc()
@@ -119,6 +117,7 @@ func fire_cannon():
 	shell_obj.global_rotation = barrel_end.global_rotation
 	shell_obj.ui = ui
 	found_bullet_speed = shell_obj.speed
+	shell_obj.source = control_manager.using_player.name.to_int()
 	shell_obj._ready()
 	
 	if control_manager.is_multiplayer_authority():
