@@ -10,7 +10,8 @@ class_name PlayerMovement
 @onready var collision_shape_3d: CollisionShape3D = $"../CollisionShape3D"
 @onready var floorcast: RayCast3D = $Floorcast
 
-@export var speed = 5.0
+@export var walk_speed = 4.0
+@export var sprint_speed = 7.0
 @export var jump_velocity = 4.5
 @export var sensetivity = 0.005;
 
@@ -77,6 +78,8 @@ func _physics_process(delta: float) -> void:
 	
 	
 	var adjusted_local_velocity = ship.global_basis.inverse() * player.velocity
+	
+	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
 	
 	# jump
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():

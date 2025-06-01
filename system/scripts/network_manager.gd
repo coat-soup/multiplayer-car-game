@@ -41,7 +41,7 @@ func _on_host_pressed() -> void:
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
-	level_manager.setup(multiplayer)
+	if level_manager: level_manager.setup(multiplayer)
 	
 	$Camera3D.queue_free()
 	add_player(multiplayer.get_unique_id())
@@ -54,7 +54,7 @@ func _on_host_local_pressed() -> void:
 	
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
-	level_manager.setup(multiplayer)
+	if level_manager: level_manager.setup(multiplayer)
 	
 	#upnp_setup()
 	

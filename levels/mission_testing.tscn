@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgokpns7ftbi"]
+[gd_scene load_steps=20 format=3 uid="uid://dgokpns7ftbi"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="7_7qkik"]
 [ext_resource type="PackedScene" uid="uid://c67a7v47cve4u" path="res://enemies/satellite_01.tscn" id="8_b06m1"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://enemies/station_mockup_2.tscn" id="8_ybjgi"]
+[ext_resource type="PackedScene" uid="uid://bbiyvux10g2ew" path="res://auxcraft/barge.tscn" id="13_lk4dt"]
+[ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="14_vl1wo"]
 
 [sub_resource type="Resource" id="Resource_al2gk"]
 script = ExtResource("5_8a36v")
@@ -105,3 +107,9 @@ transform = Transform3D(0.875266, -0.10166, -0.472838, -0.238089, 0.760421, -0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_kbb1s")
+
+[node name="barge" parent="." instance=ExtResource("13_lk4dt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8167, 2.57746, 7.93898)
+
+[node name="CarrierBlockout" parent="." instance=ExtResource("14_vl1wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3193, -79.7654, 19.77)

@@ -1,0 +1,401 @@
+[gd_scene load_steps=26 format=3 uid="uid://c4gr06kluiqeo"]
+
+[ext_resource type="PackedScene" uid="uid://dh3jei8vyvfjx" path="res://ship/carrier.glb" id="1_8icdk"]
+[ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="2_aukwm"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_pj3bv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rn5b5"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 6
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_us018"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qs83q"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0s6kp"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_eg7fd"]
+data = PackedVector3Array(-79.9749, -1.1479, 14.2236, -79.9749, 1.1479, -14.2236, -79.9749, 1.1479, 14.2236, -79.9749, -1.1479, 14.2236, -79.9749, -1.1479, -14.2236, -79.9749, 1.1479, -14.2236, -79.9749, -1.1479, -14.2236, 124.378, 1.1479, -14.2236, -79.9749, 1.1479, -14.2236, -79.9749, -1.1479, -14.2236, 124.378, -1.1479, -14.2236, 124.378, 1.1479, -14.2236, 124.378, -1.1479, -14.2236, 124.378, 1.1479, 14.2236, 124.378, 1.1479, -14.2236, 124.378, -1.1479, -14.2236, 124.378, -1.1479, 14.2236, 124.378, 1.1479, 14.2236, 124.378, -1.1479, 14.2236, -79.9749, 1.1479, 14.2236, 124.378, 1.1479, 14.2236, 124.378, -1.1479, 14.2236, -79.9749, -1.1479, 14.2236, -79.9749, 1.1479, 14.2236, -79.9749, -1.1479, -14.2236, 124.378, -1.1479, 14.2236, 124.378, -1.1479, -14.2236, -79.9749, -1.1479, -14.2236, -79.9749, -1.1479, 14.2236, 124.378, -1.1479, 14.2236, 124.378, 1.1479, -14.2236, -79.9749, 1.1479, 14.2236, -79.9749, 1.1479, -14.2236, 124.378, 1.1479, -14.2236, 124.378, 1.1479, 14.2236, -79.9749, 1.1479, 14.2236)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_to7v6"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8w50k"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bym7a"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i24v0"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mljlt"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0br8"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_u80q3"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i2afk"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_70nou"]
+data = PackedVector3Array(-15.6848, -1.072, 15.6848, -15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, -1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, -15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, 1.072, 15.6848, 15.6848, 1.072, -15.6848, 15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, 15.6848, 1.072, 15.6848, 15.6848, -1.072, 15.6848, -15.6848, -1.072, 15.6848, -15.6848, 1.072, 15.6848, -15.6848, -1.072, -15.6848, 15.6848, -1.072, 15.6848, 15.6848, -1.072, -15.6848, -15.6848, -1.072, -15.6848, -15.6848, -1.072, 15.6848, 15.6848, -1.072, 15.6848, 15.6848, 1.072, -15.6848, -15.6848, 1.072, 15.6848, -15.6848, 1.072, -15.6848, 15.6848, 1.072, -15.6848, 15.6848, 1.072, 15.6848, -15.6848, 1.072, 15.6848)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_720ju"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6ohn4"]
+data = PackedVector3Array(-27.5129, -1.1479, 9.6047, -27.5129, 1.1479, -27.5133, -27.5129, 1.1479, 9.6047, -27.5129, -1.1479, 9.6047, -27.5129, -1.1479, -27.5133, -27.5129, 1.1479, -27.5133, -27.5129, -1.1479, -27.5133, 27.5131, 1.1479, -27.5133, -27.5129, 1.1479, -27.5133, -27.5129, -1.1479, -27.5133, 27.5131, -1.1479, -27.5133, 27.5131, 1.1479, -27.5133, 27.5131, -1.1479, -27.5133, 27.5131, 1.1479, 9.6047, 27.5131, 1.1479, -27.5133, 27.5131, -1.1479, -27.5133, 27.5131, -1.1479, 9.6047, 27.5131, 1.1479, 9.6047, 27.5131, -1.1479, 9.6047, -27.5129, 1.1479, 9.6047, 27.5131, 1.1479, 9.6047, 27.5131, -1.1479, 9.6047, -27.5129, -1.1479, 9.6047, -27.5129, 1.1479, 9.6047, -17.6975, -1.1479, 4.6341, -27.5129, -1.1479, -27.5133, -27.5129, -1.1479, 9.6047, -17.6975, -1.1479, 4.6341, -17.6975, -1.1479, -19.2395, -27.5129, -1.1479, -27.5133, -17.6975, -1.1479, -19.2395, 27.5131, -1.1479, -27.5133, -27.5129, -1.1479, -27.5133, 27.5131, -1.1479, 9.6047, -17.6975, -1.1479, 4.6341, -27.5129, -1.1479, 9.6047, 27.5131, -1.1479, 9.6047, -3.1406, -1.1479, 4.6341, -17.6975, -1.1479, 4.6341, -3.1406, -1.1479, -19.2395, 27.5131, -1.1479, -27.5133, -17.6975, -1.1479, -19.2395, 27.5131, -1.1479, 9.6047, -3.1406, -1.1479, -19.2395, -3.1406, -1.1479, 4.6341, 27.5131, -1.1479, -27.5133, -3.1406, -1.1479, -19.2395, 27.5131, -1.1479, 9.6047, -27.5129, 1.1479, -27.5133, -17.6975, 1.1479, 4.6341, -27.5129, 1.1479, 9.6047, -27.5129, 1.1479, -27.5133, -17.6975, 1.1479, -19.2395, -17.6975, 1.1479, 4.6341, -3.1406, 1.1479, 4.6341, -27.5129, 1.1479, 9.6047, -17.6975, 1.1479, 4.6341, 27.5131, 1.1479, -27.5133, -17.6975, 1.1479, -19.2395, -27.5129, 1.1479, -27.5133, 27.5131, 1.1479, -27.5133, -3.1406, 1.1479, -19.2395, -17.6975, 1.1479, -19.2395, -3.1406, 1.1479, 4.6341, 27.5131, 1.1479, 9.6047, -27.5129, 1.1479, 9.6047, 27.5131, 1.1479, -27.5133, -3.1406, 1.1479, 4.6341, -3.1406, 1.1479, -19.2395, 27.5131, 1.1479, 9.6047, -3.1406, 1.1479, 4.6341, 27.5131, 1.1479, -27.5133, -17.6975, 1.1479, 4.6341, -17.6975, -1.1479, -19.2395, -17.6975, -1.1479, 4.6341, -17.6975, 1.1479, 4.6341, -17.6975, 1.1479, -19.2395, -17.6975, -1.1479, -19.2395, -17.6975, 1.1479, -19.2395, -3.1406, -1.1479, -19.2395, -17.6975, -1.1479, -19.2395, -17.6975, 1.1479, -19.2395, -3.1406, 1.1479, -19.2395, -3.1406, -1.1479, -19.2395, -3.1406, -1.1479, -19.2395, -3.1406, 1.1479, 4.6341, -3.1406, -1.1479, 4.6341, -3.1406, -1.1479, -19.2395, -3.1406, 1.1479, -19.2395, -3.1406, 1.1479, 4.6341, -3.1406, -1.1479, 4.6341, -17.6975, 1.1479, 4.6341, -17.6975, -1.1479, 4.6341, -3.1406, -1.1479, 4.6341, -3.1406, 1.1479, 4.6341, -17.6975, 1.1479, 4.6341)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kjp0q"]
+data = PackedVector3Array(-20.5049, -0.8555, 2.9427, -20.5049, 0.8555, -2.9432, -20.5049, 0.8555, 2.9427, -20.5049, -0.8555, 2.9427, -20.5049, -0.8555, -2.9432, -20.5049, 0.8555, -2.9432, -20.5049, -0.8555, -2.9432, 20.5051, 0.8555, -2.9432, -20.5049, 0.8555, -2.9432, -20.5049, -0.8555, -2.9432, 20.5051, -0.8555, -2.9432, 20.5051, 0.8555, -2.9432, 20.5051, -0.8555, -2.9432, 20.5051, 0.8555, 2.9427, 20.5051, 0.8555, -2.9432, 20.5051, -0.8555, -2.9432, 20.5051, -0.8555, 2.9427, 20.5051, 0.8555, 2.9427, 20.5051, -0.8555, 2.9427, -20.5049, 0.8555, 2.9427, 20.5051, 0.8555, 2.9427, 20.5051, -0.8555, 2.9427, -20.5049, -0.8555, 2.9427, -20.5049, 0.8555, 2.9427, -20.5049, -0.8555, -2.9432, 20.5051, -0.8555, 2.9427, 20.5051, -0.8555, -2.9432, -20.5049, -0.8555, -2.9432, -20.5049, -0.8555, 2.9427, 20.5051, -0.8555, 2.9427, 20.5051, 0.8555, -2.9432, -20.5049, 0.8555, 2.9427, -20.5049, 0.8555, -2.9432, 20.5051, 0.8555, -2.9432, 20.5051, 0.8555, 2.9427, -20.5049, 0.8555, 2.9427)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ly4uv"]
+data = PackedVector3Array(-25.5416, -0.8555, 4.3745, -25.5416, 0.8555, -4.3751, -25.5416, 0.8555, 4.3745, -25.5416, -0.8555, 4.3745, -25.5416, -0.8555, -4.3751, -25.5416, 0.8555, -4.3751, -25.5416, -0.8555, -4.3751, 25.5417, 0.8555, -4.3751, -25.5416, 0.8555, -4.3751, -25.5416, -0.8555, -4.3751, 25.5417, -0.8555, -4.3751, 25.5417, 0.8555, -4.3751, 25.5417, -0.8555, -4.3751, 25.5417, 0.8555, 4.3745, 25.5417, 0.8555, -4.3751, 25.5417, -0.8555, -4.3751, 25.5417, -0.8555, 4.3745, 25.5417, 0.8555, 4.3745, 25.5417, -0.8555, 4.3745, -25.5416, 0.8555, 4.3745, 25.5417, 0.8555, 4.3745, 25.5417, -0.8555, 4.3745, -25.5416, -0.8555, 4.3745, -25.5416, 0.8555, 4.3745, -25.5416, -0.8555, -4.3751, 25.5417, -0.8555, 4.3745, 25.5417, -0.8555, -4.3751, -25.5416, -0.8555, -4.3751, -25.5416, -0.8555, 4.3745, 25.5417, -0.8555, 4.3745, 25.5417, 0.8555, -4.3751, -25.5416, 0.8555, 4.3745, -25.5416, 0.8555, -4.3751, 25.5417, 0.8555, -4.3751, 25.5417, 0.8555, 4.3745, -25.5416, 0.8555, 4.3745)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sm3gv"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 3
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ynmbs"]
+data = PackedVector3Array(-7.2503, -1, 11.9422, -7.2503, 1, -11.9437, -7.2503, 1, 11.9422, -7.2503, -1, 11.9422, -7.2503, -1, -11.9437, -7.2503, 1, -11.9437, -7.2503, -1, -11.9437, 7.2503, 1, -11.9437, -7.2503, 1, -11.9437, -7.2503, -1, -11.9437, 7.2503, -1, -11.9437, 7.2503, 1, -11.9437, 7.2503, -1, -11.9437, 7.2503, 1, 11.9422, 7.2503, 1, -11.9437, 7.2503, -1, -11.9437, 7.2503, -1, 11.9422, 7.2503, 1, 11.9422, 7.2503, -1, 11.9422, -7.2503, 1, 11.9422, 7.2503, 1, 11.9422, 7.2503, -1, 11.9422, -7.2503, -1, 11.9422, -7.2503, 1, 11.9422, -7.2503, -1, -11.9437, 7.2503, -1, 11.9422, 7.2503, -1, -11.9437, -7.2503, -1, -11.9437, -7.2503, -1, 11.9422, 7.2503, -1, 11.9422, 7.2503, 1, -11.9437, -7.2503, 1, 11.9422, -7.2503, 1, -11.9437, 7.2503, 1, -11.9437, 7.2503, 1, 11.9422, -7.2503, 1, 11.9422)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgn4f"]
+render_priority = 0
+shader = ExtResource("2_pj3bv")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i3kwk"]
+data = PackedVector3Array(-41.339, -1, 24.8025, -41.339, 1, -24.8025, -41.339, 1, 24.8025, -41.339, -1, 24.8025, -41.339, -1, -24.8025, -41.339, 1, -24.8025, -41.339, -1, -24.8025, 41.339, 1, -24.8025, -41.339, 1, -24.8025, -41.339, -1, -24.8025, 41.339, -1, -24.8025, 41.339, 1, -24.8025, 41.339, -1, -24.8025, 41.339, 1, 24.8025, 41.339, 1, -24.8025, 41.339, -1, -24.8025, 41.339, -1, 24.8025, 41.339, 1, 24.8025, 41.339, -1, 24.8025, -41.339, 1, 24.8025, 41.339, 1, 24.8025, 41.339, -1, 24.8025, -41.339, -1, 24.8025, -41.339, 1, 24.8025, -41.339, -1, -24.8025, 41.339, -1, 24.8025, 41.339, -1, -24.8025, -41.339, -1, -24.8025, -41.339, -1, 24.8025, 41.339, -1, 24.8025, 41.339, 1, -24.8025, -41.339, 1, 24.8025, -41.339, 1, -24.8025, 41.339, 1, -24.8025, 41.339, 1, 24.8025, -41.339, 1, 24.8025)
+
+[node name="carrier" instance=ExtResource("1_8icdk")]
+
+[node name="FighterBlockout" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")
+
+[node name="BargeBlockout" parent="." index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")
+
+[node name="BargeBlockout_001" parent="." index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")
+
+[node name="BargeBlockout_002" parent="." index="3"]
+surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")
+
+[node name="FighterBlockout_001" parent="." index="4"]
+surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")
+
+[node name="Cube" parent="StoragePad" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad/Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad/Cube/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_qs83q")
+
+[node name="Cube_009" parent="." index="6"]
+surface_material_override/0 = SubResource("ShaderMaterial_0s6kp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_009" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_009/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_eg7fd")
+
+[node name="Cube_010" parent="StoragePad_001" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_001/Cube_010" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_001/Cube_010/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_to7v6")
+
+[node name="Cube_015" parent="StoragePad_002" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_002/Cube_015" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_002/Cube_015/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_8w50k")
+
+[node name="Cube_020" parent="StoragePad_003" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_003/Cube_020" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_003/Cube_020/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_bym7a")
+
+[node name="Cube_025" parent="StoragePad_004" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_004/Cube_025" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_004/Cube_025/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_i24v0")
+
+[node name="Cube_030" parent="StoragePad_005" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_us018")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_005/Cube_030" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_005/Cube_030/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_mljlt")
+
+[node name="Cube_035" parent="StoragePad_006" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_l0br8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_006/Cube_035" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_006/Cube_035/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_u80q3")
+
+[node name="Cube_040" parent="StoragePad_007" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_i2afk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StoragePad_007/Cube_040" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoragePad_007/Cube_040/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_70nou")
+
+[node name="Cube_045" parent="." index="14"]
+surface_material_override/0 = SubResource("ShaderMaterial_720ju")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_045" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_045/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_6ohn4")
+
+[node name="wall_light" parent="." index="15" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -8.29926, 18.1755, 28.6312)
+
+[node name="wall_light2" parent="." index="16" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -41.2993, 18.1755, 28.6312)
+
+[node name="wall_light3" parent="." index="17" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -38.7797, 18.1755, -27.5992)
+
+[node name="wall_light4" parent="." index="18" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -8.77969, 18.1755, -27.5992)
+
+[node name="wall_light5" parent="." index="19" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 68.3117, 18.1755, -26.5109)
+
+[node name="wall_light6" parent="." index="20" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 102.312, 18.1755, -26.5109)
+
+[node name="wall_light7" parent="." index="21" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 102.735, 18.1755, 26.2836)
+
+[node name="wall_light8" parent="." index="22" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 72.7355, 18.1755, 26.2836)
+
+[node name="wall_light9" parent="." index="23" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 89.933, 18.1755, 1.18518)
+
+[node name="wall_light10" parent="." index="24" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 30.933, 18.1755, 1.18518)
+
+[node name="wall_light11" parent="." index="25" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -36.8002, 18.1755, 1.18518)
+
+[node name="wall_light12" parent="." index="26" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 28.8173, 14.4825, 40.4768)
+
+[node name="wall_light13" parent="." index="27" instance=ExtResource("2_aukwm")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -32.946, -3.82295, -1.01727)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_046" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_046/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_kjp0q")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Cube_046" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_046/StaticBody3D2" index="0"]
+shape = SubResource("ConcavePolygonShape3D_ly4uv")
+
+[node name="Cube_049" parent="." index="29"]
+surface_material_override/0 = SubResource("ShaderMaterial_sm3gv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_049" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_049/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_ynmbs")
+
+[node name="Cube_050" parent="." index="30"]
+surface_material_override/0 = SubResource("ShaderMaterial_rgn4f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_050" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_050/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_i3kwk")
