@@ -48,14 +48,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3193, -0.8784, 19.77)
 [node name="ShipHolder" type="Node3D" parent="."]
 
 [node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("9_i2hlw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 21)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 21)
 root = NodePath("..")
 movement_clone = NodePath("../ShipMovementClone")
 
 [node name="ShipMovementClone" parent="ShipHolder" instance=ExtResource("10_qn60d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 21)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 21)
 
 [node name="World" type="Node3D" parent="."]
 

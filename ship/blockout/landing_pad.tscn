@@ -343,13 +343,13 @@ size = Vector3(25, 1, 25)
 material = SubResource("ShaderMaterial_tfoyg")
 
 [node name="Roof" type="CSGBox3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00233006, 8.74188, -2.78949)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.00233006, 8.74188, -5.03949)
 use_collision = true
-size = Vector3(30, 1, 30)
+size = Vector3(30, 1, 21)
 material = SubResource("ShaderMaterial_hlgb2")
 
 [node name="wall_light" parent="." instance=ExtResource("1_j3b8y")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -1.11819, 8.20161, 2.13448)
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -1.11819, 8.20161, 0.13448)
 
 [node name="wall_light2" parent="." instance=ExtResource("1_j3b8y")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -1.11819, 8.20161, -7.86552)
