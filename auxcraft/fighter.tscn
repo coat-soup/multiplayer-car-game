@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb54q17erdbsf"]
+
+[ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
+[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="3_gjnon"]
+[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="5_1n6oi"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_fb5fw"]
+[ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="7_0mde5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
+size = Vector3(1, 1.89404, 0.78833)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tds0y"]
+properties/0/path = NodePath("MovementManager:velocity_sync")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("MovementManager:rotation_input")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("MovementManager:virtual_joystick_value")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component") groups=["ship"]]
+script = ExtResource("1_oe2xb")
+movement_manager = NodePath("MovementManager")
+main_target_component = NodePath("MainTargetComponent")
+
+[node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
+script = ExtResource("2_3xy1i")
+ship = NodePath("..")
+
+[node name="fighter" parent="." instance=ExtResource("3_gjnon")]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+current = true
+far = 10000.0
+
+[node name="Cockpit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 2)
+
+[node name="Controllable" type="RemoteTransform3D" parent="Cockpit" node_paths=PackedStringArray("camera", "interactable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+script = ExtResource("5_1n6oi")
+camera = NodePath("../../CameraPivot/Camera3D")
+interactable = NodePath("../Interactable")
+
+[node name="Interactable" type="StaticBody3D" parent="Cockpit"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_fb5fw")
+prompt_text = "Steer Ship"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cockpit/Interactable"]
+shape = SubResource("BoxShape3D_fbly5")
+
+[node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager", "controllable", "camera_pivot")]
+script = ExtResource("7_0mde5")
+ship_manager = NodePath("..")
+controllable = NodePath("../Cockpit/Controllable")
+camera_pivot = NodePath("../CameraPivot")
+acceleration = 30.0
+max_speed = 50.0
+mass = 200.0
+turn_speed = 2.0
+roll_speed = 2.0
+rotation_accel = 3.0
+
+[node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_tds0y")

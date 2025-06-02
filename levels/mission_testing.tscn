@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="7_7qkik"]
 [ext_resource type="PackedScene" uid="uid://c67a7v47cve4u" path="res://enemies/satellite_01.tscn" id="8_b06m1"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://enemies/station_mockup_2.tscn" id="8_ybjgi"]
-[ext_resource type="PackedScene" uid="uid://bbiyvux10g2ew" path="res://auxcraft/barge.tscn" id="13_lk4dt"]
-[ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="14_vl1wo"]
+[ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/fighter.tscn" id="11_iny3n"]
+[ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/fighter_movement_clone.tscn" id="12_r80y2"]
 
 [sub_resource type="Resource" id="Resource_al2gk"]
 script = ExtResource("5_8a36v")
@@ -49,11 +49,12 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_kbb1s"]
 
 [node name="Root" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -15, 21)
 script = ExtResource("1_kqwcw")
 
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager") groups=["network manager"]]
 script = ExtResource("2_8udqw")
-spawn_position = Vector3(0, 0, 5)
+spawn_position = Vector3(0, 6, 0)
 ship = NodePath("../ShipHolder/Ship")
 level_manager = NodePath("../LevelManager")
 
@@ -82,6 +83,14 @@ movement_clone = NodePath("../ShipMovementClone")
 
 [node name="ShipMovementClone" parent="ShipHolder" instance=ExtResource("4_vmead")]
 
+[node name="Fighter" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("11_iny3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+root = NodePath("..")
+movement_clone = NodePath("../ShipMovementClone2")
+
+[node name="ShipMovementClone2" parent="ShipHolder" instance=ExtResource("12_r80y2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+
 [node name="World" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
@@ -107,9 +116,3 @@ transform = Transform3D(0.875266, -0.10166, -0.472838, -0.238089, 0.760421, -0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_kbb1s")
-
-[node name="barge" parent="." instance=ExtResource("13_lk4dt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8167, 2.57746, 7.93898)
-
-[node name="CarrierBlockout" parent="." instance=ExtResource("14_vl1wo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3193, -79.7654, 19.77)

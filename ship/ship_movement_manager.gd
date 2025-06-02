@@ -10,6 +10,7 @@ var camera_sensetivity := 0.005
 
 @export var acceleration := 10.0
 @export var max_speed := 20.0
+@export var damping_accel_multiplier := 0.5
 
 @export var mass := 400.0
 
@@ -18,18 +19,18 @@ var directional_input := Vector3.ZERO
 
 var planets : Array[Planet]
 
-@onready var veldebug: CSGSphere3D = $"../CSGSphere3D"
 @export var velocity_sync : Vector3
 
 @onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
 @onready var velocity_synchroniser: MultiplayerSynchronizer = $"../VelocitySynchroniser"
 
+@export var invert_y := false
+@export var display_joystick_ui := true
 @export var virtual_joystick_value = Vector2.ZERO
 @export var turn_speed := 0.2
 @export var roll_speed := 0.2
 @export var rotation_accel := 1.0
 
-@export var maneouvre_mode := false
 var freelook := false
 @export var camera_recenter_speed := 5.0
 
@@ -71,7 +72,6 @@ func _physics_process(delta: float) -> void:
 		ship.velocity = velocity_sync
 	
 	var directional_input_relative = (ship.global_basis * directional_input).normalized()
-	veldebug.global_position = ship.global_position + directional_input_relative * 10
 	var v_input = ship.velocity + acceleration * directional_input_relative * delta
 	if v_input.length() < max_speed:
 		ship.velocity = v_input
@@ -79,6 +79,12 @@ func _physics_process(delta: float) -> void:
 		var orthogonal = directional_input_relative - ship.velocity.normalized() * directional_input_relative.dot(ship.velocity.normalized())
 		ship.velocity = ship.velocity + acceleration * orthogonal.normalized() * delta
 	
+	# INERTIAL DAMPENING
+	var desired_velocity = directional_input_relative * ship.velocity.dot(directional_input_relative)
+	var lateral_velocity = ship.velocity - desired_velocity
+	ship.velocity -= lateral_velocity.limit_length(1.0) * damping_accel_multiplier * acceleration * delta
+	
+	# GRAVITY
 	var main_planet := planets[0] if len(planets) > 0 else null
 	var max_grav := 0.0
 	for planet in planets:
@@ -93,11 +99,15 @@ func _physics_process(delta: float) -> void:
 	
 	if not controllable.is_multiplayer_authority(): return
 	
-	var joystick : Vector2 = virtual_joystick_value if virtual_joystick_value.length() > 0.1 else Vector2.ZERO
-	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("right", "left") * int(controllable.using_player != null)), rotation_accel * delta)
+	var strength : float = virtual_joystick_value.length()
+	var joystick : Vector2 = virtual_joystick_value if strength > 0.1 else Vector2.ZERO
+	strength = (strength - 0.1) / 0.9 # normalise with deadzone
+	joystick *= strength
+	
+	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("roll_right", "roll_left") * int(controllable.using_player != null)), rotation_accel * delta)
 	
 	ship.rotate_object_local(Vector3.UP, -rotation_input.x * turn_speed * delta)
-	ship.rotate_object_local(Vector3.RIGHT, -rotation_input.y * turn_speed * delta)
+	ship.rotate_object_local(Vector3.RIGHT, (-1 if invert_y else 1) * rotation_input.y * turn_speed * delta)
 	ship.rotate_object_local(Vector3.FORWARD, rotation_input.z * roll_speed * delta)
 	
 	ship.move_and_slide()
@@ -105,10 +115,7 @@ func _physics_process(delta: float) -> void:
 	if not controllable.is_multiplayer_authority(): return
 	if not controllable or not controllable.using_player: return
 	
-	if maneouvre_mode:
-		directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
-	else:
-		directional_input = Vector3(0,0, Input.get_axis("down", "up"))
+	directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
 	
 	if not freelook:
 		camera_pivot.rotation = camera_pivot.rotation.lerp(Vector3.ZERO, delta * camera_recenter_speed)
@@ -131,11 +138,10 @@ func rotate_ship_in_orbit(delta: float, planet : Planet):
 func on_controlled():
 	velocity_synchroniser.set_multiplayer_authority(str(controllable.using_player.name).to_int(), false)
 
-	if controllable.is_multiplayer_authority():
-		pass
-		#ui.toggle_virtual_joystick(true)
+	if display_joystick_ui and controllable.is_multiplayer_authority():
+		ui.toggle_virtual_joystick(true)
 
-	
+
 func on_uncontrolled():
-	if controllable.is_multiplayer_authority():
+	if display_joystick_ui and controllable.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(false)

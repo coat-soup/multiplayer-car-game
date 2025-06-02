@@ -1,6 +1,5 @@
-[gd_scene load_steps=19 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=11 format=3 uid="uid://bj01vh7sj7yne"]
 
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_hetd0"]
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
@@ -8,37 +7,7 @@
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
-[ext_resource type="PackedScene" uid="uid://bodxwf6u75vxl" path="res://ship/systems/radar/holotable.tscn" id="7_uxitm"]
-[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="8_neyn7"]
-[ext_resource type="Material" uid="uid://x223y683bm5w" path="res://ship/systems/radar/marker_materials/radar_marker_friendly.tres" id="9_t5bjm"]
-[ext_resource type="PackedScene" uid="uid://cafdmu62a50mc" path="res://world/props/scenes/wall_light.tscn" id="13_2eybb"]
-[ext_resource type="PackedScene" uid="uid://cvsblvva5sf3y" path="res://ship/components/turrets/autocannon_component.tscn" id="14_r5ok8"]
-[ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="15_5xqaw"]
-[ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="15_l2c1o"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
-render_priority = 0
-shader = ExtResource("1_hetd0")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 1
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
+[ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -64,36 +33,37 @@ script = ExtResource("2_i8s7e")
 ship = NodePath("..")
 
 [node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21, -27.2965)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-material_override = SubResource("ShaderMaterial_51rqv")
-use_collision = true
-size = Vector3(20, 2, 30)
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21.5054, -20.5969)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+current = true
+far = 10000.0
 
 [node name="Helm" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 19.5054, -19)
 
 [node name="HelmModel" parent="Helm" node_paths=PackedStringArray("controller") instance=ExtResource("3_28ont")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.945758, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 controller = NodePath("../../MovementManager")
 
 [node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.47777)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 script = ExtResource("4_ygd72")
 camera = NodePath("../../CameraPivot/Camera3D")
 interactable = NodePath("../Interactable")
 
 [node name="Interactable" type="StaticBody3D" parent="Helm"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.347, -0.987)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("5_fc0ek")
 prompt_text = "Steer Ship"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Helm/Interactable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27374e-13, -0.447021, -0.843628)
 shape = SubResource("BoxShape3D_fbly5")
 
 [node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager", "controllable", "camera_pivot")]
@@ -101,63 +71,11 @@ script = ExtResource("5_hfqvi")
 ship_manager = NodePath("..")
 controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
-acceleration = 100.0
-max_speed = 100.0
-turn_speed = 1.0
-roll_speed = 1.0
+invert_y = true
+display_joystick_ui = false
 
-[node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8497, 11.3441)
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-current = true
-far = 10000.0
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-
-[node name="Holotable" parent="." node_paths=PackedStringArray("main_ship") instance=ExtResource("7_uxitm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.470349, 6.08205)
-main_ship = NodePath("..")
-
-[node name="Holotable2" parent="." node_paths=PackedStringArray("main_ship") instance=ExtResource("7_uxitm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72708, 0.373095, 13.6899)
-main_ship = NodePath("..")
-
-[node name="RadarSignature" parent="." instance=ExtResource("8_neyn7")]
-transform = Transform3D(37.9823, 0, 0, 0, 30.6432, 0, 0, 0, 81.6803, 0, 0, 0)
-visible = false
-marker_mat = ExtResource("9_t5bjm")
+[node name="CarrierBlockout" parent="." instance=ExtResource("9_7i8yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 17)
 
 [node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tds0y")
-
-[node name="wall_light" parent="." instance=ExtResource("13_2eybb")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -6.87613, 5, -0.174829)
-
-[node name="wall_light2" parent="." instance=ExtResource("13_2eybb")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.03901, 5, 8.45885)
-
-[node name="wall_light3" parent="." instance=ExtResource("13_2eybb")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 5.97936, 5, 6.86543)
-
-[node name="wall_light4" parent="." instance=ExtResource("13_2eybb")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 7.03136, 5, -1.80696)
-
-[node name="wall_light5" parent="." instance=ExtResource("13_2eybb")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.80825, 5, -10.3002)
-
-[node name="Wrench" parent="." instance=ExtResource("15_5xqaw")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.74486, 0.23937, 0.469147)
-
-[node name="AutocannonComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("14_r5ok8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32793, 9.53674e-07, 4.38461)
-ship = NodePath("..")
-
-[node name="AutocannonComponent2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("14_r5ok8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32793, 9.53674e-07, -10.6154)
-ship = NodePath("..")
-
-[node name="RailgunComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("15_l2c1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.28629, 9.53674e-07, 4.82859)
-ship = NodePath("..")
