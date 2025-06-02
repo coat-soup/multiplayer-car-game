@@ -1,10 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=21 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="3_16skt"]
 [ext_resource type="PackedScene" uid="uid://xk45fu6cvrgo" path="res://world/props/models/human_reference.glb" id="4_8lisy"]
 [ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="5_0blf7"]
+[ext_resource type="Script" path="res://system/scripts/elevator.gd" id="6_xtomb"]
+[ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
+[ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="8_6f0kf"]
+[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
+[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="10_7fcxl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2f3v"]
 render_priority = 0
@@ -150,6 +155,102 @@ shader_parameter/use_inside_uv = false
 shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iff7"]
+render_priority = 0
+shader = ExtResource("3_16skt")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 4
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l61ii"]
+render_priority = 0
+shader = ExtResource("3_16skt")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 3
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vaq4w"]
+render_priority = 0
+shader = ExtResource("3_16skt")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmofw"]
+render_priority = 0
+shader = ExtResource("3_16skt")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
 [node name="CarrierBlockout" type="Node3D"]
 
 [node name="HangarLevel" parent="." instance=ExtResource("1_47j6l")]
@@ -158,112 +259,208 @@ shader_parameter/albedo_alpha = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.6, -8)
 
 [node name="Engineering" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, -38)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -38)
+
+[node name="wall_light" parent="Engineering" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -5, 6, 11)
+
+[node name="wall_light2" parent="Engineering" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 6, 6, 11)
+
+[node name="wall_light3" parent="Engineering" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 11, 6, -3)
 
 [node name="Floor" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 12.2542)
 use_collision = true
-size = Vector3(15, 1, 27)
-material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="Floor14" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-use_collision = true
-size = Vector3(7, 1, 6)
-material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="Floor15" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17)
-use_collision = true
-size = Vector3(7, 1, 6)
-material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="Floor6" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, 6.5)
-use_collision = true
-size = Vector3(4, 1, 27)
-material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="Floor7" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 6.5)
-use_collision = true
-size = Vector3(4, 1, 27)
-material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="Floor8" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.364645, 4.425, -5.56036)
-use_collision = true
-size = Vector3(17, 1, 7)
+size = Vector3(15, 1, 15.4917)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor2" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, -7.38536, 2.675, 7.93964)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.06449, 6.5083)
 use_collision = true
-size = Vector3(9, 1, 49)
+size = Vector3(3, 0.5, 2)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor3" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, 7.61464, 2.675, 7.93964)
+[node name="Floor29" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, -3.14359, 2.08646, 6.5083)
 use_collision = true
-size = Vector3(9, 1, 49)
+size = Vector3(4, 0.5, 2)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor12" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, 4.61464, 2.675, -5.56036)
+[node name="Floor30" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-0.866025, 0.5, -8.74228e-08, 0.5, 0.866025, 0, 7.57103e-08, -4.37114e-08, -1, 3.10804, 2.08646, 6.5083)
 use_collision = true
-size = Vector3(9, 1, 7)
+size = Vector3(4, 0.5, 2)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor13" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, -3.88536, 2.675, -5.56036)
+[node name="Floor6" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.515137, 10.5083)
 use_collision = true
-size = Vector3(9, 1, 7)
+size = Vector3(5, 2, 12)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor7" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.515137, 10.5083)
+use_collision = true
+size = Vector3(5, 2, 12)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor24" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 8.69539, 0.506836, 6.43339)
+use_collision = true
+size = Vector3(2, 2, 5)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor28" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-0.866025, -8.74228e-08, 0.5, 7.57103e-08, -1, -4.37114e-08, 0.5, 0, 0.866025, -8.30461, 0.506836, 6.43339)
+use_collision = true
+size = Vector3(2, 2, 5)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor25" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 8.41262, 1.0022, 14.561)
+use_collision = true
+size = Vector3(3.36432, 1.00439, 5.36029)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor27" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-0.866025, -8.9407e-08, 0.5, 8.9407e-08, -1, -4.47035e-08, 0.5, 0, 0.866025, -8.58738, 1.0022, 14.561)
+use_collision = true
+size = Vector3(3.36432, 1.00439, 5.36029)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor23" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 18.5083)
+use_collision = true
+size = Vector3(3, 1, 4)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor26" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 18.5083)
+use_collision = true
+size = Vector3(3, 1, 4)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor4" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, 0, 2.18557e-08, 0, 0.5, -2.18557e-08, 4.86465, 2.675, 20.1896)
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -3.70946, -0.100594, 18.0067)
 use_collision = true
-size = Vector3(9, 1, 11)
+size = Vector3(4.71487, 1, 3.98657)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor5" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, 0, 2.18557e-08, 0, 0.5, -2.18557e-08, -4.63535, 2.675, 20.1896)
+transform = Transform3D(-0.866025, -0.5, 8.74228e-08, -0.5, 0.866025, 0, -7.57103e-08, -4.37114e-08, -1, 3.71209, -0.104622, 18.0067)
 use_collision = true
-size = Vector3(9, 1, 11)
+size = Vector3(4.69876, 1, 3.98657)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor9" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-1.54543e-08, -0.353553, 0.353553, 0.5, 0, 2.18557e-08, -1.54543e-08, 0.353553, 0.353553, 6.18787, 2.675, -5.48713)
+[node name="Floor3" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-0.866025, 8.74228e-08, -0.5, -7.57103e-08, -1, -4.37114e-08, -0.5, 0, 0.866025, 10.683, -1, 8.13741)
 use_collision = true
-size = Vector3(9, 1, 8)
+size = Vector3(7, 0.964615, 9)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor22" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -10.567, -1, 8.57043)
+use_collision = true
+size = Vector3(7, 0.964615, 8)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor8" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.45532, 0.508736, -2.74585)
+use_collision = true
+size = Vector3(10, 2, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor12" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 9.45532, 2.50874, -2.74585)
+use_collision = true
+size = Vector3(7, 1, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor16" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, 4.70947, 2.50874, -10.7458)
+use_collision = true
+size = Vector3(7, 1, 10)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor17" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, 12.2095, 2.50874, 5.25415)
+use_collision = true
+size = Vector3(7, 1, 7)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor14" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1.13566e-07, 0.866025, 0.5, -1, 1.31134e-07, 0, -6.55671e-08, -0.5, 0.866025, -11.9176, 2.50874, 12.3403)
+use_collision = true
+size = Vector3(7, 1, 18)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor15" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-1.13566e-07, -0.866025, 0.5, -1, 1.31134e-07, 0, -6.55671e-08, -0.5, -0.866025, 11.8324, 2.50874, 12.7733)
+use_collision = true
+size = Vector3(7, 1, 17)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor11" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-1.54543e-08, 0.353553, 0.353553, 0.5, 1.25607e-15, 2.18557e-08, 1.54543e-08, 0.353553, -0.353553, -5.81213, 2.675, -5.48713)
+transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, -6.81275, 0.244331, 4.48616)
 use_collision = true
-size = Vector3(9, 1, 8)
+size = Vector3(2.47119, 1, 12.7944)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor10" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(-7.99974e-09, 2.98554e-08, 0.5, 0.433013, -0.25, 2.18557e-08, 0.25, 0.433013, -2.18557e-08, 0.364644, 2.675, -4.81036)
+[node name="Floor18" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, -0.54468, 5.00874, -2.74585)
 use_collision = true
-size = Vector3(9, 1, 17)
+size = Vector3(2, 1, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor19" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, -13.5447, 2.50874, -2.74585)
+use_collision = true
+size = Vector3(7, 1, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor20" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, -7.0044, 5.00874, 4.48616)
+use_collision = true
+size = Vector3(2, 1, 12.4111)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Engineering"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 7)
-radius = 2.0
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.18748, 11)
+radius = 1.6254
 height = 10.0
 material = SubResource("ShaderMaterial_xilf3")
 
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Engineering"]
+transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 10.1035, 1.4681, 10.1816)
+radius = 1.13511
+height = 3.86927
+material = SubResource("ShaderMaterial_xilf3")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Engineering"]
+transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -9.89647, 1.4681, 10.1816)
+radius = 1.13511
+height = 3.86927
+material = SubResource("ShaderMaterial_xilf3")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Engineering"]
+transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 11.7972, 1.4681, 7.24803)
+radius = 1.13511
+height = 3.86927
+material = SubResource("ShaderMaterial_xilf3")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Engineering"]
+transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -11.2028, 1.4681, 7.24803)
+radius = 1.13511
+height = 3.86927
+material = SubResource("ShaderMaterial_xilf3")
+
 [node name="human_reference" parent="Engineering" instance=ExtResource("4_8lisy")]
-transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -1.69449, -0.5, 12.7895)
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -7.69449, -0.5, 12.7895)
 
 [node name="human_reference3" parent="Engineering" instance=ExtResource("4_8lisy")]
-transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 6.58232, 0.5, 14.8704)
-
-[node name="human_reference2" parent="Engineering" instance=ExtResource("4_8lisy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.66361, -5)
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 6.58232, -0.5, 14.8704)
 
 [node name="CargoHold" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 8)
@@ -281,9 +478,9 @@ size = Vector3(18, 1, 8)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor10" type="CSGBox3D" parent="CargoHold"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -13.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -14)
 use_collision = true
-size = Vector3(27, 1, 8)
+size = Vector3(27, 1, 9)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor7" type="CSGBox3D" parent="CargoHold"]
@@ -305,25 +502,31 @@ size = Vector3(3, 1, 3)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor2" type="CSGBox3D" parent="CargoHold"]
-transform = Transform3D(-0.258819, -0.965926, 0, 0.965926, -0.258819, 0, 0, 0, 1, -12, 3.5, 0)
+transform = Transform3D(0.258819, -0.965926, 0, 0.965926, 0.258819, 0, 0, 0, 1, -10, 3.5, -0.5)
 use_collision = true
-size = Vector3(7, 1, 35)
+size = Vector3(7, 1, 36)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor3" type="CSGBox3D" parent="CargoHold"]
-transform = Transform3D(0.258819, -0.965926, 0, 0.965926, 0.258819, 0, 0, 0, 1, 12, 3.5, 11)
+transform = Transform3D(-0.258819, -0.965926, 0, 0.965926, -0.258819, 0, 0, 0, 1, 10, 3.5, 11)
 use_collision = true
 size = Vector3(7, 1, 9)
 material = SubResource("ShaderMaterial_f2f3v")
 
-[node name="Floor8" type="CSGBox3D" parent="CargoHold"]
-transform = Transform3D(0.183013, -0.683013, -0.707107, 0.965926, 0.258819, 0, 0.183013, -0.683013, 0.707107, 14.2929, 3.5, 4.70711)
+[node name="Floor4" type="CSGBox3D" parent="CargoHold"]
+transform = Transform3D(-0.258819, -0.965926, 0, 0.965926, -0.258819, 0, 0, 0, 1, 15.6523, 3.5, -8)
 use_collision = true
-size = Vector3(7, 1, 7)
+size = Vector3(7, 1, 19)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor8" type="CSGBox3D" parent="CargoHold"]
+transform = Transform3D(-0.183013, -0.683013, -0.707107, 0.965926, -0.258819, 0, -0.183013, -0.683013, 0.707107, 13, 3.5, 4)
+use_collision = true
+size = Vector3(7, 1, 9)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="MedBay" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 14)
 
 [node name="wall_light" parent="MedBay" instance=ExtResource("5_0blf7")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -2.22938, 4.72504, 6.5)
@@ -350,7 +553,7 @@ size = Vector3(2, 0.3, 10)
 material = SubResource("ShaderMaterial_1301s")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5.5, 2.5, 0)
+transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, -4.41692, 2.5, 0)
 use_collision = true
 size = Vector3(4, 1, 20)
 material = SubResource("ShaderMaterial_3gayu")
@@ -359,6 +562,18 @@ material = SubResource("ShaderMaterial_3gayu")
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 1, 2.5, 10)
 use_collision = true
 size = Vector3(4, 1, 13)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="MedBay"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -2, 2.5, -10)
+use_collision = true
+size = Vector3(4, 1, 7)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="MedBay"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 6, 2.5, -10)
+use_collision = true
+size = Vector3(4, 1, 3)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="MedBay"]
@@ -386,7 +601,7 @@ size = Vector3(4, 1, 4)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="Bed" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5454, 1, 1)
 size = Vector3(3, 0.5, 1.5)
 material = SubResource("ShaderMaterial_gdsk1")
 
@@ -394,7 +609,7 @@ material = SubResource("ShaderMaterial_gdsk1")
 transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.5, -0.00025177)
 
 [node name="Bed2" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5454, 1, -2)
 size = Vector3(3, 0.5, 1.5)
 material = SubResource("ShaderMaterial_gdsk1")
 
@@ -402,7 +617,7 @@ material = SubResource("ShaderMaterial_gdsk1")
 transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.5, -0.000249863)
 
 [node name="Bed3" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5454, 1, -5)
 size = Vector3(3, 0.5, 1.5)
 material = SubResource("ShaderMaterial_gdsk1")
 
@@ -411,7 +626,7 @@ transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96
 visible = false
 
 [node name="Bed4" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5454, 1, -8)
 size = Vector3(3, 0.5, 1.5)
 material = SubResource("ShaderMaterial_gdsk1")
 
@@ -427,47 +642,1388 @@ use_collision = true
 size = Vector3(11, 1, 16)
 material = SubResource("ShaderMaterial_ajja7")
 
-[node name="Floor2" type="CSGBox3D" parent="Armory"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5.5, 2.5, -3)
+[node name="Wall2" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(0.5, -0.866026, 0, 0.866026, 0.5, 0, 0, 0, 1, -4.37168, 2.5, -3)
 use_collision = true
 size = Vector3(4, 1, 16)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall4" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.5, 1.80298, -8)
+use_collision = true
+size = Vector3(2.60596, 1, 6)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="SuitLocker" type="Node3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5.5, 1.80298, 3.95697)
+
+[node name="Wall7" type="CSGBox3D" parent="Armory/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="Armory/SuitLocker"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="Armory/SuitLocker"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="Armory/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="Armory/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="Armory/SuitLocker" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker2" type="Node3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.00177, 1.80298, 3.95697)
+
+[node name="Wall7" type="CSGBox3D" parent="Armory/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="Armory/SuitLocker2"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="Armory/SuitLocker2"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="Armory/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="Armory/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="Armory/SuitLocker2" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker3" type="Node3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.58198, 1.80298, 3.95697)
+
+[node name="Wall7" type="CSGBox3D" parent="Armory/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="Armory/SuitLocker3"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="Armory/SuitLocker3"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="Armory/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="Armory/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="Armory/SuitLocker3" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker4" type="Node3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.09899, 1.80298, 3.95697)
+
+[node name="Wall7" type="CSGBox3D" parent="Armory/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="Armory/SuitLocker4"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="Armory/SuitLocker4"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="Armory/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="Armory/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="Armory/SuitLocker4" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="Wall6" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.71492, 0.935425, -1)
+use_collision = true
+size = Vector3(0.213623, 5.57031, 2)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall5" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.81644, 1.80298, -8)
+use_collision = true
+size = Vector3(2.60596, 1, 6)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -4.5, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 2)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall7" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 3.25043, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 8.49915)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall3" type="CSGBox3D" parent="Armory"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 1.5, 2.5, -11)
+use_collision = true
+size = Vector3(4, 1, 12)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="human_reference" parent="Armory" instance=ExtResource("4_8lisy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.84719, 0.5, -8.12869)
+
+[node name="Lounge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 9, -24)
+
+[node name="Floor" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
+use_collision = true
+size = Vector3(11, 1, 16)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor2" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 1.97899, 0.544802, 4.35975)
+use_collision = true
+size = Vector3(3, 1, 2.05637)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall2" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 5.82973, 2.63397, -3)
+use_collision = true
+size = Vector3(6, 1, 16)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -2.5, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 6)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall7" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 5, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 3)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall3" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0.5, 2.5, -11)
+use_collision = true
+size = Vector3(4, 1, 12)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall4" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(0.707107, -1.11268e-28, -0.707107, 0.707107, -6.18173e-08, 0.707107, -4.37114e-08, -1, -4.37114e-08, -5.26777, 2.64644, -11)
+use_collision = true
+size = Vector3(2, 1, 6)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall5" type="CSGBox3D" parent="Lounge"]
+transform = Transform3D(0.707107, -1.11268e-28, -0.707107, 0.707107, -6.18173e-08, 0.707107, -4.37114e-08, -1, -4.37114e-08, -5.26777, 2.64644, 5)
+use_collision = true
+size = Vector3(2, 1, 6)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="human_reference" parent="Lounge" instance=ExtResource("4_8lisy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.84719, 0.5, -8.12869)
+
+[node name="MessHall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 10, 18)
+
+[node name="Floor" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -3)
+use_collision = true
+size = Vector3(11, 1, 16)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall2" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 5.32973, 2.5, -3)
+use_collision = true
+size = Vector3(4, 1, 16)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -3, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 7)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall7" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 5, 2.5, 5)
+use_collision = true
+size = Vector3(4, 1, 3)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall3" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 5, 2.5, -11)
+use_collision = true
+size = Vector3(4, 1, 3)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Wall4" type="CSGBox3D" parent="MessHall"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -3, 2.5, -11)
+use_collision = true
+size = Vector3(4, 1, 7)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="human_reference" parent="MessHall" instance=ExtResource("4_8lisy")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.84719, 0.5, -8.12869)
+
+[node name="Airlock" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 10, 0.794361)
+
+[node name="Floor" type="CSGBox3D" parent="Airlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -1)
+use_collision = true
+size = Vector3(7, 1, 8)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor2" type="CSGBox3D" parent="Airlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 4, -1)
+use_collision = true
+size = Vector3(7, 1, 8)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor3" type="CSGBox3D" parent="Airlock"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, 2, -4.50889)
+use_collision = true
+size = Vector3(7, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="Airlock"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, 2, 2.59256)
+use_collision = true
+size = Vector3(7, 1, 4)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="CorridorMid" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 15, -12)
 
 [node name="Floor" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.4848)
 use_collision = true
-size = Vector3(8, 1, 23)
+size = Vector3(8, 1, 17.0304)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Floor2" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, -2.5)
 use_collision = true
-size = Vector3(8, 1, 23)
+size = Vector3(8, 1, 17)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor3" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535155, 3.66507, 13.5256)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0352, 7.66507, 13.5256)
+use_collision = true
+size = Vector3(22, 1, 3)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor5" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(1, -7.86876e-06, -4.96158e-06, -4.96158e-06, -3.36917e-05, -1, 7.86876e-06, 1, -3.36917e-05, 20.0352, 10.0169, 15.1946)
+use_collision = true
+size = Vector3(22, 0.5, 3.70361)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor6" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(1, -7.82505e-06, -5.00529e-06, 7.82505e-06, 1, -3.3648e-05, 5.00529e-06, 3.3648e-05, 1, 15.0352, 11.6941, 13.4111)
+use_collision = true
+size = Vector3(12, 0.5, 3.43311)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Wall" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1.5, 3, 7.5)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1.5, 3, 9.25171)
 use_collision = true
-size = Vector3(5, 1, 9)
+size = Vector3(5, 1, 13.4966)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Wall2" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1.5, 3, -6.5)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1.5, 3, -6.75244)
 use_collision = true
-size = Vector3(5, 1, 9)
+size = Vector3(5, 1, 8.49512)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Wall3" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 5.5, 3, 7.5)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 5.5, 3, 8.7644)
 use_collision = true
-size = Vector3(5, 1, 9)
+size = Vector3(5, 1, 12.4712)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Wall4" type="CSGBox3D" parent="CorridorMid"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 5.5, 3, -6.5)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 5.5, 3, -6.75659)
 use_collision = true
-size = Vector3(5, 1, 9)
+size = Vector3(5, 1, 8.48682)
 material = SubResource("ShaderMaterial_ajja7")
+
+[node name="StairsDown" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(-3.78552e-08, -2.18557e-08, -1, -0.5, 0.866025, -5.32907e-15, 0.866025, 0.5, -4.37114e-08, 3.59116, -2.44529, 10.1201)
+use_collision = true
+size = Vector3(10.0571, 1, 3)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="StairsUp" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(1.13566e-07, 6.55671e-08, 1, -0.5, 0.866025, -5.32907e-15, -0.866025, -0.5, 1.31134e-07, 0.531142, 1.86646, 9.04749)
+use_collision = true
+size = Vector3(7.46582, 1, 3)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="StairsUp2" type="CSGBox3D" parent="CorridorMid"]
+transform = Transform3D(-0.866025, -0.5, 2.62268e-07, -0.5, 0.866025, -7.10543e-15, -2.27131e-07, -1.31134e-07, -1, 5.65873, 5.73291, 13.5443)
+use_collision = true
+size = Vector3(8, 1, 3)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="CorridorMidStarboard" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 10, -12)
+
+[node name="wall_light" parent="CorridorMidStarboard" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 3.82137e-15, 8.74228e-08, -3.82137e-15, -1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -1, 2.00863, 4.51703, 0)
+
+[node name="wall_light2" parent="CorridorMidStarboard" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 3.82137e-15, 8.74228e-08, -3.82137e-15, -1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -10.9914, 4.51703, -9.53674e-07)
+
+[node name="Floor3" type="CSGBox3D" parent="CorridorMidStarboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, -2.00001)
+use_collision = true
+size = Vector3(13, 1, 12)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor6" type="CSGBox3D" parent="CorridorMidStarboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5.22126)
+use_collision = true
+size = Vector3(10, 1, 5.5575)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="CorridorMidStarboard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, -5.2212)
+use_collision = true
+size = Vector3(5, 1, 6.44238)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor5" type="CSGBox3D" parent="CorridorMidStarboard"]
+transform = Transform3D(1, -3.78552e-08, 6.55671e-08, 3.78552e-08, -0.5, -0.866026, 6.55671e-08, 0.866026, -0.5, -0.500004, 2.36279, -6.47176)
+use_collision = true
+size = Vector3(15, 1, 4.2832)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="CorridorMidPort" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 10, -12)
+
+[node name="wall_light" parent="CorridorMidPort" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 3.82137e-15, 8.74228e-08, -3.82137e-15, -1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -1, 2.00863, 4.51703, 0)
+
+[node name="wall_light2" parent="CorridorMidPort" instance=ExtResource("5_0blf7")]
+transform = Transform3D(1, 3.82137e-15, 8.74228e-08, -3.82137e-15, -1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -1, -10.9914, 4.51703, -9.53674e-07)
+
+[node name="Floor3" type="CSGBox3D" parent="CorridorMidPort"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 3.5576)
+use_collision = true
+size = Vector3(17, 1, 12)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="CorridorMidPort"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 0, 6.55761)
+use_collision = true
+size = Vector3(9, 1, 6)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Wall4" type="CSGBox3D" parent="CorridorMidPort"]
+transform = Transform3D(2.18557e-08, 3.78552e-08, -1, 0.866025, -0.5, 0, -0.5, -0.866025, -4.37114e-08, -6, 2.5, 8.32973)
+use_collision = true
+size = Vector3(4, 1, 26)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Elevators" type="Node3D" parent="."]
+
+[node name="Elevator" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.1327, -0.0142627, -13.4801)
+script = ExtResource("6_xtomb")
+floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2"), NodePath("FloorPos3"), NodePath("FloorPos4")]
+platform = NodePath("Platform")
+
+[node name="Button" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.73421, 0.68407, 3.11269)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "0"
+prompt_text = "Call Elevator"
+
+[node name="Button2" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.27178, 10.6254, 3.16556)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="Button3" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.46045, 16.922, 3.56615)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "2"
+prompt_text = "Call Elevator"
+
+[node name="Button4" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53955, 24.6329, 3.56615)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "3"
+prompt_text = "Call Elevator"
+
+[node name="Platform" type="CSGBox3D" parent="Elevators/Elevator"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0175018, 0, 0.1127)
+use_collision = true
+size = Vector3(8, 1, 5)
+material = SubResource("ShaderMaterial_l61ii")
+
+[node name="Button" parent="Elevators/Elevator/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)
+target_node = NodePath("../..")
+function_name = "cycle_floor"
+arguments = "1"
+prompt_text = "Use Elevator"
+
+[node name="FloorPos" type="Node3D" parent="Elevators/Elevator"]
+
+[node name="FloorPos2" type="Node3D" parent="Elevators/Elevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="FloorPos3" type="Node3D" parent="Elevators/Elevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+
+[node name="FloorPos4" type="Node3D" parent="Elevators/Elevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
+
+[node name="Elevator2" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.8832, -3.03651, 2.0346)
+script = ExtResource("6_xtomb")
+floor_positions = [NodePath("SalvageFloorPos"), NodePath("BayFloorPos"), NodePath("CargoFloorPos")]
+platform = NodePath("Platform")
+target_floor = 1
+
+[node name="BayButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.73421, 0.68407, 3.11269)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="SalvageButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.72822, -5.50108, -6.17887)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "0"
+prompt_text = "Call Elevator"
+
+[node name="CargoButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.62242, 18.922, -1.43385)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "2"
+prompt_text = "Call Elevator"
+
+[node name="Platform" type="CSGBox3D" parent="Elevators/Elevator2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.270432, 0, -1.8873)
+use_collision = true
+size = Vector3(8.50586, 1, 9)
+material = SubResource("ShaderMaterial_l61ii")
+
+[node name="Button" parent="Elevators/Elevator2/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)
+target_node = NodePath("../..")
+function_name = "cycle_floor"
+arguments = "1"
+prompt_text = "Use Elevator"
+
+[node name="BayFloorPos" type="Node3D" parent="Elevators/Elevator2"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, -0.270432, 0, -1.8873)
+
+[node name="CargoFloorPos" type="Node3D" parent="Elevators/Elevator2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27, 18, -1.887)
+
+[node name="SalvageFloorPos" type="Node3D" parent="Elevators/Elevator2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, -6, -8)
+
+[node name="Elevator3" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.98895, -3.03651, -3.9654)
+script = ExtResource("6_xtomb")
+floor_positions = [NodePath("BayFloorPos"), NodePath("HangarFloorPos")]
+platform = NodePath("Platform")
+target_floor = 1
+
+[node name="BayButton" parent="Elevators/Elevator3" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.85463, 0.554882, -0.59522)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "0"
+prompt_text = "Call Elevator"
+
+[node name="HangarButton" parent="Elevators/Elevator3" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 3.56439, -1.59746)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="Platform" type="CSGBox3D" parent="Elevators/Elevator3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("ShaderMaterial_l61ii")
+
+[node name="Button" parent="Elevators/Elevator3/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
+target_node = NodePath("../..")
+function_name = "cycle_floor"
+arguments = "1"
+prompt_text = "Use Elevator"
+
+[node name="BayFloorPos" type="Node3D" parent="Elevators/Elevator3"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
+
+[node name="HangarFloorPos" type="Node3D" parent="Elevators/Elevator3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Elevator4" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, -41.5491)
+script = ExtResource("6_xtomb")
+floor_positions = [NodePath("BayFloorPos"), NodePath("HangarFloorPos")]
+platform = NodePath("Platform")
+target_floor = 1
+
+[node name="BayButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.85463, 0.554882, -0.59522)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "0"
+prompt_text = "Call Elevator"
+
+[node name="HangarButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 3.56439, -1.59746)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="Platform" type="CSGBox3D" parent="Elevators/Elevator4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+use_collision = true
+size = Vector3(12, 1, 12)
+material = SubResource("ShaderMaterial_l61ii")
+
+[node name="Button" parent="Elevators/Elevator4/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
+target_node = NodePath("../..")
+function_name = "cycle_floor"
+arguments = "1"
+prompt_text = "Use Elevator"
+
+[node name="BayFloorPos" type="Node3D" parent="Elevators/Elevator4"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
+
+[node name="HangarFloorPos" type="Node3D" parent="Elevators/Elevator4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Elevator5" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.4653, 30.9635, -44.5158)
+script = ExtResource("6_xtomb")
+floor_positions = [NodePath("CrewFloorPos"), NodePath("GroundFloorPos"), NodePath("BridgeFloorPos")]
+platform = NodePath("Platform")
+target_floor = 1
+
+[node name="AirlockButton" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.14537, -7.44512, 1.40478)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="GroundButton2" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.14537, -14.7081, 2.40478)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "0"
+prompt_text = "Call Elevator"
+
+[node name="BridgeButton" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 0.564388, -1.59746)
+target_node = NodePath("..")
+function_name = "call_to_floor"
+arguments = "1"
+prompt_text = "Call Elevator"
+
+[node name="Platform" type="CSGBox3D" parent="Elevators/Elevator5"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("ShaderMaterial_l61ii")
+
+[node name="Button" parent="Elevators/Elevator5/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
+target_node = NodePath("../..")
+function_name = "cycle_floor"
+arguments = "1"
+prompt_text = "Use Elevator"
+
+[node name="CrewFloorPos" type="Node3D" parent="Elevators/Elevator5"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, -15.1767, 0)
+
+[node name="GroundFloorPos" type="Node3D" parent="Elevators/Elevator5"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, -8.30377, 0)
+
+[node name="BridgeFloorPos" type="Node3D" parent="Elevators/Elevator5"]
+
+[node name="Turret" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.509, 15.3458, -3.59074)
+
+[node name="RailgunComponent" parent="Turret" instance=ExtResource("8_6f0kf")]
+
+[node name="Ladder" parent="Turret" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, 1, 2, 0, 2)
+
+[node name="Ladder2" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Ladder3" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Ladder4" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="Ladder5" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="Ladder6" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Turret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, -0.572876, 2)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("ShaderMaterial_vaq4w")
+
+[node name="Bridge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 31, -40)
+
+[node name="wall_light" parent="Bridge" instance=ExtResource("5_0blf7")]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 4.82123e-07, 5.51485, 0)
+
+[node name="human_reference" parent="Bridge" instance=ExtResource("4_8lisy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04476, 0.5, 2.31515)
+
+[node name="Floor" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
+use_collision = true
+size = Vector3(10, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor8" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+use_collision = true
+size = Vector3(12, 1, 8)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor5" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -13.8077)
+use_collision = true
+size = Vector3(12, 1, 10.385)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor3" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 4.5, -1.93934, 6.93934)
+use_collision = true
+size = Vector3(3, 1, 7)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor7" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, -1.23223, 6.23223)
+use_collision = true
+size = Vector3(6, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor6" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, -4.5, -3, 8)
+use_collision = true
+size = Vector3(3, 1, 10)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(-1, -4.37114e-08, -7.57103e-08, 4.37114e-08, 0.5, -0.866025, 7.57103e-08, -0.866025, -0.5, 0, -1.41259, -7.5)
+use_collision = true
+size = Vector3(12, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor2" type="CSGBox3D" parent="Bridge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+use_collision = true
+size = Vector3(12, 1, 14)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="CrewAirlock" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 31, -40)
+
+[node name="SuitLocker" type="Node3D" parent="CrewAirlock"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -5, -6.54141, 0.45697)
+
+[node name="Wall7" type="CSGBox3D" parent="CrewAirlock/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="CrewAirlock/SuitLocker"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="CrewAirlock/SuitLocker"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="CrewAirlock/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="CrewAirlock/SuitLocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="CrewAirlock/SuitLocker" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker2" type="Node3D" parent="CrewAirlock"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -5, -6.54141, -0.617886)
+
+[node name="Wall7" type="CSGBox3D" parent="CrewAirlock/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="CrewAirlock/SuitLocker2"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="CrewAirlock/SuitLocker2"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="CrewAirlock/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="CrewAirlock/SuitLocker2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="CrewAirlock/SuitLocker2" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker3" type="Node3D" parent="CrewAirlock"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -5, -6.54141, -1.66591)
+
+[node name="Wall7" type="CSGBox3D" parent="CrewAirlock/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="CrewAirlock/SuitLocker3"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="CrewAirlock/SuitLocker3"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="CrewAirlock/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="CrewAirlock/SuitLocker3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="CrewAirlock/SuitLocker3" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker4" type="Node3D" parent="CrewAirlock"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -5, -6.54141, -2.72262)
+
+[node name="Wall7" type="CSGBox3D" parent="CrewAirlock/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="CrewAirlock/SuitLocker4"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="CrewAirlock/SuitLocker4"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="CrewAirlock/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="CrewAirlock/SuitLocker4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="CrewAirlock/SuitLocker4" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="SuitLocker5" type="Node3D" parent="CrewAirlock"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -5, -6.54141, -3.81427)
+
+[node name="Wall7" type="CSGBox3D" parent="CrewAirlock/SuitLocker5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43219)
+use_collision = true
+size = Vector3(2.60596, 1, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall10" type="CSGBox3D" parent="CrewAirlock/SuitLocker5"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, -0.422309, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall11" type="CSGBox3D" parent="CrewAirlock/SuitLocker5"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 0.434156, 0.128954)
+use_collision = true
+size = Vector3(2.60596, 0.519043, 0.13562)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall8" type="CSGBox3D" parent="CrewAirlock/SuitLocker5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14539, 3.8147e-06, 0.101593)
+use_collision = true
+size = Vector3(0.315186, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="Wall9" type="CSGBox3D" parent="CrewAirlock/SuitLocker5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24411, 1.90735e-06, 0.101593)
+use_collision = true
+size = Vector3(0.135986, 1, 0.796814)
+material = SubResource("ShaderMaterial_8iff7")
+
+[node name="human_reference2" parent="CrewAirlock/SuitLocker5" instance=ExtResource("4_8lisy")]
+transform = Transform3D(4.37114e-08, 1, -3.82137e-15, 1, -4.37114e-08, -8.74228e-08, -8.74228e-08, 0, -1, -0.940489, 0.0189695, -0.069212)
+
+[node name="Floor4" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 2.5, -5.33366, 7.5)
+use_collision = true
+size = Vector3(1, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor9" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 3, -5.334, 5.5)
+use_collision = true
+size = Vector3(1, 7, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor10" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, -3, -5.334, 5.5)
+use_collision = true
+size = Vector3(1, 7, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor6" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(-4.37114e-08, 5.96046e-08, -1, 1, 2.6054e-15, -4.37114e-08, 0, -1, -5.96046e-08, 0, -3.83366, 7.5)
+use_collision = true
+size = Vector3(2, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor5" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, -2.5, -5.33366, 7.5)
+use_collision = true
+size = Vector3(1, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor12" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, -2.5, -3.83366, 2.5)
+use_collision = true
+size = Vector3(1, 1, 8)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor13" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 2.5, -3.83366, 2.5)
+use_collision = true
+size = Vector3(1, 1, 8)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor3" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, 0.928512, 0.371303, 0, -0.371303, 0.928512, 0, -7.69158, 9.365)
+use_collision = true
+size = Vector3(5, 1, 4.117)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor7" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(-4.37114e-08, -1, -1.58933e-08, 0.707107, -1.96704e-08, -0.707107, 0.707107, -4.21468e-08, 0.707107, 3, -4.21234, 8.08578)
+use_collision = true
+size = Vector3(3, 1, 10)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor8" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(-4.37114e-08, -1, -1.58933e-08, 0.707107, -1.96704e-08, -0.707107, 0.707107, -4.21468e-08, 0.707107, -3, -4.21234, 8.08578)
+use_collision = true
+size = Vector3(3, 1, 10)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -8.33366, 2.5)
+use_collision = true
+size = Vector3(10, 1, 19)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="human_reference" parent="CrewAirlock" instance=ExtResource("4_8lisy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.925396, -7.83859, 2.31515)
+
+[node name="wall_light" parent="CrewAirlock" instance=ExtResource("5_0blf7")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.30332, -0.5, 0.539932)
+
+[node name="Floor11" type="CSGBox3D" parent="CrewAirlock"]
+transform = Transform3D(-4.37114e-08, 5.96046e-08, -1, 1, 2.6054e-15, -4.37114e-08, 0, -1, -5.96046e-08, 0, -2.33366, 2.5)
+use_collision = true
+size = Vector3(5, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="CrewQuarters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 24, -40)
+
+[node name="Floor" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -8.33366, -7.5)
+use_collision = true
+size = Vector3(9, 1, 29)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor11" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.33366, 2)
+use_collision = true
+size = Vector3(6, 1, 10)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor12" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3.33366, -11.5)
+use_collision = true
+size = Vector3(6, 1, 11)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor18" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, 3)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor6" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, 7)
+use_collision = true
+size = Vector3(4, 1, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor17" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, 3)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor10" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -21.4846)
+use_collision = true
+size = Vector3(4, 0.99, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor9" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, -5.83366, -21.5366)
+use_collision = true
+size = Vector3(6, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor15" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -6, -5.83366, -17)
+use_collision = true
+size = Vector3(8, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor2" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 2.37132, -7.51138, -7.5)
+use_collision = true
+size = Vector3(2, 1, 29)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -0.128679, -3.18126, -7.5)
+use_collision = true
+size = Vector3(4, 1, 29)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="human_reference" parent="CrewQuarters" instance=ExtResource("4_8lisy")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 1.0746, -7.83859, -4.68485)
+
+[node name="wall_light" parent="CrewQuarters" instance=ExtResource("5_0blf7")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.30332, -0.5, 0.539932)
+
+[node name="Bed" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, 2.26118)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed2" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, 2.26118)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed2" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor31" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -18)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor32" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -18)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed17" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -18.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed17" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed18" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -18.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed18" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor25" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -9)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor26" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -9)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed5" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -9.73882)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed5" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed6" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -9.73882)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed6" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor27" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -12)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor28" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -12)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed7" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -12.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed7" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed8" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -12.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed8" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor29" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -15)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor30" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -15)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed15" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -15.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed15" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed16" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -15.7388)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed16" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor19" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, 0)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor20" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, 0)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed11" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -0.738819)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed11" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed12" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -0.738819)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed12" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Floor21" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -6)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor24" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -5.83366, -3)
+use_collision = true
+size = Vector3(3, 0.19, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor22" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -6)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor23" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(0.866025, 2.18557e-08, -0.5, 0.5, -3.78552e-08, 0.866025, 0, -1, -4.37114e-08, 0, -6.33366, -3)
+use_collision = true
+size = Vector3(4, 0.2, 4)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Bed13" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, -6.73882)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed13" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed14" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, -6.73882)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed14" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed3" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -6.82367, 5.74203)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed3" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed4" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33782, -5.82367, 5.74203)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed4" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed9" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.49646, -6.82367, 5.74203)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed9" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="Bed10" type="CSGBox3D" parent="CrewQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.49646, -5.82367, 5.74203)
+size = Vector3(3, 0.147339, 1.5)
+material = SubResource("ShaderMaterial_gdsk1")
+
+[node name="human_reference2" parent="CrewQuarters/Bed10" instance=ExtResource("4_8lisy")]
+transform = Transform3D(5.96046e-08, -1, 0, 4.37114e-08, 2.498e-16, 1, -1, -5.96046e-08, 4.37114e-08, 0.972586, 0.225077, -0.00025177)
+
+[node name="CaptainsQuarters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 31, -59)
+
+[node name="Floor" type="CSGBox3D" parent="CaptainsQuarters"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.33366, 7)
+use_collision = true
+size = Vector3(12, 1, 10)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor2" type="CSGBox3D" parent="CaptainsQuarters"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -5.75439, 1.18952)
+use_collision = true
+size = Vector3(12, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor3" type="CSGBox3D" parent="CaptainsQuarters"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 5, -5.75439, 11.1895)
+use_collision = true
+size = Vector3(2, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="Floor4" type="CSGBox3D" parent="CaptainsQuarters"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -2.5, -5.75439, 11.1895)
+use_collision = true
+size = Vector3(7, 1, 5)
+material = SubResource("ShaderMaterial_ajja7")
+
+[node name="human_reference" parent="CaptainsQuarters" instance=ExtResource("4_8lisy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0447588, -7.85598, 5.31515)
+
+[node name="wall_light" parent="CaptainsQuarters" instance=ExtResource("5_0blf7")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.30332, -3.5, 4.53993)
+
+[node name="fighter" parent="." instance=ExtResource("10_7fcxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75659, 26.8321, -40.622)
+
+[node name="Hull" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Hull"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 24, -4)
+use_collision = true
+size = Vector3(26, 1, 50)
+material = SubResource("ShaderMaterial_gmofw")
