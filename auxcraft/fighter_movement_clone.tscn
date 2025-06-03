@@ -1,31 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvs55tafiwxnj"]
+[gd_scene load_steps=4 format=3 uid="uid://cvs55tafiwxnj"]
 
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_qiirx"]
 [ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="3_q1ujj"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
-render_priority = 0
-shader = ExtResource("2_qiirx")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 1
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.0
-shader_parameter/roughness = 1.0
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
 size = Vector3(6.705, 4.97, 8.9209)
@@ -47,12 +22,6 @@ motion_mode = 1
 visible = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-visible = false
-material_override = SubResource("ShaderMaterial_51rqv")
-size = Vector3(20, 2, 30)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1687, -0.539551)

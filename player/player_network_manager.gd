@@ -6,11 +6,16 @@ class_name PlayerNetworkManager
 @export var username_label: Label3D
 var username: String = ""
 
+@export var player : Player
+
 var network_manager : NetworkManager
 var ui : UIManager
 
+
 func _enter_tree() -> void:
-	set_multiplayer_authority(str(get_owner().name).to_int())
+	pass
+	#player.set_multiplayer_authority(str(get_owner().name).to_int())
+
 
 func _ready() -> void:
 	network_manager = get_tree().get_first_node_in_group("network manager") as NetworkManager

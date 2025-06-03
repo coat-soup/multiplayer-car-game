@@ -88,12 +88,11 @@ func add_player(peer_id):
 	var player = PLAYER.instantiate()
 	player.name = str(peer_id)
 	print("playername: " + player.name)
-	ship.add_child(player)
-	#add_child(player)
-	player.global_position = spawn_position
+	add_child(player)
+	player.global_position = Vector3.ZERO
 
 
-func remove_player(peer_id): 	
+func remove_player(peer_id):
 	var players = get_tree().get_nodes_in_group("player")
 	for player in players:
 		if player.name == str(peer_id):

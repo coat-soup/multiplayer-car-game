@@ -15,10 +15,10 @@ func _process(delta: float) -> void:
 		platform.position = platform.position.move_toward(floor_positions[target_floor].position, delta * speed)
 
 
-func call_to_floor(floor):
-	target_floor = int(floor)
+func call_to_floor(floor_id):
+	target_floor = int(floor_id)
 
-func cycle_floor(dir):
+func cycle_floor(_pass):
 	if target_floor >= len(floor_positions) - 1: cycle_dir = -1
 	elif target_floor <= 0: cycle_dir = 1
 	

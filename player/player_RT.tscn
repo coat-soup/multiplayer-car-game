@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://6r4tjppfaj4w"]
+
+[node name="PlayerRT" type="RemoteTransform3D"]

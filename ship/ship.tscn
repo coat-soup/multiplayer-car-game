@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=16 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -23,10 +23,26 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component") groups=["ship"]]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xlqn0"]
+size = Vector3(37.0995, 9.5211, 87)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_31aqn"]
+size = Vector3(13.2833, 4.44031, 38)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uu56e"]
+size = Vector3(12.8199, 9.04535, 12.7519)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwgce"]
+size = Vector3(42.5774, 15.1165, 84.8757)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sw16b"]
+size = Vector3(36.4025, 8.68864, 30.8955)
+
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
+gravity_bounds = NodePath("GravityBounds")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_i8s7e")
@@ -79,3 +95,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 17)
 
 [node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_tds0y")
+
+[node name="GravityBounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.589752, 7.193, -2.19174)
+shape = SubResource("BoxShape3D_xlqn0")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="GravityBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.78116, 13.6526, -22.8648)
+shape = SubResource("BoxShape3D_31aqn")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="GravityBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54944, 20.4714, -23.7858)
+shape = SubResource("BoxShape3D_uu56e")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="GravityBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147255, -5.01062, 11.5191)
+shape = SubResource("BoxShape3D_fwgce")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="GravityBounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23471, -16.7967, 8.99235)
+shape = SubResource("BoxShape3D_sw16b")

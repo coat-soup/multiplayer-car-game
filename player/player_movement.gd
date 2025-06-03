@@ -2,12 +2,13 @@ extends Node3D
 
 class_name PlayerMovement
 
-@export var player : Player
+@export var player : CharacterBody3D
+@export var player_manager : Player
 
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
 
-@onready var collision_shape_3d: CollisionShape3D = $"../CollisionShape3D"
+@onready var collision_shape_3d: CollisionShape3D = $"CollisionShape3D"
 @onready var floorcast: RayCast3D = $Floorcast
 
 @export var walk_speed = 4.0
@@ -31,19 +32,46 @@ var debug_mode = false
 
 var floor_obj : Node3D
 
-var on_ship := true
+var on_ship := false
 @export var ship_gravity := 9.8
-@onready var ship : ShipManager = get_tree().get_first_node_in_group("ship") as ShipManager
+@onready var ship : ShipManager
+
+const PLAYER_RT = preload("res://player/player_RT.tscn")
+var remote_transform : RemoteTransform3D
+
 
 func _ready():
-	if not player.active or not is_multiplayer_authority(): return
+	ship = get_tree().get_first_node_in_group("ship") as ShipManager
+	remote_transform = PLAYER_RT.instantiate() as RemoteTransform3D
+	ship.add_child(remote_transform)
 	
+	ship.gravity_bounds.body_entered.connect(check_gravity_entered)
+	ship.gravity_bounds.body_exited.connect(check_gravity_left)
+	
+	if not is_multiplayer_authority(): return
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 
 
+func check_gravity_entered(body):
+	if body == self:
+		on_ship = true
+		position += player_manager.global_position - remote_transform.global_position
+		
+		rotate_object_local(Vector3.RIGHT, camera_pivot.rotation.x)
+		camera_pivot.rotation.x = 0
+		
+		remote_transform.remote_path = player_manager.get_path()
+
+
+func check_gravity_left(body):
+	if body == self:
+		on_ship = false
+		remote_transform.remote_path = ""
+
+
 func _input(_event: InputEvent) -> void:
-	if not player.active or not is_multiplayer_authority(): return
+	if not player_manager.active or not is_multiplayer_authority(): return
 	if Input.is_key_pressed(KEY_SEMICOLON):
 		debug_mode = !debug_mode
 		if debug_mode:
@@ -53,74 +81,85 @@ func _input(_event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not player.active or not is_multiplayer_authority(): return
+	if not player_manager.active or not is_multiplayer_authority(): return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		player.rotate_y(-event.relative.x * sensetivity)
-		camera_pivot.rotate_x(-event.relative.y * sensetivity)
-		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		if on_ship:
+			player.rotate_y(-event.relative.x * sensetivity)
+			camera_pivot.rotate_x(-event.relative.y * sensetivity)
+			camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		else:
+			player.rotate_object_local(Vector3.RIGHT, -event.relative.y * sensetivity)
+			player.rotate_object_local(Vector3.UP, -event.relative.x * sensetivity)
 
 
 func _physics_process(delta: float) -> void:
-	if not player.active or not is_multiplayer_authority(): return
+	if not player_manager.active or not is_multiplayer_authority(): return
 	
-	player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
 	
 	# gravity
 	if not player.is_on_floor() and !debug_mode and on_ship:
 		player.velocity += -ship.global_basis.y * ship_gravity * delta
 	
-	if on_ship:
-		player.up_direction = ship.global_basis.y
+	if on_ship: player.up_direction = ship.global_basis.y
+	else: player.up_direction = player.global_basis.y
 	
 	# input
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (player.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+	var direction := (player.basis * Vector3(input_dir.x, 0.0 if on_ship else Input.get_axis("crouch", "jump"), input_dir.y)).normalized()
 	
 	var adjusted_local_velocity = ship.global_basis.inverse() * player.velocity
 	
 	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
 	
-	# jump
-	if Input.is_action_just_pressed("jump") and player.is_on_floor():
-		jump_start.emit()
-		adjusted_local_velocity.y = jump_velocity
-		#player.velocity += ship.global_basis.y * jump_velocity
-		
-	elif player.is_on_floor():
-		#handle_floor_attachment()
-		
-		if direction:
-			adjusted_local_velocity.x = direction.x * speed
-			adjusted_local_velocity.z = direction.z * speed
-		else:
-			adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 10)
-			adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 10)
-		
-		if landing:
-			landing = false
-			if adjusted_local_velocity.y < 1:
-				jump_land.emit()
+	if not on_ship:
+		#EVA
+			player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 2)
+			player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 2)
+			player.velocity.y = lerp(player.velocity.y, direction.y * speed, delta * 2)
+			player.rotate_object_local(Vector3.FORWARD, Input.get_axis("roll_left", "roll_right") * delta * 2)
+			#player.velocity = adjusted_local_velocity
 	else:
-		adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 2)
-		adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 2)
+		player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
+		# WALKING MOVEMENT
+		if Input.is_action_just_pressed("jump") and player.is_on_floor() and on_ship: # jump
+			jump_start.emit()
+			adjusted_local_velocity.y = jump_velocity
+			#player.velocity += ship.global_basis.y * jump_velocity
+			
+		elif player.is_on_floor():
+			#handle_floor_attachment()
+			
+			if direction:
+				adjusted_local_velocity.x = direction.x * speed
+				adjusted_local_velocity.z = direction.z * speed
+			else:
+				adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 10)
+				adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 10)
+			
+			if landing:
+				landing = false
+				if adjusted_local_velocity.y < 1:
+					jump_land.emit()
+		else:
+			adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 2)
+			adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 2)
+			
+			if !landing:
+				landing = true
 		
-		if !landing:
-			landing = true
+		player.velocity = ship.global_basis * adjusted_local_velocity
+		
+		# viewbob
+		t_bob += delta * player.velocity.length() * float(player.is_on_floor())
+		var b : float = bob_calc(t_bob)
+		camera.transform.origin = Vector3(0, b, 0)
+		
+		# bob signals
+		if b/BOB_AMP < 0.05:
+			bob_bottom.emit()
+		elif b/BOB_AMP > 0.95:
+			bob_top.emit()
 	
-	player.velocity = ship.global_basis * adjusted_local_velocity
-	
-	# viewbob
-	t_bob += delta * player.velocity.length() * float(player.is_on_floor())
-	var b : float = bob_calc(t_bob)
-	camera.transform.origin = Vector3(0, b, 0)
-	
-	# bob signals
-	if b/BOB_AMP < 0.05:
-		bob_bottom.emit()
-	elif b/BOB_AMP > 0.95:
-		bob_top.emit()
-
 	player.move_and_slide()
 
 

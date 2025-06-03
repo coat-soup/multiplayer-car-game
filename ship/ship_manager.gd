@@ -5,6 +5,8 @@ class_name ShipManager
 @export var movement_clone : CharacterBody3D
 @export var movement_manager : ShipMovementManager
 @export var main_target_component : ShipComponent
+@export var gravity_bounds: Area3D
+
 
 func _ready() -> void:
 	movement_clone.global_position = global_position

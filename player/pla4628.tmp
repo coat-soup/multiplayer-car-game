@@ -14,93 +14,97 @@
 [sub_resource type="BoxMesh" id="BoxMesh_cp4tc"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ubgm6"]
-properties/0/path = NodePath("MovementManager:position")
+properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("MovementManager:rotation")
+properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("MovementManager/CameraPivot:rotation")
+properties/2/path = NodePath("CameraPivot:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("MovementManager/UsernameLabel:text")
+properties/3/path = NodePath("NetworkManager/UsernameLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera", "health") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera", "health") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
+collision_layer = 2
+collision_mask = 35
 script = ExtResource("1_wogeu")
 network_manager = NodePath("NetworkManager")
 movement_manager = NodePath("MovementManager")
-equipment_manager = NodePath("MovementManager/CameraPivot/EquipmentManager")
-camera = NodePath("MovementManager/CameraPivot/Camera")
+equipment_manager = NodePath("CameraPivot/EquipmentManager")
+camera = NodePath("CameraPivot/Camera")
 health = NodePath("Health")
 
-[node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player")]
+[node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
 script = ExtResource("2_yagft")
-third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel")]
-username_label = NodePath("../MovementManager/UsernameLabel")
-player = NodePath("..")
+third_person_models = [NodePath("../CameraPivot/FaceModel")]
+username_label = NodePath("UsernameLabel")
 
-[node name="MovementManager" type="CharacterBody3D" parent="." node_paths=PackedStringArray("player", "player_manager", "camera_pivot", "camera")]
-script = ExtResource("1_u3ln2")
-player = NodePath(".")
-player_manager = NodePath("..")
-camera_pivot = NodePath("CameraPivot")
-camera = NodePath("CameraPivot/Camera")
-
-[node name="UsernameLabel" type="Label3D" parent="MovementManager"]
+[node name="UsernameLabel" type="Label3D" parent="NetworkManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26044, 0)
 billboard = 1
 text = "STEAM USER"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MovementManager"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_765p8")
-skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementManager"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ybx0f")
 
-[node name="CameraPivot" type="Node3D" parent="MovementManager"]
+[node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 
-[node name="Camera" type="Camera3D" parent="MovementManager/CameraPivot"]
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
 far = 10000.0
 
-[node name="EquipmentManager" type="Node3D" parent="MovementManager/CameraPivot" node_paths=PackedStringArray("player")]
+[node name="EquipmentManager" type="Node3D" parent="CameraPivot" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384345, -0.558265, -0.802137)
 script = ExtResource("5_wjl74")
-player = NodePath("../../..")
+player = NodePath("../..")
 
-[node name="FaceModel" type="Node3D" parent="MovementManager/CameraPivot"]
+[node name="FaceModel" type="Node3D" parent="CameraPivot"]
 
-[node name="Eyes" type="MeshInstance3D" parent="MovementManager/CameraPivot/FaceModel"]
+[node name="Eyes" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
 transform = Transform3D(0.53311, 0, 0, 0, 0.27028, 0, 0, 0, 0.200378, 0, -0.167882, -0.420097)
 mesh = SubResource("BoxMesh_cp4tc")
 skeleton = NodePath("../../../MeshInstance3D")
 
-[node name="Eyes2" type="MeshInstance3D" parent="MovementManager/CameraPivot/FaceModel"]
+[node name="Eyes2" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
 transform = Transform3D(0.0553542, 0, 0, 0, 0.0553542, 0, 0, 0, 0.880138, -0.611887, -0.532021, -0.376919)
 mesh = SubResource("BoxMesh_cp4tc")
 skeleton = NodePath("../../../MeshInstance3D")
 
-[node name="Eyes3" type="MeshInstance3D" parent="MovementManager/CameraPivot/FaceModel"]
+[node name="Eyes3" type="MeshInstance3D" parent="CameraPivot/FaceModel"]
 transform = Transform3D(0.0553542, 0, 0, 0, 0.0553542, 0, 0, 0, 0.880138, 0.612, -0.532, -0.377)
 mesh = SubResource("BoxMesh_cp4tc")
 skeleton = NodePath("../../../MeshInstance3D")
-
-[node name="Floorcast" type="RayCast3D" parent="MovementManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991744, 0)
-target_position = Vector3(0, -0.3, 0)
-collision_mask = 32
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ubgm6")
 
 [node name="InteractionManager" type="Node" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("3_h4ya3")
-camera = NodePath("../MovementManager/CameraPivot/Camera")
+camera = NodePath("../CameraPivot/Camera")
+
+[node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("player", "camera_pivot", "camera")]
+script = ExtResource("1_u3ln2")
+player = NodePath("..")
+camera_pivot = NodePath("../CameraPivot")
+camera = NodePath("../CameraPivot/Camera")
+walk_speed = null
+sprint_speed = null
+jump_velocity = null
+sensetivity = null
+ship_gravity = null
+
+[node name="Floorcast" type="RayCast3D" parent="MovementManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991744, 0)
+target_position = Vector3(0, -0.3, 0)
+collision_mask = 32
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("6_3dm8w")

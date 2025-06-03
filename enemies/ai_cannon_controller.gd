@@ -34,7 +34,6 @@ func _process(_delta: float) -> void:
 	if is_multiplayer_authority():
 		distance_to_target = cannon_controller.global_position.distance_to(target.global_position)
 		if distance_to_target <= sight_range:
-			cannon_controller.ui.display_chat_message("vel:" + str(target.get_parent_velocity()))
 			var adjusted_pos = target.global_position + spread_offset + target.get_parent_velocity() * distance_to_target / cannon_controller.found_bullet_speed
 			var angle = rad_to_deg((adjusted_pos - cannon_controller.barrel_end.global_position).angle_to(cannon_controller.barrel_end.global_basis.z))
 			cannon_controller.ai_camera_lookat(adjusted_pos)
@@ -48,8 +47,6 @@ func _process(_delta: float) -> void:
 				if result and result.position.distance_to(target.global_position) < result.position.distance_to(cannon_controller.barrel_end.global_position):
 					cannon_controller.ai_try_fire()
 					randomise_spread_offset()
-	else:
-		print("not auth")
 
 
 func randomise_spread_offset():

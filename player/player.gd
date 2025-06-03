@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node3D
 
 class_name Player
 
@@ -36,6 +36,6 @@ func on_damaged():
 
 func on_died():
 	health.heal.rpc(100, -1)
-	velocity = Vector3.ZERO
-	global_rotation = Vector3.ZERO
-	global_position = Vector3(0,2,0) if not respawn_point else respawn_point.global_position
+	movement_manager.player.velocity = Vector3.ZERO
+	movement_manager.global_rotation = Vector3.ZERO
+	movement_manager.global_position = Vector3(0,2,0) if not respawn_point else respawn_point.global_position

@@ -12,5 +12,5 @@ func _ready() -> void:
 	callable = Callable(target_node, function_name)
 
 
-func activate_button(source):
+func activate_button(_source):
 	callable.call(arguments)

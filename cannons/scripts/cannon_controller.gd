@@ -118,7 +118,7 @@ func fire_cannon():
 	shell_obj.global_rotation = barrel_end.global_rotation
 	shell_obj.ui = ui
 	found_bullet_speed = shell_obj.speed
-	shell_obj.source = control_manager.using_player.name.to_int() if not control_manager.ai_override else -1
+	shell_obj.source = control_manager.using_player.name.to_int() if control_manager.using_player else -1
 	shell_obj._ready()
 	
 	if control_manager.is_multiplayer_authority():

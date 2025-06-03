@@ -6,6 +6,9 @@ class_name SearchAndDestroyMission
 @export var spread : float = 10.0
 
 func generate_mission(world : Node3D, main_pos : Vector3):
+	if num_to_spawn == 0:
+		print("not spawning satellites")
+		return
 	var objective := DestroyComponentsObjective.new()
 	objective.on_completed.connect(check_completed)
 	objectives.append(objective)
