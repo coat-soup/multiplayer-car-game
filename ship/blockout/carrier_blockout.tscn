@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=20 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
 [ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="8_6f0kf"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
-[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="10_7fcxl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2f3v"]
 render_priority = 0
@@ -1100,7 +1099,7 @@ material = SubResource("ShaderMaterial_ajja7")
 [node name="Elevator" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13.1327, -0.0142627, -13.4801)
 script = ExtResource("6_xtomb")
-floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2"), NodePath("FloorPos3"), NodePath("FloorPos4")]
+floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2"), NodePath("FloorPos3")]
 platform = NodePath("Platform")
 
 [node name="Button" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
@@ -1124,13 +1123,6 @@ function_name = "call_to_floor"
 arguments = "2"
 prompt_text = "Call Elevator"
 
-[node name="Button4" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.53955, 24.6329, 3.56615)
-target_node = NodePath("..")
-function_name = "call_to_floor"
-arguments = "3"
-prompt_text = "Call Elevator"
-
 [node name="Platform" type="CSGBox3D" parent="Elevators/Elevator"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0175018, 0, 0.1127)
 use_collision = true
@@ -1151,9 +1143,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="FloorPos3" type="Node3D" parent="Elevators/Elevator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
-
-[node name="FloorPos4" type="Node3D" parent="Elevators/Elevator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
 
 [node name="Elevator2" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.8832, -3.03651, 2.0346)
@@ -1248,22 +1237,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 [node name="Elevator4" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, -41.5491)
 script = ExtResource("6_xtomb")
-floor_positions = [NodePath("BayFloorPos"), NodePath("HangarFloorPos")]
+floor_positions = [NodePath("HangarFloorPos"), NodePath("DeckFloorPos")]
 platform = NodePath("Platform")
-target_floor = 1
 
-[node name="BayButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.85463, 0.554882, -0.59522)
+[node name="DeckButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13.1454, 24.5549, 6.40478)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="HangarButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 3.56439, -1.59746)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.39449, 0.56439, -1.59746)
 target_node = NodePath("..")
 function_name = "call_to_floor"
-arguments = "1"
+arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="Platform" type="CSGBox3D" parent="Elevators/Elevator4"]
@@ -1272,6 +1260,8 @@ use_collision = true
 size = Vector3(12, 1, 12)
 material = SubResource("ShaderMaterial_l61ii")
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Elevators/Elevator4/Platform"]
+
 [node name="Button" parent="Elevators/Elevator4/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
 target_node = NodePath("../..")
@@ -1279,11 +1269,11 @@ function_name = "cycle_floor"
 arguments = "1"
 prompt_text = "Use Elevator"
 
-[node name="BayFloorPos" type="Node3D" parent="Elevators/Elevator4"]
+[node name="HangarFloorPos" type="Node3D" parent="Elevators/Elevator4"]
 transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
 
-[node name="HangarFloorPos" type="Node3D" parent="Elevators/Elevator4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+[node name="DeckFloorPos" type="Node3D" parent="Elevators/Elevator4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
 
 [node name="Elevator5" type="Node3D" parent="Elevators" node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.4653, 30.9635, -44.5158)
@@ -2016,9 +2006,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0447588, -7.85598, 5.31515)
 
 [node name="wall_light" parent="CaptainsQuarters" instance=ExtResource("5_0blf7")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 1.30332, -3.5, 4.53993)
-
-[node name="fighter" parent="." instance=ExtResource("10_7fcxl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75659, 26.8321, -40.622)
 
 [node name="Hull" type="Node3D" parent="."]
 

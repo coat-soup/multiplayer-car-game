@@ -34,6 +34,8 @@ var planets : Array[Planet]
 var freelook := false
 @export var camera_recenter_speed := 5.0
 
+var locked_to_rails := false
+
 
 func _ready() -> void:
 	for i in get_tree().get_nodes_in_group("planet"):
@@ -65,11 +67,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			ui.update_virtual_joystick(virtual_joystick_value)
 
 
+func lock_to_rails():
+	locked_to_rails = true
+	ship.velocity = Vector3.ZERO
+	velocity_sync = Vector3.ZERO
+	directional_input = Vector3.ZERO
+
+
 func _physics_process(delta: float) -> void:
 	if controllable.is_multiplayer_authority():
 		velocity_sync = ship.velocity
 	else:
 		ship.velocity = velocity_sync
+	
+	ui.display_chat_message("SPEED: " + str(velocity_sync.length()))
 	
 	var directional_input_relative = (ship.global_basis * directional_input).normalized()
 	var v_input = ship.velocity + acceleration * directional_input_relative * delta
@@ -105,6 +116,10 @@ func _physics_process(delta: float) -> void:
 	joystick *= strength
 	
 	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("roll_right", "roll_left") * int(controllable.using_player != null)), rotation_accel * delta)
+	
+	
+	if locked_to_rails:
+		return
 	
 	ship.rotate_object_local(Vector3.UP, -rotation_input.x * turn_speed * delta)
 	ship.rotate_object_local(Vector3.RIGHT, (-1 if invert_y else 1) * rotation_input.y * turn_speed * delta)

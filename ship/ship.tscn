@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=20 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
+[ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
+[ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
+[ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -37,6 +40,9 @@ size = Vector3(42.5774, 15.1165, 84.8757)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sw16b"]
 size = Vector3(36.4025, 8.68864, 30.8955)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
+size = Vector3(5, 5, 13.1836)
 
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds") groups=["ship"]]
 script = ExtResource("1_hvcqr")
@@ -117,3 +123,163 @@ shape = SubResource("BoxShape3D_fwgce")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="GravityBounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23471, -16.7967, 8.99235)
 shape = SubResource("BoxShape3D_sw16b")
+
+[node name="LaunchSystem" type="Node3D" parent="." node_paths=PackedStringArray("remote_transforms", "pad_waypoints", "runway_waypoint", "runway_zone", "carrier_ship")]
+script = ExtResource("9_kncal")
+remote_transforms = [NodePath("RemoteTransforms/PadRT"), NodePath("RemoteTransforms/PadRT2"), NodePath("RemoteTransforms/PadRT3"), NodePath("RemoteTransforms/PadRT4"), NodePath("RemoteTransforms/PadRT5"), NodePath("RemoteTransforms/PadRT6"), NodePath("RemoteTransforms/PadRT7")]
+pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/WaypointPad2"), NodePath("Waypoints/WaypointCenter3"), NodePath("Waypoints/WaypointPad4"), NodePath("Waypoints/WaypointPad5"), NodePath("Waypoints/WaypointPad6"), NodePath("Waypoints/WaypointPad7")]
+runway_waypoint = NodePath("Waypoints/WaypointDeck")
+runway_zone = NodePath("RunwayArea")
+carrier_ship = NodePath("..")
+
+[node name="RunwayArea" type="Area3D" parent="LaunchSystem"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72911, 14, 0)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LaunchSystem/RunwayArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.91799)
+shape = SubResource("BoxShape3D_sqwf5")
+
+[node name="RemoteTransforms" type="Node3D" parent="LaunchSystem"]
+
+[node name="PadRT" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -11, -9)
+
+[node name="PadRT2" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, -9)
+
+[node name="PadRT3" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, 16)
+
+[node name="PadRT4" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, 30)
+
+[node name="PadRT5" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -11, 30)
+
+[node name="PadRT6" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -11, 46)
+
+[node name="PadRT7" type="RemoteTransform3D" parent="LaunchSystem/RemoteTransforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -11, 46)
+
+[node name="Waypoints" type="Node3D" parent="LaunchSystem"]
+
+[node name="WaypointCenter" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -10)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointPad"), NodePath("../WaypointPad2"), NodePath("../WaypointElevator"), NodePath("../WaypointCenter2")]
+
+[node name="WaypointElevator" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -10, -25)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointDeck"), NodePath("../WaypointCenter")]
+elevator_path = NodePath("../../../CarrierBlockout/Elevators/Elevator4")
+
+[node name="WaypointDeck" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 15, -25)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointElevator")]
+elevator_level = 1
+
+[node name="WaypointPad" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, -10)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter")]
+
+[node name="WaypointPad2" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, -10)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter")]
+
+[node name="WaypointCenter2" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 16)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointPad3"), NodePath("../WaypointCenter"), NodePath("../WaypointCenter3")]
+
+[node name="WaypointPad3" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 16)
+script = ExtResource("10_qloxf")
+connections = [null, NodePath("../WaypointCenter2")]
+
+[node name="WaypointCenter3" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 30)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointPad4"), NodePath("../WaypointPad5"), NodePath("../WaypointCenter4"), NodePath("../WaypointCenter2")]
+
+[node name="WaypointPad4" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, 30)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter3")]
+
+[node name="WaypointPad5" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 30)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter3")]
+
+[node name="WaypointCenter4" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 47)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter3"), NodePath("../WaypointPad6"), NodePath("../WaypointPad7")]
+
+[node name="WaypointPad6" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, 47)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter4")]
+
+[node name="WaypointPad7" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 47)
+script = ExtResource("10_qloxf")
+connections = [NodePath("../WaypointCenter4")]
+
+[node name="LaunchButtons" type="Node3D" parent="LaunchSystem"]
+
+[node name="Button" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, -3)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "0"
+prompt_text = "Launch"
+
+[node name="Button2" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, -3)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "1"
+prompt_text = "Launch"
+
+[node name="Button3" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 22)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "2"
+prompt_text = "Launch"
+
+[node name="Button4" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, 37)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "3"
+prompt_text = "Launch"
+
+[node name="Button5" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 37)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "4"
+prompt_text = "Launch"
+
+[node name="Button6" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, 52)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "5"
+prompt_text = "Launch"
+
+[node name="Button7" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 52)
+target_node = NodePath("../..")
+function_name = "launch_ship_from_pad"
+arguments = "6"
+prompt_text = "Launch"

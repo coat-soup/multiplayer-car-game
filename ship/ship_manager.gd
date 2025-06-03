@@ -2,7 +2,7 @@ extends Node3D
 class_name ShipManager
 
 @export var root : Node
-@export var movement_clone : CharacterBody3D
+@export var movement_clone : ShipMovementClone
 @export var movement_manager : ShipMovementManager
 @export var main_target_component : ShipComponent
 @export var gravity_bounds: Area3D

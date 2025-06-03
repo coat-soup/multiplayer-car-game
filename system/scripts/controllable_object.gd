@@ -89,3 +89,15 @@ func un_controll():
 	
 	await get_tree().create_timer(0.5).timeout
 	interactable.active = true
+
+
+@rpc("any_peer", "call_local")
+func reset_synch_auth():
+	synchronizer.set_multiplayer_authority(1, false)
+	root_owner.set_multiplayer_authority(1, false)
+
+@rpc("any_peer", "call_local")
+func retry_sync_auth():
+	if using_player:
+		synchronizer.set_multiplayer_authority(str(using_player.name).to_int(), false)
+		root_owner.set_multiplayer_authority(str(using_player.name).to_int(), false)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvs55tafiwxnj"]
+[gd_scene load_steps=5 format=3 uid="uid://cvs55tafiwxnj"]
 
+[ext_resource type="Script" path="res://auxcraft/ship_movement_clone.gd" id="1_u3bfa"]
 [ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="3_q1ujj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
@@ -13,10 +14,11 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="ShipMovementClone" type="CharacterBody3D"]
+[node name="FighterMovementClone" type="CharacterBody3D"]
 collision_layer = 16
 collision_mask = 16
 motion_mode = 1
+script = ExtResource("1_u3bfa")
 
 [node name="fighter" parent="." instance=ExtResource("3_q1ujj")]
 visible = false
