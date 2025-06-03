@@ -48,7 +48,7 @@ func take_control(player_id : String):
 	
 	using_player = player
 	#using_player.reparent(interactable)
-	remote_path = get_path_to(using_player)
+	remote_path = get_path_to(using_player.movement_manager)
 	player.position = Vector3.ZERO
 	
 	if is_multiplayer_authority():

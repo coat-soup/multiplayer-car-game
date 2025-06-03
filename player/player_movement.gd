@@ -56,19 +56,37 @@ func _ready():
 func check_gravity_entered(body):
 	if body == self:
 		on_ship = true
-		position += player_manager.global_position - remote_transform.global_position
+		#player.position += player_manager.global_position - remote_transform.global_position
+		#player.rotation += player_manager.global_rotation - remote_transform.global_rotation
+		var r_diff = player_manager.global_rotation - remote_transform.global_rotation
 		
-		rotate_object_local(Vector3.RIGHT, camera_pivot.rotation.x)
-		camera_pivot.rotation.x = 0
+		var g_pos = player.global_position
+		var g_rot = player.global_rotation
+		
+		#player.position = player.position.rotated(Vector3.RIGHT, r_diff.x)
+		#player.position = player.position.rotated(Vector3.UP, r_diff.y)
+		#player.position = player.position.rotated(Vector3.FORWARD, r_diff.z)
 		
 		remote_transform.remote_path = player_manager.get_path()
+		
+		#await get_tree().process_frame
+		player.global_position = g_pos
+		player.global_rotation = g_rot
 
 
 func check_gravity_left(body):
 	if body == self:
 		on_ship = false
 		remote_transform.remote_path = ""
+		player.rotate_object_local(Vector3.RIGHT, camera_pivot.rotation.x)
+		camera_pivot.rotation.x = 0
 
+func pause_ship_rpc():
+	remote_transform.update_position = false
+	remote_transform.update_rotation = false
+func unpause_ship_rpc():
+	remote_transform.update_position = true
+	remote_transform.update_rotation = true
 
 func _input(_event: InputEvent) -> void:
 	if not player_manager.active or not is_multiplayer_authority(): return
@@ -105,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	
 	# input
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (player.basis * Vector3(input_dir.x, 0.0 if on_ship else Input.get_axis("crouch", "jump"), input_dir.y)).normalized()
+	var direction := ((player.basis if on_ship else player.global_basis) * Vector3(input_dir.x, 0.0 if on_ship else Input.get_axis("crouch", "jump"), input_dir.y)).normalized()
 	
 	var adjusted_local_velocity = ship.global_basis.inverse() * player.velocity
 	
@@ -113,13 +131,14 @@ func _physics_process(delta: float) -> void:
 	
 	if not on_ship:
 		#EVA
-			player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 2)
-			player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 2)
-			player.velocity.y = lerp(player.velocity.y, direction.y * speed, delta * 2)
-			player.rotate_object_local(Vector3.FORWARD, Input.get_axis("roll_left", "roll_right") * delta * 2)
-			#player.velocity = adjusted_local_velocity
+		player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 2)
+		player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 2)
+		player.velocity.y = lerp(player.velocity.y, direction.y * speed, delta * 2)
+		player.rotate_object_local(Vector3.FORWARD, Input.get_axis("roll_left", "roll_right") * delta * 2)
+		#player.velocity = adjusted_local_velocity
 	else:
 		player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
+		player.rotation.x = lerp_angle(player.rotation.x, 0, delta * 10)
 		# WALKING MOVEMENT
 		if Input.is_action_just_pressed("jump") and player.is_on_floor() and on_ship: # jump
 			jump_start.emit()
