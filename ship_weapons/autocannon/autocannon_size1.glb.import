@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c71iwas4otsi0"
-path="res://.godot/imported/shell.glb-ec9e436ce02f8fe3dab491cf63590d98.scn"
+uid="uid://duov3q78g5yer"
+path="res://.godot/imported/autocannon_size1.glb-e53e158327205453d4c3e6585ed62043.scn"
 
 [deps]
 
-source_file="res://cannons/shell.glb"
-dest_files=["res://.godot/imported/shell.glb-ec9e436ce02f8fe3dab491cf63590d98.scn"]
+source_file="res://ship_weapons/autocannon/autocannon_size1.glb"
+dest_files=["res://.godot/imported/autocannon_size1.glb-e53e158327205453d4c3e6585ed62043.scn"]
 
 [params]
 

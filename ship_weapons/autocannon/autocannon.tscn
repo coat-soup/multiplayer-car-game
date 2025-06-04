@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://cxb87aa4s0d0k"]
 
-[ext_resource type="PackedScene" uid="uid://v6ld2t0h2oos" path="res://cannons/autocannon/autocannon.glb" id="1_gtjru"]
-[ext_resource type="Script" path="res://cannons/scripts/cannon_controller.gd" id="2_c1g2y"]
+[ext_resource type="PackedScene" uid="uid://v6ld2t0h2oos" path="res://ship_weapons/autocannon/autocannon.glb" id="1_gtjru"]
+[ext_resource type="Script" path="res://ship_weapons/scripts/cannon_controller.gd" id="2_c1g2y"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="2_sgksp"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="3_6v6u1"]
-[ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://cannons/autocannon_shell.tscn" id="3_ri3vl"]
+[ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://ship_weapons/autocannon_shell.tscn" id="3_ri3vl"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_1tp4y"]
-[ext_resource type="Texture2D" uid="uid://brrchc8gfkb5x" path="res://cannons/autocannon/autocannon.png" id="4_akics"]
+[ext_resource type="Texture2D" uid="uid://brrchc8gfkb5x" path="res://ship_weapons/autocannon/autocannon.png" id="4_akics"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="4_ulasb"]
-[ext_resource type="Texture2D" uid="uid://bicy3jnjvley2" path="res://cannons/autocannon/autocannon_n.png" id="5_kk432"]
+[ext_resource type="Texture2D" uid="uid://bicy3jnjvley2" path="res://ship_weapons/autocannon/autocannon_n.png" id="5_kk432"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcdmx"]
 albedo_texture = ExtResource("4_akics")

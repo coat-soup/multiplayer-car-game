@@ -80,8 +80,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		ship.velocity = velocity_sync
 	
-	ui.display_chat_message("SPEED: " + str(velocity_sync.length()))
-	
 	var directional_input_relative = (ship.global_basis * directional_input).normalized()
 	var v_input = ship.velocity + acceleration * directional_input_relative * delta
 	if v_input.length() < max_speed:

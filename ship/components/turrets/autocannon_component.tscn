@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvsblvva5sf3y"]
 
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_iicsa"]
-[ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://cannons/autocannon/autocannon.tscn" id="2_1qikb"]
+[ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://ship_weapons/autocannon/autocannon.tscn" id="2_1qikb"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="3_i7jyb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]

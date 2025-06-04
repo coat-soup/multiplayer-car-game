@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bu84gmqc03kyx"]
 
-[ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://cannons/shell.glb" id="1_t3p0o"]
+[ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_t3p0o"]
 
 [node name="shell" instance=ExtResource("1_t3p0o")]
 

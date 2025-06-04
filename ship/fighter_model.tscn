@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjnmu2tlklrfb"]
+
+[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="1_ob1ty"]
+
+[node name="fighter" instance=ExtResource("1_ob1ty")]
+
+[node name="Cylinder_002" parent="." index="3"]
+visible = false

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://hbyqte87esm2"]
+
+[ext_resource type="PackedScene" uid="uid://duov3q78g5yer" path="res://ship_weapons/autocannon/autocannon_size1.glb" id="1_timnr"]
+[ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="2_5hunb"]
+[ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://ship_weapons/autocannon_shell.tscn" id="3_mw7yq"]
+[ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="3_xo7rc"]
+
+[node name="autocannon_size1" node_paths=PackedStringArray("barrel_end", "firing_audio") instance=ExtResource("1_timnr")]
+script = ExtResource("2_5hunb")
+shell = ExtResource("3_mw7yq")
+barrel_end = NodePath("BarrelEnd")
+fire_rate = 3.0
+firing_audio = NodePath("BarrelEnd/FiringAudio")
+
+[node name="BarrelEnd" type="Node3D" parent="." index="1"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -4.73164, 0.495864, 2.39935e-08)
+
+[node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd" index="0"]
+stream = ExtResource("3_xo7rc")
+unit_size = 250.0
+max_distance = 250.0
+max_polyphony = 3

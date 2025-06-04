@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bc5fnv6u2ikqc"]
 
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_nsl61"]
-[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://cannons/massive_cannon/massive_cannon.tscn" id="2_240kq"]
+[ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://ship_weapons/massive_cannon/massive_cannon.tscn" id="2_240kq"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="3_3j6ra"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]

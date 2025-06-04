@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bop8uqrotuyrh"
-path="res://.godot/imported/massive_cannon.glb-ffac5b35497d87afce7276c6e2451159.scn"
+path="res://.godot/imported/massive_cannon.glb-f1bb8e29b0aec81979da3382dfee3338.scn"
 
 [deps]
 
-source_file="res://cannons/massive_cannon/massive_cannon.glb"
-dest_files=["res://.godot/imported/massive_cannon.glb-ffac5b35497d87afce7276c6e2451159.scn"]
+source_file="res://ship_weapons/massive_cannon/massive_cannon.glb"
+dest_files=["res://.godot/imported/massive_cannon.glb-f1bb8e29b0aec81979da3382dfee3338.scn"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wdhhcfk1obsl"
-path="res://.godot/imported/massive_cannon.png-f628df832603a0ab30a7e0e1cd46f222.ctex"
+uid="uid://brrchc8gfkb5x"
+path="res://.godot/imported/autocannon.png-6042e0fa7e098c34f33b64397f76ec78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cannons/massive_cannon/massive_cannon.png"
-dest_files=["res://.godot/imported/massive_cannon.png-f628df832603a0ab30a7e0e1cd46f222.ctex"]
+source_file="res://ship_weapons/autocannon/autocannon.png"
+dest_files=["res://.godot/imported/autocannon.png-6042e0fa7e098c34f33b64397f76ec78.ctex"]
 
 [params]
 

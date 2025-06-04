@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=11 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
-[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="3_gjnon"]
+[ext_resource type="PackedScene" uid="uid://cjnmu2tlklrfb" path="res://ship/fighter_model.tscn" id="3_arndu"]
+[ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="4_00x40"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="5_1n6oi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_fb5fw"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="7_0mde5"]
+[ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapons_controller.gd" id="8_onrm8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -26,11 +28,23 @@ script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 
+[node name="ShipWeaponsController" type="Node3D" parent="." node_paths=PackedStringArray("weapons", "ship", "controllable")]
+script = ExtResource("8_onrm8")
+weapons = [NodePath("../fighter/autocannon_size1"), NodePath("../fighter/autocannon_size2")]
+ship = NodePath("..")
+controllable = NodePath("../Cockpit/Controllable")
+
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_3xy1i")
 ship = NodePath("..")
 
-[node name="fighter" parent="." instance=ExtResource("3_gjnon")]
+[node name="fighter" parent="." instance=ExtResource("3_arndu")]
+
+[node name="autocannon_size1" parent="fighter" instance=ExtResource("4_00x40")]
+transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 2.7715, -0.752023, -1)
+
+[node name="autocannon_size2" parent="fighter" instance=ExtResource("4_00x40")]
+transform = Transform3D(-5.73206e-15, -1, 1.31134e-07, -4.37114e-08, 1.31134e-07, 1, -1, 0, -4.37114e-08, -2.771, -0.752, -1)
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
