@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=12 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
+[ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/fighter_movement_clone.tscn" id="2_l5eic"]
 [ext_resource type="PackedScene" uid="uid://cjnmu2tlklrfb" path="res://ship/fighter_model.tscn" id="3_arndu"]
 [ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="4_00x40"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="5_1n6oi"]
@@ -27,6 +28,7 @@ properties/2/replication_mode = 1
 script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
+MOVEMENT_CLONE_PREFAB = ExtResource("2_l5eic")
 
 [node name="ShipWeaponsController" type="Node3D" parent="." node_paths=PackedStringArray("weapons", "ship", "controllable")]
 script = ExtResource("8_onrm8")
@@ -51,7 +53,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-current = true
 far = 10000.0
 
 [node name="Cockpit" type="Node3D" parent="."]

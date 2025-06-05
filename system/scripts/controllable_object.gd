@@ -19,6 +19,9 @@ var ui : UIManager
 @export var transfer_auth := true
 
 
+func _enter_tree() -> void:
+	camera.current = false
+
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	interactable.interacted.connect(on_interact)

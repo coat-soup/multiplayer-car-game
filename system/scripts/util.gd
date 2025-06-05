@@ -77,3 +77,16 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 static func random_point_in_sphere(radius : float, min_radius : float = 0.0) -> Vector3:
 	return (Vector3.UP * randf_range(min_radius, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
 	
+
+
+static func spawn_ship(prefab : PackedScene, position : Vector3, parent : Node, update_level_manager : bool = true) -> ShipManager:
+	var ship = prefab.instantiate() as ShipManager
+	ship.movement_clone = ship.MOVEMENT_CLONE_PREFAB.instantiate()
+	parent.add_child.call_deferred(ship, true)
+	parent.add_child.call_deferred(ship.movement_clone, true)
+	ship.position = position
+	ship.movement_clone.position = position
+	
+	if update_level_manager:
+		(parent.get_tree().get_first_node_in_group("network manager").level_manager as LevelManager).active_ships.append(prefab)
+	return ship

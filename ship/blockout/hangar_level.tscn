@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://jyhm57p6b4r4"]
+[gd_scene load_steps=6 format=3 uid="uid://jyhm57p6b4r4"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_2pe03"]
 [ext_resource type="PackedScene" uid="uid://o1vr7bkxm3w2" path="res://ship/blockout/landing_pad.tscn" id="1_xcwav"]
-[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="2_l0c2g"]
 [ext_resource type="PackedScene" uid="uid://bn34hdhi2rq2m" path="res://ship/blockout/barge_bay.tscn" id="6_os2g7"]
 [ext_resource type="PackedScene" uid="uid://xk45fu6cvrgo" path="res://world/props/models/human_reference.glb" id="7_84bgc"]
 
@@ -35,14 +34,8 @@ shader_parameter/albedo_alpha = 0.5
 [node name="LandingPad" parent="." instance=ExtResource("1_xcwav")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.0175, 0, 14.1127)
 
-[node name="fighter2" parent="LandingPad" instance=ExtResource("2_l0c2g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.512879, 2.53501, -2.0119)
-
 [node name="LandingPad2" parent="." instance=ExtResource("1_xcwav")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.0175, 0, 29.1127)
-
-[node name="fighter" parent="LandingPad2" instance=ExtResource("2_l0c2g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.512878, 2.53501, -2.0119)
 
 [node name="LandingPad4" parent="." instance=ExtResource("1_xcwav")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 10.9825, 0, 29.1127)

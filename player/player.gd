@@ -25,6 +25,7 @@ func _ready() -> void:
 		health.took_damage.connect(on_damaged)
 		health.healed.connect(on_damaged)
 		health.died.connect(on_died)
+		camera.current = true
 
 
 func on_damaged():

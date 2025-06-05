@@ -27,12 +27,27 @@ var cur_path_id := -1
 var launch_yeet := 0.0
 var yeeting := false
 
+@export var starting_ships_on_load : Array[PackedScene]
+
 
 func _ready():
 	for i in remote_transforms:
 		ships.append(null)
 	
 	runway_zone.body_entered.connect(check_runway)
+	
+	get_tree().get_first_node_in_group("network manager").host_started.connect(spawn_preloads)
+
+
+func spawn_preloads():
+	carrier_ship.movement_manager.ui.display_chat_message("connected")
+	if not multiplayer.is_server(): return
+	for i in range(len(starting_ships_on_load)):
+		var ship = Util.spawn_ship(starting_ships_on_load[i], Vector3.ONE * 100, carrier_ship.get_parent_node_3d()) as ShipManager
+		
+		await get_tree().create_timer(0.1).timeout
+		directly_add_ship_to_pad(ship, i)
+		carrier_ship.movement_manager.ui.display_chat_message("SPAWNING LOCAL AUXCRAFT")
 
 
 func check_runway(body):
@@ -144,3 +159,11 @@ func get_first_available_pad() -> int:
 		if not ships[i]:
 			return i
 	return -1
+
+
+func directly_add_ship_to_pad(ship : ShipManager, pad_id : int):
+	ships[pad_id] = ship
+	remote_transforms[pad_id].position = pad_waypoints[pad_id].position
+	remote_transforms[pad_id].remote_path = ship.movement_clone.get_path()
+	ship.movement_manager.lock_to_rails()
+	ship.movement_clone.toggle_collider(false)

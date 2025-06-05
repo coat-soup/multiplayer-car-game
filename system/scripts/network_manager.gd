@@ -1,6 +1,7 @@
 extends Node
-
 class_name NetworkManager
+
+signal host_started
 
 @onready var ui : UIManager = get_tree().get_first_node_in_group("ui")
 
@@ -46,6 +47,8 @@ func _on_host_pressed() -> void:
 	$Camera3D.queue_free()
 	add_player(multiplayer.get_unique_id())
 	ui.toggle_network_menu(false)
+	
+	host_started.emit()
 
 
 func _on_host_local_pressed() -> void:
@@ -61,6 +64,8 @@ func _on_host_local_pressed() -> void:
 	$Camera3D.queue_free()
 	add_player(multiplayer.get_unique_id())
 	ui.toggle_network_menu(false)
+	
+	host_started.emit()
 
 
 func _on_join_pressed() -> void:

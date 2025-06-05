@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=22 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
+[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="2_bt4ft"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
 [ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
+[ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/fighter.tscn" id="10_hiebf"]
 [ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
 
@@ -49,6 +51,7 @@ script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 gravity_bounds = NodePath("GravityBounds")
+MOVEMENT_CLONE_PREFAB = ExtResource("2_bt4ft")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_i8s7e")
@@ -127,10 +130,11 @@ shape = SubResource("BoxShape3D_sw16b")
 [node name="LaunchSystem" type="Node3D" parent="." node_paths=PackedStringArray("remote_transforms", "pad_waypoints", "runway_waypoint", "runway_zone", "carrier_ship")]
 script = ExtResource("9_kncal")
 remote_transforms = [NodePath("RemoteTransforms/PadRT"), NodePath("RemoteTransforms/PadRT2"), NodePath("RemoteTransforms/PadRT3"), NodePath("RemoteTransforms/PadRT4"), NodePath("RemoteTransforms/PadRT5"), NodePath("RemoteTransforms/PadRT6"), NodePath("RemoteTransforms/PadRT7")]
-pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/WaypointPad2"), NodePath("Waypoints/WaypointCenter3"), NodePath("Waypoints/WaypointPad4"), NodePath("Waypoints/WaypointPad5"), NodePath("Waypoints/WaypointPad6"), NodePath("Waypoints/WaypointPad7")]
+pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/WaypointPad2"), NodePath("Waypoints/WaypointPad3"), NodePath("Waypoints/WaypointPad4"), NodePath("Waypoints/WaypointPad5"), NodePath("Waypoints/WaypointPad6"), NodePath("Waypoints/WaypointPad7")]
 runway_waypoint = NodePath("Waypoints/WaypointDeck")
 runway_zone = NodePath("RunwayArea")
 carrier_ship = NodePath("..")
+starting_ships_on_load = Array[PackedScene]([ExtResource("10_hiebf")])
 
 [node name="RunwayArea" type="Area3D" parent="LaunchSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72911, 14, 0)

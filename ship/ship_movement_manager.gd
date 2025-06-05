@@ -75,6 +75,7 @@ func lock_to_rails():
 
 
 func _physics_process(delta: float) -> void:
+	if not ship: return
 	if controllable.is_multiplayer_authority():
 		velocity_sync = ship.velocity
 	else:
