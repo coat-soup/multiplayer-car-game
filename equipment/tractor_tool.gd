@@ -16,7 +16,7 @@ func on_triggered(button : int):
 	if button != 0: return
 	if target:
 		print("letting go")
-		target.gravity_scale = 1
+		#target.gravity_scale = 1
 		target = null
 		
 	else:
@@ -26,7 +26,7 @@ func on_triggered(button : int):
 		if target:
 			#TODO: particles
 			
-			target.gravity_scale = 0
+			#target.gravity_scale = 0
 			target_distance = target.global_position.distance_to(global_position)
 			
 			audio.pitch_scale = randf_range(0.9,1.1)
@@ -59,7 +59,6 @@ func _process(delta: float) -> void:
 		var point = (global_position - global_basis.z * target_distance)
 		target.linear_velocity = move_speed * (point - target.global_position).limit_length(1.0)
 		#target.linear_velocity = target.linear_velocity.move_toward(move_speed * (point - target.global_position).limit_length(1.0), delta * acceleration)
-
 
 
 func raycast_target() -> PhysicsBody3D:

@@ -154,7 +154,7 @@ func get_first_available_pad() -> int:
 
 func directly_add_ship_to_pad(ship : ShipManager, pad_id : int):
 	ships[pad_id] = ship
+	ship.movement_clone.toggle_collider(false)
 	remote_transforms[pad_id].global_position = pad_waypoints[pad_id].global_position
 	remote_transforms[pad_id].remote_path = ship.movement_clone.get_path()
 	ship.movement_manager.lock_to_rails()
-	ship.movement_clone.toggle_collider(false)

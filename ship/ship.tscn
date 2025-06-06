@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=24 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
+[ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="5_cwq02"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
@@ -64,6 +65,9 @@ ship = NodePath("..")
 
 [node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21, -27.2965)
+
+[node name="ItemManager" type="Node" parent="."]
+script = ExtResource("5_cwq02")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21.5054, -20.5969)

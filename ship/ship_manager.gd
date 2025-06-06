@@ -29,6 +29,7 @@ func setup():
 	movement_manager.ship = movement_clone
 	movement_clone.ship_manager = self
 	movement_manager.controllable.synchronizer = movement_clone.get_node("MultiplayerSynchronizer") as MultiplayerSynchronizer
+	movement_manager.controllable.root_owner = movement_clone
 
 
 @rpc("any_peer", "call_local")
@@ -36,6 +37,7 @@ func request_set_movement_clone():
 	if multiplayer.is_server() and movement_clone:
 		movement_manager.ui.display_chat_message("Returning clone set request")
 		set_peer_movement_clone.rpc_id(multiplayer.get_remote_sender_id(), movement_clone.get_path())
+
 
 @rpc("any_peer", "call_local")
 func set_peer_movement_clone(node_path : NodePath):
