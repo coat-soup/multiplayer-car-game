@@ -15,6 +15,7 @@ class_name PlayerMovement
 @export var sprint_speed = 7.0
 @export var jump_velocity = 4.5
 @export var sensetivity = 0.005;
+var camera_locked := false
 
 #viewbob
 const BOB_FREQ = 2.5
@@ -93,7 +94,7 @@ func _input(_event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not player_manager.active or not is_multiplayer_authority(): return
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if not camera_locked and event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if on_ship:
 			player.rotate_y(-event.relative.x * sensetivity)
 			camera_pivot.rotate_x(-event.relative.y * sensetivity)

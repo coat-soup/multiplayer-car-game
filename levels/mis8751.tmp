@@ -85,6 +85,12 @@ movement_clone = NodePath("../ShipMovementClone")
 
 [node name="TractorTool" parent="ShipHolder/Ship" instance=ExtResource("13_y00j6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1959, 13, -27.057)
+beam_range = null
+force = null
+damping = null
+ground_offset = null
+interact_holdable = null
+raycast_on_startup = null
 
 [node name="World" type="Node3D" parent="."]
 

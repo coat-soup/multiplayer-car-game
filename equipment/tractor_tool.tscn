@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://fyxpmm5wifkc"]
+
+[ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
+[ext_resource type="PackedScene" uid="uid://dwyud5d5wciho" path="res://equipment/models/tractor_tool.glb" id="2_aqkas"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
+size = Vector3(1.104, 0.447, 0.2)
+
+[node name="TractorTool" type="Node3D" node_paths=PackedStringArray("interactable")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_bttfc")
+equipment_name = "Tractor Tool"
+interactable = NodePath("StaticBody3D")
+
+[node name="tractor_tool" parent="." instance=ExtResource("2_aqkas")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_e8735")
+prompt_text = "Equip Wrench"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0240918, 0.00222123, 0)
+shape = SubResource("BoxShape3D_yrpc2")
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]

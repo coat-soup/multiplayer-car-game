@@ -1300,7 +1300,7 @@ prompt_text = "Call Elevator"
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 0.564388, -1.59746)
 target_node = NodePath("..")
 function_name = "call_to_floor"
-arguments = "1"
+arguments = "2"
 prompt_text = "Call Elevator"
 
 [node name="Platform" type="CSGBox3D" parent="Elevators/Elevator5"]

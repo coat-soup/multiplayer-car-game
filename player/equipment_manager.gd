@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
 		drop_equipment.rpc(cur_slot)
 	
 	var scroll_dir = int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)) - int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP))
-	if scroll_dir != 0:
+	if scroll_dir != 0 and not (items[cur_slot] and (items[cur_slot] as TractorTool) and (items[cur_slot] as TractorTool).target):
 		swap_to_item((cur_slot + scroll_dir) % items.size())
 
 

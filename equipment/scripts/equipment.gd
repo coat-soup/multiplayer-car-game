@@ -19,6 +19,7 @@ var prev_parent : Node3D = null
 @export var raycast_on_startup := true
 
 
+
 func _ready():
 	interactable.prompt_text = "Equip " + equipment_name
 	interactable.interacted.connect(try_equip)
