@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bn34hdhi2rq2m"]
 
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_oyxet"]
-[ext_resource type="PackedScene" uid="uid://bbiyvux10g2ew" path="res://auxcraft/barge.tscn" id="2_f8075"]
+[ext_resource type="PackedScene" uid="uid://bbiyvux10g2ew" path="res://auxcraft/scenes/barge.tscn" id="2_f8075"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dmxh5"]
 render_priority = 0

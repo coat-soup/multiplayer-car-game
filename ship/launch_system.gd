@@ -1,7 +1,5 @@
 extends Node3D
 
-signal reached_waypoint
-
 var current_waypoint : Vector3
 
 @onready var elevator_RT: RemoteTransform3D = $"../CarrierBlockout/Elevators/Elevator4/Platform/RemoteTransform3D"
@@ -27,7 +25,7 @@ var cur_path_id := -1
 var launch_yeet := 0.0
 var yeeting := false
 
-@export var starting_ships_on_load : Array[PackedScene]
+@export var starting_ships_on_load : Array[Ship]
 
 
 func _ready():
@@ -43,7 +41,7 @@ func spawn_preloads():
 	carrier_ship.movement_manager.ui.display_chat_message("connected")
 	if not multiplayer.is_server(): return
 	for i in range(len(starting_ships_on_load)):
-		var ship = Util.spawn_ship(starting_ships_on_load[i], Vector3.ONE * 100, carrier_ship.get_parent_node_3d()) as ShipManager
+		var ship = starting_ships_on_load[i].spawn_instance(Vector3.UP * 50, carrier_ship.get_parent_node_3d()) as ShipManager
 		
 		await get_tree().create_timer(0.1).timeout
 		directly_add_ship_to_pad(ship, i)
@@ -55,7 +53,8 @@ func check_runway(body):
 	print("Checking runway: ", body)
 	var ship = body as ShipMovementClone
 	if state == 0 and ship and ship != carrier_ship.movement_clone:
-		land_and_store(ship.ship)
+		land_and_store(ship.ship_manager)
+		print("storing", ship.ship_manager)
 
 
 func land_and_store(ship : ShipManager):
@@ -90,33 +89,27 @@ func _process(delta: float) -> void:
 			# check finished
 			if cur_path_id == len(path) - 1:
 				if state == 1:
-					print("finished moving to deck. now yeeting")
 					await get_tree().create_timer(1.0).timeout
 					yeeting = true
 				else:
 					state = 0
 					remote_transforms[cur_pad].rotation = Vector3(0,deg_to_rad(90),0)
-				print("FINISHED")
 				cur_path_id = -1
 			
 			# next waypoint on same level
 			elif path[cur_path_id].elevator_level == path[cur_path_id + 1].elevator_level:
 				cur_path_id += 1
-				print("Reached node on level ", path[cur_path_id].elevator_level)
 			
 			# elevator stuff
 			else:
 				# is on elevator
 				if path[cur_path_id].on_elevator:
-					print("on elevator at floor: ", path[cur_path_id].elevator_level)
 					path[cur_path_id].on_elevator.call_to_floor.rpc(path[cur_path_id+1].elevator_level)
 				# is waiting on elevator
 				elif path[cur_path_id + 1].on_elevator:
-					print("waiting on elevator at floor: ", path[cur_path_id + 1].elevator_level)
 					path[cur_path_id + 1].on_elevator.call_to_floor.rpc(path[cur_path_id].elevator_level)
 		
 	if yeeting: # if finished path and launching
-		print("yeet: ", launch_yeet)
 		remote_transforms[cur_pad].global_position += launch_yeet * global_basis.z.normalized() * delta
 		launch_yeet += 15.0 * delta
 		if launch_yeet >= 30.0:
@@ -139,7 +132,6 @@ func launch_ship_from_pad(pad_id):
 	#if not is_multiplayer_authority(): return
 	var ship = ships[int(pad_id)]
 	if state == 0 and ship:
-		print("Launching ship")
 		
 		cur_pad = int(pad_id)
 		remote_transforms[cur_pad].rotation = Vector3(0,deg_to_rad(180),0)
@@ -149,7 +141,6 @@ func launch_ship_from_pad(pad_id):
 		state = 1
 		
 		path = pad_waypoints[cur_pad].find_path_to_waypoint(runway_waypoint)
-		print(path)
 		cur_path_id = 0
 		remote_transforms[cur_pad].rotation = Vector3(0,0,0)
 
@@ -163,7 +154,7 @@ func get_first_available_pad() -> int:
 
 func directly_add_ship_to_pad(ship : ShipManager, pad_id : int):
 	ships[pad_id] = ship
-	remote_transforms[pad_id].position = pad_waypoints[pad_id].position
+	remote_transforms[pad_id].global_position = pad_waypoints[pad_id].global_position
 	remote_transforms[pad_id].remote_path = ship.movement_clone.get_path()
 	ship.movement_manager.lock_to_rails()
 	ship.movement_clone.toggle_collider(false)

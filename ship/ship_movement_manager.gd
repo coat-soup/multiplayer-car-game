@@ -34,7 +34,7 @@ var planets : Array[Planet]
 var freelook := false
 @export var camera_recenter_speed := 5.0
 
-var locked_to_rails := false
+@export var locked_to_rails := false
 
 
 func _ready() -> void:
@@ -116,6 +116,8 @@ func _physics_process(delta: float) -> void:
 	
 	rotation_input = rotation_input.move_toward(Vector3(joystick.x, joystick.y, Input.get_axis("roll_right", "roll_left") * int(controllable.using_player != null)), rotation_accel * delta)
 	
+	if not freelook:
+		camera_pivot.rotation = camera_pivot.rotation.lerp(Vector3.ZERO, delta * camera_recenter_speed)
 	
 	if locked_to_rails:
 		return
@@ -130,9 +132,6 @@ func _physics_process(delta: float) -> void:
 	if not controllable or not controllable.using_player: return
 	
 	directional_input = Vector3(Input.get_axis("right", "left"), Input.get_axis("crouch", "jump"), Input.get_axis("down", "up"))
-	
-	if not freelook:
-		camera_pivot.rotation = camera_pivot.rotation.lerp(Vector3.ZERO, delta * camera_recenter_speed)
 
 
 func rotate_ship_in_orbit(delta: float, planet : Planet):

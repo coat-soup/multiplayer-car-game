@@ -12,11 +12,8 @@ var end_POI : POI
 @export var level_size := 2000.0
 var level_gen_seed : int = -1
 
-var active_ships : Array[PackedScene]
-
 
 func setup(_multiplayer):
-	return
 	_multiplayer.peer_connected.connect(generate_for_new_connection)
 	reset_level()
 
@@ -44,7 +41,6 @@ func generate_level():
 
 func generate_for_new_connection(peer_id : int):
 	generate_from_seed.rpc_id(peer_id, level_gen_seed)
-	#spawn_ships.rpc_id(peer_id, active_ships)
 
 
 @rpc("any_peer", "call_local")
@@ -68,9 +64,3 @@ func reset_level():
 	
 	if is_multiplayer_authority():
 		generate_from_seed.rpc(randi())
-
-
-@rpc("any_peer", "call_local")
-func spawn_ships(ships: Array[PackedScene]):
-	for i in ships:
-		Util.spawn_ship(i, Vector3.ZERO, ship.get_parent_node_3d(), false)

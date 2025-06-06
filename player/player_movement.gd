@@ -56,16 +56,9 @@ func _ready():
 func check_gravity_entered(body):
 	if body == self:
 		on_ship = true
-		#player.position += player_manager.global_position - remote_transform.global_position
-		#player.rotation += player_manager.global_rotation - remote_transform.global_rotation
-		var r_diff = player_manager.global_rotation - remote_transform.global_rotation
 		
 		var g_pos = player.global_position
 		var g_rot = player.global_rotation
-		
-		#player.position = player.position.rotated(Vector3.RIGHT, r_diff.x)
-		#player.position = player.position.rotated(Vector3.UP, r_diff.y)
-		#player.position = player.position.rotated(Vector3.FORWARD, r_diff.z)
 		
 		remote_transform.remote_path = player_manager.get_path()
 		

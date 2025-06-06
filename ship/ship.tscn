@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=23 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -10,9 +10,10 @@
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
 [ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
-[ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/fighter.tscn" id="10_hiebf"]
+[ext_resource type="Script" path="res://ship/ship.gd" id="10_o00jc"]
 [ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
+[ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -27,6 +28,9 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("MovementManager:locked_to_rails")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xlqn0"]
 size = Vector3(37.0995, 9.5211, 87)
@@ -46,12 +50,13 @@ size = Vector3(36.4025, 8.68864, 30.8955)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
 size = Vector3(5, 5, 13.1836)
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 gravity_bounds = NodePath("GravityBounds")
-MOVEMENT_CLONE_PREFAB = ExtResource("2_bt4ft")
+movement_clone_prefab = ExtResource("2_bt4ft")
+spawn_point = NodePath("SpawnPoint")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_i8s7e")
@@ -75,11 +80,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 19.5054, -19)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 controller = NodePath("../../MovementManager")
 
-[node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable")]
+[node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 script = ExtResource("4_ygd72")
 camera = NodePath("../../CameraPivot/Camera3D")
 interactable = NodePath("../Interactable")
+synchronizer = NodePath("../../VelocitySynchroniser")
 
 [node name="Interactable" type="StaticBody3D" parent="Helm"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
@@ -134,7 +140,7 @@ pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/Waypoint
 runway_waypoint = NodePath("Waypoints/WaypointDeck")
 runway_zone = NodePath("RunwayArea")
 carrier_ship = NodePath("..")
-starting_ships_on_load = Array[PackedScene]([ExtResource("10_hiebf")])
+starting_ships_on_load = Array[ExtResource("10_o00jc")]([ExtResource("11_en0ln")])
 
 [node name="RunwayArea" type="Area3D" parent="LaunchSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72911, 14, 0)
@@ -287,3 +293,6 @@ target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "6"
 prompt_text = "Launch"
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 13, -25)

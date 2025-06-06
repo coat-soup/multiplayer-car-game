@@ -94,7 +94,6 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	print("playername: " + player.name)
 	add_child(player)
-	player.global_position = Vector3.ZERO
 
 
 func remove_player(peer_id):

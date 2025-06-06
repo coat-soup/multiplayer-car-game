@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvs55tafiwxnj"]
 
-[ext_resource type="Script" path="res://auxcraft/ship_movement_clone.gd" id="1_u3bfa"]
-[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/fighter.glb" id="3_q1ujj"]
+[ext_resource type="Script" path="res://ship/ship_movement_clone.gd" id="1_u3bfa"]
+[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/models/fighter.glb" id="3_q1ujj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
 size = Vector3(6.705, 4.97, 8.9209)

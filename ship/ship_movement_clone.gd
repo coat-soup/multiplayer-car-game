@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name ShipMovementClone
 
-@export var ship : ShipManager
+@export var ship_manager : ShipManager
 
 func toggle_collider(value : bool):
 	if not value:

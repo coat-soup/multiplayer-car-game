@@ -26,6 +26,7 @@ func _ready() -> void:
 		health.healed.connect(on_damaged)
 		health.died.connect(on_died)
 		camera.current = true
+	global_position = network_manager.network_manager.ship.spawn_point.global_position
 
 
 func on_damaged():

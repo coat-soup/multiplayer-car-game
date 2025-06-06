@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 				weapon.fire_cannon.rpc()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not (controllable.using_player or controllable.ai_override): return
 	if not controllable.is_multiplayer_authority(): return
 	

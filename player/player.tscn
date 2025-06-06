@@ -55,7 +55,6 @@ billboard = 1
 text = "STEAM USER"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovementManager"]
-cast_shadow = 0
 mesh = SubResource("CapsuleMesh_765p8")
 skeleton = NodePath("../..")
 

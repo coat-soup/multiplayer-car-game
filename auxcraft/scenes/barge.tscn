@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbiyvux10g2ew"]
 
-[ext_resource type="PackedScene" uid="uid://bpbbkbmxjpib7" path="res://auxcraft/barge.glb" id="1_yk5lo"]
+[ext_resource type="PackedScene" uid="uid://bpbbkbmxjpib7" path="res://auxcraft/models/barge.glb" id="1_yk5lo"]
 [ext_resource type="PackedScene" uid="uid://cafdmu62a50mc" path="res://world/props/scenes/wall_light.tscn" id="2_dha4x"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pa3ai"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ship" load_steps=4 format=3 uid="uid://css45hbcbf211"]
+
+[ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="1_knbkj"]
+[ext_resource type="Script" path="res://ship/ship.gd" id="1_o23qk"]
+[ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="2_dbrio"]
+
+[resource]
+script = ExtResource("1_o23qk")
+ship_name = "Fighter"
+buy_price = 100
+description = "Standard fighter craft"
+prefab = ExtResource("2_dbrio")
+movement_prefab = ExtResource("1_knbkj")

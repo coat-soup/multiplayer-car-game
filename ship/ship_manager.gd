@@ -6,15 +6,37 @@ class_name ShipManager
 @export var movement_manager : ShipMovementManager
 @export var main_target_component : ShipComponent
 @export var gravity_bounds: Area3D
-@export var MOVEMENT_CLONE_PREFAB : PackedScene
+@export var setup_on_load := true
+@export var movement_clone_prefab : PackedScene
+@export var spawn_point : Node3D
 
 
 func _ready() -> void:
+	if setup_on_load:
+		setup()
+
+
+func setup():
 	root = get_parent_node_3d()
+	#movement_clone = movement_clone_prefab.instantiate()
+	#root.add_child.call_deferred(movement_clone)
 	while not movement_clone or not movement_clone.is_inside_tree():
+		if not multiplayer.is_server(): request_set_movement_clone.rpc()
 		await get_tree().process_frame
 	movement_clone.global_position = global_position
 	movement_clone.global_rotation = global_rotation
 	(movement_clone.get_node("RemoteTransform3D") as RemoteTransform3D).remote_path = get_path()
 	movement_manager.ship = movement_clone
+	movement_clone.ship_manager = self
 	movement_manager.controllable.synchronizer = movement_clone.get_node("MultiplayerSynchronizer") as MultiplayerSynchronizer
+
+
+@rpc("any_peer", "call_local")
+func request_set_movement_clone():
+	if multiplayer.is_server() and movement_clone:
+		movement_manager.ui.display_chat_message("Returning clone set request")
+		set_peer_movement_clone.rpc_id(multiplayer.get_remote_sender_id(), movement_clone.get_path())
+
+@rpc("any_peer", "call_local")
+func set_peer_movement_clone(node_path : NodePath):
+	movement_clone = get_tree().root.get_node_or_null(node_path)

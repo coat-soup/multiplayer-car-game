@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bpbbkbmxjpib7"
-path="res://.godot/imported/barge.glb-1ae297731b7116c043dc59fab7bc2273.scn"
+uid="uid://dsxppgkiwvytu"
+path="res://.godot/imported/fighter.glb-71e8f6075322b1492a059c08d086496c.scn"
 
 [deps]
 
-source_file="res://auxcraft/barge.glb"
-dest_files=["res://.godot/imported/barge.glb-1ae297731b7116c043dc59fab7bc2273.scn"]
+source_file="res://auxcraft/models/fighter.glb"
+dest_files=["res://.godot/imported/fighter.glb-71e8f6075322b1492a059c08d086496c.scn"]
 
 [params]
 

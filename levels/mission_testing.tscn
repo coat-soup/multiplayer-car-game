@@ -75,7 +75,8 @@ level_manager = NodePath("../LevelManager")
 
 [node name="ShipHolder" type="Node3D" parent="."]
 
-[node name="ShipMovementClone" parent="ShipHolder" instance=ExtResource("9_4ngro")]
+[node name="ShipMovementClone" parent="ShipHolder" node_paths=PackedStringArray("ship_manager") instance=ExtResource("9_4ngro")]
+ship_manager = NodePath("../Ship")
 
 [node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("3_rvx0j")]
 root = NodePath("..")
@@ -100,7 +101,7 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://auxcraft/fighter.tscn", "res://auxcraft/fighter_movement_clone.tscn")
+_spawnable_scenes = PackedStringArray("res://auxcraft/scenes/fighter.tscn", "res://auxcraft/scenes/fighter_movement_clone.tscn")
 spawn_path = NodePath("../ShipHolder")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
