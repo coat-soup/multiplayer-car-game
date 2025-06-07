@@ -132,6 +132,7 @@ spawn_path = NodePath("../ShipHolder")
 [node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("on_ship")]
 transform = Transform3D(0.745678, 0.0655786, -0.663073, -0.0239216, 0.997139, 0.0717174, 0.665878, -0.0376169, 0.745112, 6.37344, 10.2915, -18.5677)
 gravity_scale = 0.0
+continuous_cd = true
 angular_damp = 0.2
 script = ExtResource("14_31ws3")
 on_ship = NodePath("../ShipHolder/Ship")

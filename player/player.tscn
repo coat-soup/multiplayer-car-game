@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=19 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_wogeu"]
@@ -6,6 +6,21 @@
 [ext_resource type="Script" path="res://player/player_interaction_manager.gd" id="3_h4ya3"]
 [ext_resource type="Script" path="res://player/equipment_manager.gd" id="5_wjl74"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="6_3dm8w"]
+[ext_resource type="Script" path="res://player/player_sound_manager.gd" id="7_a862v"]
+[ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="7_lbrq5"]
+[ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="8_7er0m"]
+[ext_resource type="AudioStream" uid="uid://dxtrxm7rb6wi1" path="res://sfx/footsteps/footsteps-003.wav" id="9_l8d65"]
+[ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="10_4ryyx"]
+[ext_resource type="AudioStream" uid="uid://bgupddqt4qcyb" path="res://sfx/footsteps/footsteps-004.wav" id="10_s7j3x"]
+[ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="11_an08s"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vacjh"]
+streams_count = 5
+stream_0/stream = ExtResource("7_lbrq5")
+stream_1/stream = ExtResource("8_7er0m")
+stream_2/stream = ExtResource("9_l8d65")
+stream_3/stream = ExtResource("10_s7j3x")
+stream_4/stream = ExtResource("11_an08s")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
@@ -48,6 +63,19 @@ player = NodePath(".")
 player_manager = NodePath("..")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera")
+
+[node name="SoundManager" type="Node3D" parent="MovementManager" node_paths=PackedStringArray("movement")]
+script = ExtResource("7_a862v")
+movement = NodePath("..")
+
+[node name="FootstepAudio" type="AudioStreamPlayer3D" parent="MovementManager/SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+stream = SubResource("AudioStreamRandomizer_vacjh")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="MovementManager/SoundManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+stream = ExtResource("10_4ryyx")
+volume_db = -1.0
 
 [node name="UsernameLabel" type="Label3D" parent="MovementManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26044, 0)

@@ -1,15 +1,66 @@
-[gd_scene load_steps=5 format=3 uid="uid://fyxpmm5wifkc"]
+[gd_scene load_steps=13 format=4 uid="uid://fyxpmm5wifkc"]
 
 [ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
 [ext_resource type="PackedScene" uid="uid://dwyud5d5wciho" path="res://equipment/models/tractor_tool.glb" id="2_aqkas"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
+[ext_resource type="AudioStream" uid="uid://dkxuvx7bjudl7" path="res://sfx/tractor_hum.wav" id="4_uf7hw"]
+
+[sub_resource type="Gradient" id="Gradient_1mqwj"]
+colors = PackedColorArray(0, 0.772549, 0.968627, 1, 0.97, 0, 0.0161664, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
 size = Vector3(1.104, 0.447, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2sgln"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kcquc"]
+_surfaces = [{
+"aabb": AABB(-1, -6.57213e-08, -1, 2, 1.79536, 2),
+"format": 34896613377,
+"index_count": 192,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAFAAMAAgAEAAUABAAHAAUABAAGAAcABgAJAAcABgAIAAkACAALAAkACAAKAAsACgANAAsACgAMAA0ADAAPAA0ADAAOAA8ADgARAA8ADgAQABEAEAATABEAEAASABMAEgAVABMAEgAUABUAFAAXABUAFAAWABcAFgAZABcAFgAYABkAGAAbABkAGAAaABsAGgAdABsAGgAcAB0AHAAfAB0AHAAeAB8AHgAhAB8AHgAgACEAIAAjACEAIAAiACMAIgAlACMAIgAkACUAJAAnACUAJAAmACcAJgApACcAJgAoACkAKAArACkAKAAqACsAKgAtACsAKgAsAC0ALAAvAC0ALAAuAC8ALgAxAC8ALgAwADEAMAAzADEAMAAyADMAMgA1ADMAMgA0ADUANAA3ADUANAA2ADcANgA5ADcANgA4ADkAOAA7ADkAOAA6ADsAOgA9ADsAOgA8AD0APAA/AD0APAA+AD8APgABAD8APgAAAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("/3///wAAAAD/fwAAD3kAAAZn//91AgAApX4AADF5AAADT///vgkAAFd9AACWeQAA4jj//5IVAAAkfAAAOnoAAH0l//99JQAAF3sAABd7AACSFf//4jgAADp6AAAkfAAAvgn//wNPAACWeQAAV30AAHUC/v8GZwAAMXkAAKV+AAAAAP7//38AAA95AAD/fwAAdQL+//iYAAAxeQAAWYEAAL4J/v/7sAAAlnkAAKeCAACSFf7/HMcAADp6AADagwAAfSX+/4HaAAAXewAA54QAAOI4/v9s6gAAJHwAAMSFAAADT/7/QPYAAFd9AABohgAABmf+/4n9AAClfgAAzYYAAP9//v///wAA/38AAO+GAAD4mP7/if0AAFmBAADNhgAA+7D+/0D2AACnggAAaIYAABzH/v9s6gAA2oMAAMSFAACB2v7/gdoAAOeEAADnhAAAbOr+/xzHAADEhQAA2oMAAED2/v/7sAAAaIYAAKeCAACJ/f7/+JgAAM2GAABZgQAA///+//9/AADvhgAA/38AAIn9/v8GZwAAzYYAAKV+AABA9v7/A08AAGiGAABXfQAAbOr+/+I4AADEhQAAJHwAAIHa/v99JQAA54QAABd7AAAcx/7/khUAANqDAAA6egAA+7D//74JAACnggAAlnkAAPiY//91AgAAWYEAADF5AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1h00a"]
+resource_name = "vfx_cone_Cone_001"
+_surfaces = [{
+"aabb": AABB(-1, -6.57213e-08, -1, 2, 1.79536, 2),
+"attribute_data": PackedByteArray("AAD/f////38AABgN//8YDf/3/3//9xgN/+//f//vGA3/5/9//+cYDf/f/3//3xgN/9f/f//XGA3/z/9//88YDf/H/3//xxgN/7//f/+/GA3/t/9//7cYDf+v/3//rxgN/6f/f/+nGA3/n/9//58YDf+X/3//lxgN/4//f/+PGA3/h/9//4cYDf9//3//fxgN/3f/f/93GA3/b/9//28YDf9n/3//ZxgN/1//f/9fGA3/V/9//1cYDf9P/3//TxgN/0f/f/9HGA3/P/9//z8YDf83/3//NxgN/y//f/8vGA3/J/9//ycYDf8f/3//HxgN/xf/f/8XGA3/D/9//w8YDf8H/3//BxgN"),
+"format": 34896613399,
+"index_count": 192,
+"index_data": PackedByteArray("AQAFAAMAAQAEAAUABAAHAAUABAAGAAcABgAJAAcABgAIAAkACAALAAkACAAKAAsACgANAAsACgAMAA0ADAAPAA0ADAAOAA8ADgARAA8ADgAQABEAEAATABEAEAASABMAEgAVABMAEgAUABUAFAAXABUAFAAWABcAFgAZABcAFgAYABkAGAAbABkAGAAaABsAGgAdABsAGgAcAB0AHAAfAB0AHAAeAB8AHgAhAB8AHgAgACEAIAAjACEAIAAiACMAIgAlACMAIgAkACUAJAAnACUAJAAmACcAJgApACcAJgAoACkAKAArACkAKAAqACsAKgAtACsAKgAsAC0ALAAvAC0ALAAuAC8ALgAxAC8ALgAwADEAMAAzADEAMAAyADMAMgA1ADMAMgA0ADUANAA3ADUANAA2ADcANgA5ADcANgA4ADkAOAA7ADkAOAA6ADsAOgA9ADsAOgA8AD0APAA/AD0APAA+AD8APgBBAD8APgBAAEEAQAACAEEAQAAAAAIA"),
+"material": SubResource("StandardMaterial3D_2sgln"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("/3///wAAP+z/f///AAA/7P9/AAAPeT/s/38AAA95P+wGZ///dQJW7KV+AAAxeVbsA0///74JoOxXfQAAlnmg7OI4//+SFRvtJHwAADp6G+19Jf//fSXF7Rd7AAAXe8XtkhX//+I4nO46egAAJHyc7r4J//8DT5/vlnkAAFd9nu91Av7/BmfJ8DF5AAClfsnwAAD+//9/GPIPeQAA/38Y8nUC/v/4mInzMXkAAFmBifO+Cf7/+7AY9ZZ5AACnghj1khX+/xzHwfY6egAA2oPB9n0l/v+B2n/4F3sAAOeEf/jiOP7/bOpQ+iR8AADEhVD6A0/+/0D2LfxXfQAAaIYt/AZn/v+J/RT+pX4AAM2GFP7/f/7///////9/AADvhv//+Jj+/4n9FP5ZgQAAzYYU/vuw/v9A9i38p4IAAGiGLfwcx/7/bOpQ+tqDAADEhVD6gdr+/4Haf/jnhAAA54R/+Gzq/v8cx8H2xIUAANqDwfZA9v7/+7AY9WiGAACnghj1if3+//iYifPNhgAAWYGJ8////v//fxjy74YAAP9/GPKJ/f7/BmfJ8M2GAAClfsnwQPb+/wNPn+9ohgAAV32f72zq/v/iOJzuxIUAACR8nO6B2v7/fSXF7eeEAAAXe8XtHMf+/5IVG+3agwAAOnob7fuw//++CaDsp4IAAJZ5oOz4mP//dQJW7FmBAAAxeVbs2gKPg48DJH3aAo6DjwMkfQEOOH0BDjh9cRn0enEZ9HoiIwh5IiMIeZorWneaK1p3MzPYdTMz2HUvOnZ0Lzp2dL9AKXO/QClzCkfpcQpH6XEzTbFwM02xcFlTeW9ZU3lvmVk7bplZO24WYPJsFmDybPVmlWv1ZpVrZG4camRuHGqhdnpooXZ6aP9/nmac5v//hReg9oUXoPbjFWTu4xVk7mkU9OZpFPTmDRMW4A0TFuDDEZnZwxGZ2YYQWNOGEFjTTg8zzU4PM80VDgrHFQ4Kx9YMvsDWDL7AiQsuuokLLromCjKzJgoys6UImaulCJmr9wYio/cGIqMLBXGZCwVxmcYCAI7GAgCO")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kcquc")
+
+[sub_resource type="Gradient" id="Gradient_18vkd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_navbv"]
+gradient = SubResource("Gradient_18vkd")
+fill_to = Vector2(0, 0.451613)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i4dix"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0.590153, 0.979932, 0.196078)
+albedo_texture = SubResource("GradientTexture2D_navbv")
+
 [node name="TractorTool" type="Node3D" node_paths=PackedStringArray("interactable")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bttfc")
+color_by_norm_dist_grad = SubResource("Gradient_1mqwj")
 equipment_name = "Tractor Tool"
 interactable = NodePath("StaticBody3D")
 
@@ -27,4 +78,14 @@ prompt_text = "Equip Wrench"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0240918, 0.00222123, 0)
 shape = SubResource("BoxShape3D_yrpc2")
 
-[node name="Audio" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_uf7hw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Cone" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.473143, -7.70938e-09, -2.06818e-08, 2.06818e-08, -7.70938e-09, 0.473143, -2.06818e-08, -0.17637, -2.06818e-08, -2.05142e-08, 0, -0.469311)
+visible = false
+mesh = SubResource("ArrayMesh_1h00a")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_i4dix")

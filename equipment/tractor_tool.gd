@@ -10,9 +10,14 @@ var target : Item
 var t_phys : RigidBody3D
 var target_distance : float
 
-@onready var audio: AudioStreamPlayer = $Audio
+@onready var audio: AudioStreamPlayer3D = $Audio
 
 var constant_offset_for_some_fucking_reason := Vector3(0, -5000, 0)
+@onready var cone: MeshInstance3D = $Cone
+
+
+@export var color_by_norm_dist_grad : Gradient
+
 
 func on_triggered(button : int):
 	if button != 0: return
@@ -21,6 +26,8 @@ func on_triggered(button : int):
 		#target.gravity_scale = 1
 		target = null
 		t_phys = null
+		audio.playing = false
+		cone.visible = false
 		
 	else:
 		print("beaming")
@@ -34,9 +41,8 @@ func on_triggered(button : int):
 			
 			#target.gravity_scale = 0
 			target_distance = target.global_position.distance_to(global_position)
-			
-			audio.pitch_scale = randf_range(0.9,1.1)
-			audio.play()
+			audio.playing = true
+			cone.visible = true
 		else: print("Didn't hit anything")
 
 
@@ -45,7 +51,7 @@ func _input(event: InputEvent) -> void:
 	if not held_by_auth: return
 	var scroll_dir = int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)) - int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP))
 	if scroll_dir != 0:
-		target_distance = clamp(target_distance - scroll_dir * 0.2, 1.0, beam_range)
+		target_distance = clamp(target_distance - scroll_dir * 0.2, 2.0, beam_range)
 	if Input.is_action_just_released("secondary_fire"):
 		held_player.movement_manager.camera_locked = false
 
@@ -65,7 +71,14 @@ func _process(delta: float) -> void:
 		if target.on_ship:
 			point = held_player.movement_manager.ship.movement_clone.to_local(point) + constant_offset_for_some_fucking_reason
 		t_phys.linear_velocity = move_speed * (point - t_phys.global_position).limit_length(1.0)
-
+		
+		var lag_distance = point.distance_to(t_phys.global_position)
+		var normalised_lag_distance = min(1.0, lag_distance/5.0)
+		audio.pitch_scale = lerp(1.0,1.2, normalised_lag_distance)
+		#(cone.get_surface_override_material(0) as StandardMaterial3D).albedo_color = color_by_norm_dist_grad.sample(normalised_lag_distance)
+		
+		if target.global_position.distance_to(global_position) > beam_range * 1.3:
+			on_triggered(0)
 
 
 func raycast_target() -> Item:

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="3_1oyru"]
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="4_cl32f"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_diix6"]
-[ext_resource type="Shader" path="res://vfx/space_sky.gdshader" id="5_vb6jv"]
+[ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="5_vb6jv"]
 [ext_resource type="PackedScene" uid="uid://b6icnbs8qfg2f" path="res://enemies/station_mockup.tscn" id="7_jqffu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]

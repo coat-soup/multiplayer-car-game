@@ -154,7 +154,7 @@ func _physics_process(delta: float) -> void:
 			if landing:
 				landing = false
 				if adjusted_local_velocity.y < 1:
-					jump_land.emit()
+					activate_signal.rpc("jump_land")
 		else:
 			adjusted_local_velocity.x = lerp(adjusted_local_velocity.x, direction.x * speed, delta * 2)
 			adjusted_local_velocity.z = lerp(adjusted_local_velocity.z, direction.z * speed, delta * 2)
@@ -171,9 +171,9 @@ func _physics_process(delta: float) -> void:
 		
 		# bob signals
 		if b/BOB_AMP < 0.05:
-			bob_bottom.emit()
+			activate_signal.rpc("bob_bottom")
 		elif b/BOB_AMP > 0.95:
-			bob_top.emit()
+			activate_signal.rpc("bob_top")
 	
 	player.move_and_slide()
 
@@ -212,3 +212,8 @@ func handle_floor_attachment():
 @rpc("any_peer", "call_local")
 func set_parent_to_vehicle(node_name: String):
 	player.reparent(get_tree().root.get_node(node_name) if node_name != "" else get_tree().root)
+
+
+@rpc("any_peer", "call_local")
+func activate_signal(sig : String):
+	emit_signal(sig)

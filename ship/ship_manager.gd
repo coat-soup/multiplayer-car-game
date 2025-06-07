@@ -12,9 +12,11 @@ class_name ShipManager
 @export var item_manager : ShipItemManager
 
 
+
 func _ready() -> void:
 	if setup_on_load:
 		setup()
+
 
 func setup():
 	root = get_parent()

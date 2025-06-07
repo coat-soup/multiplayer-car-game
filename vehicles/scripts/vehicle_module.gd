@@ -17,7 +17,7 @@ var controller : VehicleController
 
 @export var health : Health
 
-const BROKEN_COMPONENT_PARTICLES = preload("res://vfx/broken_component_particles.tscn")
+const BROKEN_COMPONENT_PARTICLES = preload("res://vfx/particles/broken_component_particles.tscn")
 var broken_particles : Node3D = null
 var is_broken := false
 

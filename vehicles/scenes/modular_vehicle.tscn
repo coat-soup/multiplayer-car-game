@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dnm1s3yn6a1rg" path="res://sfx/sand_drift.wav" id="12_bjgp2"]
 [ext_resource type="AudioStream" uid="uid://c827rm2y3kexa" path="res://sfx/car_crash.mp3" id="13_787ia"]
 [ext_resource type="AudioStream" uid="uid://ctsk2l0y8uhto" path="res://sfx/suspension.wav" id="14_a7hjv"]
-[ext_resource type="PackedScene" uid="uid://dfv6kqfnpyxv2" path="res://vfx/tire_particles.tscn" id="15_uwmsm"]
+[ext_resource type="PackedScene" uid="uid://dfv6kqfnpyxv2" path="res://vfx/particles/tire_particles.tscn" id="15_uwmsm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l7i2k"]
 friction = 0.5

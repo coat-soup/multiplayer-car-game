@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_0b4r6"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_sm41t"]
-[ext_resource type="PackedScene" uid="uid://61gee2tf6ccy" path="res://vfx/bullet_impact.tscn" id="3_tjnrr"]
+[ext_resource type="PackedScene" uid="uid://61gee2tf6ccy" path="res://vfx/particles/bullet_impact.tscn" id="3_tjnrr"]
 [ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="4_bjmly"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/gun_bullet_visual.gd" id="4_hppjh"]
 

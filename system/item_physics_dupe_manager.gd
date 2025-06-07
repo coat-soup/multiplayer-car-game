@@ -47,6 +47,8 @@ func handle_item_spawn(item : Item):
 	
 	item.dupe_RT = RemoteTransform3D.new()
 	item.physics_dupe.add_child(item.dupe_RT)
+	item.physics_dupe.contact_monitor = true
+	item.physics_dupe.max_contacts_reported = 2
 	
 	item.physics_dupe.gravity_scale = 0
 	item.physics_dupe.linear_damp = 0.1
