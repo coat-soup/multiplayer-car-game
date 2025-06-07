@@ -42,9 +42,11 @@ var remote_transform : RemoteTransform3D
 
 
 func _ready():
-	ship = get_tree().get_first_node_in_group("ship") as ShipManager
+	ship = player_manager.network_manager.network_manager.ship
 	remote_transform = PLAYER_RT.instantiate() as RemoteTransform3D
 	ship.add_child(remote_transform)
+	
+	print(ship)
 	
 	ship.gravity_bounds.body_entered.connect(check_gravity_entered)
 	ship.gravity_bounds.body_exited.connect(check_gravity_left)

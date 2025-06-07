@@ -51,13 +51,14 @@ size = Vector3(36.4025, 8.68864, 30.8955)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
 size = Vector3(5, 5, 13.1836)
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 gravity_bounds = NodePath("GravityBounds")
 movement_clone_prefab = ExtResource("2_bt4ft")
 spawn_point = NodePath("SpawnPoint")
+item_manager = NodePath("ItemManager")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_i8s7e")
@@ -66,8 +67,9 @@ ship = NodePath("..")
 [node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21, -27.2965)
 
-[node name="ItemManager" type="Node" parent="."]
+[node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("5_cwq02")
+ship_manager = NodePath("..")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21.5054, -20.5969)

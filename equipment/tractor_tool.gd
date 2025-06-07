@@ -6,11 +6,13 @@ class_name TractorTool
 @export var acceleration : float = 50.0
 @export var spin_speed : float = 0.2
 
-var target : RigidBody3D
+var target : Item
+var t_phys : RigidBody3D
 var target_distance : float
 
 @onready var audio: AudioStreamPlayer = $Audio
 
+var constant_offset_for_some_fucking_reason := Vector3(0, -5000, 0)
 
 func on_triggered(button : int):
 	if button != 0: return
@@ -18,12 +20,16 @@ func on_triggered(button : int):
 		print("letting go")
 		#target.gravity_scale = 1
 		target = null
+		t_phys = null
 		
 	else:
 		print("beaming")
 		
 		target = raycast_target()
 		if target:
+			target.set_auth.rpc(str(held_player.name).to_int())
+			
+			t_phys = target.physics_dupe
 			#TODO: particles
 			
 			#target.gravity_scale = 0
@@ -45,28 +51,30 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	if target:
+	if t_phys:
 		if Input.is_action_pressed("secondary_fire"):
 			held_player.movement_manager.camera_locked = true
 			var spin_dir := Input.get_last_mouse_velocity()
-			#target.global_rotate(global_basis.y, deg_to_rad(spin_dir.x * spin_speed * delta))
-			#target.global_rotate(global_basis.x, deg_to_rad(spin_dir.y * spin_speed * delta))
+
 			var t_vel = global_basis * Vector3(deg_to_rad(spin_dir.y * spin_speed), deg_to_rad(spin_dir.x * spin_speed), 0)
-			target.angular_velocity = target.angular_velocity.move_toward(t_vel, 300.0 * delta)
+			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(t_vel, 300.0 * delta)
 		else:
-			target.angular_velocity = target.angular_velocity.move_toward(Vector3.ZERO, delta * 30)
-		#target.apply_force(force * delta * ((global_position - global_basis.z * beam_range / 2) - target.global_position).limit_length(1.0))
-		var point = (global_position - global_basis.z * target_distance)
-		target.linear_velocity = move_speed * (point - target.global_position).limit_length(1.0)
-		#target.linear_velocity = target.linear_velocity.move_toward(move_speed * (point - target.global_position).limit_length(1.0), delta * acceleration)
+			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(Vector3.ZERO, delta * 30)
+
+		var point := (global_position - global_basis.z * target_distance)
+		if target.on_ship:
+			point = held_player.movement_manager.ship.movement_clone.to_local(point) + constant_offset_for_some_fucking_reason
+		t_phys.linear_velocity = move_speed * (point - t_phys.global_position).limit_length(1.0)
 
 
-func raycast_target() -> PhysicsBody3D:
+
+func raycast_target() -> Item:
 	var space_state = get_world_3d().direct_space_state
 
 	var query = PhysicsRayQueryParameters3D.create(held_player.camera.global_position, held_player.camera.global_position - held_player.camera.global_basis.z * beam_range, Util.layer_mask([1]))
 	query.exclude = [held_player]
 
 	var result := space_state.intersect_ray(query)
-	if result: return result.collider as PhysicsBody3D
-	else: return null
+	if result:
+		return result.collider as Item
+	return null

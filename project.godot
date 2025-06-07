@@ -39,6 +39,7 @@ ui=""
 planet=""
 ship=""
 "radar signature"=""
+item=""
 
 [input]
 

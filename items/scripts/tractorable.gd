@@ -1,10 +1,10 @@
 extends RigidBody3D
-class_name item
+class_name Tractorable
 
 @export var on_ship: ShipManager
 var old_vel : Vector3
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if on_ship and is_multiplayer_authority():
 		var vel_diff = on_ship.movement_manager.velocity_sync - old_vel
 

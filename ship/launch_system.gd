@@ -32,20 +32,19 @@ func _ready():
 	for i in remote_transforms:
 		ships.append(null)
 	
+	#await get_tree().process_frame
 	runway_zone.body_entered.connect(check_runway)
 	
 	get_tree().get_first_node_in_group("network manager").host_started.connect(spawn_preloads)
 
 
 func spawn_preloads():
-	carrier_ship.movement_manager.ui.display_chat_message("connected")
 	if not multiplayer.is_server(): return
 	for i in range(len(starting_ships_on_load)):
-		var ship = starting_ships_on_load[i].spawn_instance(Vector3.UP * 50, carrier_ship.get_parent_node_3d()) as ShipManager
+		var ship = starting_ships_on_load[i].spawn_instance(Vector3.UP * 50, carrier_ship.root) as ShipManager
 		
 		await get_tree().create_timer(0.1).timeout
 		directly_add_ship_to_pad(ship, i)
-		carrier_ship.movement_manager.ui.display_chat_message("SPAWNING LOCAL AUXCRAFT")
 
 
 func check_runway(body):

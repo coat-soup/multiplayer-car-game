@@ -15,7 +15,7 @@ static func layer_mask(layers: Array) -> int:
 # 4 vehicle component
 # 5 vehicle physics body (should only interact with default)
 # 6 fine vehicle collision (walls, floor, cannon, etc)
-
+# 7 ship item physics dupe layer (both ship dupe and item dupe should have only this layer)
 
 static func get_player_from_id(id: String, source : Node) -> Player:
 	for player in source.get_tree().get_nodes_in_group("player"):

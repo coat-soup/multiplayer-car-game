@@ -27,7 +27,6 @@ func _ready() -> void:
 		health.died.connect(on_died)
 		camera.current = true
 	
-	await get_tree().create_timer(0.5).timeout
 	global_position = network_manager.network_manager.ship.spawn_point.global_position
 
 

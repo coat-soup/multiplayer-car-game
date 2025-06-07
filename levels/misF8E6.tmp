@@ -59,8 +59,10 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Root" type="Node3D"]
+[node name="Root" type="Node3D" node_paths=PackedStringArray("ship_holder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -15, 21)
 script = ExtResource("1_kqwcw")
+ship_holder = NodePath("")
 
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager") groups=["network manager"]]
 script = ExtResource("2_8udqw")
@@ -86,7 +88,6 @@ ui = NodePath("../UI")
 level_manager = NodePath("../LevelManager")
 
 [node name="ItemPhysicsDupeManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5000, 0)
 script = ExtResource("9_4ldd7")
 ship_prefab = ExtResource("3_rvx0j")
 ship_manager = NodePath("../ShipHolder/Ship")
@@ -94,12 +95,12 @@ ship_manager = NodePath("../ShipHolder/Ship")
 [node name="ShipHolder" type="Node" parent="."]
 
 [node name="ShipMovementClone" parent="ShipHolder" node_paths=PackedStringArray("ship_manager") instance=ExtResource("9_4ngro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
 ship_manager = NodePath("../Ship")
 
-[node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("movement_clone") instance=ExtResource("3_rvx0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
+[node name="Ship" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("3_rvx0j")]
+root = NodePath("")
 movement_clone = NodePath("../ShipMovementClone")
+setup_on_load = null
 
 [node name="TestCargoItem" parent="ShipHolder/Ship" instance=ExtResource("12_uwd3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14, -26)

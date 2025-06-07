@@ -9,15 +9,15 @@ class_name ShipManager
 @export var setup_on_load := true
 @export var movement_clone_prefab : PackedScene
 @export var spawn_point : Node3D
+@export var item_manager : ShipItemManager
 
 
 func _ready() -> void:
 	if setup_on_load:
 		setup()
 
-
 func setup():
-	root = get_parent_node_3d()
+	root = get_parent()
 	#movement_clone = movement_clone_prefab.instantiate()
 	#root.add_child.call_deferred(movement_clone)
 	while not movement_clone or not movement_clone.is_inside_tree():
