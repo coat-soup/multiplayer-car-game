@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=22 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
 [ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="8_6f0kf"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
+[ext_resource type="PackedScene" uid="uid://b1q502qy271v8" path="res://world/props/scenes/sliding_door_01.tscn" id="10_suvyu"]
+[ext_resource type="PackedScene" uid="uid://bg471in0ssgr4" path="res://world/props/scenes/sliding_door_02.tscn" id="11_18wsr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2f3v"]
 render_priority = 0
@@ -564,15 +566,15 @@ size = Vector3(4, 1, 13)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -2, 2.5, -10)
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -1.84937, 2.5, -10)
 use_collision = true
-size = Vector3(4, 1, 7)
+size = Vector3(4, 1, 7.30127)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 6, 2.5, -10)
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 5.85718, 2.5, -10)
 use_collision = true
-size = Vector3(4, 1, 3)
+size = Vector3(4, 1, 3.28564)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="MedBay"]
@@ -588,15 +590,15 @@ size = Vector3(2, 1, 7)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 2.11073, 2.5, 3.12132)
+transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 2.07534, 2.5, 3.15671)
 use_collision = true
-size = Vector3(4, 1, 2)
+size = Vector3(4, 1, 1.8999)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="MedBay"]
-transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 5.64626, 2.5, -0.414213)
+transform = Transform3D(-3.09086e-08, -0.707107, -0.707107, 1, -4.37114e-08, 0, -3.09086e-08, -0.707107, 0.707107, 5.72757, 2.5, -0.495523)
 use_collision = true
-size = Vector3(4, 1, 4)
+size = Vector3(4, 1, 3.77002)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="Bed" type="CSGBox3D" parent="MedBay"]
@@ -1990,15 +1992,15 @@ size = Vector3(12, 1, 5)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Floor3" type="CSGBox3D" parent="CaptainsQuarters"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 5, -5.75439, 11.1895)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 4.84839, -5.75439, 11.1895)
 use_collision = true
-size = Vector3(2, 1, 5)
+size = Vector3(2.30322, 1, 5)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Floor4" type="CSGBox3D" parent="CaptainsQuarters"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -2.5, -5.75439, 11.1895)
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -2.33423, -5.75439, 11.1895)
 use_collision = true
-size = Vector3(7, 1, 5)
+size = Vector3(7.33154, 1, 5)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="human_reference" parent="CaptainsQuarters" instance=ExtResource("4_8lisy")]
@@ -2014,3 +2016,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 24, -4)
 use_collision = true
 size = Vector3(26, 1, 50)
 material = SubResource("ShaderMaterial_gmofw")
+
+[node name="sliding_door_01" parent="." instance=ExtResource("10_suvyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.2746, 10.5, -18.827)
+
+[node name="sliding_door_03" parent="." instance=ExtResource("10_suvyu")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -11.4059, 10.5, 15.6867)
+
+[node name="sliding_door_04" parent="." instance=ExtResource("10_suvyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5251, 23.1651, -21.4735)
+
+[node name="sliding_door_05" parent="." instance=ExtResource("10_suvyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.187, 23.1651, -36.4735)
+
+[node name="sliding_door_06" parent="." instance=ExtResource("10_suvyu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5052, 23.1663, -47.9235)
+
+[node name="sliding_door_02" parent="." instance=ExtResource("11_18wsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0101, 10.5, 4.01655)

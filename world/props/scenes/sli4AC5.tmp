@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3 uid="uid://b1q502qy271v8"]
+
+[ext_resource type="PackedScene" uid="uid://dxc57bpx1scme" path="res://world/props/models/sliding_door_01.glb" id="1_omqa1"]
+[ext_resource type="Script" path="res://world/props/scripts/door.gd" id="2_hp8no"]
+[ext_resource type="Texture2D" uid="uid://c364f0h8vviol" path="res://world/props/textures/sliding_door_01.png" id="2_jifwf"]
+[ext_resource type="Texture2D" uid="uid://cqvoajj5hunv4" path="res://world/props/textures/sliding_door_01_n.png" id="3_rr3vl"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_i24c4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0oqv"]
+albedo_texture = ExtResource("2_jifwf")
+normal_enabled = true
+normal_texture = ExtResource("3_rr3vl")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_76mtb"]
+size = Vector3(1.49066, 3.296, 0.5)
+
+[sub_resource type="Animation" id="Animation_cp5x1"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_002:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.1, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_004:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.1, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvus5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_002:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube_004:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.1, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0jbo"]
+_data = {
+"RESET": SubResource("Animation_hvus5"),
+"open": SubResource("Animation_cp5x1")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5nr7e"]
+size = Vector3(2.275, 2.797, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rhehk"]
+properties/0/path = NodePath(".:is_open")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="sliding_door_01" instance=ExtResource("1_omqa1")]
+script = ExtResource("2_hp8no")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_n0oqv")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_n0oqv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_002" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_002/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.590332, 1.64902, 0)
+shape = SubResource("BoxShape3D_76mtb")
+
+[node name="Cube_004" parent="." index="2"]
+transform = Transform3D(-0.832623, -2.71303e-07, 0, 2.71303e-07, -0.832623, 0, 0, 0, 0.832623, 1.1, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_n0oqv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_004" index="0"]
+transform = Transform3D(1, 6.51683e-07, -6.34481e-14, 6.51683e-07, -1, 1.43173e-07, 5.12028e-14, -1.43173e-07, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_004/StaticBody3D" index="0"]
+transform = Transform3D(1, -4.27451e-21, -5.0822e-20, -7.33087e-21, 1, -4.26326e-14, 0, 4.26326e-14, 1, -0.550504, 1.64902, 2.84217e-14)
+shape = SubResource("BoxShape3D_76mtb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_r0jbo")
+}
+
+[node name="Interactable" type="StaticBody3D" parent="." index="4"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("5_i24c4")
+prompt_text = "Open Door"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46765, 0)
+shape = SubResource("BoxShape3D_5nr7e")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="5"]
+replication_config = SubResource("SceneReplicationConfig_rhehk")
