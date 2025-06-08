@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=23 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
 [ext_resource type="PackedScene" uid="uid://b1q502qy271v8" path="res://world/props/scenes/sliding_door_01.tscn" id="10_suvyu"]
 [ext_resource type="PackedScene" uid="uid://bg471in0ssgr4" path="res://world/props/scenes/sliding_door_02.tscn" id="11_18wsr"]
+[ext_resource type="PackedScene" uid="uid://b0wjbek7t0l5p" path="res://world/props/scenes/ventilation_fan.tscn" id="12_8yyc7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f2f3v"]
 render_priority = 0
@@ -2034,3 +2035,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5052, 23.1663, -47.9235)
 
 [node name="sliding_door_02" parent="." instance=ExtResource("11_18wsr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0101, 10.5, 4.01655)
+
+[node name="ventilation_fan" parent="." instance=ExtResource("12_8yyc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.8762, 13.072, 4.5)
+
+[node name="ventilation_fan2" parent="." instance=ExtResource("12_8yyc7")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13.4631, 13.1077, 23.5)
+
+[node name="ventilation_fan3" parent="." instance=ExtResource("12_8yyc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.32842, 26.6182, -47.3105)
