@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://pwgcoen1ioeq"]
+
+[ext_resource type="PackedScene" uid="uid://dfddtr75y1pma" path="res://world/props/models/crate_rack_small.glb" id="1_wblyb"]
+[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_3ys7a"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jgrsx"]
+points = PackedVector3Array(0.746768, 0.0516778, 0.60773, -0.746768, -0.0416683, -0.605768, -0.746768, 0.0516778, -0.605768, 0.746768, -0.0416683, -0.605768, -0.746768, -0.0416683, 0.60773, -0.746768, 0.0516778, 0.60773, 0.746768, 0.0516778, -0.605768, 0.746768, -0.0416683, 0.60773)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kej7e"]
+size = Vector3(0.05, 2.396, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1uyyk"]
+size = Vector3(1.2, 0.6, 2)
+
+[node name="crate_rack_small" instance=ExtResource("1_wblyb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+
+[node name="ShelfCol" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.242056, 0)
+shape = SubResource("ConvexPolygonShape3D_jgrsx")
+
+[node name="ShelfCol2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24206, 0)
+shape = SubResource("ConvexPolygonShape3D_jgrsx")
+
+[node name="ShelfCol3" type="CollisionShape3D" parent="StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24206, 0)
+shape = SubResource("ConvexPolygonShape3D_jgrsx")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661555, 1.42828, 0)
+shape = SubResource("BoxShape3D_kej7e")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.662, 1.428, 0)
+shape = SubResource("BoxShape3D_kej7e")
+
+[node name="Point" type="Area3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726, 0)
+script = ExtResource("2_3ys7a")
+accepted_groups = Array[String](["storage crate"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Point" index="0"]
+shape = SubResource("BoxShape3D_1uyyk")
+
+[node name="Point2" type="Area3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.726, 0)
+script = ExtResource("2_3ys7a")
+accepted_groups = Array[String](["storage crate"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Point2" index="0"]
+shape = SubResource("BoxShape3D_1uyyk")
+
+[node name="Point3" type="Area3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.726, 0)
+script = ExtResource("2_3ys7a")
+accepted_groups = Array[String](["storage crate"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Point3" index="0"]
+shape = SubResource("BoxShape3D_1uyyk")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://crv73tl4bv8bi"]
+
+[ext_resource type="PackedScene" uid="uid://c7b3drusispws" path="res://world/props/models/storage_crate.glb" id="1_vsco8"]
+
+[node name="storage_crate" instance=ExtResource("1_vsco8")]

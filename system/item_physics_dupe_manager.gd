@@ -48,7 +48,6 @@ func recursive_dupe_setup(node : Node, disable := true):
 	
 	c_comp = node as Elevator
 	if c_comp:
-		print("FELEVATOR")
 		(ship_manager.get_node(duped_ship.get_path_to(c_comp)) as Elevator).moving_to_floor.connect(c_comp.call_to_floor)
 		disable = false
 	

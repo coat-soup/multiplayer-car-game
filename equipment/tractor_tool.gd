@@ -22,19 +22,19 @@ var constant_offset_for_some_fucking_reason := Vector3(0, -5000, 0)
 func on_triggered(button : int):
 	if button != 0: return
 	if target:
-		print("letting go")
-		#target.gravity_scale = 1
+		target.on_physics_let_go.rpc()
+		
 		target = null
 		t_phys = null
 		audio.playing = false
 		cone.visible = false
 		
 	else:
-		print("beaming")
-		
 		target = raycast_target()
 		if target:
 			target.set_auth.rpc(str(held_player.name).to_int())
+			
+			target.on_physics_picked_up.rpc()
 			
 			t_phys = target.physics_dupe
 			#TODO: particles
