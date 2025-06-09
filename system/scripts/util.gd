@@ -8,6 +8,11 @@ static func layer_mask(layers: Array) -> int:
 		mask |= (1 << (layer - 1))
 	return mask
 
+## Checks if mask contains layer
+static func layer_in_mask(mask: int, layer: int) -> bool:
+	return (mask & (1 << (layer - 1))) != 0
+
+
 # COLLISION LAYER REPRESENTATIONS:
 # 1 default
 # 2 player (player should only ever have this)

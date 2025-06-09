@@ -1,4 +1,7 @@
 extends Node3D
+class_name Door
+
+signal toggled
 
 @export var is_open := false
 
@@ -20,8 +23,10 @@ func _physics_process(delta: float) -> void:
 		if close_timer <= 0:
 			toggle_door()
 
+
 func on_interact(source):
 	toggle_door.rpc()
+
 
 @rpc("any_peer", "call_local")
 func toggle_door():
@@ -30,6 +35,8 @@ func toggle_door():
 	
 	if is_open:
 		close_timer = 5.0
+	
+	toggled.emit(is_open)
 
 
 func do_anim():

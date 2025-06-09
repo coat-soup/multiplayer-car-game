@@ -23,22 +23,49 @@ func _ready() -> void:
 
 
 
-func recursive_dupe_setup(node : Node):
-	node.set_process(false)
-	node.process_mode = Node.PROCESS_MODE_DISABLED
-	
+func recursive_dupe_setup(node : Node, disable := true):
 	var node3d : Node3D = node as Node3D
 	if node3d:
-		node3d.visible = false
+		node3d.visible = true
+	
 	var collider = node as StaticBody3D
+	if collider:
+		collider.disable_mode = CollisionObject3D.DISABLE_MODE_KEEP_ACTIVE
 	if not collider:
 		collider = node as CSGShape3D
 	if collider:
-		collider.collision_layer = Util.layer_mask([7])
-		collider.collision_mask = Util.layer_mask([7])
+		if Util.layer_in_mask(collider.collision_layer, 1):
+			collider.collision_layer = Util.layer_mask([7])
+			collider.collision_mask = Util.layer_mask([7])
+	
+	var c_comp = node as Door
+	if c_comp:
+		c_comp.set_script(preload("res://world/props/scripts/door_dupe_linker.gd"))
+		c_comp = c_comp as DoorDupeLinker
+		c_comp.door = ship_manager.get_node(duped_ship.get_path_to(c_comp)) as Door
+		c_comp.setup()
+		disable = false
+	
+	c_comp = node as Elevator
+	if c_comp:
+		print("FELEVATOR")
+		(ship_manager.get_node(duped_ship.get_path_to(c_comp)) as Elevator).moving_to_floor.connect(c_comp.call_to_floor)
+		disable = false
+	
+	if disable:
+		node.set_process(false)
+		node.process_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		node.set_process(true)
+		node.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# disabling process doesn't work
+	if node as MultiplayerSynchronizer:
+		node.queue_free()
+		return
 	
 	for child in node.get_children():
-		recursive_dupe_setup(child)
+		recursive_dupe_setup(child, disable)
 
 
 func handle_item_spawn(item : Item):
