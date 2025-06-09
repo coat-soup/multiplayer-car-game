@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://fyxpmm5wifkc"]
 
 [ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
-[ext_resource type="PackedScene" uid="uid://dwyud5d5wciho" path="res://equipment/models/tractor_tool.glb" id="2_aqkas"]
+[ext_resource type="PackedScene" uid="uid://ch0bc52eqydbm" path="res://equipment/models/tractor_tool_model.tscn" id="2_t7tfp"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
 [ext_resource type="AudioStream" uid="uid://dkxuvx7bjudl7" path="res://sfx/tractor_hum.wav" id="4_uf7hw"]
 
@@ -64,7 +64,7 @@ color_by_norm_dist_grad = SubResource("Gradient_1mqwj")
 equipment_name = "Tractor Tool"
 interactable = NodePath("StaticBody3D")
 
-[node name="tractor_tool" parent="." instance=ExtResource("2_aqkas")]
+[node name="tractor_tool2" parent="." instance=ExtResource("2_t7tfp")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

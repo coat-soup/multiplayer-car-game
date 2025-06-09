@@ -9,9 +9,9 @@ extends Equipment
 var can_fire := true
 var reloading := false
 
-const GUN_BULLET = preload("res://cannons/gun_bullet.tscn")
+const GUN_BULLET = preload("res://ship_weapons/gun_bullet.tscn")
 @export var barrel_end: Node3D
-const MUZZLE_FLASH = preload("res://vfx/muzzle_flash.tscn")
+const MUZZLE_FLASH = preload("res://vfx/particles/muzzle_flash.tscn")
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 

@@ -5,7 +5,7 @@ extends Equipment
 @export var repair_range := 5.0
 @export var anim : AnimationPlayer
 
-const WRENCH_BONK_PARTICLES = preload("res://vfx/wrench_bonk_particles.tscn")
+const WRENCH_BONK_PARTICLES = preload("res://vfx/particles/wrench_bonk_particles.tscn")
 @onready var audio: AudioStreamPlayer = $Audio
 
 var on_cooldown := false

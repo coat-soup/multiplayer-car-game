@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch0bc52eqydbm"]
+
+[ext_resource type="PackedScene" uid="uid://dwyud5d5wciho" path="res://equipment/models/tractor_tool.glb" id="1_c262n"]
+[ext_resource type="Texture2D" uid="uid://boqqqj6s8xeqr" path="res://equipment/textures/tractor_tool.png" id="2_ncqhg"]
+[ext_resource type="Texture2D" uid="uid://whxujwyoerah" path="res://equipment/textures/tractor_tool_n.png" id="3_74rv2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vem5r"]
+albedo_texture = ExtResource("2_ncqhg")
+normal_enabled = true
+normal_texture = ExtResource("3_74rv2")
+texture_filter = 0
+
+[node name="tractor_tool" instance=ExtResource("1_c262n")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cylinder" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_002" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_004" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_005" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_006" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_003" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cylinder_002" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cylinder_003" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cylinder_004" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cylinder_005" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_009" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_010" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_008" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
+
+[node name="Cube_011" parent="." index="15"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vem5r")
