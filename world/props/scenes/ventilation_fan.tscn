@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0wjbek7t0l5p"]
+[gd_scene load_steps=19 format=3 uid="uid://b0wjbek7t0l5p"]
 
 [ext_resource type="PackedScene" uid="uid://d178u2q03xoms" path="res://world/props/models/ventilation_fan.glb" id="1_4osas"]
 [ext_resource type="Texture2D" uid="uid://cp17heu4bfm3m" path="res://world/props/textures/ventilation_fan.png" id="2_4431k"]
@@ -49,15 +49,23 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_g2le0"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.00909091, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_h8vnk"]
 gradient = SubResource("Gradient_g2le0")
 
+[sub_resource type="Curve" id="Curve_f28ml"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lvbub"]
+curve = SubResource("Curve_f28ml")
+
 [sub_resource type="Curve" id="Curve_26vfe"]
 min_value = -200.0
 max_value = 200.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.15942, 68.1319), 0.0, 0.0, 0, 0, Vector2(0.347826, 2.19781), 0.0, 0.0, 0, 0, Vector2(0.449275, 90.1099), 0.0, 0.0, 0, 0, Vector2(0.608696, 15.3846), 0.0, 0.0, 0, 0, Vector2(0.702899, 85.7143), 0.0, 0.0, 0, 0, Vector2(0.891304, 15.3846), 0.0, 0.0, 0, 0, Vector2(1, 85.7143), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, -68.1319), 0.0, 0.0, 0, 0, Vector2(0.15942, 68.1319), 0.0, 0.0, 0, 0, Vector2(0.347826, -63.7363), 0.0, 0.0, 0, 0, Vector2(0.463768, 76.9231), 0.0, 0.0, 0, 0, Vector2(0.608696, -72.5275), 0.0, 0.0, 0, 0, Vector2(0.768116, 85.7143), 0.0, 0.0, 0, 0, Vector2(0.913043, -63.7363), 0.0, 0.0, 0, 0, Vector2(1, 90.1099), 0.0, 0.0, 0, 0]
 point_count = 8
 
 [sub_resource type="CurveTexture" id="CurveTexture_dla0c"]
@@ -71,7 +79,10 @@ spread = 20.0
 initial_velocity_min = 3.0
 initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
+tangential_accel_min = -1.0
+tangential_accel_max = 0.999998
 tangential_accel_curve = SubResource("CurveTexture_dla0c")
+scale_curve = SubResource("CurveTexture_lvbub")
 color = Color(1, 1, 1, 0.105882)
 color_ramp = SubResource("GradientTexture1D_h8vnk")
 turbulence_noise_scale = 0.1
@@ -82,6 +93,7 @@ point_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fgyr"]
 transparency = 1
+shading_mode = 0
 vertex_color_use_as_albedo = true
 billboard_mode = 3
 billboard_keep_scale = true
@@ -135,7 +147,7 @@ libraries = {
 autoplay = "spin"
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="6"]
-lifetime = 3.0
+amount = 4
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_5re1k")
 draw_pass_1 = SubResource("RibbonTrailMesh_s6gq5")

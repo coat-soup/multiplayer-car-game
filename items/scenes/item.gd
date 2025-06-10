@@ -9,15 +9,23 @@ class_name Item
 
 @export var on_ship : ShipManager
 var snap_point : ItemSnapPoint
+var cargo_grid : CargoGrid
 var potential_snap_points : Array[ItemSnapPoint]
 
 var held_in_place := false
+var tractored := false
+var controlling_RT : RemoteTransform3D
 
 var velo_calc : Vector3
 
 @onready var impact_audio: AudioStreamPlayer3D = $ImpactAudio
 
 var snap_indicator : Node3D
+
+@export var cargo_grid_dimensions : Vector3i = Vector3i.ZERO # zero for uncargogridable
+
+var cargo_spot_a : Vector3i
+var cargo_spot_b : Vector3i
 
 
 func _ready() -> void:
@@ -41,7 +49,6 @@ static func recursive_set_texture(node : Node):
 
 
 func on_collided(_body):
-	print("collided with force ", velo_calc)
 	if velo_calc.length() >= 0.05:
 		impact_audio.pitch_scale = randf_range(0.9,1.1)
 		impact_audio.play()
@@ -49,19 +56,24 @@ func on_collided(_body):
 
 func _physics_process(_delta: float) -> void:
 	velo_calc = physics_dupe.position - local_position
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() and not held_in_place:
 		local_position = physics_dupe.position
 		local_rotation = physics_dupe.rotation
 	if on_ship and not held_in_place:
 		position = local_position
 		rotation = local_rotation
 	
-	if !held_in_place:
+	if tractored:
 		var sp = get_closest_snap_point()
 		if sp and is_multiplayer_authority():
 			snap_indicator.visible = true
 			snap_indicator.global_position = sp.global_position
 			snap_indicator.global_rotation = sp.global_rotation
+		elif cargo_grid and is_multiplayer_authority():
+			snap_indicator.visible = true
+			snap_indicator.global_position = cargo_grid.get_snapped_world_position(self)
+			snap_indicator.global_rotation = cargo_grid.global_rotation + cargo_grid.get_snapped_rotation(self)
+			if not cargo_grid.can_put_item_there(self): snap_indicator.visible = false
 		else: snap_indicator.visible = false
 
 
@@ -73,12 +85,13 @@ func set_auth(id):
 
 @rpc("any_peer", "call_local")
 func on_physics_let_go():
+	tractored = false
+	
 	var sp = get_closest_snap_point()
 	if sp:
 		snap_point = sp
 		snap_point.set_item.rpc(get_path())
 		
-		physics_dupe.freeze = true
 		held_in_place = true
 		
 		global_position = snap_point.global_position
@@ -87,12 +100,24 @@ func on_physics_let_go():
 		physics_dupe.rotation = rotation
 		
 		snap_indicator.visible = false
+		
+		await get_tree().process_frame # so rigidbody updates before freezing
+		physics_dupe.freeze = true
+		
+	elif cargo_grid:
+		if is_multiplayer_authority():
+			cargo_grid.try_place_item(self)
 
 
 @rpc("any_peer", "call_local")
 func on_physics_picked_up():
+	tractored = true
 	if snap_point:
 		snap_point.set_item.rpc("")
+		physics_dupe.freeze = false
+		held_in_place = false
+	elif cargo_grid:
+		cargo_grid.remove_item(self)
 		physics_dupe.freeze = false
 		held_in_place = false
 

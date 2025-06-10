@@ -31,7 +31,7 @@ func on_triggered(button : int):
 		
 	else:
 		target = raycast_target()
-		if target:
+		if target and not target.tractored:
 			target.set_auth.rpc(str(held_player.name).to_int())
 			
 			target.on_physics_picked_up.rpc()

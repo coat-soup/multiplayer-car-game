@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://veqnmj5as5gq"]
+[gd_scene load_steps=7 format=3 uid="uid://brtryfb447bwb"]
 
-[ext_resource type="Script" path="res://items/scenes/item.gd" id="1_oc8r8"]
-[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_inbej"]
+[ext_resource type="Script" path="res://items/scenes/item.gd" id="1_y2yrd"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_2agdc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o0ln4"]
+size = Vector3(4, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkqtu"]
 albedo_color = Color(1, 0.41, 0.41, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlt71"]
+size = Vector3(4, 2, 2)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
 properties/0/path = NodePath(".:local_position")
@@ -18,9 +20,9 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="TestCargoItem" type="CharacterBody3D" groups=["item"]]
-script = ExtResource("1_oc8r8")
-cargo_grid_dimensions = Vector3i(1, 1, 1)
+[node name="TestLargeCargoItem" type="CharacterBody3D" groups=["item"]]
+script = ExtResource("1_y2yrd")
+cargo_grid_dimensions = Vector3i(4, 2, 2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_o0ln4")
@@ -33,4 +35,4 @@ shape = SubResource("BoxShape3D_vlt71")
 replication_config = SubResource("SceneReplicationConfig_mrjew")
 
 [node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_inbej")
+stream = ExtResource("2_2agdc")

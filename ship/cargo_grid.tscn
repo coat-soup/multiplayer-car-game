@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbcq4tjxh8fmr"]
+
+[ext_resource type="Script" path="res://ship/cargo_grid.gd" id="1_cf5t5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t58d"]
+albedo_color = Color(0.389287, 0.389287, 0.389287, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2uxhr"]
+
+[node name="CargoGrid" type="Node3D"]
+script = ExtResource("1_cf5t5")
+
+[node name="Base" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(1, 0.1, 1)
+
+[node name="Base2" type="CSGBox3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0291299, 0)
+size = Vector3(0.8, 0.1, 0.8)
+material = SubResource("StandardMaterial3D_6t58d")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_2uxhr")

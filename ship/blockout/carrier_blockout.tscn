@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=25 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
 [ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="3_16skt"]
 [ext_resource type="PackedScene" uid="uid://xk45fu6cvrgo" path="res://world/props/models/human_reference.glb" id="4_8lisy"]
 [ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="5_0blf7"]
+[ext_resource type="PackedScene" uid="uid://bis7oyw47pkoh" path="res://world/props/models/wall_light.glb" id="6_4xyns"]
 [ext_resource type="Script" path="res://system/scripts/elevator.gd" id="6_xtomb"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
 [ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="8_6f0kf"]
+[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="9_187u4"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
 [ext_resource type="PackedScene" uid="uid://b1q502qy271v8" path="res://world/props/scenes/sliding_door_01.tscn" id="10_suvyu"]
 [ext_resource type="PackedScene" uid="uid://bg471in0ssgr4" path="res://world/props/scenes/sliding_door_02.tscn" id="11_18wsr"]
@@ -263,17 +265,116 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.6, -8)
 [node name="Engineering" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -38)
 
-[node name="wall_light" parent="Engineering" instance=ExtResource("5_0blf7")]
+[node name="wall_light4" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(0.0223151, 0.704894, 0.708962, -0.0201479, 0.709311, -0.704607, -0.999548, 0.00143931, 0.0300306, -3.35936, -0.367263, 11)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light5" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-0.0223151, -0.704894, -0.708962, -0.0201479, 0.709311, -0.704608, 0.999548, -0.00143926, -0.0300305, 3.39523, -0.367263, 11)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light10" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-0.0300259, 0.00312355, -0.999544, 0.00153239, 0.999994, 0.00307885, 0.999548, -0.00143926, -0.0300305, 11.0841, -0.367263, 8.7806)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Engineering/wall_light10"]
+light_color = Color(0.131994, 0.380141, 1, 1)
+light_energy = 5.0
+
+[node name="wall_light11" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-0.0300259, 0.00312355, -0.999544, 0.00153239, 0.999994, 0.00307885, 0.999548, -0.00143926, -0.0300305, -10.4511, -0.367263, 8.62202)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Engineering/wall_light11"]
+light_color = Color(0.131994, 0.380141, 1, 1)
+light_energy = 5.0
+
+[node name="wall_light6" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(0.0223151, 0.704894, 0.708962, -0.0201479, 0.709311, -0.704607, -0.999548, 0.00143931, 0.0300306, -3.35936, -0.367263, 6)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light7" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-0.0223151, -0.704894, -0.708962, -0.0201479, 0.709311, -0.704608, 0.999548, -0.00143926, -0.0300305, 3.39523, -0.367263, 6)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light8" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(0.0223151, 0.704894, 0.708962, -0.0201479, 0.709311, -0.704607, -0.999548, 0.00143931, 0.0300306, -3.35936, -0.367263, 15)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light8"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light9" parent="Engineering" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-0.0223151, -0.704894, -0.708962, -0.0201479, 0.709311, -0.704608, 0.999548, -0.00143926, -0.0300305, 3.39523, -0.367263, 15)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Engineering/wall_light9"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.737341, 0, 0.0996466, 1)
+light_energy = 5.0
+shadow_enabled = true
+spot_angle = 90.0
+
+[node name="wall_light" parent="Engineering" instance=ExtResource("6_4xyns")]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -5, 6, 11)
 
-[node name="wall_light2" parent="Engineering" instance=ExtResource("5_0blf7")]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Engineering/wall_light"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.839737, 0.766113, 7.70092e-07, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 57.7146
+spot_angle = 55.6168
+
+[node name="wall_light2" parent="Engineering" instance=ExtResource("6_4xyns")]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 6, 6, 11)
 
-[node name="wall_light3" parent="Engineering" instance=ExtResource("5_0blf7")]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 11, 6, -3)
+[node name="SpotLight3D2" type="SpotLight3D" parent="Engineering/wall_light2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.839737, 0.766113, 7.70092e-07, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 57.7146
+spot_angle = 55.6168
 
 [node name="Floor" type="CSGBox3D" parent="Engineering"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 12.2542)
+use_collision = true
+size = Vector3(15, 1, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor13" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 20.5)
+use_collision = true
+size = Vector3(15, 1, 1)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor9" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12.2542)
 use_collision = true
 size = Vector3(15, 1, 15.4917)
 material = SubResource("ShaderMaterial_f2f3v")
@@ -362,16 +463,34 @@ use_collision = true
 size = Vector3(7, 0.964615, 9)
 material = SubResource("ShaderMaterial_f2f3v")
 
+[node name="Floor10" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-0.866025, 8.74228e-08, -0.5, -7.57103e-08, -1, -4.37114e-08, -0.5, 0, 0.866025, 9.00148, 6, 11.0499)
+use_collision = true
+size = Vector3(7, 0.964615, 15.7261)
+material = SubResource("ShaderMaterial_f2f3v")
+
 [node name="Floor22" type="CSGBox3D" parent="Engineering"]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -10.567, -1, 8.57043)
 use_collision = true
 size = Vector3(7, 0.964615, 8)
 material = SubResource("ShaderMaterial_f2f3v")
 
+[node name="Floor31" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -8.18953, 6, 11.4529)
+use_collision = true
+size = Vector3(8.23547, 0.964615, 15.37)
+material = SubResource("ShaderMaterial_f2f3v")
+
 [node name="Floor8" type="CSGBox3D" parent="Engineering"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.45532, 0.508736, -2.74585)
 use_collision = true
 size = Vector3(10, 2, 15.4917)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor32" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.45532, 6.00874, -2.74585)
+use_collision = true
+size = Vector3(10, 1, 15.4917)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor12" type="CSGBox3D" parent="Engineering"]
@@ -390,6 +509,12 @@ material = SubResource("ShaderMaterial_f2f3v")
 transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, 12.2095, 2.50874, 5.25415)
 use_collision = true
 size = Vector3(7, 1, 7)
+material = SubResource("ShaderMaterial_f2f3v")
+
+[node name="Floor21" type="CSGBox3D" parent="Engineering"]
+transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31134e-07, -1, -4.37114e-08, -14.7905, 2.50874, 4.25415)
+use_collision = true
+size = Vector3(7, 1, 3)
 material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="Floor14" type="CSGBox3D" parent="Engineering"]
@@ -527,17 +652,101 @@ use_collision = true
 size = Vector3(7, 1, 9)
 material = SubResource("ShaderMaterial_f2f3v")
 
+[node name="wall_light" parent="CargoHold" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 6.55852, 10)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CargoHold/wall_light"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 80.0
+
+[node name="wall_light2" parent="CargoHold" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 6.55852, -10)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CargoHold/wall_light2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 80.0
+
+[node name="wall_light3" parent="CargoHold" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 7.06647, 6.55852, -1.68796)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CargoHold/wall_light3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 80.0
+
 [node name="MedBay" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 14)
 
-[node name="wall_light" parent="MedBay" instance=ExtResource("5_0blf7")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -2.22938, 4.72504, 6.5)
+[node name="wall_light" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 1.77062, 3.92432, -8.16525)
 
-[node name="wall_light2" parent="MedBay" instance=ExtResource("5_0blf7")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 4.77062, 4.72504, 6.5)
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.883518, 0.956414, 1, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 57.7146
+spot_angle = 55.6168
 
-[node name="wall_light3" parent="MedBay" instance=ExtResource("5_0blf7")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 1.77062, 4.72504, -4.5)
+[node name="wall_light2" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 1.77062, 3.92432, -0.165253)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.883518, 0.956414, 1, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 57.7146
+spot_angle = 55.6168
+
+[node name="wall_light4" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-3.98258e-08, 0.911108, -0.412166, -1.80164e-08, 0.412167, 0.911108, 1, 4.37114e-08, 5.29396e-22, -4.78719, 0.609701, -0.342677)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light4"]
+transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 0, -3.10588e-22, -1, 1.77636e-15, 1, 2.32941e-22, 0.0343704, 0.00563335, -0.0869598)
+light_color = Color(0.317981, 0.773317, 1, 1)
+light_energy = 5.0
+spot_range = 2.0
+spot_angle = 89.99
+
+[node name="wall_light5" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-3.98258e-08, 0.911108, -0.412166, -1.80164e-08, 0.412167, 0.911108, 1, 4.37114e-08, 5.29396e-22, -4.78719, 0.609701, -3.34268)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light5"]
+transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 0, -3.10588e-22, -1, 1.77636e-15, 1, 2.32941e-22, 0.0343704, 0.00563335, -0.0869598)
+light_color = Color(0.317981, 0.773317, 1, 1)
+light_energy = 5.0
+spot_range = 2.0
+spot_angle = 89.99
+
+[node name="wall_light6" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(-3.98258e-08, 0.911108, -0.412166, -1.80164e-08, 0.412167, 0.911108, 1, 4.37114e-08, 5.29396e-22, -4.78719, 0.609701, -6.34268)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light6"]
+transform = Transform3D(1, -7.10543e-15, -1.42109e-14, 0, -3.10588e-22, -1, 1.77636e-15, 1, 2.32941e-22, 0.0343704, 0.00563335, -0.0869598)
+light_color = Color(0.317981, 0.773317, 1, 1)
+light_energy = 5.0
+spot_range = 2.0
+spot_angle = 89.99
+
+[node name="wall_light3" parent="MedBay" instance=ExtResource("6_4xyns")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 1.77062, 3.92432, 5.83475)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MedBay/wall_light3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.883518, 0.956414, 1, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 57.7146
+spot_angle = 55.6168
 
 [node name="human_reference" parent="MedBay" instance=ExtResource("4_8lisy")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -2.50699, 0.5, -0.562891)
@@ -546,6 +755,18 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
 use_collision = true
 size = Vector3(11, 1, 20)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Floor2" type="CSGBox3D" parent="MedBay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16675, 4.43073, 0)
+use_collision = true
+size = Vector3(9.6665, 1, 20)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="Floor3" type="CSGBox3D" parent="MedBay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.88982, 3.44818, 0)
+use_collision = true
+size = Vector3(1.07196, 2.96509, 20)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="MedBay"]
@@ -570,6 +791,12 @@ material = SubResource("ShaderMaterial_3gayu")
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -1.84937, 2.5, -10)
 use_collision = true
 size = Vector3(4, 1, 7.30127)
+material = SubResource("ShaderMaterial_3gayu")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="MedBay"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 3.01702, 3.95947, -10.0258)
+use_collision = true
+size = Vector3(1.08105, 0.946228, 2.46887)
 material = SubResource("ShaderMaterial_3gayu")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="MedBay"]
@@ -1180,6 +1407,10 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.270
 use_collision = true
 size = Vector3(8.50586, 1, 9)
 material = SubResource("ShaderMaterial_l61ii")
+
+[node name="CargoGrid" parent="Elevators/Elevator2/Platform" instance=ExtResource("9_187u4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38783, 1, -3.67769)
+dimensions = Vector3i(8, 6, 8)
 
 [node name="Button" parent="Elevators/Elevator2/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)

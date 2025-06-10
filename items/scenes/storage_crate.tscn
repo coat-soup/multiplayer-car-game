@@ -17,6 +17,7 @@ properties/1/replication_mode = 1
 
 [node name="StorageCrate" type="CharacterBody3D" groups=["item", "storage crate"]]
 script = ExtResource("1_p1mdd")
+cargo_grid_dimensions = Vector3i(1, 1, 1)
 
 [node name="storage_crate" parent="." instance=ExtResource("2_pe0ab")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.449809, 0)
