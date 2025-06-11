@@ -8,6 +8,7 @@ var end_POI : POI
 @export var network_manager : NetworkManager
 @export var mission_manager : MissionManager
 @export var ship : ShipManager
+@export var item_physics_manager : ItemPhysicsDupeManager
 
 @export var level_size := 2000.0
 var level_gen_seed : int = -1
@@ -18,6 +19,15 @@ func setup(_multiplayer):
 	reset_level()
 
 
+func spawn_item(prefab : PackedScene, pos, in_ship: bool) -> Item:
+	var item = prefab.instantiate() as Item
+	ship.add_child(item)
+	item.global_position = pos
+	item_physics_manager.handle_item_spawn(item, in_ship)
+	item.setup()
+	return item
+
+
 func generate_level():
 	print("generating level")
 	ship.movement_clone.velocity = Vector3.ZERO
@@ -26,8 +36,9 @@ func generate_level():
 	start_POI = friendly_station.instantiate() as POI
 	start_POI.level_manager = self
 	add_child(start_POI)
-	start_POI.position = Util.random_point_in_sphere(400.0, 350.0)
-	start_POI.global_rotation = Util.random_point_in_sphere(1.0)
+	start_POI.position = Vector3(-20,-30,-300)
+	#start_POI.position = Util.random_point_in_sphere(400.0, 350.0)
+	#start_POI.global_rotation = Util.random_point_in_sphere(1.0)
 	
 	end_POI = friendly_station.instantiate() as POI
 	end_POI.level_manager = self

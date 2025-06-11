@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://b75nuxh2j8oak"]
+
+[ext_resource type="Script" path="res://stations/station_cargo_bay.gd" id="1_5cnar"]
+[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_vctcq"]
+[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="3_2w25f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0ecv"]
+render_priority = 0
+shader = ExtResource("2_vctcq")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[node name="StationCargoBay" type="Node3D" node_paths=PackedStringArray("cargo_grid")]
+script = ExtResource("1_5cnar")
+cargo_grid = NodePath("CargoGrid")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(40, 1, 25)
+material = SubResource("ShaderMaterial_j0ecv")
+
+[node name="CargoGrid" parent="." instance=ExtResource("3_2w25f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -10)
+dimensions = Vector3i(20, 10, 20)

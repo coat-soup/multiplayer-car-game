@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bv1p65pnew75r"
-path="res://.godot/imported/station_mockup_2.glb-5ac6192b30e14551856c836f0607e285.scn"
+uid="uid://5gg45bhgfvk1"
+path="res://.godot/imported/station_mockup.glb-5e934342ad8ab299ce79abc187b204ed.scn"
 
 [deps]
 
-source_file="res://enemies/station_mockup_2.glb"
-dest_files=["res://.godot/imported/station_mockup_2.glb-5ac6192b30e14551856c836f0607e285.scn"]
+source_file="res://stations/station_mockup.glb"
+dest_files=["res://.godot/imported/station_mockup.glb-5e934342ad8ab299ce79abc187b204ed.scn"]
 
 [params]
 

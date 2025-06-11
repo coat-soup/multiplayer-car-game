@@ -13,7 +13,7 @@ signal on_completed
 var completed : bool = false
 
 
-func generate_mission(_world : Node3D, _main_pos : Vector3):
+func generate_mission(_level_manager : LevelManager, _main_pos : Vector3):
 	pass
 
 

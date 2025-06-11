@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CargoTransportMission" load_steps=5 format=3 uid="uid://ctcpvp4csbcie"]
+
+[ext_resource type="Script" path="res://missions/mission_objective.gd" id="1_cj2ij"]
+[ext_resource type="PackedScene" uid="uid://brtryfb447bwb" path="res://items/scenes/test_large_cargo_item.tscn" id="1_vn2m4"]
+[ext_resource type="Script" path="res://missions/cargo_transport_mission.gd" id="2_1ee8w"]
+[ext_resource type="PackedScene" uid="uid://veqnmj5as5gq" path="res://items/scenes/test_cargo_item.tscn" id="2_6cyra"]
+
+[resource]
+script = ExtResource("2_1ee8w")
+cargo_items = Array[PackedScene]([ExtResource("1_vn2m4"), ExtResource("2_6cyra")])
+num_to_spawn = 3
+title = "Crate Transport"
+reward = 100
+difficulty = 0
+objectives = Array[ExtResource("1_cj2ij")]([])

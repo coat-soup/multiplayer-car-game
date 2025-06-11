@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 			toggle_door()
 
 
-func on_interact(source):
+func on_interact(_source):
 	toggle_door.rpc()
 
 

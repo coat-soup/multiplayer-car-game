@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://hr4b7fw1y3nc"]
+
+[ext_resource type="PackedScene" uid="uid://0nsrlhaiky60" path="res://enemies/satellite_01.glb" id="1_wulx3"]
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_68xcs"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="3_hsiwx"]
+[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="4_mewwm"]
+[ext_resource type="Material" uid="uid://bni5bs60b1joy" path="res://ship/systems/radar/marker_materials/radar_marker_enemy.tres" id="5_42gbm"]
+[ext_resource type="PackedScene" uid="uid://cvsblvva5sf3y" path="res://ship/components/turrets/autocannon_component.tscn" id="6_0m34b"]
+[ext_resource type="Script" path="res://enemies/ai_cannon_controller.gd" id="7_k1tjv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_otbuj"]
+height = 15.836
+radius = 4.0238
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wnqg4"]
+height = 15.2771
+radius = 3.24903
+
+[node name="satellite_01" node_paths=PackedStringArray("health") instance=ExtResource("1_wulx3")]
+script = ExtResource("2_68xcs")
+health = NodePath("Hitbox/Health")
+
+[node name="Hitbox" type="StaticBody3D" parent="." index="7"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("CylinderShape3D_otbuj")
+
+[node name="Health" type="Node" parent="Hitbox" index="1"]
+script = ExtResource("3_hsiwx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("CylinderShape3D_wnqg4")
+
+[node name="RadarSignature" parent="." index="9" instance=ExtResource("4_mewwm")]
+transform = Transform3D(7.34338, 0, 0, 0, 17.8854, 0, 0, 0, 7.34338, 0, 0, 0)
+visible = false
+marker_mat = ExtResource("5_42gbm")
+
+[node name="AutocannonComponent" parent="." index="10" instance=ExtResource("6_0m34b")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.412, 0, 0)
+
+[node name="AICannonController" type="Node" parent="AutocannonComponent" index="3" node_paths=PackedStringArray("cannon_component")]
+script = ExtResource("7_k1tjv")
+cannon_component = NodePath("..")
+
+[node name="AutocannonComponent2" parent="." index="11" instance=ExtResource("6_0m34b")]
+transform = Transform3D(4.37114e-08, 1, -1.77636e-15, 1, -4.37114e-08, -5.96046e-08, -5.96046e-08, 0, -1, 3.412, 0, 0)
+
+[node name="AICannonController" type="Node" parent="AutocannonComponent2" index="3" node_paths=PackedStringArray("cannon_component")]
+script = ExtResource("7_k1tjv")
+cannon_component = NodePath("..")

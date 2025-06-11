@@ -1,6 +1,9 @@
 extends Node3D
 class_name CargoGrid
 
+signal item_added
+signal item_removed
+
 @export var dimensions : Vector3i = Vector3i.ONE
 
 # actual items (1 dimension)
@@ -31,14 +34,6 @@ func _ready() -> void:
 	area.body_entered.connect(on_body_entered)
 	area.body_exited.connect(on_body_exited)
 
-
-func _process(delta: float) -> void:
-	var n_free = 0
-	for x in range(0, dimensions.x):
-		for y in range(0, dimensions.y):
-			for z in range(0, dimensions.z):
-				if grid[x][y][z] == false: n_free += 1
-	#print(n_free, " spaces free")
 
 func on_body_entered(body):
 	body = body as Item
@@ -92,8 +87,10 @@ func get_item_corner_cell(item: Item, other_corner := false):
 
 
 func can_put_item_there(item : Item) -> bool:
-	var a = get_item_corner_cell(item)
-	var b = get_item_corner_cell(item, true)
+	return is_area_free(get_item_corner_cell(item), get_item_corner_cell(item, true))
+
+
+func is_area_free(a : Vector3i, b : Vector3i) -> bool:
 	
 	#print("checking ", a, " to ", b)
 	
@@ -114,6 +111,7 @@ func remove_item(item : Item):
 	var b = item.cargo_spot_b
 	
 	print("removing ", a, " to ", b)
+	print("before: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	
 	var rt_id = remote_transforms.find(item.controlling_RT)
 	if item.controlling_RT:
@@ -122,19 +120,27 @@ func remove_item(item : Item):
 		item.controlling_RT.queue_free()
 		item.controlling_RT = null
 	
-	item.physics_dupe.position = item.position
-	item.physics_dupe.rotation = item.rotation
+	if item.on_ship:
+		item.physics_dupe.position = item.position
+		item.physics_dupe.rotation = item.rotation
+	else:
+		item.physics_dupe.global_position = item.global_position
+		item.physics_dupe.global_rotation = item.global_rotation
 	
-	#var id = stored_items.find(item)
+	print("after: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
+	var id = stored_items.find(item)
 	
-	#if id == -1: return
+	if id == -1:
+		print(self, " couldn't remove item ", item, " - not found.")
+		return
 	
 	for x in range(min(a.x, b.x), max(a.x,b.x) + 1):
 		for y in range(min(a.y, b.y), max(a.y,b.y) + 1):
 			for z in range(min(a.z, b.z), max(a.z,b.z) + 1):
 				grid[x][y][z] = false
 	
-	#stored_items[id] = null
+	stored_items[id] = null
+	item_removed.emit()
 
 
 func try_place_item(item : Item):
@@ -151,21 +157,25 @@ func place_item(a, b, item_path : String):
 	
 	print("placing ", a, " to ", b)
 	
-	var id = insert_into_null_or_append(stored_items, item)
+	insert_into_null_or_append(stored_items, item)
 	
 	for x in range(min(a.x, b.x), max(a.x,b.x) + 1):
 		for y in range(min(a.y, b.y), max(a.y,b.y) + 1):
 			for z in range(min(a.z, b.z), max(a.z,b.z) + 1):
 				grid[x][y][z] = true
 	
-	
 	item.held_in_place = true
 	
+	print("before: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	# item placement
 	item.global_position = get_snapped_world_position(item)
-	item.physics_dupe.position = item.position
 	item.global_rotation = get_snapped_world_rotation(item)
-	item.physics_dupe.rotation = item.rotation
+	if item.on_ship:
+		item.physics_dupe.position = item.position
+		item.physics_dupe.rotation = item.rotation
+	else:
+		item.physics_dupe.global_position = item.global_position
+		item.physics_dupe.global_rotation = item.global_rotation
 	
 	# remote transform
 	var rt_id = insert_into_null_or_append(remote_transforms, RemoteTransform3D.new())
@@ -178,8 +188,11 @@ func place_item(a, b, item_path : String):
 	
 	item.snap_indicator.visible = false
 	
-	await get_tree().create_timer(0.1) # so rigidbody updates before freezing
+	await get_tree().create_timer(0.1).timeout # so rigidbody updates before freezing
 	item.physics_dupe.freeze = true
+	print("after: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
+	
+	item_added.emit()
 
 
 func insert_into_null_or_append(array : Array, value : Variant) -> int:
@@ -189,3 +202,25 @@ func insert_into_null_or_append(array : Array, value : Variant) -> int:
 			return i
 	array.append(value)
 	return len(array) - 1
+
+
+# very unorganised/inefficient, just used for basic spawning
+func stupid_find_first_slot_for_item(item : Item) -> Array[Vector3i]:
+	var corner_offset = item.cargo_grid_dimensions - Vector3i.ONE
+	
+	for x in range(0, dimensions.x):
+		for y in range(0, dimensions.y):
+			for z in range(0, dimensions.z):
+				var c_pos = Vector3i(x,y,z)
+				if is_area_free(c_pos, c_pos + corner_offset):
+					return [c_pos,c_pos + corner_offset]
+	return []
+
+
+func place_item_crude_at_points_crude(item : Item, a, b):
+	item.global_position = (to_global(a) + to_global(b)) / 2.0
+	item.global_rotation = global_rotation
+	
+	item.physics_dupe.global_position = (to_global(a) + to_global(b)) / 2.0
+	item.physics_dupe.global_rotation = global_rotation
+	place_item(a, b, item.get_path())

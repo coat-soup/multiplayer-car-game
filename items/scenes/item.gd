@@ -27,8 +27,9 @@ var snap_indicator : Node3D
 var cargo_spot_a : Vector3i
 var cargo_spot_b : Vector3i
 
+var phys_delay= true
 
-func _ready() -> void:
+func setup() -> void:
 	physics_dupe.body_entered.connect(on_collided)
 	
 	if not snap_indicator:
@@ -38,6 +39,9 @@ func _ready() -> void:
 		add_child(snap_indicator)
 		recursive_set_texture(snap_indicator)
 		snap_indicator.visible = false
+	
+	await get_tree().create_timer(0.5).timeout
+	phys_delay = false
 
 
 static func recursive_set_texture(node : Node):
@@ -55,11 +59,15 @@ func on_collided(_body):
 
 
 func _physics_process(_delta: float) -> void:
+	if phys_delay: return
+	
 	velo_calc = physics_dupe.position - local_position
 	if is_multiplayer_authority() and not held_in_place:
 		local_position = physics_dupe.position
 		local_rotation = physics_dupe.rotation
+	
 	if on_ship and not held_in_place:
+		#print(position)
 		position = local_position
 		rotation = local_rotation
 	
@@ -111,15 +119,21 @@ func on_physics_let_go():
 
 @rpc("any_peer", "call_local")
 func on_physics_picked_up():
+	print("picked up")
 	tractored = true
 	if snap_point:
 		snap_point.set_item.rpc("")
 		physics_dupe.freeze = false
 		held_in_place = false
-	elif cargo_grid:
+	elif cargo_grid and held_in_place:
 		cargo_grid.remove_item(self)
 		physics_dupe.freeze = false
 		held_in_place = false
+
+
+func move_item(world_pos : Vector3):
+	if on_ship: physics_dupe.position = on_ship.to_local(world_pos)
+	else: physics_dupe.global_position = world_pos
 
 
 func get_closest_snap_point() -> ItemSnapPoint:

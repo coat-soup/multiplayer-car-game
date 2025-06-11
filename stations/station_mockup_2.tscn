@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2s5an1qhg1si"]
+[gd_scene load_steps=8 format=3 uid="uid://b2s5an1qhg1si"]
 
-[ext_resource type="PackedScene" uid="uid://bv1p65pnew75r" path="res://enemies/station_mockup_2.glb" id="1_kninq"]
+[ext_resource type="PackedScene" uid="uid://bv1p65pnew75r" path="res://stations/station_mockup_2.glb" id="1_kninq"]
 [ext_resource type="Script" path="res://system/scripts/POI.gd" id="2_lj330"]
 [ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="2_ol42j"]
 [ext_resource type="PackedScene" uid="uid://cvsblvva5sf3y" path="res://ship/components/turrets/autocannon_component.tscn" id="3_15wrm"]
 [ext_resource type="PackedScene" uid="uid://bc5fnv6u2ikqc" path="res://ship/components/turrets/railgun_component.tscn" id="4_p4ke1"]
+[ext_resource type="PackedScene" uid="uid://b75nuxh2j8oak" path="res://stations/station_cargo_bay.tscn" id="8_62v5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ga5r"]
 size = Vector3(130, 30, 157.39)
@@ -64,3 +65,9 @@ collision_mask = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.3052)
 shape = SubResource("BoxShape3D_0ga5r")
+
+[node name="StationCargoBay" parent="." index="15" instance=ExtResource("8_62v5k")]
+transform = Transform3D(-5.73206e-15, -1, -1.31134e-07, -4.37114e-08, 1.31134e-07, -1, 1, 0, -4.37114e-08, 73.5486, -2.00272, 315.474)
+
+[node name="TestCargoDestination" parent="." index="16" instance=ExtResource("8_62v5k")]
+transform = Transform3D(-5.73206e-15, -1, -1.31134e-07, -4.37114e-08, 1.31134e-07, -1, 1, 0, -4.37114e-08, 73.5486, -2.00272, 259.474)
