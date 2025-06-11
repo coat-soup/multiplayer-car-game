@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="1_knbkj"]
 [ext_resource type="Script" path="res://ship/ship.gd" id="1_o23qk"]
-[ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="2_dbrio"]
+[ext_resource type="PackedScene" uid="uid://t4p1tge6aikq" path="res://auxcraft/scenes/barge.tscn" id="2_f86yf"]
 
 [resource]
 script = ExtResource("1_o23qk")
-ship_name = "Fighter"
+ship_name = "Barge"
 buy_price = 100
-description = "Standard fighter craft"
-prefab = ExtResource("2_dbrio")
+description = "For all your cargo hauling needs"
+prefab = ExtResource("2_f86yf")
 movement_prefab = ExtResource("1_knbkj")

@@ -94,6 +94,8 @@ func handle_item_spawn(item : Item):
 func item_entered_ship(item : Item):
 	item.physics_dupe.gravity_scale = 1
 	item.physics_dupe.position = item.position
+	item.physics_dupe.rotation -= ship_manager.global_rotation
+	item.physics_dupe.linear_velocity *= ship_manager.global_basis
 	item.physics_dupe.linear_velocity -= ship_manager.movement_manager.velocity_sync
 	item.dupe_RT.remote_path = ""
 
@@ -101,7 +103,9 @@ func item_entered_ship(item : Item):
 func item_left_ship(item : Item):
 	item.physics_dupe.gravity_scale = 0
 	item.physics_dupe.global_position = item.global_position
+	item.physics_dupe.global_rotation += ship_manager.global_rotation
 	item.dupe_RT.remote_path = item.get_path()
+	item.physics_dupe.linear_velocity *= ship_manager.global_basis.inverse()
 	item.physics_dupe.linear_velocity += ship_manager.movement_manager.velocity_sync
 
 

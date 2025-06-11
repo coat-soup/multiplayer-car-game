@@ -61,12 +61,13 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("secondary_fire"):
 			held_player.movement_manager.camera_locked = true
 			var spin_dir := Input.get_last_mouse_velocity()
-
-			var t_vel = global_basis * Vector3(deg_to_rad(spin_dir.y * spin_speed), deg_to_rad(spin_dir.x * spin_speed), 0)
+			
+			var t_vel = held_player.camera.global_basis.x * deg_to_rad(spin_dir.y * spin_speed) + held_player.camera.global_basis.y * deg_to_rad(spin_dir.x * spin_speed)
+			if target.on_ship: t_vel = target.on_ship.global_basis.inverse() * t_vel
 			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(t_vel, 300.0 * delta)
 		else:
 			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(Vector3.ZERO, delta * 30)
-
+		
 		var point := (global_position - global_basis.z * target_distance)
 		if target.on_ship:
 			point = held_player.movement_manager.ship.movement_clone.to_local(point) + constant_offset_for_some_fucking_reason

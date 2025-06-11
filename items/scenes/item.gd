@@ -72,7 +72,7 @@ func _physics_process(_delta: float) -> void:
 		elif cargo_grid and is_multiplayer_authority():
 			snap_indicator.visible = true
 			snap_indicator.global_position = cargo_grid.get_snapped_world_position(self)
-			snap_indicator.global_rotation = cargo_grid.global_rotation + cargo_grid.get_snapped_rotation(self)
+			snap_indicator.global_rotation = cargo_grid.get_snapped_world_rotation(self)
 			if not cargo_grid.can_put_item_there(self): snap_indicator.visible = false
 		else: snap_indicator.visible = false
 

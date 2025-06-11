@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=27 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
 [ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]
+[ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
 
@@ -148,7 +149,7 @@ pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/Waypoint
 runway_waypoint = NodePath("Waypoints/WaypointDeck")
 runway_zone = NodePath("RunwayArea")
 carrier_ship = NodePath("..")
-starting_ships_on_load = Array[ExtResource("10_o00jc")]([ExtResource("11_en0ln")])
+starting_ships_on_load = Array[ExtResource("10_o00jc")]([ExtResource("11_en0ln"), ExtResource("14_0qgqj")])
 
 [node name="RunwayArea" type="Area3D" parent="LaunchSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72911, 14, 0)
@@ -303,7 +304,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 4.39225, 16.3417)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 17.3923, -34.6583)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)

@@ -11,6 +11,8 @@ var remote_transforms : Array[RemoteTransform3D]
 
 @onready var area: Area3D = $Area3D
 
+@export var snapped_rotation_offset := Vector3.ZERO
+
 
 func _ready() -> void:
 	grid = []
@@ -61,14 +63,27 @@ func get_snapped_world_position(item : Item) -> Vector3:
 	return to_global(local_pos.round() - even_offset)
 
 
-static func get_snapped_rotation(item : Item) -> Vector3:
-	const rad_90 : float = PI/2.0
-	var rot := Vector3(
-		round(item.rotation.x / rad_90) * rad_90,
-		round(item.rotation.y / rad_90) * rad_90,
-		round(item.rotation.z / rad_90) * rad_90
+func get_snapped_world_rotation(item: Item) -> Vector3:
+	const rad_90 := PI / 2.0
+
+	# Step 1: Convert item's global rotation to the grid's local rotation space
+	var item_local_rot = (global_basis.inverse() * item.global_basis).get_euler()
+
+	# Step 2: Snap the local rotation to the grid's local 90° angles
+	var snapped_local_rot = Vector3(
+		round(item_local_rot.x / rad_90) * rad_90,
+		round(item_local_rot.y / rad_90) * rad_90,
+		round(item_local_rot.z / rad_90) * rad_90
 	)
-	return rot
+
+	# Step 3: Convert the snapped local rotation back to world space
+	var snapped_local_basis = Basis.from_euler(snapped_local_rot)
+	var snapped_world_basis = global_basis * snapped_local_basis
+
+	# Step 4: Return the final snapped world rotation (Euler angles)
+	return snapped_world_basis.get_euler()
+
+
 
 
 func get_item_corner_cell(item: Item, other_corner := false):
@@ -100,11 +115,15 @@ func remove_item(item : Item):
 	
 	print("removing ", a, " to ", b)
 	
-	#var rt_id = remote_transforms.find(item.controlling_RT)
-	#item.controlling_RT.remote_path = ""
-	#remote_transforms[rt_id] = null
-	#item.controlling_RT.queue_free()
-	#item.controlling_RT = null
+	var rt_id = remote_transforms.find(item.controlling_RT)
+	if item.controlling_RT:
+		item.controlling_RT.remote_path = ""
+		remote_transforms[rt_id] = null
+		item.controlling_RT.queue_free()
+		item.controlling_RT = null
+	
+	item.physics_dupe.position = item.position
+	item.physics_dupe.rotation = item.rotation
 	
 	#var id = stored_items.find(item)
 	
@@ -130,14 +149,6 @@ func place_item(a, b, item_path : String):
 	item.cargo_spot_a = a
 	item.cargo_spot_b = b
 	
-	#var rt_id = insert_into_null_or_append(remote_transforms, RemoteTransform3D.new())
-	#item.controlling_RT = remote_transforms[rt_id]
-	#print(rt_id, item.controlling_RT)
-	#item.controlling_RT.remote_path = item_path
-	#add_child(item.controlling_RT)
-	#item.controlling_RT.global_position = item.global_position
-	#item.controlling_RT.global_rotation = item.global_rotation
-	
 	print("placing ", a, " to ", b)
 	
 	var id = insert_into_null_or_append(stored_items, item)
@@ -149,14 +160,24 @@ func place_item(a, b, item_path : String):
 	
 	
 	item.held_in_place = true
-		
+	
+	# item placement
 	item.global_position = get_snapped_world_position(item)
 	item.physics_dupe.position = item.position
-	item.global_rotation = get_snapped_rotation(item)
+	item.global_rotation = get_snapped_world_rotation(item)
 	item.physics_dupe.rotation = item.rotation
 	
+	# remote transform
+	var rt_id = insert_into_null_or_append(remote_transforms, RemoteTransform3D.new())
+	item.controlling_RT = remote_transforms[rt_id]
+	print(rt_id, item.controlling_RT)
+	item.controlling_RT.remote_path = item_path
+	add_child(item.controlling_RT)
+	item.controlling_RT.global_position = item.global_position
+	item.controlling_RT.global_rotation = item.global_rotation
+	
 	item.snap_indicator.visible = false
-		
+	
 	await get_tree().create_timer(0.1) # so rigidbody updates before freezing
 	item.physics_dupe.freeze = true
 
