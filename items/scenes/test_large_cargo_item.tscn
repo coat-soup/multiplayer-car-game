@@ -1,7 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://brtryfb447bwb"]
+[gd_scene load_steps=9 format=3 uid="uid://brtryfb447bwb"]
 
-[ext_resource type="Script" path="res://items/scenes/item.gd" id="1_y2yrd"]
+[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_y2yrd"]
+[ext_resource type="Script" path="res://items/scripts/item_data.gd" id="2_1fpxp"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_2agdc"]
+
+[sub_resource type="Resource" id="Resource_tt7il"]
+script = ExtResource("2_1fpxp")
+item_name = ""
+price = 0
+crafting_recipes = Array[String]([])
 
 [sub_resource type="BoxMesh" id="BoxMesh_o0ln4"]
 size = Vector3(4, 2, 2)
@@ -22,6 +29,7 @@ properties/1/replication_mode = 1
 
 [node name="TestLargeCargoItem" type="CharacterBody3D" groups=["item"]]
 script = ExtResource("1_y2yrd")
+item_data = SubResource("Resource_tt7il")
 cargo_grid_dimensions = Vector3i(4, 2, 2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

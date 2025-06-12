@@ -17,7 +17,7 @@ func generate_mission(level_manager : LevelManager, _main_pos : Vector3):
 	var start_grid = (level_manager.start_POI.get_node("StationCargoBay") as StationCargoBay).cargo_grid
 	
 	for i in range(num_to_spawn):
-		var item : Item = level_manager.spawn_item(cargo_items.pick_random(), start_grid.global_position + Vector3(-10,0,0), false)
+		var item : Item = level_manager.spawn_item(cargo_items.pick_random(), start_grid.global_position + Vector3(-10,0,0))
 		objective.cargo.append(item)
 		
 		var grid_pos = start_grid.stupid_find_first_slot_for_item(item)

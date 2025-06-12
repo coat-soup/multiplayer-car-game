@@ -1,5 +1,5 @@
 extends Resource
-class_name Ship
+class_name ShipData
 
 @export var ship_name : String
 @export var buy_price : int

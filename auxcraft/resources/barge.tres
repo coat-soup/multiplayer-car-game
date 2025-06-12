@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="1_8nqss"]
 [ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="2_857xn"]
-[ext_resource type="Script" path="res://ship/ship.gd" id="3_pwe25"]
+[ext_resource type="Script" path="res://ship/ship_data.gd" id="3_pwe25"]
 
 [resource]
 script = ExtResource("3_pwe25")

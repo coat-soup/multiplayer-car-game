@@ -13,22 +13,32 @@ var end_POI : POI
 @export var level_size := 2000.0
 var level_gen_seed : int = -1
 
+@export var item_spawner : MultiplayerSpawner
+#@export var items_spawned : Array[Item]
+
+func _ready() -> void:
+	for scene in Util.get_scenes_in_folder("res://items/scenes/"):
+		item_spawner.add_spawnable_scene(scene)
 
 func setup(_multiplayer):
 	_multiplayer.peer_connected.connect(generate_for_new_connection)
 	reset_level()
 
 
-func spawn_item(prefab : PackedScene, pos, in_ship: bool) -> Item:
+func spawn_item(prefab : PackedScene, pos) -> Item:
+	#if not is_multiplayer_authority(): return
+	
+	#item_spawner.add_spawnable_scene(prefab.resource_path)
 	var item = prefab.instantiate() as Item
-	ship.add_child(item)
+	#var item = item_spawner.spawn(prefab)
+	print("spawned: ", item)
+	ship.add_child(item, true)
 	item.global_position = pos
-	item_physics_manager.handle_item_spawn(item, in_ship)
-	item.setup()
 	return item
 
 
 func generate_level():
+	#if not is_multiplayer_authority(): return
 	print("generating level")
 	ship.movement_clone.velocity = Vector3.ZERO
 	ship.movement_clone.position = Vector3.ZERO
@@ -47,11 +57,18 @@ func generate_level():
 	end_POI.global_rotation = Util.random_point_in_sphere(1.0)
 	
 	#await get_tree().process_frame
-	mission_manager.generate_missions()
+	if is_multiplayer_authority():
+		mission_manager.generate_missions()
 
 
 func generate_for_new_connection(peer_id : int):
-	generate_from_seed.rpc_id(peer_id, level_gen_seed)
+	if multiplayer.is_server() or true:
+		generate_from_seed.rpc_id(peer_id, level_gen_seed)
+		
+		return # doesnt work bc cant send resource
+		var state = WorldState.get_world_state(get_parent_node_3d())
+		generate_from_world_state.rpc_id(peer_id, state)
+		print("\n SENT GEN \n")
 
 
 @rpc("any_peer", "call_local")
@@ -75,3 +92,12 @@ func reset_level():
 	
 	if is_multiplayer_authority():
 		generate_from_seed.rpc(randi())
+
+
+# DOESNT WORK - CANT RPC RESOURCES
+@rpc("any_peer", "call_local")
+func generate_from_world_state(state : WorldState):
+	print("\n Generating world for new player")
+	for item in state.loose_items:
+		spawn_item(load(item.item_prefab_path), item.world_position)
+		print("spawning loose item: ", item)

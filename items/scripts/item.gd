@@ -1,6 +1,8 @@
 extends Node3D
 class_name Item
 
+@export var item_data : ItemData
+
 @export var physics_dupe : RigidBody3D
 @export var dupe_RT : RemoteTransform3D
 
@@ -27,10 +29,24 @@ var snap_indicator : Node3D
 var cargo_spot_a : Vector3i
 var cargo_spot_b : Vector3i
 
-var phys_delay= true
+var phys_delay = true
 
-func setup() -> void:
+@onready var ui = get_tree().get_first_node_in_group("ui") as UIManager
+
+var target_angular_velocity : Vector3
+var target_linear_velocity : Vector3
+var angular_acceleration : float
+
+var item_physics_dupe_manager : ItemPhysicsDupeManager
+
+func _ready() -> void:
+	item_physics_dupe_manager = (get_tree().get_first_node_in_group("network manager") as NetworkManager).level_manager.item_physics_manager
+	item_physics_dupe_manager.handle_item_spawn(self)
+	
 	physics_dupe.body_entered.connect(on_collided)
+	
+	multiplayer.connected_to_server.connect(on_connect) # for items already in scene
+	on_connect() # for items spawned by spawner
 	
 	if not snap_indicator:
 		snap_indicator = duplicate()
@@ -42,6 +58,70 @@ func setup() -> void:
 	
 	await get_tree().create_timer(0.5).timeout
 	phys_delay = false
+
+
+func on_connect():
+	#ui.display_chat_message("item connected")
+	if not multiplayer.is_server():
+		request_initialise_on_load.rpc_id(1)
+
+
+func _physics_process(delta: float) -> void:
+	if phys_delay: return
+	if held_in_place: return
+	
+	velo_calc = physics_dupe.position - local_position
+	
+	if is_multiplayer_authority():
+		local_position = physics_dupe.position
+		local_rotation = physics_dupe.rotation
+	else:
+		physics_dupe.position = local_position
+		physics_dupe.rotation = local_rotation
+	
+	if on_ship:
+		position = physics_dupe.position
+		rotation = physics_dupe.rotation
+	
+	if tractored:
+		#physics_dupe.angular_velocity = physics_dupe.angular_velocity.move_toward(target_angular_velocity, delta * angular_acceleration)
+		
+		var sp = get_closest_snap_point()
+		if sp and is_multiplayer_authority():
+			snap_indicator.visible = true
+			snap_indicator.global_position = sp.global_position
+			snap_indicator.global_rotation = sp.global_rotation
+		elif cargo_grid and is_multiplayer_authority():
+			snap_indicator.visible = true
+			snap_indicator.global_position = cargo_grid.get_snapped_world_position(self)
+			snap_indicator.global_rotation = cargo_grid.get_snapped_world_rotation(self)
+			if not cargo_grid.can_put_item_there(self): snap_indicator.visible = false
+		else: snap_indicator.visible = false
+
+
+@rpc("any_peer", "call_local")
+func request_initialise_on_load():
+	if not multiplayer.is_server(): return
+	
+	#if not on_ship:
+	ui.display_chat_message("ATTEMPING SEND - cg " + str( cargo_grid) + " held " + str(held_in_place))
+	
+	if cargo_grid and held_in_place:
+		ui.display_chat_message("SENDING CARGO")
+		initialise_on_load.rpc_id(multiplayer.get_remote_sender_id(), cargo_grid.get_path(), cargo_spot_a, cargo_spot_b, cargo_grid.global_rotation - physics_dupe.global_rotation)
+	else:
+		initialise_on_load.rpc_id(multiplayer.get_remote_sender_id())
+
+
+@rpc("any_peer", "call_local")
+func initialise_on_load(path_to_cargo_grid : String = "", a : Vector3i = Vector3i.ZERO, b : Vector3i = Vector3i.ZERO, local_rot : Vector3 = Vector3.ZERO):
+	cargo_grid = get_tree().root.get_node_or_null(path_to_cargo_grid) as CargoGrid
+	if cargo_grid:
+		cargo_grid.place_item_crude_at_points_crude(self, a, b, local_rot)
+		ui.display_chat_message("CARGIN GRIDDING")
+	if not on_ship:
+		#ui.display_chat_message("SETTING RT FOR OFF SHIP")
+		dupe_RT.remote_path = ""
 
 
 static func recursive_set_texture(node : Node):
@@ -56,33 +136,6 @@ func on_collided(_body):
 	if velo_calc.length() >= 0.05:
 		impact_audio.pitch_scale = randf_range(0.9,1.1)
 		impact_audio.play()
-
-
-func _physics_process(_delta: float) -> void:
-	if phys_delay: return
-	
-	velo_calc = physics_dupe.position - local_position
-	if is_multiplayer_authority() and not held_in_place:
-		local_position = physics_dupe.position
-		local_rotation = physics_dupe.rotation
-	
-	if on_ship and not held_in_place:
-		#print(position)
-		position = local_position
-		rotation = local_rotation
-	
-	if tractored:
-		var sp = get_closest_snap_point()
-		if sp and is_multiplayer_authority():
-			snap_indicator.visible = true
-			snap_indicator.global_position = sp.global_position
-			snap_indicator.global_rotation = sp.global_rotation
-		elif cargo_grid and is_multiplayer_authority():
-			snap_indicator.visible = true
-			snap_indicator.global_position = cargo_grid.get_snapped_world_position(self)
-			snap_indicator.global_rotation = cargo_grid.get_snapped_world_rotation(self)
-			if not cargo_grid.can_put_item_there(self): snap_indicator.visible = false
-		else: snap_indicator.visible = false
 
 
 @rpc("any_peer", "call_local")
@@ -144,3 +197,13 @@ func get_closest_snap_point() -> ItemSnapPoint:
 			closest = i
 	
 	return potential_snap_points[closest] if closest != -1 else null
+
+
+@rpc("any_peer", "call_local")
+func set_target_angular_velocity(vel : Vector3, accel):
+	target_angular_velocity = vel
+	angular_acceleration = accel
+
+@rpc("any_peer", "call_local")
+func set_linear_velocity(vel : Vector3):
+	physics_dupe.linear_velocity = vel

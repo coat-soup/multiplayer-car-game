@@ -39,7 +39,6 @@ func on_body_entered(body):
 	body = body as Item
 	if body and check_item_accepted(body):
 		body.cargo_grid = self
-		print("setting grid")
 
 
 func on_body_exited(body):
@@ -111,7 +110,6 @@ func remove_item(item : Item):
 	var b = item.cargo_spot_b
 	
 	print("removing ", a, " to ", b)
-	print("before: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	
 	var rt_id = remote_transforms.find(item.controlling_RT)
 	if item.controlling_RT:
@@ -127,7 +125,6 @@ func remove_item(item : Item):
 		item.physics_dupe.global_position = item.global_position
 		item.physics_dupe.global_rotation = item.global_rotation
 	
-	print("after: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	var id = stored_items.find(item)
 	
 	if id == -1:
@@ -166,7 +163,6 @@ func place_item(a, b, item_path : String):
 	
 	item.held_in_place = true
 	
-	print("before: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	# item placement
 	item.global_position = get_snapped_world_position(item)
 	item.global_rotation = get_snapped_world_rotation(item)
@@ -180,7 +176,6 @@ func place_item(a, b, item_path : String):
 	# remote transform
 	var rt_id = insert_into_null_or_append(remote_transforms, RemoteTransform3D.new())
 	item.controlling_RT = remote_transforms[rt_id]
-	print(rt_id, item.controlling_RT)
 	item.controlling_RT.remote_path = item_path
 	add_child(item.controlling_RT)
 	item.controlling_RT.global_position = item.global_position
@@ -190,7 +185,6 @@ func place_item(a, b, item_path : String):
 	
 	await get_tree().create_timer(0.1).timeout # so rigidbody updates before freezing
 	item.physics_dupe.freeze = true
-	print("after: itempos ", item.global_position, " physpos ", item.physics_dupe.global_position)
 	
 	item_added.emit()
 
@@ -217,10 +211,13 @@ func stupid_find_first_slot_for_item(item : Item) -> Array[Vector3i]:
 	return []
 
 
-func place_item_crude_at_points_crude(item : Item, a, b):
+func place_item_crude_at_points_crude(item : Item, a, b, local_rotation := Vector3.ZERO):
 	item.global_position = (to_global(a) + to_global(b)) / 2.0
-	item.global_rotation = global_rotation
+	item.global_rotation = global_rotation + local_rotation
+	var rot = get_snapped_world_rotation(item)
+	item.global_rotation = rot
 	
 	item.physics_dupe.global_position = (to_global(a) + to_global(b)) / 2.0
-	item.physics_dupe.global_rotation = global_rotation
+	item.physics_dupe.global_rotation = rot
+	
 	place_item(a, b, item.get_path())

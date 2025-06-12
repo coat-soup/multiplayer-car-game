@@ -81,3 +81,22 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 
 static func random_point_in_sphere(radius : float, min_radius : float = 0.0) -> Vector3:
 	return (Vector3.UP * randf_range(min_radius, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
+
+
+static func get_scenes_in_folder(folder_path: String) -> Array[String]:
+	var scenes: Array[String] = []
+	var dir := DirAccess.open(folder_path)
+	
+	if dir:
+		dir.list_dir_begin()
+		while true:
+			var file_name = dir.get_next()
+			if file_name == "": break
+			if not dir.current_is_dir() and file_name.ends_with(".tscn"):
+				var full_path = folder_path.path_join(file_name)
+				scenes.append(full_path)
+		dir.list_dir_end()
+	else:
+		push_error("Failed to open directory: %s" % folder_path)
+
+	return scenes

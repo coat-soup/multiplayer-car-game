@@ -7,7 +7,7 @@ albedo_color = Color(0.389287, 0.389287, 0.389287, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2uxhr"]
 
-[node name="CargoGrid" type="Node3D"]
+[node name="CargoGrid" type="Node3D" groups=["cargo_grid"]]
 script = ExtResource("1_cf5t5")
 
 [node name="Base" type="CSGBox3D" parent="."]

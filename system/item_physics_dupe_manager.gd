@@ -15,9 +15,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	for item in get_tree().get_nodes_in_group("item"):
-		handle_item_spawn(item)
-		item.setup()
+	#for item in get_tree().get_nodes_in_group("item"):
+		#handle_item_spawn(item)
 	
 	ship_manager.item_manager.item_added.connect(item_entered_ship)
 	ship_manager.item_manager.item_removed.connect(item_left_ship)
@@ -82,7 +81,7 @@ func recursive_dupe_setup(node : Node, disable := true):
 		recursive_dupe_setup(child, disable)
 
 
-func handle_item_spawn(item : Item, in_ship=true):
+func handle_item_spawn(item : Item):
 	item.physics_dupe = RigidBody3D.new()
 	add_child(item.physics_dupe)
 	
@@ -106,19 +105,18 @@ func handle_item_spawn(item : Item, in_ship=true):
 	
 	#item.physics_dupe.collision_layer = Util.layer_mask([7])
 	#item.physics_dupe.collision_mask = Util.layer_mask([7])
-	
-	if not in_ship:
-		print("iteming")
-		#item.dupe_RT.remote_path = item.get_path()
 
 
 func item_entered_ship(item : Item):
 	item.physics_dupe.gravity_scale = 1
 	item.physics_dupe.position = item.position
 	item.physics_dupe.rotation -= ship_manager.global_rotation
+	
+	item.dupe_RT.remote_path = ""
+	
 	item.physics_dupe.linear_velocity *= ship_manager.global_basis
 	item.physics_dupe.linear_velocity -= ship_manager.movement_manager.velocity_sync
-	item.dupe_RT.remote_path = ""
+	
 	item.physics_dupe.collision_layer = Util.layer_mask([7])
 	item.physics_dupe.collision_mask = Util.layer_mask([7])
 
@@ -127,7 +125,9 @@ func item_left_ship(item : Item):
 	item.physics_dupe.gravity_scale = 0
 	item.physics_dupe.global_position = item.global_position
 	item.physics_dupe.global_rotation += ship_manager.global_rotation
+	
 	item.dupe_RT.remote_path = item.get_path()
+	
 	item.physics_dupe.linear_velocity *= ship_manager.global_basis.inverse()
 	item.physics_dupe.linear_velocity += ship_manager.movement_manager.velocity_sync
 	

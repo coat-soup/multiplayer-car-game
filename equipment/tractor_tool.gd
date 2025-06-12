@@ -65,12 +65,15 @@ func _process(delta: float) -> void:
 			var t_vel = held_player.camera.global_basis.x * deg_to_rad(spin_dir.y * spin_speed) + held_player.camera.global_basis.y * deg_to_rad(spin_dir.x * spin_speed)
 			if target.on_ship: t_vel = target.on_ship.global_basis.inverse() * t_vel
 			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(t_vel, 300.0 * delta)
+			#target.set_target_angular_velocity.rpc_id(1, t_vel, 300)
 		else:
+			#target.set_target_angular_velocity.rpc_id(1, Vector3.ZERO, 30)
 			t_phys.angular_velocity = t_phys.angular_velocity.move_toward(Vector3.ZERO, delta * 30)
 		
 		var point := (global_position - global_basis.z * target_distance)
 		if target.on_ship:
 			point = held_player.movement_manager.ship.movement_clone.to_local(point) + constant_offset_for_some_fucking_reason
+		#target.set_linear_velocity.rpc_id(1, move_speed * (point - t_phys.global_position).limit_length(1.0))
 		t_phys.linear_velocity = move_speed * (point - t_phys.global_position).limit_length(1.0)
 		
 		var lag_distance = point.distance_to(t_phys.global_position)

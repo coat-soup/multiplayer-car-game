@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
 [ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
-[ext_resource type="Script" path="res://ship/ship.gd" id="10_o00jc"]
+[ext_resource type="Script" path="res://ship/ship_data.gd" id="10_o00jc"]
 [ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
 [ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]

@@ -25,7 +25,7 @@ var cur_path_id := -1
 var launch_yeet := 0.0
 var yeeting := false
 
-@export var starting_ships_on_load : Array[Ship]
+@export var starting_ships_on_load : Array[ShipData]
 
 
 func _ready():
@@ -49,7 +49,6 @@ func spawn_preloads():
 
 func check_runway(body):
 	#if not is_multiplayer_authority(): return
-	print("Checking runway: ", body)
 	var ship = body as ShipMovementClone
 	if state == 0 and ship and ship != carrier_ship.movement_clone:
 		land_and_store(ship.ship_manager)
@@ -75,7 +74,6 @@ func land_and_store(ship : ShipManager):
 	state = 2
 	
 	path = runway_waypoint.find_path_to_waypoint(pad_waypoints[cur_pad])
-	print(path)
 	cur_path_id = 0
 
 

@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("2_1ee8w")
 cargo_items = Array[PackedScene]([ExtResource("1_vn2m4"), ExtResource("2_6cyra")])
-num_to_spawn = 3
+num_to_spawn = 4
 title = "Crate Transport"
 reward = 100
 difficulty = 0
