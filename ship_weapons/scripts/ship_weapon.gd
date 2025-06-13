@@ -12,7 +12,7 @@ var fire_timer := 0.0
 var ui : UIManager
 
 @export var firing_audio: AudioStreamPlayer3D
-@export var weapons_controller : ShipWeaponsController
+@export var weapons_controller : MountedWeaponsController
 var found_bullet_speed : float = 100
 
 

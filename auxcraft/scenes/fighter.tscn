@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="5_1n6oi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_fb5fw"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="7_0mde5"]
-[ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapons_controller.gd" id="8_onrm8"]
+[ext_resource type="Script" path="res://ship_weapons/scripts/mounted_weapons_controller.gd" id="8_onrm8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -30,11 +30,11 @@ movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 movement_clone_prefab = ExtResource("2_tvu4p")
 
-[node name="ShipWeaponsController" type="Node3D" parent="." node_paths=PackedStringArray("weapons", "ship", "controllable")]
+[node name="ShipWeaponsController" type="Node3D" parent="." node_paths=PackedStringArray("weapons", "controllable", "ship")]
 script = ExtResource("8_onrm8")
 weapons = [NodePath("../fighter/autocannon_size1"), NodePath("../fighter/autocannon_size2")]
-ship = NodePath("..")
 controllable = NodePath("../Cockpit/Controllable")
+ship = NodePath("..")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_3xy1i")

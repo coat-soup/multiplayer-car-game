@@ -320,17 +320,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98997, 4, 26.3464)
 dimensions = Vector3i(10, 8, 10)
 
 [node name="turret_size_1" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.04763, 12.5, 33.2363)
-ship = NodePath("..")
-
-[node name="turret_size_3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
-transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -1, 1.91069e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, -21.583, -6.5, 17.2363)
-ship = NodePath("..")
-
-[node name="turret_size_4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
-transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 21.5382, -7.5, 28.2648)
-ship = NodePath("..")
-
-[node name="turret_size_2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
-transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 5.04763, -1.5, -35.7637)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.04763, 25.5, -22.7637)
 ship = NodePath("..")

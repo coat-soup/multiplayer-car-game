@@ -1,9 +1,9 @@
 extends Node3D
-class_name ShipWeaponsController
+class_name MountedWeaponsController
 
 @export var weapons : Array[ShipWeapon]
-@export var ship : ShipManager
 @export var controllable : Controllable
+@export var ship : ShipManager
 
 
 func _ready():
