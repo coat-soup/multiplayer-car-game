@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhyxnxy63odi7"]
+
+[ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature.gd" id="1_kur0v"]
+[ext_resource type="PackedScene" uid="uid://ciw1cvuv14kmr" path="res://enemies/creatures/models/hammerhead.glb" id="1_r13gk"]
+[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_80ntv"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="4_3smqp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v2xhj"]
+radius = 1.22582
+height = 9.76721
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gjpiv"]
+radius = 2.04245
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jj8ol"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38u20"]
+size = Vector3(3.19, 2.325, 1.10929)
+
+[node name="HammerheadEnemy" type="CharacterBody3D" node_paths=PackedStringArray("health")]
+motion_mode = 1
+script = ExtResource("1_kur0v")
+health = NodePath("Health")
+
+[node name="hammerhead" parent="." instance=ExtResource("1_r13gk")]
+
+[node name="RadarSignature" parent="." instance=ExtResource("2_80ntv")]
+transform = Transform3D(4.10737, 0, 0, 0, 2.66326, 0, 0, 0, 11.6513, 0, 0, 0)
+visible = false
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_3smqp")
+max_health = 400.0
+
+[node name="BodyCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.995983, 0.0645679, 0.0620472, 0.0610224, 0.0177258, -0.997979, -0.0655373, 0.997756, 0.0137144, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_v2xhj")
+
+[node name="HeadCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.93138)
+shape = SubResource("SphereShape3D_gjpiv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jj8ol")
+
+[node name="AttackHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+collision_mask = 17
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.841256)
+shape = SubResource("BoxShape3D_38u20")

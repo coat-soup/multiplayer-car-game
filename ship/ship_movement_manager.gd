@@ -158,3 +158,8 @@ func on_controlled():
 func on_uncontrolled():
 	if display_joystick_ui and controllable.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(false)
+
+
+@rpc("any_peer", "call_local")
+func add_impact_impulse(force : Vector3):
+	ship.velocity += force/mass
