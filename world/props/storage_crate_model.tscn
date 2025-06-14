@@ -1,5 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://crv73tl4bv8bi"]
+[gd_scene load_steps=5 format=3 uid="uid://crv73tl4bv8bi"]
 
 [ext_resource type="PackedScene" uid="uid://c7b3drusispws" path="res://world/props/models/storage_crate.glb" id="1_vsco8"]
+[ext_resource type="Texture2D" uid="uid://b6c2muugtjp3w" path="res://world/props/textures/storage_crate.png" id="2_cu70g"]
+[ext_resource type="Texture2D" uid="uid://bm6xqcxcyq8rf" path="res://world/props/textures/storage_crate_n.png" id="3_tlknd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fo6i"]
+albedo_texture = ExtResource("2_cu70g")
+normal_enabled = true
+normal_texture = ExtResource("3_tlknd")
+texture_filter = 0
 
 [node name="storage_crate" instance=ExtResource("1_vsco8")]
+
+[node name="Cube_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6fo6i")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6fo6i")
+
+[node name="Cube_003" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6fo6i")

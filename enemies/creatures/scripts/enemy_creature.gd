@@ -56,7 +56,7 @@ func on_body_entered_attack(body : Node3D):
 	if ship:
 		ship.ship_manager.movement_manager.add_impact_impulse.rpc(global_basis.z * 8000)
 		time_to_attack = attack_cooldown
-		print("ATTACKING")
+
 
 func on_died():
 	dead = true
