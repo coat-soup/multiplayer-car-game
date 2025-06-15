@@ -105,6 +105,7 @@ func handle_item_spawn(item : Item):
 	
 	#item.physics_dupe.collision_layer = Util.layer_mask([7])
 	#item.physics_dupe.collision_mask = Util.layer_mask([7])
+	item_left_ship(item)
 
 
 func item_entered_ship(item : Item):

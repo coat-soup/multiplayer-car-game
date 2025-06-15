@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://babxyff8abmit"]
 
 [ext_resource type="PackedScene" uid="uid://d4lli3uc4lpm4" path="res://vehicles/models/truck.glb" id="1_axlmb"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_jn2uv"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_jn2uv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbvug"]
 render_priority = 0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://jyhm57p6b4r4"]
 
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_2pe03"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="1_2pe03"]
 [ext_resource type="PackedScene" uid="uid://o1vr7bkxm3w2" path="res://ship/blockout/landing_pad.tscn" id="1_xcwav"]
 [ext_resource type="PackedScene" uid="uid://bn34hdhi2rq2m" path="res://ship/blockout/barge_bay.tscn" id="6_os2g7"]
 [ext_resource type="PackedScene" uid="uid://xk45fu6cvrgo" path="res://world/props/models/human_reference.glb" id="7_84bgc"]

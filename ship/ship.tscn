@@ -306,7 +306,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6.51296, 26.7756, -17.9875)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.23003, 12.7756, -24.8338)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -332,5 +332,5 @@ transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, 8.74228e-0
 ship = NodePath("..")
 
 [node name="turret_size_2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
-transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 5.04763, -1.5, -35.7637)
+transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 0, -19.5, -25.764)
 ship = NodePath("..")

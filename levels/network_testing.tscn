@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://fjs02dvqh52d"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b5jgp"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_2nf1g"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_2nf1g"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_4gblq"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="4_h2y7w"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://ship_weapons/massive_cannon/massive_cannon.tscn" id="5_ijex1"]

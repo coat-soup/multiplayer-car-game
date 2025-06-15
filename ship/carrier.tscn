@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dh3jei8vyvfjx" path="res://ship/carrier.glb" id="1_8icdk"]
 [ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="2_aukwm"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="2_pj3bv"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_pj3bv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rn5b5"]
 render_priority = 0

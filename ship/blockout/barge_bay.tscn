@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bn34hdhi2rq2m"]
 
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_oyxet"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="1_oyxet"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dmxh5"]
 render_priority = 0

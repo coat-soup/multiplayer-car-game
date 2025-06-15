@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://djooi0jrmmym1"]
 
 [ext_resource type="Script" path="res://ship/ship_movement_clone.gd" id="1_m4cbo"]
-[ext_resource type="Shader" path="res://levels/prototype_grid.gdshader" id="1_tp68i"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="1_tp68i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
 render_priority = 0

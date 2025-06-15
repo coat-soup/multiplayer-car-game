@@ -17,6 +17,8 @@ transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -4.73164
 
 [node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd" index="0"]
 stream = ExtResource("3_xo7rc")
-unit_size = 250.0
-max_distance = 250.0
+volume_db = -10.0
+unit_size = 50.0
+max_db = -1.0
+max_distance = 50.0
 max_polyphony = 3
