@@ -167,14 +167,14 @@ spawn_path = NodePath("../NetworkManager")
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../ShipHolder/Ship")
 
-[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.256, 11.539, 0.430455)
-target = NodePath("../ShipHolder/Ship")
+[node name="HammerheadEnemy" parent="." instance=ExtResource("17_a2seb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317.768, 47.0564, -35.3579)
+target = NodePath("")
 
-[node name="HammerheadEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.744, 139.539, 0.430455)
-target = NodePath("../ShipHolder/Ship")
+[node name="HammerheadEnemy2" parent="." instance=ExtResource("17_a2seb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.232, 47.0564, -35.3579)
+target = NodePath("")
 
-[node name="HammerheadEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -323.744, -59.461, 0.430455)
-target = NodePath("../ShipHolder/Ship")
+[node name="HammerheadEnemy3" parent="." instance=ExtResource("17_a2seb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.7685, 47.0564, -262.358)
+target = NodePath("")

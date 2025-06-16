@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://clbihxv8snp87"]
+
+[ext_resource type="Texture2D" uid="uid://clahbkvppu7ti" path="res://ui/textures/radar_map_plane.png" id="1_or3ch"]
+[ext_resource type="Script" path="res://ship/systems/radar/radar_plane_map.gd" id="1_wo1b6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8axr2"]
+albedo_color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="RadarMap" type="Node3D" node_paths=PackedStringArray("marker_holder")]
+script = ExtResource("1_wo1b6")
+marker_holder = NodePath("Sprite3D/MarkerHolder")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.229973, 0)
+visible = false
+size = Vector3(1, 0.495239, 1)
+material = SubResource("StandardMaterial3D_8axr2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, -0.000107288, 0.875772, 0.00454608)
+modulate = Color(3.17663e-06, 0.549549, 0.74969, 1)
+texture = ExtResource("1_or3ch")
+
+[node name="MarkerHolder" type="Node3D" parent="Sprite3D"]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, -10, 0, 10, -4.37114e-07, 0, 0, 0)

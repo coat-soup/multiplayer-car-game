@@ -33,6 +33,8 @@ health = NodePath("Health")
 [node name="RadarSignature" parent="." instance=ExtResource("2_80ntv")]
 transform = Transform3D(4.10737, 0, 0, 0, 2.66326, 0, 0, 0, 11.6513, 0, 0, 0)
 visible = false
+signature_name = "Hammerhead"
+relation = 2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_3smqp")
