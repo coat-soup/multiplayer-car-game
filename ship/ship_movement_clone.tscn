@@ -28,7 +28,7 @@ shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kpdi5"]
-size = Vector3(45, 34, 72)
+size = Vector3(45, 34, 109.307)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6r31v"]
 properties/0/path = NodePath(".:rotation")
@@ -54,7 +54,7 @@ material_override = SubResource("ShaderMaterial_51rqv")
 size = Vector3(20, 2, 30)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -1.65326)
 shape = SubResource("BoxShape3D_kpdi5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

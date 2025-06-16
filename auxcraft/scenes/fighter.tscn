@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=15 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="7_0mde5"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/mounted_weapons_controller.gd" id="8_onrm8"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="10_ddwes"]
+[ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="11_qanif"]
+[ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="12_ji0mw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -96,3 +98,12 @@ transform = Transform3D(4.04892, 0, 0, 0, 4.04892, 0, 0, 0, 4.04892, 0, 0, 0)
 visible = false
 signature_name = "Fighter"
 relation = 1
+
+[node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("11_qanif")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.635, 1.419)
+map_scale = 0.002
+radar_manager = NodePath("../RadarManager")
+
+[node name="RadarManager" type="Node3D" parent="." node_paths=PackedStringArray("self_sig")]
+script = ExtResource("12_ji0mw")
+self_sig = NodePath("../RadarSignature")

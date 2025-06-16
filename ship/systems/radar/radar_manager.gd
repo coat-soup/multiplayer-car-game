@@ -13,6 +13,7 @@ signal lost_signature
 var tracked_signatures : Array[RadarSignature]
 
 @export var passive_scan_interval : float = 3.0
+@export var self_sig : RadarSignature
 
 
 func _ready() -> void:
@@ -24,6 +25,8 @@ func passive_scan():
 	print()
 	for signature in get_tree().get_nodes_in_group("radar signature"):
 		signature = signature as RadarSignature
+		if signature == self_sig: continue
+		
 		var tracked_id = tracked_signatures.find(signature)
 		var strength = get_relative_signature_strenth(signature)
 		

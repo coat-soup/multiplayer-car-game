@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=31 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
 [ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1.tscn" id="19_64k6c"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
-[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="22_pvuks"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -319,7 +318,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.23003, 20.6371, -24.8338)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.23003, 21.7839, -24.8338)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -351,8 +350,3 @@ ship = NodePath("..")
 [node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("20_rfwny")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
-
-[node name="RadarSignature" parent="." instance=ExtResource("22_pvuks")]
-transform = Transform3D(49.3356, 0, 0, 0, 41.1583, 0, 0, 0, 126.467, 0, 0, 0)
-visible = false
-emission_strength = 5000.0

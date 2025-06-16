@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://18iftbslw8ny"]
+[gd_scene load_steps=3 format=3 uid="uid://18iftbslw8ny"]
+
+[ext_resource type="Texture2D" uid="uid://bb3mxkjaudcgd" path="res://ui/textures/radar_map_plane_elevation_indicator.png" id="1_o5n44"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqth0"]
 shading_mode = 0
@@ -14,3 +16,10 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.6
 visible = false
 text = "EEGE"
 font_size = 200
+
+[node name="ElevationLine" type="Sprite3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 54.3111, 0, 0, 0, 50, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_o5n44")
+region_enabled = true
+region_rect = Rect2(0, 0, 0.2, 64)

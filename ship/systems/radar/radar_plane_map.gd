@@ -33,7 +33,7 @@ func add_marker(signature : RadarSignature):
 		print("RECEIVED TRACK ", radar_manager.tracked_signatures[i].signature_name)
 
 
-func remove_marker(signature, id):	
+func remove_marker(signature, id):
 	markers[id].queue_free()
 	markers.remove_at(id)
 	
@@ -41,13 +41,15 @@ func remove_marker(signature, id):
 
 
 func update_markers():
-	var des = ""
-	for sig in signatures:
-		des += sig.signature_name + ", " 
-	#print(des, "\n")
-	
 	for i in range(len(markers)):
 		markers[i].position = radar_manager.to_local(radar_manager.tracked_signatures[i].global_position) * map_scale
+		
+		var e_line = markers[i].get_node("ElevationLine") as Sprite3D
+		var ns =  abs(markers[i].position.y / 9.0 / map_scale) / 2 * (map_scale / 0.001)
+		e_line.visible = true
+		e_line.region_rect = Rect2(0,0,0.2,ns)
+		e_line.offset.y = (ns if markers[i].position.y > 0 else -ns)/-2
+			
 	
 	#if len(markers) != len(radar_manager.tracked_signatures)
 	
