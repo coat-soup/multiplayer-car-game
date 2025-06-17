@@ -101,7 +101,7 @@ transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14, -26)
 
 [node name="TestCargoItem2" parent="ShipHolder/Ship" instance=ExtResource("12_uwd3m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 20.6226)
 
 [node name="TestLargeCargoItem" parent="ShipHolder/Ship" instance=ExtResource("16_55soq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09671, 5.07227, 23.1528)
