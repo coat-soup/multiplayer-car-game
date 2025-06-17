@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://items/scripts/item.gd" id="1_p1mdd"]
 [ext_resource type="Script" path="res://items/scripts/item_data.gd" id="2_88h4t"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_mt44k"]
-[ext_resource type="PackedScene" uid="uid://crv73tl4bv8bi" path="res://world/props/storage_crate_model.tscn" id="2_pe0ab"]
+[ext_resource type="PackedScene" uid="uid://crv73tl4bv8bi" path="res://world/props/models/storage_crate_model.tscn" id="2_pe0ab"]
 
 [sub_resource type="Resource" id="Resource_y362q"]
 script = ExtResource("2_88h4t")

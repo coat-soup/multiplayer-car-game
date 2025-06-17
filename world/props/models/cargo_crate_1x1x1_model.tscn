@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkokfx1y0ih10"]
+
+[ext_resource type="PackedScene" uid="uid://e4xdkmy8wayo" path="res://world/props/models/cargo_crate_1x1x1.glb" id="1_t4gfk"]
+
+[node name="cargo_crate_1x1x1" instance=ExtResource("1_t4gfk")]
