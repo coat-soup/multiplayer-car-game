@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=16 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="10_ddwes"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="11_qanif"]
 [ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="12_ji0mw"]
+[ext_resource type="Script" path="res://ship/radar_targeter.gd" id="13_h86uo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -107,3 +108,10 @@ radar_manager = NodePath("../RadarManager")
 [node name="RadarManager" type="Node3D" parent="." node_paths=PackedStringArray("self_sig")]
 script = ExtResource("12_ji0mw")
 self_sig = NodePath("../RadarSignature")
+
+[node name="RadarTargeter" type="Node3D" parent="." node_paths=PackedStringArray("controllable", "radar_manager", "weapons_controller", "parent_ship")]
+script = ExtResource("13_h86uo")
+controllable = NodePath("../Cockpit/Controllable")
+radar_manager = NodePath("../RadarManager")
+weapons_controller = NodePath("../ShipWeaponsController")
+parent_ship = NodePath("..")

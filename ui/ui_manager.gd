@@ -24,6 +24,11 @@ var chats : Array[String] = []
 @onready var mission_title_label: Label = $HUD/MissionPanel/MissionTitleLabel
 @onready var mission_objectives_label: Label = $HUD/MissionPanel/MissionObjectivesLabel
 
+@onready var radar_targetting: Control = $HUD/RadarTargetting
+@onready var radar_target_name: Label = $HUD/RadarTargetting/TargetName
+@onready var lead_pip: TextureRect = $HUD/RadarTargetting/LeadPip
+
+
 var prompt_time_remaining := 0.0
 
 
@@ -108,3 +113,18 @@ func display_mission(mission : Mission):
 
 func display_mission_completed(_mission : Mission):
 	mission_objectives_label.text = "Completed"
+
+
+func start_target_lock(signature : RadarSignature, show_pip : bool):
+	radar_targetting.visible = true
+	lead_pip.visible = show_pip
+	radar_target_name.text = signature.signature_name
+
+
+func end_target_lock():
+	radar_targetting.visible = false
+	radar_target_name.text = ""
+
+
+func update_pip_position(target_position : Vector3, camera : Camera3D):
+	lead_pip.position = camera.unproject_position(target_position) - Vector2(20,20)

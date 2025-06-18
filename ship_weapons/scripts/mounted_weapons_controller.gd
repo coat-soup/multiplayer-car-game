@@ -5,6 +5,8 @@ class_name MountedWeaponsController
 @export var controllable : Controllable
 @export var ship : ShipManager
 
+var bullet_speed : float = 200 # TODO: Calculate this properl
+
 
 func _ready():
 	for weapon in weapons:
