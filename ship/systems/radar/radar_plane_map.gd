@@ -42,6 +42,7 @@ func remove_marker(signature, id):
 
 func update_markers():
 	for i in range(len(markers)):
+		if not is_instance_valid(radar_manager.tracked_signatures[i]): continue
 		markers[i].position = radar_manager.to_local(radar_manager.tracked_signatures[i].global_position) * map_scale
 		
 		var e_line = markers[i].get_node("ElevationLine") as Sprite3D

@@ -29,7 +29,10 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if cur_target:
-		if weapons_controller:
+		if not is_instance_valid(cur_target):
+			cur_target = null
+			ui.end_target_lock()
+		elif weapons_controller:
 			var t_vel = (cur_target.global_position - target_last_pos) / delta
 			var vel = parent_ship.movement_manager.velocity_sync if parent_ship else parent_component.ship.movement_manager.velocity_sync if parent_component else Vector3.ZERO
 			ui.update_pip_position(cur_target.global_position + (t_vel - vel) * cur_target.global_position.distance_to(global_position) / weapons_controller.bullet_speed, controllable.camera)

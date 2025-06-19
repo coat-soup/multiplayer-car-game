@@ -2,7 +2,7 @@ extends Node3D
 class_name RadarManager
 
 signal tracked_signature
-signal lost_signature
+signal lost_signature(sig, id)
 
 ## eg. 1.0 = at 500m, emission must be >500 to passively scan
 @export var passive_emission_per_meter : float = 1.0
@@ -19,6 +19,7 @@ var tracked_signatures : Array[RadarSignature]
 func _ready() -> void:
 	await get_tree().create_timer(passive_scan_interval)
 	passive_scan()
+	lost_signature.connect(on_lost_signature)
 
 
 func passive_scan():
@@ -27,20 +28,19 @@ func passive_scan():
 		signature = signature as RadarSignature
 		if signature == self_sig: continue
 		
-		var tracked_id = tracked_signatures.find(signature)
-		var strength = get_relative_signature_strenth(signature)
+		var tracked_id : int = tracked_signatures.find(signature)
+		var strength : float = get_relative_signature_strenth(signature)
 		
 		print("looking at signal: ", signature.signature_name, " strength ", strength, " tracked: ", tracked_id)
 		
 		if tracked_id == -1 and strength >= passive_emission_per_meter:
 			tracked_signatures.append(signature)
 			tracked_signature.emit(signature)
+			signature.terminated.connect(on_signature_terminated.bind(signature))
 			print("TRACKING ", signature.signature_name)
 		
 		elif tracked_id != -1 and strength <= untrack_emission_per_meter:
-			tracked_signatures.remove_at(tracked_id)
-			lost_signature.emit(signature, tracked_id)
-			print("lost signal at strength:distance ", signature.emission_strength, ":", signature.global_position.distance_to(global_position), " (rs ", strength, ")<",untrack_emission_per_meter)
+			lose_signature(signature, tracked_id)
 	
 	
 	await get_tree().create_timer(passive_scan_interval).timeout
@@ -49,3 +49,19 @@ func passive_scan():
 
 func get_relative_signature_strenth(signature : RadarSignature) -> float:
 	return signature.emission_strength / signature.global_position.distance_to(global_position)
+
+
+func on_signature_terminated(sig : RadarSignature):
+	lose_signature(sig)
+
+
+func on_lost_signature(sig : RadarSignature, id : int):
+	sig.terminated.disconnect(on_signature_terminated)
+
+
+func lose_signature(sig : RadarSignature, id = -1):
+	if id == -1: id = tracked_signatures.find(sig)
+	if sig == null: sig = tracked_signatures[id]
+	
+	tracked_signatures.remove_at(id)
+	lost_signature.emit(sig, id)
