@@ -318,7 +318,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.4697, 15.1626, 13.2789)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.4697, 5.39992, 13.2789)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -326,10 +326,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
 [node name="CargoGrid" parent="." instance=ExtResource("17_80dlg")]
 transform = Transform3D(0.91356, 0, -0.406705, 0, 1, 0, 0.406705, 0, 0.91356, -5.34681, 4, 9.26683)
 dimensions = Vector3i(4, 4, 8)
+grid = []
+snapped_rotation_offset = Vector3(0, 0, 0)
 
 [node name="CargoGrid2" parent="." instance=ExtResource("17_80dlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98997, 4, 26.3464)
 dimensions = Vector3i(10, 8, 10)
+grid = []
+snapped_rotation_offset = Vector3(0, 0, 0)
 
 [node name="turret_size_1" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_64k6c")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.04763, 12.5, 33.2363)

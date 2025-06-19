@@ -143,6 +143,7 @@ text = "- Objective 1
 horizontal_alignment = 1
 
 [node name="RadarTargetting" type="Control" parent="HUD"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

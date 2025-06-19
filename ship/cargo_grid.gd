@@ -16,6 +16,7 @@ var remote_transforms : Array[RemoteTransform3D]
 
 @export var snapped_rotation_offset := Vector3.ZERO
 
+const CARGO_GRID_TILE_MODEL = preload("res://world/props/models/cargo_grid_tile_model.tscn")
 
 func _ready() -> void:
 	grid = []
@@ -26,8 +27,14 @@ func _ready() -> void:
 			for z in range(dimensions.z):
 				grid[x][y].append(false)
 	
-	$Base.scale = Vector3(dimensions.x, 1, dimensions.z)
-	$Base.position = Vector3(dimensions.x - 1, -1, dimensions.z - 1)/2.0
+	for x in range(dimensions.x):
+		for z in range(dimensions.z):
+			var tile = CARGO_GRID_TILE_MODEL.instantiate()
+			add_child(tile)
+			tile.position = Vector3(x,-0.5,z)
+	
+	#$Base.scale = Vector3(dimensions.x, 1, dimensions.z)
+	#$Base.position = Vector3(dimensions.x - 1, -1, dimensions.z - 1)/2.0
 	area.scale = dimensions
 	area.position = Vector3(dimensions.x - 1, dimensions.y - 1.0, dimensions.z - 1)/2.0
 	
@@ -53,8 +60,8 @@ func check_item_accepted(item : Item) -> bool:
 
 func get_snapped_world_position(item : Item) -> Vector3:
 	var even_offset := Vector3(0.5,0.5,0.5) * Vector3(1 - item.cargo_grid_dimensions.x % 2, 1 - item.cargo_grid_dimensions.y % 2, 1 - item.cargo_grid_dimensions.z % 2)
-	var local_pos = to_local(item.global_position)
-	return to_global(local_pos.round() - even_offset)
+	var local_pos = to_local(item.global_position)     #tileheight
+	return to_global(local_pos.round() - even_offset + Vector3(0,0.05,0))
 
 
 func get_snapped_world_rotation(item: Item) -> Vector3:

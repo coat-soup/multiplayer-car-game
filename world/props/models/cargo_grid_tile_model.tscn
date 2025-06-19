@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp6xotcmfhyuv"]
+
+[ext_resource type="PackedScene" uid="uid://c20f5ak7iqfk1" path="res://world/props/models/cargo_grid_tile.glb" id="1_ggr4a"]
+[ext_resource type="Texture2D" uid="uid://v1jop81sd4t4" path="res://world/props/textures/cargo_grid_tile.png" id="2_7y1ol"]
+[ext_resource type="Texture2D" uid="uid://brvd8lq4yiwg5" path="res://world/props/textures/cargo_grid_tile_n.png" id="3_pbew2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54sed"]
+albedo_texture = ExtResource("2_7y1ol")
+normal_enabled = true
+normal_texture = ExtResource("3_pbew2")
+texture_filter = 0
+
+[node name="cargo_grid_tile" instance=ExtResource("1_ggr4a")]
+
+[node name="Cube_002" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_54sed")
