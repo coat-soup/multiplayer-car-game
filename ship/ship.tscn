@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=33 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="2_bt4ft"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
+[ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_acrb3"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
 [ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="5_cwq02"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
@@ -21,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
 [ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1.tscn" id="19_64k6c"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
+[ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -60,7 +62,7 @@ size = Vector3(36.4025, 8.68864, 30.8955)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
 size = Vector3(5, 5, 13.1836)
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
@@ -68,6 +70,15 @@ gravity_bounds = NodePath("GravityBounds")
 movement_clone_prefab = ExtResource("2_bt4ft")
 spawn_point = NodePath("SpawnPoint")
 item_manager = NodePath("ItemManager")
+component_manager = NodePath("ComponentManager")
+
+[node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("3_acrb3")
+ship_manager = NodePath("..")
+
+[node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("5_cwq02")
+ship_manager = NodePath("..")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_i8s7e")
@@ -75,10 +86,6 @@ ship = NodePath("..")
 
 [node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21, -27.2965)
-
-[node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
-script = ExtResource("5_cwq02")
-ship_manager = NodePath("..")
 
 [node name="RadarManager" type="Node3D" parent="."]
 script = ExtResource("6_vyq40")
@@ -318,7 +325,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.4697, 15.4628, 13.2789)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.25151, 7.53327, -10.1254)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -350,3 +357,9 @@ ship = NodePath("..")
 [node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("20_rfwny")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
+
+[node name="TestShipComponent" parent="." instance=ExtResource("22_0y016")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 9.59225, 7.33638, -5.56432)
+
+[node name="TestShipComponent2" parent="." instance=ExtResource("22_0y016")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -9.40775, 7.33638, -5.56432)

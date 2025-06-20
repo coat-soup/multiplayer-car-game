@@ -582,30 +582,35 @@ material = SubResource("ShaderMaterial_f2f3v")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Engineering"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.18748, 11)
+use_collision = true
 radius = 1.6254
 height = 10.0
 material = SubResource("ShaderMaterial_xilf3")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Engineering"]
 transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 10.1035, 1.4681, 10.1816)
+use_collision = true
 radius = 1.13511
 height = 3.86927
 material = SubResource("ShaderMaterial_xilf3")
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Engineering"]
 transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -9.89647, 1.4681, 10.1816)
+use_collision = true
 radius = 1.13511
 height = 3.86927
 material = SubResource("ShaderMaterial_xilf3")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Engineering"]
 transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 11.7972, 1.4681, 7.24803)
+use_collision = true
 radius = 1.13511
 height = 3.86927
 material = SubResource("ShaderMaterial_xilf3")
 
 [node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Engineering"]
 transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -11.2028, 1.4681, 7.24803)
+use_collision = true
 radius = 1.13511
 height = 3.86927
 material = SubResource("ShaderMaterial_xilf3")

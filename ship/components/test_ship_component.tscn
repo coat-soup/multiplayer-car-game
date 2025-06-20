@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cud5ky1pvb32i"]
+
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_qt3em"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_mn6i1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcqi0"]
+size = Vector3(1.1, 1.1, 0.4)
+
+[node name="TestShipComponent" type="Node3D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_qt3em")
+health = NodePath("Hitbox/Health")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(1, 1, 0.3)
+
+[node name="Hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("2_mn6i1")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_pcqi0")

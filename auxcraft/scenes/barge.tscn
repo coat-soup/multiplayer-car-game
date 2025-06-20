@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://t4p1tge6aikq"]
+[gd_scene load_steps=13 format=3 uid="uid://t4p1tge6aikq"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_6dg5s"]
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="2_5ir0a"]
+[ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_wvq77"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="4_ccgbp"]
 [ext_resource type="PackedScene" uid="uid://bbiyvux10g2ew" path="res://auxcraft/scenes/barge_model.tscn" id="5_p1smr"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="6_r8wl8"]
@@ -24,11 +25,16 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Barge" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component") groups=["ship"]]
+[node name="Barge" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager") groups=["ship"]]
 script = ExtResource("1_6dg5s")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 movement_clone_prefab = ExtResource("2_5ir0a")
+component_manager = NodePath("ShipComponentManager")
+
+[node name="ShipComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("3_wvq77")
+ship_manager = NodePath("..")
 
 [node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("4_ccgbp")

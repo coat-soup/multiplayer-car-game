@@ -100,3 +100,15 @@ static func get_scenes_in_folder(folder_path: String) -> Array[String]:
 		push_error("Failed to open directory: %s" % folder_path)
 
 	return scenes
+
+
+static func weighted_random(array : Array, weights : Array [float]) -> int:
+	var sum = 0
+	for i in weights:
+		sum += i
+	var w = randf_range(0, sum)
+	for i in range(len(array)):
+		w -= weights[i]
+		if w <= 0:
+			return i
+	return 0

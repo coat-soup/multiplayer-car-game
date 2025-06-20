@@ -10,7 +10,7 @@ class_name ShipManager
 @export var movement_clone_prefab : PackedScene
 @export var spawn_point : Node3D
 @export var item_manager : ShipItemManager
-
+@export var component_manager : ShipComponentManager
 
 
 func _ready() -> void:

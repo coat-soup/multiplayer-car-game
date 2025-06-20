@@ -30,14 +30,14 @@ func add_marker(signature : RadarSignature):
 		
 		markers.append(marker)
 		marker.scale = Vector3(marker_scale,marker_scale,marker_scale)
-		print("RECEIVED TRACK ", radar_manager.tracked_signatures[i].signature_name)
+		#print("RECEIVED TRACK ", radar_manager.tracked_signatures[i].signature_name)
 
 
 func remove_marker(signature, id):
 	markers[id].queue_free()
 	markers.remove_at(id)
 	
-	print("lost sig", signature)
+	#print("lost sig", signature)
 
 
 func update_markers():

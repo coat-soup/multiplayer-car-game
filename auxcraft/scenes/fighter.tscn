@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=17 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="2_tvu4p"]
 [ext_resource type="PackedScene" uid="uid://cjnmu2tlklrfb" path="res://ship/fighter_model.tscn" id="3_arndu"]
+[ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_n54t7"]
 [ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="4_00x40"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="5_1n6oi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_fb5fw"]
@@ -28,11 +29,16 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component") groups=["ship"]]
+[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager") groups=["ship"]]
 script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 movement_clone_prefab = ExtResource("2_tvu4p")
+component_manager = NodePath("ShipComponentManager")
+
+[node name="ShipComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
+script = ExtResource("3_n54t7")
+ship_manager = NodePath("..")
 
 [node name="ShipWeaponsController" type="Node3D" parent="." node_paths=PackedStringArray("weapons", "controllable", "ship")]
 script = ExtResource("8_onrm8")

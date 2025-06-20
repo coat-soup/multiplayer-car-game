@@ -113,6 +113,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.774, -12.4287, 20.9914)
 transform = Transform3D(-5.1162e-08, -1, 3.72529e-09, 1, -4.37114e-08, -2.98023e-08, 0, 3.72529e-09, 1, 8.87248, 11.188, -27.4734)
 raycast_on_startup = false
 
+[node name="Wrench2" parent="ShipHolder/Ship" instance=ExtResource("14_5b2ls")]
+transform = Transform3D(-5.1162e-08, -1, 3.72529e-09, 1, -4.37114e-08, -2.98023e-08, 0, 3.72529e-09, 1, 6.87248, 5.54047, -7.4734)
+raycast_on_startup = false
+
 [node name="TractorTool" parent="ShipHolder/Ship" instance=ExtResource("13_y00j6")]
 transform = Transform3D(-3.62608e-08, 1, -3.72529e-09, -1, -4.37114e-08, 2.98023e-08, 0, 3.72529e-09, 1, 10.6264, 11.2812, -27.057)
 raycast_on_startup = false
@@ -169,12 +173,12 @@ spawn_path = NodePath("../ShipHolder/Ship")
 
 [node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317.768, 47.0564, -35.3579)
-target = NodePath("../ShipHolder/Fighter")
+target = NodePath("../ShipHolder/Ship")
 
 [node name="HammerheadEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.232, 47.0564, -35.3579)
-target = NodePath("../ShipHolder/Fighter")
+target = NodePath("../ShipHolder/Ship")
 
 [node name="HammerheadEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.7685, 47.0564, -262.358)
-target = NodePath("../ShipHolder/Fighter")
+target = NodePath("../ShipHolder/Ship")

@@ -20,7 +20,7 @@ func on_triggered(button : int):
 	var health : Health = raycast_health(true)
 	if health:
 		print("Trying repair on:" + health.name)
-		ui.display_prompt("Health: " + str(min(health.max_health, health.cur_health + heal_amount)))
+		#ui.display_prompt("Health: " + str(min(health.max_health, health.cur_health + heal_amount)), 0.5)
 		health.heal.rpc(heal_amount, held_player.name.to_int())
 		
 		audio.pitch_scale = randf_range(0.9,1.1)
@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 	if not held_by_auth: return
 	var health = raycast_health()
 	if health:
-		ui.display_prompt("Health:" + str(health.cur_health), 2.0)
+		ui.display_prompt("Health:" + str(health.cur_health), 0.1)
 
 
 func raycast_health(do_particles := false) -> Health:

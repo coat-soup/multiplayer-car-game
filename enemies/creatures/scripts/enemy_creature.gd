@@ -55,6 +55,7 @@ func on_body_entered_attack(body : Node3D):
 	var ship = body as ShipMovementClone
 	if ship:
 		ship.ship_manager.movement_manager.add_impact_impulse.rpc(global_basis.z * 8000)
+		ship.ship_manager.component_manager.take_damage_at_point(damage, global_position, -1)
 		time_to_attack = attack_cooldown
 
 

@@ -23,7 +23,6 @@ func _ready() -> void:
 
 
 func passive_scan():
-	print()
 	for signature in get_tree().get_nodes_in_group("radar signature"):
 		signature = signature as RadarSignature
 		if signature == self_sig: continue
@@ -31,13 +30,13 @@ func passive_scan():
 		var tracked_id : int = tracked_signatures.find(signature)
 		var strength : float = get_relative_signature_strenth(signature)
 		
-		print("looking at signal: ", signature.signature_name, " strength ", strength, " tracked: ", tracked_id)
+		#print("looking at signal: ", signature.signature_name, " strength ", strength, " tracked: ", tracked_id)
 		
 		if tracked_id == -1 and strength >= passive_emission_per_meter:
 			tracked_signatures.append(signature)
 			tracked_signature.emit(signature)
 			signature.terminated.connect(on_signature_terminated.bind(signature))
-			print("TRACKING ", signature.signature_name)
+			#print("TRACKING ", signature.signature_name)
 		
 		elif tracked_id != -1 and strength <= untrack_emission_per_meter:
 			lose_signature(signature, tracked_id)
