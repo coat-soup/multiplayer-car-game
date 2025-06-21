@@ -18,5 +18,4 @@ func take_damage_at_point(damage : int, point : Vector3, source : int):
 		else: weights.append(0)
 	
 	var selected = Util.weighted_random(components, weights)
-	print("randomly selected ", components[selected].name)
 	if components[selected].health : components[selected].health.take_damage(damage, source) # can sometimes select non-damagable components if all components broken (all weights=0)

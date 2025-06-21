@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 	if not held_by_auth: return
 	var health = raycast_health()
 	if health:
-		ui.display_prompt("Health:" + str(health.cur_health), 0.1)
+		ui.display_prompt("Health:" + str(round(health.cur_health)), 0.1)
 
 
 func raycast_health(do_particles := false) -> Health:

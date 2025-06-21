@@ -22,6 +22,7 @@ static func layer_in_mask(mask: int, layer: int) -> bool:
 # 6 fine vehicle collision (walls, floor, cannon, etc)
 # 7 ship item physics dupe layer (both ship dupe and item dupe should have only this layer)
 
+
 static func get_player_from_id(id: String, source : Node) -> Player:
 	for player in source.get_tree().get_nodes_in_group("player"):
 		if player.name == id:
@@ -81,6 +82,9 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 
 static func random_point_in_sphere(radius : float, min_radius : float = 0.0) -> Vector3:
 	return (Vector3.UP * randf_range(min_radius, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
+
+static func random_point_in_circle(radius : float, min_radius : float = 0.0) -> Vector2:
+	return (Vector2.UP * randf_range(min_radius, radius)).rotated(randf_range(0, 2*PI))
 
 
 static func get_scenes_in_folder(folder_path: String) -> Array[String]:

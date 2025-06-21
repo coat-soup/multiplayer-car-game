@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://djm40qegqwfy6"]
+
+[ext_resource type="Script" path="res://system/scripts/fire.gd" id="1_k3ns0"]
+[ext_resource type="PackedScene" uid="uid://d04akwrnaw7pu" path="res://vfx/particles/fire_particles.tscn" id="2_i5pd6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oagqn"]
+albedo_color = Color(1, 0.6265, 0.17, 1)
+
+[node name="Fire" type="Node3D"]
+script = ExtResource("1_k3ns0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+visible = false
+size = Vector3(0.2, 0.2, 0.2)
+material = SubResource("StandardMaterial3D_oagqn")
+
+[node name="GPUParticles3D" parent="." instance=ExtResource("2_i5pd6")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
