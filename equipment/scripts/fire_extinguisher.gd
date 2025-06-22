@@ -1,0 +1,45 @@
+extends Equipment
+class_name FireExtinguisher
+
+@export var extinguish_per_second := 1.0
+@export var extinguish_range := 6.0
+
+@onready var particles: GPUParticles3D = $Particles
+@onready var audio: AudioStreamPlayer3D = $Audio
+
+var doing_thing := false
+var fire_manager : FireManager
+
+
+func _ready() -> void:
+	fire_manager = get_tree().get_first_node_in_group("ship").get_node_or_null("FireManager") as FireManager
+	super._ready()
+
+
+func on_triggered(button : int):
+	if button == 0:
+		doing_thing = true
+		particles.emitting = true
+		audio.playing = true
+
+
+func on_trigger_ended(button : int):
+	if button == 0:
+		doing_thing = false
+		particles.emitting = false
+		audio.playing = false
+
+
+func _process(delta: float) -> void:
+	if doing_thing and fire_manager:
+		var space_state = get_world_3d().direct_space_state
+
+		var query = PhysicsRayQueryParameters3D.create(held_player.camera.global_position, held_player.camera.global_position - held_player.camera.global_basis.z * extinguish_range, Util.layer_mask([1]))
+		query.exclude = [held_player]
+
+		var result := space_state.intersect_ray(query)
+		if result:
+			var fire = fire_manager.fires.get(fire_manager.world_to_grid_pos(result.position)) as Fire
+			if fire:
+				fire.add_extinguish(extinguish_per_second * delta)
+			print("extinguisher hit ", result.collider.get_owner(), " found fire manager: ", fire_manager)

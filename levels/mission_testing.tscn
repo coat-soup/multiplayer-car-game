@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dgokpns7ftbi"]
+[gd_scene load_steps=24 format=3 uid="uid://dgokpns7ftbi"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://baol6wgc4kuq6" path="res://items/scenes/storage_crate.tscn" id="12_wkfjx"]
 [ext_resource type="PackedScene" uid="uid://fyxpmm5wifkc" path="res://equipment/tractor_tool.tscn" id="13_y00j6"]
 [ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="14_5b2ls"]
+[ext_resource type="PackedScene" uid="uid://bjg4yqqkbjmks" path="res://equipment/fire_extinguisher.tscn" id="15_c443q"]
 [ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="15_jxfhq"]
 [ext_resource type="PackedScene" uid="uid://brtryfb447bwb" path="res://items/scenes/test_large_cargo_item.tscn" id="16_55soq"]
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="16_j761u"]
@@ -136,6 +137,9 @@ raycast_on_startup = false
 [node name="TractorTool5" parent="ShipHolder/Ship" instance=ExtResource("13_y00j6")]
 transform = Transform3D(-3.62608e-08, 1, -3.72529e-09, -1, -4.37114e-08, 2.98023e-08, 0, 3.72529e-09, 1, 18.2844, -14.4043, 21.9534)
 raycast_on_startup = false
+
+[node name="FireExtinguisher" parent="ShipHolder/Ship" instance=ExtResource("15_c443q")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 6.16941, 5.6622, -5.4255)
 
 [node name="Fighter" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("15_jxfhq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78934, 0)

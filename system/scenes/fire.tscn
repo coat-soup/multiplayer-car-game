@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djm40qegqwfy6"]
+[gd_scene load_steps=5 format=3 uid="uid://djm40qegqwfy6"]
 
 [ext_resource type="Script" path="res://system/scripts/fire.gd" id="1_k3ns0"]
 [ext_resource type="PackedScene" uid="uid://d04akwrnaw7pu" path="res://vfx/particles/fire_particles.tscn" id="2_i5pd6"]
+[ext_resource type="AudioStream" uid="uid://dy5oa3x2m3agx" path="res://sfx/fire.wav" id="3_ub7vt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oagqn"]
 albedo_color = Color(1, 0.6265, 0.17, 1)
@@ -16,3 +17,10 @@ material = SubResource("StandardMaterial3D_oagqn")
 
 [node name="GPUParticles3D" parent="." instance=ExtResource("2_i5pd6")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ub7vt")
+volume_db = 5.0
+unit_size = 15.0
+autoplay = true
+max_distance = 15.0

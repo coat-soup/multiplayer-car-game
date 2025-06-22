@@ -15,6 +15,9 @@ var damagables : Array[Health]
 var fire_manager : FireManager
 var grid_pos : Vector3i
 
+var extinguish_level : float = 0.0 # 1 = extinguished
+var revive_rate : float = 0.1
+
 
 func _ready() -> void:
 	if manually_spawned: # must be parented to a fire manager
@@ -25,6 +28,10 @@ func _ready() -> void:
 	start_spread_tick()
 	var p = Util.random_point_in_circle(0.3)
 	$CSGBox3D.position = Vector3(p.x, 0, p.y)
+
+
+func _process(delta: float) -> void:
+	if extinguish_level > 0.0: extinguish_level -= revive_rate * delta
 
 
 func add_adjacent(fire : Fire):
@@ -71,5 +78,16 @@ func spread_tick():
 		spread_tick()
 
 
+func add_extinguish(amount : float):
+	extinguish_level += amount
+	$GPUParticles3D.amount_ratio = 1 - extinguish_level
+	if extinguish_level >= 1.0:
+		put_out.rpc()
+
+
+@rpc("any_peer", "call_local")
 func put_out():
+	fire_manager.fires.erase(grid_pos)
+	extinguished.emit()
+	await get_tree().create_timer(0.2).timeout
 	queue_free()

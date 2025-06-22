@@ -1,8 +1,8 @@
 extends Node3D
-
 class_name Equipment
 
 signal triggered
+signal trigger_ended
 
 @export var equipment_name : String
 @export var interactable : Interactable
@@ -19,11 +19,11 @@ var prev_parent : Node3D = null
 @export var raycast_on_startup := true
 
 
-
 func _ready():
 	interactable.prompt_text = "Equip " + equipment_name
 	interactable.interacted.connect(try_equip)
 	triggered.connect(on_triggered)
+	trigger_ended.connect(on_trigger_ended)
 	if raycast_on_startup:
 		raycast_position()
 
@@ -31,15 +31,27 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if equipped and held_by_auth and held_player.active:
 		var button = -1
+		var let_go = false
 		if event.is_action_pressed("primary_fire"):
 			button = 0
-		if event.is_action_pressed("secondary_fire"):
+		elif event.is_action_pressed("secondary_fire"):
 			button = 1
 		elif event.is_action_pressed("reload"):
 			button = 3
 		
+		elif event.is_action_released("primary_fire"):
+			let_go = true
+			button = 0
+		elif event.is_action_released("secondary_fire"):
+			let_go = true
+			button = 1
+		elif event.is_action_released("reload"):
+			let_go = true
+			button = 3
+		
 		if button != -1:
-			triggered.emit(button)
+			if not let_go: triggered.emit(button)
+			else: trigger_ended.emit(button)
 
 
 func try_equip(source):
@@ -89,4 +101,7 @@ func on_pickedup():
 	pass
 
 func on_triggered(_button : int):
+	pass
+
+func on_trigger_ended(_button : int):
 	pass
