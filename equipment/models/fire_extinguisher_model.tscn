@@ -1,11 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt5bosysuuexi"]
+[gd_scene load_steps=5 format=3 uid="uid://bt5bosysuuexi"]
 
 [ext_resource type="PackedScene" uid="uid://di076g4s4w8lg" path="res://equipment/models/fire_extinguisher.glb" id="1_o768n"]
+[ext_resource type="Texture2D" uid="uid://crls2bfnxlsmt" path="res://equipment/textures/fire_extinguisher.png" id="2_v35c2"]
+[ext_resource type="Texture2D" uid="uid://myleuuvnfgr0" path="res://equipment/textures/fire_extinguisher_n.png" id="3_stusi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyjvd"]
-albedo_color = Color(1, 0.19, 0.19, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfafe"]
+albedo_texture = ExtResource("2_v35c2")
+normal_enabled = true
+normal_texture = ExtResource("3_stusi")
+texture_filter = 0
 
 [node name="fire_extinguisher" instance=ExtResource("1_o768n")]
 
 [node name="Cylinder" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_kyjvd")
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cylinder_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cylinder_002" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cube" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cylinder_003" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cylinder_004" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cube_001" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
+
+[node name="Cube_002" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfafe")
