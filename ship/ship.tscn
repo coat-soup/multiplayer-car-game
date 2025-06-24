@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=40 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -25,6 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
 [ext_resource type="PackedScene" uid="uid://dxtthwjcgkw75" path="res://ship/components/steam_pipe_component.tscn" id="25_o4iqn"]
 [ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
+[ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="26_8kjs2"]
+[ext_resource type="Script" path="res://ui/ship_displays/component_status_panel.gd" id="27_igow3"]
+[ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="28_lax8m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyak"]
 size = Vector3(49.6853, 52.2143, 102.513)
@@ -66,6 +69,9 @@ size = Vector3(36.4025, 8.68864, 30.8955)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
 size = Vector3(5, 5, 13.1836)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xm8uo"]
+viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
@@ -386,3 +392,63 @@ ship = NodePath("..")
 [node name="SteamPipeComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("25_o4iqn")]
 transform = Transform3D(-4.05208e-08, 0.927007, -0.375044, 1.63937e-08, -0.375044, -0.927007, -1, -4.37114e-08, 1.91069e-15, 14.4493, 14.2208, -10.7832)
 ship = NodePath("..")
+
+[node name="DisplayConsole" parent="." instance=ExtResource("26_8kjs2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -19.0223)
+
+[node name="Sprite3D" type="Sprite3D" parent="DisplayConsole"]
+transform = Transform3D(-5.6213e-08, -0.70015, 0.713996, 3.06045e-08, 0.713997, 0.70015, -1, 6.12091e-08, -1.87081e-08, 0.0709292, 0.949728, 3.16495e-09)
+pixel_size = 0.0017
+texture = SubResource("ViewportTexture_xm8uo")
+
+[node name="SubViewport" type="SubViewport" parent="DisplayConsole/Sprite3D"]
+size = Vector2i(640, 360)
+
+[node name="Control" type="Control" parent="DisplayConsole/Sprite3D/SubViewport" node_paths=PackedStringArray("vbox", "component_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("27_igow3")
+vbox = NodePath("VBoxContainer")
+component_manager = NodePath("../../../../ComponentManager")
+
+[node name="ColorRect" type="ColorRect" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 600.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118, 0.131667, 0.2, 1)
+
+[node name="Label" type="Label" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -285.0
+offset_top = 10.0
+offset_right = 285.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.641639, 0.394769, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("28_lax8m")
+theme_override_font_sizes/font_size = 25
+text = "ENGINEERING CONSOLE - COMPONENT STATES"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -99.5
+offset_top = 50.0
+offset_right = 99.5
+offset_bottom = 154.0
+grow_horizontal = 2

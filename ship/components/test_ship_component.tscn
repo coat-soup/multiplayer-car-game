@@ -11,6 +11,7 @@ size = Vector3(1.1, 1.1, 0.4)
 
 [node name="TestShipComponent" type="Node3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_qt3em")
+component_name = "Test Component"
 health = NodePath("Hitbox/Health")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]

@@ -34,6 +34,7 @@ material = SubResource("StandardMaterial3D_1dr5k")
 
 [node name="SteamPipeComponent" type="Node3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_l0ykn")
+component_name = "Pipes"
 health = NodePath("Hitbox/Health")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

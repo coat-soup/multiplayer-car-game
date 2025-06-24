@@ -5,6 +5,7 @@ class_name ShipComponent
 signal broken
 signal fixed
 
+@export var component_name : String = "Component"
 
 @export var health : Health
 

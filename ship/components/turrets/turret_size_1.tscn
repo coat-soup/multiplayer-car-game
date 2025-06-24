@@ -25,6 +25,7 @@ script = ExtResource("2_cwcif")
 p_min = -10
 p_max = 190
 turret_controller = NodePath("TurretController")
+component_name = "Turret"
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, -0.285)

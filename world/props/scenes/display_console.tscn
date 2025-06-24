@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://g02ib35owvcf"]
+
+[ext_resource type="PackedScene" uid="uid://dsqyrf0w8tksa" path="res://world/props/models/display_console_model.tscn" id="1_7bebb"]
+
+[node name="DisplayConsole" type="Node3D"]
+
+[node name="display_console" parent="." instance=ExtResource("1_7bebb")]
