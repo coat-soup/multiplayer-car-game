@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxtthwjcgkw75"]
+
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_l0ykn"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_3kw57"]
+[ext_resource type="Script" path="res://ship/components/component_steam_hazard.gd" id="3_yleao"]
+[ext_resource type="AudioStream" uid="uid://dl25mmyb20mit" path="res://sfx/steam.wav" id="4_ns72n"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0opwq"]
+height = 3.04656
+radius = 0.306385
+
+[sub_resource type="Curve" id="Curve_arwhb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.152174, 1), 0.0, 0.0, 0, 0, Vector2(0.768116, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_6317r"]
+curve = SubResource("Curve_arwhb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_80f85"]
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_6317r")
+color = Color(1, 1, 1, 0.419608)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dr5k"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_sderl"]
+material = SubResource("StandardMaterial3D_1dr5k")
+
+[node name="SteamPipeComponent" type="Node3D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_l0ykn")
+health = NodePath("Hitbox/Health")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+radius = 0.153845
+height = 3.08551
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(2.18557e-08, -0.5, 0.866025, -1, -4.37114e-08, 0, 3.78552e-08, -0.866025, -0.5, -1.57223, 0, -0.167145)
+radius = 0.153845
+height = 0.505513
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-1.09278e-07, 0.5, -0.866025, 1, 8.74228e-08, -7.57103e-08, 3.78552e-08, -0.866025, -0.5, 1.58466, 0, -0.167145)
+radius = 0.153845
+height = 0.505513
+
+[node name="Hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("2_3kw57")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_0opwq")
+
+[node name="SteamHazard" type="Node3D" parent="."]
+script = ExtResource("3_yleao")
+
+[node name="Particles" type="GPUParticles3D" parent="SteamHazard"]
+emitting = false
+amount = 32
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_80f85")
+draw_pass_1 = SubResource("SphereMesh_sderl")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="SteamHazard"]
+stream = ExtResource("4_ns72n")
+max_distance = 15.0
