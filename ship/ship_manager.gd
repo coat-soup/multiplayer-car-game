@@ -11,6 +11,7 @@ class_name ShipManager
 @export var spawn_point : Node3D
 @export var item_manager : ShipItemManager
 @export var component_manager : ShipComponentManager
+@export var fire_manager : FireManager
 
 
 func _ready() -> void:

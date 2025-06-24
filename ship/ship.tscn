@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=35 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1.tscn" id="19_64k6c"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
 [ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
-[ext_resource type="PackedScene" uid="uid://djm40qegqwfy6" path="res://system/scenes/fire.tscn" id="24_1lwuo"]
 [ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyak"]
@@ -67,7 +66,7 @@ size = Vector3(36.4025, 8.68864, 30.8955)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sqwf5"]
 size = Vector3(5, 5, 13.1836)
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
@@ -76,6 +75,7 @@ movement_clone_prefab = ExtResource("2_bt4ft")
 spawn_point = NodePath("SpawnPoint")
 item_manager = NodePath("ItemManager")
 component_manager = NodePath("ComponentManager")
+fire_manager = NodePath("FireManager")
 
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_acrb3")
@@ -91,10 +91,6 @@ collision_mask = 9
 script = ExtResource("25_o7r4o")
 dimensions = Vector3i(12, 13, 25)
 cell_size = 4.0
-
-[node name="Fire" parent="FireManager" instance=ExtResource("24_1lwuo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3065, 29.9179, 37.1346)
-manually_spawned = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FireManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3427, 25.6071, 50.7566)
@@ -378,8 +374,10 @@ ship = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
 
-[node name="TestShipComponent" parent="." instance=ExtResource("22_0y016")]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 9.59225, 7.33638, -5.56432)
+[node name="TestShipComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("22_0y016")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 9.59225, 7.33638, -5.56432)
+ship = NodePath("..")
 
-[node name="TestShipComponent2" parent="." instance=ExtResource("22_0y016")]
+[node name="TestShipComponent2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("22_0y016")]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -9.40775, 7.33638, -5.56432)
+ship = NodePath("..")
