@@ -29,12 +29,13 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager") groups=["ship"]]
+[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager", "radar_manager") groups=["ship"]]
 script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 movement_clone_prefab = ExtResource("2_tvu4p")
 component_manager = NodePath("ShipComponentManager")
+radar_manager = NodePath("RadarManager")
 
 [node name="ShipComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_n54t7")

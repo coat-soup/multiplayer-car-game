@@ -104,10 +104,10 @@ func request_initialise_on_load():
 	if not multiplayer.is_server(): return
 	
 	#if not on_ship:
-	ui.display_chat_message("ATTEMPING SEND - cg " + str( cargo_grid) + " held " + str(held_in_place))
+	#ui.display_chat_message("ATTEMPING SEND - cg " + str( cargo_grid) + " held " + str(held_in_place))
 	
 	if cargo_grid and held_in_place:
-		ui.display_chat_message("SENDING CARGO")
+		#ui.display_chat_message("SENDING CARGO")
 		initialise_on_load.rpc_id(multiplayer.get_remote_sender_id(), cargo_grid.get_path(), cargo_spot_a, cargo_spot_b, cargo_grid.global_rotation - physics_dupe.global_rotation)
 	else:
 		initialise_on_load.rpc_id(multiplayer.get_remote_sender_id())
@@ -118,7 +118,7 @@ func initialise_on_load(path_to_cargo_grid : String = "", a : Vector3i = Vector3
 	cargo_grid = get_tree().root.get_node_or_null(path_to_cargo_grid) as CargoGrid
 	if cargo_grid:
 		cargo_grid.place_item_crude_at_points_crude(self, a, b, local_rot)
-		ui.display_chat_message("CARGIN GRIDDING")
+		#ui.display_chat_message("CARGIN GRIDDING")
 	if not on_ship:
 		#ui.display_chat_message("SETTING RT FOR OFF SHIP")
 		dupe_RT.remote_path = ""

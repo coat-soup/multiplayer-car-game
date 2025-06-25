@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqhl4bk7ulvsh"]
+[gd_scene load_steps=12 format=3 uid="uid://dqhl4bk7ulvsh"]
 
 [ext_resource type="PackedScene" uid="uid://qeg6q1ou08c4" path="res://ship/components/turrets/turret_size_1.glb" id="1_mct01"]
 [ext_resource type="Script" path="res://ship/components/turrets/turret_component.gd" id="2_cwcif"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="5_lr84h"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="6_amfu5"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="7_ke4pq"]
+[ext_resource type="Script" path="res://ship/radar_targeter.gd" id="9_1lbi3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_snrpd"]
 radius = 2.11147
@@ -47,6 +48,14 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.0
 update_rotation = false
 update_scale = false
 
+[node name="RadarTargeter" type="Node3D" parent="Yaw/Pitch/CameraPositionPush" index="0" node_paths=PackedStringArray("controllable", "radar_manager", "weapons_controller", "parent_ship", "parent_component")]
+script = ExtResource("9_1lbi3")
+controllable = NodePath("../../Controllable")
+radar_manager = NodePath("")
+weapons_controller = NodePath("../../MountedWeaponsController")
+parent_ship = NodePath("")
+parent_component = NodePath("../../../..")
+
 [node name="MountedWeaponsController" type="Node3D" parent="Yaw/Pitch" index="5" node_paths=PackedStringArray("weapons", "controllable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56969, 0)
 script = ExtResource("3_i8rta")
@@ -68,6 +77,7 @@ transform = Transform3D(4.37114e-08, -0.707107, -0.707107, 3.82137e-15, 0.707107
 [node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 modulate = Color(1, 1, 1, 0.313726)
+no_depth_test = true
 texture = ExtResource("5_lr84h")
 
 [node name="Controllable" type="RemoteTransform3D" parent="Yaw/Pitch" index="7" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]

@@ -34,6 +34,7 @@ func add_marker(signature : RadarSignature):
 
 
 func remove_marker(signature, id):
+	if id < 0 or id >= len(signatures): return
 	markers[id].queue_free()
 	markers.remove_at(id)
 	

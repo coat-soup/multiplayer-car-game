@@ -34,14 +34,12 @@ func take_damage(amount: float, source_id : int = -1):
 
 @rpc("any_peer", "call_local")
 func heal(amount: float, _source_id : int = -1):
-	healed.emit()
 	
 	cur_health = min(max_health, cur_health + amount)
-	if not is_multiplayer_authority(): return
+	healed.emit()
 
 
 @rpc("any_peer", "call_local")
 func die():
 	print("died")
 	died.emit()
-	if not is_multiplayer_authority(): return

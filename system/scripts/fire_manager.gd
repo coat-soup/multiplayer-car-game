@@ -21,6 +21,23 @@ func _ready() -> void:
 	body_exited.connect(body_exited_damage)
 	
 	damage_tick()
+	
+	if not is_multiplayer_authority():
+		multiplayer.connected_to_server.connect(on_connected)
+
+
+func on_connected():
+	for fire in fires:
+		fires.put_out() # DONT RPC
+	request_initialise_on_load().rpc(1)
+
+
+@rpc("any_peer", "call_local")
+func request_initialise_on_load():
+	if not multiplayer.is_server(): return
+	for pos in fires.keys():
+		(get_parent() as ShipManager).movement_manager.ui.display_chat_message("Sending " + str(pos) + " fire to " + str(get_tree().get_rpc_sender_id()))
+		try_spawn_fire.rpc_id(get_tree().get_rpc_sender_id(), pos)
 
 
 func body_entered_damage(body):
@@ -46,13 +63,14 @@ func damage_tick():
 		pos = world_to_grid_pos(player.movement_manager.global_position - player.movement_manager.global_basis.y)
 		
 		if fires.get(pos) != null:
-			if player.health.cur_health > 0: player.health.take_damage(dps * damage_interval)
+			player.health.take_damage.rpc(dps * damage_interval)
 	
 	
 	await get_tree().create_timer(damage_interval).timeout
 	damage_tick()
 
 
+@rpc("any_peer", "call_local")
 func try_spawn_fire(pos : Vector3i):
 	var ray_start = to_global(pos * cell_size)
 	
@@ -109,3 +127,9 @@ func pick_random_adjacent_pos(x, y, z) -> Vector3i:
 	Vector3i(x,   y,  z+1),
 	Vector3i(x+1, y,  z  ),
 	Vector3i(x,   y,  z-1)].pick_random()
+
+
+@rpc("any_peer", "call_local")
+func try_extinguish_at_pos(pos : Vector3i, extinguish_val : float):
+	if fires[pos]:
+		fires[pos].add_extinguish(extinguish_val)

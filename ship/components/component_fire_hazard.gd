@@ -15,4 +15,4 @@ func _ready() -> void:
 func on_component_broken():
 	if fire_manager and is_multiplayer_authority():
 		if randf() < proc_chance:
-			fire_manager.try_spawn_fire(fire_manager.world_to_grid_pos(global_position))
+			fire_manager.try_spawn_fire.rpc(fire_manager.world_to_grid_pos(global_position))

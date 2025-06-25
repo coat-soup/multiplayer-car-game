@@ -73,7 +73,7 @@ size = Vector3(5, 5, 13.1836)
 [sub_resource type="ViewportTexture" id="ViewportTexture_xm8uo"]
 viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
@@ -83,6 +83,7 @@ spawn_point = NodePath("SpawnPoint")
 item_manager = NodePath("ItemManager")
 component_manager = NodePath("ComponentManager")
 fire_manager = NodePath("FireManager")
+radar_manager = NodePath("RadarManager")
 
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_acrb3")
@@ -452,3 +453,14 @@ offset_top = 50.0
 offset_right = 99.5
 offset_bottom = 154.0
 grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
+custom_minimum_size = Vector2(400, 23.215)
+layout_mode = 2
+text = "GFGEGE     w                      f"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
+layout_mode = 2
+text = "GFGEGE TEST compeonnt - minimiamifnsiasf"
+fit_content = true
+scroll_active = false

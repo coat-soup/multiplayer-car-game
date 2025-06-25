@@ -3,7 +3,7 @@ class_name Fire
 
 signal extinguished
 
-@export var spread_interval : float = 15.0
+@export var spread_interval : float = 25.0
 
 var adjacent_fires : Array[Fire]
 
@@ -61,28 +61,33 @@ func body_exited_damage(body):
 
 
 func start_spread_tick():
+	if not is_multiplayer_authority(): return
+	
 	if len(adjacent_fires) >= 4: return
 	
-	await get_tree().create_timer(randf_range(0.0, spread_interval)).timeout
+	await get_tree().create_timer(randf_range(spread_interval/2.0, spread_interval)).timeout
 	spread_tick()
 
 
 func spread_tick():
+	if not is_multiplayer_authority(): return
+	
 	if len(adjacent_fires) < 4:
 		var p = fire_manager.pick_random_adjacent_pos(grid_pos.x, grid_pos.y, grid_pos.z)
 		if fire_manager.fires.get(p) == null:
-			fire_manager.try_spawn_fire(p)
+			fire_manager.try_spawn_fire.rpc(p)
 	
 	await get_tree().create_timer(spread_interval).timeout
 	if len(adjacent_fires) < 4:
 		spread_tick()
 
 
+#@rpc("any_peer", "call_local")
 func add_extinguish(amount : float):
 	extinguish_level += amount
 	$GPUParticles3D.amount_ratio = 1 - extinguish_level
 	if extinguish_level >= 1.0:
-		put_out.rpc()
+		put_out()#.rpc()
 
 
 @rpc("any_peer", "call_local")

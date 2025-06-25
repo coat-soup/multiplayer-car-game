@@ -14,6 +14,11 @@ var cur_target : RadarSignature
 var target_last_pos : Vector3
 
 
+func _ready() -> void:
+	if parent_component and not radar_manager:
+		radar_manager = parent_component.ship.radar_manager
+
+
 func _input(event: InputEvent) -> void:
 	if not controllable.is_multiplayer_authority() or not controllable.using_player: return
 	
