@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=41 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="26_8kjs2"]
 [ext_resource type="Script" path="res://ui/ship_displays/component_status_panel.gd" id="27_igow3"]
 [ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="28_lax8m"]
+[ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="29_jayie"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyak"]
 size = Vector3(49.6853, 52.2143, 102.513)
@@ -455,12 +456,15 @@ offset_bottom = 154.0
 grow_horizontal = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
-custom_minimum_size = Vector2(400, 23.215)
+custom_minimum_size = Vector2(400, 30)
 layout_mode = 2
+bbcode_enabled = true
 text = "GFGEGE     w                      f"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
 layout_mode = 2
-text = "GFGEGE TEST compeonnt - minimiamifnsiasf"
+theme = ExtResource("29_jayie")
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
 fit_content = true
 scroll_active = false

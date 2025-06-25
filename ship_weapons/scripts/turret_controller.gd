@@ -109,6 +109,7 @@ static func pushv(val, deadzone = 0.1) -> float:
 func on_broken():
 	control_manager.un_controll.rpc()
 	print("kicking player")
+	print("TURRET BROKEN")
 	
 	control_manager.interactable.toggle_active.rpc(false)
 

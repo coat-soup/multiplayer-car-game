@@ -9,3 +9,5 @@ class_name Turret_Component
 func _ready() -> void:
 	turret_controller.p_min = p_min
 	turret_controller.p_max = p_max
+	
+	super._ready()

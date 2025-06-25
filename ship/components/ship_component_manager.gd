@@ -14,7 +14,7 @@ func _ready() -> void:
 func take_damage_at_point(damage : int, point : Vector3, source : int):
 	var weights : Array[float] = []
 	for c in components:
-		if c.health and c.health.cur_health > 0: weights.append(1.0 / c.global_position.distance_to(point))
+		if true or c.health and c.health.cur_health > 0: weights.append(1.0 / c.global_position.distance_to(point)) # allow dead things to be selected so your ship isnt completely fucked by one little dude in the corner
 		else: weights.append(0)
 	
 	var selected = Util.weighted_random(components, weights)

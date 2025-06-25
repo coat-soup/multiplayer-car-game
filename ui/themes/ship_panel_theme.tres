@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://djj00ugs4ffua"]
+
+[ext_resource type="FontFile" uid="uid://dxi4u368hg23p" path="res://ui/fonts/HomeVideo-BLG6G.ttf" id="1_qhjom"]
+[ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="1_yvpyr"]
+
+[resource]
+default_font = ExtResource("1_qhjom")
+RichTextLabel/fonts/bold_font = ExtResource("1_yvpyr")

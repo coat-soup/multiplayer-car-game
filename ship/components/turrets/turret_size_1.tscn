@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqhl4bk7ulvsh"]
+[gd_scene load_steps=14 format=3 uid="uid://dqhl4bk7ulvsh"]
 
 [ext_resource type="PackedScene" uid="uid://qeg6q1ou08c4" path="res://ship/components/turrets/turret_size_1.glb" id="1_mct01"]
 [ext_resource type="Script" path="res://ship/components/turrets/turret_component.gd" id="2_cwcif"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="6_amfu5"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="7_ke4pq"]
 [ext_resource type="Script" path="res://ship/radar_targeter.gd" id="9_1lbi3"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="10_lbvm3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_snrpd"]
 radius = 2.11147
@@ -21,12 +22,17 @@ properties/1/path = NodePath("Yaw/Pitch:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="turret_size_1" node_paths=PackedStringArray("turret_controller") instance=ExtResource("1_mct01")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0rbcy"]
+height = 2.59143
+radius = 2.318
+
+[node name="turret_size_1" node_paths=PackedStringArray("turret_controller", "health") instance=ExtResource("1_mct01")]
 script = ExtResource("2_cwcif")
 p_min = -10
 p_max = 190
 turret_controller = NodePath("TurretController")
 component_name = "Turret"
+health = NodePath("Hitbox/Health")
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, -0.285)
@@ -100,3 +106,14 @@ crosshair = NodePath("../Yaw/Pitch/Crosshair")
 do_joystick = false
 ship_component = NodePath("..")
 weapons_manager = NodePath("../Yaw/Pitch/MountedWeaponsController")
+
+[node name="Hitbox" type="StaticBody3D" parent="." index="11"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox" index="0"]
+script = ExtResource("10_lbvm3")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_0rbcy")
