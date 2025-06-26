@@ -1637,21 +1637,21 @@ floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2"), NodePath("FloorP
 platform = NodePath("Platform")
 
 [node name="Button" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.73421, 0.68407, 3.11269)
+transform = Transform3D(-1, -4.37114e-08, -1.31134e-07, -1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, -4.79274, 0.531528, 2.51726)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="Button2" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.27178, 10.6254, 3.16556)
+transform = Transform3D(-1, -4.37114e-08, -1.31134e-07, -1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, -4.69665, 10.5374, 3.16556)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "1"
 prompt_text = "Call Elevator"
 
 [node name="Button3" parent="Elevators/Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.46045, 16.922, 3.56615)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.46045, 16.922, 3.56615)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "2"
@@ -1664,7 +1664,7 @@ size = Vector3(6, 1, 5)
 material = SubResource("ShaderMaterial_l61ii")
 
 [node name="Button" parent="Elevators/Elevator/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81043, 0.619388, 0.691732)
+transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, -4.37114e-08, 1, 1.31134e-07, -1, -4.37114e-08, 2.81043, 0.508706, 0.691733)
 target_node = NodePath("../..")
 function_name = "cycle_floor"
 arguments = "1"
@@ -1686,21 +1686,21 @@ platform = NodePath("Platform")
 target_floor = 1
 
 [node name="BayButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.73421, 0.68407, 3.11269)
+transform = Transform3D(-1, -4.37114e-08, -1.31134e-07, -1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, -3.73421, 0.508325, 3.11269)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "1"
 prompt_text = "Call Elevator"
 
 [node name="SalvageButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.72822, -5.50108, -6.17887)
+transform = Transform3D(-1, -4.37114e-08, -1.31134e-07, -1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, 5.72822, -5.50108, -6.17887)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="CargoButton" parent="Elevators/Elevator2" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.62242, 18.922, -1.43385)
+transform = Transform3D(-1, 1.08573e-08, -8.87927e-08, 3.25718e-08, 0.968661, -0.248386, 8.33132e-08, -0.248386, -0.968661, -5.62242, 20.8384, 2.42113)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "2"
@@ -1718,7 +1718,7 @@ dimensions = Vector3i(8, 6, 8)
 snapped_rotation_offset = Vector3(0, 1.571, 0)
 
 [node name="Button" parent="Elevators/Elevator2/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2)
+transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, -4.37114e-08, 1, 1.31134e-07, -1, -4.37114e-08, 3.5228, 0.514252, -4.24258)
 target_node = NodePath("../..")
 function_name = "cycle_floor"
 arguments = "1"
@@ -1780,14 +1780,14 @@ floor_positions = [NodePath("HangarFloorPos"), NodePath("DeckFloorPos")]
 platform = NodePath("Platform")
 
 [node name="DeckButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -13.1454, 24.5549, 6.40478)
+transform = Transform3D(7.99231e-08, 0.707107, -0.707107, -1.23634e-07, 0.707107, 0.707107, 1, 3.09086e-08, 1.43937e-07, -11.8055, 25.5143, 8.81241)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="HangarButton" parent="Elevators/Elevator4" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.39449, 0.56439, -1.59746)
+transform = Transform3D(-1.06581e-14, 1, 4.37114e-08, -1.31134e-07, -4.37114e-08, 1, 1, 7.10543e-15, 1.31134e-07, -8.52306, 0.498779, -1.59746)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
@@ -1802,7 +1802,7 @@ material = SubResource("ShaderMaterial_l61ii")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Elevators/Elevator4/Platform"]
 
 [node name="Button" parent="Elevators/Elevator4/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
+transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, 2.98023e-08, 1, 1.31134e-07, -1, 2.98023e-08, 5.54096, 0.527791, 5)
 target_node = NodePath("../..")
 function_name = "cycle_floor"
 arguments = "1"
@@ -1822,21 +1822,21 @@ platform = NodePath("Platform")
 target_floor = 2
 
 [node name="GroundButton2" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.14537, -14.7081, 2.40478)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.41227, -13.2175, 2.40478)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "0"
 prompt_text = "Call Elevator"
 
 [node name="AirlockButton" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.03697, -7.44512, 0.649442)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.03697, -6.16502, 1.02863)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "1"
 prompt_text = "Call Elevator"
 
 [node name="BridgeButton" parent="Elevators/Elevator5" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.60551, 0.564388, -1.59746)
+transform = Transform3D(-1, -4.37114e-08, -1.31134e-07, -1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-08, -1.91359, 0.545197, -1.25144)
 target_node = NodePath("..")
 function_name = "call_to_floor"
 arguments = "2"
@@ -1849,7 +1849,7 @@ size = Vector3(3, 1, 3)
 material = SubResource("ShaderMaterial_l61ii")
 
 [node name="Button" parent="Elevators/Elevator5/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_biyn4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.552838, 1)
+transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, -4.37114e-08, 1, 1.31134e-07, -1, -4.37114e-08, 1, 0.510658, 1)
 target_node = NodePath("../..")
 function_name = "cycle_floor"
 arguments = "1"

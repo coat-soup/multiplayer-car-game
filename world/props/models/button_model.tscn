@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqgk0lqe0wdya"]
+
+[ext_resource type="PackedScene" uid="uid://t252wjj7ol5q" path="res://world/props/models/button.glb" id="1_ptgvg"]
+[ext_resource type="AudioStream" uid="uid://csowu6ej2sk3x" path="res://sfx/physical_button.wav" id="2_qmg7i"]
+
+[sub_resource type="Animation" id="Animation_l24yx"]
+resource_name = "trigger"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_003:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.0545065), Vector3(0, 0, 0.0317696), Vector3(0, 0, 0.0545065)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ht5cn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_003:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.0545065)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cktex"]
+_data = {
+"RESET": SubResource("Animation_ht5cn"),
+"trigger": SubResource("Animation_l24yx")
+}
+
+[node name="button" instance=ExtResource("1_ptgvg")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_cktex")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("2_qmg7i")
+max_distance = 10.0

@@ -1,9 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dce3os7dfxwv8"]
 
 [ext_resource type="Script" path="res://system/button.gd" id="1_n8j8v"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s45s3"]
-albedo_color = Color(0.86, 0.616333, 0, 1)
+[ext_resource type="PackedScene" uid="uid://cqgk0lqe0wdya" path="res://world/props/models/button_model.tscn" id="2_231jh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_67lvn"]
 size = Vector3(0.3, 0.3, 0.3)
@@ -14,9 +12,7 @@ collision_mask = 0
 script = ExtResource("1_n8j8v")
 prompt_text = "Use Button"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(0.3, 0.3, 0.3)
-material = SubResource("StandardMaterial3D_s45s3")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_67lvn")
+
+[node name="button" parent="." instance=ExtResource("2_231jh")]

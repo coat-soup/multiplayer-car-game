@@ -6,6 +6,8 @@ extends Interactable
 
 var callable : Callable
 
+@onready var anim : AnimationPlayer = get_node_or_null("button/AnimationPlayer") as AnimationPlayer
+
 
 func _ready() -> void:
 	interacted.connect(activate_button)
@@ -15,6 +17,8 @@ func _ready() -> void:
 func activate_button(_source):
 	activate_button_rpc.rpc()
 
+
 @rpc("any_peer", "call_local")
 func activate_button_rpc():
 	callable.call(arguments)
+	if anim: anim.play("trigger")
