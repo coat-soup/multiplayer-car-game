@@ -68,20 +68,35 @@ func on_connect():
 
 func _physics_process(delta: float) -> void:
 	if phys_delay: return
-	if held_in_place: return
 	
 	velo_calc = physics_dupe.position - local_position
 	
-	if is_multiplayer_authority():
-		local_position = physics_dupe.position
-		local_rotation = physics_dupe.rotation
-	else:
-		physics_dupe.position = local_position
-		physics_dupe.rotation = local_rotation
 	
 	if on_ship:
 		position = physics_dupe.position
 		rotation = physics_dupe.rotation
+	else:
+		dupe_RT.remote_path = get_path()
+		global_position = physics_dupe.global_position
+		global_rotation = physics_dupe.global_rotation
+	
+	
+	if is_multiplayer_authority():
+		if on_ship:
+			local_position = physics_dupe.position
+			local_rotation = physics_dupe.rotation
+		else:
+			local_position = item_physics_dupe_manager.ship_manager.movement_manager.to_local(physics_dupe.global_position)
+			local_rotation = physics_dupe.rotation
+		
+	else:
+		if on_ship:
+			physics_dupe.position = local_position
+			physics_dupe.rotation = local_rotation
+		else:
+			physics_dupe.global_position = item_physics_dupe_manager.ship_manager.movement_manager.to_global(local_position)
+			physics_dupe.rotation = local_rotation
+
 	
 	if tractored:
 		#physics_dupe.angular_velocity = physics_dupe.angular_velocity.move_toward(target_angular_velocity, delta * angular_acceleration)
@@ -145,6 +160,20 @@ func set_auth(id):
 
 
 @rpc("any_peer", "call_local")
+func on_physics_picked_up():
+	print("picked up")
+	tractored = true
+	if snap_point:
+		snap_point.set_item.rpc("")
+		physics_dupe.freeze = false
+		held_in_place = false
+	elif cargo_grid and held_in_place:
+		cargo_grid.remove_item(self)
+		physics_dupe.freeze = false
+		held_in_place = false
+
+
+@rpc("any_peer", "call_local")
 func on_physics_let_go():
 	tractored = false
 	
@@ -168,20 +197,6 @@ func on_physics_let_go():
 	elif cargo_grid:
 		if is_multiplayer_authority():
 			cargo_grid.try_place_item(self)
-
-
-@rpc("any_peer", "call_local")
-func on_physics_picked_up():
-	print("picked up")
-	tractored = true
-	if snap_point:
-		snap_point.set_item.rpc("")
-		physics_dupe.freeze = false
-		held_in_place = false
-	elif cargo_grid and held_in_place:
-		cargo_grid.remove_item(self)
-		physics_dupe.freeze = false
-		held_in_place = false
 
 
 func move_item(world_pos : Vector3):

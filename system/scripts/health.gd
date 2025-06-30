@@ -41,5 +41,5 @@ func heal(amount: float, _source_id : int = -1):
 
 @rpc("any_peer", "call_local")
 func die():
-	print("died")
+	print(get_owner().name, " died")
 	died.emit()

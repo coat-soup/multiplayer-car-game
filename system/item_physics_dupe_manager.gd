@@ -82,10 +82,13 @@ func recursive_dupe_setup(node : Node, disable := true):
 
 
 func handle_item_spawn(item : Item):
+	print("handling item spawn for ", item)
 	item.physics_dupe = RigidBody3D.new()
 	add_child(item.physics_dupe)
 	
 	item.dupe_RT = RemoteTransform3D.new()
+	item.dupe_RT.update_position = true
+	item.dupe_RT.update_rotation = true
 	item.physics_dupe.add_child(item.dupe_RT)
 	item.physics_dupe.contact_monitor = true
 	item.physics_dupe.max_contacts_reported = 2

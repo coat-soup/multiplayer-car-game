@@ -33,7 +33,6 @@ func rebuild_list():
 		label.bbcode_enabled = true
 		label.theme = THEME
 		label.text = get_component_display_text(component)
-		print(label.text)
 		vbox.add_child(label)
 		labels[component] = label
 		if component.health:

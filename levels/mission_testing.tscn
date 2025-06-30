@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgokpns7ftbi"]
+[gd_scene load_steps=23 format=3 uid="uid://dgokpns7ftbi"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="15_jxfhq"]
 [ext_resource type="PackedScene" uid="uid://brtryfb447bwb" path="res://items/scenes/test_large_cargo_item.tscn" id="16_55soq"]
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="16_j761u"]
-[ext_resource type="PackedScene" uid="uid://bhyxnxy63odi7" path="res://enemies/creatures/scenes/hammerhead_enemy.tscn" id="17_a2seb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
 shader = ExtResource("5_grtg3")
@@ -174,15 +173,3 @@ spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../ShipHolder/Ship")
-
-[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -317.768, 47.0564, -35.3579)
-target = NodePath("../ShipHolder/Ship")
-
-[node name="HammerheadEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.232, 47.0564, -35.3579)
-target = NodePath("../ShipHolder/Ship")
-
-[node name="HammerheadEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("17_a2seb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.7685, 47.0564, -262.358)
-target = NodePath("../ShipHolder/Ship")
