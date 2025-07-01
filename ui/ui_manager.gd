@@ -38,6 +38,11 @@ func _ready():
 	join.pressed.connect(network_manager._on_join_pressed)
 
 
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_F1: visible = !visible
+
+
 func _process(delta: float) -> void:
 	if prompt_time_remaining > 0:
 		prompt_time_remaining -= delta

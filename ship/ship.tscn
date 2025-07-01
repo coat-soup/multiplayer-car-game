@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=42 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://ui/ship_displays/component_status_panel.gd" id="27_igow3"]
 [ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="28_lax8m"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="29_jayie"]
+[ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="30_w31jj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyak"]
 size = Vector3(49.6853, 52.2143, 102.513)
@@ -468,3 +469,8 @@ bbcode_enabled = true
 text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
 fit_content = true
 scroll_active = false
+
+[node name="TestShipComponent3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("30_w31jj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
+component_name = "Reactor"
+ship = NodePath("..")

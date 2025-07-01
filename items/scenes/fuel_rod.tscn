@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://56mh32px1stj"]
+
+[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_5pfyd"]
+[ext_resource type="Script" path="res://items/scripts/item_data.gd" id="2_yfvue"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_12t3q"]
+[ext_resource type="PackedScene" uid="uid://forh4xk0kdga" path="res://world/props/models/fuel_rod_model.tscn" id="4_qey43"]
+
+[sub_resource type="Resource" id="Resource_pt5ub"]
+script = ExtResource("2_yfvue")
+item_name = ""
+price = 0
+crafting_recipes = Array[String]([])
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s0n2e"]
+height = 1.18203
+radius = 0.308849
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="FuelRod" type="CharacterBody3D" groups=["fuel rod", "item"]]
+script = ExtResource("1_5pfyd")
+item_data = SubResource("Resource_pt5ub")
+cargo_grid_dimensions = Vector3i(1, 1, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_s0n2e")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_12t3q")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mrjew")
+
+[node name="fuel_rod" parent="." instance=ExtResource("4_qey43")]

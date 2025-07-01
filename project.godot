@@ -42,6 +42,7 @@ ship=""
 item=""
 "storage crate"=""
 cargo_grid=""
+"fuel rod"=""
 
 [input]
 
