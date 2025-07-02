@@ -163,7 +163,7 @@ func set_auth(id):
 func on_physics_picked_up():
 	print("picked up")
 	tractored = true
-	if snap_point:
+	if snap_point and held_in_place:
 		snap_point.set_item.rpc("")
 		physics_dupe.freeze = false
 		held_in_place = false

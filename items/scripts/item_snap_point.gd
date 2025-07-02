@@ -1,9 +1,13 @@
 extends Area3D
 class_name ItemSnapPoint
 
+signal item_placed
+signal item_removed
+
 @export var accepted_groups : Array[String]
 
 var held_item : Item
+var prev_t : Transform3D
 
 
 func _ready() -> void:
@@ -37,4 +41,9 @@ func check_item_accepted(item : Item) -> bool:
 
 @rpc("any_peer", "call_local")
 func set_item(item_path : String):
+	if held_item: held_item.physics_dupe.transform = prev_t
 	held_item = get_tree().root.get_node(item_path) if item_path != "" else null
+	if held_item: prev_t = held_item.physics_dupe.transform
+	
+	if held_item: item_placed.emit()
+	else: item_removed.emit()

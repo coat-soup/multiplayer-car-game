@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ckooiwe35tmch"]
 
-[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_tokv6"]
+[ext_resource type="Script" path="res://ship/components/ship_reactor.gd" id="1_hkfen"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_cx84k"]
 [ext_resource type="PackedScene" uid="uid://dwxq58hbqceca" path="res://world/props/models/reactor_model.tscn" id="2_wr0e7"]
 [ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_pjtu8"]
@@ -12,10 +12,9 @@ radius = 2.15267
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2xf5a"]
 
-[node name="TestShipComponent" type="Node3D" node_paths=PackedStringArray("health")]
-script = ExtResource("1_tokv6")
+[node name="ShipReactorComponent" type="Node3D"]
+script = ExtResource("1_hkfen")
 component_name = "Test Component"
-health = NodePath("Hitbox/Health")
 
 [node name="reactor" parent="." instance=ExtResource("2_wr0e7")]
 
