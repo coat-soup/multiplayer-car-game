@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxkng4fhy512t"]
+
+[ext_resource type="PackedScene" uid="uid://bhb7mqus0fdin" path="res://world/props/models/breaker_box.glb" id="1_h76ig"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07mxh"]
+albedo_color = Color(0.576209, 0.633393, 0.693997, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ml7ug"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inrt5"]
+albedo_color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmt2j"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="breaker_box" instance=ExtResource("1_h76ig")]
+
+[node name="Cube" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_07mxh")
+
+[node name="Cube_002" parent="Cylinder" index="0"]
+material_override = SubResource("StandardMaterial3D_07mxh")
+
+[node name="Cube_001" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_ml7ug")
+
+[node name="Cube_004" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_ml7ug")
+
+[node name="Cube_006" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_inrt5")
+
+[node name="Cylinder_001" parent="." index="6"]
+material_override = SubResource("StandardMaterial3D_kmt2j")
+
+[node name="Cube_007" parent="." index="7"]
+material_override = SubResource("StandardMaterial3D_inrt5")

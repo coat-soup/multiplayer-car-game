@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx7tg26c45i6f"]
+
+[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_138k0"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_cwfvn"]
+[ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_rbjtp"]
+[ext_resource type="PackedScene" uid="uid://cxkng4fhy512t" path="res://world/props/models/breaker_box_model.tscn" id="4_lyhlq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcqi0"]
+size = Vector3(0.854712, 1.2356, 0.268933)
+
+[node name="BreakerBox" type="Node3D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_138k0")
+component_name = "Breaker"
+health = NodePath("Hitbox/Health")
+
+[node name="Hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("2_cwfvn")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040161, -0.00710297, -0.0188537)
+shape = SubResource("BoxShape3D_pcqi0")
+
+[node name="FireHazard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.562401, 1.05428)
+script = ExtResource("3_rbjtp")
+
+[node name="breaker_box" parent="." instance=ExtResource("4_lyhlq")]

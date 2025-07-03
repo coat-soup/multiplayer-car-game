@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=43 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1.tscn" id="19_64k6c"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
 [ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
+[ext_resource type="PackedScene" uid="uid://bx7tg26c45i6f" path="res://ship/components/breaker_box.tscn" id="24_co1q7"]
 [ext_resource type="PackedScene" uid="uid://dxtthwjcgkw75" path="res://ship/components/steam_pipe_component.tscn" id="25_o4iqn"]
 [ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
 [ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="26_8kjs2"]
@@ -384,7 +385,7 @@ ship = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
 
-[node name="TestShipComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("22_0y016")]
+[node name="BreakerBox2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("24_co1q7")]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 9.59225, 7.33638, -5.56432)
 ship = NodePath("..")
 
