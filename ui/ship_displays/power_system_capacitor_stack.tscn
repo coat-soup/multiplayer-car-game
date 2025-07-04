@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8srl8wi5j5om"]
+
+[ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="1_x7vxf"]
+[ext_resource type="Texture2D" uid="uid://danh7tb2v6rx7" path="res://addons/terrain_3d/icons/height_div.svg" id="2_nossd"]
+
+[node name="System" type="Control"]
+custom_minimum_size = Vector2(200, 700)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="IconStack" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -375.0
+offset_right = 20.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="IconStack"]
+custom_minimum_size = Vector2(100, 80)
+layout_mode = 2
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_x7vxf")
+text = "System Name"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_nossd")

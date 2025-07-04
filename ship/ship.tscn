@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=54 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
 [ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
 [ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_acrb3"]
+[ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="4_n8wuk"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
+[ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="5_31fms"]
 [ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="5_cwq02"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
@@ -27,10 +29,63 @@
 [ext_resource type="PackedScene" uid="uid://dxtthwjcgkw75" path="res://ship/components/steam_pipe_component.tscn" id="25_o4iqn"]
 [ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
 [ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="26_8kjs2"]
-[ext_resource type="Script" path="res://ui/ship_displays/component_status_panel.gd" id="27_igow3"]
-[ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="28_lax8m"]
-[ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="29_jayie"]
 [ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="30_w31jj"]
+[ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="32_ci636"]
+[ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
+
+[sub_resource type="Resource" id="Resource_kl4ev"]
+script = ExtResource("5_31fms")
+system_name = "Thrusters"
+max_capacitors = 4
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_t7g4u"]
+script = ExtResource("5_31fms")
+system_name = "Weapons"
+max_capacitors = 6
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_2t2p7"]
+script = ExtResource("5_31fms")
+system_name = "Shields"
+max_capacitors = 4
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_3x8m8"]
+script = ExtResource("5_31fms")
+system_name = "Radar"
+max_capacitors = 3
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_wd2yx"]
+script = ExtResource("5_31fms")
+system_name = "Life Support"
+max_capacitors = 3
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_bhj5s"]
+script = ExtResource("5_31fms")
+system_name = "Lights"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_dirrh"]
+script = ExtResource("5_31fms")
+system_name = "Hydroponics"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_fkvsh"]
+script = ExtResource("5_31fms")
+system_name = "Salvage"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_ssukg"]
+script = ExtResource("5_31fms")
+system_name = "Medical"
+max_capacitors = 1
+min_capacitors_for_power = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyak"]
 size = Vector3(49.6853, 52.2143, 102.513)
@@ -76,6 +131,9 @@ size = Vector3(5, 5, 13.1836)
 [sub_resource type="ViewportTexture" id="ViewportTexture_xm8uo"]
 viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_kof4r"]
+viewport_path = NodePath("DisplayConsole2/Sprite3D/SubViewport")
+
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
@@ -91,6 +149,12 @@ radar_manager = NodePath("RadarManager")
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_acrb3")
 ship_manager = NodePath("..")
+
+[node name="PowerManager" type="Node3D" parent="." node_paths=PackedStringArray("reactor")]
+script = ExtResource("4_n8wuk")
+power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_bhj5s"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+reactor = NodePath("../TestShipComponent3")
+capacitors = 12
 
 [node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("5_cwq02")
@@ -352,7 +416,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.451336, 6.58173, 14.0234)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.81394, 7.67717, -20.2214)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -401,75 +465,29 @@ ship = NodePath("..")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -19.0223)
 
 [node name="Sprite3D" type="Sprite3D" parent="DisplayConsole"]
-transform = Transform3D(-5.6213e-08, -0.70015, 0.713996, 3.06045e-08, 0.713997, 0.70015, -1, 6.12091e-08, -1.87081e-08, 0.0709292, 0.949728, 3.16495e-09)
-pixel_size = 0.0017
+transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709295, 0.949728, 0)
+pixel_size = 0.001
 texture = SubResource("ViewportTexture_xm8uo")
 
 [node name="SubViewport" type="SubViewport" parent="DisplayConsole/Sprite3D"]
-size = Vector2i(640, 360)
+size = Vector2i(2560, 1440)
 
-[node name="Control" type="Control" parent="DisplayConsole/Sprite3D/SubViewport" node_paths=PackedStringArray("vbox", "component_manager")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("27_igow3")
-vbox = NodePath("VBoxContainer")
+[node name="ComponentStatusPanel" parent="DisplayConsole/Sprite3D/SubViewport" node_paths=PackedStringArray("component_manager") instance=ExtResource("32_qhab0")]
 component_manager = NodePath("../../../../ComponentManager")
 
-[node name="ColorRect" type="ColorRect" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 600.0
-offset_bottom = 320.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.118, 0.131667, 0.2, 1)
+[node name="DisplayConsole2" parent="." instance=ExtResource("26_8kjs2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -21.0223)
 
-[node name="Label" type="Label" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -285.0
-offset_top = 10.0
-offset_right = 285.0
-offset_bottom = 33.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.641639, 0.394769, 1.92523e-07, 1)
-theme_override_fonts/font = ExtResource("28_lax8m")
-theme_override_font_sizes/font_size = 25
-text = "ENGINEERING CONSOLE - COMPONENT STATES"
-horizontal_alignment = 1
+[node name="Sprite3D" type="Sprite3D" parent="DisplayConsole2"]
+transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709292, 0.949728, 3.16495e-09)
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_kof4r")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplayConsole/Sprite3D/SubViewport/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -99.5
-offset_top = 50.0
-offset_right = 99.5
-offset_bottom = 154.0
-grow_horizontal = 2
+[node name="SubViewport" type="SubViewport" parent="DisplayConsole2/Sprite3D"]
+size = Vector2i(2560, 1440)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
-custom_minimum_size = Vector2(400, 30)
-layout_mode = 2
-bbcode_enabled = true
-text = "GFGEGE     w                      f"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="DisplayConsole/Sprite3D/SubViewport/Control/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("29_jayie")
-bbcode_enabled = true
-text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
-fit_content = true
-scroll_active = false
+[node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager") instance=ExtResource("32_ci636")]
+power_manager = NodePath("../../../../PowerManager")
 
 [node name="TestShipComponent3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("30_w31jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
