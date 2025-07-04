@@ -1,7 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://g02ib35owvcf"]
+[gd_scene load_steps=5 format=3 uid="uid://g02ib35owvcf"]
 
 [ext_resource type="PackedScene" uid="uid://dsqyrf0w8tksa" path="res://world/props/models/display_console_model.tscn" id="1_7bebb"]
+[ext_resource type="Script" path="res://world/props/scripts/display_console.gd" id="1_prllk"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_jus6s"]
 
-[node name="DisplayConsole" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_stunp"]
+
+[node name="DisplayConsole" type="Node3D" node_paths=PackedStringArray("camera_focus_transorm", "interactable")]
+script = ExtResource("1_prllk")
+camera_focus_transorm = NodePath("CameraTransform")
+interactable = NodePath("Interactable")
 
 [node name="display_console" parent="." instance=ExtResource("1_7bebb")]
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.797448, 0)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_jus6s")
+prompt_text = "Focus Display"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("BoxShape3D_stunp")
+
+[node name="CameraTransform" type="Node3D" parent="."]
+transform = Transform3D(-4.47035e-08, -0.669623, 0.742701, 5.96046e-08, 0.742701, 0.669623, -1, 1.49012e-08, 0, 0.54791, 1.38049, 0)
