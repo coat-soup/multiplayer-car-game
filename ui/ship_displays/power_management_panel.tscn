@@ -79,3 +79,12 @@ bbcode_enabled = true
 text = "[b][color=yellow]36[/color][/b] used
 
 [b][color=green]40[/color][/b] total"
+
+[node name="CursorTest" type="ColorRect" parent="."]
+offset_left = 395.0
+offset_top = 219.0
+offset_right = 435.0
+offset_bottom = 259.0
+rotation = 0.785398
+mouse_filter = 2
+color = Color(1, 0, 0.983333, 1)

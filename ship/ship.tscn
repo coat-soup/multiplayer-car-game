@@ -486,8 +486,9 @@ texture = SubResource("ViewportTexture_kof4r")
 [node name="SubViewport" type="SubViewport" parent="DisplayConsole2/Sprite3D"]
 size = Vector2i(2560, 1440)
 
-[node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager") instance=ExtResource("32_ci636")]
+[node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager", "display_panel") instance=ExtResource("32_ci636")]
 power_manager = NodePath("../../../../PowerManager")
+display_panel = NodePath("../../..")
 
 [node name="TestShipComponent3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("30_w31jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)

@@ -1,8 +1,7 @@
 extends Resource
 class_name PowerSystem
 
-signal added_capacitor
-signal removed_capacitor
+signal capacitors_changed
 signal powered_on
 signal powered_off
 
