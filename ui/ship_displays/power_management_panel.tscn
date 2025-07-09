@@ -132,14 +132,16 @@ layout_mode = 0
 offset_left = 2049.0
 offset_top = 625.0
 offset_right = 2449.0
-offset_bottom = 875.0
+offset_bottom = 954.0
 theme = ExtResource("3_byj1k")
 theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 100
 bbcode_enabled = true
 text = "[b][color=yellow]36[/color][/b] used
 
-[b][color=green]40[/color][/b] total"
+[b][color=green]00[/color][/b] broken
+
+[b][color=white]40[/color][/b] total"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

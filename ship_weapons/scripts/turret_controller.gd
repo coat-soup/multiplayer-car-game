@@ -69,7 +69,6 @@ func ai_camera_lookat(global_pos : Vector3):
 	camera.look_at(global_pos)
 
 
-
 func _process(delta: float) -> void:
 	if not (control_manager.using_player or control_manager.ai_override): return
 	if not control_manager.is_multiplayer_authority(): return

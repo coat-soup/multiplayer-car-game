@@ -5,12 +5,6 @@ class_name ShipComponentManager
 var components : Array[ShipComponent]
 
 
-func _ready() -> void:
-	for child in ship_manager.get_children():
-		var component = child as ShipComponent
-		if component: components.append(component)
-
-
 func take_damage_at_point(damage : int, point : Vector3, source : int):
 	var weights : Array[float] = []
 	for c in components:

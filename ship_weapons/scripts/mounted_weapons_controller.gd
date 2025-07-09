@@ -9,11 +9,8 @@ var bullet_speed : float = 200 # TODO: Calculate this properl
 
 
 func _ready():
-	if not ship: await get_tree().create_timer(0.1)
 	for weapon in weapons:
 		weapon.weapons_controller = self
-		weapon.ship = ship
-		weapon.try_initialise_power_system()
 
 
 func _input(event: InputEvent) -> void:

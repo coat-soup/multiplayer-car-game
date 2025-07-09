@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=54 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="30_w31jj"]
 [ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="32_ci636"]
 [ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
+[ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="33_7poo3"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -149,7 +150,6 @@ ship_manager = NodePath("..")
 script = ExtResource("4_n8wuk")
 power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
 reactor = NodePath("../TestShipComponent3")
-capacitors = 12
 
 [node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("5_cwq02")
@@ -411,7 +411,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.81394, 7.67717, -20.2214)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.80649, 7.67486, -16.7313)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -457,7 +457,7 @@ transform = Transform3D(-4.05208e-08, 0.927007, -0.375044, 1.63937e-08, -0.37504
 ship = NodePath("..")
 
 [node name="DisplayConsole" parent="." instance=ExtResource("26_8kjs2")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -19.0223)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -15.7313)
 
 [node name="Sprite3D" type="Sprite3D" parent="DisplayConsole"]
 transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709295, 0.949728, 0)
@@ -471,7 +471,7 @@ size = Vector2i(2560, 1440)
 component_manager = NodePath("../../../../ComponentManager")
 
 [node name="DisplayConsole2" parent="." instance=ExtResource("26_8kjs2")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -21.0223)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -17.0223)
 
 [node name="Sprite3D" type="Sprite3D" parent="DisplayConsole2"]
 transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709292, 0.949728, 3.16495e-09)
@@ -489,3 +489,41 @@ display_panel = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
 component_name = "Reactor"
 ship = NodePath("..")
+
+[node name="Capacitors" type="Node3D" parent="."]
+
+[node name="Capacitor" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.97039, 6.59937, -28.746)
+
+[node name="Capacitor2" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 8.97039, 8.26734, -28.746)
+
+[node name="Capacitor3" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, -1.74846e-07, 1.74846e-07, 5.2108e-15, 1, 8.97039, 8.26734, -26.746)
+
+[node name="Capacitor4" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.97039, 6.59937, -26.746)
+
+[node name="Capacitor5" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.97039, 6.59937, -24.746)
+
+[node name="Capacitor6" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.97039, 8.26734, -24.746)
+
+[node name="Capacitor7" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.97039, 8.26734, -22.746)
+
+[node name="Capacitor8" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.97039, 6.59937, -22.746)
+
+[node name="Capacitor9" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.97039, 6.59937, -20.746)
+
+[node name="Capacitor10" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 1.74846e-07, -1.74846e-07, -5.2108e-15, 1, 8.97039, 8.26734, -20.746)
+
+[node name="Capacitor11" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.97039, 8.26734, -18.746)
+
+[node name="Capacitor12" parent="Capacitors" instance=ExtResource("33_7poo3")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 8.97039, 6.59937, -18.746)

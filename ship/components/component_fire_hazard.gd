@@ -9,6 +9,8 @@ var fire_manager : FireManager
 func _ready() -> void:
 	if not parent_component: parent_component = get_parent() as ShipComponent
 	parent_component.broken.connect(on_component_broken)
+	
+	if not parent_component.ship: await get_tree().process_frame
 	fire_manager = parent_component.ship.fire_manager
 
 

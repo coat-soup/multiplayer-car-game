@@ -15,6 +15,7 @@ const BROKEN_COMPONENT_PARTICLES = preload("res://vfx/particles/broken_component
 var broken_particles : Node3D = null
 var is_broken := false
 @export var ship : ShipManager
+@export var exlcude_from_component_manager := false
 
 
 func _ready():
@@ -24,6 +25,8 @@ func _ready():
 	
 	if not ship:
 		try_get_ship_grandparent()
+	if not exlcude_from_component_manager and ship and ship.component_manager: ship.component_manager.components.append(self)
+	
 	
 	try_initialise_power_system()
 
@@ -69,8 +72,9 @@ func power_ratio() -> float:
 	if power_system == null:
 		print("Component", name, " has no power system, returning ratio = 1")
 		return 1.0
-	else:
+	elif ship.power_manager.reactor == null or ship.power_manager.reactor.has_fuel():
 		return float(power_system.assigned_capacitors)/float(power_system.max_capacitors)
+	else: return 0.0
 
 
 func try_get_ship_grandparent():

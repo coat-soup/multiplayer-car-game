@@ -18,6 +18,7 @@ var current_adjusted_stack := -1
 
 func _ready():
 	rebuild()
+	power_manager.capacitors_changed.connect(update_capacitors)
 
 
 func _input(event: InputEvent) -> void:
@@ -72,8 +73,9 @@ func update_capacitors():
 			var cap = (system_container.get_child(i).get_child(0).get_child(power_manager.power_systems[i].max_capacitors - 1 - c) as ColorRect)
 			cap.color = active_colour if power_manager.power_systems[i].assigned_capacitors > c else empty_colour
 	
-	var color : String = "green" if power_manager.unused_capacitors >= power_manager.capacitors * 0.5 else "yellow" if power_manager.unused_capacitors != 0 else "red"
-	capacitor_usage_label.text = "[b][color=%s]%02d[/color][/b] free\n\n[b][color=white]%02d[/color][/b] total" % [color, power_manager.unused_capacitors, power_manager.capacitors]
+	var broken_color : String = "green" if power_manager.broken_capacitors == 0 else "orange" if power_manager.broken_capacitors != len(power_manager.capacitors) else "red"
+	var free_color : String = "green" if power_manager.unused_capacitors >= len(power_manager.capacitors) * 0.5 else "yellow" if power_manager.unused_capacitors != 0 else "red"
+	capacitor_usage_label.text = "[b][color=%s]%02d[/color][/b] broken\n\n[b][color=%s]%02d[/color][/b] free\n\n[b][color=white]%02d[/color][/b] total" % [broken_color, power_manager.broken_capacitors, free_color, power_manager.unused_capacitors, len(power_manager.capacitors)]
 
 
 #func capacitor_slot_clicked

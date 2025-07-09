@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg0ius8wdpt8s"]
+
+[ext_resource type="Script" path="res://ship/components/capacitor.gd" id="1_mlgie"]
+[ext_resource type="PackedScene" uid="uid://c77aq2gn11tis" path="res://world/props/models/capacitor_model.tscn" id="2_mfwnr"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_x4h4v"]
+[ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_o8t82"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1unw"]
+size = Vector3(0.885, 2.327, 1.831)
+
+[node name="Capacitor" type="Node3D" node_paths=PackedStringArray("health")]
+script = ExtResource("1_mlgie")
+component_name = "Capacitor"
+health = NodePath("Hitbox/Health")
+
+[node name="capacitor" parent="." instance=ExtResource("2_mfwnr")]
+
+[node name="Hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("2_x4h4v")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14439, -0.0322497)
+shape = SubResource("BoxShape3D_v1unw")
+
+[node name="FireHazard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.562401, 1.05428)
+script = ExtResource("3_o8t82")
