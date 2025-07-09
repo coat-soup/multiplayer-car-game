@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=61 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -12,13 +12,20 @@
 [ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="5_cwq02"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
+[ext_resource type="Texture2D" uid="uid://c463w0dl8ktnv" path="res://ui/textures/thrusters_icon.png" id="6_ua2gt"]
 [ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="6_vyq40"]
+[ext_resource type="Texture2D" uid="uid://uydjupo5sgo1" path="res://ui/textures/weapons_icon.png" id="7_8hc1n"]
+[ext_resource type="Texture2D" uid="uid://81ds006ta5qk" path="res://ui/textures/shields_icon.png" id="8_q8kml"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
 [ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
+[ext_resource type="Texture2D" uid="uid://1dolycbn442d" path="res://ui/textures/radar_icon.png" id="9_o7onv"]
 [ext_resource type="Script" path="res://ship/ship_data.gd" id="10_o00jc"]
 [ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
+[ext_resource type="Texture2D" uid="uid://gkwhvpbe0fex" path="res://ui/textures/life_support_icon.png" id="10_wqmr4"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
+[ext_resource type="Texture2D" uid="uid://dl8dklo2befbw" path="res://ui/textures/salvage_icon.png" id="11_2v2dt"]
 [ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]
+[ext_resource type="Texture2D" uid="uid://crocha8p6hldi" path="res://ui/textures/hydroponics_icon.png" id="11_t3hrb"]
 [ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
@@ -37,48 +44,56 @@
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
 system_name = "Thrusters"
+icon = ExtResource("6_ua2gt")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_t7g4u"]
 script = ExtResource("5_31fms")
 system_name = "Weapons"
+icon = ExtResource("7_8hc1n")
 max_capacitors = 6
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_2t2p7"]
 script = ExtResource("5_31fms")
 system_name = "Shields"
+icon = ExtResource("8_q8kml")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_3x8m8"]
 script = ExtResource("5_31fms")
 system_name = "Radar"
+icon = ExtResource("9_o7onv")
 max_capacitors = 3
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_wd2yx"]
 script = ExtResource("5_31fms")
 system_name = "Life Support"
+icon = ExtResource("10_wqmr4")
 max_capacitors = 3
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_dirrh"]
 script = ExtResource("5_31fms")
 system_name = "Hydroponics"
+icon = ExtResource("11_t3hrb")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_fkvsh"]
 script = ExtResource("5_31fms")
 system_name = "Salvage"
+icon = ExtResource("11_2v2dt")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_ssukg"]
 script = ExtResource("5_31fms")
 system_name = "Medical"
+icon = ExtResource("10_wqmr4")
 max_capacitors = 1
 min_capacitors_for_power = 1
 

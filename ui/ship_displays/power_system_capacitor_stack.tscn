@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8srl8wi5j5om"]
 
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="1_x7vxf"]
-[ext_resource type="Texture2D" uid="uid://danh7tb2v6rx7" path="res://addons/terrain_3d/icons/height_div.svg" id="2_nossd"]
+[ext_resource type="Texture2D" uid="uid://uydjupo5sgo1" path="res://ui/textures/weapons_icon.png" id="2_gioll"]
 
 [node name="System" type="Control"]
 custom_minimum_size = Vector2(200, 700)
@@ -30,6 +30,7 @@ layout_mode = 2
 color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="Label" type="Label" parent="."]
+texture_filter = 1
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 7
@@ -48,6 +49,8 @@ text = "System Name"
 horizontal_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="."]
+modulate = Color(0, 0.8, 1, 1)
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -59,4 +62,4 @@ offset_right = 32.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_nossd")
+texture = ExtResource("2_gioll")
