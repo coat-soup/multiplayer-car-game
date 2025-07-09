@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=27 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="11_qanif"]
 [ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="12_ji0mw"]
 [ext_resource type="Script" path="res://ship/radar_targeter.gd" id="13_h86uo"]
+[ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="15_82wde"]
+[ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="16_crtc6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(1, 1.89404, 0.78833)
@@ -29,13 +31,62 @@ properties/2/path = NodePath("MovementManager:virtual_joystick_value")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager", "radar_manager") groups=["ship"]]
+[sub_resource type="Resource" id="Resource_kl4ev"]
+script = ExtResource("16_crtc6")
+system_name = "Thrusters"
+max_capacitors = 4
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_t7g4u"]
+script = ExtResource("16_crtc6")
+system_name = "Weapons"
+max_capacitors = 6
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_2t2p7"]
+script = ExtResource("16_crtc6")
+system_name = "Shields"
+max_capacitors = 4
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_3x8m8"]
+script = ExtResource("16_crtc6")
+system_name = "Radar"
+max_capacitors = 3
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_wd2yx"]
+script = ExtResource("16_crtc6")
+system_name = "Life Support"
+max_capacitors = 3
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_dirrh"]
+script = ExtResource("16_crtc6")
+system_name = "Hydroponics"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_fkvsh"]
+script = ExtResource("16_crtc6")
+system_name = "Salvage"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_ssukg"]
+script = ExtResource("16_crtc6")
+system_name = "Medical"
+max_capacitors = 1
+min_capacitors_for_power = 1
+
+[node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager", "radar_manager", "power_manager") groups=["ship"]]
 script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
 movement_clone_prefab = ExtResource("2_tvu4p")
 component_manager = NodePath("ShipComponentManager")
 radar_manager = NodePath("RadarManager")
+power_manager = NodePath("PowerManager")
 
 [node name="ShipComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_n54t7")
@@ -53,11 +104,15 @@ ship = NodePath("..")
 
 [node name="fighter" parent="." instance=ExtResource("3_arndu")]
 
-[node name="autocannon_size1" parent="fighter" instance=ExtResource("4_00x40")]
+[node name="autocannon_size1" parent="fighter" node_paths=PackedStringArray("weapons_controller", "ship") instance=ExtResource("4_00x40")]
 transform = Transform3D(1.91069e-15, 1, -4.37114e-08, 4.37114e-08, -4.37114e-08, -1, -1, 0, -4.37114e-08, 2.7715, -0.752023, -1)
+weapons_controller = NodePath("../../ShipWeaponsController")
+ship = NodePath("../..")
 
-[node name="autocannon_size2" parent="fighter" instance=ExtResource("4_00x40")]
+[node name="autocannon_size2" parent="fighter" node_paths=PackedStringArray("weapons_controller", "ship") instance=ExtResource("4_00x40")]
 transform = Transform3D(-5.73206e-15, -1, 1.31134e-07, -4.37114e-08, 1.31134e-07, 1, -1, 0, -4.37114e-08, -2.771, -0.752, -1)
+weapons_controller = NodePath("../../ShipWeaponsController")
+ship = NodePath("../..")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
@@ -122,3 +177,8 @@ controllable = NodePath("../Cockpit/Controllable")
 radar_manager = NodePath("../RadarManager")
 weapons_controller = NodePath("../ShipWeaponsController")
 parent_ship = NodePath("..")
+
+[node name="PowerManager" type="Node3D" parent="."]
+script = ExtResource("15_82wde")
+power_systems = Array[ExtResource("16_crtc6")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+capacitors = 12

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=53 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -61,12 +61,6 @@ min_capacitors_for_power = 1
 script = ExtResource("5_31fms")
 system_name = "Life Support"
 max_capacitors = 3
-min_capacitors_for_power = 1
-
-[sub_resource type="Resource" id="Resource_bhj5s"]
-script = ExtResource("5_31fms")
-system_name = "Lights"
-max_capacitors = 1
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_dirrh"]
@@ -134,7 +128,7 @@ viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_kof4r"]
 viewport_path = NodePath("DisplayConsole2/Sprite3D/SubViewport")
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager", "power_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
@@ -145,6 +139,7 @@ item_manager = NodePath("ItemManager")
 component_manager = NodePath("ComponentManager")
 fire_manager = NodePath("FireManager")
 radar_manager = NodePath("RadarManager")
+power_manager = NodePath("PowerManager")
 
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_acrb3")
@@ -152,7 +147,7 @@ ship_manager = NodePath("..")
 
 [node name="PowerManager" type="Node3D" parent="." node_paths=PackedStringArray("reactor")]
 script = ExtResource("4_n8wuk")
-power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_bhj5s"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
 reactor = NodePath("../TestShipComponent3")
 capacitors = 12
 

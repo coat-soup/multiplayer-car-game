@@ -15,9 +15,18 @@ var ui : UIManager
 @export var weapons_controller : MountedWeaponsController
 var found_bullet_speed : float = 100
 
+const capacitor_boost_range := Vector2(0.5,1)
+
 
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
+	super._ready()
+	
+	power_system.capacitors_changed.connect(test_dev)
+
+
+func test_dev():
+	print("weapon capacitors changed: ", power_system.assigned_capacitors)
 
 
 func _process(delta: float) -> void:
@@ -27,8 +36,10 @@ func _process(delta: float) -> void:
 
 @rpc("any_peer", "call_local")
 func fire_cannon():
+	if power_ratio() <= 0: return
+	
 	ui.display_chat_message("firing")
-	fire_timer = 1 / fire_rate
+	fire_timer = 1 / (fire_rate * lerp(capacitor_boost_range.x, capacitor_boost_range.y, power_ratio()))
 	
 	firing_audio.play()
 	

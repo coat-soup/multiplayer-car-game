@@ -17,7 +17,7 @@ var tracked_signatures : Array[RadarSignature]
 
 
 func _ready() -> void:
-	await get_tree().create_timer(passive_scan_interval)
+	await get_tree().create_timer(passive_scan_interval).timeout
 	passive_scan()
 	lost_signature.connect(on_lost_signature)
 
@@ -54,7 +54,7 @@ func on_signature_terminated(sig : RadarSignature):
 	lose_signature(sig)
 
 
-func on_lost_signature(sig : RadarSignature, id : int):
+func on_lost_signature(sig : RadarSignature, _id : int):
 	sig.terminated.disconnect(on_signature_terminated)
 
 

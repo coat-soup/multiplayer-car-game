@@ -64,11 +64,6 @@ func generate_level():
 func generate_for_new_connection(peer_id : int):
 	if multiplayer.is_server() or true:
 		generate_from_seed.rpc_id(peer_id, level_gen_seed)
-		
-		return # doesnt work bc cant send resource
-		var state = WorldState.get_world_state(get_parent_node_3d())
-		generate_from_world_state.rpc_id(peer_id, state)
-		print("\n SENT GEN \n")
 
 
 @rpc("any_peer", "call_local")

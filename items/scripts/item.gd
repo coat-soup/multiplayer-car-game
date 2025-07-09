@@ -66,7 +66,7 @@ func on_connect():
 		request_initialise_on_load.rpc_id(1)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if phys_delay: return
 	
 	velo_calc = physics_dupe.position - local_position

@@ -13,6 +13,7 @@ var CAPACITOR_STACK_UI = preload("res://ui/ship_displays/power_system_capacitor_
 @export var display_panel : DisplayConsole
 
 var current_adjusted_stack := -1
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -21,12 +22,13 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		$CursorTest.position = event.position
 		if Input.is_action_pressed("ui_primary"):
 			var capacitor := get_focused_capacitor(event.position)
 			if current_adjusted_stack == -1: current_adjusted_stack = capacitor.x
 			if capacitor.x == current_adjusted_stack and capacitor.x != -1 and capacitor.y != -1:
-				power_manager.set_system_capacitors(capacitor.x, max(0, min(capacitor.y, power_manager.power_systems[capacitor.x].max_capacitors)))
+				var target_capacitors = max(0, min(capacitor.y, power_manager.power_systems[capacitor.x].max_capacitors))
+				power_manager.set_system_capacitors.rpc(capacitor.x, target_capacitors)
+				if target_capacitors - power_manager.power_systems[capacitor.x].assigned_capacitors > 0 and power_manager.unused_capacitors == 0: anim.play("Max Capacitor Shake")
 		if Input.is_action_just_released("ui_primary"):
 			current_adjusted_stack = -1
 
@@ -70,7 +72,8 @@ func update_capacitors():
 			var cap = (system_container.get_child(i).get_child(0).get_child(power_manager.power_systems[i].max_capacitors - 1 - c) as ColorRect)
 			cap.color = active_colour if power_manager.power_systems[i].assigned_capacitors > c else empty_colour
 	
-	capacitor_usage_label.text = "[b][color=yellow]%02d[/color][/b] used\n\n[b][color=green]%02d[/color][/b] total" % [power_manager.capacitors - power_manager.unused_capacitors, power_manager.capacitors]
+	var color : String = "green" if power_manager.unused_capacitors >= power_manager.capacitors * 0.5 else "yellow" if power_manager.unused_capacitors != 0 else "red"
+	capacitor_usage_label.text = "[b][color=%s]%02d[/color][/b] free\n\n[b][color=white]%02d[/color][/b] total" % [color, power_manager.unused_capacitors, power_manager.capacitors]
 
 
 #func capacitor_slot_clicked

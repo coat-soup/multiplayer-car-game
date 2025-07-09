@@ -20,7 +20,7 @@ func _ready() -> void:
 	update_markers()
 
 
-func add_marker(signature : RadarSignature):
+func add_marker(_signature : RadarSignature):
 	for i in range(len(radar_manager.tracked_signatures)):
 		if len(markers) > i: continue 							# WARNING: Im not sure about the numbering here
 		
@@ -33,7 +33,7 @@ func add_marker(signature : RadarSignature):
 		#print("RECEIVED TRACK ", radar_manager.tracked_signatures[i].signature_name)
 
 
-func remove_marker(signature, id):
+func remove_marker(_signature, id):
 	if id < 0 or id >= len(signatures): return
 	markers[id].queue_free()
 	markers.remove_at(id)

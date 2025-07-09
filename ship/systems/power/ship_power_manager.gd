@@ -8,8 +8,15 @@ class_name ShipPowerManager
 
 
 @rpc("any_peer", "call_local")
-func set_system_capacitors(id : int, capacitors : int):
-	var change = min(unused_capacitors, max(-power_systems[id].assigned_capacitors, min(power_systems[id].max_capacitors - power_systems[id].assigned_capacitors, capacitors - power_systems[id].assigned_capacitors)))
+func set_system_capacitors(id : int, amount : int):
+	var change = min(unused_capacitors, max(-power_systems[id].assigned_capacitors, min(power_systems[id].max_capacitors - power_systems[id].assigned_capacitors, amount - power_systems[id].assigned_capacitors)))
 	power_systems[id].assigned_capacitors += change
 	power_systems[id].capacitors_changed.emit()
 	unused_capacitors -= change
+
+
+func get_system_power(system_name : String) -> float: # (range 0 to 1)
+	for system in power_systems:
+		if system.system_name == system_name: return system.assigned_capacitors/system.max_capacitors
+	
+	return 0

@@ -5,7 +5,7 @@ class_name EnemyCreature
 @export var turn_speed : float = 2.0
 
 @export var damage : int = 30
-@export var attack_cooldown : int = 5.0
+@export var attack_cooldown : float = 5.0
 
 @export var health : Health
 
@@ -38,8 +38,8 @@ func _process(delta: float) -> void:
 		var rotation_axis = global_basis.z.cross(t_dir)
 		if rotation_axis.length() > 0.001:
 			rotation_axis = rotation_axis.normalized()
-			var angle_difference = acos(clamp(global_basis.z.dot(t_dir), -1.0, 1.0))
-			var rotation_amount = min(angle_difference, turn_speed * delta)
+			var angle_diff = acos(clamp(global_basis.z.dot(t_dir), -1.0, 1.0))
+			var rotation_amount = min(angle_diff, turn_speed * delta)
 			rotate(rotation_axis, rotation_amount)
 		
 		velocity = velocity.move_toward(global_basis.z * speed * (0.0 if time_to_attack > attack_cooldown*0.9 else 1.0), delta * 40.0)
@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 func on_body_entered_attack(body : Node3D):
 	if time_to_attack > 0.0: return
 	
-	var health = body.get_node_or_null("Health")
+	var _health_comp = body.get_node_or_null("Health")
 	var ship = body as ShipMovementClone
 	if ship:
 		ship.ship_manager.movement_manager.add_impact_impulse.rpc(global_basis.z * 8000)

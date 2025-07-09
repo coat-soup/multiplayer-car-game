@@ -54,12 +54,10 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.0
 update_rotation = false
 update_scale = false
 
-[node name="RadarTargeter" type="Node3D" parent="Yaw/Pitch/CameraPositionPush" index="0" node_paths=PackedStringArray("controllable", "radar_manager", "weapons_controller", "parent_ship", "parent_component")]
+[node name="RadarTargeter" type="Node3D" parent="Yaw/Pitch/CameraPositionPush" index="0" node_paths=PackedStringArray("controllable", "weapons_controller", "parent_component")]
 script = ExtResource("9_1lbi3")
 controllable = NodePath("../../Controllable")
-radar_manager = NodePath("")
 weapons_controller = NodePath("../../MountedWeaponsController")
-parent_ship = NodePath("")
 parent_component = NodePath("../../../..")
 
 [node name="MountedWeaponsController" type="Node3D" parent="Yaw/Pitch" index="5" node_paths=PackedStringArray("weapons", "controllable")]
