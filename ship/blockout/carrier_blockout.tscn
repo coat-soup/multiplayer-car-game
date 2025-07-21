@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=25 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
@@ -21,30 +21,6 @@ shader_parameter/world_uv = false
 shader_parameter/object_uv = false
 shader_parameter/object_uv_scale = Vector2(1, 1)
 shader_parameter/preset_color = 0
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.25
-shader_parameter/roughness = 0.75
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xilf3"]
-render_priority = 0
-shader = ExtResource("3_16skt")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 4
 shader_parameter/base_color = Color(0, 0, 0, 1)
 shader_parameter/metalic = 0.25
 shader_parameter/roughness = 0.75
@@ -561,34 +537,6 @@ transform = Transform3D(-5.73206e-15, -4.37114e-08, 1, -1, 1.31134e-07, 0, -1.31
 use_collision = true
 size = Vector3(2, 1, 12.4111)
 material = SubResource("ShaderMaterial_f2f3v")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Engineering"]
-transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 10.1035, 1.4681, 10.1816)
-use_collision = true
-radius = 1.13511
-height = 3.86927
-material = SubResource("ShaderMaterial_xilf3")
-
-[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Engineering"]
-transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -9.89647, 1.4681, 10.1816)
-use_collision = true
-radius = 1.13511
-height = 3.86927
-material = SubResource("ShaderMaterial_xilf3")
-
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Engineering"]
-transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, 11.7972, 1.4681, 7.24803)
-use_collision = true
-radius = 1.13511
-height = 3.86927
-material = SubResource("ShaderMaterial_xilf3")
-
-[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Engineering"]
-transform = Transform3D(0.866025, 5.32907e-15, -0.5, 0, 1, 1.06581e-14, 0.5, -9.23022e-15, 0.866025, -11.2028, 1.4681, 7.24803)
-use_collision = true
-radius = 1.13511
-height = 3.86927
-material = SubResource("ShaderMaterial_xilf3")
 
 [node name="human_reference" parent="Engineering" instance=ExtResource("4_8lisy")]
 transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -7.69449, -0.5, 12.7895)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=65 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://dl8dklo2befbw" path="res://ui/textures/salvage_icon.png" id="11_2v2dt"]
 [ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]
 [ext_resource type="Texture2D" uid="uid://crocha8p6hldi" path="res://ui/textures/hydroponics_icon.png" id="11_t3hrb"]
+[ext_resource type="Script" path="res://ship/systems/power/ship_cooling_manager.gd" id="13_eyx6l"]
+[ext_resource type="Texture2D" uid="uid://dwujhpjpacelj" path="res://ui/textures/cooling_icon.png" id="13_h85l3"]
 [ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
@@ -40,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="32_ci636"]
 [ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
 [ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="33_7poo3"]
+[ext_resource type="PackedScene" uid="uid://buwk3kfechuo7" path="res://ship/components/cooler.tscn" id="43_nfii6"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -59,6 +62,13 @@ min_capacitors_for_power = 1
 script = ExtResource("5_31fms")
 system_name = "Shields"
 icon = ExtResource("8_q8kml")
+max_capacitors = 4
+min_capacitors_for_power = 1
+
+[sub_resource type="Resource" id="Resource_rg6ev"]
+script = ExtResource("5_31fms")
+system_name = "Cooling"
+icon = ExtResource("13_h85l3")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
@@ -144,7 +154,7 @@ viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_kof4r"]
 viewport_path = NodePath("DisplayConsole2/Sprite3D/SubViewport")
 
-[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager", "power_manager") groups=["ship"]]
+[node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager", "power_manager", "cooling_manager") groups=["ship"]]
 script = ExtResource("1_hvcqr")
 movement_manager = NodePath("MovementManager")
 main_target_component = NodePath("MainTargetComponent")
@@ -156,6 +166,7 @@ component_manager = NodePath("ComponentManager")
 fire_manager = NodePath("FireManager")
 radar_manager = NodePath("RadarManager")
 power_manager = NodePath("PowerManager")
+cooling_manager = NodePath("CoolingManager")
 
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("3_acrb3")
@@ -163,8 +174,12 @@ ship_manager = NodePath("..")
 
 [node name="PowerManager" type="Node3D" parent="." node_paths=PackedStringArray("reactor")]
 script = ExtResource("4_n8wuk")
-power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_rg6ev"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
 reactor = NodePath("../TestShipComponent3")
+
+[node name="CoolingManager" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
+script = ExtResource("13_eyx6l")
+ship = NodePath("..")
 
 [node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
 script = ExtResource("5_cwq02")
@@ -542,3 +557,19 @@ transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74
 
 [node name="Capacitor12" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 8.97039, 6.59937, -18.746)
+
+[node name="Cooler" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.597, 3.44533, -14.0359)
+ship = NodePath("..")
+
+[node name="Cooler3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.597, 3.445, -14.036)
+ship = NodePath("..")
+
+[node name="Cooler2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5729, 3.44533, -10.6161)
+ship = NodePath("..")
+
+[node name="Cooler4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 3.445, -10.616)
+ship = NodePath("..")

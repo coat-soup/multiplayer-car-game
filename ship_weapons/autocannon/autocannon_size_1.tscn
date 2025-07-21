@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://hbyqte87esm2"]
+[gd_scene load_steps=6 format=3 uid="uid://hbyqte87esm2"]
 
 [ext_resource type="PackedScene" uid="uid://duov3q78g5yer" path="res://ship_weapons/autocannon/autocannon_size1.glb" id="1_timnr"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="2_5hunb"]
 [ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://ship_weapons/autocannon_shell.tscn" id="3_mw7yq"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="3_xo7rc"]
+[ext_resource type="PackedScene" uid="uid://b8e8a2p2jypcg" path="res://ship/systems/power/component_heat_manager.tscn" id="5_f586l"]
 
 [node name="autocannon_size1" node_paths=PackedStringArray("barrel_end", "firing_audio") instance=ExtResource("1_timnr")]
 script = ExtResource("2_5hunb")
@@ -11,6 +12,7 @@ shell = ExtResource("3_mw7yq")
 barrel_end = NodePath("BarrelEnd")
 fire_rate = 3.0
 firing_audio = NodePath("BarrelEnd/FiringAudio")
+component_name = "Autocannon (S1)"
 power_system_name = "Weapons"
 
 [node name="BarrelEnd" type="Node3D" parent="." index="1"]
@@ -23,3 +25,5 @@ unit_size = 50.0
 max_db = -1.0
 max_distance = 50.0
 max_polyphony = 3
+
+[node name="ComponentHeatManager" parent="." index="2" instance=ExtResource("5_f586l")]

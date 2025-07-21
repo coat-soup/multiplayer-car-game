@@ -36,7 +36,9 @@ func _process(_delta: float) -> void:
 	if not held_by_auth: return
 	var health = raycast_health()
 	if health:
-		ui.display_prompt("Health:" + str(round(health.cur_health)), 0.1)
+		var component = health.get_parent().get_parent() as ShipComponent
+		var component_name = (component.component_name + "\n") if component else ""
+		ui.display_prompt(component_name + "Health:" + str(round(health.cur_health)), 0.1)
 
 
 func raycast_health(do_particles := false) -> Health:

@@ -16,6 +16,8 @@ var ui : UIManager
 var found_bullet_speed : float = 100
 
 const capacitor_boost_range := Vector2(0.5,1)
+@export var heat_per_shot := 10.0
+@onready var heat_manager : ComponentHeatManager = $ComponentHeatManager
 
 
 func _ready() -> void:
@@ -36,7 +38,7 @@ func _process(delta: float) -> void:
 
 @rpc("any_peer", "call_local")
 func fire_cannon():
-	if power_ratio() <= 0: return
+	if power_ratio() <= 0 or heat_manager.cur_heat + heat_per_shot >= heat_manager.heat_capacity: return
 	
 	ui.display_chat_message("firing")
 	fire_timer = 1 / (fire_rate * lerp(capacitor_boost_range.x, capacitor_boost_range.y, power_ratio()))
@@ -57,3 +59,5 @@ func fire_cannon():
 	
 	if weapons_controller.ship:
 		shell_obj.velocity += weapons_controller.ship.movement_manager.velocity_sync
+	
+	heat_manager.add_heat(heat_per_shot)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bemq7kamgw881"]
+
+[ext_resource type="PackedScene" uid="uid://6yyuiqvqa606" path="res://world/props/models/cooler.glb" id="1_3ohnq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xddt5"]
+height = 2.58961
+radius = 0.941099
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nvghb"]
+height = 0.40205
+radius = 1.26277
+
+[node name="cooler" instance=ExtResource("1_3ohnq")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80038, 0)
+shape = SubResource("CylinderShape3D_xddt5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232287, 0)
+shape = SubResource("CylinderShape3D_nvghb")

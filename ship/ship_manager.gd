@@ -14,6 +14,7 @@ class_name ShipManager
 @export var fire_manager : FireManager
 @export var radar_manager : RadarManager
 @export var power_manager : ShipPowerManager
+@export var cooling_manager : ShipCoolingManager
 
 
 func _ready() -> void:

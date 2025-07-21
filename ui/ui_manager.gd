@@ -28,6 +28,8 @@ var chats : Array[String] = []
 @onready var radar_target_name: Label = $HUD/RadarTargetting/TargetName
 @onready var lead_pip: TextureRect = $HUD/RadarTargetting/LeadPip
 
+@onready var mounted_weapon_container: VBoxContainer = $MountedWeaponPanel/VBoxContainer
+
 
 var prompt_time_remaining := 0.0
 
@@ -133,3 +135,32 @@ func end_target_lock():
 
 func update_pip_position(target_position : Vector3, camera : Camera3D):
 	lead_pip.position = camera.unproject_position(target_position) - Vector2(20,20)
+
+
+func setup_mounted_weapons(controller : MountedWeaponsController):
+	for child in mounted_weapon_container.get_children():
+		child.queue_free()
+	
+	for weapon in controller.weapons:
+		var weapon_info = preload("res://ui/widgets/mounted_weapon_hud_widget.tscn").instantiate()
+		mounted_weapon_container.add_child(weapon_info)
+		
+		(weapon_info.get_node("NameLabel") as Label).text = weapon.component_name
+		
+		weapon.heat_manager.heat_changed.connect(update_mounted_weapons.bind(controller))
+
+	
+	update_mounted_weapons(controller)
+
+
+func unsetup_mounted_weapons(controller : MountedWeaponsController):
+	for child in mounted_weapon_container.get_children():
+		child.queue_free()
+	
+	for weapon in controller.weapons:
+		weapon.heat_manager.heat_changed.disconnect(update_mounted_weapons)
+
+
+func update_mounted_weapons(controller : MountedWeaponsController):
+	for i in range(len(controller.weapons)):
+		(mounted_weapon_container.get_child(i).get_node("ProgressBar") as ProgressBar).value = controller.weapons[i].heat_manager.get_heat_ratio()
