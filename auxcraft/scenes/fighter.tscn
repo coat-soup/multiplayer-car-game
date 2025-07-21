@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bb54q17erdbsf"]
+[gd_scene load_steps=30 format=3 uid="uid://bb54q17erdbsf"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_oe2xb"]
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_3xy1i"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://ship/radar_targeter.gd" id="13_h86uo"]
 [ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="15_82wde"]
 [ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="16_crtc6"]
+[ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="19_4nti4"]
 [ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="19_bsn7f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
@@ -185,10 +186,14 @@ radar_manager = NodePath("../RadarManager")
 weapons_controller = NodePath("../ShipWeaponsController")
 parent_ship = NodePath("..")
 
-[node name="PowerManager" type="Node3D" parent="."]
+[node name="PowerManager" type="Node3D" parent="." node_paths=PackedStringArray("reactor")]
 script = ExtResource("15_82wde")
 power_systems = Array[ExtResource("16_crtc6")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+reactor = NodePath("../ShipReactorComponent")
 
 [node name="Capacitor" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("19_bsn7f")]
 transform = Transform3D(1, 0, 0, 0, -0.554133, 0.832428, 0, -0.832428, -0.554133, 0.0125663, 0.728952, -1.58254)
 ship = NodePath("..")
+
+[node name="ShipReactorComponent" parent="." instance=ExtResource("19_4nti4")]
+transform = Transform3D(0.0669459, 0, 0, 0, -2.9263e-09, 0.0669459, 0, -0.0669459, -2.9263e-09, 0.0330878, 1.21103, -3.82393)

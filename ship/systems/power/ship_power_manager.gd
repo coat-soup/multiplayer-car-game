@@ -23,10 +23,17 @@ func set_system_capacitors(id : int, amount : int):
 	unused_capacitors -= change
 
 
-func get_system_power(system_name : String) -> float: # (range 0 to 1)
+func get_system(system_name : String) -> PowerSystem:
 	for system in power_systems:
-		if system.system_name == system_name: return system.assigned_capacitors/system.max_capacitors
+		if system.system_name == system_name: return system
 	
+	return null
+
+
+func get_system_power(system_name : String) -> float: # (range 0 to 1)
+	if not reactor.active: return 0
+	for system in power_systems:
+		if system.system_name == system_name: return float(system.assigned_capacitors)/float(system.max_capacitors)
 	return 0
 
 

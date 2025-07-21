@@ -29,6 +29,9 @@ var chats : Array[String] = []
 @onready var lead_pip: TextureRect = $HUD/RadarTargetting/LeadPip
 
 @onready var mounted_weapon_container: VBoxContainer = $MountedWeaponPanel/VBoxContainer
+@onready var turret_power_panel: Control = $TurretPowerPanel
+@onready var turret_capacitor_label: RichTextLabel = $TurretPowerPanel/CapacitorNumberLabel
+@onready var power_warning: RichTextLabel = $"TurretPowerPanel/Power Warning"
 
 
 var prompt_time_remaining := 0.0
@@ -164,3 +167,15 @@ func unsetup_mounted_weapons(controller : MountedWeaponsController):
 func update_mounted_weapons(controller : MountedWeaponsController):
 	for i in range(len(controller.weapons)):
 		(mounted_weapon_container.get_child(i).get_node("ProgressBar") as ProgressBar).value = controller.weapons[i].heat_manager.get_heat_ratio()
+
+
+func toggle_turet_power_panel(value: bool):
+	turret_power_panel.visible = value
+
+
+func update_turret_capacitors(cur: int, max: int):
+	turret_capacitor_label.text = str(cur) + "/" + str(max)
+
+
+func toggle_power_warning(value: bool):
+	power_warning.visible = value

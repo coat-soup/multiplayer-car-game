@@ -24,11 +24,7 @@ func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
 	super._ready()
 	
-	power_system.capacitors_changed.connect(test_dev)
-
-
-func test_dev():
-	print("weapon capacitors changed: ", power_system.assigned_capacitors)
+	heat_manager.cooling_delay = 1/fire_rate
 
 
 func _process(delta: float) -> void:
@@ -40,7 +36,6 @@ func _process(delta: float) -> void:
 func fire_cannon():
 	if power_ratio() <= 0 or heat_manager.cur_heat + heat_per_shot >= heat_manager.heat_capacity: return
 	
-	ui.display_chat_message("firing")
 	fire_timer = 1 / (fire_rate * lerp(capacitor_boost_range.x, capacitor_boost_range.y, power_ratio()))
 	
 	firing_audio.play()

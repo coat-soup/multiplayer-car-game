@@ -85,7 +85,8 @@ func _process(delta: float) -> void:
 		yaw_obj.rotation.y += clamp(wrapf(camera.rotation.y - yaw_obj.rotation.y, -PI, PI) * 10, -1, 1) * delta * turn_speed
 		pitch_obj.rotation.x += clamp(wrapf(camera.rotation.x - pitch_obj.rotation.x, -PI, PI) * 10, -1, 1) * delta * turn_speed
 		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
-		return
+	
+	ui.toggle_power_warning(ship_component and ship_component.power_ratio() == 0)
 
 
 func on_controlled():
@@ -93,16 +94,27 @@ func on_controlled():
 		ui.toggle_virtual_joystick(true)
 	if control_manager.is_multiplayer_authority():
 		crosshair.visible = true
+		ui.toggle_turet_power_panel(true)
+		ship_component.ship.power_manager.capacitors_changed.connect(update_ui_capacitors)
+		update_ui_capacitors()
 
 
 func on_uncontrolled():
 	crosshair.visible = false
 	if control_manager.is_multiplayer_authority():
 		ui.toggle_virtual_joystick(false)
+		ui.toggle_turet_power_panel(false)
+		ship_component.ship.power_manager.capacitors_changed.disconnect(update_ui_capacitors)
 
 
 static func pushv(val, deadzone = 0.1) -> float:
 	return val if abs(val) <= deadzone else 1.0 if val > 0.0 else -1.0
+
+
+func update_ui_capacitors():
+	if not ship_component: return
+	var power_system : PowerSystem = ship_component.ship.power_manager.get_system(ship_component.power_system_name)
+	ui.update_turret_capacitors(power_system.assigned_capacitors, power_system.max_capacitors)
 
 
 func on_broken():

@@ -72,7 +72,7 @@ func power_ratio() -> float:
 	if power_system == null:
 		print("Component", name, " has no power system, returning ratio = 1")
 		return 1.0
-	elif ship.power_manager.reactor == null or ship.power_manager.reactor.has_fuel():
+	elif ship.power_manager.reactor == null or ship.power_manager.reactor.active:
 		return float(power_system.assigned_capacitors)/float(power_system.max_capacitors)
 	else: return 0.0
 

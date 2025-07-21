@@ -12,6 +12,7 @@ shell = ExtResource("3_mw7yq")
 barrel_end = NodePath("BarrelEnd")
 fire_rate = 3.0
 firing_audio = NodePath("BarrelEnd/FiringAudio")
+heat_per_shot = 5.0
 component_name = "Autocannon (S1)"
 power_system_name = "Weapons"
 
@@ -27,3 +28,4 @@ max_distance = 50.0
 max_polyphony = 3
 
 [node name="ComponentHeatManager" parent="." index="2" instance=ExtResource("5_f586l")]
+heat_capacity = 70.0

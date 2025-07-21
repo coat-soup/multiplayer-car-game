@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=7 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="2_5fnut"]
 [ext_resource type="Texture2D" uid="uid://d4cceisyu1vjl" path="res://ui/textures/hit_marker.png" id="3_1s2mg"]
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="4_rw5hn"]
 [ext_resource type="PackedScene" uid="uid://cpalqa8168dhh" path="res://ui/widgets/mounted_weapon_hud_widget.tscn" id="5_xul21"]
+[ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="6_5nekn"]
 
 [node name="UI" type="Control" groups=["ui"]]
 layout_mode = 3
@@ -252,3 +253,43 @@ layout_mode = 2
 [node name="MountedWeaponHUDWidget5" parent="MountedWeaponPanel/VBoxContainer" instance=ExtResource("5_xul21")]
 visible = false
 layout_mode = 2
+
+[node name="TurretPowerPanel" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 2456.0
+offset_top = 703.0
+offset_right = 2496.0
+offset_bottom = 743.0
+
+[node name="CapacitorNumberLabel" type="RichTextLabel" parent="TurretPowerPanel"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -2.0
+offset_right = 62.0
+offset_bottom = 26.955
+theme = ExtResource("6_5nekn")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "0/5"
+
+[node name="CapacitorTextLabel" type="RichTextLabel" parent="TurretPowerPanel"]
+clip_contents = false
+layout_mode = 0
+offset_left = -33.0
+offset_top = 27.0
+offset_right = 87.0
+offset_bottom = 77.56
+theme = ExtResource("6_5nekn")
+bbcode_enabled = true
+text = "Capacitors"
+
+[node name="Power Warning" type="RichTextLabel" parent="TurretPowerPanel"]
+layout_mode = 0
+offset_left = -46.0
+offset_top = 60.0
+offset_right = 74.0
+offset_bottom = 110.56
+theme = ExtResource("6_5nekn")
+bbcode_enabled = true
+text = "[b][color=red][pulse freq=2.0 color=transparent ease=-1.0]NO POWER[/pulse][/color][/b]"
