@@ -1,13 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwxq58hbqceca"]
+[gd_scene load_steps=13 format=3 uid="uid://dwxq58hbqceca"]
 
 [ext_resource type="PackedScene" uid="uid://bunw5yu7r3sp5" path="res://world/props/models/reactor.glb" id="1_r3dcg"]
+[ext_resource type="Texture2D" uid="uid://4dh3owu83pps" path="res://world/props/textures/reactor.png" id="2_mle46"]
+[ext_resource type="Texture2D" uid="uid://b7bguyy143qgc" path="res://world/props/textures/reactor_n.png" id="3_5d0lx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqhm8"]
+albedo_texture = ExtResource("2_mle46")
+normal_enabled = true
+normal_texture = ExtResource("3_5d0lx")
+texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btx6t"]
-albedo_color = Color(0, 0, 0, 0.415686)
+albedo_texture = ExtResource("2_mle46")
 metallic_specular = 1.0
 roughness = 0.0
 refraction_enabled = true
 refraction_scale = 0.01
+texture_filter = 0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_84mc3"]
 emission_shape_scale = Vector3(0.2, 0.2, 1)
@@ -41,17 +50,56 @@ data = PackedVector3Array(0, -1.5994, -0.8262, 0.1612, 1.8903, -0.8103, 0, 1.890
 
 [node name="reactor" instance=ExtResource("1_r3dcg")]
 
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_002" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_003" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_004" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_005" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_007" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_008" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_009" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_010" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
 [node name="Cylinder_006" parent="." index="12"]
 surface_material_override/0 = SubResource("StandardMaterial3D_btx6t")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="20"]
+[node name="Cylinder_011" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cylinder_012" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="Cube_002" parent="." index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.71849)
 lifetime = 0.1
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_84mc3")
 draw_pass_1 = SubResource("SphereMesh_egq85")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="21"]
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="18"]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1.78814e-07, -2.08616e-07, 1, -1, 0, 2.08616e-07, 0, -1, -2.38419e-07, 0, 0, 1.17911)
