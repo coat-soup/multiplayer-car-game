@@ -39,6 +39,7 @@ var angular_acceleration : float
 
 var item_physics_dupe_manager : ItemPhysicsDupeManager
 
+
 func _ready() -> void:
 	item_physics_dupe_manager = (get_tree().get_first_node_in_group("network manager") as NetworkManager).level_manager.item_physics_manager
 	item_physics_dupe_manager.handle_item_spawn(self)
@@ -71,32 +72,32 @@ func _physics_process(_delta: float) -> void:
 	
 	velo_calc = physics_dupe.position - local_position
 	
-	
-	if on_ship:
-		position = physics_dupe.position
-		rotation = physics_dupe.rotation
-	else:
-		dupe_RT.remote_path = get_path()
-		global_position = physics_dupe.global_position
-		global_rotation = physics_dupe.global_rotation
-	
-	
-	if is_multiplayer_authority():
+	if not held_in_place:
 		if on_ship:
-			local_position = physics_dupe.position
-			local_rotation = physics_dupe.rotation
+			position = physics_dupe.position
+			rotation = physics_dupe.rotation
 		else:
-			local_position = item_physics_dupe_manager.ship_manager.movement_manager.to_local(physics_dupe.global_position)
-			local_rotation = physics_dupe.rotation
+			dupe_RT.remote_path = get_path()
+			global_position = physics_dupe.global_position
+			global_rotation = physics_dupe.global_rotation
 		
-	else:
-		if on_ship:
-			physics_dupe.position = local_position
-			physics_dupe.rotation = local_rotation
+		
+		if is_multiplayer_authority():
+			if on_ship:
+				local_position = physics_dupe.position
+				local_rotation = physics_dupe.rotation
+			else:
+				local_position = item_physics_dupe_manager.ship_manager.movement_manager.to_local(physics_dupe.global_position)
+				local_rotation = physics_dupe.rotation
+			
 		else:
-			physics_dupe.global_position = item_physics_dupe_manager.ship_manager.movement_manager.to_global(local_position)
-			physics_dupe.rotation = local_rotation
-
+			if on_ship:
+				physics_dupe.position = local_position
+				physics_dupe.rotation = local_rotation
+			else:
+				physics_dupe.global_position = item_physics_dupe_manager.ship_manager.movement_manager.to_global(local_position)
+				physics_dupe.rotation = local_rotation
+	
 	
 	if tractored:
 		#physics_dupe.angular_velocity = physics_dupe.angular_velocity.move_toward(target_angular_velocity, delta * angular_acceleration)

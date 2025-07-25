@@ -1,6 +1,6 @@
 extends Control
 
-@export var vbox : VBoxContainer
+@onready var container : GridContainer = $GridContainer
 @export var component_manager : ShipComponentManager
 
 var labels = {}
@@ -23,19 +23,19 @@ func get_component_display_text(component : ShipComponent) -> String:
 
 
 func rebuild_list():
-	for child in vbox.get_children():
+	for child in container.get_children():
 		child.queue_free()
 	
 	for component in component_manager.components:
 		var label := RichTextLabel.new()
-		label.custom_minimum_size = Vector2(700, 50)
+		label.custom_minimum_size = Vector2(850, 50)
 		label.scroll_active = false
 		label.bbcode_enabled = true
 		label.theme = THEME
 		label.text = get_component_display_text(component)
 		label.add_theme_font_size_override("normal_font_size",30)
 		label.add_theme_font_size_override("bold_font_size",30)
-		vbox.add_child(label)
+		container.add_child(label)
 		labels[component] = label
 		if component.health:
 			component.health.took_damage.connect(update_label.bind(component))

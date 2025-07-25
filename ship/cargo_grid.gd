@@ -18,7 +18,13 @@ var remote_transforms : Array[RemoteTransform3D]
 
 const CARGO_GRID_TILE_MODEL = preload("res://world/props/models/cargo_grid_tile_model.tscn")
 
+var transform_helper : Node3D
+
+
 func _ready() -> void:
+	transform_helper = Node3D.new()
+	add_child(transform_helper)
+	
 	grid = []
 	for x in range(dimensions.x):
 		grid.append([])
@@ -59,12 +65,10 @@ func check_item_accepted(item : Item) -> bool:
 
 
 func get_snapped_world_position(item : Item) -> Vector3:
-	var even_offset := Vector3(0.5,0.5,0.5) * Vector3(1 - item.cargo_grid_dimensions.x % 2, 1 - item.cargo_grid_dimensions.y % 2, 1 - item.cargo_grid_dimensions.z % 2)
-	var local_pos = to_local(item.global_position)     #tileheight
-	return to_global(local_pos.round() - even_offset + Vector3(0,0.05,0))
+	return to_global(((get_item_corner_cell(item) + get_item_corner_cell(item, true)) / 2.0))
 
 
-func get_snapped_world_rotation(item: Item) -> Vector3:
+func get_snapped_world_rotation(item: Item, actually_make_it_local := false) -> Vector3:
 	const rad_90 := PI / 2.0
 
 	# Step 1: Convert item's global rotation to the grid's local rotation space
@@ -82,13 +86,13 @@ func get_snapped_world_rotation(item: Item) -> Vector3:
 	var snapped_world_basis = global_basis * snapped_local_basis
 
 	# Step 4: Return the final snapped world rotation (Euler angles)
-	return snapped_world_basis.get_euler()
-
-
+	return snapped_world_basis.get_euler() if not actually_make_it_local else snapped_local_basis.get_euler()
 
 
 func get_item_corner_cell(item: Item, other_corner := false):
-	var global_pos = item.snap_indicator.to_global(((item.cargo_grid_dimensions - Vector3i.ONE)/2.0) * (-1.0 if other_corner else 1.0))
+	transform_helper.global_position = item.global_position
+	transform_helper.global_rotation = get_snapped_world_rotation(item)
+	var global_pos = transform_helper.to_global(((item.cargo_grid_dimensions - Vector3i.ONE)/2.0) * (-1.0 if other_corner else 1.0))
 	return to_local(global_pos).round()
 
 

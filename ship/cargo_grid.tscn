@@ -44,7 +44,6 @@ script = ExtResource("1_cf5t5")
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-visible = false
 mesh = SubResource("ArrayMesh_k6rsi")
 skeleton = NodePath("")
 

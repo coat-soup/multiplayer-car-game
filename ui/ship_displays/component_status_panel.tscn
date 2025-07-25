@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="2_64xq4"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="3_52mbi"]
 
-[node name="ComponentStatusPanel" type="Control" node_paths=PackedStringArray("vbox")]
+[node name="ComponentStatusPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cfiqt")
-vbox = NodePath("VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -36,22 +35,23 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.641639, 0.394769, 1.92523e-07, 1)
 theme_override_fonts/font = ExtResource("2_64xq4")
 theme_override_font_sizes/font_size = 50
-text = "ENGINEERING CONSOLE - COMPONENT STATES"
+text = "COMPONENT STATES"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -200.0
-offset_top = 139.0
-offset_right = 200.0
-offset_bottom = 243.0
+offset_left = -736.0
+offset_top = 270.0
+offset_right = 968.0
+offset_bottom = 1076.0
 grow_horizontal = 2
+columns = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(800, 50)
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
 layout_mode = 2
 theme_override_font_sizes/bold_italics_font_size = 25
 theme_override_font_sizes/italics_font_size = 25
@@ -61,8 +61,400 @@ theme_override_font_sizes/bold_font_size = 25
 bbcode_enabled = true
 text = "GFGEGE     w                      f"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(800, 50)
+[node name="RichTextLabel2" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel12" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel13" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel14" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel15" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel16" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel17" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel18" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel19" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel20" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel21" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel22" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel23" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel24" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel25" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel26" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel27" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel28" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel29" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
+layout_mode = 2
+theme = ExtResource("3_52mbi")
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+bbcode_enabled = true
+text = "GFGEGE TEST compeonnt - [b]minimiamifnsiasf[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel30" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(850, 50)
 layout_mode = 2
 theme = ExtResource("3_52mbi")
 theme_override_font_sizes/bold_italics_font_size = 25

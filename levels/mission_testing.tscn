@@ -41,6 +41,7 @@ background_mode = 2
 sky = SubResource("Sky_y2rht")
 tonemap_mode = 2
 glow_enabled = true
+glow_bloom = 0.08
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_kqwcw")
