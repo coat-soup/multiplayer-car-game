@@ -1,5 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://forh4xk0kdga"]
+[gd_scene load_steps=6 format=3 uid="uid://forh4xk0kdga"]
 
 [ext_resource type="PackedScene" uid="uid://c1bonfsd0sdme" path="res://world/props/models/fuel_rod.glb" id="1_xvl7l"]
+[ext_resource type="Texture2D" uid="uid://d255bqkiwtgdu" path="res://world/props/textures/fuel_rod.png" id="2_rah5s"]
+[ext_resource type="Texture2D" uid="uid://bxugvqhnwvul" path="res://world/props/textures/fuel_rod_n.png" id="3_byfhc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cajia"]
+albedo_texture = ExtResource("2_rah5s")
+normal_enabled = true
+normal_texture = ExtResource("3_byfhc")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xopd3"]
+albedo_texture = ExtResource("2_rah5s")
+emission_enabled = true
+emission = Color(2.11775e-06, 0.835782, 0.847369, 1)
+normal_enabled = true
+normal_texture = ExtResource("3_byfhc")
+texture_filter = 0
 
 [node name="fuel_rod" instance=ExtResource("1_xvl7l")]
+
+[node name="Cylinder_013" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_cajia")
+
+[node name="Cylinder_015" parent="Cylinder_013" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_cajia")
+
+[node name="Cylinder_018" parent="Cylinder_013" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xopd3")

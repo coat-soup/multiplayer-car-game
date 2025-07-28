@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://forh4xk0kdga" path="res://world/props/models/fuel_rod_model.tscn" id="4_qey43"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_s0n2e"]
-height = 1.18203
+height = 1.77124
 radius = 0.308849
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
@@ -33,6 +33,6 @@ replication_config = SubResource("SceneReplicationConfig_mrjew")
 [node name="fuel_rod" parent="." instance=ExtResource("4_qey43")]
 
 [node name="FuelLabel" type="Label3D" parent="."]
-transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0.636648)
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, 0, 0, 0.868085)
 text = "100"
 font_size = 100

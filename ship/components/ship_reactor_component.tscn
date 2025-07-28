@@ -12,6 +12,7 @@ height = 11.697
 radius = 2.15267
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2xf5a"]
+radius = 0.541998
 
 [node name="ShipReactorComponent" type="Node3D"]
 script = ExtResource("1_hkfen")
@@ -35,12 +36,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.562401, 1.05428)
 script = ExtResource("3_pjtu8")
 
 [node name="FuelRodSnapPoint" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.27215)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07914)
 script = ExtResource("5_4c4cj")
 accepted_groups = Array[String](["fuel rod"])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FuelRodSnapPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.539705)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.832641)
 shape = SubResource("SphereShape3D_2xf5a")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
