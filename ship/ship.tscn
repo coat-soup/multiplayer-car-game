@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=66 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -43,6 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
 [ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="33_7poo3"]
 [ext_resource type="PackedScene" uid="uid://buwk3kfechuo7" path="res://ship/components/cooler.tscn" id="43_nfii6"]
+[ext_resource type="PackedScene" uid="uid://dgf8kvaj6kj60" path="res://world/props/scenes/equipment_rack.tscn" id="44_op51y"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -573,3 +574,12 @@ ship = NodePath("..")
 [node name="Cooler4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 3.445, -10.616)
 ship = NodePath("..")
+
+[node name="equipment_rack" parent="." instance=ExtResource("44_op51y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96615, 3.5, 7.52529)
+
+[node name="equipment_rack2" parent="." instance=ExtResource("44_op51y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)
+
+[node name="equipment_rack3" parent="." instance=ExtResource("44_op51y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)

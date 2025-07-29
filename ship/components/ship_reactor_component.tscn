@@ -39,6 +39,8 @@ script = ExtResource("3_pjtu8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.07914)
 script = ExtResource("5_4c4cj")
 accepted_groups = Array[String](["fuel rod"])
+prompt_text = "Requires Fuel Rod"
+display_keycode = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FuelRodSnapPoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.832641)

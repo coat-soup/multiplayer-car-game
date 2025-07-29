@@ -40,6 +40,8 @@ shape = SubResource("BoxShape3D_kej7e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726, 0)
 script = ExtResource("2_3ys7a")
 accepted_groups = Array[String](["storage crate"])
+alternate_prompt = "Take Crate"
+prompt_text = "Crate Storage"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point" index="0"]
 shape = SubResource("BoxShape3D_1uyyk")
@@ -48,6 +50,8 @@ shape = SubResource("BoxShape3D_1uyyk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.726, 0)
 script = ExtResource("2_3ys7a")
 accepted_groups = Array[String](["storage crate"])
+alternate_prompt = "Take Crate"
+prompt_text = "Crate Storage"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point2" index="0"]
 shape = SubResource("BoxShape3D_1uyyk")
@@ -56,6 +60,8 @@ shape = SubResource("BoxShape3D_1uyyk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.726, 0)
 script = ExtResource("2_3ys7a")
 accepted_groups = Array[String](["storage crate"])
+alternate_prompt = "Take Crate"
+prompt_text = "Crate Storage"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point3" index="0"]
 shape = SubResource("BoxShape3D_1uyyk")

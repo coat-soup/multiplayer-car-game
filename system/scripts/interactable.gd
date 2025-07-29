@@ -1,10 +1,11 @@
-extends Node
+extends Node3D
 
 class_name Interactable
 
 signal interacted
 
 @export var prompt_text : String
+@export var display_keycode : bool = true
 
 var active := true
 
