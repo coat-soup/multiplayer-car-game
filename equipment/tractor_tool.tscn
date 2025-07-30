@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://fyxpmm5wifkc"]
+[gd_scene load_steps=14 format=4 uid="uid://fyxpmm5wifkc"]
 
 [ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
 [ext_resource type="PackedScene" uid="uid://ch0bc52eqydbm" path="res://equipment/models/tractor_tool_model.tscn" id="2_t7tfp"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
 [ext_resource type="AudioStream" uid="uid://dkxuvx7bjudl7" path="res://sfx/tractor_hum.wav" id="4_uf7hw"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="5_hv5w3"]
 
 [sub_resource type="Gradient" id="Gradient_1mqwj"]
 colors = PackedColorArray(0, 0.772549, 0.968627, 1, 0.97, 0, 0.0161664, 1)
@@ -57,25 +58,30 @@ shading_mode = 0
 albedo_color = Color(0, 0.590153, 0.979932, 0.196078)
 albedo_texture = SubResource("GradientTexture2D_navbv")
 
-[node name="TractorTool" type="Node3D" node_paths=PackedStringArray("interactable")]
+[node name="TractorTool" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bttfc")
 color_by_norm_dist_grad = SubResource("Gradient_1mqwj")
 equipment_name = "Tractor Tool"
-interactable = NodePath("StaticBody3D")
+interactable = NodePath("Interactable")
+cargo_grid_dimensions = Vector3i(2, 1, 1)
 
 [node name="tractor_tool2" parent="." instance=ExtResource("2_t7tfp")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.05309e-09, 0.00222123, 0.0240918)
+shape = SubResource("BoxShape3D_yrpc2")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("4_e8735")
 prompt_text = "Equip Wrench"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0240918, 0.00222123, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1.1086, 0, 0, 0, 1.1086, 0, 0, 0, 1.1086, 0.0240918, 0.00222123, 0)
 shape = SubResource("BoxShape3D_yrpc2")
 
 [node name="Audio" type="AudioStreamPlayer3D" parent="."]
@@ -89,3 +95,6 @@ visible = false
 mesh = SubResource("ArrayMesh_1h00a")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_i4dix")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_hv5w3")

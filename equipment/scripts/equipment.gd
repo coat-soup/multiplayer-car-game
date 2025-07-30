@@ -1,4 +1,4 @@
-extends Node3D
+extends Item
 class_name Equipment
 
 signal triggered
@@ -20,12 +20,14 @@ var prev_parent : Node3D = null
 
 
 func _ready():
+	super._ready()
+	
 	interactable.prompt_text = "Equip " + equipment_name
 	interactable.interacted.connect(try_equip)
 	triggered.connect(on_triggered)
 	trigger_ended.connect(on_trigger_ended)
-	if raycast_on_startup:
-		raycast_position()
+	#if raycast_on_startup:
+		#raycast_position()
 
 
 func _input(event: InputEvent) -> void:
@@ -67,11 +69,31 @@ func set_parent_to_scene_path(path : String, zero_transform := false):
 		position = Vector3.ZERO
 		rotation = Vector3.ZERO
 		
-	if path == "":
-		raycast_position()
+	#if path == "":
+		#raycast_position()
 
 
+@rpc("any_peer", "call_local")
+func disable_physics():
+	held_in_place = true
+	collision_layer = 0
+	physics_dupe.collision_layer = 0
+	
+	await get_tree().create_timer(0.1).timeout
+	physics_dupe.freeze = true
+
+
+@rpc("any_peer", "call_local")
+func enable_physics():
+	held_in_place = false
+	collision_layer = 1
+	physics_dupe.collision_layer = 1
+	physics_dupe.freeze = false
+
+
+## DEPRECATED
 func raycast_position():
+	return
 	var space_state = get_world_3d().direct_space_state
 	
 	if not prev_parent: prev_parent = self

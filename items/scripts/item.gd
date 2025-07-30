@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 class_name Item
 
 @export var item_data : ItemData
@@ -142,7 +142,7 @@ func initialise_on_load(path_to_cargo_grid : String = "", a : Vector3i = Vector3
 
 static func recursive_set_texture(node : Node):
 	var mesh = node as MeshInstance3D
-	if mesh:
+	if mesh and mesh.get_surface_override_material_count() > 0:
 		mesh.set_surface_override_material(0, preload("res://items/item_snap_indicator_mat.tres"))
 	for child in node.get_children():
 		recursive_set_texture(child)

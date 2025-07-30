@@ -9,7 +9,6 @@ const WRENCH_BONK_PARTICLES = preload("res://vfx/particles/wrench_bonk_particles
 @onready var audio: AudioStreamPlayer = $Audio
 
 var on_cooldown := false
-@onready var ui = get_tree().get_first_node_in_group("ui") as UIManager
 
 
 func on_triggered(button : int):

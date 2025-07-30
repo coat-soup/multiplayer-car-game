@@ -11,7 +11,7 @@ size = Vector3(0.78, 0.34, 1)
 [node name="Point" type="Area3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.308766, 2.07334, 0)
 script = ExtResource("2_lsbgo")
-accepted_groups = Array[String](["storage crate"])
+accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point" index="0"]
@@ -21,7 +21,7 @@ shape = SubResource("BoxShape3D_6b23x")
 [node name="Point2" type="Area3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316038, 1.62232, 0)
 script = ExtResource("2_lsbgo")
-accepted_groups = Array[String](["storage crate"])
+accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point2" index="0"]
@@ -31,7 +31,7 @@ shape = SubResource("BoxShape3D_6b23x")
 [node name="Point3" type="Area3D" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.308766, 1.06853, 0)
 script = ExtResource("2_lsbgo")
-accepted_groups = Array[String](["storage crate"])
+accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point3" index="0"]
@@ -41,7 +41,7 @@ shape = SubResource("BoxShape3D_6b23x")
 [node name="Point4" type="Area3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316038, 0.617508, 0)
 script = ExtResource("2_lsbgo")
-accepted_groups = Array[String](["storage crate"])
+accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point4" index="0"]

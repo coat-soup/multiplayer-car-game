@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 
 class_name EquipmentManager
 
@@ -6,11 +6,16 @@ class_name EquipmentManager
 @export var num_slots := 2
 var items : Array[Equipment] = []
 var cur_slot := 0
+var remote_transforms : Array[RemoteTransform3D]
 
 
 func _ready() -> void:
 	for i in range(num_slots):
 		items.append(null)
+		var rt = RemoteTransform3D.new()
+		add_child(rt)
+		remote_transforms.append(rt)
+
 
 func _input(event: InputEvent) -> void:
 	if not player.is_multiplayer_authority():
@@ -42,11 +47,33 @@ func equip_item(equipment: Equipment):
 func handle_equip(scene_path : NodePath, slot : int):
 	var equipment = get_tree().root.get_node(scene_path) as Equipment
 	if equipment:
+		var item = equipment
+		
+		
+		# item placement
+		item.global_position = global_position
+		item.global_rotation = global_rotation
+		if item.on_ship:
+			item.physics_dupe.position = item.position
+			item.physics_dupe.rotation = item.rotation
+		else:
+			item.physics_dupe.global_position = item.global_position
+			item.physics_dupe.global_rotation = item.global_rotation
+		
+		# remote transform
+		item.controlling_RT = remote_transforms[slot]
+		item.controlling_RT.remote_path = scene_path
+		item.controlling_RT.global_position = item.global_position
+		item.controlling_RT.global_rotation = item.global_rotation
+		
+		item.snap_indicator.visible = false
+		
+		
 		equipment.equipped = true
 		equipment.interactable.active = false
 		items[slot] = equipment
 		
-		equipment.reparent(self)
+		
 		equipment.held_player = player
 		equipment.prev_parent = player # for transform
 		equipment.position = Vector3.ZERO
@@ -59,23 +86,41 @@ func handle_equip(scene_path : NodePath, slot : int):
 		else:
 			equipment.on_held()
 		
+		
+		item.disable_physics()
+		
 	else:
 		print("could not find equipment")
 
 
 @rpc("any_peer", "call_local")
 func drop_equipment(slot: int):
-	if items[slot]:
-		items[slot].reparent(get_tree().get_root())
-		items[slot].held_player = null
-		items[slot].equipped = false
-		items[slot].held_by_auth = false
-		items[slot].visible = true
-		items[slot].interactable.active = true
-		items[slot].raycast_position()
+	var item := items[slot]
+	if item:
+		item.enable_physics()
+		
+		remote_transforms[slot].remote_path = ""
+		item.controlling_RT = null
+		
+		
+		if item.on_ship:
+			item.physics_dupe.position = item.position
+			item.physics_dupe.rotation = item.rotation
+		else:
+			item.physics_dupe.global_position = item.global_position
+			item.physics_dupe.global_rotation = item.global_rotation
+		
+		
+		
+		item.held_player = null
+		item.equipped = false
+		item.held_by_auth = false
+		item.visible = true
+		item.interactable.active = true
+		#items[slot].raycast_position()
 		if slot == cur_slot:
-			items[slot].on_unheld()
-		items[slot].on_dropped()
+			item.on_unheld()
+		item.on_dropped()
 		items[slot] = null
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn5nh1kddwt62"]
+[gd_scene load_steps=11 format=3 uid="uid://bn5nh1kddwt62"]
 
 [ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
 [ext_resource type="PackedScene" uid="uid://c8e5dm3neirpv" path="res://equipment/models/wrench.glb" id="2_gkggd"]
 [ext_resource type="PackedScene" uid="uid://ctosmn6mjroqq" path="res://equipment/models/wrench_model.tscn" id="3_yo5ni"]
 [ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="4_um0c8"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="6_vx6kc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
 size = Vector3(0.11, 1.15, 0.335)
@@ -94,11 +95,11 @@ _data = {
 "wrench_swing": SubResource("Animation_wa4qp")
 }
 
-[node name="Wrench" type="Node3D" node_paths=PackedStringArray("anim", "interactable")]
+[node name="Wrench" type="CharacterBody3D" node_paths=PackedStringArray("anim", "interactable") groups=["equipment", "item"]]
 script = ExtResource("1_mgupi")
 anim = NodePath("AnimationPlayer")
 equipment_name = "Wrench"
-interactable = NodePath("StaticBody3D")
+interactable = NodePath("Interactable")
 
 [node name="wrench3" parent="." instance=ExtResource("2_gkggd")]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
@@ -107,14 +108,18 @@ visible = false
 [node name="wrench" parent="." instance=ExtResource("3_yo5ni")]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108398, 0)
+shape = SubResource("BoxShape3D_yrpc2")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_bfpxh")
 prompt_text = "Equip Wrench"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108398, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1.47789, 0, 0, 0, 1.09683, 0, 0, 0, 1.09683, 0, 0.108398, 0)
 shape = SubResource("BoxShape3D_yrpc2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -124,3 +129,6 @@ libraries = {
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_um0c8")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_vx6kc")
