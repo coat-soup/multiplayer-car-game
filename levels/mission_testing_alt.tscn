@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=3 uid="uid://bxfgwvu4c6fo0"]
+
+[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
+[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
+[ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="3_xtqgv"]
+[ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://stations/station_mockup_2.tscn" id="4_xbgqd"]
+[ext_resource type="Script" path="res://missions/mission_manager.gd" id="5_bqb5b"]
+[ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_j3tm5"]
+[ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
+[ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="8_oriqq"]
+[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="9_w5f58"]
+[ext_resource type="PackedScene" uid="uid://ks7buq4pma1h" path="res://ship/ship_bare.tscn" id="10_wiwr8"]
+[ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="20_4wwfl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
+shader = ExtResource("19_55n7u")
+shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
+shader_parameter/star_base_color = Color(1, 0.949229, 0.874823, 1)
+shader_parameter/star_hue_offset = 0.23
+shader_parameter/star_intensity = 0.08
+shader_parameter/star_twinkle_speed = 0.8
+shader_parameter/star_twinkle_intensity = 0.2
+shader_parameter/layer_scale = 20.0
+shader_parameter/layer_scale_step = 10.0
+shader_parameter/layers_count = 3
+
+[sub_resource type="Sky" id="Sky_y2rht"]
+sky_material = SubResource("ShaderMaterial_hv1i0")
+
+[sub_resource type="Environment" id="Environment_recut"]
+background_mode = 2
+sky = SubResource("Sky_y2rht")
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.08
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_b72io")
+
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager") groups=["network manager"]]
+script = ExtResource("2_521wb")
+spawn_position = Vector3(0, 6, 0)
+ship = NodePath("../ShipHolder/Ship2")
+level_manager = NodePath("../LevelManager")
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
+
+[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship", "item_physics_manager", "item_spawner")]
+script = ExtResource("3_xtqgv")
+friendly_station = ExtResource("4_xbgqd")
+network_manager = NodePath("../NetworkManager")
+mission_manager = NodePath("../MissionManager")
+ship = NodePath("../ShipHolder/Ship2")
+item_physics_manager = NodePath("../ItemPhysicsDupeManager")
+item_spawner = NodePath("../ItemSpawner")
+
+[node name="MissionManager" type="Node" parent="." node_paths=PackedStringArray("ship", "ui", "level_manager")]
+script = ExtResource("5_bqb5b")
+ship = NodePath("../ShipHolder/Ship2")
+mission_template = ExtResource("6_j3tm5")
+ui = NodePath("../UI")
+level_manager = NodePath("../LevelManager")
+
+[node name="ItemPhysicsDupeManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5000, 0)
+script = ExtResource("7_ej4lj")
+ship_prefab = ExtResource("8_oriqq")
+ship_manager = NodePath("../ShipHolder/Ship2")
+
+[node name="ShipHolder" type="Node" parent="."]
+
+[node name="ShipMovementClone" parent="ShipHolder" node_paths=PackedStringArray("ship_manager") instance=ExtResource("9_w5f58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
+ship_manager = NodePath("../Ship2")
+
+[node name="Ship2" parent="ShipHolder" node_paths=PackedStringArray("movement_clone") instance=ExtResource("10_wiwr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.34, 0)
+movement_clone = NodePath("../ShipMovementClone")
+
+[node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://auxcraft/scenes/fighter.tscn", "res://auxcraft/scenes/fighter_movement_clone.tscn")
+spawn_path = NodePath("../ShipHolder")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_recut")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("20_4wwfl")]
+network_manager = NodePath("../NetworkManager")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+spawn_path = NodePath("../NetworkManager")
+
+[node name="ItemSpawner" type="MultiplayerSpawner" parent="."]

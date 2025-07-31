@@ -7,7 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]
 size = Vector3(3, 2.456, 3)
 
-[node name="AutocannonComponent" type="Node3D" node_paths=PackedStringArray("health")]
+[node name="AutocannonComponent" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_iicsa")
 health = NodePath("Hitbox/Health")
 

@@ -8,19 +8,15 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_pcqi0"]
 size = Vector3(0.854712, 1.2356, 0.268933)
 
-[node name="BreakerBox" type="Node3D" node_paths=PackedStringArray("health")]
+[node name="BreakerBox" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_138k0")
 component_name = "Breaker"
-health = NodePath("Hitbox/Health")
+health = NodePath("Health")
 
-[node name="Hitbox" type="StaticBody3D" parent="."]
-collision_layer = 8
-collision_mask = 0
-
-[node name="Health" type="Node" parent="Hitbox"]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("2_cwfvn")
 
-[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+[node name="MainBodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040161, -0.00710297, -0.0188537)
 shape = SubResource("BoxShape3D_pcqi0")
 

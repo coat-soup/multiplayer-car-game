@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 	if not held_by_auth: return
 	var health = raycast_health()
 	if health:
-		var component = health.get_parent().get_parent() as ShipComponent
+		var component = health.get_parent() as ShipComponent
 		var component_name = (component.component_name + "\n") if component else ""
 		ui.display_prompt(component_name + "Health:" + str(round(health.cur_health)), 0.1)
 
@@ -43,7 +43,7 @@ func _process(_delta: float) -> void:
 func raycast_health(do_particles := false) -> Health:
 	var space_state = get_world_3d().direct_space_state
 
-	var query = PhysicsRayQueryParameters3D.create(held_player.camera.global_position, held_player.camera.global_position - held_player.camera.global_basis.z * repair_range, Util.layer_mask([4]))
+	var query = PhysicsRayQueryParameters3D.create(held_player.camera.global_position, held_player.camera.global_position - held_player.camera.global_basis.z * repair_range, Util.layer_mask([1,4]))
 	query.exclude = [held_player]
 
 	var result := space_state.intersect_ray(query)

@@ -85,7 +85,7 @@ min_capacitors_for_power = 1
 [node name="Fighter" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager", "radar_manager", "power_manager", "cooling_manager") groups=["ship"]]
 script = ExtResource("1_oe2xb")
 movement_manager = NodePath("MovementManager")
-main_target_component = NodePath("MainTargetComponent")
+main_target_component = NodePath("")
 movement_clone_prefab = ExtResource("2_tvu4p")
 component_manager = NodePath("ShipComponentManager")
 radar_manager = NodePath("RadarManager")
@@ -106,7 +106,7 @@ ship = NodePath("..")
 script = ExtResource("5_3adyx")
 ship = NodePath("..")
 
-[node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
+[node name="MainTargetComponent" type="CharacterBody3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("2_3xy1i")
 ship = NodePath("..")
 

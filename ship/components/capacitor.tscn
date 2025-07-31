@@ -5,27 +5,26 @@
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_x4h4v"]
 [ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_o8t82"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v1unw"]
-size = Vector3(0.885, 2.327, 1.831)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cs7ih"]
+points = PackedVector3Array(0.103138, 0.667026, 0.559853, 0.305409, 0.667026, 0.357526, 0.305409, 0.729629, -0.404655, -0.103258, 0.667026, 0.559853, 0.103138, -0.694758, 0.559853, 0.305409, -0.694758, 0.357526, 0.215903, 0.729629, -0.559853, -0.305409, 0.729629, -0.404655, 0.305409, -0.539576, -0.404655, -0.305409, 0.667026, 0.357526, -0.103258, -0.694758, 0.559853, 0.305409, -0.694758, -0.249457, -0.215962, 0.729629, -0.559853, 0.215903, -0.384393, -0.559853, -0.305409, -0.539576, -0.404655, 0.228638, -0.550312, -0.394024, -0.305409, -0.694758, 0.357526, -0.305409, -0.694758, -0.249457, -0.215962, -0.384393, -0.559853, -0.228698, -0.550312, -0.394024)
 
-[node name="Capacitor" type="Node3D" node_paths=PackedStringArray("health")]
+[node name="Capacitor" type="CharacterBody3D" node_paths=PackedStringArray("health")]
+up_direction = Vector3(0.333289, 0.942825, 0)
 script = ExtResource("1_mlgie")
 component_name = "Capacitor"
-health = NodePath("Hitbox/Health")
+health = NodePath("Health")
+cargo_grid_dimensions = Vector3i(1, 2, 2)
 
 [node name="capacitor" parent="." instance=ExtResource("2_mfwnr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.17766, 0)
 
-[node name="Hitbox" type="StaticBody3D" parent="."]
-collision_layer = 8
-collision_mask = 0
-
-[node name="Health" type="Node" parent="Hitbox"]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("2_x4h4v")
 
-[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14439, -0.0322497)
-shape = SubResource("BoxShape3D_v1unw")
-
 [node name="FireHazard" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.562401, 1.05428)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.168725, 1.25735)
 script = ExtResource("3_o8t82")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.335, 0, 0, 0, 1.335, 0, 0, 0, 1.335, 0, -0.0507541, 0)
+shape = SubResource("ConvexPolygonShape3D_cs7ih")

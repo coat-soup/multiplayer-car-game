@@ -28,7 +28,7 @@ properties/2/replication_mode = 1
 [node name="Barge" type="Node3D" node_paths=PackedStringArray("movement_manager", "main_target_component", "component_manager") groups=["ship"]]
 script = ExtResource("1_6dg5s")
 movement_manager = NodePath("MovementManager")
-main_target_component = NodePath("MainTargetComponent")
+main_target_component = NodePath("")
 movement_clone_prefab = ExtResource("2_5ir0a")
 component_manager = NodePath("ShipComponentManager")
 
@@ -36,7 +36,7 @@ component_manager = NodePath("ShipComponentManager")
 script = ExtResource("3_wvq77")
 ship_manager = NodePath("..")
 
-[node name="MainTargetComponent" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
+[node name="MainTargetComponent" type="CharacterBody3D" parent="." node_paths=PackedStringArray("ship")]
 script = ExtResource("4_ccgbp")
 ship = NodePath("..")
 

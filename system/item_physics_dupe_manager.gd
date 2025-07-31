@@ -82,14 +82,17 @@ func recursive_dupe_setup(node : Node, disable := true):
 
 
 func handle_item_spawn(item : Item):
-	print("handling item spawn for ", item)
+	if item.immovable: return
+	#print("handling item spawn for ", item)
 	item.physics_dupe = RigidBody3D.new()
-	add_child(item.physics_dupe)
+	add_child.call_deferred(item.physics_dupe)
+	await item.physics_dupe.tree_entered
 	
 	item.dupe_RT = RemoteTransform3D.new()
 	item.dupe_RT.update_position = true
 	item.dupe_RT.update_rotation = true
-	item.physics_dupe.add_child(item.dupe_RT)
+	item.physics_dupe.add_child.call_deferred(item.dupe_RT)
+	
 	item.physics_dupe.contact_monitor = true
 	item.physics_dupe.max_contacts_reported = 2
 	
@@ -113,11 +116,16 @@ func handle_item_spawn(item : Item):
 
 
 func item_entered_ship(item : Item):
+	if item.immovable: return
+	if !item.is_inside_tree(): await item.tree_entered
+	
+	if not item.physics_dupe: print(item, " has no physics dupe")
 	item.physics_dupe.gravity_scale = 1
 	item.physics_dupe.position = item.position
 	item.physics_dupe.rotation -= ship_manager.global_rotation
 	
-	item.dupe_RT.remote_path = ""
+	if item.dupe_RT:
+		item.dupe_RT.remote_path = ""
 	
 	item.physics_dupe.linear_velocity *= ship_manager.global_basis
 	item.physics_dupe.linear_velocity -= ship_manager.movement_manager.velocity_sync
@@ -127,6 +135,11 @@ func item_entered_ship(item : Item):
 
 
 func item_left_ship(item : Item):
+	if item.immovable: return
+	if !item.is_inside_tree():
+		await item.tree_entered
+		await get_tree().create_timer(0.1)
+	
 	item.physics_dupe.gravity_scale = 0
 	item.physics_dupe.global_position = item.global_position
 	item.physics_dupe.global_rotation += ship_manager.global_rotation

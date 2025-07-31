@@ -9,8 +9,6 @@ class_name ShipWeapon
 @export var fire_rate := 1.2
 var fire_timer := 0.0
 
-var ui : UIManager
-
 @export var firing_audio: AudioStreamPlayer3D
 @export var weapons_controller : MountedWeaponsController
 var found_bullet_speed : float = 100
@@ -19,6 +17,8 @@ const capacitor_boost_range := Vector2(0.5,1)
 @export var heat_per_shot := 10.0
 @onready var heat_manager : ComponentHeatManager = $ComponentHeatManager
 
+
+#var ui
 
 func _ready() -> void:
 	ui = get_tree().get_first_node_in_group("ui") as UIManager

@@ -9,10 +9,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_pcqi0"]
 size = Vector3(1.1, 1.1, 0.4)
 
-[node name="TestShipComponent" type="Node3D" node_paths=PackedStringArray("health")]
+[node name="TestShipComponent" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_qt3em")
 component_name = "Test Component"
-health = NodePath("Hitbox/Health")
+health = NodePath("Health")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 use_collision = true
@@ -24,14 +24,10 @@ use_collision = true
 size = Vector3(0.8, 0.8, 0.05)
 material = SubResource("StandardMaterial3D_qa2hr")
 
-[node name="Hitbox" type="StaticBody3D" parent="."]
-collision_layer = 8
-collision_mask = 0
-
-[node name="Health" type="Node" parent="Hitbox"]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("2_mn6i1")
 
-[node name="MainBodyCollision" type="CollisionShape3D" parent="Hitbox"]
+[node name="MainBodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_pcqi0")
 
 [node name="FireHazard" type="Node3D" parent="."]

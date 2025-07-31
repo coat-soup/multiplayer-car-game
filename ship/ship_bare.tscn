@@ -1,110 +1,102 @@
-[gd_scene load_steps=66 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=58 format=3 uid="uid://ks7buq4pma1h"]
 
-[ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
-[ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
-[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="2_bt4ft"]
-[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_i8s7e"]
-[ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="3_28ont"]
-[ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_acrb3"]
-[ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="4_n8wuk"]
-[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="4_ygd72"]
-[ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="5_31fms"]
-[ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="5_cwq02"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_fc0ek"]
-[ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="5_hfqvi"]
-[ext_resource type="Texture2D" uid="uid://c463w0dl8ktnv" path="res://ui/textures/thrusters_icon.png" id="6_ua2gt"]
-[ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="6_vyq40"]
-[ext_resource type="Texture2D" uid="uid://uydjupo5sgo1" path="res://ui/textures/weapons_icon.png" id="7_8hc1n"]
-[ext_resource type="Texture2D" uid="uid://81ds006ta5qk" path="res://ui/textures/shields_icon.png" id="8_q8kml"]
-[ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="9_7i8yy"]
-[ext_resource type="Script" path="res://ship/launch_system.gd" id="9_kncal"]
-[ext_resource type="Texture2D" uid="uid://1dolycbn442d" path="res://ui/textures/radar_icon.png" id="9_o7onv"]
-[ext_resource type="Script" path="res://ship/ship_data.gd" id="10_o00jc"]
-[ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="10_qloxf"]
-[ext_resource type="Texture2D" uid="uid://gkwhvpbe0fex" path="res://ui/textures/life_support_icon.png" id="10_wqmr4"]
-[ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="11_1dy7n"]
-[ext_resource type="Texture2D" uid="uid://dl8dklo2befbw" path="res://ui/textures/salvage_icon.png" id="11_2v2dt"]
-[ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="11_en0ln"]
-[ext_resource type="Texture2D" uid="uid://crocha8p6hldi" path="res://ui/textures/hydroponics_icon.png" id="11_t3hrb"]
-[ext_resource type="Script" path="res://ship/systems/power/ship_cooling_manager.gd" id="13_eyx6l"]
-[ext_resource type="Texture2D" uid="uid://dwujhpjpacelj" path="res://ui/textures/cooling_icon.png" id="13_h85l3"]
-[ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
-[ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
-[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
-[ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
-[ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
-[ext_resource type="PackedScene" uid="uid://bx7tg26c45i6f" path="res://ship/components/breaker_box.tscn" id="24_co1q7"]
-[ext_resource type="PackedScene" uid="uid://dxtthwjcgkw75" path="res://ship/components/steam_pipe_component.tscn" id="25_o4iqn"]
-[ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
-[ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="26_8kjs2"]
-[ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="30_w31jj"]
-[ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="32_ci636"]
-[ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
-[ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="33_7poo3"]
-[ext_resource type="PackedScene" uid="uid://c78lblw7dof04" path="res://ship/components/turrets/turret_size_1_component.tscn" id="33_f7yk0"]
-[ext_resource type="PackedScene" uid="uid://buwk3kfechuo7" path="res://ship/components/cooler.tscn" id="43_nfii6"]
-[ext_resource type="PackedScene" uid="uid://dgf8kvaj6kj60" path="res://world/props/scenes/equipment_rack.tscn" id="44_op51y"]
+[ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_7b0p1"]
+[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="2_ea2nl"]
+[ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_hycu8"]
+[ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="4_iup15"]
+[ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="5_e7c8b"]
+[ext_resource type="Texture2D" uid="uid://c463w0dl8ktnv" path="res://ui/textures/thrusters_icon.png" id="6_isc4m"]
+[ext_resource type="Texture2D" uid="uid://uydjupo5sgo1" path="res://ui/textures/weapons_icon.png" id="7_ogxlc"]
+[ext_resource type="Texture2D" uid="uid://81ds006ta5qk" path="res://ui/textures/shields_icon.png" id="8_5wc37"]
+[ext_resource type="Texture2D" uid="uid://dwujhpjpacelj" path="res://ui/textures/cooling_icon.png" id="9_yin2t"]
+[ext_resource type="Texture2D" uid="uid://1dolycbn442d" path="res://ui/textures/radar_icon.png" id="10_y8y7n"]
+[ext_resource type="Texture2D" uid="uid://gkwhvpbe0fex" path="res://ui/textures/life_support_icon.png" id="11_2shaf"]
+[ext_resource type="Texture2D" uid="uid://crocha8p6hldi" path="res://ui/textures/hydroponics_icon.png" id="12_4hfxk"]
+[ext_resource type="Texture2D" uid="uid://dl8dklo2befbw" path="res://ui/textures/salvage_icon.png" id="13_5a4sa"]
+[ext_resource type="Script" path="res://ship/systems/power/ship_cooling_manager.gd" id="14_bkh5a"]
+[ext_resource type="Script" path="res://ship/ship_item_manager.gd" id="15_h54ft"]
+[ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="16_137n8"]
+[ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="18_acemn"]
+[ext_resource type="Script" path="res://ship/systems/radar/radar_manager.gd" id="19_1e1cy"]
+[ext_resource type="PackedScene" uid="uid://c83v51llgn40p" path="res://ship/components/helm.tscn" id="20_5saj4"]
+[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="21_hay0u"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="22_stqoh"]
+[ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="23_arjx7"]
+[ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="24_86eds"]
+[ext_resource type="Script" path="res://ship/launch_system.gd" id="25_c1gg3"]
+[ext_resource type="Script" path="res://ship/ship_data.gd" id="26_7asx8"]
+[ext_resource type="Resource" uid="uid://css45hbcbf211" path="res://auxcraft/resources/fighter.tres" id="27_8tmp2"]
+[ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="28_aumnx"]
+[ext_resource type="Script" path="res://ship/launch_rail_waypoint.gd" id="29_x72ud"]
+[ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="30_4ijqu"]
+[ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="31_ygwjh"]
+[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="32_m78nh"]
+[ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="34_qn3hx"]
+[ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="38_gyqmk"]
+[ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="39_gwxxn"]
+[ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="40_uca2q"]
+[ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="41_y3h54"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Thrusters"
-icon = ExtResource("6_ua2gt")
+icon = ExtResource("6_isc4m")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_t7g4u"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Weapons"
-icon = ExtResource("7_8hc1n")
+icon = ExtResource("7_ogxlc")
 max_capacitors = 6
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_2t2p7"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Shields"
-icon = ExtResource("8_q8kml")
+icon = ExtResource("8_5wc37")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_rg6ev"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Cooling"
-icon = ExtResource("13_h85l3")
+icon = ExtResource("9_yin2t")
 max_capacitors = 4
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_3x8m8"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Radar"
-icon = ExtResource("9_o7onv")
+icon = ExtResource("10_y8y7n")
 max_capacitors = 3
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_wd2yx"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Life Support"
-icon = ExtResource("10_wqmr4")
+icon = ExtResource("11_2shaf")
 max_capacitors = 3
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_dirrh"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Hydroponics"
-icon = ExtResource("11_t3hrb")
+icon = ExtResource("12_4hfxk")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_fkvsh"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Salvage"
-icon = ExtResource("11_2v2dt")
+icon = ExtResource("13_5a4sa")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
 [sub_resource type="Resource" id="Resource_ssukg"]
-script = ExtResource("5_31fms")
+script = ExtResource("5_e7c8b")
 system_name = "Medical"
-icon = ExtResource("10_wqmr4")
+icon = ExtResource("11_2shaf")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
@@ -156,10 +148,10 @@ viewport_path = NodePath("DisplayConsole/Sprite3D/SubViewport")
 viewport_path = NodePath("DisplayConsole2/Sprite3D/SubViewport")
 
 [node name="Ship" type="Node3D" node_paths=PackedStringArray("movement_manager", "gravity_bounds", "spawn_point", "item_manager", "component_manager", "fire_manager", "radar_manager", "power_manager", "cooling_manager") groups=["ship"]]
-script = ExtResource("1_hvcqr")
+script = ExtResource("1_7b0p1")
 movement_manager = NodePath("MovementManager")
 gravity_bounds = NodePath("GravityBounds")
-movement_clone_prefab = ExtResource("2_bt4ft")
+movement_clone_prefab = ExtResource("2_ea2nl")
 spawn_point = NodePath("SpawnPoint")
 item_manager = NodePath("ItemManager")
 component_manager = NodePath("ComponentManager")
@@ -169,26 +161,26 @@ power_manager = NodePath("PowerManager")
 cooling_manager = NodePath("CoolingManager")
 
 [node name="ComponentManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager")]
-script = ExtResource("3_acrb3")
+script = ExtResource("3_hycu8")
 ship_manager = NodePath("..")
 
 [node name="PowerManager" type="Node3D" parent="." node_paths=PackedStringArray("reactor")]
-script = ExtResource("4_n8wuk")
-power_systems = Array[ExtResource("5_31fms")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_rg6ev"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
+script = ExtResource("4_iup15")
+power_systems = Array[ExtResource("5_e7c8b")]([SubResource("Resource_kl4ev"), SubResource("Resource_t7g4u"), SubResource("Resource_2t2p7"), SubResource("Resource_rg6ev"), SubResource("Resource_3x8m8"), SubResource("Resource_wd2yx"), SubResource("Resource_dirrh"), SubResource("Resource_fkvsh"), SubResource("Resource_ssukg")])
 reactor = NodePath("../ShipReactorComponent")
 
 [node name="CoolingManager" type="Node3D" parent="." node_paths=PackedStringArray("ship")]
-script = ExtResource("13_eyx6l")
+script = ExtResource("14_bkh5a")
 ship = NodePath("..")
 
 [node name="ItemManager" type="Node" parent="." node_paths=PackedStringArray("ship_manager")]
-script = ExtResource("5_cwq02")
+script = ExtResource("15_h54ft")
 ship_manager = NodePath("..")
 
 [node name="FireManager" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, -24, -46.478)
 collision_mask = 9
-script = ExtResource("25_o7r4o")
+script = ExtResource("16_137n8")
 dimensions = Vector3i(12, 13, 25)
 cell_size = 4.0
 
@@ -196,15 +188,11 @@ cell_size = 4.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3427, 25.6071, 50.7566)
 shape = SubResource("BoxShape3D_gsyak")
 
-[node name="MainTargetComponent" type="CharacterBody3D" parent="." node_paths=PackedStringArray("ship")]
-script = ExtResource("2_i8s7e")
-ship = NodePath("..")
-
-[node name="respawn_screen" parent="." instance=ExtResource("2_1bf64")]
+[node name="respawn_screen" parent="." instance=ExtResource("18_acemn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21, -27.2965)
 
 [node name="RadarManager" type="Node3D" parent="."]
-script = ExtResource("6_vyq40")
+script = ExtResource("19_1e1cy")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 21.5054, -20.5969)
@@ -217,13 +205,13 @@ far = 10000.0
 [node name="Helm" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 19.5054, -19)
 
-[node name="HelmModel" parent="Helm" node_paths=PackedStringArray("controller") instance=ExtResource("3_28ont")]
+[node name="HelmModel" parent="Helm" node_paths=PackedStringArray("controller") instance=ExtResource("20_5saj4")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 controller = NodePath("../../MovementManager")
 
 [node name="Controllable" type="RemoteTransform3D" parent="Helm" node_paths=PackedStringArray("camera", "interactable", "synchronizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
-script = ExtResource("4_ygd72")
+script = ExtResource("21_hay0u")
 camera = NodePath("../../CameraPivot/Camera3D")
 interactable = NodePath("../Interactable")
 synchronizer = NodePath("../../VelocitySynchroniser")
@@ -232,14 +220,14 @@ synchronizer = NodePath("../../VelocitySynchroniser")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("5_fc0ek")
+script = ExtResource("22_stqoh")
 prompt_text = "Steer Ship"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Helm/Interactable"]
 shape = SubResource("BoxShape3D_fbly5")
 
 [node name="MovementManager" type="Node3D" parent="." node_paths=PackedStringArray("ship_manager", "controllable", "camera_pivot")]
-script = ExtResource("5_hfqvi")
+script = ExtResource("23_arjx7")
 ship_manager = NodePath("..")
 controllable = NodePath("../Helm/Controllable")
 camera_pivot = NodePath("../CameraPivot")
@@ -247,7 +235,7 @@ mass = 4000.0
 invert_y = true
 display_joystick_ui = false
 
-[node name="CarrierBlockout" parent="." instance=ExtResource("9_7i8yy")]
+[node name="CarrierBlockout" parent="." instance=ExtResource("24_86eds")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 17)
 
 [node name="VelocitySynchroniser" type="MultiplayerSynchronizer" parent="."]
@@ -280,13 +268,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23471, -16.7967, 8.99235)
 shape = SubResource("BoxShape3D_sw16b")
 
 [node name="LaunchSystem" type="Node3D" parent="." node_paths=PackedStringArray("remote_transforms", "pad_waypoints", "runway_waypoint", "runway_zone", "carrier_ship")]
-script = ExtResource("9_kncal")
+script = ExtResource("25_c1gg3")
 remote_transforms = [NodePath("RemoteTransforms/PadRT"), NodePath("RemoteTransforms/PadRT2"), NodePath("RemoteTransforms/PadRT3"), NodePath("RemoteTransforms/PadRT4"), NodePath("RemoteTransforms/PadRT5"), NodePath("RemoteTransforms/PadRT6"), NodePath("RemoteTransforms/PadRT7")]
 pad_waypoints = [NodePath("Waypoints/WaypointPad"), NodePath("Waypoints/WaypointPad2"), NodePath("Waypoints/WaypointPad3"), NodePath("Waypoints/WaypointPad4"), NodePath("Waypoints/WaypointPad5"), NodePath("Waypoints/WaypointPad6"), NodePath("Waypoints/WaypointPad7")]
 runway_waypoint = NodePath("Waypoints/WaypointDeck")
 runway_zone = NodePath("RunwayArea")
 carrier_ship = NodePath("..")
-starting_ships_on_load = Array[ExtResource("10_o00jc")]([ExtResource("11_en0ln"), ExtResource("14_0qgqj")])
+starting_ships_on_load = Array[ExtResource("26_7asx8")]([ExtResource("27_8tmp2"), ExtResource("28_aumnx")])
 
 [node name="RunwayArea" type="Area3D" parent="LaunchSystem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.72911, 14, 0)
@@ -324,116 +312,116 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -11, 46)
 
 [node name="WaypointCenter" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -10)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointPad"), NodePath("../WaypointPad2"), NodePath("../WaypointElevator"), NodePath("../WaypointCenter2")]
 
 [node name="WaypointElevator" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -10, -25)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointDeck"), NodePath("../WaypointCenter")]
 elevator_path = NodePath("../../../CarrierBlockout/Elevators/Elevator4")
 
 [node name="WaypointDeck" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 15, -25)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointElevator")]
 elevator_level = 1
 
 [node name="WaypointPad" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, -10)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter")]
 
 [node name="WaypointPad2" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, -10)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter")]
 
 [node name="WaypointCenter2" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 16)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointPad3"), NodePath("../WaypointCenter"), NodePath("../WaypointCenter3")]
 
 [node name="WaypointPad3" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 16)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [null, NodePath("../WaypointCenter2")]
 
 [node name="WaypointCenter3" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 30)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointPad4"), NodePath("../WaypointPad5"), NodePath("../WaypointCenter4"), NodePath("../WaypointCenter2")]
 
 [node name="WaypointPad4" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, 30)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter3")]
 
 [node name="WaypointPad5" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 30)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter3")]
 
 [node name="WaypointCenter4" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 47)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter3"), NodePath("../WaypointPad6"), NodePath("../WaypointPad7")]
 
 [node name="WaypointPad6" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -10, 47)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter4")]
 
 [node name="WaypointPad7" type="Node3D" parent="LaunchSystem/Waypoints" node_paths=PackedStringArray("connections")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -10, 47)
-script = ExtResource("10_qloxf")
+script = ExtResource("29_x72ud")
 connections = [NodePath("../WaypointCenter4")]
 
 [node name="LaunchButtons" type="Node3D" parent="LaunchSystem"]
 
-[node name="Button" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, -3)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "0"
 prompt_text = "Launch"
 
-[node name="Button2" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button2" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, -3)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "1"
 prompt_text = "Launch"
 
-[node name="Button3" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button3" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 22)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "2"
 prompt_text = "Launch"
 
-[node name="Button4" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button4" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, 37)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "3"
 prompt_text = "Launch"
 
-[node name="Button5" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button5" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 37)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "4"
 prompt_text = "Launch"
 
-[node name="Button6" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button6" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -11.4493, 52)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
 arguments = "5"
 prompt_text = "Launch"
 
-[node name="Button7" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("11_1dy7n")]
+[node name="Button7" parent="LaunchSystem/LaunchButtons" node_paths=PackedStringArray("target_node") instance=ExtResource("30_4ijqu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -11.4493, 52)
 target_node = NodePath("../..")
 function_name = "launch_ship_from_pad"
@@ -443,46 +431,22 @@ prompt_text = "Launch"
 [node name="SpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.43991, 6.42249, 18.0154)
 
-[node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
+[node name="crate_rack_small" parent="." instance=ExtResource("31_ygwjh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
 
-[node name="CargoGrid" parent="." instance=ExtResource("17_80dlg")]
+[node name="CargoGrid" parent="." instance=ExtResource("32_m78nh")]
 transform = Transform3D(0.91356, 0, -0.406705, 0, 1, 0, 0.406705, 0, 0.91356, -5.34681, 4, 9.26683)
 dimensions = Vector3i(4, 4, 8)
 
-[node name="CargoGrid2" parent="." instance=ExtResource("17_80dlg")]
+[node name="CargoGrid2" parent="." instance=ExtResource("32_m78nh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98997, 4, 26.3464)
 dimensions = Vector3i(10, 8, 10)
 
-[node name="turret_size_1_component" parent="." instance=ExtResource("33_f7yk0")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.04763, 14.0884, 33.2363)
-
-[node name="turret_size_1_component2" parent="." instance=ExtResource("33_f7yk0")]
-transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -1, 1.91069e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, -23.1549, -6.5, 17.2363)
-
-[node name="turret_size_1_component3" parent="." instance=ExtResource("33_f7yk0")]
-transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 23.1007, -7.5, 28.2648)
-
-[node name="turret_size_1_component4" parent="." instance=ExtResource("33_f7yk0")]
-transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 0, -19.5, -25.764)
-
-[node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("20_rfwny")]
+[node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("34_qn3hx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
 
-[node name="BreakerBox2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("24_co1q7")]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 9.59225, 7.33638, -5.56432)
-ship = NodePath("..")
-
-[node name="TestShipComponent2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("22_0y016")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -9.40775, 7.33638, -5.56432)
-ship = NodePath("..")
-
-[node name="SteamPipeComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("25_o4iqn")]
-transform = Transform3D(-4.05208e-08, 0.927007, -0.375044, 1.63937e-08, -0.375044, -0.927007, -1, -4.37114e-08, 1.91069e-15, 14.4493, 14.2208, -10.7832)
-ship = NodePath("..")
-
-[node name="DisplayConsole" parent="." instance=ExtResource("26_8kjs2")]
+[node name="DisplayConsole" parent="." instance=ExtResource("38_gyqmk")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -15.7313)
 
 [node name="Sprite3D" type="Sprite3D" parent="DisplayConsole"]
@@ -493,10 +457,10 @@ texture = SubResource("ViewportTexture_xm8uo")
 [node name="SubViewport" type="SubViewport" parent="DisplayConsole/Sprite3D"]
 size = Vector2i(2560, 1440)
 
-[node name="ComponentStatusPanel" parent="DisplayConsole/Sprite3D/SubViewport" node_paths=PackedStringArray("component_manager") instance=ExtResource("32_qhab0")]
+[node name="ComponentStatusPanel" parent="DisplayConsole/Sprite3D/SubViewport" node_paths=PackedStringArray("component_manager") instance=ExtResource("39_gwxxn")]
 component_manager = NodePath("../../../../ComponentManager")
 
-[node name="DisplayConsole2" parent="." instance=ExtResource("26_8kjs2")]
+[node name="DisplayConsole2" parent="." instance=ExtResource("38_gyqmk")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -17.0223)
 
 [node name="Sprite3D" type="Sprite3D" parent="DisplayConsole2"]
@@ -507,74 +471,11 @@ texture = SubResource("ViewportTexture_kof4r")
 [node name="SubViewport" type="SubViewport" parent="DisplayConsole2/Sprite3D"]
 size = Vector2i(2560, 1440)
 
-[node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager", "display_panel") instance=ExtResource("32_ci636")]
+[node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager", "display_panel") instance=ExtResource("40_uca2q")]
 power_manager = NodePath("../../../../PowerManager")
 display_panel = NodePath("../../..")
 
-[node name="ShipReactorComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("30_w31jj")]
+[node name="ShipReactorComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("41_y3h54")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
 component_name = "Reactor"
 ship = NodePath("..")
-
-[node name="Capacitors" type="Node3D" parent="."]
-
-[node name="Capacitor" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -28.746)
-
-[node name="Capacitor2" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 7.77689, 8.26734, -28.746)
-
-[node name="Capacitor3" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, -1.74846e-07, 1.74846e-07, 5.2108e-15, 1, 7.77689, 8.26734, -26.746)
-
-[node name="Capacitor4" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 6.59937, -26.746)
-
-[node name="Capacitor5" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -24.746)
-
-[node name="Capacitor6" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 8.26734, -24.746)
-
-[node name="Capacitor7" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 8.26734, -22.746)
-
-[node name="Capacitor8" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 6.59937, -22.746)
-
-[node name="Capacitor9" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -20.746)
-
-[node name="Capacitor10" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 1.74846e-07, -1.74846e-07, -5.2108e-15, 1, 7.77689, 8.26734, -20.746)
-
-[node name="Capacitor11" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 8.26734, -18.746)
-
-[node name="Capacitor12" parent="Capacitors" instance=ExtResource("33_7poo3")]
-transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 7.77689, 6.59937, -18.746)
-
-[node name="Cooler" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.597, 4.92107, -14.0359)
-ship = NodePath("..")
-
-[node name="Cooler3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.597, 4.92074, -14.036)
-ship = NodePath("..")
-
-[node name="Cooler2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5729, 4.92107, -10.6161)
-ship = NodePath("..")
-
-[node name="Cooler4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 4.92074, -10.616)
-ship = NodePath("..")
-
-[node name="equipment_rack" parent="." instance=ExtResource("44_op51y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96615, 3.5, 7.52529)
-
-[node name="equipment_rack2" parent="." instance=ExtResource("44_op51y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)
-
-[node name="equipment_rack3" parent="." instance=ExtResource("44_op51y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)

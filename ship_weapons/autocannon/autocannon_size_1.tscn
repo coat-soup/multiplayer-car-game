@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://hbyqte87esm2"]
+[gd_scene load_steps=7 format=3 uid="uid://hbyqte87esm2"]
 
-[ext_resource type="PackedScene" uid="uid://duov3q78g5yer" path="res://ship_weapons/autocannon/autocannon_size1.glb" id="1_timnr"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="2_5hunb"]
 [ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://ship_weapons/autocannon_shell.tscn" id="3_mw7yq"]
+[ext_resource type="PackedScene" uid="uid://cuedrhoog4y0p" path="res://ship_weapons/autocannon/autocannon_size_1_model.tscn" id="3_o3khy"]
 [ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="3_xo7rc"]
 [ext_resource type="PackedScene" uid="uid://b8e8a2p2jypcg" path="res://ship/systems/power/component_heat_manager.tscn" id="5_f586l"]
 
-[node name="autocannon_size1" node_paths=PackedStringArray("barrel_end", "firing_audio") instance=ExtResource("1_timnr")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnolv"]
+size = Vector3(5.494, 1, 0.215)
+
+[node name="autocannon_size1" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "firing_audio")]
 script = ExtResource("2_5hunb")
 shell = ExtResource("3_mw7yq")
 barrel_end = NodePath("BarrelEnd")
@@ -15,17 +18,25 @@ firing_audio = NodePath("BarrelEnd/FiringAudio")
 heat_per_shot = 5.0
 component_name = "Autocannon (S1)"
 power_system_name = "Weapons"
+local_position = Vector3(6, 1, 1)
 
-[node name="BarrelEnd" type="Node3D" parent="." index="1"]
-transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -4.73164, 0.495864, 2.39935e-08)
+[node name="autocannon_size1" parent="." instance=ExtResource("3_o3khy")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.491104, -1.94149)
 
-[node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd" index="0"]
+[node name="ComponentHeatManager" parent="." instance=ExtResource("5_f586l")]
+heat_capacity = 70.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.26416e-08, -0.0238086, -0.0508736)
+shape = SubResource("BoxShape3D_pnolv")
+
+[node name="BarrelEnd" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -4.56956e-08, 0, 1, 0, 4.56956e-08, 0, 1, 2.3082e-07, 0.00476041, 2.79015)
+
+[node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd"]
 stream = ExtResource("3_xo7rc")
 volume_db = -10.0
 unit_size = 50.0
 max_db = -1.0
 max_distance = 50.0
 max_polyphony = 3
-
-[node name="ComponentHeatManager" parent="." index="2" instance=ExtResource("5_f586l")]
-heat_capacity = 70.0

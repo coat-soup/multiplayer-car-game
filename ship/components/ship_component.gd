@@ -1,5 +1,4 @@
-extends Node3D
-
+extends Item
 class_name ShipComponent
 
 signal broken
@@ -19,6 +18,8 @@ var is_broken := false
 
 
 func _ready():
+	super._ready()
+	
 	if health:
 		health.died.connect(on_break)
 		health.healed.connect(on_fixed)
@@ -36,7 +37,6 @@ func try_initialise_power_system():
 	if power_system_name != "" and power_system_name != "None":
 		for system in ship.power_manager.power_systems:
 			if system.system_name == power_system_name:
-				print("setting ", name, " power system to ", system)
 				power_system = system
 
 

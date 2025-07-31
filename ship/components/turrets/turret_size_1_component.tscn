@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c78lblw7dof04"]
+
+[ext_resource type="Script" path="res://ship/components/turrets/turret_component.gd" id="1_21s0o"]
+[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_l202h"]
+[ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1_model.tscn" id="3_ag0cx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0rbcy"]
+height = 2.59143
+radius = 0.965986
+
+[node name="turret_size_1_component" type="CharacterBody3D" node_paths=PackedStringArray("turret_controller", "health")]
+script = ExtResource("1_21s0o")
+p_min = -10
+p_max = 190
+turret_controller = NodePath("turret_size_1_model")
+component_name = "Turret"
+health = NodePath("Health")
+power_system_name = "Weapons"
+cargo_grid_dimensions = Vector3i(3, 3, 3)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_l202h")
+
+[node name="MainBodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.0632742, 0)
+shape = SubResource("CylinderShape3D_0rbcy")
+
+[node name="turret_size_1_model" parent="." node_paths=PackedStringArray("ship_component") instance=ExtResource("3_ag0cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+ship_component = NodePath("..")

@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Item
 
 @export var item_data : ItemData
+@export var immovable : bool = false
 
 @export var physics_dupe : RigidBody3D
 @export var dupe_RT : RemoteTransform3D
@@ -20,9 +21,10 @@ var controlling_RT : RemoteTransform3D
 
 var velo_calc : Vector3
 
-@onready var impact_audio: AudioStreamPlayer3D = $ImpactAudio
-
-var snap_indicator : Node3D
+var snap_indicator : Node3D :
+	get:
+		if not snap_indicator: return create_snap_indicator()
+		else: return snap_indicator
 
 @export var cargo_grid_dimensions : Vector3i = Vector3i.ZERO # zero for uncargogridable
 
@@ -38,24 +40,22 @@ var target_linear_velocity : Vector3
 var angular_acceleration : float
 
 var item_physics_dupe_manager : ItemPhysicsDupeManager
+var impact_audio: AudioStreamPlayer3D
 
 
 func _ready() -> void:
+	impact_audio = AudioStreamPlayer3D.new()
+	impact_audio.stream = preload("res://sfx/box_crash.wav")
+	impact_audio.max_distance = 15
+	add_child(impact_audio)
+	
 	item_physics_dupe_manager = (get_tree().get_first_node_in_group("network manager") as NetworkManager).level_manager.item_physics_manager
 	item_physics_dupe_manager.handle_item_spawn(self)
 	
-	physics_dupe.body_entered.connect(on_collided)
+	if not immovable: physics_dupe.body_entered.connect(on_collided)
 	
 	multiplayer.connected_to_server.connect(on_connect) # for items already in scene
 	on_connect() # for items spawned by spawner
-	
-	if not snap_indicator:
-		snap_indicator = duplicate()
-		(snap_indicator as Item).snap_indicator = snap_indicator
-		snap_indicator.process_mode = Node.PROCESS_MODE_DISABLED
-		add_child(snap_indicator)
-		recursive_set_texture(snap_indicator)
-		snap_indicator.visible = false
 	
 	await get_tree().create_timer(0.5).timeout
 	phys_delay = false
@@ -68,7 +68,7 @@ func on_connect():
 
 
 func _physics_process(_delta: float) -> void:
-	if phys_delay: return
+	if phys_delay or immovable or not dupe_RT: return
 	
 	velo_calc = physics_dupe.position - local_position
 	
@@ -138,6 +138,16 @@ func initialise_on_load(path_to_cargo_grid : String = "", a : Vector3i = Vector3
 	if not on_ship:
 		#ui.display_chat_message("SETTING RT FOR OFF SHIP")
 		dupe_RT.remote_path = ""
+
+
+func create_snap_indicator() -> Node3D:
+	snap_indicator = duplicate()
+	(snap_indicator as Item).snap_indicator = snap_indicator
+	snap_indicator.process_mode = Node.PROCESS_MODE_DISABLED
+	add_child(snap_indicator)
+	recursive_set_texture(snap_indicator)
+	snap_indicator.visible = false
+	return snap_indicator
 
 
 static func recursive_set_texture(node : Node):

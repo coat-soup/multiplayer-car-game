@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuedrhoog4y0p"]
+
+[ext_resource type="PackedScene" uid="uid://duov3q78g5yer" path="res://ship_weapons/autocannon/autocannon_size1.glb" id="1_qrry4"]
+
+[node name="autocannon_size1" instance=ExtResource("1_qrry4")]

@@ -10,7 +10,7 @@ size = Vector3(4, 3.225, 4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_k0iar"]
 size = Vector3(2, 3.225, 2)
 
-[node name="RailgunComponent" type="Node3D" node_paths=PackedStringArray("health")]
+[node name="RailgunComponent" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_nsl61")
 health = NodePath("Hitbox/Health")
 
