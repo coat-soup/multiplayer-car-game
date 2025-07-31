@@ -164,10 +164,14 @@ func set_auth(id):
 func on_physics_picked_up():
 	print("picked up")
 	tractored = true
+	
 	if snap_point and held_in_place:
 		snap_point.set_item.rpc("")
 		physics_dupe.freeze = false
 		held_in_place = false
+		snap_point = null
+		print("picking up from snap point")
+		
 	elif cargo_grid and held_in_place:
 		cargo_grid.remove_item(self)
 		physics_dupe.freeze = false
@@ -182,18 +186,6 @@ func on_physics_let_go():
 	if sp:
 		snap_point = sp
 		snap_point.set_item.rpc(get_path())
-		
-		held_in_place = true
-		
-		global_position = snap_point.global_position
-		physics_dupe.position = position
-		global_rotation = snap_point.global_rotation
-		physics_dupe.rotation = rotation
-		
-		snap_indicator.visible = false
-		
-		await get_tree().process_frame # so rigidbody updates before freezing
-		physics_dupe.freeze = true
 		
 	elif cargo_grid:
 		if is_multiplayer_authority():
@@ -219,6 +211,7 @@ func get_closest_snap_point() -> ItemSnapPoint:
 func set_target_angular_velocity(vel : Vector3, accel):
 	target_angular_velocity = vel
 	angular_acceleration = accel
+
 
 @rpc("any_peer", "call_local")
 func set_linear_velocity(vel : Vector3):

@@ -3,6 +3,7 @@ class_name Equipment
 
 signal triggered
 signal trigger_ended
+signal picked_up
 
 @export var equipment_name : String
 @export var interactable : Interactable
@@ -28,6 +29,8 @@ func _ready():
 	trigger_ended.connect(on_trigger_ended)
 	#if raycast_on_startup:
 		#raycast_position()
+		
+	picked_up.connect(on_pickedup)
 
 
 func _input(event: InputEvent) -> void:

@@ -79,7 +79,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 		equipment.position = Vector3.ZERO
 		equipment.rotation = Vector3.ZERO
 		
-		equipment.on_pickedup()
+		equipment.picked_up.emit()
 		
 		if slot != cur_slot:
 			equipment.visible = false
