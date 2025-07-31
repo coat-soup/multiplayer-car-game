@@ -106,9 +106,10 @@ func handle_item_spawn(item : Item):
 	
 	item.physics_dupe.global_position = item.global_position
 	
-	#item.physics_dupe.collision_layer = Util.layer_mask([7])
-	#item.physics_dupe.collision_mask = Util.layer_mask([7])
 	item_left_ship(item)
+	
+	# Debug Box
+	#item.physics_dupe.add_child(CSGBox3D.new())
 
 
 func item_entered_ship(item : Item):
@@ -135,8 +136,8 @@ func item_left_ship(item : Item):
 	item.physics_dupe.linear_velocity *= ship_manager.global_basis.inverse()
 	item.physics_dupe.linear_velocity += ship_manager.movement_manager.velocity_sync
 	
-	item.physics_dupe.collision_layer = Util.layer_mask([1])
-	item.physics_dupe.collision_mask = Util.layer_mask([1])
+	#item.physics_dupe.collision_layer = Util.layer_mask([1])
+	item.physics_dupe.collision_mask = Util.layer_mask([1,7])
 
 
 

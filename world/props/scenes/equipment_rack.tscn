@@ -1,41 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgf8kvaj6kj60"]
+[gd_scene load_steps=5 format=3 uid="uid://dgf8kvaj6kj60"]
 
 [ext_resource type="PackedScene" uid="uid://jtj18lvtve4e" path="res://world/props/models/equipment_rack.glb" id="1_dmoob"]
 [ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_lsbgo"]
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cakpi"]
+data = PackedVector3Array(-1, -1, 0.5696, -1, 2.0027, -0.5696, -1, 2.0027, 0.5696, -1, -1, 0.5696, -1, -1, -0.5696, -1, 2.0027, -0.5696, -1, -1, -0.5696, 1, 2.0027, -0.5696, -1, 2.0027, -0.5696, -1, -1, -0.5696, 1, -1, -0.5696, 1, 2.0027, -0.5696, 1, -1, -0.5696, 1, 2.0027, 0.5696, 1, 2.0027, -0.5696, 1, -1, -0.5696, 1, -1, 0.5696, 1, 2.0027, 0.5696, 0.9239, -0.915, 0.5696, 1, 2.0027, 0.5696, 1, -1, 0.5696, -1, 2.0027, 0.5696, -0.9239, -0.915, 0.5696, -1, -1, 0.5696, -1, 2.0027, 0.5696, -0.9239, 1.9176, 0.5696, -0.9239, -0.915, 0.5696, 0.9239, 1.9176, 0.5696, 1, 2.0027, 0.5696, 0.9239, -0.915, 0.5696, -1, 2.0027, 0.5696, 0.9239, 1.9176, 0.5696, -0.9239, 1.9176, 0.5696, 1, 2.0027, 0.5696, 0.9239, 1.9176, 0.5696, -1, 2.0027, 0.5696, -0.9239, -0.915, 0.5696, 1, -1, 0.5696, -1, -1, 0.5696, -0.9239, -0.915, 0.5696, 0.9239, -0.915, 0.5696, 1, -1, 0.5696, -1, -1, -0.5696, 1, -1, 0.5696, 1, -1, -0.5696, -1, -1, -0.5696, -1, -1, 0.5696, 1, -1, 0.5696, 1, 2.0027, -0.5696, -1, 2.0027, 0.5696, -1, 2.0027, -0.5696, 1, 2.0027, -0.5696, 1, 2.0027, 0.5696, -1, 2.0027, 0.5696, -0.9239, -0.915, -0.0234, -0.9239, 1.9176, 0.5696, -0.9239, 1.9176, -0.0234, -0.9239, -0.915, -0.0234, -0.9239, -0.915, 0.5696, -0.9239, 1.9176, 0.5696, -0.9239, -0.915, -0.0234, 0.9239, 1.9176, -0.0234, 0.9239, -0.915, -0.0234, -0.9239, -0.915, -0.0234, -0.9239, 1.9176, -0.0234, 0.9239, 1.9176, -0.0234, 0.9239, 1.9176, -0.0234, 0.9239, -0.915, 0.5696, 0.9239, -0.915, -0.0234, 0.9239, 1.9176, -0.0234, 0.9239, 1.9176, 0.5696, 0.9239, -0.915, 0.5696, 0.9239, -0.915, 0.5696, -0.9239, -0.915, -0.0234, 0.9239, -0.915, -0.0234, 0.9239, -0.915, 0.5696, -0.9239, -0.915, 0.5696, -0.9239, -0.915, -0.0234, -0.9239, 1.9176, 0.5696, 0.9239, 1.9176, -0.0234, -0.9239, 1.9176, -0.0234, -0.9239, 1.9176, 0.5696, 0.9239, 1.9176, 0.5696, 0.9239, 1.9176, -0.0234)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_6b23x"]
-size = Vector3(0.78, 0.34, 1)
+size = Vector3(0.429551, 0.34, 1)
 
 [node name="equipment_rack" instance=ExtResource("1_dmoob")]
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_cakpi")
+
 [node name="Point" type="Area3D" parent="." index="6"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 2.07334, 0.181948)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 2.391, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.000319868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175225, 0, 0.000319868)
 shape = SubResource("BoxShape3D_6b23x")
 
 [node name="Point2" type="Area3D" parent="." index="7"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.316038, 1.62232, 0.181948)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.316038, 1.81003, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.000319868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)
 shape = SubResource("BoxShape3D_6b23x")
 
 [node name="Point3" type="Area3D" parent="." index="8"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 1.06853, 0.181948)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 1.18404, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point3" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.000319868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)
 shape = SubResource("BoxShape3D_6b23x")
 
 [node name="Point4" type="Area3D" parent="." index="9"]
@@ -45,5 +53,5 @@ accepted_groups = Array[String](["equipment"])
 prompt_text = "Place Item"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point4" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.000319868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)
 shape = SubResource("BoxShape3D_6b23x")

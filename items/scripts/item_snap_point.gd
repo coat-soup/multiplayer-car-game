@@ -55,6 +55,8 @@ func set_item(item_path : String, reset_transform : bool = true):
 	
 	held_item = get_tree().root.get_node(item_path) if item_path != "" else null
 	if held_item:
+		active = false
+		
 		attach_item(held_item)
 		
 		prev_t = held_item.physics_dupe.transform
@@ -63,6 +65,7 @@ func set_item(item_path : String, reset_transform : bool = true):
 		var eq = held_item as Equipment
 		if eq: eq.picked_up.connect(on_equipment_picked_up_manually)
 	else:
+		active = true
 		item_removed.emit()
 
 

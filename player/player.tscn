@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=20 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_wogeu"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="10_4ryyx"]
 [ext_resource type="AudioStream" uid="uid://bgupddqt4qcyb" path="res://sfx/footsteps/footsteps-004.wav" id="10_s7j3x"]
 [ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="11_an08s"]
+[ext_resource type="Script" path="res://player/player_grab_beam.gd" id="11_vv2t4"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vacjh"]
 streams_count = 5
@@ -94,6 +95,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 
 [node name="Camera" type="Camera3D" parent="MovementManager/CameraPivot"]
 far = 10000.0
+
+[node name="TractorBeam" type="Node3D" parent="MovementManager/CameraPivot" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.484552)
+script = ExtResource("11_vv2t4")
+beam_range = 2.0
+move_speed = 10.0
+player = NodePath("../../..")
 
 [node name="EquipmentManager" type="Node3D" parent="MovementManager/CameraPivot" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384345, -0.558265, -0.802137)

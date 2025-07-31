@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn5nh1kddwt62"]
+[gd_scene load_steps=12 format=3 uid="uid://bn5nh1kddwt62"]
 
 [ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
 size = Vector3(0.11, 1.15, 0.335)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqgua"]
+size = Vector3(0.18, 1.225, 0.41)
 
 [sub_resource type="Animation" id="Animation_42rna"]
 length = 0.001
@@ -119,8 +122,8 @@ script = ExtResource("2_bfpxh")
 prompt_text = "Equip Wrench"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
-transform = Transform3D(1.47789, 0, 0, 0, 1.09683, 0, 0, 0, 1.09683, 0, 0.108398, 0)
-shape = SubResource("BoxShape3D_yrpc2")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108398, 0)
+shape = SubResource("BoxShape3D_fqgua")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

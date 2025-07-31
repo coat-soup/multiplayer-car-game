@@ -49,6 +49,7 @@ material = SubResource("StandardMaterial3D_cbuah")
 
 [node name="FireExtinguisher" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
 script = ExtResource("1_sue74")
+equipment_name = "Fire Extinguisher"
 interactable = NodePath("Interactable")
 
 [node name="fire_extinguisher" parent="." instance=ExtResource("2_42dcg")]

@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 		drop_equipment.rpc(cur_slot)
 	
 	var scroll_dir = int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)) - int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP))
-	if scroll_dir != 0 and not (items[cur_slot] and (items[cur_slot] as TractorTool) and (items[cur_slot] as TractorTool).target):
+	if scroll_dir != 0 and not (items[cur_slot] and (items[cur_slot] as TractorTool) and (items[cur_slot] as TractorTool).beam.target):
 		swap_to_item((cur_slot + scroll_dir) % items.size())
 
 
@@ -79,7 +79,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 		equipment.position = Vector3.ZERO
 		equipment.rotation = Vector3.ZERO
 		
-		equipment.picked_up.emit()
+		equipment.on_picked_up()
 		
 		if slot != cur_slot:
 			equipment.visible = false
@@ -118,8 +118,6 @@ func drop_equipment(slot: int):
 		item.visible = true
 		item.interactable.active = true
 		#items[slot].raycast_position()
-		if slot == cur_slot:
-			item.on_unheld()
 		item.on_dropped()
 		items[slot] = null
 
@@ -140,7 +138,7 @@ func toggle_item_visibility(slot : int, value : bool):
 func swap_to_item(slot):
 	if items[cur_slot]:
 		toggle_item_visibility.rpc(cur_slot, false)
-		items[cur_slot].on_unheld()
+		items[cur_slot].on_put_away()
 		items[cur_slot].held_by_auth = false
 	
 	cur_slot = slot

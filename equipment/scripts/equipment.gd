@@ -3,7 +3,15 @@ class_name Equipment
 
 signal triggered
 signal trigger_ended
+
+## item added to inventory
 signal picked_up
+## item removed from inventory
+signal dropped
+## item moved into hand from inventory or anywhere else (eg picked up, swapped to, unholstered)
+signal held
+## item moved out of hand/became inactive (eg swapped to different equipment, holstered)
+signal put_away
 
 @export var equipment_name : String
 @export var interactable : Interactable
@@ -29,8 +37,6 @@ func _ready():
 	trigger_ended.connect(on_trigger_ended)
 	#if raycast_on_startup:
 		#raycast_position()
-		
-	picked_up.connect(on_pickedup)
 
 
 func _input(event: InputEvent) -> void:
@@ -80,7 +86,7 @@ func set_parent_to_scene_path(path : String, zero_transform := false):
 func disable_physics():
 	held_in_place = true
 	collision_layer = 0
-	physics_dupe.collision_layer = 0
+	#physics_dupe.collision_layer = 0
 	
 	await get_tree().create_timer(0.1).timeout
 	physics_dupe.freeze = true
@@ -90,7 +96,7 @@ func disable_physics():
 func enable_physics():
 	held_in_place = false
 	collision_layer = 1
-	physics_dupe.collision_layer = 1
+	#physics_dupe.collision_layer = 1
 	physics_dupe.freeze = false
 
 
@@ -114,16 +120,16 @@ func raycast_position():
 
 
 func on_held():
-	pass
+	held.emit()
 
-func on_unheld():
-	pass
+func on_put_away():
+	put_away.emit()
 
 func on_dropped():
-	pass
+	dropped.emit()
 
-func on_pickedup():
-	pass
+func on_picked_up():
+	picked_up.emit()
 
 func on_triggered(_button : int):
 	pass
