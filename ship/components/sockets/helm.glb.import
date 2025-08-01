@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bhv4042syfd7o"
-path="res://.godot/imported/helm.glb-200659b0ca6f14f9c6aaf7bde6137768.scn"
+path="res://.godot/imported/helm.glb-7df838c690ed1b192f8b27cdbe3a13b7.scn"
 
 [deps]
 
-source_file="res://ship/components/helm.glb"
-dest_files=["res://.godot/imported/helm.glb-200659b0ca6f14f9c6aaf7bde6137768.scn"]
+source_file="res://ship/components/sockets/helm.glb"
+dest_files=["res://.godot/imported/helm.glb-7df838c690ed1b192f8b27cdbe3a13b7.scn"]
 
 [params]
 

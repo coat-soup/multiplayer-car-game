@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://biiw4dt0cfd2n"]
+
+[ext_resource type="Script" path="res://ship/components/sockets/component_socket.gd" id="1_aun2p"]
+[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="3_1k8e7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tw7bx"]
+radius = 0.434877
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqs31"]
+albedo_color = Color(1, 0.44, 0.44, 1)
+
+[node name="Size1WeaponHardpoint" type="Node3D" node_paths=PackedStringArray("snap_point")]
+script = ExtResource("1_aun2p")
+snap_point = NodePath("SnapPoint")
+
+[node name="SnapPoint" type="Area3D" parent="."]
+script = ExtResource("3_1k8e7")
+accepted_groups = Array[String](["mounted weapon", "size 1"])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.287103, 0)
+shape = SubResource("SphereShape3D_tw7bx")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 0.182572
+height = 0.115032
+material = SubResource("StandardMaterial3D_mqs31")

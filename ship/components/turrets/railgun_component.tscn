@@ -13,6 +13,7 @@ size = Vector3(2, 3.225, 2)
 [node name="RailgunComponent" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_nsl61")
 health = NodePath("Hitbox/Health")
+immovable = true
 
 [node name="massive_cannon" parent="." instance=ExtResource("2_240kq")]
 

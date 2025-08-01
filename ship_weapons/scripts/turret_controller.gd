@@ -23,7 +23,7 @@ var ui : UIManager
 
 @export var ship_component : ShipComponent
 @export var weapons_manager : MountedWeaponsController
-
+@export var radar_targeter : RadarTargeter
 
 
 func _ready() -> void:
@@ -40,6 +40,12 @@ func _ready() -> void:
 	
 	crosshair.visible = false
 	weapons_manager.ship = ship_component.ship
+	
+	for hardpoint in weapons_manager.hardpoints:
+		hardpoint.ship = weapons_manager.ship
+	
+	
+	if radar_targeter: radar_targeter.radar_manager = ship_component.ship.radar_manager
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -73,7 +79,7 @@ func _process(delta: float) -> void:
 	if not (control_manager.using_player or control_manager.ai_override): return
 	if not control_manager.is_multiplayer_authority(): return
 	
-	camera.position = ship_component.to_local($"../Yaw/Pitch/CameraPositionPush".global_position)
+	camera.position = ship_component.to_local($"Yaw/Pitch/CameraPositionPush".global_position)
 	
 	if do_joystick and virtual_joystick_value.length() > 0.1:
 		yaw_obj.rotate_y(-virtual_joystick_value.x * turn_speed * delta)

@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="7_iyqls"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="8_86yhy"]
 [ext_resource type="Script" path="res://ship/ship_movement_manager.gd" id="9_glk8j"]
-[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="9_iaebr"]
+[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="9_iaebr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbly5"]
 size = Vector3(0.67, 1.00249, 0.670167)

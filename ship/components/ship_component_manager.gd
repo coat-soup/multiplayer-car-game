@@ -1,6 +1,8 @@
 extends Node
 class_name ShipComponentManager
 
+signal components_changed
+
 @export var ship_manager : ShipManager
 var components : Array[ShipComponent]
 
@@ -13,3 +15,19 @@ func take_damage_at_point(damage : int, point : Vector3, source : int):
 	
 	var selected = Util.weighted_random(components, weights)
 	if components[selected].health : components[selected].health.take_damage(damage, source) # can sometimes select non-damagable components if all components broken (all weights=0)
+
+
+func install_component(component : ShipComponent):
+	components.append(component)
+	component.on_install_to_ship(ship_manager)
+	
+	components_changed.emit()
+
+
+func uninstall_component(component : ShipComponent):
+	var id = components.find(component)
+	if id != -1:
+		components.remove_at(id)
+		component.on_uninstall_from_ship(ship_manager)
+	
+	components_changed.emit()

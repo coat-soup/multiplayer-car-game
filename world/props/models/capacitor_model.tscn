@@ -25,19 +25,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cube_004" parent="." index="1"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cube_005" parent="." index="2"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cube_007" parent="." index="3"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cube" parent="." index="4"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cylinder_002" parent="." index="5"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")
 
 [node name="Cylinder_003" parent="." index="6"]
+visible = false
 surface_material_override/0 = SubResource("StandardMaterial3D_f04un")

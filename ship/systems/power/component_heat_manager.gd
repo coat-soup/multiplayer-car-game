@@ -19,6 +19,7 @@ func _ready():
 	await get_tree().create_timer(randf_range(0, tick_speed)).timeout
 	tick()
 
+
 func _process(delta: float) -> void:
 	if cool_cooldown > 0: cool_cooldown -= delta
 
@@ -51,7 +52,7 @@ func get_heat_ratio() -> float:
 
 
 func tick():
-	if cur_heat > 0:# and is_multiplayer_authority():
+	if cur_heat > 0 and component.ship:# and is_multiplayer_authority():
 		remove_heat(component.ship.cooling_manager.get_total_cooling_rate() * tick_speed)
 	
 	await get_tree().create_timer(tick_speed).timeout

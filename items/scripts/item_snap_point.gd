@@ -1,19 +1,26 @@
 extends Interactable
 class_name ItemSnapPoint
 
-signal item_placed
-signal item_removed
+signal item_placed(Item)
+signal item_removed(Item)
 
 @export var accepted_groups : Array[String]
+@export var needs_all : bool = true
 
 var held_item : Item
-var prev_t : Transform3D
+var prev_p : Vector3
+var prev_r : Vector3
 @onready var area : Area3D
 @export var alternate_prompt : String = ""
+
+var remote_transform : RemoteTransform3D
 
 
 func _ready() -> void:
 	area = self as Node3D as Area3D
+	
+	remote_transform = RemoteTransform3D.new()
+	add_child(remote_transform)
 	
 	area.body_entered.connect(on_body_entered)
 	area.body_exited.connect(on_body_exited)
@@ -25,13 +32,11 @@ func on_body_entered(body):
 	if held_item: return
 	
 	body = body as Item
-	if body and check_item_accepted(body):
+	if body and check_item_accepted(body) and body.tractored:
 		body.potential_snap_points.append(self)
 
 
 func on_body_exited(body):
-	if held_item: return
-	
 	body = body as Item
 	if body:
 		var i = body.potential_snap_points.find(self)
@@ -39,34 +44,46 @@ func on_body_exited(body):
 
 
 func check_item_accepted(item : Item) -> bool:
-	for group in accepted_groups:
-		if item.is_in_group(group):
-			return true
-	return false
+	if needs_all:
+		for group in accepted_groups:
+			if not item.is_in_group(group):
+				#print(item, " not in correct group: ", group)
+				return false
+		return true
+	else:
+		for group in accepted_groups:
+			if item.is_in_group(group):
+				return true
+		return false
 
 
 @rpc("any_peer", "call_local")
 func set_item(item_path : String, reset_transform : bool = true):
-	print("running set item (auth:%s)" % [is_multiplayer_authority()])
+	#print("%s running set item for %s (auth:%s)" % [get_parent().name, item_path, is_multiplayer_authority()])
 	if held_item:
 		var eq = held_item as Equipment
 		if eq: eq.picked_up.disconnect(on_equipment_picked_up_manually)
-		if reset_transform: held_item.physics_dupe.transform = prev_t
+		if reset_transform:
+			held_item.move_item(to_global(prev_p))
+		remote_transform.remote_path = ""
+		held_item.controlling_RT = null
 	
-	held_item = get_tree().root.get_node(item_path) if item_path != "" else null
-	if held_item:
+	if item_path != "":
+		held_item = get_tree().root.get_node(item_path) as Item
 		active = false
 		
 		attach_item(held_item)
 		
-		prev_t = held_item.physics_dupe.transform
-		item_placed.emit()
+		if held_item.potential_snap_points.find(self) == -1: held_item.potential_snap_points.append(self) # WARNING: doesn't seem to work for some reason
+		
+		item_placed.emit(held_item)
 		
 		var eq = held_item as Equipment
 		if eq: eq.picked_up.connect(on_equipment_picked_up_manually)
 	else:
 		active = true
-		item_removed.emit()
+		item_removed.emit(held_item)
+		held_item = null
 
 
 func observe(_source: Node3D) -> String:
@@ -80,15 +97,23 @@ func on_equipment_picked_up_manually():
 
 func attach_item(item : Item):
 	item.held_in_place = true
-		
+	
+	prev_p = to_local(item.global_position)
+	prev_r = item.global_rotation * global_basis
+	
 	item.global_position = global_position
-	item.physics_dupe.position = item.position
+	item.move_item(item.global_position)
+	#item.physics_dupe.position = item.position
 	item.global_rotation = global_rotation
 	item.physics_dupe.rotation = item.rotation
 	item.snap_point = self
 	
 	item.snap_indicator.visible = false
-		
+	
+	remote_transform.remote_path = item.get_path()
+	item.controlling_RT = remote_transform
+	remote_transform.position = item.snap_point_offset
+	
 	await get_tree().process_frame # so rigidbody updates before freezing
 	item.physics_dupe.freeze = true
 

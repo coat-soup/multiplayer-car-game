@@ -44,6 +44,22 @@ func add_capacitor_component(capacitor : Capacitor):
 	capacitors.append(capacitor)
 	capacitor.broken.connect(on_capacitor_broken)
 	capacitor.fixed.connect(on_capacitor_fixed)
+	
+	capacitors_changed.emit()
+
+
+func remove_capacitor_component(capacitor : Capacitor):
+	if !capacitor.is_broken:
+		if unused_capacitors <= 0: unassign_random_capacitor()
+		unused_capacitors -= 1
+	else: broken_capacitors -= 1
+	
+	var id = capacitors.find(capacitor)
+	capacitors.remove_at(id)
+	capacitor.broken.disconnect(on_capacitor_broken)
+	capacitor.fixed.disconnect(on_capacitor_fixed)
+	
+	capacitors_changed.emit()
 
 
 # no rpc, called automatically on all clients already

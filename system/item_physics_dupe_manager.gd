@@ -82,11 +82,14 @@ func recursive_dupe_setup(node : Node, disable := true):
 
 
 func handle_item_spawn(item : Item):
-	if item.immovable: return
 	#print("handling item spawn for ", item)
 	item.physics_dupe = RigidBody3D.new()
 	add_child.call_deferred(item.physics_dupe)
 	await item.physics_dupe.tree_entered
+	
+	if item.immovable:
+		item.physics_dupe.freeze = true
+		item.held_in_place = true
 	
 	item.dupe_RT = RemoteTransform3D.new()
 	item.dupe_RT.update_position = true
@@ -116,7 +119,7 @@ func handle_item_spawn(item : Item):
 
 
 func item_entered_ship(item : Item):
-	if item.immovable: return
+	#if item.immovable: return
 	if !item.is_inside_tree(): await item.tree_entered
 	
 	if not item.physics_dupe: print(item, " has no physics dupe")

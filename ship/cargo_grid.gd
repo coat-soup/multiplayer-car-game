@@ -160,6 +160,9 @@ func try_place_item(item : Item):
 func place_item(a, b, item_path : String):
 	var item = get_tree().root.get_node(item_path) as Item
 	
+	if !item.physics_dupe.is_inside_tree():
+		await item.physics_dupe.tree_entered
+	
 	item.cargo_spot_a = a
 	item.cargo_spot_b = b
 	
@@ -223,6 +226,9 @@ func stupid_find_first_slot_for_item(item : Item) -> Array[Vector3i]:
 
 
 func place_item_crude_at_points_crude(item : Item, a, b, local_rotation := Vector3.ZERO):
+	if !item.physics_dupe.is_inside_tree():
+		await item.physics_dupe.tree_entered
+	
 	item.global_position = (to_global(a) + to_global(b)) / 2.0
 	item.global_rotation = global_rotation + local_rotation
 	var rot = get_snapped_world_rotation(item)

@@ -44,6 +44,10 @@ item=""
 cargo_grid=""
 "fuel rod"=""
 equipment=""
+capacitor=""
+cooler=""
+"mounted weapon"=""
+"size 1"=""
 
 [input]
 

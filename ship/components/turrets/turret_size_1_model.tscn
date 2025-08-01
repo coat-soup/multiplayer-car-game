@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_tk1iy"]
 [ext_resource type="Script" path="res://ship/radar_targeter.gd" id="4_lcj02"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/mounted_weapons_controller.gd" id="5_vb5bh"]
-[ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="6_ll1b2"]
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="7_yw4u1"]
 [ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="8_45arp"]
+[ext_resource type="PackedScene" uid="uid://biiw4dt0cfd2n" path="res://ship/components/size1_weapon_hardpoint.tscn" id="9_8tv2m"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/turret_controller.gd" id="9_onh7n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_snrpd"]
@@ -20,7 +20,7 @@ properties/1/path = NodePath("Yaw/Pitch:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="turret_size_1_model" node_paths=PackedStringArray("yaw_obj", "pitch_obj", "camera", "control_manager", "crosshair", "weapons_manager") instance=ExtResource("1_ggbwr")]
+[node name="turret_size_1_model" node_paths=PackedStringArray("yaw_obj", "pitch_obj", "camera", "control_manager", "crosshair", "weapons_manager", "radar_targeter") instance=ExtResource("1_ggbwr")]
 script = ExtResource("9_onh7n")
 yaw_obj = NodePath("Yaw")
 pitch_obj = NodePath("Yaw/Pitch")
@@ -29,6 +29,7 @@ control_manager = NodePath("Yaw/Pitch/Controllable")
 crosshair = NodePath("Yaw/Pitch/Crosshair")
 do_joystick = false
 weapons_manager = NodePath("Yaw/Pitch/MountedWeaponsController")
+radar_targeter = NodePath("Yaw/Pitch/CameraPositionPush/RadarTargeter")
 
 [node name="Camera3D" type="Camera3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, -0.285)
@@ -47,40 +48,32 @@ shape = SubResource("CylinderShape3D_snrpd")
 
 [node name="CameraPositionPush" type="RemoteTransform3D" parent="Yaw/Pitch" index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.000305533, -0.285)
+remote_path = NodePath("../../../Camera3D")
 update_rotation = false
 update_scale = false
 
-[node name="RadarTargeter" type="Node3D" parent="Yaw/Pitch/CameraPositionPush" index="0" node_paths=PackedStringArray("controllable", "weapons_controller", "parent_component")]
+[node name="RadarTargeter" type="Node3D" parent="Yaw/Pitch/CameraPositionPush" index="0" node_paths=PackedStringArray("controllable", "weapons_controller")]
 script = ExtResource("4_lcj02")
 controllable = NodePath("../../Controllable")
 weapons_controller = NodePath("../../MountedWeaponsController")
-parent_component = NodePath("../../../..")
 
-[node name="MountedWeaponsController" type="Node3D" parent="Yaw/Pitch" index="5" node_paths=PackedStringArray("weapons", "controllable")]
+[node name="MountedWeaponsController" type="Node3D" parent="Yaw/Pitch" index="5" node_paths=PackedStringArray("hardpoints", "controllable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56969, 0)
 script = ExtResource("5_vb5bh")
-weapons = [NodePath("autocannon_size1"), NodePath("autocannon_size2"), NodePath("autocannon_size3"), NodePath("autocannon_size4")]
+hardpoints = [NodePath("Size1WeaponHardpoint"), NodePath("Size1WeaponHardpoint2"), NodePath("Size1WeaponHardpoint3"), NodePath("Size1WeaponHardpoint4")]
 controllable = NodePath("../Controllable")
 
-[node name="autocannon_size1" parent="Yaw/Pitch/MountedWeaponsController" index="0" node_paths=PackedStringArray("weapons_controller") instance=ExtResource("6_ll1b2")]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.12229, 2.18041, 1.99985)
-weapons_controller = NodePath("..")
-exlcude_from_component_manager = true
+[node name="Size1WeaponHardpoint" parent="Yaw/Pitch/MountedWeaponsController" index="0" instance=ExtResource("9_8tv2m")]
+transform = Transform3D(-0.707107, 0.707107, 6.18172e-08, 0.707107, 0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, 1.79307, 0.0554037)
 
-[node name="autocannon_size2" parent="Yaw/Pitch/MountedWeaponsController" index="1" node_paths=PackedStringArray("weapons_controller") instance=ExtResource("6_ll1b2")]
-transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 2.12229, 0.938892, 1.99985)
-weapons_controller = NodePath("..")
-exlcude_from_component_manager = true
+[node name="Size1WeaponHardpoint2" parent="Yaw/Pitch/MountedWeaponsController" index="1" instance=ExtResource("9_8tv2m")]
+transform = Transform3D(0.707107, 0.707107, -6.18172e-08, 0.707107, -0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, 1.32623, 0.0554037)
 
-[node name="autocannon_size3" parent="Yaw/Pitch/MountedWeaponsController" index="2" node_paths=PackedStringArray("weapons_controller") instance=ExtResource("6_ll1b2")]
-transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -2.122, 0.938892, 1.99985)
-weapons_controller = NodePath("..")
-exlcude_from_component_manager = true
+[node name="Size1WeaponHardpoint3" parent="Yaw/Pitch/MountedWeaponsController" index="2" instance=ExtResource("9_8tv2m")]
+transform = Transform3D(0.707107, -0.707107, -6.18172e-08, -0.707107, -0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, 1.32623, 0.0554037)
 
-[node name="autocannon_size4" parent="Yaw/Pitch/MountedWeaponsController" index="3" node_paths=PackedStringArray("weapons_controller") instance=ExtResource("6_ll1b2")]
-transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -2.122, 2.18041, 1.99985)
-weapons_controller = NodePath("..")
-exlcude_from_component_manager = true
+[node name="Size1WeaponHardpoint4" parent="Yaw/Pitch/MountedWeaponsController" index="3" instance=ExtResource("9_8tv2m")]
+transform = Transform3D(-0.707107, -0.707107, 6.18172e-08, -0.707107, 0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, 1.79307, 0.0554037)
 
 [node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)

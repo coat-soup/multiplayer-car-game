@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgokpns7ftbi"]
+[gd_scene load_steps=25 format=3 uid="uid://dgokpns7ftbi"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://brtryfb447bwb" path="res://items/scenes/test_large_cargo_item.tscn" id="16_55soq"]
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="16_j761u"]
 [ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_o8f6l"]
+[ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="21_s68hy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
 shader = ExtResource("5_grtg3")
@@ -152,6 +153,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92395, 3.87943, 10.6184)
 
 [node name="FuelRod2" parent="ShipHolder/Ship" instance=ExtResource("16_o8f6l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.92395, 3.87943, 10.6184)
+
+[node name="autocannon_size1" parent="ShipHolder/Ship" instance=ExtResource("21_s68hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271867, 14.2687, 31.2138)
+
+[node name="autocannon_size2" parent="ShipHolder/Ship" instance=ExtResource("21_s68hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271867, 6.98546, 31.2138)
 
 [node name="Fighter" parent="ShipHolder" node_paths=PackedStringArray("root", "movement_clone") instance=ExtResource("15_jxfhq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.78934, 0)

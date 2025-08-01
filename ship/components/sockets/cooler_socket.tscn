@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdhfc617b6k0j"]
+
+[ext_resource type="Script" path="res://ship/components/sockets/component_socket.gd" id="1_dyeap"]
+[ext_resource type="PackedScene" uid="uid://c0t1pa8573yaa" path="res://world/props/models/cooler_socket_model.tscn" id="2_g8np0"]
+[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="3_cn00e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tw7bx"]
+radius = 1.47525
+
+[node name="CoolerSocket" type="Node3D" node_paths=PackedStringArray("snap_point")]
+script = ExtResource("1_dyeap")
+snap_point = NodePath("SnapPoint")
+
+[node name="cooler_socket" parent="." instance=ExtResource("2_g8np0")]
+
+[node name="SnapPoint" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57038, 0)
+script = ExtResource("3_cn00e")
+accepted_groups = Array[String](["cooler"])
+display_keycode = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.429264, 0)
+shape = SubResource("SphereShape3D_tw7bx")

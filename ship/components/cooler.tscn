@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://buwk3kfechuo7"]
+[gd_scene load_steps=15 format=3 uid="uid://buwk3kfechuo7"]
 
 [ext_resource type="Script" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
 [ext_resource type="PackedScene" uid="uid://bemq7kamgw881" path="res://world/props/models/cooler_model.tscn" id="2_c06p6"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="3_lhyqq"]
 [ext_resource type="AudioStream" uid="uid://b6um8vtxxp0fd" path="res://sfx/cooler_hum.wav" id="5_uxqcx"]
-[ext_resource type="PackedScene" uid="uid://bfl8vq1vy5rya" path="res://world/props/models/cooler_socket.glb" id="6_17066"]
 [ext_resource type="Texture2D" uid="uid://daevp70v12o1b" path="res://vfx/textures/smoke.png" id="7_nmyfo"]
 
 [sub_resource type="Gradient" id="Gradient_5831t"]
@@ -71,7 +70,7 @@ color_ramp = SubResource("GradientTexture1D_d6nq2")
 height = 2.58961
 radius = 0.941099
 
-[node name="Cooler" type="CharacterBody3D" node_paths=PackedStringArray("health")]
+[node name="Cooler" type="CharacterBody3D" node_paths=PackedStringArray("health") groups=["cooler", "item"]]
 script = ExtResource("1_hxxg3")
 component_name = "Cooler"
 health = NodePath("Health")
@@ -89,9 +88,6 @@ stream = ExtResource("5_uxqcx")
 volume_db = -5.0
 autoplay = true
 max_distance = 20.0
-
-[node name="cooler_socket" parent="." instance=ExtResource("6_17066")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.52204, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78663, 0)

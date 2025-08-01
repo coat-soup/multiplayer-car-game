@@ -4,6 +4,10 @@ class_name ShipComponent
 signal broken
 signal fixed
 
+signal installed
+signal uninstalled
+
+
 @export var component_name : String = "Component"
 @export var health : Health
 
@@ -24,12 +28,22 @@ func _ready():
 		health.died.connect(on_break)
 		health.healed.connect(on_fixed)
 	
-	if not ship:
-		try_get_ship_grandparent()
-	if not exlcude_from_component_manager and ship and ship.component_manager: ship.component_manager.components.append(self)
-	
-	
+	if immovable: # setup here instead of manual install
+		if not ship:
+			try_get_ship_grandparent()
+		if not exlcude_from_component_manager and ship and ship.component_manager: ship.component_manager.install_component(self)
+		try_initialise_power_system()
+
+
+func on_install_to_ship(ship_manager : ShipManager):
+	ship = ship_manager
 	try_initialise_power_system()
+	installed.emit()
+
+
+func on_uninstall_from_ship(ship_manager : ShipManager):
+	ship = null
+	uninstalled.emit()
 
 
 func try_initialise_power_system():

@@ -29,6 +29,7 @@ data = PackedVector3Array(0, -1.5994, -0.8262, 0.1612, 1.8903, -0.8103, 0, 1.890
 [node name="ShipReactorComponent" type="CharacterBody3D"]
 script = ExtResource("1_hkfen")
 component_name = "Test Component"
+immovable = true
 
 [node name="reactor" parent="." instance=ExtResource("2_wr0e7")]
 

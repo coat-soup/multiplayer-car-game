@@ -45,13 +45,13 @@ func shutdown():
 		reactor_state_changed.emit()
 
 
-func on_fuel_inserted():
-	fuel_rod = fuel_rod_snap_point.held_item
+func on_fuel_inserted(item : Item):
+	fuel_rod = item as FuelRod
 	fuel_rod.fuel_emptied.connect(shutdown)
 	startup()
 
 
-func on_fuel_removed():
+func on_fuel_removed(item : Item):
 	fuel_rod.fuel_emptied.disconnect(shutdown)
 	fuel_rod = null
 	shutdown()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=69 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dwujhpjpacelj" path="res://ui/textures/cooling_icon.png" id="13_h85l3"]
 [ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
-[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/cargo_grid.tscn" id="17_80dlg"]
+[ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="17_80dlg"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
 [ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
 [ext_resource type="PackedScene" uid="uid://bx7tg26c45i6f" path="res://ship/components/breaker_box.tscn" id="24_co1q7"]
@@ -42,8 +42,11 @@
 [ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="32_qhab0"]
 [ext_resource type="PackedScene" uid="uid://dg0ius8wdpt8s" path="res://ship/components/capacitor.tscn" id="33_7poo3"]
 [ext_resource type="PackedScene" uid="uid://c78lblw7dof04" path="res://ship/components/turrets/turret_size_1_component.tscn" id="33_f7yk0"]
+[ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="34_xxxw1"]
+[ext_resource type="PackedScene" uid="uid://0fkexj8olvfs" path="res://ship/components/sockets/capacitor_socket.tscn" id="42_7sw5g"]
 [ext_resource type="PackedScene" uid="uid://buwk3kfechuo7" path="res://ship/components/cooler.tscn" id="43_nfii6"]
 [ext_resource type="PackedScene" uid="uid://dgf8kvaj6kj60" path="res://world/props/scenes/equipment_rack.tscn" id="44_op51y"]
+[ext_resource type="PackedScene" uid="uid://bdhfc617b6k0j" path="res://ship/components/sockets/cooler_socket.tscn" id="45_7sed3"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -454,17 +457,25 @@ dimensions = Vector3i(4, 4, 8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98997, 4, 26.3464)
 dimensions = Vector3i(10, 8, 10)
 
-[node name="turret_size_1_component" parent="." instance=ExtResource("33_f7yk0")]
+[node name="turret_size_1_component" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.04763, 14.0884, 33.2363)
+ship = NodePath("..")
+immovable = true
 
-[node name="turret_size_1_component2" parent="." instance=ExtResource("33_f7yk0")]
+[node name="turret_size_1_component2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -1, 1.91069e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, -23.1549, -6.5, 17.2363)
+ship = NodePath("..")
+immovable = true
 
-[node name="turret_size_1_component3" parent="." instance=ExtResource("33_f7yk0")]
+[node name="turret_size_1_component3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 23.1007, -7.5, 28.2648)
+ship = NodePath("..")
+immovable = true
 
-[node name="turret_size_1_component4" parent="." instance=ExtResource("33_f7yk0")]
+[node name="turret_size_1_component4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 0, -19.5, -25.764)
+ship = NodePath("..")
+immovable = true
 
 [node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("20_rfwny")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
@@ -481,6 +492,7 @@ ship = NodePath("..")
 [node name="SteamPipeComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("25_o4iqn")]
 transform = Transform3D(-4.05208e-08, 0.927007, -0.375044, 1.63937e-08, -0.375044, -0.927007, -1, -4.37114e-08, 1.91069e-15, 14.4493, 14.2208, -10.7832)
 ship = NodePath("..")
+immovable = true
 
 [node name="DisplayConsole" parent="." instance=ExtResource("26_8kjs2")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -15.7313)
@@ -515,60 +527,139 @@ display_panel = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
 component_name = "Reactor"
 ship = NodePath("..")
+immovable = true
 
 [node name="Capacitors" type="Node3D" parent="."]
 
+[node name="CapacitorSocket" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.95418, 6.59937, -28.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket2" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 8.95418, 8.26734, -28.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket3" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, -1.74846e-07, 1.74846e-07, 5.2108e-15, 1, 8.95418, 8.26734, -26.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket4" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.95418, 6.59937, -26.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket5" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.95418, 6.59937, -24.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket6" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.95418, 8.26734, -24.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket7" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.95418, 8.26734, -22.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket8" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.95418, 6.59937, -22.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket9" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 8.95418, 6.59937, -20.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket10" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 1.74846e-07, -1.74846e-07, -5.2108e-15, 1, 8.95418, 8.26734, -20.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket11" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 8.95418, 8.26734, -18.746)
+ship = NodePath("../..")
+
+[node name="CapacitorSocket12" parent="Capacitors" node_paths=PackedStringArray("ship") instance=ExtResource("42_7sw5g")]
+transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 8.95418, 6.59937, -18.746)
+ship = NodePath("../..")
+
 [node name="Capacitor" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -28.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor2" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 7.77689, 8.26734, -28.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor3" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, -1.74846e-07, 1.74846e-07, 5.2108e-15, 1, 7.77689, 8.26734, -26.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor4" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 6.59937, -26.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor5" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -24.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor6" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 8.26734, -24.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor7" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 8.26734, -22.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor8" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 6.59937, -22.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor9" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 0, 0, 0, 1, 7.77689, 6.59937, -20.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor10" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, 1, 2.98023e-08, 1.74846e-07, -1.74846e-07, -5.2108e-15, 1, 7.77689, 8.26734, -20.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor11" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, 8.74228e-08, -8.74228e-08, -2.6054e-15, -1, 7.77689, 8.26734, -18.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
 [node name="Capacitor12" parent="Capacitors" instance=ExtResource("33_7poo3")]
 transform = Transform3D(2.98023e-08, -1, 0, -1, -2.98023e-08, -8.74228e-08, 8.74228e-08, 2.6054e-15, -1, 7.77689, 6.59937, -18.746)
+up_direction = Vector3(0.333289, 0.942825, 0)
 
-[node name="Cooler" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.597, 4.92107, -14.0359)
-ship = NodePath("..")
+[node name="Coolers" type="Node3D" parent="."]
 
-[node name="Cooler3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.597, 4.92074, -14.036)
-ship = NodePath("..")
+[node name="Cooler" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.597, 5.31395, -14.0359)
+ship = NodePath("../..")
 
-[node name="Cooler2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5729, 4.92107, -10.6161)
-ship = NodePath("..")
+[node name="Cooler3" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.597, 5.31362, -14.036)
+ship = NodePath("../..")
 
-[node name="Cooler4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 4.92074, -10.616)
-ship = NodePath("..")
+[node name="Cooler2" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5729, 5.31395, -10.6161)
+ship = NodePath("../..")
+
+[node name="Cooler4" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("43_nfii6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 5.31362, -10.616)
+ship = NodePath("../..")
+
+[node name="CoolerSocket" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("45_7sed3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.597, 3.44836, -14.0359)
+ship = NodePath("../..")
+
+[node name="CoolerSocket2" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("45_7sed3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.597, 3.44803, -14.036)
+ship = NodePath("../..")
+
+[node name="CoolerSocket3" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("45_7sed3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5729, 3.44836, -10.6161)
+ship = NodePath("../..")
+
+[node name="CoolerSocket4" parent="Coolers" node_paths=PackedStringArray("ship") instance=ExtResource("45_7sed3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.573, 3.44803, -10.616)
+ship = NodePath("../..")
 
 [node name="equipment_rack" parent="." instance=ExtResource("44_op51y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96615, 3.5, 7.52529)
@@ -578,3 +669,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)
 
 [node name="equipment_rack3" parent="." instance=ExtResource("44_op51y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.42531, 11.1663, -29.7546)
+
+[node name="Weapons" type="Node3D" parent="."]
+
+[node name="autocannon_size1" parent="Weapons" instance=ExtResource("34_xxxw1")]
+transform = Transform3D(0.707107, 0.707107, 1.74846e-07, -0.707107, 0.707107, 0, -1.23635e-07, -1.23635e-07, 1, 9.16963, 14.7369, 35.2365)
+exlcude_from_component_manager = true
+
+[node name="autocannon_size2" parent="Weapons" instance=ExtResource("34_xxxw1")]
+transform = Transform3D(-0.707107, 0.707107, 1.74846e-07, -0.707107, -0.707107, 0, 1.23635e-07, -1.23635e-07, 1, 9.16963, 13.4954, 35.2365)
+exlcude_from_component_manager = true
+
+[node name="autocannon_size3" parent="Weapons" instance=ExtResource("34_xxxw1")]
+transform = Transform3D(-0.707107, -0.707107, 1.74846e-07, 0.707107, -0.707107, 0, 1.23635e-07, 1.23635e-07, 1, 4.92534, 13.4954, 35.2365)
+exlcude_from_component_manager = true
+
+[node name="autocannon_size4" parent="Weapons" instance=ExtResource("34_xxxw1")]
+transform = Transform3D(0.707107, -0.707107, 1.74846e-07, 0.707107, 0.707107, 0, -1.23635e-07, 1.23635e-07, 1, 4.92534, 14.7369, 35.2365)
+exlcude_from_component_manager = true

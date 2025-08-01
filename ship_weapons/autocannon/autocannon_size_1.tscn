@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b8e8a2p2jypcg" path="res://ship/systems/power/component_heat_manager.tscn" id="5_f586l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pnolv"]
-size = Vector3(5.494, 1, 0.215)
+size = Vector3(5.494, 1, 0.4)
 
-[node name="autocannon_size1" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "firing_audio")]
+[node name="autocannon_size1" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "firing_audio") groups=["item", "mounted weapon", "size 1"]]
 script = ExtResource("2_5hunb")
 shell = ExtResource("3_mw7yq")
 barrel_end = NodePath("BarrelEnd")
@@ -18,7 +18,8 @@ firing_audio = NodePath("BarrelEnd/FiringAudio")
 heat_per_shot = 5.0
 component_name = "Autocannon (S1)"
 power_system_name = "Weapons"
-local_position = Vector3(6, 1, 1)
+snap_point_offset = Vector3(0, 0.491, 1.941)
+cargo_grid_dimensions = Vector3i(1, 1, 6)
 
 [node name="autocannon_size1" parent="." instance=ExtResource("3_o3khy")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.491104, -1.94149)

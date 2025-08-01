@@ -21,6 +21,8 @@ var controlling_RT : RemoteTransform3D
 
 var velo_calc : Vector3
 
+@export var snap_point_offset : Vector3
+
 var snap_indicator : Node3D :
 	get:
 		if not snap_indicator: return create_snap_indicator()
@@ -105,7 +107,7 @@ func _physics_process(_delta: float) -> void:
 		var sp = get_closest_snap_point()
 		if sp and is_multiplayer_authority():
 			snap_indicator.visible = true
-			snap_indicator.global_position = sp.global_position
+			snap_indicator.global_position = sp.to_global(snap_point_offset)
 			snap_indicator.global_rotation = sp.global_rotation
 		elif cargo_grid and is_multiplayer_authority():
 			snap_indicator.visible = true

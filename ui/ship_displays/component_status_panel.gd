@@ -9,7 +9,7 @@ const THEME = preload("res://ui/themes/ship_panel_theme.tres")
 
 
 func _ready() -> void:
-	await get_tree().create_timer(1.0).timeout
+	component_manager.components_changed.connect(rebuild_list)
 	rebuild_list()
 
 
@@ -25,6 +25,7 @@ func get_component_display_text(component : ShipComponent) -> String:
 func rebuild_list():
 	for child in container.get_children():
 		child.queue_free()
+		
 	
 	for component in component_manager.components:
 		var label := RichTextLabel.new()
@@ -36,11 +37,10 @@ func rebuild_list():
 		label.add_theme_font_size_override("normal_font_size",30)
 		label.add_theme_font_size_override("bold_font_size",30)
 		container.add_child(label)
-		labels[component] = label
-		if component.health:
+		if component.health and not labels.has(component):
 			component.health.took_damage.connect(update_label.bind(component))
 			component.health.healed.connect(update_label.bind(component))
-
+		labels[component] = label
 
 func update_label(component):
 	labels[component].text = get_component_display_text(component)

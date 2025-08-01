@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0t1pa8573yaa"]
+
+[ext_resource type="PackedScene" uid="uid://bfl8vq1vy5rya" path="res://world/props/models/cooler_socket.glb" id="1_7yp65"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0qqtd"]
+height = 0.340648
+radius = 1.24478
+
+[node name="cooler_socket" instance=ExtResource("1_7yp65")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174807, 0)
+shape = SubResource("CylinderShape3D_0qqtd")

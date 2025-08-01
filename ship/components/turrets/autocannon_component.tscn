@@ -10,6 +10,7 @@ size = Vector3(3, 2.456, 3)
 [node name="AutocannonComponent" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 script = ExtResource("1_iicsa")
 health = NodePath("Hitbox/Health")
+immovable = true
 
 [node name="autocannon" parent="." instance=ExtResource("2_1qikb")]
 
