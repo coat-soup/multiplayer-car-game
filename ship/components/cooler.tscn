@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
 [ext_resource type="PackedScene" uid="uid://bemq7kamgw881" path="res://world/props/models/cooler_model.tscn" id="2_c06p6"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="3_lhyqq"]
+[ext_resource type="Texture2D" uid="uid://b3abikc8ku3p4" path="res://vfx/textures/smoke_large.png" id="5_csud8"]
 [ext_resource type="AudioStream" uid="uid://b6um8vtxxp0fd" path="res://sfx/cooler_hum.wav" id="5_uxqcx"]
-[ext_resource type="Texture2D" uid="uid://daevp70v12o1b" path="res://vfx/textures/smoke.png" id="7_nmyfo"]
 
 [sub_resource type="Gradient" id="Gradient_5831t"]
 offsets = PackedFloat32Array(0, 0.381818, 0.672727, 1)
@@ -36,7 +36,8 @@ color_ramp = SubResource("GradientTexture1D_d6nq2")
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("7_nmyfo")
+albedo_texture = ExtResource("5_csud8")
+texture_filter = 0
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1

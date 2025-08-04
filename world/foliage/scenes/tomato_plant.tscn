@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn86312ku2n5v"]
+
+[ext_resource type="PackedScene" uid="uid://6s61myatmnn1" path="res://world/foliage/models/tomato_plant.glb" id="1_5asqj"]
+[ext_resource type="Texture2D" uid="uid://ccr5x3lsswcfr" path="res://world/foliage/textures/tomato_leaf.png" id="2_21jai"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_duql8"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("2_21jai")
+texture_filter = 0
+
+[node name="tomato_plant" instance=ExtResource("1_5asqj")]
+
+[node name="Leaves" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_duql8")

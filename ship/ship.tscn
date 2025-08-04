@@ -443,7 +443,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.68821, 13.3153, 29.5647)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.68821, 5.81736, 17.214)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)

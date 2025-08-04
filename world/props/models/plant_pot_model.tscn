@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhr3fnfrm5fme"]
+
+[ext_resource type="PackedScene" uid="uid://ca1kiq6isnvpo" path="res://world/props/models/plant_pot.glb" id="1_xkjqo"]
+[ext_resource type="Texture2D" uid="uid://gx5qr1bopstu" path="res://world/props/textures/plant_pot.png" id="2_01y4q"]
+[ext_resource type="Texture2D" uid="uid://co1ynpp3ihavu" path="res://world/props/textures/plant_pot_n.png" id="3_2p6dp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xq0o1"]
+albedo_texture = ExtResource("2_01y4q")
+normal_enabled = true
+normal_texture = ExtResource("3_2p6dp")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7k0b"]
+albedo_texture = ExtResource("2_01y4q")
+normal_enabled = true
+normal_texture = ExtResource("3_2p6dp")
+texture_filter = 0
+
+[node name="plant_pot" instance=ExtResource("1_xkjqo")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xq0o1")
+
+[node name="Circle" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_l7k0b")

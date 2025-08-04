@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://sc8dgmgtad4m"]
+
+[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_ng4g6"]
+[ext_resource type="Resource" uid="uid://bpjvq4ltreou1" path="res://items/item_data/item_plant_pot.tres" id="2_m822q"]
+[ext_resource type="PackedScene" uid="uid://dhr3fnfrm5fme" path="res://world/props/models/plant_pot_model.tscn" id="3_pd4ah"]
+[ext_resource type="PackedScene" uid="uid://cn86312ku2n5v" path="res://world/foliage/scenes/tomato_plant.tscn" id="4_5qo5h"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_kqo7j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o0ln4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkqtu"]
+albedo_color = Color(1, 0.41, 0.41, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f246p"]
+height = 1.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="PlantPot" type="CharacterBody3D" groups=["item"]]
+script = ExtResource("1_ng4g6")
+item_data = ExtResource("2_m822q")
+cargo_grid_dimensions = Vector3i(1, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_o0ln4")
+surface_material_override/0 = SubResource("StandardMaterial3D_gkqtu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_f246p")
+
+[node name="plant_pot" parent="." instance=ExtResource("3_pd4ah")]
+
+[node name="tomato_plant2" parent="plant_pot" instance=ExtResource("4_5qo5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.363309, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mrjew")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_kqo7j")

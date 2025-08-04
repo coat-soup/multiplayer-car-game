@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgokpns7ftbi"]
+[gd_scene load_steps=25 format=3 uid="uid://dgokpns7ftbi"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_kqwcw"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_8udqw"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://brtryfb447bwb" path="res://items/scenes/test_large_cargo_item.tscn" id="16_55soq"]
 [ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_o8f6l"]
 [ext_resource type="PackedScene" uid="uid://5q8ojsaytb8m" path="res://items/scenes/iron.tscn" id="18_pu78r"]
+[ext_resource type="PackedScene" uid="uid://sc8dgmgtad4m" path="res://items/scenes/plant_pot.tscn" id="19_3f7fm"]
 [ext_resource type="PackedScene" uid="uid://hbyqte87esm2" path="res://ship_weapons/autocannon/autocannon_size_1.tscn" id="21_s68hy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
@@ -161,6 +162,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271867, 6.98546, 31.2138)
 
 [node name="Iron" parent="ShipHolder/Ship" instance=ExtResource("18_pu78r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.65092, 3.8166, 13.995)
+
+[node name="PlantPot" parent="ShipHolder/Ship" instance=ExtResource("19_3f7fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7611, -1.96346, 35.1905)
+
+[node name="PlantPot2" parent="ShipHolder/Ship" instance=ExtResource("19_3f7fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7611, -1.96346, 32.1905)
+
+[node name="PlantPot3" parent="ShipHolder/Ship" instance=ExtResource("19_3f7fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7611, -1.96346, 28.1905)
+
+[node name="PlantPot4" parent="ShipHolder/Ship" instance=ExtResource("19_3f7fm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.388, 4.05914, 20.7995)
 
 [node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://auxcraft/scenes/fighter.tscn", "res://auxcraft/scenes/fighter_movement_clone.tscn")
