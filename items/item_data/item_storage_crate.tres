@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_6tsgh")
 item_name = "Storage Crate"
-price = 0
+price = 20
 crafting_recipes = Array[String]([])

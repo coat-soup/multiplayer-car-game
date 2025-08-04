@@ -1,4 +1,4 @@
-extends Equipment
+extends Holdable
 
 @export var damage := 20.0
 @export var fire_rate := 5.0

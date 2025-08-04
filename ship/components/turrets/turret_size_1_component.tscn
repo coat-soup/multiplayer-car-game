@@ -24,6 +24,7 @@ turret_controller = NodePath("turret_size_1_model")
 component_name = "Turret"
 health = NodePath("Health")
 power_system_name = "Weapons"
+immovable = true
 cargo_grid_dimensions = Vector3i(3, 3, 3)
 
 [node name="Health" type="Node" parent="."]

@@ -55,6 +55,7 @@ func _ready() -> void:
 	item_physics_dupe_manager.handle_item_spawn(self)
 	
 	if not immovable: physics_dupe.body_entered.connect(on_collided)
+	#physics_dupe.body_entered.connect(on_collided)
 	
 	multiplayer.connected_to_server.connect(on_connect) # for items already in scene
 	on_connect() # for items spawned by spawner
@@ -70,7 +71,7 @@ func on_connect():
 
 
 func _physics_process(_delta: float) -> void:
-	if phys_delay or immovable or not dupe_RT: return
+	if phys_delay or not dupe_RT: return
 	
 	velo_calc = physics_dupe.position - local_position
 	

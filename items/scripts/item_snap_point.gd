@@ -79,7 +79,7 @@ func check_item_accepted(item : Item) -> bool:
 func set_item(item_path : String, reset_transform : bool = true):
 	#print("%s running set item for %s (auth:%s)" % [get_parent().name, item_path, is_multiplayer_authority()])
 	if held_item:
-		var eq = held_item as Equipment
+		var eq = held_item as Holdable
 		if eq: eq.picked_up.disconnect(on_equipment_picked_up_manually)
 		if reset_transform:
 			held_item.move_item(to_global(prev_p))
@@ -96,7 +96,7 @@ func set_item(item_path : String, reset_transform : bool = true):
 		
 		item_placed.emit(held_item)
 		
-		var eq = held_item as Equipment
+		var eq = held_item as Holdable
 		if eq: eq.picked_up.connect(on_equipment_picked_up_manually)
 	else:
 		active = true
@@ -126,7 +126,7 @@ func attach_item(item : Item):
 	item.physics_dupe.rotation = item.rotation
 	item.snap_point = self
 	
-	item.snap_indicator.visible = false
+	if item.snap_indicator: item.snap_indicator.visible = false
 	
 	remote_transform.remote_path = item.get_path()
 	item.controlling_RT = remote_transform
@@ -141,6 +141,9 @@ func on_interacted(source : Node):
 	var eq : EquipmentManager = (source as Player).equipment_manager
 	var item = eq.items[eq.cur_slot]
 	if item:
+		if not check_item_accepted(item):
+			item.ui.display_prompt("Only accepts " +  str(accepted_groups))
+			return
 		eq.drop_equipment.rpc(eq.cur_slot)
 		await item.on_dropped
 		await get_tree().create_timer(0.1).timeout

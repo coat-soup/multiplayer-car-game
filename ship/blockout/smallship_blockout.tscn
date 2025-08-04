@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2vh3q0o2fbfo"]
+
+[ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/models/fighter.glb" id="2_lj7qg"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="4_deuj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmofw"]
+render_priority = 0
+shader = ExtResource("4_deuj0")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[node name="SmallShipBlockout" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.493591)
+use_collision = true
+size = Vector3(17.82, 1, 50.9872)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.60695, 17)
+use_collision = true
+size = Vector3(17.125, 1, 16)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.3872, -14)
+use_collision = true
+size = Vector3(17.275, 1, 16)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 8.70853, 4.80103, 0)
+use_collision = true
+size = Vector3(9.60205, 1, 50)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -9.03673, 4.75684, 0)
+use_collision = true
+size = Vector3(9.51367, 1, 50)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="fighter" parent="." instance=ExtResource("2_lj7qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0385997, 2.01933, 21.6236)

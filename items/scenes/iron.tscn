@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://5q8ojsaytb8m"]
+
+[ext_resource type="Script" path="res://equipment/scripts/holdable.gd" id="1_4ms06"]
+[ext_resource type="Resource" uid="uid://dmdes4sw3sjmu" path="res://items/item_data/item_iron.tres" id="2_6u5v2"]
+[ext_resource type="PackedScene" uid="uid://bm2o8cxed6vxm" path="res://items/models/metal_chunk.glb" id="3_rvph4"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_sw0ic"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_cqlq7"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3ykmm"]
+points = PackedVector3Array(-0.15649, 0.0153898, -0.0497259, -0.061065, -0.0390131, -0.113558, -0.102074, -0.0407565, -0.0614393, -0.137714, -0.0398335, -0.00791486, -0.132323, 0.0160307, 0.0256411, -0.134903, 0.083637, -0.00702241, -0.0865917, 0.139373, -0.0517786, -0.115528, 0.0687929, -0.0716355, 0.00401871, -0.044679, -0.101153, -0.0452145, -0.0834943, -0.0663701, -0.058024, 0.0770482, -0.103451, -0.0260235, 0.0159025, -0.119136, -0.0829746, -0.0753416, -0.00775868, -0.102166, -0.0418845, 0.0468813, -0.0947934, 0.0159025, 0.0864836, -0.113731, 0.0700747, 0.055605, -0.0794498, 0.12276, 0.0314197, -0.00284676, 0.133938, -0.0776595, -0.0256318, 0.159678, -0.00704472, 0.0539662, -0.0337318, -0.0660577, 0.0240622, -0.0845967, -0.0444159, 0.0376549, 0.0162102, -0.0966686, -0.0262078, -0.102235, -0.00791486, 0.00602306, 0.0680237, -0.107021, -0.0432332, -0.0732906, 0.0445163, -0.0567568, -0.0334498, 0.0861266, -0.0262078, 0.0159025, 0.108795, -0.0567568, 0.0789453, 0.0892056, -0.00344576, 0.121658, 0.0573229, 0.046087, 0.130861, -0.00778099, 0.0554176, 0.0788428, -0.0678426, 0.0788477, -0.0490374, -0.00791486, 0.0240622, -0.0845967, 0.0286085, 0.00484809, -0.0462173, 0.0876884, 0.0592881, -0.0369365, 0.0541994, 0.031711, 0.0165691, 0.0723383, 0.0456723, 0.0736896, 0.0477291)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1p50k"]
+radius = 0.287957
+
+[node name="Iron" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["item"]]
+script = ExtResource("1_4ms06")
+interactable = NodePath("Interactable")
+item_data = ExtResource("2_6u5v2")
+
+[node name="metal_chunk" parent="." instance=ExtResource("3_rvph4")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mrjew")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_sw0ic")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_3ykmm")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("5_cqlq7")
+prompt_text = "Equip Wrench"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108398, 0)
+shape = SubResource("SphereShape3D_1p50k")

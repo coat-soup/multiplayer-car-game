@@ -50,7 +50,7 @@ func get_normalised_lag_distance() -> float:
 
 func start_grab():
 	target = raycast_target()
-	if target and not target.tractored:
+	if target and not target.tractored and not target.immovable:
 		target.set_auth.rpc(str(player.name).to_int())
 		
 		target.on_physics_picked_up.rpc()

@@ -1,4 +1,4 @@
-extends Equipment
+extends Holdable
 class_name FireExtinguisher
 
 @export var extinguish_per_second := 1.0

@@ -60,9 +60,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			virtual_joystick_value = virtual_joystick_value.limit_length(1)
 			ui.update_virtual_joystick(virtual_joystick_value)
 		else:
+			var m = -1 if camera.rotation.z > 0 else 1
 			camera.rotation.y += (-event.relative.x * sensetivity) * (-1.0 if camera.rotation.x > PI/2 else 1.0)
-			camera.rotation.x += (-event.relative.y * sensetivity)
+			camera.rotation.x += (-event.relative.y * sensetivity)# * (-1.0 if camera.rotation.x > PI/2 else 1.0)
+			
 			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))
+			#print(rad_to_deg(camera.rotation.x), ", ", rad_to_deg(camera.rotation.y), ", ", rad_to_deg(camera.rotation.z), " YDIFF: ", (-event.relative.y * sensetivity))# * (-1.0 if camera.rotation.x > PI/2 else 1.0))
 
 
 func ai_camera_input(dir : Vector2):
@@ -88,6 +91,7 @@ func _process(delta: float) -> void:
 		
 	else:
 		camera.rotation.z = 0
+		#var m = 1.0 if camera.rotation.x < deg_to_rad(90) else -1.0
 		yaw_obj.rotation.y += clamp(wrapf(camera.rotation.y - yaw_obj.rotation.y, -PI, PI) * 10, -1, 1) * delta * turn_speed
 		pitch_obj.rotation.x += clamp(wrapf(camera.rotation.x - pitch_obj.rotation.x, -PI, PI) * 10, -1, 1) * delta * turn_speed
 		pitch_obj.rotation.x = clamp(pitch_obj.rotation.x, deg_to_rad(p_min), deg_to_rad(p_max))

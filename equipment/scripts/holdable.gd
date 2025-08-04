@@ -1,5 +1,5 @@
 extends Item
-class_name Equipment
+class_name Holdable
 
 signal triggered
 signal trigger_ended
@@ -13,7 +13,6 @@ signal held
 ## item moved out of hand/became inactive (eg swapped to different equipment, holstered)
 signal put_away
 
-@export var equipment_name : String
 @export var interactable : Interactable
 
 @export var ground_offset := 0.2
@@ -31,7 +30,7 @@ var prev_parent : Node3D = null
 func _ready():
 	super._ready()
 	
-	interactable.prompt_text = "Equip " + equipment_name
+	interactable.prompt_text = "Pick up " + item_data.item_name
 	interactable.interacted.connect(try_equip)
 	triggered.connect(on_triggered)
 	trigger_ended.connect(on_trigger_ended)

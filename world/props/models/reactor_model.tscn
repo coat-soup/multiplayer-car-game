@@ -86,3 +86,6 @@ lifetime = 0.1
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_84mc3")
 draw_pass_1 = SubResource("SphereMesh_egq85")
+
+[node name="Cylinder_013" parent="." index="18"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oqhm8")

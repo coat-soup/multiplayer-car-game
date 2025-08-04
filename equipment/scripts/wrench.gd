@@ -1,4 +1,4 @@
-extends Equipment
+extends Holdable
 
 @export var heal_amount := 30.0
 @export var cooldown := 0.9

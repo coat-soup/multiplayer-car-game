@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=68 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="17_80dlg"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
-[ext_resource type="PackedScene" uid="uid://cud5ky1pvb32i" path="res://ship/components/test_ship_component.tscn" id="22_0y016"]
 [ext_resource type="PackedScene" uid="uid://bx7tg26c45i6f" path="res://ship/components/breaker_box.tscn" id="24_co1q7"]
 [ext_resource type="PackedScene" uid="uid://dxtthwjcgkw75" path="res://ship/components/steam_pipe_component.tscn" id="25_o4iqn"]
 [ext_resource type="Script" path="res://system/scripts/fire_manager.gd" id="25_o7r4o"]
@@ -444,7 +443,7 @@ arguments = "6"
 prompt_text = "Launch"
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.43991, 6.42249, 18.0154)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.68821, 13.3153, 29.5647)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("16_6fyx0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04543, 11.1663, -29.7402)
@@ -460,39 +459,30 @@ dimensions = Vector3i(10, 8, 10)
 [node name="turret_size_1_component" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.04763, 14.0884, 33.2363)
 ship = NodePath("..")
-immovable = true
 
 [node name="turret_size_1_component2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -1, 1.91069e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, -23.1549, -6.5, 17.2363)
 ship = NodePath("..")
-immovable = true
 
 [node name="turret_size_1_component3" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 23.1007, -7.5, 28.2648)
 ship = NodePath("..")
-immovable = true
 
 [node name="turret_size_1_component4" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("33_f7yk0")]
 transform = Transform3D(-1, -8.74228e-08, -1.19209e-07, 8.74228e-08, -1, 5.57929e-15, -1.19209e-07, -7.10543e-15, 1, 0, -19.5, -25.764)
 ship = NodePath("..")
-immovable = true
 
 [node name="RadarMap" parent="." node_paths=PackedStringArray("radar_manager") instance=ExtResource("20_rfwny")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40338, 19.5, -18.3839)
 radar_manager = NodePath("../RadarManager")
 
-[node name="BreakerBox2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("24_co1q7")]
+[node name="BreakerBox" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("24_co1q7")]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 9.59225, 7.33638, -5.56432)
-ship = NodePath("..")
-
-[node name="TestShipComponent2" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("22_0y016")]
-transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -9.40775, 7.33638, -5.56432)
 ship = NodePath("..")
 
 [node name="SteamPipeComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("25_o4iqn")]
 transform = Transform3D(-4.05208e-08, 0.927007, -0.375044, 1.63937e-08, -0.375044, -0.927007, -1, -4.37114e-08, 1.91069e-15, 14.4493, 14.2208, -10.7832)
 ship = NodePath("..")
-immovable = true
 
 [node name="DisplayConsole" parent="." instance=ExtResource("26_8kjs2")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.53378, 5.58681, -15.7313)
@@ -524,7 +514,7 @@ power_manager = NodePath("../../../../PowerManager")
 display_panel = NodePath("../../..")
 
 [node name="ShipReactorComponent" parent="." node_paths=PackedStringArray("ship") instance=ExtResource("30_w31jj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.34405, -9.19166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.40247, -9.19166)
 component_name = "Reactor"
 ship = NodePath("..")
 

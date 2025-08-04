@@ -20,7 +20,7 @@ shape = SubResource("ConcavePolygonShape3D_cakpi")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 2.391, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
-prompt_text = "Place Item"
+prompt_text = "Place Equipment"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175225, 0, 0.000319868)
@@ -30,7 +30,7 @@ shape = SubResource("BoxShape3D_6b23x")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.316038, 1.81003, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
-prompt_text = "Place Item"
+prompt_text = "Place Equipment"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)
@@ -40,7 +40,7 @@ shape = SubResource("BoxShape3D_6b23x")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.308766, 1.18404, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
-prompt_text = "Place Item"
+prompt_text = "Place Equipment"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)
@@ -50,7 +50,7 @@ shape = SubResource("BoxShape3D_6b23x")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.316038, 0.617508, 0.181948)
 script = ExtResource("2_lsbgo")
 accepted_groups = Array[String](["equipment"])
-prompt_text = "Place Item"
+prompt_text = "Place Equipment"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Point4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161523, 0, -0.133055)

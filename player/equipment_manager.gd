@@ -4,7 +4,7 @@ class_name EquipmentManager
 
 @export var player : Player
 @export var num_slots := 2
-var items : Array[Equipment] = []
+var items : Array[Holdable] = []
 var cur_slot := 0
 var remote_transforms : Array[RemoteTransform3D]
 
@@ -29,7 +29,7 @@ func _input(event: InputEvent) -> void:
 		swap_to_item((cur_slot + scroll_dir) % items.size())
 
 
-func equip_item(equipment: Equipment):
+func equip_item(equipment: Holdable):
 	var slot = first_available_slot() if items[cur_slot] else cur_slot
 	
 	if items[slot]:
@@ -45,7 +45,7 @@ func equip_item(equipment: Equipment):
 
 @rpc("any_peer", "call_local")
 func handle_equip(scene_path : NodePath, slot : int):
-	var equipment = get_tree().root.get_node(scene_path) as Equipment
+	var equipment = get_tree().root.get_node(scene_path) as Holdable
 	if equipment:
 		var item = equipment
 		

@@ -1,4 +1,4 @@
-extends Equipment
+extends Holdable
 class_name TractorTool
 
 @onready var beam: TractorBeam = $TractorBeam

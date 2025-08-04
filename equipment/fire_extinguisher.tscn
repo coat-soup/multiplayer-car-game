@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjg4yqqkbjmks"]
+[gd_scene load_steps=16 format=3 uid="uid://bjg4yqqkbjmks"]
 
 [ext_resource type="Script" path="res://equipment/scripts/fire_extinguisher.gd" id="1_sue74"]
 [ext_resource type="PackedScene" uid="uid://bt5bosysuuexi" path="res://equipment/models/fire_extinguisher_model.tscn" id="2_42dcg"]
+[ext_resource type="Resource" uid="uid://bj78gdfe6blqg" path="res://items/item_data/item_fire_extinguisher.tres" id="2_em84o"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_gxao3"]
 [ext_resource type="AudioStream" uid="uid://ba2gmv18h7gjy" path="res://sfx/fire_extinguisher.wav" id="4_ae8mx"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="5_222vs"]
@@ -57,8 +58,8 @@ properties/1/replication_mode = 1
 
 [node name="FireExtinguisher" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
 script = ExtResource("1_sue74")
-equipment_name = "Fire Extinguisher"
 interactable = NodePath("Interactable")
+item_data = ExtResource("2_em84o")
 
 [node name="fire_extinguisher" parent="." instance=ExtResource("2_42dcg")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

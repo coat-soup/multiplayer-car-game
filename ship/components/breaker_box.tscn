@@ -12,6 +12,7 @@ size = Vector3(0.854712, 1.2356, 0.268933)
 script = ExtResource("1_138k0")
 component_name = "Breaker"
 health = NodePath("Health")
+immovable = true
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_cwfvn")

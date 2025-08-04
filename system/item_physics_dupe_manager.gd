@@ -87,10 +87,6 @@ func handle_item_spawn(item : Item):
 	add_child.call_deferred(item.physics_dupe)
 	await item.physics_dupe.tree_entered
 	
-	if item.immovable:
-		item.physics_dupe.freeze = true
-		item.held_in_place = true
-	
 	item.dupe_RT = RemoteTransform3D.new()
 	item.dupe_RT.update_position = true
 	item.dupe_RT.update_rotation = true
@@ -111,8 +107,15 @@ func handle_item_spawn(item : Item):
 			item.physics_dupe.add_child(child.duplicate())
 	
 	item.physics_dupe.global_position = item.global_position
+	item.physics_dupe.global_rotation = item.global_rotation
 	
 	item_left_ship(item)
+	
+	if item.immovable:
+		item.held_in_place = true
+		#await get_tree().process_frame
+		item.physics_dupe.freeze = true
+	
 	
 	# Debug Box
 	#item.physics_dupe.add_child(CSGBox3D.new())
@@ -120,6 +123,7 @@ func handle_item_spawn(item : Item):
 
 func item_entered_ship(item : Item):
 	#if item.immovable: return
+	
 	if !item.is_inside_tree(): await item.tree_entered
 	
 	if not item.physics_dupe: print(item, " has no physics dupe")
@@ -138,7 +142,8 @@ func item_entered_ship(item : Item):
 
 
 func item_left_ship(item : Item):
-	if item.immovable: return
+	#if item.immovable: return
+	
 	if !item.is_inside_tree():
 		await item.tree_entered
 		await get_tree().create_timer(0.1)

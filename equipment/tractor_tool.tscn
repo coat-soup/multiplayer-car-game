@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://fyxpmm5wifkc"]
+[gd_scene load_steps=17 format=4 uid="uid://fyxpmm5wifkc"]
 
 [ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
 [ext_resource type="Script" path="res://system/scripts/tractor_beam.gd" id="2_dugx1"]
+[ext_resource type="Resource" uid="uid://b5a1owq5v0ccj" path="res://items/item_data/item_tractor_tool.tres" id="2_p7pmv"]
 [ext_resource type="PackedScene" uid="uid://ch0bc52eqydbm" path="res://equipment/models/tractor_tool_model.tscn" id="2_t7tfp"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
 [ext_resource type="AudioStream" uid="uid://dkxuvx7bjudl7" path="res://sfx/tractor_hum.wav" id="4_uf7hw"]
@@ -71,8 +72,8 @@ properties/1/replication_mode = 1
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bttfc")
 color_by_norm_dist_grad = SubResource("Gradient_1mqwj")
-equipment_name = "Tractor Tool"
 interactable = NodePath("Interactable")
+item_data = ExtResource("2_p7pmv")
 cargo_grid_dimensions = Vector3i(2, 1, 1)
 
 [node name="TractorBeam" type="Node3D" parent="."]

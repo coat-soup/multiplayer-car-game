@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn5nh1kddwt62"]
+[gd_scene load_steps=14 format=3 uid="uid://bn5nh1kddwt62"]
 
 [ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
 [ext_resource type="PackedScene" uid="uid://c8e5dm3neirpv" path="res://equipment/models/wrench.glb" id="2_gkggd"]
+[ext_resource type="Resource" uid="uid://l4g58tiq5jpu" path="res://items/item_data/item_wrench.tres" id="2_mcbsl"]
 [ext_resource type="PackedScene" uid="uid://ctosmn6mjroqq" path="res://equipment/models/wrench_model.tscn" id="3_yo5ni"]
 [ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="4_um0c8"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="6_vx6kc"]
@@ -109,8 +110,8 @@ properties/1/replication_mode = 1
 [node name="Wrench" type="CharacterBody3D" node_paths=PackedStringArray("anim", "interactable") groups=["equipment", "item"]]
 script = ExtResource("1_mgupi")
 anim = NodePath("AnimationPlayer")
-equipment_name = "Wrench"
 interactable = NodePath("Interactable")
+item_data = ExtResource("2_mcbsl")
 
 [node name="wrench3" parent="." instance=ExtResource("2_gkggd")]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
