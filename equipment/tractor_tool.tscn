@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://fyxpmm5wifkc"]
+[gd_scene load_steps=16 format=4 uid="uid://fyxpmm5wifkc"]
 
 [ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
 [ext_resource type="Script" path="res://system/scripts/tractor_beam.gd" id="2_dugx1"]
@@ -59,6 +59,14 @@ shading_mode = 0
 albedo_color = Color(0, 0.590153, 0.979932, 0.196078)
 albedo_texture = SubResource("GradientTexture2D_navbv")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rbftn"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="TractorTool" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bttfc")
@@ -102,3 +110,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_i4dix")
 
 [node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_hv5w3")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rbftn")

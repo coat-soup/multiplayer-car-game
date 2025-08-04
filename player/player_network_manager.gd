@@ -37,6 +37,7 @@ func _ready() -> void:
 	request_sync_username.rpc_id(str(get_owner().name).to_int())
 	#try_sync()
 
+
 func try_sync(n := 0):
 	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
 		request_sync_username.rpc_id(str(get_owner().name).to_int())

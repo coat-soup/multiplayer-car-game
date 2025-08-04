@@ -26,6 +26,24 @@ func _ready() -> void:
 	area.body_exited.connect(on_body_exited)
 	
 	interacted.connect(on_interacted)
+	multiplayer.connected_to_server.connect(on_connect)
+
+
+func on_connect():
+	if not multiplayer.is_server():
+		request_initialise_on_load.rpc_id(1)
+
+
+@rpc("call_local", "any_peer")
+func request_initialise_on_load():
+	if not multiplayer.is_server(): return
+	if held_item:
+		initialise_on_load.rpc_id(multiplayer.get_remote_sender_id(), held_item.get_path())
+
+
+@rpc("call_local", "any_peer")
+func initialise_on_load(item_path):
+	set_item(item_path)
 
 
 func on_body_entered(body):

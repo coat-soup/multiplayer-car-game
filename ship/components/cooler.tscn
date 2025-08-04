@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buwk3kfechuo7"]
+[gd_scene load_steps=16 format=3 uid="uid://buwk3kfechuo7"]
 
 [ext_resource type="Script" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
 [ext_resource type="PackedScene" uid="uid://bemq7kamgw881" path="res://world/props/models/cooler_model.tscn" id="2_c06p6"]
@@ -70,6 +70,14 @@ color_ramp = SubResource("GradientTexture1D_d6nq2")
 height = 2.58961
 radius = 0.941099
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2noch"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Cooler" type="CharacterBody3D" node_paths=PackedStringArray("health") groups=["cooler", "item"]]
 script = ExtResource("1_hxxg3")
 component_name = "Cooler"
@@ -107,3 +115,6 @@ draw_pass_1 = SubResource("QuadMesh_uea6v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.278336, 0)
 shape = SubResource("CylinderShape3D_4kp51")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2noch")

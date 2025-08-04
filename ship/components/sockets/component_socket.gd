@@ -9,8 +9,7 @@ func _ready() -> void:
 	snap_point.item_placed.connect(on_component_placed)
 	snap_point.item_removed.connect(on_component_removed)
 	
-	await get_tree().create_timer(0.2).timeout
-	try_start_snap()
+	(get_tree().get_first_node_in_group("network manager") as NetworkManager).host_started.connect(try_start_snap)
 
 
 func try_start_snap():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjg4yqqkbjmks"]
+[gd_scene load_steps=15 format=3 uid="uid://bjg4yqqkbjmks"]
 
 [ext_resource type="Script" path="res://equipment/scripts/fire_extinguisher.gd" id="1_sue74"]
 [ext_resource type="PackedScene" uid="uid://bt5bosysuuexi" path="res://equipment/models/fire_extinguisher_model.tscn" id="2_42dcg"]
@@ -47,6 +47,14 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_3vc4y"]
 material = SubResource("StandardMaterial3D_cbuah")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dex42"]
+properties/0/path = NodePath(".:local_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:local_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="FireExtinguisher" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
 script = ExtResource("1_sue74")
 equipment_name = "Fire Extinguisher"
@@ -82,3 +90,6 @@ stream = ExtResource("4_ae8mx")
 
 [node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_222vs")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dex42")
