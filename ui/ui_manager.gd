@@ -33,6 +33,7 @@ var chats : Array[String] = []
 @onready var turret_capacitor_label: RichTextLabel = $TurretPowerPanel/CapacitorNumberLabel
 @onready var power_warning: RichTextLabel = $"TurretPowerPanel/Power Warning"
 
+@onready var hotbar: HBoxContainer = $HUD/Hotbar
 
 var prompt_time_remaining := 0.0
 
@@ -179,3 +180,21 @@ func update_turret_capacitors(cur: int, max: int):
 
 func toggle_power_warning(value: bool):
 	power_warning.visible = value
+
+
+func select_hotbar_slot(slot : int):
+	for i in range(hotbar.get_child_count()):
+		hotbar.get_child(i).get_node("Select").visible = i == slot
+
+
+func place_item_in_slot(item : Holdable, slot : int):
+	var icon = preload("res://ui/scenes/inventory_item_icon.tscn").instantiate()
+	hotbar.get_child(slot).add_child(icon)
+	(icon.get_node("Icon") as TextureRect).texture = null #TODO: make icons
+	(icon.get_node("Name") as Label).text = item.item_data.item_name
+	(icon.get_node("StackCount") as Label).text = str(item.items_in_stack) if item.stack_size > 1 else ""
+
+
+func remove_item_from_slot(item : Holdable, slot : int):
+	var icon = hotbar.get_child(slot).get_node("InventoryItemIcon")
+	if icon: icon.queue_free()

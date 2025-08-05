@@ -22,6 +22,9 @@ var held_by_auth := false
 var held_player : Player = null
 var prev_parent : Node3D = null
 
+@export var stack_size : int = 1
+var items_in_stack : int = 1
+
 @export var interact_holdable := true
 
 @export var raycast_on_startup := true

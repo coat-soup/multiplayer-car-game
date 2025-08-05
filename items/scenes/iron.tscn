@@ -23,6 +23,7 @@ radius = 0.287957
 [node name="Iron" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["item"]]
 script = ExtResource("1_4ms06")
 interactable = NodePath("Interactable")
+stack_size = 50
 item_data = ExtResource("2_6u5v2")
 
 [node name="metal_chunk" parent="." instance=ExtResource("3_rvph4")]
@@ -40,7 +41,7 @@ shape = SubResource("ConvexPolygonShape3D_3ykmm")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("5_cqlq7")
-prompt_text = "Equip Wrench"
+prompt_text = "Pick up Iron"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108398, 0)

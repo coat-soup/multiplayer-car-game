@@ -3,10 +3,11 @@ extends Node3D
 class_name EquipmentManager
 
 @export var player : Player
-@export var num_slots := 2
+@export var num_slots := 9
 var items : Array[Holdable] = []
 var cur_slot := 0
 var remote_transforms : Array[RemoteTransform3D]
+@onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
 
 
 func _ready() -> void:
@@ -15,6 +16,9 @@ func _ready() -> void:
 		var rt = RemoteTransform3D.new()
 		add_child(rt)
 		remote_transforms.append(rt)
+	
+	if is_multiplayer_authority():
+		ui.select_hotbar_slot(0)
 
 
 func _input(event: InputEvent) -> void:
@@ -49,6 +53,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 	if equipment:
 		var item = equipment
 		
+		if player.is_multiplayer_authority(): ui.place_item_in_slot(item, slot)
 		
 		# item placement
 		item.global_position = global_position
@@ -97,6 +102,8 @@ func handle_equip(scene_path : NodePath, slot : int):
 func drop_equipment(slot: int):
 	var item := items[slot]
 	if item:
+		if player.is_multiplayer_authority(): ui.remove_item_from_slot(item, slot)
+		
 		item.enable_physics()
 		
 		remote_transforms[slot].remote_path = ""
@@ -148,6 +155,8 @@ func swap_to_item(slot):
 		toggle_item_visibility.rpc(cur_slot, true)
 		items[cur_slot].held_by_auth = true
 		items[cur_slot].on_held()
+	
+	ui.select_hotbar_slot(slot)
 
 
 @rpc("any_peer", "call_local")

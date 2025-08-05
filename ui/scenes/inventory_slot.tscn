@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dclr6k74xds6n"]
+
+[ext_resource type="Texture2D" uid="uid://xppph38n83p" path="res://ui/textures/inventory_slot.png" id="1_y0oab"]
+[ext_resource type="Texture2D" uid="uid://bo5bx2yttegqf" path="res://ui/textures/corner_select_highlight.png" id="2_r4amr"]
+
+[node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot" type="TextureRect" parent="."]
+modulate = Color(0.266575, 0.266575, 0.266575, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("1_y0oab")
+
+[node name="Select" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 0.685705, 0.206147, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+texture = ExtResource("2_r4amr")
