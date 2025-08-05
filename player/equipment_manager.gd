@@ -3,7 +3,7 @@ extends Node3D
 class_name EquipmentManager
 
 @export var player : Player
-@export var num_slots := 9
+@export var num_slots := 8
 var items : Array[Holdable] = []
 var cur_slot := 0
 var remote_transforms : Array[RemoteTransform3D]
@@ -30,11 +30,11 @@ func _input(event: InputEvent) -> void:
 	
 	var scroll_dir = int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN)) - int(Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP))
 	if scroll_dir != 0 and not (items[cur_slot] and (items[cur_slot] as TractorTool) and (items[cur_slot] as TractorTool).beam.target):
-		swap_to_item((cur_slot + scroll_dir) % items.size())
+		swap_to_item(posmod((cur_slot + scroll_dir), items.size()))
 
 
-func equip_item(equipment: Holdable):
-	var slot = first_available_slot() if items[cur_slot] else cur_slot
+func equip_item(equipment: Holdable, specific_slot = -1):
+	var slot = specific_slot if specific_slot != -1 else (first_available_slot() if items[cur_slot] else cur_slot)
 	
 	if items[slot]:
 		drop_equipment.rpc(slot)
@@ -89,6 +89,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 		if slot != cur_slot:
 			equipment.visible = false
 		else:
+			equipment.visible = true
 			equipment.on_held()
 		
 		
@@ -102,7 +103,7 @@ func handle_equip(scene_path : NodePath, slot : int):
 func drop_equipment(slot: int):
 	var item := items[slot]
 	if item:
-		if player.is_multiplayer_authority(): ui.remove_item_from_slot(item, slot)
+		#if player.is_multiplayer_authority(): ui.remove_item_from_slot(item, slot)
 		
 		item.enable_physics()
 		
@@ -156,7 +157,7 @@ func swap_to_item(slot):
 		items[cur_slot].held_by_auth = true
 		items[cur_slot].on_held()
 	
-	ui.select_hotbar_slot(slot)
+	ui.select_hotbar_slot(cur_slot)
 
 
 @rpc("any_peer", "call_local")

@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 	
 	do_raycast()
 	if target_interactable and not target_interactable.active:
-		return
+		target_interactable = null
 	if target_interactable and Input.is_action_just_pressed("interact"):
 		target_interactable.interact(player)
 		

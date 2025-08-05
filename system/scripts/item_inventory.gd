@@ -1,0 +1,234 @@
+extends Node
+class_name ItemInventory
+
+@export var display_name : String = "Inventory"
+@export var dimensions : Vector2i = Vector2i(1,1)
+
+var items : Array[Holdable]
+
+@onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
+
+var opened_locally : bool = false
+var using_player : Player
+@export var interactable : Interactable
+
+var inventory_ui_panel : InventoryUIPanelManager
+const INVENTORY_UI_PANEL = preload("res://ui/widgets/inventory_ui_panel.tscn")
+
+var currently_dragging : InventoryItemIconManager
+
+
+func _ready() -> void:
+	interactable.interacted.connect(on_interacted)
+	
+	inventory_ui_panel = INVENTORY_UI_PANEL.instantiate() as InventoryUIPanelManager
+	inventory_ui_panel.inventory = self
+	add_child(inventory_ui_panel)
+	inventory_ui_panel.rebuild()
+	
+	inventory_ui_panel.visible = false
+	
+	for x in range(dimensions.x):
+		for y in range(dimensions.y):
+			items.append(null)
+
+
+func _input(event: InputEvent) -> void:
+	if opened_locally and event.is_action_pressed("interact"):
+		close_inventory.rpc()
+
+
+func on_interacted(source : Node):
+	request_open_by_player.rpc(source.get_path())
+
+
+@rpc("any_peer", "call_local")
+func request_open_by_player(player_path : String):
+	if not multiplayer.is_server(): return
+	var accepted = using_player == null
+	if accepted:
+		using_player = get_tree().get_root().get_node(player_path) as Player
+		if not using_player:
+			print("Opening player not found for ", get_parent().name, "inventory (path: ", player_path, ")")
+	receive_open_response.rpc_id(multiplayer.get_remote_sender_id(), accepted, player_path)
+
+
+@rpc("any_peer", "call_local")
+func receive_open_response(accepted : bool, player_path : String):
+	if accepted:
+		using_player = get_tree().get_root().get_node(player_path) as Player
+		open_inventory_local()
+	else:
+		ui.display_prompt("In use by other player.")
+
+
+@rpc("any_peer", "call_local")
+func close_inventory():
+	if opened_locally:
+		close_inventory_local()
+	using_player = null
+
+
+func open_inventory_local():
+	ui.open_inventory_panel(self)
+	interactable.active = false
+	opened_locally = true
+	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	using_player.active = false
+	
+	for item in using_player.equipment_manager.items:
+		if not item: continue
+		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
+		item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
+	
+	for item in items:
+		if not item: continue
+		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
+		item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
+
+
+func close_inventory_local():
+	ui.close_inventory_panel(self)
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	using_player.active = true
+	
+	for item in using_player.equipment_manager.items:
+		if not item: continue
+		item.inventory_icon.started_drag.disconnect(on_drag_started)
+		item.inventory_icon.ended_drag.disconnect(on_drag_ended)
+	
+	for item in items:
+		if not item: continue
+		item.inventory_icon.started_drag.disconnect(on_drag_started)
+		item.inventory_icon.ended_drag.disconnect(on_drag_ended)
+	
+	if currently_dragging: currently_dragging.stop_dragging()
+	
+	await get_tree().create_timer(0.2).timeout
+	opened_locally = false
+	interactable.active = true
+
+
+@rpc("any_peer", "call_local")
+func set_item(item_path : String, slot : int, change_physics : bool = true):
+	var item : Holdable = get_tree().get_root().get_node(item_path) as Holdable
+	if item:
+		items[slot] = item
+		inventory_ui_panel.put_icon_in_slot(item.inventory_icon, slot)
+		item.inventory_icon.visible = true
+		
+		if change_physics:
+			item.visible = false
+			item.disable_physics()
+			#item.move_item(get_parent().global_position)
+
+
+@rpc("any_peer", "call_local")
+func swap_item_positions(a : int, b : int):
+	var item_a = items[a]
+	var item_b = items[b]
+	
+	items[a] = item_b
+	if item_b: inventory_ui_panel.put_icon_in_slot(item_b.inventory_icon, a)
+	
+	items[b] = item_a
+	if item_a: inventory_ui_panel.put_icon_in_slot(item_a.inventory_icon, b)
+
+
+@rpc("any_peer", "call_local")
+func drop_item(slot : int, change_physics : bool = true):
+	var item = items[slot]
+	
+	item.inventory_icon.reparent(item)
+	item.inventory_icon.visible = false
+	if change_physics:
+		item.enable_physics()
+		item.visible = true
+		
+		if using_player:
+			await get_tree().process_frame
+			item.move_item(using_player.equipment_manager.global_position)
+	
+	items[slot] = null
+
+
+func on_drag_started(icon : InventoryItemIconManager):
+	currently_dragging = icon
+
+
+func on_drag_ended(icon : InventoryItemIconManager):
+	var ending_point = get_hovering_slot()
+	
+	print("ending point: ", ending_point)
+	
+	if ending_point.y == -1:
+		# return to prev slot
+		if check_in_bounds(get_viewport().get_mouse_position(), ui.hotbar) or check_in_bounds(get_viewport().get_mouse_position(), inventory_ui_panel.background):
+			if items.has(icon.item):
+				icon.reparent(inventory_ui_panel.slot_container.get_child(icon.inventory_position))
+				icon.position = Vector2.ZERO
+			elif using_player.equipment_manager.items.has(icon.item):
+				icon.reparent(ui.hotbar.get_child(icon.inventory_position))
+				icon.position = Vector2.ZERO
+		
+		else: # throw out ## WARNING: disabled with `true or` in previous if because figuring out where to place the item when throwing it out is kind of a pain
+			if items.has(icon.item):
+				drop_item.rpc(icon.inventory_position)
+			elif using_player.equipment_manager.items.has(icon.item):
+				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+		
+	elif ending_point.y == 0:
+		if items.has(icon.item): # inventory to hotbar
+				drop_item.rpc(icon.inventory_position, false)
+				if using_player.equipment_manager.items[ending_point.x]:
+					var prev_item = using_player.equipment_manager.items[ending_point.x]
+					var old_slot = icon.inventory_position
+					using_player.equipment_manager.drop_equipment.rpc(ending_point.x)
+					set_item.rpc(prev_item.get_path(), old_slot)
+				using_player.equipment_manager.equip_item(icon.item, ending_point.x)
+			
+		elif using_player.equipment_manager.items.has(icon.item): # hotbar to hotbar
+			print("Moving from hotbar to hotbar. from ", icon.inventory_position, " to ", ending_point)
+			var prev_item = using_player.equipment_manager.items[ending_point.x]
+			var old_slot = icon.inventory_position
+			using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+			using_player.equipment_manager.equip_item(icon.item, ending_point.x)
+			if prev_item:
+				using_player.equipment_manager.equip_item(prev_item, old_slot)
+		
+	elif ending_point.y == 1:
+		if items.has(icon.item):  # inventory to inventory
+				swap_item_positions.rpc(icon.inventory_position, ending_point.x)
+			
+		elif using_player.equipment_manager.items.has(icon.item):  # hotbar to inventory
+			using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+			if items[ending_point.x]:
+					var prev_item = items[ending_point.x]
+					var old_slot = icon.inventory_position
+					drop_item.rpc(ending_point.x, false)
+					using_player.equipment_manager.equip_item(prev_item, old_slot)
+			set_item.rpc(icon.item.get_path(), ending_point.x)
+	
+	currently_dragging = null
+
+
+func get_hovering_slot() -> Vector2i: # in form (index, 0=hotbar, 1=opened_inventory), index=-1 means not hovering over slot
+	var pos = get_viewport().get_mouse_position()
+	
+	for slot in ui.hotbar.get_children():
+		if check_in_bounds(pos, slot):
+				return Vector2i(slot.get_index(), 0)
+	
+	for slot in inventory_ui_panel.slot_container.get_children():
+		if check_in_bounds(pos, slot):
+			return Vector2i(slot.get_index(), 1)
+	
+	return Vector2i(-1,-1)
+
+
+func check_in_bounds(pos : Vector2, node : Control) -> bool:
+	pos -= node.global_position
+	if pos.x > 0 and pos.y > 0 and pos.x < node.size.x and pos.y < node.size.y: return true
+	else: return false

@@ -33,7 +33,9 @@ var chats : Array[String] = []
 @onready var turret_capacitor_label: RichTextLabel = $TurretPowerPanel/CapacitorNumberLabel
 @onready var power_warning: RichTextLabel = $"TurretPowerPanel/Power Warning"
 
-@onready var hotbar: HBoxContainer = $HUD/Hotbar
+@onready var hotbar: HBoxContainer = $HUD/Inventory/Hotbar
+@onready var inventory_panel_holder: Control = $HUD/Inventory/InventoryPanelHolder
+@onready var dragged_icon_holder: Control = $HUD/Inventory/DraggedIconHolder
 
 var prompt_time_remaining := 0.0
 
@@ -188,13 +190,24 @@ func select_hotbar_slot(slot : int):
 
 
 func place_item_in_slot(item : Holdable, slot : int):
-	var icon = preload("res://ui/scenes/inventory_item_icon.tscn").instantiate()
-	hotbar.get_child(slot).add_child(icon)
-	(icon.get_node("Icon") as TextureRect).texture = null #TODO: make icons
-	(icon.get_node("Name") as Label).text = item.item_data.item_name
-	(icon.get_node("StackCount") as Label).text = str(item.items_in_stack) if item.stack_size > 1 else ""
+	var icon = item.inventory_icon
+	icon.visible = true
+	icon.reparent(hotbar.get_child(slot))
+	icon.position = Vector2.ZERO
 
 
 func remove_item_from_slot(item : Holdable, slot : int):
-	var icon = hotbar.get_child(slot).get_node("InventoryItemIcon")
+	var icon = hotbar.get_child(slot).get_child(1)
 	if icon: icon.queue_free()
+
+
+func open_inventory_panel(inventory : ItemInventory):
+	inventory.inventory_ui_panel.reparent(inventory_panel_holder)
+	var bg : ColorRect = inventory.inventory_ui_panel.get_node("Background") as ColorRect
+	inventory.inventory_ui_panel.position = Vector2(-bg.size.x, -bg.size.y/2)
+	inventory.inventory_ui_panel.visible = true
+
+
+func close_inventory_panel(inventory : ItemInventory):
+	inventory.inventory_ui_panel.visible = false
+	inventory.inventory_ui_panel.reparent(inventory)

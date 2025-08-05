@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://baol6wgc4kuq6"]
+[gd_scene load_steps=9 format=3 uid="uid://baol6wgc4kuq6"]
 
 [ext_resource type="Script" path="res://items/scripts/item.gd" id="1_p1mdd"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_mt44k"]
 [ext_resource type="PackedScene" uid="uid://crv73tl4bv8bi" path="res://world/props/models/storage_crate_model.tscn" id="2_pe0ab"]
 [ext_resource type="Resource" uid="uid://dxtjutk37c3d8" path="res://items/item_data/item_storage_crate.tres" id="2_y24bs"]
+[ext_resource type="Script" path="res://system/scripts/item_inventory.gd" id="5_dq2fy"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_dcj17"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlt71"]
 size = Vector3(1.2, 0.9, 1)
@@ -32,3 +34,19 @@ replication_config = SubResource("SceneReplicationConfig_mrjew")
 
 [node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_mt44k")
+
+[node name="ItemInventory" type="Node" parent="." node_paths=PackedStringArray("interactable")]
+script = ExtResource("5_dq2fy")
+display_name = "Storage Crate"
+dimensions = Vector2i(6, 4)
+interactable = NodePath("../Interactable")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("6_dcj17")
+prompt_text = "Open Inventory"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1.11433, 0, 0, 0, 1.11433, 0, 0, 0, 1.11433, 0, 0, 0)
+shape = SubResource("BoxShape3D_vlt71")

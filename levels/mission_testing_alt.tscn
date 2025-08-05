@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="9_w5f58"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
-[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="20_4wwfl"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
 shader = ExtResource("19_55n7u")

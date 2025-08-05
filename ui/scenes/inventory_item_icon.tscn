@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cb5c2vcqs0fi3"]
+[gd_scene load_steps=2 format=3 uid="uid://cb5c2vcqs0fi3"]
+
+[ext_resource type="Script" path="res://ui/scripts/inventory_item_icon_manager.gd" id="1_qhxpw"]
 
 [node name="InventoryItemIcon" type="Control"]
 custom_minimum_size = Vector2(80, 80)
@@ -8,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qhxpw")
 
 [node name="Icon" type="TextureRect" parent="."]
 modulate = Color(0.266575, 0.266575, 0.266575, 1)
@@ -16,7 +19,7 @@ layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
 
-[node name="StackCount" type="Label" parent="."]
+[node name="StackLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 57.0
@@ -25,7 +28,7 @@ offset_bottom = 80.0
 text = "1"
 horizontal_alignment = 2
 
-[node name="Name" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0

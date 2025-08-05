@@ -29,6 +29,20 @@ var items_in_stack : int = 1
 
 @export var raycast_on_startup := true
 
+var prev_layers : int
+
+
+var inventory_icon : InventoryItemIconManager:
+	get:
+		if inventory_icon: return inventory_icon
+		else:
+			inventory_icon = preload("res://ui/scenes/inventory_item_icon.tscn").instantiate() as InventoryItemIconManager
+			inventory_icon.ui = ui
+			inventory_icon.item = self
+			add_child(inventory_icon)
+			inventory_icon.rebuild()
+			return inventory_icon
+
 
 func _ready():
 	super._ready()
@@ -88,7 +102,8 @@ func set_parent_to_scene_path(path : String, zero_transform := false):
 func disable_physics():
 	held_in_place = true
 	collision_layer = 0
-	#physics_dupe.collision_layer = 0
+	prev_layers = physics_dupe.collision_layer
+	physics_dupe.collision_layer = 0
 	
 	await get_tree().create_timer(0.1).timeout
 	physics_dupe.freeze = true
@@ -98,7 +113,7 @@ func disable_physics():
 func enable_physics():
 	held_in_place = false
 	collision_layer = 1
-	#physics_dupe.collision_layer = 1
+	physics_dupe.collision_layer = prev_layers
 	physics_dupe.freeze = false
 
 

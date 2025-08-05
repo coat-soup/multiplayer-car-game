@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvtvljrtqbpvo"]
+
+[ext_resource type="Script" path="res://ui/scripts/inventory_ui_panel_manager.gd" id="1_itufc"]
+[ext_resource type="PackedScene" uid="uid://dclr6k74xds6n" path="res://ui/scenes/inventory_slot.tscn" id="1_mmkj7"]
+
+[node name="InventoryUIPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_itufc")
+padding = null
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 399.835
+offset_bottom = 800.0
+color = Color(0.215902, 0.215902, 0.215902, 1)
+
+[node name="SlotContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+
+[node name="InventorySlot" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="SlotContainer" instance=ExtResource("1_mmkj7")]
+layout_mode = 2
+
+[node name="NameText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 154.0
+offset_bottom = 39.0
+text = "INVENTORY NAME"

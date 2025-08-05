@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://missions/mission_manager.gd" id="3_eba62"]
 [ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="3_rvx0j"]
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="5_grtg3"]
-[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="6_nkvd6"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="6_nkvd6"]
 [ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_yil5e"]
 [ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="7_7qkik"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://stations/station_mockup_2.tscn" id="8_ybjgi"]

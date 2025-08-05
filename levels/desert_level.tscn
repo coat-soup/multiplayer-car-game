@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b4edtsm7wqfui" path="res://world/landscape/scenes/rocks_stack_01.tscn" id="12_jtjrn"]
 [ext_resource type="PackedScene" uid="uid://dfv5q1rqef88i" path="res://vehicles/scenes/modular_vehicle.tscn" id="12_mtjk6"]
 [ext_resource type="Shader" path="res://vfx/shaders/post_processing_shader.gdshader" id="13_5iaee"]
-[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/ui.tscn" id="14_dbygt"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="14_dbygt"]
 [ext_resource type="PackedScene" uid="uid://chg41ge62ovwo" path="res://world/foliage/scenes/cactus_tall.tscn" id="14_dgsuv"]
 [ext_resource type="PackedScene" uid="uid://cd1jh6wm80v5e" path="res://world/foliage/models/peenor.glb" id="15_tu7tu"]
 [ext_resource type="PackedScene" uid="uid://bluc870pqpnhm" path="res://world/landscape/scenes/ribcage_full.tscn" id="20_1hj3b"]
