@@ -6,4 +6,5 @@
 script = ExtResource("1_uysuc")
 item_name = "Plant Pot"
 price = 30
+prefab_path = "res://items/scenes/plant_pot.tscn"
 crafting_recipes = Array[String]([])

@@ -41,6 +41,7 @@ var inventory_icon : InventoryItemIconManager:
 			inventory_icon.item = self
 			add_child(inventory_icon)
 			inventory_icon.rebuild()
+			inventory_icon.visible = false
 			return inventory_icon
 
 

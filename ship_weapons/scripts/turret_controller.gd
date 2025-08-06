@@ -60,7 +60,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			virtual_joystick_value = virtual_joystick_value.limit_length(1)
 			ui.update_virtual_joystick(virtual_joystick_value)
 		else:
-			var m = -1 if camera.rotation.z > 0 else 1
 			camera.rotation.y += (-event.relative.x * sensetivity) * (-1.0 if camera.rotation.x > PI/2 else 1.0)
 			camera.rotation.x += (-event.relative.y * sensetivity)# * (-1.0 if camera.rotation.x > PI/2 else 1.0)
 			

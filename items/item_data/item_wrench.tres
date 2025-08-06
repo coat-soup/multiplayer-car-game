@@ -6,4 +6,5 @@
 script = ExtResource("1_t0tvm")
 item_name = "Wrench"
 price = 20
+prefab_path = "res://equipment/wrench.tscn"
 crafting_recipes = Array[String]([])

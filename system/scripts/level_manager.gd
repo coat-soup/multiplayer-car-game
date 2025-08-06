@@ -16,13 +16,32 @@ var level_gen_seed : int = -1
 @export var item_spawner : MultiplayerSpawner
 #@export var items_spawned : Array[Item]
 
+var tracked_spawnable_items : Array[String]
+
+
 func _ready() -> void:
 	for scene in Util.get_scenes_in_folder("res://items/scenes/"):
 		item_spawner.add_spawnable_scene(scene)
 
+
 func setup(_multiplayer):
 	_multiplayer.peer_connected.connect(generate_for_new_connection)
 	reset_level()
+
+
+func spawn_item_synced(file_path, pos) -> Item:
+	add_item_to_spawner.rpc(file_path)
+	var item = load(file_path).instantiate() as Item
+	ship.add_child(item, true)
+	item.global_position = pos
+	return item
+
+
+@rpc("call_local", "any_peer")
+func add_item_to_spawner(file_path : String):
+	if not tracked_spawnable_items.has(file_path):
+		tracked_spawnable_items.append(file_path)
+		item_spawner.add_spawnable_scene(file_path)
 
 
 func spawn_item(prefab : PackedScene, pos) -> Item:

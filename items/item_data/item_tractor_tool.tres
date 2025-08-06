@@ -6,4 +6,5 @@
 script = ExtResource("1_vplcc")
 item_name = "Tractor Tool"
 price = 55
+prefab_path = "res://equipment/tractor_tool.tscn"
 crafting_recipes = Array[String]([])

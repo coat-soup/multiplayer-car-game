@@ -22,6 +22,15 @@ func _ready() -> void:
 	ship_manager.item_manager.item_removed.connect(item_left_ship)
 
 
+@rpc("any_peer", "call_local")
+func spawn_item(file_path : String, world_pos : Vector3) -> Item:
+	print("spawning item from file ", file_path)
+	var item = load(file_path).instantiate() as Item
+	ship_manager.add_child(item, true)
+	item.global_position = world_pos
+	return item
+
+
 func recursive_set_layer_mask(node : Node, layer_mask : int):
 	print("attempting layer set on ", node)
 	var collider = node as StaticBody3D

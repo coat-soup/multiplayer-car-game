@@ -6,4 +6,5 @@
 script = ExtResource("1_6tsgh")
 item_name = "Storage Crate"
 price = 20
+prefab_path = "res://items/scenes/storage_crate.tscn"
 crafting_recipes = Array[String]([])

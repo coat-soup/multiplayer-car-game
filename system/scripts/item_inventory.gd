@@ -81,11 +81,13 @@ func open_inventory_local():
 		if not item: continue
 		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
 		item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
+		item.inventory_icon.stack_split.connect(on_stack_split.bind(item.inventory_icon))
 	
 	for item in items:
 		if not item: continue
 		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
 		item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
+		item.inventory_icon.stack_split.connect(on_stack_split.bind(item.inventory_icon))
 
 
 func close_inventory_local():
@@ -98,11 +100,13 @@ func close_inventory_local():
 		if not item: continue
 		item.inventory_icon.started_drag.disconnect(on_drag_started)
 		item.inventory_icon.ended_drag.disconnect(on_drag_ended)
+		item.inventory_icon.stack_split.disconnect(on_stack_split)
 	
 	for item in items:
 		if not item: continue
 		item.inventory_icon.started_drag.disconnect(on_drag_started)
 		item.inventory_icon.ended_drag.disconnect(on_drag_ended)
+		item.inventory_icon.stack_split.disconnect(on_stack_split)
 	
 	if currently_dragging: currently_dragging.stop_dragging()
 	
@@ -161,8 +165,6 @@ func on_drag_started(icon : InventoryItemIconManager):
 func on_drag_ended(icon : InventoryItemIconManager):
 	var ending_point = get_hovering_slot()
 	
-	print("ending point: ", ending_point)
-	
 	var stackable = stackable_amount(icon.item, items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
 	var stack_all = stackable == icon.item.items_in_stack
 	
@@ -193,9 +195,12 @@ func on_drag_ended(icon : InventoryItemIconManager):
 					var old_slot = icon.inventory_position
 					using_player.equipment_manager.drop_equipment.rpc(ending_point.x)
 					set_item.rpc(prev_item.get_path(), old_slot)
-				using_player.equipment_manager.equip_item(icon.item, ending_point.x)
+				using_player.equipment_manager.equip_item(icon.item, ending_point.x, false)
 			
 		elif using_player.equipment_manager.items.has(icon.item): # hotbar to hotbar
+			if icon.inventory_position == ending_point.x:
+				return_icon(icon)
+				return
 			if stackable > 0:
 				icon.item.change_stack_size.rpc(-stackable)
 				using_player.equipment_manager.items[ending_point.x].change_stack_size.rpc(stackable)
@@ -207,12 +212,15 @@ func on_drag_ended(icon : InventoryItemIconManager):
 				var prev_item = using_player.equipment_manager.items[ending_point.x]
 				var old_slot = icon.inventory_position
 				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-				using_player.equipment_manager.equip_item(icon.item, ending_point.x)
+				using_player.equipment_manager.equip_item(icon.item, ending_point.x, false)
 				if prev_item:
-					using_player.equipment_manager.equip_item(prev_item, old_slot)
+					using_player.equipment_manager.equip_item(prev_item, old_slot, false)
 		
 	elif ending_point.y == 1:
 		if items.has(icon.item):  # inventory to inventory
+			if icon.inventory_position == ending_point.x:
+				return_icon(icon)
+				return
 			if stackable > 0:
 				icon.item.change_stack_size.rpc(-stackable)
 				items[ending_point.x].change_stack_size.rpc(stackable)
@@ -240,6 +248,32 @@ func on_drag_ended(icon : InventoryItemIconManager):
 				set_item.rpc(icon.item.get_path(), ending_point.x)
 	
 	currently_dragging = null
+
+
+func on_stack_split(amount : int, icon : InventoryItemIconManager):
+	print(icon.item, " splitting ", amount)
+	
+	var ending_point = get_hovering_slot()
+	
+	var target_item = null if ending_point.y == -1 else (items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
+	var stackable = min(amount, stackable_amount(icon.item, target_item))
+	
+	if target_item:
+		target_item.change_stack_size.rpc(stackable)
+		icon.item.change_stack_size.rpc(-stackable)
+	else:
+		var new_item = icon.item.item_physics_dupe_manager.spawn_item(icon.item.scene_file_path, using_player.equipment_manager.global_position)
+		sync_item_spawn.rpc(new_item.name, icon)
+		icon.item.change_stack_size.rpc(-amount)
+		new_item.change_stack_size.rpc(amount - 1)
+		if ending_point.y == 0: using_player.equipment_manager.equip_item(new_item, ending_point.x, false)
+		elif ending_point.y == 1: set_item.rpc(new_item.get_path(), ending_point.x)
+
+
+@rpc("any_peer") # not call local bc already spawned locally
+func sync_item_spawn(entity_name : String, icon : InventoryItemIconManager):
+	var new_item = icon.item.item_physics_dupe_manager.spawn_item(icon.item.scene_file_path, using_player.equipment_manager.global_position) as Holdable
+	new_item.name = entity_name
 
 
 func return_icon(icon : InventoryItemIconManager):
