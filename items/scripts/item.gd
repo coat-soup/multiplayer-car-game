@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Item
 
+signal destroyed
+
 @export var item_data : ItemData
 @export var immovable : bool = false
 
@@ -229,3 +231,11 @@ func set_target_angular_velocity(vel : Vector3, accel):
 @rpc("any_peer", "call_local")
 func set_linear_velocity(vel : Vector3):
 	physics_dupe.linear_velocity = vel
+
+
+@rpc("any_peer", "call_local")
+func destroy_item():
+	destroyed.emit()
+	physics_dupe.queue_free()
+	snap_indicator.queue_free()
+	queue_free()

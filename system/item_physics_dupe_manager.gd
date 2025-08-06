@@ -142,11 +142,11 @@ func item_entered_ship(item : Item):
 
 
 func item_left_ship(item : Item):
-	#if item.immovable: return
-	
 	if !item.is_inside_tree():
 		await item.tree_entered
 		await get_tree().create_timer(0.1)
+	
+	if not is_instance_valid(item.physics_dupe): return
 	
 	item.physics_dupe.gravity_scale = 0
 	item.physics_dupe.global_position = item.global_position

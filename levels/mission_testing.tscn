@@ -162,6 +162,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.271867, 6.98546, 31.2138)
 
 [node name="Iron" parent="ShipHolder/Ship" instance=ExtResource("18_pu78r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.65092, 3.8166, 13.995)
+items_in_stack = 45
+
+[node name="Iron4" parent="ShipHolder/Ship" instance=ExtResource("18_pu78r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65092, 3.8166, 13.995)
+items_in_stack = 20
+
+[node name="Iron2" parent="ShipHolder/Ship" instance=ExtResource("18_pu78r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65092, 3.8166, 13.995)
+items_in_stack = 2
+
+[node name="Iron3" parent="ShipHolder/Ship" instance=ExtResource("18_pu78r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34908, 3.8166, 13.995)
 
 [node name="PlantPot" parent="ShipHolder/Ship" instance=ExtResource("19_3f7fm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7611, -1.96346, 35.1905)

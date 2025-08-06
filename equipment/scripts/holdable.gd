@@ -23,7 +23,7 @@ var held_player : Player = null
 var prev_parent : Node3D = null
 
 @export var stack_size : int = 1
-var items_in_stack : int = 1
+@export var items_in_stack : int = 1
 
 @export var interact_holdable := true
 
@@ -48,6 +48,7 @@ func _ready():
 	super._ready()
 	
 	interactable.prompt_text = "Pick up " + item_data.item_name
+	if stack_size > 1: interactable.prompt_text += " (x" + str(items_in_stack) + ")"
 	interactable.interacted.connect(try_equip)
 	triggered.connect(on_triggered)
 	trigger_ended.connect(on_trigger_ended)
@@ -153,3 +154,19 @@ func on_triggered(_button : int):
 
 func on_trigger_ended(_button : int):
 	pass
+
+
+@rpc("any_peer", "call_local")
+func destroy_item():
+	inventory_icon.queue_free()
+	super.destroy_item()
+
+
+@rpc("any_peer", "call_local")
+func change_stack_size(change : int):
+	items_in_stack += change
+	
+	interactable.prompt_text = "Pick up " + item_data.item_name
+	if stack_size > 1: interactable.prompt_text += " (x" + str(items_in_stack) + ")"
+	
+	inventory_icon.rebuild()

@@ -36,12 +36,12 @@ func _input(event: InputEvent) -> void:
 func equip_item(equipment: Holdable, specific_slot = -1):
 	var slot = specific_slot if specific_slot != -1 else (first_available_slot() if items[cur_slot] else cur_slot)
 	
-	if items[slot]:
-		drop_equipment.rpc(slot)
-		print("dropping", items[slot])
+	#if items[slot]:
+		#drop_equipment.rpc(slot)
+		#print("dropping", items[slot])
 	
 	print("equipping ", equipment)
-	items[slot] = equipment
+	#items[slot] = equipment
 	equipment.held_by_auth = true
 	
 	handle_equip.rpc(equipment.get_path(), slot)
@@ -52,6 +52,20 @@ func handle_equip(scene_path : NodePath, slot : int):
 	var equipment = get_tree().root.get_node(scene_path) as Holdable
 	if equipment:
 		var item = equipment
+		
+		for othertem in items:
+			var s = ItemInventory.stackable_amount(item, othertem)
+			if s > 0 and item.items_in_stack > 0:
+				othertem.change_stack_size(s) # no rpc bc in rpc function
+				item.change_stack_size(-s)
+		
+		if item.items_in_stack <= 0:
+			item.destroy_item()
+			return
+		
+		if items[slot]:
+			if player.is_multiplayer_authority(): ui.display_prompt("Inventory full")
+			return
 		
 		if player.is_multiplayer_authority(): ui.place_item_in_slot(item, slot)
 		

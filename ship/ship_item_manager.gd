@@ -45,6 +45,7 @@ func add_item(item : Item):
 
 
 func remove_item(item : Item):
-	items.remove_at(items.find(item))
+	var id = items.find(item)
+	if id != -1: items.remove_at(id)
 	item.on_ship = null
 	item_removed.emit(item)

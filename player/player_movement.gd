@@ -84,6 +84,7 @@ func unpause_ship_rpc():
 	remote_transform.update_position = true
 	remote_transform.update_rotation = true
 
+
 func _input(_event: InputEvent) -> void:
 	if not player_manager.active or not is_multiplayer_authority(): return
 	if Input.is_key_pressed(KEY_SEMICOLON):
@@ -107,7 +108,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not player_manager.active or not is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 	
 	
 	# gravity
@@ -121,6 +122,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := ((player.basis if on_ship else player.global_basis) * Vector3(input_dir.x, 0.0 if on_ship else Input.get_axis("crouch", "jump"), input_dir.y)).normalized()
 	
+	if not player_manager.active: direction = Vector3.ZERO
+	
 	var adjusted_local_velocity = ship.global_basis.inverse() * player.velocity
 	
 	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
@@ -130,13 +133,13 @@ func _physics_process(delta: float) -> void:
 		player.velocity.x = lerp(player.velocity.x, direction.x * speed, delta * 2)
 		player.velocity.z = lerp(player.velocity.z, direction.z * speed, delta * 2)
 		player.velocity.y = lerp(player.velocity.y, direction.y * speed, delta * 2)
-		player.rotate_object_local(Vector3.FORWARD, Input.get_axis("roll_left", "roll_right") * delta * 2)
+		if player_manager.active: player.rotate_object_local(Vector3.FORWARD, Input.get_axis("roll_left", "roll_right") * delta * 2)
 		#player.velocity = adjusted_local_velocity
 	else:
 		player.rotation.z = lerp_angle(player.rotation.z, 0, delta * 10)
 		player.rotation.x = lerp_angle(player.rotation.x, 0, delta * 10)
 		# WALKING MOVEMENT
-		if Input.is_action_just_pressed("jump") and player.is_on_floor() and on_ship: # jump
+		if player_manager.active and Input.is_action_just_pressed("jump") and player.is_on_floor() and on_ship: # jump
 			jump_start.emit()
 			adjusted_local_velocity.y = jump_velocity
 			#player.velocity += ship.global_basis.y * jump_velocity

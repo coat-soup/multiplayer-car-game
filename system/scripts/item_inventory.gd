@@ -59,7 +59,7 @@ func receive_open_response(accepted : bool, player_path : String):
 		using_player = get_tree().get_root().get_node(player_path) as Player
 		open_inventory_local()
 	else:
-		ui.display_prompt("In use by other player.")
+		ui.display_prompt("In use by other player")
 
 
 @rpc("any_peer", "call_local")
@@ -106,8 +106,8 @@ func close_inventory_local():
 	
 	if currently_dragging: currently_dragging.stop_dragging()
 	
-	await get_tree().create_timer(0.2).timeout
 	opened_locally = false
+	await get_tree().create_timer(0.2).timeout
 	interactable.active = true
 
 
@@ -163,15 +163,13 @@ func on_drag_ended(icon : InventoryItemIconManager):
 	
 	print("ending point: ", ending_point)
 	
+	var stackable = stackable_amount(icon.item, items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
+	var stack_all = stackable == icon.item.items_in_stack
+	
 	if ending_point.y == -1:
 		# return to prev slot
 		if check_in_bounds(get_viewport().get_mouse_position(), ui.hotbar) or check_in_bounds(get_viewport().get_mouse_position(), inventory_ui_panel.background):
-			if items.has(icon.item):
-				icon.reparent(inventory_ui_panel.slot_container.get_child(icon.inventory_position))
-				icon.position = Vector2.ZERO
-			elif using_player.equipment_manager.items.has(icon.item):
-				icon.reparent(ui.hotbar.get_child(icon.inventory_position))
-				icon.position = Vector2.ZERO
+			return_icon(icon)
 		
 		else: # throw out ## WARNING: disabled with `true or` in previous if because figuring out where to place the item when throwing it out is kind of a pain
 			if items.has(icon.item):
@@ -181,6 +179,14 @@ func on_drag_ended(icon : InventoryItemIconManager):
 		
 	elif ending_point.y == 0:
 		if items.has(icon.item): # inventory to hotbar
+			if stackable > 0:
+				icon.item.change_stack_size.rpc(-stackable)
+				using_player.equipment_manager.items[ending_point.x].change_stack_size.rpc(stackable)
+				return_icon(icon)
+				if stack_all:
+					drop_item.rpc(icon.inventory_position, false)
+					icon.item.destroy_item.rpc()
+			else:
 				drop_item.rpc(icon.inventory_position, false)
 				if using_player.equipment_manager.items[ending_point.x]:
 					var prev_item = using_player.equipment_manager.items[ending_point.x]
@@ -190,28 +196,66 @@ func on_drag_ended(icon : InventoryItemIconManager):
 				using_player.equipment_manager.equip_item(icon.item, ending_point.x)
 			
 		elif using_player.equipment_manager.items.has(icon.item): # hotbar to hotbar
-			print("Moving from hotbar to hotbar. from ", icon.inventory_position, " to ", ending_point)
-			var prev_item = using_player.equipment_manager.items[ending_point.x]
-			var old_slot = icon.inventory_position
-			using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-			using_player.equipment_manager.equip_item(icon.item, ending_point.x)
-			if prev_item:
-				using_player.equipment_manager.equip_item(prev_item, old_slot)
+			if stackable > 0:
+				icon.item.change_stack_size.rpc(-stackable)
+				using_player.equipment_manager.items[ending_point.x].change_stack_size.rpc(stackable)
+				return_icon(icon)
+				if stack_all:
+					using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+					icon.item.destroy_item.rpc()
+			else:
+				var prev_item = using_player.equipment_manager.items[ending_point.x]
+				var old_slot = icon.inventory_position
+				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+				using_player.equipment_manager.equip_item(icon.item, ending_point.x)
+				if prev_item:
+					using_player.equipment_manager.equip_item(prev_item, old_slot)
 		
 	elif ending_point.y == 1:
 		if items.has(icon.item):  # inventory to inventory
-				swap_item_positions.rpc(icon.inventory_position, ending_point.x)
+			if stackable > 0:
+				icon.item.change_stack_size.rpc(-stackable)
+				items[ending_point.x].change_stack_size.rpc(stackable)
+				return_icon(icon)
+				if stack_all:
+					drop_item.rpc(icon.inventory_position, false)
+					icon.item.destroy_item.rpc()
+			else: swap_item_positions.rpc(icon.inventory_position, ending_point.x)
 			
 		elif using_player.equipment_manager.items.has(icon.item):  # hotbar to inventory
-			using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-			if items[ending_point.x]:
-					var prev_item = items[ending_point.x]
-					var old_slot = icon.inventory_position
-					drop_item.rpc(ending_point.x, false)
-					using_player.equipment_manager.equip_item(prev_item, old_slot)
-			set_item.rpc(icon.item.get_path(), ending_point.x)
+			if stackable > 0:
+				icon.item.change_stack_size.rpc(-stackable)
+				items[ending_point.x].change_stack_size.rpc(stackable)
+				return_icon(icon)
+				if stack_all:
+					using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+					icon.item.destroy_item.rpc()
+			else:
+				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
+				if items[ending_point.x]:
+						var prev_item = items[ending_point.x]
+						var old_slot = icon.inventory_position
+						drop_item.rpc(ending_point.x, false)
+						using_player.equipment_manager.equip_item(prev_item, old_slot)
+				set_item.rpc(icon.item.get_path(), ending_point.x)
 	
 	currently_dragging = null
+
+
+func return_icon(icon : InventoryItemIconManager):
+	if items.has(icon.item):
+		icon.reparent(inventory_ui_panel.slot_container.get_child(icon.inventory_position))
+		icon.position = Vector2.ZERO
+	elif using_player.equipment_manager.items.has(icon.item):
+		icon.reparent(ui.hotbar.get_child(icon.inventory_position))
+		icon.position = Vector2.ZERO
+
+
+# checks how many items from a can be put to b
+static func stackable_amount(a : Holdable, b : Holdable) -> int:
+	if a and b and a.item_data == b.item_data and a.stack_size > 1:
+		return min(b.stack_size - b.items_in_stack, a.items_in_stack)
+	else: return 0
 
 
 func get_hovering_slot() -> Vector2i: # in form (index, 0=hotbar, 1=opened_inventory), index=-1 means not hovering over slot

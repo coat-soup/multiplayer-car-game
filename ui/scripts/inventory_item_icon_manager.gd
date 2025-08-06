@@ -21,7 +21,7 @@ var ui : UIManager
 func _ready() -> void:
 	mouse_entered.connect(on_mouse_entered)
 	mouse_exited.connect(on_mouse_exited)
-	item.dropped.connect(on_dropped)
+	if item: item.dropped.connect(on_dropped) # sometimes item is destroyed immediately upon access
 
 
 func _input(event: InputEvent) -> void:
