@@ -29,6 +29,54 @@ func setup(_multiplayer):
 	reset_level()
 
 
+@rpc("any_peer", "call_local")
+func spawn_item_with_callback(file_path : String, pos : Vector3, sender : Node, callback_function : String):
+	var item = load(file_path).instantiate() as Item
+	ship.add_child(item, true)
+	item.global_position = pos
+
+
+func spawn_item_replicated(file_path : String, pos : Vector3) -> Item:
+	var item = load(file_path).instantiate() as Item
+	ship.add_child(item, true)
+	item.global_position = pos
+	
+	mission_manager.ui.display_chat_message("Starting item spawn for " + item.name)
+	
+	replicate_item_spawn.rpc(item.name, file_path, pos)
+	return item
+
+
+@rpc("any_peer", "call_remote")
+func replicate_item_spawn(node_name : String, file_path : String, pos : Vector3):
+	mission_manager.ui.display_chat_message("Syncing item spawn for " + node_name)
+	var item = load(file_path).instantiate() as Item
+	ship.add_child(item, true)
+	item.global_position = pos
+	item.name = node_name
+
+
+func test_spawn_function(value):
+	print("Custom spawn function called: ", value)
+	
+	return null
+
+
+@rpc("any_peer", "call_local")
+func spawn_item_synced_with_callback(file_path : String, pos : Vector3, sender_path : String, callback_function : String):
+	item_spawner.spawn_function = test_spawn_function
+	if not tracked_spawnable_items.has(file_path):
+		tracked_spawnable_items.append(file_path)
+		item_spawner.add_spawnable_scene(file_path)
+		
+	if not multiplayer.is_server(): return
+	add_item_to_spawner.rpc(file_path)
+	var item = load(file_path).instantiate() as Item
+	ship.add_child(item, true)
+	item.global_position = pos
+	return item
+
+
 func spawn_item_synced(file_path, pos) -> Item:
 	add_item_to_spawner.rpc(file_path)
 	var item = load(file_path).instantiate() as Item

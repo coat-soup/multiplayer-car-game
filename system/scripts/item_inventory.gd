@@ -251,6 +251,14 @@ func on_drag_ended(icon : InventoryItemIconManager):
 
 
 func on_stack_split(amount : int, icon : InventoryItemIconManager):
+	rpc_stack_split.rpc(amount, icon.item.get_path())
+
+
+@rpc("any_peer", "call_local")
+func rpc_stack_split(amount, item_path):
+	if not multiplayer.is_server(): return
+	var icon : InventoryItemIconManager = (get_tree().get_root().get_node(item_path) as Holdable).inventory_icon as InventoryItemIconManager
+	
 	print(icon.item, " splitting ", amount)
 	
 	var ending_point = get_hovering_slot()
@@ -262,18 +270,13 @@ func on_stack_split(amount : int, icon : InventoryItemIconManager):
 		target_item.change_stack_size.rpc(stackable)
 		icon.item.change_stack_size.rpc(-stackable)
 	else:
-		var new_item = icon.item.item_physics_dupe_manager.spawn_item(icon.item.scene_file_path, using_player.equipment_manager.global_position)
-		sync_item_spawn.rpc(new_item.name, icon)
+		var new_item = using_player.network_manager.network_manager.level_manager.spawn_item_synced(icon.item.scene_file_path, using_player.equipment_manager.global_position)
 		icon.item.change_stack_size.rpc(-amount)
 		new_item.change_stack_size.rpc(amount - 1)
+		
+		await get_tree().create_timer(0.5).timeout
 		if ending_point.y == 0: using_player.equipment_manager.equip_item(new_item, ending_point.x, false)
 		elif ending_point.y == 1: set_item.rpc(new_item.get_path(), ending_point.x)
-
-
-@rpc("any_peer") # not call local bc already spawned locally
-func sync_item_spawn(entity_name : String, icon : InventoryItemIconManager):
-	var new_item = icon.item.item_physics_dupe_manager.spawn_item(icon.item.scene_file_path, using_player.equipment_manager.global_position) as Holdable
-	new_item.name = entity_name
 
 
 func return_icon(icon : InventoryItemIconManager):
