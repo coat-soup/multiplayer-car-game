@@ -51,7 +51,7 @@ func request_open_by_player(player_path : String):
 		using_player = get_tree().get_root().get_node(player_path) as Player
 		if not using_player:
 			print("Opening player not found for ", get_parent().name, "inventory (path: ", player_path, ")")
-		if multiplayer.is_server(): receive_open_response.rpc_id(multiplayer.get_remote_sender_id(), accepted, player_path)
+	if multiplayer.is_server(): receive_open_response.rpc_id(multiplayer.get_remote_sender_id(), accepted, player_path)
 
 
 @rpc("any_peer", "call_local")
@@ -60,6 +60,7 @@ func receive_open_response(accepted : bool, player_path : String):
 		using_player = get_tree().get_root().get_node(player_path) as Player
 		open_inventory_local()
 	else:
+		print("TELLING THEM NO")
 		ui.display_prompt("In use by other player")
 
 
@@ -293,33 +294,34 @@ func inventory_to_inventory(from : int, to: int):
 			drop_item(from, false)
 	else: swap_item_positions(from, to)
 
+
 func on_stack_split(amount : int, icon : InventoryItemIconManager):
-	rpc_stack_split.rpc(amount, icon.item.get_path())
+	var ending_point = get_hovering_slot()
+	rpc_stack_split.rpc(amount, Vector2i(icon.inventory_item.inventory_slot, icon.inventory_item.inventory_type), ending_point)
 
 
 @rpc("any_peer", "call_local")
-func rpc_stack_split(amount, item_path):
-	if not multiplayer.is_server(): return
-	var icon : InventoryItemIconManager = (get_tree().get_root().get_node(item_path) as Holdable).inventory_icon as InventoryItemIconManager
+func rpc_stack_split(amount, starting_point, ending_point):
+	var from_item : InventoryItemData = items[starting_point.x] if starting_point.y == 0 else using_player.equipment_manager.items[starting_point.x].inventory_icon.inventory_item
 	
-	print(icon.item, " splitting ", amount)
-	
-	var ending_point = get_hovering_slot()
+	print(from_item.item_data.item_name, " splitting ", amount)
 	
 	var target_item = null if ending_point.y == -1 else (items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
-	var stackable = min(amount, stackable_amount(icon.item, target_item))
+	var stackable = min(amount, stackable_amount(from_item, target_item))
+	
+	var from_item_maybe_actual_item = items[from_item.inventory_slot] if from_item.inventory_type == 0 else using_player.equipment_manager.items[starting_point.x]
 	
 	if target_item:
-		target_item.change_stack_size.rpc(stackable)
-		icon.item.change_stack_size.rpc(-stackable)
+		target_item.change_stack_size(stackable)
+		from_item_maybe_actual_item.change_stack_size(-stackable)
 	else:
-		var new_item = using_player.network_manager.network_manager.level_manager.spawn_item_synced(icon.item.scene_file_path, using_player.equipment_manager.global_position)
-		icon.item.change_stack_size.rpc(-amount)
-		new_item.change_stack_size.rpc(amount - 1)
-		
-		await get_tree().create_timer(0.5).timeout
-		if ending_point.y == 0: using_player.equipment_manager.equip_item(new_item, ending_point.x, false)
-		elif ending_point.y == 1: set_item.rpc(new_item.get_path(), ending_point.x)
+		from_item_maybe_actual_item.change_stack_size(-amount)
+		if multiplayer.is_server():
+			var new_item : Holdable = level_manager.spawn_item_synced(from_item.item_data.prefab_path, using_player.equipment_manager.global_position)
+			new_item.override_stack_size.rpc(amount)
+			
+			if ending_point.y == 0: using_player.equipment_manager.equip_item(new_item, ending_point.x, false)
+			elif ending_point.y == 1: set_item.rpc(new_item.get_path(), ending_point.x)
 
 
 func return_icon(icon : InventoryItemIconManager):
