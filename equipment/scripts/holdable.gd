@@ -36,12 +36,9 @@ var inventory_icon : InventoryItemIconManager:
 	get:
 		if inventory_icon: return inventory_icon
 		else:
-			inventory_icon = preload("res://ui/scenes/inventory_item_icon.tscn").instantiate() as InventoryItemIconManager
+			inventory_icon = InventoryItemData.new(self, self).ui_icon
 			inventory_icon.ui = ui
-			inventory_icon.item = self
-			add_child(inventory_icon)
-			inventory_icon.rebuild()
-			inventory_icon.visible = false
+			inventory_icon.inventory_item.inventory_type = 1
 			return inventory_icon
 
 
@@ -144,8 +141,13 @@ func on_held():
 func on_put_away():
 	put_away.emit()
 
+
 func on_dropped():
 	dropped.emit()
+	if inventory_icon:
+		inventory_icon.reparent(self)
+		inventory_icon.visible = false
+
 
 func on_picked_up():
 	picked_up.emit()
@@ -166,8 +168,16 @@ func destroy_item():
 @rpc("any_peer", "call_local")
 func change_stack_size(change : int):
 	items_in_stack += change
+	inventory_icon.inventory_item.change_stack_size(change)
 	
 	interactable.prompt_text = "Pick up " + item_data.item_name
 	if stack_size > 1: interactable.prompt_text += " (x" + str(items_in_stack) + ")"
+
+
+@rpc("any_peer", "call_local")
+func override_stack_size(amount : int):
+	items_in_stack = amount
+	inventory_icon.inventory_item.override_stack_size(amount)
 	
-	inventory_icon.rebuild()
+	interactable.prompt_text = "Pick up " + item_data.item_name
+	if stack_size > 1: interactable.prompt_text += " (x" + str(items_in_stack) + ")"

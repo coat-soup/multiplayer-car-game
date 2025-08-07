@@ -5,7 +5,7 @@ signal started_drag
 signal ended_drag
 signal stack_split
 
-var item : Holdable
+var inventory_item : InventoryItemData
 
 @onready var icon: TextureRect = $Icon
 @onready var stack_label: Label = $StackLabel
@@ -21,7 +21,6 @@ var ui : UIManager
 func _ready() -> void:
 	mouse_entered.connect(on_mouse_entered)
 	mouse_exited.connect(on_mouse_exited)
-	if item: item.dropped.connect(on_dropped) # sometimes item is destroyed immediately upon access
 
 
 func _input(event: InputEvent) -> void:
@@ -51,8 +50,8 @@ func stop_dragging():
 
 
 func try_split_stack():
-	if item.stack_size > 1 and item.items_in_stack > 1:
-		stack_split.emit(int(item.items_in_stack/2))#, item)
+	if inventory_item.stack_size > 1 and inventory_item.items_in_stack > 1:
+		stack_split.emit(int(inventory_item.items_in_stack/2))#, item)
 
 
 func on_mouse_entered():
@@ -63,12 +62,7 @@ func on_mouse_exited():
 	hovering = false
 
 
-func on_dropped():
-	reparent(item)
-	visible = false
-
-
 func rebuild():
 	icon.texture = null #TODO: make icons
-	stack_label.text = str(item.items_in_stack) if item.stack_size > 1 else ""
-	name_label.text = item.item_data.item_name
+	stack_label.text = str(inventory_item.items_in_stack) if inventory_item.stack_size > 1 else ""
+	name_label.text = inventory_item.item_data.item_name

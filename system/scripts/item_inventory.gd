@@ -4,7 +4,7 @@ class_name ItemInventory
 @export var display_name : String = "Inventory"
 @export var dimensions : Vector2i = Vector2i(1,1)
 
-var items : Array[Holdable]
+var items : Array[InventoryItemData]
 
 @onready var ui : UIManager = get_tree().get_first_node_in_group("ui") as UIManager
 
@@ -16,6 +16,8 @@ var inventory_ui_panel : InventoryUIPanelManager
 const INVENTORY_UI_PANEL = preload("res://ui/widgets/inventory_ui_panel.tscn")
 
 var currently_dragging : InventoryItemIconManager
+
+@onready var level_manager = (get_tree().get_first_node_in_group("network manager") as NetworkManager).level_manager
 
 
 func _ready() -> void:
@@ -44,13 +46,12 @@ func on_interacted(source : Node):
 
 @rpc("any_peer", "call_local")
 func request_open_by_player(player_path : String):
-	if not multiplayer.is_server(): return
 	var accepted = using_player == null
 	if accepted:
 		using_player = get_tree().get_root().get_node(player_path) as Player
 		if not using_player:
 			print("Opening player not found for ", get_parent().name, "inventory (path: ", player_path, ")")
-	receive_open_response.rpc_id(multiplayer.get_remote_sender_id(), accepted, player_path)
+		if multiplayer.is_server(): receive_open_response.rpc_id(multiplayer.get_remote_sender_id(), accepted, player_path)
 
 
 @rpc("any_peer", "call_local")
@@ -77,6 +78,9 @@ func open_inventory_local():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	using_player.active = false
 	
+	using_player.equipment_manager.equipped_item.connect(on_new_equip)
+	using_player.equipment_manager.dropped_item.connect(on_equipment_dropped)
+	
 	for item in using_player.equipment_manager.items:
 		if not item: continue
 		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
@@ -85,9 +89,10 @@ func open_inventory_local():
 	
 	for item in items:
 		if not item: continue
-		item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
-		item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
-		item.inventory_icon.stack_split.connect(on_stack_split.bind(item.inventory_icon))
+		item.ui_icon.visible = true
+		item.ui_icon.started_drag.connect(on_drag_started.bind(item.ui_icon))
+		item.ui_icon.ended_drag.connect(on_drag_ended.bind(item.ui_icon))
+		item.ui_icon.stack_split.connect(on_stack_split.bind(item.ui_icon))
 
 
 func close_inventory_local():
@@ -96,6 +101,9 @@ func close_inventory_local():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	using_player.active = true
 	
+	using_player.equipment_manager.equipped_item.disconnect(on_new_equip)
+	using_player.equipment_manager.dropped_item.disconnect(on_equipment_dropped)
+	
 	for item in using_player.equipment_manager.items:
 		if not item: continue
 		item.inventory_icon.started_drag.disconnect(on_drag_started)
@@ -104,9 +112,9 @@ func close_inventory_local():
 	
 	for item in items:
 		if not item: continue
-		item.inventory_icon.started_drag.disconnect(on_drag_started)
-		item.inventory_icon.ended_drag.disconnect(on_drag_ended)
-		item.inventory_icon.stack_split.disconnect(on_stack_split)
+		item.ui_icon.started_drag.disconnect(on_drag_started)
+		item.ui_icon.ended_drag.disconnect(on_drag_ended)
+		item.ui_icon.stack_split.disconnect(on_stack_split)
 	
 	if currently_dragging: currently_dragging.stop_dragging()
 	
@@ -115,18 +123,36 @@ func close_inventory_local():
 	interactable.active = true
 
 
+func on_new_equip(item : Holdable):
+	item.inventory_icon.started_drag.connect(on_drag_started.bind(item.inventory_icon))
+	item.inventory_icon.ended_drag.connect(on_drag_ended.bind(item.inventory_icon))
+	item.inventory_icon.stack_split.connect(on_stack_split.bind(item.inventory_icon))
+
+
+func on_equipment_dropped(item : Holdable):
+	item.inventory_icon.started_drag.disconnect(on_drag_started)
+	item.inventory_icon.ended_drag.disconnect(on_drag_ended)
+	item.inventory_icon.stack_split.disconnect(on_stack_split)
+
+
 @rpc("any_peer", "call_local")
 func set_item(item_path : String, slot : int, change_physics : bool = true):
 	var item : Holdable = get_tree().get_root().get_node(item_path) as Holdable
 	if item:
-		items[slot] = item
-		inventory_ui_panel.put_icon_in_slot(item.inventory_icon, slot)
-		item.inventory_icon.visible = true
+		items[slot] = InventoryItemData.new(item, self)
+		inventory_ui_panel.put_icon_in_slot(items[slot].ui_icon, slot)
+		items[slot].inventory_slot = slot
+		items[slot].inventory_type = 0
 		
-		if change_physics:
-			item.visible = false
-			item.disable_physics()
-			#item.move_item(get_parent().global_position)
+		item.destroy_item()
+		
+		if using_player.is_multiplayer_authority():
+			print("first s ", items[slot])
+			items[slot].ui_icon.visible = true
+			print("second s ", items[slot])
+			items[slot].ui_icon.started_drag.connect(on_drag_started.bind(items[slot].ui_icon))
+			items[slot].ui_icon.ended_drag.connect(on_drag_ended.bind(items[slot].ui_icon))
+			items[slot].ui_icon.stack_split.connect(on_stack_split.bind(items[slot].ui_icon))
 
 
 @rpc("any_peer", "call_local")
@@ -135,27 +161,26 @@ func swap_item_positions(a : int, b : int):
 	var item_b = items[b]
 	
 	items[a] = item_b
-	if item_b: inventory_ui_panel.put_icon_in_slot(item_b.inventory_icon, a)
+	if item_b:
+		inventory_ui_panel.put_icon_in_slot(item_b.ui_icon, a)
+		item_b.inventory_slot = a
 	
 	items[b] = item_a
-	if item_a: inventory_ui_panel.put_icon_in_slot(item_a.inventory_icon, b)
+	if item_a:
+		inventory_ui_panel.put_icon_in_slot(item_a.ui_icon, b)
+		item_a.inventory_slot = b
 
 
 @rpc("any_peer", "call_local")
-func drop_item(slot : int, change_physics : bool = true):
-	var item = items[slot]
+func drop_item(slot : int, spawn_outside : bool = true) -> Item:
+	print("attempting to drop item at ", slot)
+	var new_item : Holdable = level_manager.spawn_item_synced(items[slot].item_data.prefab_path, using_player.equipment_manager.global_position) if spawn_outside else null
 	
-	item.inventory_icon.reparent(item)
-	item.inventory_icon.visible = false
-	if change_physics:
-		item.enable_physics()
-		item.visible = true
-		
-		if using_player:
-			await get_tree().process_frame
-			item.move_item(using_player.equipment_manager.global_position)
+	if new_item: new_item.override_stack_size.rpc(items[slot].items_in_stack)
 	
+	items[slot].ui_icon.queue_free()
 	items[slot] = null
+	return new_item
 
 
 func on_drag_started(icon : InventoryItemIconManager):
@@ -165,90 +190,108 @@ func on_drag_started(icon : InventoryItemIconManager):
 func on_drag_ended(icon : InventoryItemIconManager):
 	var ending_point = get_hovering_slot()
 	
-	var stackable = stackable_amount(icon.item, items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
-	var stack_all = stackable == icon.item.items_in_stack
+	var stackable = stackable_amount(icon.inventory_item, items[ending_point.x] if ending_point.y == 1 else using_player.equipment_manager.items[ending_point.x])
+	var stack_all = stackable == icon.inventory_item.items_in_stack
+	
+	return_icon(icon)
 	
 	if ending_point.y == -1:
 		# return to prev slot
 		if check_in_bounds(get_viewport().get_mouse_position(), ui.hotbar) or check_in_bounds(get_viewport().get_mouse_position(), inventory_ui_panel.background):
 			return_icon(icon)
 		
-		else: # throw out ## WARNING: disabled with `true or` in previous if because figuring out where to place the item when throwing it out is kind of a pain
-			if items.has(icon.item):
+		else: # throw out
+			if icon.inventory_item.inventory_type == 0:
 				drop_item.rpc(icon.inventory_position)
-			elif using_player.equipment_manager.items.has(icon.item):
+			else:
 				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
 		
 	elif ending_point.y == 0:
-		if items.has(icon.item): # inventory to hotbar
-			if stackable > 0:
-				icon.item.change_stack_size.rpc(-stackable)
-				using_player.equipment_manager.items[ending_point.x].change_stack_size.rpc(stackable)
-				return_icon(icon)
-				if stack_all:
-					drop_item.rpc(icon.inventory_position, false)
-					icon.item.destroy_item.rpc()
-			else:
-				drop_item.rpc(icon.inventory_position, false)
-				if using_player.equipment_manager.items[ending_point.x]:
-					var prev_item = using_player.equipment_manager.items[ending_point.x]
-					var old_slot = icon.inventory_position
-					using_player.equipment_manager.drop_equipment.rpc(ending_point.x)
-					set_item.rpc(prev_item.get_path(), old_slot)
-				using_player.equipment_manager.equip_item(icon.item, ending_point.x, false)
+		if items.has(icon.inventory_item): # inventory to hotbar
+			inventory_to_hotbar.rpc(icon.inventory_item.inventory_slot, ending_point.x)
 			
-		elif using_player.equipment_manager.items.has(icon.item): # hotbar to hotbar
+		elif icon.inventory_item.inventory_type == 1: # hotbar to hotbar
 			if icon.inventory_position == ending_point.x:
 				return_icon(icon)
 				return
 			if stackable > 0:
-				icon.item.change_stack_size.rpc(-stackable)
+				var item = using_player.equipment_manager.items[icon.inventory_item.inventory_slot]
+				item.change_stack_size.rpc(-stackable)
 				using_player.equipment_manager.items[ending_point.x].change_stack_size.rpc(stackable)
 				return_icon(icon)
 				if stack_all:
 					using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-					icon.item.destroy_item.rpc()
+					item.destroy_item.rpc()
 			else:
 				var prev_item = using_player.equipment_manager.items[ending_point.x]
+				var new_item = using_player.equipment_manager.items[icon.inventory_item.inventory_slot]
 				var old_slot = icon.inventory_position
 				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-				using_player.equipment_manager.equip_item(icon.item, ending_point.x, false)
-				if prev_item:
-					using_player.equipment_manager.equip_item(prev_item, old_slot, false)
+				if prev_item : using_player.equipment_manager.drop_equipment.rpc(ending_point.x)
+				using_player.equipment_manager.equip_item(new_item, ending_point.x, false)
+				if prev_item: using_player.equipment_manager.equip_item(prev_item, old_slot, false)
 		
 	elif ending_point.y == 1:
-		if items.has(icon.item):  # inventory to inventory
-			if icon.inventory_position == ending_point.x:
-				return_icon(icon)
-				return
-			if stackable > 0:
-				icon.item.change_stack_size.rpc(-stackable)
-				items[ending_point.x].change_stack_size.rpc(stackable)
-				return_icon(icon)
-				if stack_all:
-					drop_item.rpc(icon.inventory_position, false)
-					icon.item.destroy_item.rpc()
-			else: swap_item_positions.rpc(icon.inventory_position, ending_point.x)
+		if icon.inventory_item and items.has(icon.inventory_item):  # inventory to inventory
+			if icon.inventory_position != ending_point.x:
+				inventory_to_inventory.rpc(icon.inventory_item.inventory_slot, ending_point.x)
 			
-		elif using_player.equipment_manager.items.has(icon.item):  # hotbar to inventory
-			if stackable > 0:
-				icon.item.change_stack_size.rpc(-stackable)
-				items[ending_point.x].change_stack_size.rpc(stackable)
-				return_icon(icon)
-				if stack_all:
-					using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-					icon.item.destroy_item.rpc()
-			else:
-				using_player.equipment_manager.drop_equipment.rpc(icon.inventory_position)
-				if items[ending_point.x]:
-						var prev_item = items[ending_point.x]
-						var old_slot = icon.inventory_position
-						drop_item.rpc(ending_point.x, false)
-						using_player.equipment_manager.equip_item(prev_item, old_slot)
-				set_item.rpc(icon.item.get_path(), ending_point.x)
+		elif icon.inventory_item.inventory_type == 1:  # hotbar to inventory
+			hotbar_to_inventory.rpc(icon.inventory_item.inventory_slot, ending_point.x)
 	
 	currently_dragging = null
 
+
+@rpc("any_peer", "call_local")
+func inventory_to_hotbar(from : int, to : int):
+	var hot_item = using_player.equipment_manager.items[to]
+	var stackable = stackable_amount(items[from], hot_item)
+	var stack_all = items[from] and stackable == items[from].items_in_stack
+	
+	if stackable > 0:
+		hot_item.change_stack_size(stackable)
+		items[from].change_stack_size(-stackable)
+		if stack_all:
+			drop_item(from, false)
+	else:
+		if hot_item:
+			using_player.equipment_manager.drop_equipment(to)
+			set_item(hot_item.get_path(), from)
+		var new_item = drop_item(from)
+		if new_item: using_player.equipment_manager.handle_equip.rpc(new_item.get_path(), to, false)
+
+
+@rpc("any_peer", "call_local")
+func hotbar_to_inventory(from : int, to : int):
+	var item = using_player.equipment_manager.items[from]
+	var stackable = stackable_amount(item, items[to])
+	var stack_all = stackable == item.items_in_stack
+	
+	if stackable > 0:
+		item.change_stack_size(-stackable)
+		items[to].change_stack_size(stackable)
+		if stack_all:
+			using_player.equipment_manager.drop_equipment(from)
+			item.destroy_item()
+	else:
+		using_player.equipment_manager.drop_equipment(from)
+		if items[to] and multiplayer.is_server():
+			var new_item = drop_item(to)
+			if new_item: using_player.equipment_manager.handle_equip.rpc(new_item.get_path(), from, false)
+		set_item(item.get_path(), to)
+
+
+@rpc("any_peer", "call_local")
+func inventory_to_inventory(from : int, to: int):
+	var stackable = stackable_amount(items[from], items[to])
+	var stack_all = stackable == items[from].items_in_stack
+	
+	if stackable > 0:
+		items[from].change_stack_size(-stackable)
+		items[to].change_stack_size(stackable)
+		if stack_all:
+			drop_item(from, false)
+	else: swap_item_positions(from, to)
 
 func on_stack_split(amount : int, icon : InventoryItemIconManager):
 	rpc_stack_split.rpc(amount, icon.item.get_path())
@@ -280,16 +323,16 @@ func rpc_stack_split(amount, item_path):
 
 
 func return_icon(icon : InventoryItemIconManager):
-	if items.has(icon.item):
+	if icon.inventory_item.inventory_type == 0:
 		icon.reparent(inventory_ui_panel.slot_container.get_child(icon.inventory_position))
 		icon.position = Vector2.ZERO
-	elif using_player.equipment_manager.items.has(icon.item):
+	else:
 		icon.reparent(ui.hotbar.get_child(icon.inventory_position))
 		icon.position = Vector2.ZERO
 
 
 # checks how many items from a can be put to b
-static func stackable_amount(a : Holdable, b : Holdable) -> int:
+static func stackable_amount(a, b) -> int:
 	if a and b and a.item_data == b.item_data and a.stack_size > 1:
 		return min(b.stack_size - b.items_in_stack, a.items_in_stack)
 	else: return 0

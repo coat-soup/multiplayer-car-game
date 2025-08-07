@@ -78,6 +78,8 @@ func spawn_item_synced_with_callback(file_path : String, pos : Vector3, sender_p
 
 
 func spawn_item_synced(file_path, pos) -> Item:
+	if not multiplayer.is_server(): return
+	
 	add_item_to_spawner.rpc(file_path)
 	var item = load(file_path).instantiate() as Item
 	ship.add_child(item, true)

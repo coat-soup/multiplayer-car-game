@@ -1,6 +1,8 @@
 extends Node3D
-
 class_name EquipmentManager
+
+signal equipped_item
+signal dropped_item
 
 @export var player : Player
 @export var num_slots := 8
@@ -71,6 +73,13 @@ func handle_equip(scene_path : NodePath, slot : int, try_combine : bool = true):
 		
 		if player.is_multiplayer_authority(): ui.place_item_in_slot(item, slot)
 		
+		item.inventory_icon.inventory_item.inventory_type = 1
+		item.inventory_icon.inventory_item.inventory_slot = slot
+		print("setting ", item.inventory_icon.inventory_item, " slot to ", slot)
+		
+		if not item.physics_dupe.is_inside_tree():
+			await item.physics_dupe.tree_entered
+		
 		# item placement
 		item.global_position = global_position
 		item.global_rotation = global_rotation
@@ -112,6 +121,8 @@ func handle_equip(scene_path : NodePath, slot : int, try_combine : bool = true):
 		
 		item.disable_physics()
 		
+		equipped_item.emit(equipment)
+		
 	else:
 		print("could not find equipment")
 
@@ -145,6 +156,8 @@ func drop_equipment(slot: int):
 		#items[slot].raycast_position()
 		item.on_dropped()
 		items[slot] = null
+		
+		dropped_item.emit(item)
 
 
 func first_available_slot() -> int:
