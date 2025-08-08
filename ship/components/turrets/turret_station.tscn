@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc6cp7ikj2q7r"]
+[gd_scene load_steps=7 format=3 uid="uid://bc6cp7ikj2q7r"]
 
 [ext_resource type="PackedScene" uid="uid://prsly7le0fu6" path="res://world/props/models/turret_station_model.tscn" id="1_3lfii"]
+[ext_resource type="Script" path="res://ship/components/turrets/turret_station.gd" id="1_62ct6"]
 [ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_xkbn8"]
+[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_m8vh8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgbq0"]
 size = Vector3(1.2, 0.6, 1.09302)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_t3iwh"]
+size = Vector3(1, 1.66498, 1.33154)
+
 [node name="TurretStation" type="Node3D"]
+script = ExtResource("1_62ct6")
 
 [node name="turret_station" parent="." instance=ExtResource("1_3lfii")]
 
@@ -31,3 +37,12 @@ prompt_text = "Crate Storage"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AmmoSnapPoint2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0882568)
 shape = SubResource("BoxShape3D_fgbq0")
+
+[node name="Interactable" type="Area3D" parent="."]
+transform = Transform3D(0.901742, 0, 0.432275, 0, 1, 0, -0.432275, 0, 0.901742, 0.386748, 0.80927, 0.281282)
+script = ExtResource("3_m8vh8")
+prompt_text = "Enter Turret"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.272858, 0)
+shape = SubResource("BoxShape3D_t3iwh")

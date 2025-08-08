@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt6gjy4t0uku3"]
+
+[ext_resource type="PackedScene" uid="uid://b3d44i84cbmh3" path="res://ship_weapons/repeater/repeater_size1.glb" id="1_mlcx3"]
+
+[node name="repeater_size1" instance=ExtResource("1_mlcx3")]

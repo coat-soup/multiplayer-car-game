@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://8rrllcm8rqp2"]
+
+[ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_u4anq"]
+[ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_cmvh5"]
+[ext_resource type="PackedScene" uid="uid://f3je33lmcj5c" path="res://vfx/particles/small_explosion_particles.tscn" id="3_c8mll"]
+[ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="4_ridgg"]
+[ext_resource type="AudioStream" uid="uid://u2jyqk1nf5fk" path="res://sfx/explosion.wav" id="5_2nxda"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cstll"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.87, 0, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="Gradient" id="Gradient_w74vy"]
+offsets = PackedFloat32Array(0.1, 0.454545)
+colors = PackedColorArray(0.111197, 0.111197, 0.111197, 1, 0.529067, 0.529067, 0.529067, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sa8mb"]
+gradient = SubResource("Gradient_w74vy")
+
+[sub_resource type="Curve" id="Curve_j4bco"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15942, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yuu5n"]
+curve = SubResource("Curve_j4bco")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k7yca"]
+direction = Vector3(0, 0, 1)
+spread = 90.0
+flatness = 0.663
+initial_velocity_min = 2.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 2, 0)
+damping_min = 5.0
+damping_max = 8.0
+scale_min = 0.2
+scale_curve = SubResource("CurveTexture_yuu5n")
+color_ramp = SubResource("GradientTexture1D_sa8mb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wbao"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.856394, 0.784084, 0, 1)
+emission_enabled = true
+emission = Color(0.91227, 0.670797, 1.54018e-06, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dql1y"]
+material = SubResource("StandardMaterial3D_0wbao")
+
+[node name="shell" instance=ExtResource("1_u4anq")]
+script = ExtResource("2_cmvh5")
+damage = 10
+speed = 200.0
+particles = ExtResource("3_c8mll")
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, -7.43755e-08, -0.5, 0, 1.70151, -2.18557e-08, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_cstll")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
+emitting = false
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_k7yca")
+draw_pass_1 = SubResource("SphereMesh_dql1y")
+script = ExtResource("4_ridgg")
+
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("5_2nxda")
+unit_size = 600.0
+max_distance = 600.0
