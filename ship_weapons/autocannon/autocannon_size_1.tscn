@@ -40,7 +40,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.2641
 shape = SubResource("BoxShape3D_pnolv")
 
 [node name="BarrelEnd" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.56956e-08, 0, 1, 0, 4.56956e-08, 0, 1, 2.3082e-07, 0.00476041, 2.79015)
+transform = Transform3D(1, 0, -4.56956e-08, 0, 1, 0, 4.56956e-08, 0, 1, 2.3082e-07, 0.00476041, 3.33129)
 
 [node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd"]
 stream = ExtResource("3_xo7rc")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://prsly7le0fu6"]
+
+[ext_resource type="PackedScene" uid="uid://sog5yhv1fveb" path="res://world/props/models/turret_station.glb" id="1_jlc8y"]
+
+[node name="turret_station" instance=ExtResource("1_jlc8y")]

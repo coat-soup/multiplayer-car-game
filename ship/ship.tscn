@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=69 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://buwk3kfechuo7" path="res://ship/components/cooler.tscn" id="43_nfii6"]
 [ext_resource type="PackedScene" uid="uid://dgf8kvaj6kj60" path="res://world/props/scenes/equipment_rack.tscn" id="44_op51y"]
 [ext_resource type="PackedScene" uid="uid://bdhfc617b6k0j" path="res://ship/components/sockets/cooler_socket.tscn" id="45_7sed3"]
+[ext_resource type="PackedScene" uid="uid://bc6cp7ikj2q7r" path="res://ship/components/turrets/turret_station.tscn" id="48_q2qno"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -676,3 +677,9 @@ exlcude_from_component_manager = true
 [node name="autocannon_size4" parent="Weapons" instance=ExtResource("34_xxxw1")]
 transform = Transform3D(0.707107, -0.707107, 1.74846e-07, 0.707107, 0.707107, 0, -1.23635e-07, 1.23635e-07, 1, 4.92534, 14.7369, 35.2365)
 exlcude_from_component_manager = true
+
+[node name="TurretStation" parent="." instance=ExtResource("48_q2qno")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 13.06, 3.5, 25.906)
+
+[node name="TurretStation2" parent="." instance=ExtResource("48_q2qno")]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 17.8416, -1.5, -0.437782)

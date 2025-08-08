@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ndvevtj1a6da"]
+[gd_scene load_steps=23 format=3 uid="uid://ndvevtj1a6da"]
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://system/scripts/elevator.gd" id="6_xtomb"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="9_187u4"]
-[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="9_vv6mk"]
 [ext_resource type="PackedScene" uid="uid://b1q502qy271v8" path="res://world/props/scenes/sliding_door_01.tscn" id="10_suvyu"]
 [ext_resource type="PackedScene" uid="uid://bg471in0ssgr4" path="res://world/props/scenes/sliding_door_02.tscn" id="11_18wsr"]
 [ext_resource type="PackedScene" uid="uid://b0wjbek7t0l5p" path="res://world/props/scenes/ventilation_fan.tscn" id="12_8yyc7"]
@@ -169,30 +168,6 @@ shader_parameter/world_uv = false
 shader_parameter/object_uv = false
 shader_parameter/object_uv_scale = Vector2(1, 1)
 shader_parameter/preset_color = 3
-shader_parameter/base_color = Color(0, 0, 0, 1)
-shader_parameter/metalic = 0.25
-shader_parameter/roughness = 0.75
-shader_parameter/grid_scale = 1.0
-shader_parameter/grid_width = 0.01
-shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/inside_scale = 1.0
-shader_parameter/inside_width = 0.01
-shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
-shader_parameter/checkered = true
-shader_parameter/sub_checkered_grid = false
-shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
-shader_parameter/checkered_blend_color = 0.1
-shader_parameter/use_inside_uv = false
-shader_parameter/use_albedo_color = false
-shader_parameter/albedo_alpha = 0.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vaq4w"]
-render_priority = 0
-shader = ExtResource("3_16skt")
-shader_parameter/world_uv = false
-shader_parameter/object_uv = false
-shader_parameter/object_uv_scale = Vector2(1, 1)
-shader_parameter/preset_color = 0
 shader_parameter/base_color = Color(0, 0, 0, 1)
 shader_parameter/metalic = 0.25
 shader_parameter/roughness = 0.75
@@ -1483,9 +1458,9 @@ size = Vector3(14, 1, 6)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Floor8" type="CSGBox3D" parent="CorridorMidStarboard"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, -4.23334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, -4.23334)
 use_collision = true
-size = Vector3(13, 1, 3.53333)
+size = Vector3(15, 1, 3.53333)
 material = SubResource("ShaderMaterial_ajja7")
 
 [node name="Floor6" type="CSGBox3D" parent="CorridorMidStarboard"]
@@ -1785,33 +1760,6 @@ transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, -15.1
 transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, -8.30377, 0)
 
 [node name="BridgeFloorPos" type="Node3D" parent="Elevators/Elevator5"]
-
-[node name="Turret" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.509, 15.3458, -3.59074)
-
-[node name="Ladder" parent="Turret" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, -4.37114e-08, 0, 1, 0, 4.37114e-08, 0, 1, 2, 0, 2)
-
-[node name="Ladder2" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-
-[node name="Ladder3" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-
-[node name="Ladder4" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
-
-[node name="Ladder5" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-
-[node name="Ladder6" parent="Turret/Ladder" instance=ExtResource("9_vv6mk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Turret"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, -0.572876, 2)
-use_collision = true
-size = Vector3(3, 1, 3)
-material = SubResource("ShaderMaterial_vaq4w")
 
 [node name="Bridge" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 31, -40)

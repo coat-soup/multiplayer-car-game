@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc6cp7ikj2q7r"]
+
+[ext_resource type="PackedScene" uid="uid://prsly7le0fu6" path="res://world/props/models/turret_station_model.tscn" id="1_3lfii"]
+[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_xkbn8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fgbq0"]
+size = Vector3(1.2, 0.6, 1.09302)
+
+[node name="TurretStation" type="Node3D"]
+
+[node name="turret_station" parent="." instance=ExtResource("1_3lfii")]
+
+[node name="AmmoSnapPoint" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60511, 1.73813, -1.01422)
+script = ExtResource("2_xkbn8")
+accepted_groups = Array[String](["storage crate"])
+alternate_prompt = "Take Crate"
+prompt_text = "Crate Storage"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AmmoSnapPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0882568)
+shape = SubResource("BoxShape3D_fgbq0")
+
+[node name="AmmoSnapPoint2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60511, 0.594171, -1.01422)
+script = ExtResource("2_xkbn8")
+accepted_groups = Array[String](["storage crate"])
+alternate_prompt = "Take Crate"
+prompt_text = "Crate Storage"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AmmoSnapPoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0882568)
+shape = SubResource("BoxShape3D_fgbq0")
