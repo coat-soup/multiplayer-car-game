@@ -19,6 +19,7 @@ properties/1/replication_mode = 1
 
 [node name="autocannon_size1" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "firing_audio") groups=["item", "mounted weapon", "size 1"]]
 script = ExtResource("2_5hunb")
+ammo_type = 1
 shell = ExtResource("3_mw7yq")
 barrel_end = NodePath("BarrelEnd")
 fire_rate = 3.0

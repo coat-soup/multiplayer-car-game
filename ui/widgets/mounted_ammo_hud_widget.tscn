@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://0r3upnv6wo75"]
+
+[ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="1_sisgf"]
+
+[node name="MountedWeaponHUDWidget" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = -141.0
+offset_right = 159.0
+offset_bottom = 23.0
+theme = ExtResource("1_sisgf")
+text = "AMMO TYPE"
+horizontal_alignment = 2
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 3.0
+offset_top = 27.0
+offset_right = 168.0
+offset_bottom = 50.0
+theme = ExtResource("1_sisgf")
+theme_override_font_sizes/font_size = 15
+text = "Heat
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+offset_left = 48.0
+offset_top = 29.0
+offset_right = 160.0
+offset_bottom = 39.0
+theme = ExtResource("1_sisgf")
+max_value = 1.0
+show_percentage = false

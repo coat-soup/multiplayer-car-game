@@ -32,6 +32,10 @@ var chats : Array[String] = []
 @onready var turret_power_panel: Control = $TurretPowerPanel
 @onready var turret_capacitor_label: RichTextLabel = $TurretPowerPanel/CapacitorNumberLabel
 @onready var power_warning: RichTextLabel = $"TurretPowerPanel/Power Warning"
+@onready var mounted_ammo_panel: Control = $MountedWeaponAmmoPanel
+@onready var mounted_ammo_container: Control = $MountedWeaponAmmoPanel/VBoxContainer
+@onready var ammo_warning: RichTextLabel = $"MountedWeaponAmmoPanel/Ammo Warning"
+
 
 @onready var hotbar: HBoxContainer = $HUD/Inventory/Hotbar
 @onready var inventory_panel_holder: Control = $HUD/Inventory/InventoryPanelHolder
@@ -170,6 +174,36 @@ func unsetup_mounted_weapons(controller : MountedWeaponsController):
 func update_mounted_weapons(controller : MountedWeaponsController):
 	for i in range(len(controller.weapons)):
 		(mounted_weapon_container.get_child(i).get_node("ProgressBar") as ProgressBar).value = controller.weapons[i].heat_manager.get_heat_ratio()
+
+
+func setup_mounted_ammo(controller : MountedWeaponsController):
+	for crate in controller.ammo_crates:
+		var widget = preload("res://ui/widgets/mounted_ammo_hud_widget.tscn").instantiate()
+		mounted_ammo_container.add_child(widget)
+		
+		widget.get_node("NameLabel").text = crate.get_ammo_type_string() + " ammo"
+		
+		crate.ammo_changed.connect(update_mounted_ammo.bind(controller))
+	
+	update_mounted_ammo(controller)
+	mounted_ammo_panel.visible = true
+
+
+func unsetup_mounted_ammo(controller : MountedWeaponsController):
+	for child in mounted_ammo_container.get_children():
+		child.queue_free()
+	
+	for crate in controller.ammo_crates:
+		crate.ammo_changed.disconnect(update_mounted_ammo)
+	
+	mounted_ammo_panel.visible = false
+
+
+func update_mounted_ammo(controller : MountedWeaponsController):
+	for i in range(len(controller.ammo_crates)):
+		mounted_ammo_container.get_child(i).get_node("CountLabel").text = str(controller.ammo_crates[i].cur_ammo)
+		mounted_ammo_container.get_child(i).get_node("ProgressBar").value = controller.ammo_crates[i].cur_ammo / float(controller.ammo_crates[i].max_ammo)
+	ammo_warning.visible = controller.check_needs_ammo()
 
 
 func toggle_turet_power_panel(value: bool):

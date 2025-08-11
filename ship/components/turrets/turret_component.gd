@@ -5,6 +5,8 @@ class_name Turret_Component
 @export_range(-360, 360) var p_max := 180
 
 @export var turret_controller : TurretController
+@export var turret_station : TurretStation
+
 
 func _ready() -> void:
 	turret_controller.p_min = p_min

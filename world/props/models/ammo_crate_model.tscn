@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c33ntq2fnh4y3"]
+
+[ext_resource type="PackedScene" uid="uid://c7b3drusispws" path="res://world/props/models/storage_crate.glb" id="1_amgwa"]
+[ext_resource type="Texture2D" uid="uid://b6c2muugtjp3w" path="res://world/props/textures/storage_crate.png" id="2_5w8mv"]
+[ext_resource type="Texture2D" uid="uid://bm6xqcxcyq8rf" path="res://world/props/textures/storage_crate_n.png" id="3_sthsb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk5a5"]
+albedo_color = Color(0.831809, 0.952851, 0.70478, 1)
+albedo_texture = ExtResource("2_5w8mv")
+normal_enabled = true
+normal_texture = ExtResource("3_sthsb")
+texture_filter = 0
+
+[node name="storage_crate" instance=ExtResource("1_amgwa")]
+
+[node name="Cube_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rk5a5")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rk5a5")
+
+[node name="Cube_003" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rk5a5")

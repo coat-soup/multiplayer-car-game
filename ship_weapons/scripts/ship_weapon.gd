@@ -1,6 +1,8 @@
 extends ShipComponent
 class_name ShipWeapon
 
+@export var ammo_type : AmmoCrate.AMMO_TYPE
+
 @export var shell : PackedScene
 
 @export var barrel_end : Node3D
@@ -35,6 +37,9 @@ func _process(delta: float) -> void:
 @rpc("any_peer", "call_local")
 func fire_cannon():
 	if power_ratio() <= 0 or heat_manager.cur_heat + heat_per_shot >= heat_manager.heat_capacity: return
+	var crate = weapons_controller.get_filled_ammo_crate_of_type(ammo_type)
+	if not crate: return
+	else: crate.remove_ammo(1)
 	
 	fire_timer = 1 / (fire_rate * lerp(capacitor_boost_range.x, capacitor_boost_range.y, power_ratio()))
 	

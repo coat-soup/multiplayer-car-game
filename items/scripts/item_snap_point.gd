@@ -100,8 +100,9 @@ func set_item(item_path : String, reset_transform : bool = true):
 		if eq: eq.picked_up.connect(on_equipment_picked_up_manually)
 	else:
 		active = true
-		item_removed.emit(held_item)
+		var temp_item = held_item
 		held_item = null
+		item_removed.emit(temp_item)
 
 
 func observe(_source: Node3D) -> String:

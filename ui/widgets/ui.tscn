@@ -311,13 +311,44 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="MountedWeaponAmmoPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -126.0
+offset_right = -180.0
+offset_bottom = -86.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MountedWeaponAmmoPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 65
+
+[node name="Ammo Warning" type="RichTextLabel" parent="MountedWeaponAmmoPanel"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 137.0
+offset_right = 168.0
+offset_bottom = 187.56
+theme = ExtResource("6_5nekn")
+bbcode_enabled = true
+text = "[b][color=red][pulse freq=2.0 color=transparent ease=-1.0]NO AMMO[/pulse][/color][/b]"
+
 [node name="TurretPowerPanel" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_left = 2456.0
-offset_top = 703.0
-offset_right = 2496.0
-offset_bottom = 743.0
+offset_left = 2427.0
+offset_top = 857.0
+offset_right = 2467.0
+offset_bottom = 897.0
 
 [node name="CapacitorNumberLabel" type="RichTextLabel" parent="TurretPowerPanel"]
 layout_mode = 0

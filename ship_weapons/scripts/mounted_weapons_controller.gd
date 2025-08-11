@@ -6,6 +6,8 @@ class_name MountedWeaponsController
 @export var controllable : Controllable
 @export var ship : ShipManager
 
+var ammo_crates : Array[AmmoCrate]
+
 var bullet_speed : float = 200 # TODO: Calculate this properl
 
 
@@ -58,8 +60,29 @@ func weapon_detached(weapon : Item):
 func on_controlled():
 	if controllable.using_player and controllable.is_multiplayer_authority():
 		ship.movement_manager.ui.setup_mounted_weapons(self)
+		ship.movement_manager.ui.setup_mounted_ammo(self)
 
 
 func on_uncontrolled():
 	if controllable.is_multiplayer_authority():
 		ship.movement_manager.ui.unsetup_mounted_weapons(self)
+		ship.movement_manager.ui.unsetup_mounted_ammo(self)
+
+
+func set_ammo_crates(crates : Array[AmmoCrate]):
+	ammo_crates = crates
+
+
+func check_needs_ammo() -> bool:
+	for weapon in weapons:
+		var needs_ammo = true
+		for crate in ammo_crates:
+			if crate.cur_ammo > 0 and crate.ammo_type == weapon.ammo_type: needs_ammo = false
+		if needs_ammo: return true
+	return false
+
+
+func get_filled_ammo_crate_of_type(ammo_type) -> AmmoCrate:
+	for crate in ammo_crates:
+		if crate.cur_ammo > 0 and crate.ammo_type == ammo_type: return crate
+	return null

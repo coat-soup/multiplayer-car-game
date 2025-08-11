@@ -49,6 +49,7 @@ func add_capacitor_component(capacitor : Capacitor):
 
 
 func remove_capacitor_component(capacitor : Capacitor):
+	print("power manager removing capacitor")
 	if !capacitor.is_broken:
 		if unused_capacitors <= 0: unassign_random_capacitor()
 		unused_capacitors -= 1
