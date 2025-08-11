@@ -58,6 +58,7 @@ func handle_impact():
 		return
 	active = false
 	
+	$ExplosionAudio.pitch_scale = randf_range(0.9, 1.1)
 	$ExplosionAudio.play()
 
 	if is_multiplayer_authority():

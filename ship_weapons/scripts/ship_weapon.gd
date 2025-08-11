@@ -43,6 +43,7 @@ func fire_cannon():
 	
 	fire_timer = 1 / (fire_rate * lerp(capacitor_boost_range.x, capacitor_boost_range.y, power_ratio()))
 	
+	firing_audio.pitch_scale = randf_range(0.9, 1.1)
 	firing_audio.play()
 	
 	var shell_obj = shell.instantiate() as CannonShell

@@ -70,5 +70,7 @@ script = ExtResource("4_ridgg")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="." index="2"]
 stream = ExtResource("5_2nxda")
+volume_db = -10.0
 unit_size = 600.0
+max_db = -5.0
 max_distance = 600.0

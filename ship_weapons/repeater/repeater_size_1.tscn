@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8rrllcm8rqp2" path="res://ship_weapons/laser_repeater_shell.tscn" id="2_jg0y5"]
 [ext_resource type="PackedScene" uid="uid://bt6gjy4t0uku3" path="res://ship_weapons/repeater/repeater_size_1_model.tscn" id="3_3atfn"]
 [ext_resource type="PackedScene" uid="uid://b8e8a2p2jypcg" path="res://ship/systems/power/component_heat_manager.tscn" id="4_c2rql"]
-[ext_resource type="AudioStream" uid="uid://cdfx0tyt4k73l" path="res://sfx/cannon_fire.wav" id="5_w3jjc"]
+[ext_resource type="AudioStream" uid="uid://duott6iqul8vg" path="res://sfx/laser_fire.wav" id="5_spivr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n4q74"]
 size = Vector3(4.65918, 1, 0.51)
@@ -43,10 +43,10 @@ shape = SubResource("BoxShape3D_n4q74")
 transform = Transform3D(1, 0, -4.56956e-08, 0, 1, 0, 4.56956e-08, 0, 1, 2.3082e-07, 0.0211631, 3.05574)
 
 [node name="FiringAudio" type="AudioStreamPlayer3D" parent="BarrelEnd"]
-stream = ExtResource("5_w3jjc")
-volume_db = -10.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04964e-09, 0, 0.154274)
+stream = ExtResource("5_spivr")
 unit_size = 50.0
-max_db = -1.0
+max_db = -4.0
 max_distance = 50.0
 max_polyphony = 3
 

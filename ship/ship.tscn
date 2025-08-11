@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=71 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://ship/systems/power/ship_cooling_manager.gd" id="13_eyx6l"]
 [ext_resource type="Texture2D" uid="uid://dwujhpjpacelj" path="res://ui/textures/cooling_icon.png" id="13_h85l3"]
 [ext_resource type="Resource" uid="uid://b6r5sef7bj5v4" path="res://auxcraft/resources/barge.tres" id="14_0qgqj"]
+[ext_resource type="Texture2D" uid="uid://bkfpaub555jrf" path="res://ui/textures/medical_icon.png" id="14_n45d3"]
 [ext_resource type="PackedScene" uid="uid://pwgcoen1ioeq" path="res://world/props/scenes/crate_rack_small.tscn" id="16_6fyx0"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="17_80dlg"]
 [ext_resource type="PackedScene" uid="uid://clbihxv8snp87" path="res://ship/systems/radar/radar_map.tscn" id="20_rfwny"]
@@ -108,7 +109,7 @@ min_capacitors_for_power = 1
 [sub_resource type="Resource" id="Resource_ssukg"]
 script = ExtResource("5_31fms")
 system_name = "Medical"
-icon = ExtResource("10_wqmr4")
+icon = ExtResource("14_n45d3")
 max_capacitors = 1
 min_capacitors_for_power = 1
 
