@@ -6,6 +6,7 @@ class_name MountedWeaponsController
 @export var controllable : Controllable
 @export var ship : ShipManager
 
+var turret_station : TurretStation
 var ammo_crates : Array[AmmoCrate]
 
 var bullet_speed : float = 200 # TODO: Calculate this properl
@@ -71,6 +72,9 @@ func on_uncontrolled():
 
 func set_ammo_crates(crates : Array[AmmoCrate]):
 	ammo_crates = crates
+	if controllable.using_player and controllable.is_multiplayer_authority():
+		ship.movement_manager.ui.unsetup_mounted_ammo(self)
+		ship.movement_manager.ui.setup_mounted_ammo(self)
 
 
 func check_needs_ammo() -> bool:

@@ -78,6 +78,8 @@ func check_item_accepted(item : Item) -> bool:
 @rpc("any_peer", "call_local")
 func set_item(item_path : String, reset_transform : bool = true):
 	#print("%s running set item for %s (auth:%s)" % [get_parent().name, item_path, is_multiplayer_authority()])
+	var item_ref = held_item
+	
 	if held_item:
 		var eq = held_item as Holdable
 		if eq: eq.picked_up.disconnect(on_equipment_picked_up_manually)
@@ -100,9 +102,8 @@ func set_item(item_path : String, reset_transform : bool = true):
 		if eq: eq.picked_up.connect(on_equipment_picked_up_manually)
 	else:
 		active = true
-		var temp_item = held_item
 		held_item = null
-		item_removed.emit(temp_item)
+		item_removed.emit(item_ref)
 
 
 func observe(_source: Node3D) -> String:

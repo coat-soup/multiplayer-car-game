@@ -181,7 +181,7 @@ func on_physics_picked_up():
 	tractored = true
 	
 	if snap_point and held_in_place:
-		snap_point.set_item.rpc("")
+		snap_point.set_item("")
 		physics_dupe.freeze = false
 		held_in_place = false
 		snap_point = null
@@ -200,7 +200,7 @@ func on_physics_let_go():
 	var sp = get_closest_snap_point()
 	if sp:
 		snap_point = sp
-		snap_point.set_item.rpc(get_path())
+		snap_point.set_item(get_path())
 		
 	elif cargo_grid:
 		if is_multiplayer_authority():

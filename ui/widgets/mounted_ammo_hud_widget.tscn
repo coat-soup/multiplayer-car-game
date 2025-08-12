@@ -25,8 +25,7 @@ offset_right = 168.0
 offset_bottom = 50.0
 theme = ExtResource("1_sisgf")
 theme_override_font_sizes/font_size = 15
-text = "Heat
-"
+text = "1500"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 2

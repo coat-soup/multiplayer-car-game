@@ -182,10 +182,13 @@ func setup_mounted_ammo(controller : MountedWeaponsController):
 		mounted_ammo_container.add_child(widget)
 		
 		widget.get_node("NameLabel").text = crate.get_ammo_type_string() + " ammo"
-		
-		crate.ammo_changed.connect(update_mounted_ammo.bind(controller))
+		widget.get_node("CountLabel").text = str(crate.cur_ammo)
+		widget.get_node("ProgressBar").value = float(crate.cur_ammo) / float(crate.max_ammo)
+	ammo_warning.visible = controller.check_needs_ammo()
 	
-	update_mounted_ammo(controller)
+	controller.turret_station.ammo_ammount_changed.connect(update_mounted_ammo.bind(controller))
+	
+	#update_mounted_ammo(controller)
 	mounted_ammo_panel.visible = true
 
 
@@ -193,16 +196,16 @@ func unsetup_mounted_ammo(controller : MountedWeaponsController):
 	for child in mounted_ammo_container.get_children():
 		child.queue_free()
 	
-	for crate in controller.ammo_crates:
-		crate.ammo_changed.disconnect(update_mounted_ammo)
+	controller.turret_station.ammo_ammount_changed.disconnect(update_mounted_ammo)
 	
 	mounted_ammo_panel.visible = false
 
 
 func update_mounted_ammo(controller : MountedWeaponsController):
 	for i in range(len(controller.ammo_crates)):
+		print("updating ammo counter for ", controller.ammo_crates[i])
 		mounted_ammo_container.get_child(i).get_node("CountLabel").text = str(controller.ammo_crates[i].cur_ammo)
-		mounted_ammo_container.get_child(i).get_node("ProgressBar").value = controller.ammo_crates[i].cur_ammo / float(controller.ammo_crates[i].max_ammo)
+		mounted_ammo_container.get_child(i).get_node("ProgressBar").value = float(controller.ammo_crates[i].cur_ammo) / float(controller.ammo_crates[i].max_ammo)
 	ammo_warning.visible = controller.check_needs_ammo()
 
 
