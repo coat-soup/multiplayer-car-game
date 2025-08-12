@@ -1,5 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt6gjy4t0uku3"]
+[gd_scene load_steps=5 format=3 uid="uid://bt6gjy4t0uku3"]
 
 [ext_resource type="PackedScene" uid="uid://b3d44i84cbmh3" path="res://ship_weapons/repeater/repeater_size1.glb" id="1_mlcx3"]
+[ext_resource type="Texture2D" uid="uid://req8qtqlmuyx" path="res://ship_weapons/repeater/repeater_size1.png" id="2_wgui1"]
+[ext_resource type="Texture2D" uid="uid://boe0opo1ak5t5" path="res://ship_weapons/repeater/repeater_size1_n.png" id="3_l3ojp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j15e"]
+albedo_texture = ExtResource("2_wgui1")
+normal_enabled = true
+normal_texture = ExtResource("3_l3ojp")
+texture_filter = 0
 
 [node name="repeater_size1" instance=ExtResource("1_mlcx3")]
+
+[node name="Mount" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cube_001" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_001" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_002" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_003" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_004" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_006" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_008" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_010" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cube_005" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cube_004" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cube_006" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")
+
+[node name="Cylinder_011" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8j15e")

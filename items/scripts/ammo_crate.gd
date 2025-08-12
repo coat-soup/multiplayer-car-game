@@ -9,12 +9,13 @@ const AMMO_TYPE_NAMES : Array[String] = ["Repeater", "Autocannon", "Railgun"]
 @export var ammo_type : AMMO_TYPE
 
 @export var max_ammo : int = 500
-@onready var cur_ammo : int = max_ammo
+@export var cur_ammo : int
 
 @export var interactable : Interactable
 
 
 func _ready() -> void:
+	cur_ammo = max_ammo
 	super._ready()
 	update_prompt()
 

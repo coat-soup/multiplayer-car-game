@@ -1,5 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuedrhoog4y0p"]
+[gd_scene load_steps=6 format=3 uid="uid://cuedrhoog4y0p"]
 
 [ext_resource type="PackedScene" uid="uid://duov3q78g5yer" path="res://ship_weapons/autocannon/autocannon_size1.glb" id="1_qrry4"]
+[ext_resource type="Texture2D" uid="uid://bbersc8dnt4go" path="res://ship_weapons/autocannon/autocannon_size1.png" id="2_c71cc"]
+[ext_resource type="Texture2D" uid="uid://padgp7vo5cf" path="res://ship_weapons/autocannon/autocannon_size1_n.png" id="3_tx2pp"]
+[ext_resource type="Texture2D" uid="uid://bmemfavu57ubq" path="res://ship_weapons/autocannon/autocannon_size1_m.png" id="3_ww2ou"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2w6ic"]
+albedo_texture = ExtResource("2_c71cc")
+metallic_specular = 0.0
+metallic_texture = ExtResource("3_ww2ou")
+roughness_texture = ExtResource("3_ww2ou")
+roughness_texture_channel = 2
+normal_enabled = true
+normal_texture = ExtResource("3_tx2pp")
+texture_filter = 0
 
 [node name="autocannon_size1" instance=ExtResource("1_qrry4")]
+
+[node name="Mount" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cube" parent="Mount/Body" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cube_001" parent="Mount/Body" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cube_002" parent="Mount/Body" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cube_003" parent="Mount/Body" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cube_005" parent="Mount/Body" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cylinder" parent="Mount/Body" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")
+
+[node name="Cylinder_001" parent="Mount/Body" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2w6ic")

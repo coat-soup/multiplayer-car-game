@@ -16,6 +16,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:cur_ammo")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="AmmoCrate" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["ammo crate", "item"]]
 script = ExtResource("1_kebvl")

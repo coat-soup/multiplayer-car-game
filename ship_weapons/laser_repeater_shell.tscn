@@ -39,15 +39,15 @@ scale_min = 0.2
 scale_curve = SubResource("CurveTexture_yuu5n")
 color_ramp = SubResource("GradientTexture1D_sa8mb")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wbao"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqjcf"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.856394, 0.784084, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 emission_enabled = true
-emission = Color(0.91227, 0.670797, 1.54018e-06, 1)
+emission = Color(0.91, 0, 0, 1)
 emission_energy_multiplier = 3.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_dql1y"]
-material = SubResource("StandardMaterial3D_0wbao")
+[sub_resource type="SphereMesh" id="SphereMesh_xrywy"]
+material = SubResource("StandardMaterial3D_sqjcf")
 
 [node name="shell" instance=ExtResource("1_u4anq")]
 script = ExtResource("2_cmvh5")
@@ -65,7 +65,7 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_k7yca")
-draw_pass_1 = SubResource("SphereMesh_dql1y")
+draw_pass_1 = SubResource("SphereMesh_xrywy")
 script = ExtResource("4_ridgg")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="." index="2"]
