@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bj01vh7sj7yne"]
+[gd_scene load_steps=72 format=3 uid="uid://bj01vh7sj7yne"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_hvcqr"]
 [ext_resource type="PackedScene" uid="uid://svn47mpibhxt" path="res://world/props/scenes/respawn_screen.tscn" id="2_1bf64"]
@@ -49,6 +49,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhfc617b6k0j" path="res://ship/components/sockets/cooler_socket.tscn" id="45_7sed3"]
 [ext_resource type="PackedScene" uid="uid://cvpnxfa666d7o" path="res://ship_weapons/repeater/repeater_size_1.tscn" id="47_v2j0s"]
 [ext_resource type="PackedScene" uid="uid://bc6cp7ikj2q7r" path="res://ship/components/turrets/turret_station.tscn" id="48_q2qno"]
+[ext_resource type="PackedScene" uid="uid://dhhtqn4mah1gr" path="res://player/player_skeleton.tscn" id="50_ya0ts"]
 
 [sub_resource type="Resource" id="Resource_kl4ev"]
 script = ExtResource("5_31fms")
@@ -699,3 +700,6 @@ turret_component = NodePath("../turret_size_1_component")
 [node name="TurretStation2" parent="." node_paths=PackedStringArray("turret_component") instance=ExtResource("48_q2qno")]
 transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 17.8416, -1.5, -0.437782)
 turret_component = NodePath("../turret_size_1_component3")
+
+[node name="player" parent="." instance=ExtResource("50_ya0ts")]
+transform = Transform3D(0.319555, 0, -0.947568, 0, 1, 0, 0.947568, 0, 0.319555, 9.01833, 3.5, 33.1074)

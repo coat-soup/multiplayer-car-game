@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=22 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -9,6 +9,13 @@
 [ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="9_w5f58"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
+[ext_resource type="PackedScene" uid="uid://bjg4yqqkbjmks" path="res://equipment/fire_extinguisher.tscn" id="10_pckhk"]
+[ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="11_frd7v"]
+[ext_resource type="PackedScene" uid="uid://fyxpmm5wifkc" path="res://equipment/tractor_tool.tscn" id="12_03ejh"]
+[ext_resource type="PackedScene" uid="uid://clqu8kjs60vvv" path="res://items/scenes/ammo_crate.tscn" id="13_rkede"]
+[ext_resource type="PackedScene" uid="uid://baol6wgc4kuq6" path="res://items/scenes/storage_crate.tscn" id="14_1oh8v"]
+[ext_resource type="PackedScene" uid="uid://sc8dgmgtad4m" path="res://items/scenes/plant_pot.tscn" id="15_m6q4y"]
+[ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_clduo"]
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
 
@@ -77,6 +84,85 @@ ship_manager = NodePath("../SmallShip")
 [node name="SmallShip" parent="ShipHolder" node_paths=PackedStringArray("movement_clone") instance=ExtResource("10_go3cm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.34, 0)
 movement_clone = NodePath("../ShipMovementClone")
+
+[node name="FireExtinguisher" parent="ShipHolder/SmallShip" instance=ExtResource("10_pckhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25267, -9.13897, 11.8983)
+
+[node name="FireExtinguisher2" parent="ShipHolder/SmallShip" instance=ExtResource("10_pckhk")]
+transform = Transform3D(0.00918025, -0.999958, 0, 0.999958, 0.00918025, 0, 0, 0, 1, -7.60063, -8.93906, 6.02198)
+
+[node name="Wrench" parent="ShipHolder/SmallShip" instance=ExtResource("11_frd7v")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 9.28234, -8.4956, 7.34078)
+
+[node name="Wrench2" parent="ShipHolder/SmallShip" instance=ExtResource("11_frd7v")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 9.3143, -10.6051, 16.8395)
+
+[node name="Wrench3" parent="ShipHolder/SmallShip" instance=ExtResource("11_frd7v")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 8.23031, -10.8156, 16.1155)
+
+[node name="TractorTool" parent="ShipHolder/SmallShip" instance=ExtResource("12_03ejh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.27956, -10.6229, 17.6593)
+
+[node name="TractorTool2" parent="ShipHolder/SmallShip" instance=ExtResource("12_03ejh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.27956, -10.6229, 18.6593)
+
+[node name="TractorTool3" parent="ShipHolder/SmallShip" instance=ExtResource("12_03ejh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.27956, -10.6229, 19.6593)
+
+[node name="TractorTool4" parent="ShipHolder/SmallShip" instance=ExtResource("12_03ejh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.27956, -10.6229, 20.6593)
+
+[node name="TractorTool5" parent="ShipHolder/SmallShip" instance=ExtResource("12_03ejh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.27956, -10.6229, 21.6593)
+
+[node name="AmmoCrate" parent="ShipHolder/SmallShip" instance=ExtResource("13_rkede")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5.27443, -9.32902, 52.1009)
+ammo_type = 1
+
+[node name="AmmoCrate2" parent="ShipHolder/SmallShip" instance=ExtResource("13_rkede")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68631, -10.8477, 38.4886)
+ammo_type = 1
+
+[node name="AmmoCrate3" parent="ShipHolder/SmallShip" instance=ExtResource("13_rkede")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02712, -10.8477, 38.4886)
+ammo_type = 1
+
+[node name="AmmoCrate4" parent="ShipHolder/SmallShip" instance=ExtResource("13_rkede")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73528, -9.84767, 38.4886)
+max_ammo = 1500
+
+[node name="StorageCrate" parent="ShipHolder/SmallShip" instance=ExtResource("14_1oh8v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0783322, -10.5, 38.2762)
+
+[node name="StorageCrate2" parent="ShipHolder/SmallShip" instance=ExtResource("14_1oh8v")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -4.04497, 2.16634, -2.64357)
+
+[node name="StorageCrate3" parent="ShipHolder/SmallShip" instance=ExtResource("14_1oh8v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.66449, 1.89037, -0.985936)
+
+[node name="PlantPot" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.98285, -3.72162, 1.10945)
+
+[node name="PlantPot2" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.98285, -3.72162, 3.10945)
+
+[node name="PlantPot3" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.98285, -3.72162, 5.10945)
+
+[node name="PlantPot4" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.98285, -3.72162, 7.10945)
+
+[node name="PlantPot5" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.20938, -9.00289, 52.7466)
+
+[node name="PlantPot6" parent="ShipHolder/SmallShip" instance=ExtResource("15_m6q4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20938, -9.00289, 52.7466)
+
+[node name="FuelRod" parent="ShipHolder/SmallShip" instance=ExtResource("16_clduo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4447, -10.5, 17.3671)
+
+[node name="FuelRod2" parent="ShipHolder/SmallShip" instance=ExtResource("16_clduo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4447, -10.5, 17.3671)
 
 [node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://auxcraft/scenes/fighter.tscn", "res://auxcraft/scenes/fighter_movement_clone.tscn")

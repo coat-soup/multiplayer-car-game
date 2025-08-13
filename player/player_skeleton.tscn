@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhhtqn4mah1gr"]
+
+[ext_resource type="PackedScene" uid="uid://b58mng7dppykp" path="res://player/player.glb" id="1_8uaxt"]
+[ext_resource type="Script" path="res://player/skeleton_ik_test.gd" id="2_tk7hq"]
+
+[sub_resource type="Animation" id="Animation_ibert"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/Marker3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.70069, 0.973458, 0)
+
+[sub_resource type="Animation" id="Animation_f3o8p"]
+resource_name = "new_animation"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/BoneAttachment3D/Marker3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.935959, 2.23803, 0.124093, 0.733333, 1, -0.333083, 2.40958, 0.124093, 1.5, 1, -0.935959, 2.23803, 0.124093)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lusni"]
+_data = {
+"RESET": SubResource("Animation_ibert"),
+"new_animation": SubResource("Animation_f3o8p")
+}
+
+[node name="player" instance=ExtResource("1_8uaxt")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(1.06581e-14, 0.210278, -4.09782e-08)
+bones/1/rotation = Quaternion(0.382683, -2.57644e-13, 9.12387e-08, 0.92388)
+bones/1/scale = Vector3(1, 1, 1)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
+root_bone = &"ArmUpper.R"
+tip_bone = &"Hand.R"
+target_node = NodePath("../BoneAttachment3D/Marker3D")
+script = ExtResource("2_tk7hq")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -7.10543e-15, 2.38419e-07, 1.68587e-07, 0.707107, -0.707107, -1.68587e-07, 0.707107, 0.707107, -1.49411e-15, 1.09488, -0.0355278)
+bone_name = "TorsoLower"
+bone_idx = 1
+override_pose = true
+
+[node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+transform = Transform3D(1.24876e-07, 1.68587e-07, 1, -0.707107, 0.707107, -3.09086e-08, -0.707107, -0.707107, 2.0751e-07, -0.70069, 0.973458, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_lusni")
+}
+autoplay = "new_animation"
