@@ -38,13 +38,12 @@ func _process(delta: float) -> void:
 		var rotation_axis = global_basis.z.cross(t_dir)
 		var rotation_amount: float = 0
 		if rotation_axis.length() > 0.001:
-			rotation_axis = rotation_axis.normalized()
 			var angle_diff = acos(clamp(global_basis.z.dot(t_dir), -1.0, 1.0))
 			rotation_amount = min(angle_diff, turn_speed * delta)
 		elif t_dir.dot(global_basis.z) < 0:
 			rotation_axis = global_basis.x
 			rotation_amount = turn_speed * delta
-		rotate(rotation_axis, rotation_amount)
+		rotate(rotation_axis.normalized(), rotation_amount)
 		
 		velocity = velocity.move_toward(global_basis.z * speed * (0.0 if time_to_attack > attack_cooldown*0.9 else 1.0), delta * 40.0)
 	else:

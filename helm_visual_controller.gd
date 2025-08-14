@@ -1,4 +1,6 @@
 extends Node3D
+class_name HelmVisuals
+
 
 @export var controller : ShipMovementManager
 @onready var throttle: MeshInstance3D = $ThrottleSlide/Throttle
