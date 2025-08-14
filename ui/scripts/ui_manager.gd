@@ -5,6 +5,7 @@ class_name UIManager
 @onready var lobby_id_text_field: TextEdit = $NetworkPanel/LobbyIDTextField
 @onready var interact_text: Label = $HUD/InteractText
 @onready var chat_box: Label = $HUD/ChatBox
+@onready var chat_anim: AnimationPlayer = $HUD/ChatBox/AnimationPlayer
 
 @onready var host_steam: Button = $NetworkPanel/HostSteam
 @onready var host_local: Button = $NetworkPanel/HostLocal
@@ -42,12 +43,17 @@ var chats : Array[String] = []
 @onready var dragged_icon_holder: Control = $HUD/Inventory/DraggedIconHolder
 
 var prompt_time_remaining := 0.0
+var chat_fade_timer : Timer
 
 
 func _ready():
 	host_steam.pressed.connect(network_manager._on_host_pressed)
 	host_local.pressed.connect(network_manager._on_host_local_pressed)
 	join.pressed.connect(network_manager._on_join_pressed)
+	
+	chat_fade_timer = Timer.new()
+	add_child(chat_fade_timer)
+	chat_fade_timer.timeout.connect(fade_chat)
 
 
 func _input(event):
@@ -83,13 +89,21 @@ func display_prompt(prompt: String, time := 2.0):
 
 @rpc("any_peer", "call_local")
 func display_chat_message(message : String):
-	chats.append(message)
+	chat_box.modulate = Color.WHITE
+	chat_fade_timer.stop()
+	chat_fade_timer.start(5.0)
+	
+	chats.append("[Server]: " + message)
 	if chats.size() > 10:
 		chats.remove_at(0)
 	
 	chat_box.text = ""
 	for chat in chats:
 		chat_box.text += "\n" + chat
+
+
+func fade_chat():
+	chat_anim.play("chat_fade")
 
 
 func toggle_virtual_joystick(value: bool):
@@ -203,7 +217,6 @@ func unsetup_mounted_ammo(controller : MountedWeaponsController):
 
 func update_mounted_ammo(controller : MountedWeaponsController):
 	for i in range(len(controller.ammo_crates)):
-		print("updating ammo counter for ", controller.ammo_crates[i])
 		mounted_ammo_container.get_child(i).get_node("CountLabel").text = str(controller.ammo_crates[i].cur_ammo)
 		mounted_ammo_container.get_child(i).get_node("ProgressBar").value = float(controller.ammo_crates[i].cur_ammo) / float(controller.ammo_crates[i].max_ammo)
 	ammo_warning.visible = controller.check_needs_ammo()

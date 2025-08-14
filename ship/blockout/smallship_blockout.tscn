@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c2vh3q0o2fbfo"]
+[gd_scene load_steps=26 format=3 uid="uid://c2vh3q0o2fbfo"]
 
 [ext_resource type="PackedScene" uid="uid://dsxppgkiwvytu" path="res://auxcraft/models/fighter.glb" id="2_lj7qg"]
 [ext_resource type="PackedScene" uid="uid://bis7oyw47pkoh" path="res://world/props/models/wall_light.glb" id="3_142ra"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_5ron0"]
 [ext_resource type="PackedScene" uid="uid://bg471in0ssgr4" path="res://world/props/scenes/sliding_door_02.tscn" id="8_hn6m1"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="8_j3rsb"]
+[ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="11_fa52d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ewbk"]
 render_priority = 0
@@ -525,9 +526,9 @@ size = Vector3(7, 0.964615, 15.7261)
 material = SubResource("ShaderMaterial_0ewbk")
 
 [node name="Floor22" type="CSGBox3D" parent="Engineering"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -10.567, -1, 8.57043)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -11.067, -1, 7.7044)
 use_collision = true
-size = Vector3(7, 0.964615, 8)
+size = Vector3(7, 0.964615, 10)
 material = SubResource("ShaderMaterial_0ewbk")
 
 [node name="Floor31" type="CSGBox3D" parent="Engineering"]
@@ -1137,9 +1138,9 @@ size = Vector3(1, 24, 6)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor34" type="CSGBox3D" parent="CrewAirlock"]
-transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 5.08966, -11.5525, 5.62197)
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 5.08966, -11.6035, 5.62197)
 use_collision = true
-size = Vector3(1, 1.83417, 4.56299)
+size = Vector3(1, 1.83417, 4.46106)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor33" type="CSGBox3D" parent="CrewAirlock"]
@@ -1275,13 +1276,13 @@ size = Vector3(6, 1, 16)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor28" type="CSGBox3D" parent="CrewAirlock"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 5.07294, -9.77606, 6.31753)
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 5.07294, -9.8342, 6.41822)
 use_collision = true
-size = Vector3(2.95935, 1.05127, 6)
+size = Vector3(2.95935, 1.05127, 6.23254)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor30" type="CSGBox3D" parent="CrewAirlock"]
-transform = Transform3D(-1, 4.37114e-08, 7.57103e-08, 0, 0.866025, -0.5, -8.74228e-08, -0.5, -0.866025, 8.05302, -12.5647, 6.31753)
+transform = Transform3D(-1, 4.37114e-08, 7.57103e-08, 0, 0.866025, -0.5, -8.74228e-08, -0.5, -0.866025, 8.05302, -12.7557, 6.53379)
 use_collision = true
 size = Vector3(3.01587, 1.05127, 6)
 material = SubResource("ShaderMaterial_lxtyw")
@@ -1293,9 +1294,9 @@ size = Vector3(3.01587, 0.424072, 5.68347)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor29" type="CSGBox3D" parent="CrewAirlock"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59326, -11.3228, 10.3175)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.59326, -11.3228, 10.5948)
 use_collision = true
-size = Vector3(6, 1.05127, 4)
+size = Vector3(6, 1.05127, 3.44531)
 material = SubResource("ShaderMaterial_lxtyw")
 
 [node name="Floor37" type="CSGBox3D" parent="CrewAirlock"]
@@ -1334,7 +1335,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.94838, -7.83366, 3.37192)
 [node name="Elevator" type="Node3D" parent="." node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -9.20389, 0.0638883, 1.30355)
 script = ExtResource("6_coe6n")
-floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2"), NodePath("FloorPos3")]
+floor_positions = [NodePath("FloorPos"), NodePath("FloorPos2")]
 platform = NodePath("Platform")
 
 [node name="Button" parent="Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_5ron0")]
@@ -1351,13 +1352,6 @@ function_name = "call_to_floor"
 arguments = "1"
 prompt_text = "Call Elevator"
 
-[node name="Button3" parent="Elevator" node_paths=PackedStringArray("target_node") instance=ExtResource("7_5ron0")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.46045, 16.922, 3.56615)
-target_node = NodePath("..")
-function_name = "call_to_floor"
-arguments = "2"
-prompt_text = "Call Elevator"
-
 [node name="Platform" type="CSGBox3D" parent="Elevator"]
 transform = Transform3D(-1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, -1, -0.0175014, 0, -0.3873)
 use_collision = true
@@ -1371,13 +1365,15 @@ function_name = "cycle_floor"
 arguments = "1"
 prompt_text = "Use Elevator"
 
+[node name="CargoGrid" parent="Elevator/Platform" instance=ExtResource("8_j3rsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.13915, 1, -0.97821)
+dimensions = Vector3i(2, 4, 3)
+snapped_rotation_offset = Vector3(0, 1.571, 0)
+
 [node name="FloorPos" type="Node3D" parent="Elevator"]
 
 [node name="FloorPos2" type="Node3D" parent="Elevator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.01832, 0)
-
-[node name="FloorPos3" type="Node3D" parent="Elevator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 
 [node name="Elevator3" type="Node3D" parent="." node_paths=PackedStringArray("floor_positions", "platform")]
 transform = Transform3D(5.96046e-08, 0, -1, 0, 1, 0, 1, 0, 5.96046e-08, 7.79611, 0.0638883, 14.5268)
@@ -1413,7 +1409,7 @@ size = Vector3(11, 1, 6)
 material = SubResource("ShaderMaterial_w3mpj")
 
 [node name="Button" parent="Elevator3/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_5ron0")]
-transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, -4.37114e-08, 1, 1.31134e-07, -1, -4.37114e-08, -4.43648, 0.508706, -2.80096)
+transform = Transform3D(1, 1.31134e-07, 1.31134e-07, -1.31134e-07, -4.37114e-08, 1, 1.31134e-07, -1, -4.37114e-08, -4.97477, 0.508706, 2.71015)
 target_node = NodePath("../..")
 function_name = "cycle_floor"
 arguments = "1"
@@ -1428,7 +1424,7 @@ snapped_rotation_offset = Vector3(0, 1.571, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4825, 0, 0.612696)
 
 [node name="FloorPos2" type="Node3D" parent="Elevator3"]
-transform = Transform3D(0.999999, 0, -3.55271e-14, 0, 1, 0, 3.55271e-14, 0, 0.999999, 2.4825, 2.58263, -0.775834)
+transform = Transform3D(0.999999, 0, -3.55271e-14, 0, 1, 0, 3.55271e-14, 0, 0.999999, 2.4825, 2.49023, -0.775834)
 
 [node name="FloorPos3" type="Node3D" parent="Elevator3"]
 transform = Transform3D(0.999999, 0, -3.55271e-14, 0, 1, 0, 3.55271e-14, 0, 0.999999, 2.4825, 7, -2.3873)
@@ -1454,9 +1450,9 @@ arguments = "1"
 prompt_text = "Call Elevator"
 
 [node name="Platform" type="CSGBox3D" parent="Elevator2"]
-transform = Transform3D(-0.999985, 0, -5.96019e-08, 0, 1, 0, 5.96019e-08, 0, -0.999985, 0.215321, 0, 0.171715)
+transform = Transform3D(-0.999985, 0, -5.96019e-08, 0, 1, 0, 5.96019e-08, 0, -0.999985, 0.215321, 0, 0.216848)
 use_collision = true
-size = Vector3(3.14752, 1, 2.88196)
+size = Vector3(3.14752, 1, 2.97223)
 material = SubResource("ShaderMaterial_w3mpj")
 
 [node name="Button" parent="Elevator2/Platform" node_paths=PackedStringArray("target_node") instance=ExtResource("7_5ron0")]
@@ -1469,7 +1465,7 @@ prompt_text = "Use Elevator"
 [node name="FloorPos" type="Node3D" parent="Elevator2"]
 
 [node name="FloorPos2" type="Node3D" parent="Elevator2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2929, 0)
 
 [node name="Corridor" type="Node3D" parent="."]
 
@@ -2195,3 +2191,9 @@ use_collision = true
 radius = 7.0
 height = 22.0
 material = SubResource("ShaderMaterial_y4ay4")
+
+[node name="Ladder" parent="." instance=ExtResource("11_fa52d")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8.80807, 1.47144, -13.4487)
+
+[node name="Ladder2" parent="." instance=ExtResource("11_fa52d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.64548, 1.47144, -13.4487)

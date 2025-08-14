@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=23 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://missions/mission_manager.gd" id="5_bqb5b"]
 [ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_j3tm5"]
 [ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
-[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="9_w5f58"]
+[ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="9_vonv0"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
 [ext_resource type="PackedScene" uid="uid://bjg4yqqkbjmks" path="res://equipment/fire_extinguisher.tscn" id="10_pckhk"]
 [ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="11_frd7v"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://baol6wgc4kuq6" path="res://items/scenes/storage_crate.tscn" id="14_1oh8v"]
 [ext_resource type="PackedScene" uid="uid://sc8dgmgtad4m" path="res://items/scenes/plant_pot.tscn" id="15_m6q4y"]
 [ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_clduo"]
+[ext_resource type="PackedScene" uid="uid://bhyxnxy63odi7" path="res://enemies/creatures/scenes/hammerhead_enemy.tscn" id="19_3awfk"]
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
 
@@ -77,13 +78,13 @@ ship_manager = NodePath("../ShipHolder/SmallShip")
 
 [node name="ShipHolder" type="Node" parent="."]
 
-[node name="ShipMovementClone" parent="ShipHolder" node_paths=PackedStringArray("ship_manager") instance=ExtResource("9_w5f58")]
+[node name="SmallshipMovementClone" parent="ShipHolder" node_paths=PackedStringArray("ship_manager") instance=ExtResource("9_vonv0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13, 0)
 ship_manager = NodePath("../SmallShip")
 
 [node name="SmallShip" parent="ShipHolder" node_paths=PackedStringArray("movement_clone") instance=ExtResource("10_go3cm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.34, 0)
-movement_clone = NodePath("../ShipMovementClone")
+movement_clone = NodePath("../SmallshipMovementClone")
 
 [node name="FireExtinguisher" parent="ShipHolder/SmallShip" instance=ExtResource("10_pckhk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25267, -9.13897, 11.8983)
@@ -187,3 +188,15 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
+
+[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.4724, 0, 51.3865)
+target = NodePath("../ShipHolder/SmallShip")
+
+[node name="HammerheadEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.4724, 0, 97.3865)
+target = NodePath("../ShipHolder/SmallShip")
+
+[node name="HammerheadEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.4724, 14, 79.3865)
+target = NodePath("../ShipHolder/SmallShip")

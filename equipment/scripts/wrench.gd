@@ -12,7 +12,7 @@ var on_cooldown := false
 
 
 func on_triggered(button : int):
-	if on_cooldown or button != 0: return
+	if on_cooldown or (button != 0 and button != 1): return
 	anim.play("wrench_swing")
 	print("wrenching")
 	
@@ -20,7 +20,8 @@ func on_triggered(button : int):
 	if health:
 		print("Trying repair on:" + health.name)
 		#ui.display_prompt("Health: " + str(min(health.max_health, health.cur_health + heal_amount)), 0.5)
-		health.heal.rpc(heal_amount, held_player.name.to_int())
+		if button == 0: health.heal.rpc(heal_amount, held_player.name.to_int())
+		elif button == 1: health.take_damage.rpc(heal_amount, held_player.name.to_int())
 		
 		audio.pitch_scale = randf_range(0.9,1.1)
 		audio.play()

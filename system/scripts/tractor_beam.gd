@@ -79,7 +79,7 @@ func raycast_target() -> Item:
 	var space_state = get_world_3d().direct_space_state
 
 	var query = PhysicsRayQueryParameters3D.create(player.camera.global_position, player.camera.global_position - player.camera.global_basis.z * beam_range, Util.layer_mask([1]))
-	query.exclude = [player]
+	query.exclude = [player.movement_manager]
 
 	var result := space_state.intersect_ray(query)
 	if result:

@@ -96,6 +96,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
 [node name="Camera" type="Camera3D" parent="MovementManager/CameraPivot"]
 far = 10000.0
 
+[node name="InteractCast" type="RayCast3D" parent="MovementManager/CameraPivot/Camera"]
+transform = Transform3D(1, 7.30704e-05, -7.25735e-05, -7.25735e-05, 0.000140866, -1, -7.30704e-05, 1, 0.000140866, 0, 0, 0)
+target_position = Vector3(0, -5, 0)
+collision_mask = 7
+
 [node name="TractorBeam" type="Node3D" parent="MovementManager/CameraPivot" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.484552)
 script = ExtResource("11_vv2t4")
@@ -128,7 +133,6 @@ skeleton = NodePath("../../../MeshInstance3D")
 [node name="Floorcast" type="RayCast3D" parent="MovementManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991744, 0)
 target_position = Vector3(0, -0.3, 0)
-collision_mask = 32
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ubgm6")

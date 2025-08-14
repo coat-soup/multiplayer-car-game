@@ -22,7 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040161, -0.00710297, -0.01
 shape = SubResource("BoxShape3D_pcqi0")
 
 [node name="FireHazard" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.562401, 1.05428)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.35229, 1.76007)
 script = ExtResource("3_rbjtp")
 
 [node name="breaker_box" parent="." instance=ExtResource("4_lyhlq")]

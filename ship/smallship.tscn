@@ -1,7 +1,7 @@
 [gd_scene load_steps=61 format=3 uid="uid://dr4yd6t4v6g1r"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_qhgmn"]
-[ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="2_mg3by"]
+[ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="2_d7vex"]
 [ext_resource type="Script" path="res://ship/components/ship_component_manager.gd" id="3_a0m3s"]
 [ext_resource type="Script" path="res://ship/systems/power/ship_power_manager.gd" id="4_iq5c6"]
 [ext_resource type="Script" path="res://ship/systems/power/power_system.gd" id="5_3eq2l"]
@@ -150,7 +150,7 @@ viewport_path = NodePath("DisplayConsole2/Sprite3D/SubViewport")
 script = ExtResource("1_qhgmn")
 movement_manager = NodePath("MovementManager")
 gravity_bounds = NodePath("GravityBounds")
-movement_clone_prefab = ExtResource("2_mg3by")
+movement_clone_prefab = ExtResource("2_d7vex")
 spawn_point = NodePath("SpawnPoint")
 item_manager = NodePath("ItemManager")
 component_manager = NodePath("ComponentManager")

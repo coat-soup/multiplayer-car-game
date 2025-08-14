@@ -79,8 +79,9 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Cooler" type="CharacterBody3D" node_paths=PackedStringArray("health") groups=["cooler", "item"]]
+[node name="Cooler" type="CharacterBody3D" node_paths=PackedStringArray("particles", "health") groups=["cooler", "item"]]
 script = ExtResource("1_hxxg3")
+particles = [NodePath("GPUParticles3D"), NodePath("GPUParticles3D2")]
 component_name = "Cooler"
 health = NodePath("Health")
 power_system_name = "Cooling"

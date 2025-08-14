@@ -9,6 +9,7 @@ func setup() -> void:
 	anim = $AnimationPlayer
 	toggle(door.is_open)
 
+
 func toggle(is_open):
-	if not is_open: anim.play("open")
+	if is_open: anim.play("open")
 	else: anim.play_backwards("open")

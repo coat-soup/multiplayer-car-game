@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://blr7e5cm7q8ts"]
+
+[ext_resource type="Script" path="res://ship/ship_movement_clone.gd" id="1_s2cre"]
+[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_s2kah"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
+render_priority = 0
+shader = ExtResource("2_s2kah")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kcufx"]
+size = Vector3(16.92, 12.1201, 18.4401)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f54ik"]
+size = Vector3(35.465, 15.6683, 84.095)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6r31v"]
+properties/0/path = NodePath(".:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="SmallshipMovementClone" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 16
+motion_mode = 1
+script = ExtResource("1_s2cre")
+movement_synch_lerp_speed = 10.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_51rqv")
+size = Vector3(20, 2, 30)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.86286, 4.19178)
+shape = SubResource("BoxShape3D_kcufx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.2757, 18.7064)
+shape = SubResource("BoxShape3D_f54ik")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6r31v")

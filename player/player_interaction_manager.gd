@@ -5,6 +5,8 @@ extends Node
 
 @onready var player: Player = $".."
 
+@export var raycast : RayCast3D
+
 var ui : UIManager
 
 var target_interactable : Interactable
@@ -38,7 +40,7 @@ func do_raycast():
 	var end = origin + -camera.global_basis.z * max_distance
 	var query = PhysicsRayQueryParameters3D.create(origin, end, Util.layer_mask([1,2,3]))
 	query.collide_with_areas = true
-	query.exclude = [player]
+	query.exclude = [player.movement_manager]
 
 	var result := space_state.intersect_ray(query)
 	

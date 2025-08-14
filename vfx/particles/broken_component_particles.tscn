@@ -66,6 +66,7 @@ material = SubResource("StandardMaterial3D_w00r8")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 lifetime = 4.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_e81r4")
 draw_pass_1 = SubResource("QuadMesh_mgxnc")
 
@@ -75,5 +76,6 @@ amount_ratio = 0.2476
 lifetime = 0.3
 explosiveness = 1.0
 randomness = 1.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_teksj")
 draw_pass_1 = SubResource("QuadMesh_mk2ph")

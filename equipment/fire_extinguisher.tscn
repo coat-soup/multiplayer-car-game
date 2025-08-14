@@ -83,6 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.401983, -0.181526)
 emitting = false
 amount = 16
 lifetime = 0.5
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_24g7f")
 draw_pass_1 = SubResource("QuadMesh_3vc4y")
 

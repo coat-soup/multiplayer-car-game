@@ -34,7 +34,10 @@ func on_control_started():
 
 
 func on_control_ended():
-	if cached_local_player: cached_local_player.movement_manager.global_position = interactable.global_position
+	if cached_local_player:
+		cached_local_player.movement_manager.global_position = interactable.global_position
+		cached_local_player.movement_manager.check_gravity_entered(cached_local_player.movement_manager) # force reattach (otherwise you'll go flying lol)
+		
 
 
 func on_ammo_used():

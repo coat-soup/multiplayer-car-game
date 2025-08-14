@@ -43,4 +43,4 @@ func rebuild_list():
 		labels[component] = label
 
 func update_label(component):
-	labels[component].text = get_component_display_text(component)
+	if is_instance_valid(labels[component]): labels[component].text = get_component_display_text(component)

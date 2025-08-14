@@ -14,4 +14,6 @@ func _ready() -> void:
 
 
 func _on_static_body_3d_interacted(source) -> void:
-	source.global_position = exit_point.global_position
+	var player = source as Player
+	if player:
+		player.movement_manager.global_position = exit_point.global_position

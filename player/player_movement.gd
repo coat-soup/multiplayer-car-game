@@ -77,6 +77,7 @@ func check_gravity_left(body):
 		player.rotate_object_local(Vector3.RIGHT, camera_pivot.rotation.x)
 		camera_pivot.rotation.x = 0
 
+
 func pause_ship_rpc():
 	remote_transform.update_position = false
 	remote_transform.update_rotation = false
@@ -144,7 +145,7 @@ func _physics_process(delta: float) -> void:
 			adjusted_local_velocity.y = jump_velocity
 			#player.velocity += ship.global_basis.y * jump_velocity
 			
-		elif player.is_on_floor():
+		elif floorcast.is_colliding(): #player.is_on_floor(): # isonfloor spazzes out when the ship is rotated
 			#handle_floor_attachment()
 			
 			if direction:
@@ -170,7 +171,7 @@ func _physics_process(delta: float) -> void:
 		# viewbob
 		t_bob += delta * player.velocity.length() * float(player.is_on_floor())
 		var b : float = bob_calc(t_bob)
-		camera.transform.origin = Vector3(0, b, 0)
+		camera.position = Vector3(0, b, 0)
 		
 		# bob signals
 		if b/BOB_AMP < 0.05:

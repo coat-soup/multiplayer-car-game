@@ -36,7 +36,6 @@ _data = {
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/1/position = Vector3(1.06581e-14, 0.210278, -4.09782e-08)
 bones/1/rotation = Quaternion(0.382683, -2.57644e-13, 9.12387e-08, 0.92388)
-bones/1/scale = Vector3(1, 1, 1)
 
 [node name="SkeletonIK3D" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
 root_bone = &"ArmUpper.R"
