@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://ship_weapons/scripts/turret_controller.gd" id="9_onh7n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_snrpd"]
+height = 0.001
 radius = 2.11147
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6o6ra"]

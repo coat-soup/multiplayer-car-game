@@ -42,7 +42,7 @@ shape = SubResource("BoxShape3D_fgbq0")
 [node name="Interactable" type="Area3D" parent="."]
 transform = Transform3D(0.901742, 0, 0.432275, 0, 1, 0, -0.432275, 0, 0.901742, 0.386748, 0.80927, 0.281282)
 script = ExtResource("3_m8vh8")
-prompt_text = "Enter Turret"
+prompt_text = "Enter turret"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.272858, 0)

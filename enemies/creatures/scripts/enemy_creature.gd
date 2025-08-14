@@ -33,14 +33,18 @@ func _process(delta: float) -> void:
 		#rotation -= Vector3(t_dir.signed_angle_to(global_basis.z, global_basis.x), t_dir.signed_angle_to(global_basis.z, global_basis.y), 0) * delta * turn_speed
 		
 		if time_to_attack > 0.0:
-			t_dir = t_dir.rotated(global_basis.x, -PI/2)
+			t_dir = -t_dir #t_dir.rotated(global_basis.x, -PI/2)
 		
 		var rotation_axis = global_basis.z.cross(t_dir)
+		var rotation_amount: float = 0
 		if rotation_axis.length() > 0.001:
 			rotation_axis = rotation_axis.normalized()
 			var angle_diff = acos(clamp(global_basis.z.dot(t_dir), -1.0, 1.0))
-			var rotation_amount = min(angle_diff, turn_speed * delta)
-			rotate(rotation_axis, rotation_amount)
+			rotation_amount = min(angle_diff, turn_speed * delta)
+		elif t_dir.dot(global_basis.z) < 0:
+			rotation_axis = global_basis.x
+			rotation_amount = turn_speed * delta
+		rotate(rotation_axis, rotation_amount)
 		
 		velocity = velocity.move_toward(global_basis.z * speed * (0.0 if time_to_attack > attack_cooldown*0.9 else 1.0), delta * 40.0)
 	else:

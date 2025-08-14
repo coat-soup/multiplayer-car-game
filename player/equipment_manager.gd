@@ -115,7 +115,7 @@ func handle_equip(scene_path : NodePath, slot : int, try_combine : bool = true):
 			equipment.visible = false
 		else:
 			equipment.visible = true
-			equipment.held_by_auth = true
+			equipment.held_by_auth = player.is_multiplayer_authority()
 			equipment.on_held()
 		
 		
@@ -184,7 +184,7 @@ func swap_to_item(slot):
 	
 	if items[cur_slot]:
 		toggle_item_visibility.rpc(cur_slot, true)
-		items[cur_slot].held_by_auth = true
+		items[cur_slot].held_by_auth = player.is_multiplayer_authority()
 		items[cur_slot].on_held()
 	
 	ui.select_hotbar_slot(cur_slot)

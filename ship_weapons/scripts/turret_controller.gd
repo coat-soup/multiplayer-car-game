@@ -44,7 +44,6 @@ func _ready() -> void:
 	for hardpoint in weapons_manager.hardpoints:
 		hardpoint.ship = weapons_manager.ship
 	
-	
 	if radar_targeter: radar_targeter.radar_manager = ship_component.ship.radar_manager
 
 
@@ -131,9 +130,12 @@ func on_broken():
 	print("kicking player")
 	print("TURRET BROKEN")
 	
-	control_manager.interactable.toggle_active.rpc(false)
+	control_manager.interactable.prompt_text = "Turret broken"
+	control_manager.can_control = false
+	#control_manager.interactable.toggle_active.rpc(false)
 
 
 func on_fixed():
-	control_manager.interactable.toggle_active.rpc(true)
-	pass
+	#control_manager.interactable.toggle_active.rpc(true)
+	control_manager.can_control = true
+	control_manager.interactable.prompt_text = "Enter turret"

@@ -18,6 +18,8 @@ var ui : UIManager
 @onready var root_owner : Node = get_owner()
 @export var transfer_auth := true
 
+var can_control : bool = true
+
 
 func _enter_tree() -> void:
 	camera.current = false
@@ -33,9 +35,7 @@ func _input(event: InputEvent) -> void:
 
 
 func on_interact(player):
-	if using_player:
-		ui.display_chat_message.rpc("%s attempting control of %s. %s already in control" % [player.name, root_owner.name, using_player.name])
-		return
+	if not can_control or using_player: return
 	take_control.rpc(str(player.name))
 
 
@@ -98,6 +98,7 @@ func un_controll():
 func reset_synch_auth():
 	synchronizer.set_multiplayer_authority(1, false)
 	root_owner.set_multiplayer_authority(1, false)
+
 
 @rpc("any_peer", "call_local")
 func retry_sync_auth():
