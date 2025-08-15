@@ -7,6 +7,13 @@ class_name UIManager
 @onready var chat_box: Label = $HUD/ChatBox
 @onready var chat_anim: AnimationPlayer = $HUD/ChatBox/AnimationPlayer
 
+@onready var interact_info_panel: Control = $HUD/InteractInfoPanel
+@onready var interact_outline_bg: NinePatchRect = $HUD/InteractInfoPanel/InteractOutlineBG
+@onready var interact_outline: NinePatchRect = $HUD/InteractInfoPanel/InteractOutline
+@onready var interact_name_label: Label = $HUD/InteractInfoPanel/InteractOutline/NameLabel
+@onready var interact_action_label: Label = $HUD/InteractInfoPanel/InteractOutline/ActionLabel
+
+
 @onready var host_steam: Button = $NetworkPanel/HostSteam
 @onready var host_local: Button = $NetworkPanel/HostLocal
 @onready var join: Button = $NetworkPanel/Join
@@ -28,6 +35,8 @@ var chats : Array[String] = []
 @onready var radar_targetting: Control = $HUD/RadarTargetting
 @onready var radar_target_name: Label = $HUD/RadarTargetting/TargetName
 @onready var lead_pip: TextureRect = $HUD/RadarTargetting/LeadPip
+@onready var target_outline: NinePatchRect = $HUD/RadarTargetting/TargetOutline
+
 
 @onready var mounted_weapon_container: VBoxContainer = $MountedWeaponPanel/VBoxContainer
 @onready var turret_power_panel: Control = $TurretPowerPanel
@@ -74,6 +83,20 @@ func toggle_network_menu(value : bool):
 
 func get_lobby_id() -> String:
 	return lobby_id_text_field.text
+
+
+func toggle_interact_panel(value: bool):
+	interact_info_panel.visible = value
+
+
+func update_interact_panel(name_text : String, prompts : String, pos : Vector2, size : Vector2):
+	interact_name_label.text = name_text
+	interact_action_label.text = prompts
+	
+	interact_outline.global_position = pos
+	interact_outline.size = size
+	interact_outline_bg.global_position = pos
+	interact_outline_bg.size = size
 
 
 func set_interact_text(text: String = "", prefix_key := false):
@@ -158,8 +181,12 @@ func end_target_lock():
 	radar_target_name.text = ""
 
 
-func update_pip_position(target_position : Vector3, camera : Camera3D):
-	lead_pip.position = camera.unproject_position(target_position) - Vector2(20,20)
+func update_target_lock(signature : RadarSignature, target_position : Vector3, camera : Camera3D):
+	lead_pip.global_position = camera.unproject_position(target_position) - Vector2(20,20)
+	var mesh = (signature.get_node("RadarMarker/Visual") as CSGSphere3D).get_meshes()[1] as Mesh
+	var aabb_calc = AABBHelper.get_2d_bounds_from_aabb(signature, mesh.get_aabb(), camera)
+	target_outline.size = aabb_calc[1]
+	target_outline.global_position = aabb_calc[0] #camera.unproject_position(signature.global_position) - aabb_calc[1]/2
 
 
 func setup_mounted_weapons(controller : MountedWeaponsController):

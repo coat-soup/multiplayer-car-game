@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg0ius8wdpt8s"]
+[gd_scene load_steps=8 format=3 uid="uid://dg0ius8wdpt8s"]
 
 [ext_resource type="Script" path="res://ship/components/capacitor.gd" id="1_mlgie"]
+[ext_resource type="Resource" uid="uid://deg523dpunmxq" path="res://items/item_data/item_capacitor.tres" id="2_d8qaw"]
 [ext_resource type="PackedScene" uid="uid://c77aq2gn11tis" path="res://world/props/models/capacitor_model.tscn" id="2_mfwnr"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_x4h4v"]
 [ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_o8t82"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cs7ih"]
-points = PackedVector3Array(0.103138, 0.667026, 0.559853, 0.305409, 0.667026, 0.357526, 0.305409, 0.729629, -0.404655, -0.103258, 0.667026, 0.559853, 0.103138, -0.694758, 0.559853, 0.305409, -0.694758, 0.357526, 0.215903, 0.729629, -0.559853, -0.305409, 0.729629, -0.404655, 0.305409, -0.539576, -0.404655, -0.305409, 0.667026, 0.357526, -0.103258, -0.694758, 0.559853, 0.305409, -0.694758, -0.249457, -0.215962, 0.729629, -0.559853, 0.215903, -0.384393, -0.559853, -0.305409, -0.539576, -0.404655, 0.228638, -0.550312, -0.394024, -0.305409, -0.694758, 0.357526, -0.305409, -0.694758, -0.249457, -0.215962, -0.384393, -0.559853, -0.228698, -0.550312, -0.394024)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ojmsp"]
+size = Vector3(0.825, 1.9, 1.485)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qtx3k"]
 properties/0/path = NodePath(".:local_position")
@@ -21,6 +22,7 @@ up_direction = Vector3(0.333289, 0.942825, 0)
 script = ExtResource("1_mlgie")
 component_name = "Capacitor"
 health = NodePath("Health")
+item_data = ExtResource("2_d8qaw")
 cargo_grid_dimensions = Vector3i(1, 2, 2)
 
 [node name="capacitor" parent="." instance=ExtResource("2_mfwnr")]
@@ -34,8 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.168725, 1.25735)
 script = ExtResource("3_o8t82")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.335, 0, 0, 0, 1.335, 0, 0, 0, 1.335, 0, -0.0507541, 0)
-shape = SubResource("ConvexPolygonShape3D_cs7ih")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257046, 0)
+shape = SubResource("BoxShape3D_ojmsp")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qtx3k")

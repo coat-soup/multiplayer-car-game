@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxtthwjcgkw75"]
+[gd_scene load_steps=14 format=3 uid="uid://dxtthwjcgkw75"]
 
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_l0ykn"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_3kw57"]
+[ext_resource type="Resource" uid="uid://b5d2d8cix4yhl" path="res://items/item_data/item_pipes.tres" id="2_a12pc"]
 [ext_resource type="Script" path="res://ship/components/component_steam_hazard.gd" id="3_yleao"]
 [ext_resource type="Texture2D" uid="uid://daevp70v12o1b" path="res://vfx/textures/smoke.png" id="4_8shmr"]
 [ext_resource type="AudioStream" uid="uid://dl25mmyb20mit" path="res://sfx/steam.wav" id="4_ns72n"]
@@ -49,6 +50,7 @@ radius = 0.211213
 script = ExtResource("1_l0ykn")
 component_name = "Pipes"
 health = NodePath("Hitbox/Health")
+item_data = ExtResource("2_a12pc")
 immovable = true
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

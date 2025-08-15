@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvpnxfa666d7o"]
+[gd_scene load_steps=9 format=3 uid="uid://cvpnxfa666d7o"]
 
 [ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="1_7wvoa"]
 [ext_resource type="PackedScene" uid="uid://8rrllcm8rqp2" path="res://ship_weapons/laser_repeater_shell.tscn" id="2_jg0y5"]
 [ext_resource type="PackedScene" uid="uid://bt6gjy4t0uku3" path="res://ship_weapons/repeater/repeater_size_1_model.tscn" id="3_3atfn"]
+[ext_resource type="Resource" uid="uid://b1y348u13difx" path="res://items/item_data/item_repeater_s1.tres" id="3_ninx8"]
 [ext_resource type="PackedScene" uid="uid://b8e8a2p2jypcg" path="res://ship/systems/power/component_heat_manager.tscn" id="4_c2rql"]
 [ext_resource type="AudioStream" uid="uid://duott6iqul8vg" path="res://sfx/laser_fire.wav" id="5_spivr"]
 
@@ -26,6 +27,7 @@ firing_audio = NodePath("BarrelEnd/FiringAudio")
 heat_per_shot = 2.0
 component_name = "Laser Repeater (S1)"
 power_system_name = "Weapons"
+item_data = ExtResource("3_ninx8")
 snap_point_offset = Vector3(0, 0.503, 0.701)
 cargo_grid_dimensions = Vector3i(1, 1, 5)
 

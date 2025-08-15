@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bx7tg26c45i6f"]
+[gd_scene load_steps=7 format=3 uid="uid://bx7tg26c45i6f"]
 
 [ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_138k0"]
+[ext_resource type="Resource" uid="uid://cmdu4p3lyxw5h" path="res://items/item_data/item_breaker_box.tres" id="2_1iecg"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_cwfvn"]
 [ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_rbjtp"]
 [ext_resource type="PackedScene" uid="uid://cxkng4fhy512t" path="res://world/props/models/breaker_box_model.tscn" id="4_lyhlq"]
@@ -12,6 +13,7 @@ size = Vector3(0.854712, 1.2356, 0.268933)
 script = ExtResource("1_138k0")
 component_name = "Breaker"
 health = NodePath("Health")
+item_data = ExtResource("2_1iecg")
 immovable = true
 
 [node name="Health" type="Node" parent="."]

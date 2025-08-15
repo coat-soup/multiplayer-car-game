@@ -1,13 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=15 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="2_5fnut"]
+[ext_resource type="Texture2D" uid="uid://bhjuq1vuqr43k" path="res://ui/textures/border_select_9patch.png" id="2_lnut8"]
+[ext_resource type="Texture2D" uid="uid://dlgn2mvd2b1vf" path="res://ui/textures/corner_select_9patch.png" id="2_nk33s"]
 [ext_resource type="Texture2D" uid="uid://d4cceisyu1vjl" path="res://ui/textures/hit_marker.png" id="3_1s2mg"]
 [ext_resource type="Theme" uid="uid://bp8hky8fmst5q" path="res://ui/themes/player_hud_theme.tres" id="4_ol48f"]
 [ext_resource type="Texture2D" uid="uid://ev0hmhfuqjb" path="res://ui/textures/circle.png" id="4_rw5hn"]
 [ext_resource type="PackedScene" uid="uid://dclr6k74xds6n" path="res://ui/scenes/inventory_slot.tscn" id="5_bffj1"]
 [ext_resource type="PackedScene" uid="uid://cpalqa8168dhh" path="res://ui/widgets/mounted_weapon_hud_widget.tscn" id="5_xul21"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="6_5nekn"]
+[ext_resource type="Texture2D" uid="uid://bo5bx2yttegqf" path="res://ui/textures/corner_select_highlight.png" id="6_so58t"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
 length = 0.001
@@ -64,6 +67,62 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="InteractInfoPanel" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_left = 1016.0
+offset_top = 1147.0
+offset_right = 1056.0
+offset_bottom = 1187.0
+
+[node name="InteractOutlineBG" type="NinePatchRect" parent="HUD/InteractInfoPanel"]
+modulate = Color(0.44, 0.44, 0.44, 0.392157)
+texture_filter = 1
+offset_left = 53.0
+offset_top = -217.0
+offset_right = 407.0
+offset_bottom = -37.0
+texture = ExtResource("2_lnut8")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="InteractOutline" type="NinePatchRect" parent="HUD/InteractInfoPanel"]
+texture_filter = 1
+offset_left = 53.0
+offset_top = -217.0
+offset_right = 407.0
+offset_bottom = -37.0
+texture = ExtResource("2_nk33s")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="NameLabel" type="Label" parent="HUD/InteractInfoPanel/InteractOutline"]
+texture_filter = 2
+layout_mode = 0
+offset_top = -23.0
+offset_right = 40.0
+theme = ExtResource("4_ol48f")
+text = "ITEM NAME"
+
+[node name="ActionLabel" type="Label" parent="HUD/InteractInfoPanel/InteractOutline"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 8.0
+offset_right = 208.0
+offset_bottom = 33.0
+grow_horizontal = 0
+theme = ExtResource("4_ol48f")
+text = "[E] Pick up
+[Alt] Grab"
+
 [node name="InteractText" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 1016.0
@@ -71,6 +130,7 @@ offset_top = 1147.0
 offset_right = 1516.0
 offset_bottom = 1189.0
 pivot_offset = Vector2(250, 0)
+theme = ExtResource("4_ol48f")
 theme_override_font_sizes/font_size = 30
 text = "INTERACT TEXT"
 horizontal_alignment = 1
@@ -141,6 +201,7 @@ mouse_filter = 2
 
 [node name="Crosshair" type="TextureRect" parent="HUD/CrosshairHolder"]
 modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
 layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
@@ -154,6 +215,7 @@ texture = ExtResource("2_5fnut")
 [node name="Hitmarker" type="TextureRect" parent="HUD/CrosshairHolder"]
 visible = false
 modulate = Color(1, 0.65, 0, 0.392157)
+texture_filter = 1
 layout_mode = 0
 offset_left = -16.0
 offset_top = -16.0
@@ -214,6 +276,20 @@ anchor_bottom = 1.0
 pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 texture = ExtResource("4_rw5hn")
+
+[node name="TargetOutline" type="NinePatchRect" parent="HUD/RadarTargetting"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1103.0
+offset_top = 808.0
+offset_right = 1457.0
+offset_bottom = 988.0
+texture = ExtResource("6_so58t")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
 [node name="Inventory" type="Control" parent="HUD"]
 anchors_preset = 0

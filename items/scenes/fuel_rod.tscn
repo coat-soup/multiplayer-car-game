@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://56mh32px1stj"]
+[gd_scene load_steps=7 format=3 uid="uid://56mh32px1stj"]
 
 [ext_resource type="Script" path="res://items/scripts/fuel_rod.gd" id="1_rb05m"]
+[ext_resource type="Resource" uid="uid://dfhwjhp82bjoo" path="res://items/item_data/item_fuel_rod.tres" id="2_8r1dq"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_12t3q"]
 [ext_resource type="PackedScene" uid="uid://forh4xk0kdga" path="res://world/props/models/fuel_rod_model.tscn" id="4_qey43"]
 
@@ -18,6 +19,7 @@ properties/1/replication_mode = 1
 
 [node name="FuelRod" type="CharacterBody3D" groups=["fuel rod", "item"]]
 script = ExtResource("1_rb05m")
+item_data = ExtResource("2_8r1dq")
 cargo_grid_dimensions = Vector3i(1, 1, 2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

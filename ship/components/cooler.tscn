@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://buwk3kfechuo7"]
+[gd_scene load_steps=17 format=3 uid="uid://buwk3kfechuo7"]
 
 [ext_resource type="Script" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
+[ext_resource type="Resource" uid="uid://d0hafmxddh1ue" path="res://items/item_data/item_cooler.tres" id="2_4qjeg"]
 [ext_resource type="PackedScene" uid="uid://bemq7kamgw881" path="res://world/props/models/cooler_model.tscn" id="2_c06p6"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="3_lhyqq"]
 [ext_resource type="Texture2D" uid="uid://b3abikc8ku3p4" path="res://vfx/textures/smoke_large.png" id="5_csud8"]
@@ -85,6 +86,7 @@ particles = [NodePath("GPUParticles3D"), NodePath("GPUParticles3D2")]
 component_name = "Cooler"
 health = NodePath("Health")
 power_system_name = "Cooling"
+item_data = ExtResource("2_4qjeg")
 cargo_grid_dimensions = Vector3i(2, 3, 2)
 
 [node name="cooler" parent="." instance=ExtResource("2_c06p6")]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://cmdu4p3lyxw5h"]
+
+[ext_resource type="Script" path="res://items/scripts/item_data.gd" id="1_a3t3g"]
+
+[resource]
+script = ExtResource("1_a3t3g")
+item_name = "Breaker Box"
+price = 20
+prefab_path = "res://equipment/wrench.tscn"
+crafting_recipes = Array[String]([])
