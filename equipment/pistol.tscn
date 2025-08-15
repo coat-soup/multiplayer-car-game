@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccapb8n1iqflw"]
+[gd_scene load_steps=12 format=3 uid="uid://ccapb8n1iqflw"]
 
 [ext_resource type="Script" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
+[ext_resource type="Resource" uid="uid://bnmghxvvubbm7" path="res://items/item_data/item_pistol.tres" id="2_e5f8g"]
 [ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
+[ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_161ho"]
 [ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_v0mk4"]
-[ext_resource type="AudioStream" uid="uid://dhrwtwfhq265i" path="res://sfx/wrench.wav" id="5_aaevu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
 size = Vector3(0.11, 0.396811, 0.621127)
@@ -81,11 +82,18 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Pistol" type="Node3D" node_paths=PackedStringArray("barrel_end", "interactable")]
+[node name="Pistol" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "interactable") groups=["equipment", "item"]]
 script = ExtResource("1_p8mvk")
+damage = 30.0
+fire_rate = 6.0
+mag_size = 12
 barrel_end = NodePath("pistol/BarrelEnd")
-equipment_name = "Pistol"
-interactable = NodePath("StaticBody3D")
+interactable = NodePath("Interactable")
+item_data = ExtResource("2_e5f8g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0400014, 0.0034674)
+shape = SubResource("BoxShape3D_yrpc2")
 
 [node name="pistol" parent="." instance=ExtResource("2_ox50e")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 0)
@@ -93,23 +101,23 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 
 [node name="BarrelEnd" type="Node3D" parent="pistol"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.89203e-08, 0.086442, 0.33081)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("4_v0mk4")
-prompt_text = "Equip Wrench"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0400014, 0.0034674)
-shape = SubResource("BoxShape3D_yrpc2")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ep00v")
 }
 
-[node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_aaevu")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vecod")
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_161ho")
+
+[node name="Interactable" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_v0mk4")
+prompt_text = "Equip Wrench"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1.06421, 0, 0, 0, 1.06421, 0, 0, 0, 1.06421, 0, -0.0400014, 0.0034674)
+shape = SubResource("BoxShape3D_yrpc2")

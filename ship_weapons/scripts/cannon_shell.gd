@@ -11,6 +11,8 @@ signal impacted
 
 @export var particles : PackedScene
 
+@export var shapecast : ShapeCast3D
+
 var layer_mask := [1,2,4,6]
 var ignore_list : Array[RID] = [self]
 
@@ -32,19 +34,22 @@ func _ready():
 	handle_impact()
 
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
 	if active:
 		var space_state = get_world_3d().direct_space_state
 
 		var end = global_position + velocity * delta
 		var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask(layer_mask))
+		
 		query.exclude = ignore_list
-
+		
+		shapecast.target_position = Vector3(0,0, velocity.length() * delta)
+		
 		var result := space_state.intersect_ray(query)
 		
-		if result:
-			global_position = result.position
-			hit_obj = result.collider
+		if shapecast.is_colliding(): #result:
+			global_position = shapecast.get_collision_point(0) #result.position
+			hit_obj = shapecast.get_collider(0) #result.collider
 			handle_impact()#.rpc()
 	
 	global_position += velocity * delta

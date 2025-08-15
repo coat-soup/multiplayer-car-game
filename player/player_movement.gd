@@ -7,6 +7,7 @@ class_name PlayerMovement
 
 @export var camera_pivot: Node3D
 @export var camera: Camera3D
+@export var camera_shake : CameraShake
 
 @onready var collision_shape_3d: CollisionShape3D = $"CollisionShape3D"
 @onready var floorcast: RayCast3D = $Floorcast

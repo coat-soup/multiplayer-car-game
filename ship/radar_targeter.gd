@@ -12,6 +12,12 @@ class_name RadarTargeter
 
 var cur_target : RadarSignature
 var target_last_pos : Vector3
+var cached_local_player : Player
+
+
+func _ready() -> void:
+	controllable.control_started.connect(on_control_started)
+	controllable.control_ended.connect(on_control_ended)
 
 
 func _input(event: InputEvent) -> void:
@@ -51,3 +57,12 @@ func get_forward_target() -> RadarSignature:
 			c_dot = t_dot
 	
 	return closest
+
+
+func on_control_started():
+	if controllable.is_multiplayer_authority() and controllable.using_player: cached_local_player = controllable.using_player
+
+func on_control_ended():
+	if cached_local_player:
+		ui.end_target_lock()
+		cached_local_player = null

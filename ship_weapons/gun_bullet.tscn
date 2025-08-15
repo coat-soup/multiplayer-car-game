@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://fbwa111or64h"]
+[gd_scene load_steps=20 format=4 uid="uid://fbwa111or64h"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_0b4r6"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_sm41t"]
@@ -113,11 +113,13 @@ _data = {
 "new_animation": SubResource("Animation_5snys")
 }
 
-[node name="shell" instance=ExtResource("1_0b4r6")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_43wmo"]
+
+[node name="shell" node_paths=PackedStringArray("shapecast") instance=ExtResource("1_0b4r6")]
 script = ExtResource("2_sm41t")
-speed = 300.0
-drop_rate = 10.0
+speed = 500.0
 particles = ExtResource("3_tjnrr")
+shapecast = NodePath("ShapeCast3D")
 
 [node name="Cube2" type="MeshInstance3D" parent="." index="0"]
 transform = Transform3D(0.25, 0, 0, 0, -1.00072e-07, -0.25, 0, 2.28937, -1.09278e-08, 0, 0, 0)
@@ -148,3 +150,7 @@ libraries = {
 [node name="Cube" parent="." index="4"]
 transform = Transform3D(0.25, 0, 0, 0, 2.28937, 0, 0, 0, 0.25, 0, 0, 0)
 visible = false
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." index="5"]
+shape = SubResource("SphereShape3D_43wmo")
+target_position = Vector3(0, 0, 1)

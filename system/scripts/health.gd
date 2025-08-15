@@ -22,7 +22,7 @@ func take_damage(amount: float, source_id : int = -1):
 	
 	var player : Player = Util.get_player_from_id(str(source_id), self)
 	if player and player.is_multiplayer_authority():
-		player.ui.flash_hitmarker()
+		player.ui.flash_hitmarker(cur_health <= 0)
 	
 	if not is_multiplayer_authority(): return
 	

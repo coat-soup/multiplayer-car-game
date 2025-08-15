@@ -2052,6 +2052,30 @@ use_collision = true
 size = Vector3(10, 1, 17.5117)
 material = SubResource("ShaderMaterial_gmofw")
 
+[node name="CSGBox3D33" type="CSGBox3D" parent="Exterior"]
+transform = Transform3D(-0.5, 0.866025, -7.7134e-09, 0.866025, 0.5, 5.86359e-08, 5.46369e-08, 2.2638e-08, -1, -17.0361, 5.56924, -15.1223)
+use_collision = true
+size = Vector3(4, 1, 4.53564)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="Exterior"]
+transform = Transform3D(-0.25, 0.866025, -0.433013, 0.433012, 0.5, 0.75, 0.866025, 1.1319e-08, -0.5, -15.3942, 2.75465, -13.5911)
+use_collision = true
+size = Vector3(3, 1, 5)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="Exterior"]
+transform = Transform3D(0.5, 0.866025, 4.69235e-08, 0.866025, -0.5, 3.59979e-08, 5.46369e-08, 2.2638e-08, -1, 16.7293, 5.569, -15.122)
+use_collision = true
+size = Vector3(4, 1, 4.53564)
+material = SubResource("ShaderMaterial_gmofw")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="Exterior"]
+transform = Transform3D(0.25, 0.866025, 0.433013, 0.433012, -0.5, 0.75, 0.866025, -3.58217e-09, -0.5, 15.1229, 2.79792, -13.5052)
+use_collision = true
+size = Vector3(2.80176, 1, 5)
+material = SubResource("ShaderMaterial_gmofw")
+
 [node name="CSGBox3D23" type="CSGBox3D" parent="Exterior"]
 transform = Transform3D(-0.5, 0.866025, -7.7134e-09, 0.866025, 0.5, 5.86359e-08, 5.46369e-08, 2.2638e-08, -1, -17.1259, 5.72474, 11.0555)
 use_collision = true

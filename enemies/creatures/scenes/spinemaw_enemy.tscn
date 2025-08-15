@@ -35,12 +35,13 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 [node name="RadarSignature" parent="." instance=ExtResource("3_x4lw0")]
 transform = Transform3D(4.10737, 0, 0, 0, 2.66326, 0, 0, 0, 11.6513, 0, 0, 0)
 visible = false
-signature_name = "Hammerhead"
+signature_name = "Spinemaw"
+emission_strength = 200.0
 relation = 2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_vea3s")
-max_health = 400.0
+max_health = null
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.995983, 0.0645679, 0.0620472, 0.0610224, 0.0177258, -0.997979, -0.0655373, 0.997756, 0.0137144, 0, 0, 0)

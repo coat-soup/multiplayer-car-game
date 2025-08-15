@@ -127,8 +127,9 @@ func hide_ammo_counter():
 	ammo_counter.text = ""
 
 
-func flash_hitmarker():
+func flash_hitmarker(dead : bool = false):
 	display_chat_message("Hit")
+	hitmarker.modulate = Color.ORANGE if dead else Color.hex(0xffffff64)
 	hitmarker.visible = true
 	await get_tree().create_timer(0.1).timeout
 	hitmarker.visible = false
@@ -149,7 +150,7 @@ func display_mission_completed(_mission : Mission):
 func start_target_lock(signature : RadarSignature, show_pip : bool):
 	radar_targetting.visible = true
 	lead_pip.visible = show_pip
-	radar_target_name.text = signature.signature_name
+	radar_target_name.text = "TARGET: " + signature.signature_name
 
 
 func end_target_lock():

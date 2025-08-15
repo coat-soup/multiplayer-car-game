@@ -19,7 +19,7 @@ properties/1/replication_mode = 1
 [node name="turret_size_1_component" type="CharacterBody3D" node_paths=PackedStringArray("turret_controller", "health")]
 script = ExtResource("1_21s0o")
 p_min = -10
-p_max = 190
+p_max = 90
 turret_controller = NodePath("turret_size_1_model")
 component_name = "Turret"
 health = NodePath("Health")
@@ -29,6 +29,7 @@ cargo_grid_dimensions = Vector3i(3, 3, 3)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_l202h")
+max_health = null
 
 [node name="MainBodyCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.0632742, 0)

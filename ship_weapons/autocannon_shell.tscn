@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbt74wqwimjr6"]
+[gd_scene load_steps=15 format=3 uid="uid://cbt74wqwimjr6"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_ygs1v"]
 [ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_22o70"]
@@ -49,10 +49,13 @@ emission_energy_multiplier = 3.0
 [sub_resource type="SphereMesh" id="SphereMesh_dql1y"]
 material = SubResource("StandardMaterial3D_0wbao")
 
-[node name="shell" instance=ExtResource("1_ygs1v")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_410i6"]
+
+[node name="shell" node_paths=PackedStringArray("shapecast") instance=ExtResource("1_ygs1v")]
 script = ExtResource("2_22o70")
 speed = 200.0
 particles = ExtResource("3_argpk")
+shapecast = NodePath("ShapeCast3D")
 
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(0.5, 0, 0, 0, -4.37114e-08, -0.5, 0, 1, -2.18557e-08, 0, 0, 0)
@@ -73,3 +76,7 @@ volume_db = -10.0
 unit_size = 300.0
 max_db = -5.0
 max_distance = 300.0
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." index="3"]
+shape = SubResource("SphereShape3D_410i6")
+target_position = Vector3(0, 0, 1)
