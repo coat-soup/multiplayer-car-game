@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=30 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -22,6 +22,7 @@
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
 [ext_resource type="Script" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
+[ext_resource type="Script" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
@@ -59,6 +60,19 @@ volumetric_fog_albedo = Color(0.4089, 0.462872, 0.47, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 1024.0
 volumetric_fog_ambient_inject = 0.13
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_6x0jm"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("22_rh104")
+saturation = 0.0
+
+[sub_resource type="Compositor" id="Compositor_ld8yr"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_6x0jm")])
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_b72io")
@@ -204,6 +218,7 @@ spawn_path = NodePath("../ShipHolder")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_recut")
+compositor = SubResource("Compositor_ld8yr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)

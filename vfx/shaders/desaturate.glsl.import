@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cyjxkjwud11g2"
+path="res://.godot/imported/desaturate.glsl-9a3e5eef6a07be076e076488395054b0.res"
+
+[deps]
+
+source_file="res://vfx/shaders/desaturate.glsl"
+dest_files=["res://.godot/imported/desaturate.glsl-9a3e5eef6a07be076e076488395054b0.res"]
+
+[params]
+
