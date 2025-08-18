@@ -63,6 +63,15 @@ volumetric_fog_ambient_inject = 0.13
 [node name="Root" type="Node3D"]
 script = ExtResource("1_b72io")
 
+[node name="CloudComputeTest" type="TextureRect" parent="." node_paths=PackedStringArray("texture_rect")]
+offset_right = 853.0
+offset_bottom = 480.0
+scale = Vector2(3, 3)
+mouse_filter = 2
+script = ExtResource("22_n1pkx")
+texture_rect = NodePath(".")
+color = Color(0.96273, 0.780494, 0.813146, 1)
+
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("ship", "level_manager") groups=["network manager"]]
 script = ExtResource("2_521wb")
 spawn_position = Vector3(0, 6, 0)
@@ -210,12 +219,3 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
-
-[node name="CloudComputeTest" type="TextureRect" parent="." node_paths=PackedStringArray("texture_rect")]
-offset_right = 1024.0
-offset_bottom = 1024.0
-scale = Vector2(3, 3)
-mouse_filter = 2
-script = ExtResource("22_n1pkx")
-texture_rect = NodePath(".")
-color = Color(1, 1, 1, 1)
