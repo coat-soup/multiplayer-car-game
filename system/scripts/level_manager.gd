@@ -2,8 +2,10 @@ extends Node3D
 class_name LevelManager
 
 @export var friendly_station : PackedScene
-var start_POI : POI
-var end_POI : POI
+var start_station : POIStation
+var end_station : POIStation
+
+@export var POIs : Array[POIListing]
 
 @export var network_manager : NetworkManager
 @export var mission_manager : MissionManager
@@ -17,6 +19,8 @@ var level_gen_seed : int = -1
 #@export var items_spawned : Array[Item]
 
 var tracked_spawnable_items : Array[String]
+
+var r : RandomNumberGenerator
 
 
 func _ready() -> void:
@@ -112,22 +116,31 @@ func generate_level():
 	ship.movement_clone.velocity = Vector3.ZERO
 	ship.movement_clone.position = Vector3.ZERO
 	
-	start_POI = friendly_station.instantiate() as POI
-	start_POI.level_manager = self
-	add_child(start_POI)
-	start_POI.position = Vector3(-20,-30,-300)
-	#start_POI.position = Util.random_point_in_sphere(400.0, 350.0)
-	#start_POI.global_rotation = Util.random_point_in_sphere(1.0)
+	start_station = friendly_station.instantiate() as POIStation
+	start_station.level_manager = self
+	add_child(start_station)
+	start_station.position = Vector3(-20,-30,-300)
+	#start_station.position = Util.random_point_in_sphere(400.0, 350.0)
+	#start_station.global_rotation = Util.random_point_in_sphere(1.0)
 	
-	end_POI = friendly_station.instantiate() as POI
-	end_POI.level_manager = self
-	add_child(end_POI)
-	end_POI.position = Util.random_point_in_sphere(level_size * 1.1, level_size * 0.9)
-	end_POI.global_rotation = Util.random_point_in_sphere(1.0)
+	end_station = friendly_station.instantiate() as POIStation
+	end_station.level_manager = self
+	add_child(end_station)
+	end_station.position = Util.random_point_in_sphere(level_size * 1.1, level_size * 0.9, r)
+	end_station.global_rotation = Util.random_point_in_sphere(1.0, 0.0, r)
 	
 	#await get_tree().process_frame
 	if is_multiplayer_authority():
 		mission_manager.generate_missions()
+	
+	for poi in POIs:
+		for n in range(r.randi_range(poi.level_amount_range.x, poi.level_amount_range.y)):
+			var p = poi.scene.instantiate() as POI
+			add_child(p)
+			p.global_position = Util.random_point_in_sphere(level_size, 400.0, r)
+			p.global_rotation = Util.random_point_in_sphere(1.0, 0.0, r)
+			p.level_manager = self
+			p.generate(r, r.randf_range(poi.size_multiplier_range.x, poi.size_multiplier_range.y))
 
 
 func generate_for_new_connection(peer_id : int):
@@ -137,6 +150,8 @@ func generate_for_new_connection(peer_id : int):
 
 @rpc("any_peer", "call_local")
 func generate_from_seed(s : int):
+	r = RandomNumberGenerator.new()
+	r.seed = s
 	seed(s)
 	level_gen_seed = s
 	generate_level()
@@ -144,7 +159,7 @@ func generate_from_seed(s : int):
 
 func enter_POI(poi : POI):
 	print("receiving poi dock")
-	if poi == end_POI:
+	if poi == end_station:
 		print("LEVEL COMPLETE. RELOADING\n")
 		reset_level.rpc()
 

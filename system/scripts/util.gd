@@ -80,11 +80,11 @@ static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Ve
 	return direction.normalized() * force
 
 
-static func random_point_in_sphere(radius : float, min_radius : float = 0.0) -> Vector3:
-	return (Vector3.UP * randf_range(min_radius, radius)).rotated(Vector3.RIGHT, randf_range(0, 2*PI)).rotated(Vector3.FORWARD, randf_range(0, 2*PI))
+static func random_point_in_sphere(radius : float, min_radius : float = 0.0, r : RandomNumberGenerator = RandomNumberGenerator.new()) -> Vector3:
+	return (Vector3.UP * r.randf_range(min_radius, radius)).rotated(Vector3.RIGHT, r.randf_range(0, 2*PI)).rotated(Vector3.FORWARD, r.randf_range(0, 2*PI))
 
-static func random_point_in_circle(radius : float, min_radius : float = 0.0) -> Vector2:
-	return (Vector2.UP * randf_range(min_radius, radius)).rotated(randf_range(0, 2*PI))
+static func random_point_in_circle(radius : float, min_radius : float = 0.0, r : RandomNumberGenerator = RandomNumberGenerator.new()) -> Vector2:
+	return (Vector2.UP * r.randf_range(min_radius, radius)).rotated(r.randf_range(0, 2*PI))
 
 
 static func get_scenes_in_folder(folder_path: String) -> Array[String]:

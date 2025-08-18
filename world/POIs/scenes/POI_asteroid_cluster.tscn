@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr88xshma2wh2"]
+
+[ext_resource type="Script" path="res://world/POIs/scripts/POI_asteroid_cluster.gd" id="1_0ge1i"]
+
+[node name="PoiAsteroidCluster" type="Node3D"]
+script = ExtResource("1_0ge1i")
+POI_name = "Asteroid Cluster"

@@ -12,9 +12,9 @@ func generate_mission(level_manager : LevelManager, _main_pos : Vector3):
 	var objective := DeliverCargoObjective.new()
 	objective.on_completed.connect(check_completed)
 	objectives.append(objective)
-	objective.destination = (level_manager.start_POI.get_node("TestCargoDestination") as StationCargoBay).cargo_grid
+	objective.destination = (level_manager.start_station.get_node("TestCargoDestination") as StationCargoBay).cargo_grid
 	
-	var start_grid = (level_manager.start_POI.get_node("StationCargoBay") as StationCargoBay).cargo_grid
+	var start_grid = (level_manager.start_station.get_node("StationCargoBay") as StationCargoBay).cargo_grid
 	
 	for i in range(num_to_spawn):
 		var item : Item = level_manager.spawn_item(cargo_items.pick_random(), start_grid.global_position + Vector3(-10,0,0))

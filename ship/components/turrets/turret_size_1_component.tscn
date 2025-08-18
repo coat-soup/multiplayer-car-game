@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c78lblw7dof04"]
+[gd_scene load_steps=7 format=3 uid="uid://c78lblw7dof04"]
 
 [ext_resource type="Script" path="res://ship/components/turrets/turret_component.gd" id="1_21s0o"]
+[ext_resource type="Resource" uid="uid://dmxtavvu86d7x" path="res://items/item_data/item_turret.tres" id="2_4fpp7"]
 [ext_resource type="Script" path="res://system/scripts/health.gd" id="2_l202h"]
 [ext_resource type="PackedScene" uid="uid://dqhl4bk7ulvsh" path="res://ship/components/turrets/turret_size_1_model.tscn" id="3_ag0cx"]
 
@@ -24,6 +25,7 @@ turret_controller = NodePath("turret_size_1_model")
 component_name = "Turret"
 health = NodePath("Health")
 power_system_name = "Weapons"
+item_data = ExtResource("2_4fpp7")
 immovable = true
 cargo_grid_dimensions = Vector3i(3, 3, 3)
 

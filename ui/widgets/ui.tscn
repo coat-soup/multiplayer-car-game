@@ -77,6 +77,7 @@ offset_bottom = 1187.0
 [node name="InteractOutlineBG" type="NinePatchRect" parent="HUD/InteractInfoPanel"]
 modulate = Color(0.44, 0.44, 0.44, 0.392157)
 texture_filter = 1
+layout_mode = 0
 offset_left = 53.0
 offset_top = -217.0
 offset_right = 407.0
@@ -90,6 +91,7 @@ patch_margin_bottom = 8
 
 [node name="InteractOutline" type="NinePatchRect" parent="HUD/InteractInfoPanel"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 53.0
 offset_top = -217.0
 offset_right = 407.0

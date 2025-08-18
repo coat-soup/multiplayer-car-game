@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=26 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
 [ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="3_xtqgv"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://stations/station_mockup_2.tscn" id="4_xbgqd"]
 [ext_resource type="Script" path="res://missions/mission_manager.gd" id="5_bqb5b"]
+[ext_resource type="Script" path="res://world/POIs/scripts/POI_listing.gd" id="5_m7aus"]
 [ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_j3tm5"]
+[ext_resource type="PackedScene" uid="uid://cr88xshma2wh2" path="res://world/POIs/scenes/POI_asteroid_cluster.tscn" id="6_np7op"]
 [ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
 [ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="9_vonv0"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
@@ -17,10 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://sc8dgmgtad4m" path="res://items/scenes/plant_pot.tscn" id="15_m6q4y"]
 [ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_clduo"]
 [ext_resource type="PackedScene" uid="uid://ccapb8n1iqflw" path="res://equipment/pistol.tscn" id="17_e2blg"]
-[ext_resource type="PackedScene" uid="uid://bhyxnxy63odi7" path="res://enemies/creatures/scenes/hammerhead_enemy.tscn" id="19_3awfk"]
 [ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
-[ext_resource type="PackedScene" uid="uid://davfqpyxnacaa" path="res://enemies/creatures/scenes/spinemaw_enemy.tscn" id="20_uriyd"]
+
+[sub_resource type="Resource" id="Resource_oefty"]
+script = ExtResource("5_m7aus")
+scene = ExtResource("6_np7op")
+level_amount_range = Vector2(8, 10)
+size_multiplier_range = Vector2(0.5, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]
 shader = ExtResource("19_55n7u")
@@ -40,6 +46,9 @@ sky_material = SubResource("ShaderMaterial_hv1i0")
 [sub_resource type="Environment" id="Environment_recut"]
 background_mode = 2
 sky = SubResource("Sky_y2rht")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.01
 tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 0.08
@@ -59,6 +68,7 @@ transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 
 [node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship", "item_physics_manager", "item_spawner")]
 script = ExtResource("3_xtqgv")
 friendly_station = ExtResource("4_xbgqd")
+POIs = Array[ExtResource("5_m7aus")]([SubResource("Resource_oefty")])
 network_manager = NodePath("../NetworkManager")
 mission_manager = NodePath("../MissionManager")
 ship = NodePath("../ShipHolder/SmallShip")
@@ -193,43 +203,3 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
-
-[node name="SpinemawEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.6428, -26.2018, 26.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.4199, -23.184, 24.5853)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.6428, -14.2018, 25.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.6428, -22.2018, 16.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy5" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.6428, -19.2018, 26.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy6" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.6428, -13.2018, 36.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="SpinemawEnemy7" parent="." node_paths=PackedStringArray("target") instance=ExtResource("20_uriyd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.6428, -10.2018, 17.064)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9614, 7.08916, 105.789)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="HammerheadEnemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03864, 21.0892, 103.789)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="HammerheadEnemy3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("19_3awfk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03864, 5.08916, 103.789)
-target = NodePath("../ShipHolder/SmallShip")
