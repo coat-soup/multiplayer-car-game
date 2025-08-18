@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://butf8vwyh6tq5"
+path="res://.godot/imported/sphere_compute.glsl-97d08622c9ce1de114055be174adae36.res"
+
+[deps]
+
+source_file="res://vfx/shaders/sphere_compute.glsl"
+dest_files=["res://.godot/imported/sphere_compute.glsl-97d08622c9ce1de114055be174adae36.res"]
+
+[params]
+
