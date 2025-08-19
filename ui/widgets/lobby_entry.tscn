@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://kd4fvkpy7af2"]
+
+[ext_resource type="Theme" uid="uid://bp8hky8fmst5q" path="res://ui/themes/player_hud_theme.tres" id="1_4mjs1"]
+
+[node name="LobbyEntry" type="Control"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Bacgkround" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 40.0
+theme = ExtResource("1_4mjs1")
+color = Color(1, 1, 1, 0.278431)
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 119.0
+offset_bottom = 35.0
+theme = ExtResource("1_4mjs1")
+text = "FRIEND NAME"
+
+[node name="PlayerCountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 12.0
+offset_right = 275.0
+offset_bottom = 35.0
+theme = ExtResource("1_4mjs1")
+text = "0/12 Players"
+
+[node name="PingLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 12.0
+offset_right = 414.0
+offset_bottom = 35.0
+theme = ExtResource("1_4mjs1")
+text = "9999ms"
+
+[node name="JoinButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 4.0
+offset_right = 475.0
+offset_bottom = 35.0
+theme = ExtResource("1_4mjs1")
+text = "JOIN"

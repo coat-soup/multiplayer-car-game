@@ -71,8 +71,12 @@ func _on_host_local_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
-	if ui.get_lobby_id() != "":
-		steam_peer.connect_lobby(int(parse_lobby_code(ui.get_lobby_id())))
+	join_lobby_by_id(-1 if ui.get_lobby_id() == "" else int(parse_lobby_code(ui.get_lobby_id())))
+
+
+func join_lobby_by_id(id):
+	if id != -1:
+		steam_peer.connect_lobby(id)
 		multiplayer.multiplayer_peer = steam_peer
 	else: 
 		enet_peer.create_client("localhost", PORT)
@@ -127,3 +131,30 @@ static func parse_lobby_code(code: String) -> int:
 		id = id * ALPHABET.length() + value
 	
 	return id
+
+
+func get_friends_in_lobbies() -> Dictionary:
+	var results: Dictionary = {}
+
+	for i in range(0, Steam.getFriendCount()):
+		var steam_id: int = Steam.getFriendByIndex(i, Steam.FRIEND_FLAG_IMMEDIATE)
+		var game_info: Dictionary = Steam.getFriendGamePlayed(steam_id)
+		
+		#print("found steam friend ", str(steam_id), " with info: ", str(game_info))
+		
+		if game_info.is_empty():
+			# This friend is not playing a game
+			continue
+		else:
+			# They are playing a game, check if it's the same game as ours
+			var app_id: int = game_info['id']
+			var lobby = game_info['lobby']
+			
+			if app_id != Steam.getAppID():
+				# Not in this game 
+				results[steam_id] = -1
+			elif lobby is String:
+				results[steam_id] = -2 # Not in a lobby
+			else: results[steam_id] = lobby
+	
+	return results

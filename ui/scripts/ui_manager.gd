@@ -2,7 +2,7 @@ extends Control
 
 class_name UIManager
 
-@onready var lobby_id_text_field: TextEdit = $NetworkPanel/LobbyIDTextField
+@onready var lobby_id_text_field: TextEdit = $NetworkPanel/ButtonHolder/LobbyIDTextField
 @onready var interact_text: Label = $HUD/InteractText
 @onready var chat_box: Label = $HUD/ChatBox
 @onready var chat_anim: AnimationPlayer = $HUD/ChatBox/AnimationPlayer
@@ -14,9 +14,13 @@ class_name UIManager
 @onready var interact_action_label: Label = $HUD/InteractInfoPanel/InteractOutline/ActionLabel
 
 
-@onready var host_steam: Button = $NetworkPanel/HostSteam
-@onready var host_local: Button = $NetworkPanel/HostLocal
-@onready var join: Button = $NetworkPanel/Join
+@onready var host_steam: Button = $NetworkPanel/ButtonHolder/HostSteam
+@onready var host_local: Button = $NetworkPanel/ButtonHolder/HostLocal
+@onready var join: Button = $NetworkPanel/ButtonHolder/Join
+@onready var lobby_list_holder: VBoxContainer = $NetworkPanel/LobbyListHolder
+@onready var refresh_lobbies: Button = $NetworkPanel/RefreshLobbies
+
+
 @onready var health_bar: ProgressBar = $HUD/HealthBar
 
 @onready var ammo_counter: Label = $AmmoCounter
@@ -63,6 +67,9 @@ func _ready():
 	chat_fade_timer = Timer.new()
 	add_child(chat_fade_timer)
 	chat_fade_timer.timeout.connect(fade_chat)
+	
+	refresh_lobbies.pressed.connect(build_lobby_list)
+	build_lobby_list()
 
 
 func _input(event):
@@ -289,3 +296,51 @@ func open_inventory_panel(inventory : ItemInventory):
 func close_inventory_panel(inventory : ItemInventory):
 	inventory.inventory_ui_panel.visible = false
 	inventory.inventory_ui_panel.reparent(inventory)
+
+
+func build_lobby_list():
+	for child in lobby_list_holder.get_children():
+		child.queue_free()
+	
+	var data = network_manager.get_friends_in_lobbies()
+	for steam_id in data:
+		var lobby_entry = preload("res://ui/widgets/lobby_entry.tscn").instantiate()
+		lobby_list_holder.add_child(lobby_entry)
+		
+		lobby_entry.get_node("NameLabel").text = Steam.getFriendPersonaName(steam_id)
+		
+		var alt_m : String
+		match data[steam_id]:
+			-1: alt_m = "Not in game"
+			-2: alt_m = "In menus"
+		
+		if data[steam_id] == -1 or data[steam_id] == -2:
+			lobby_entry.get_node("PlayerCountLabel").text = alt_m
+			lobby_entry.get_node("PingLabel").visible = false
+			lobby_entry.get_node("JoinButton").visible = false
+			continue
+		
+		
+		lobby_entry.get_node("PlayerCountLabel").text = ""
+		lobby_entry.get_node("PingLabel").text = ""
+		lobby_entry.get_node("JoinButton").pressed.connect(on_friend_lobby_join_pressed.bind(steam_id, data[steam_id]))
+
+
+
+func on_friend_lobby_join_pressed(steam_id: int, lobby_id: int) -> bool:
+	var game_info: Dictionary = Steam.getFriendGamePlayed(steam_id)
+
+	if game_info.is_empty():
+		build_lobby_list()
+		return false
+
+	# They are in a game
+	var app_id: int = game_info.id
+	var lobby = game_info.lobby
+
+	# Return true if they are in the same game and have the same lobby_id
+	if app_id == Steam.getAppID() and lobby is int and lobby == lobby_id:
+		network_manager.join_lobby_by_id(lobby_id)
+		return true
+	
+	return false

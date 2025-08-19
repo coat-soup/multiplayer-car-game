@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=16 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="2_5fnut"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpalqa8168dhh" path="res://ui/widgets/mounted_weapon_hud_widget.tscn" id="5_xul21"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="6_5nekn"]
 [ext_resource type="Texture2D" uid="uid://bo5bx2yttegqf" path="res://ui/textures/corner_select_highlight.png" id="6_so58t"]
+[ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/widgets/lobby_entry.tscn" id="10_yfaaw"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
 length = 0.001
@@ -68,6 +69,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="InteractInfoPanel" type="Control" parent="HUD"]
+visible = false
 anchors_preset = 0
 offset_left = 1016.0
 offset_top = 1147.0
@@ -349,40 +351,115 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NetworkPanel" type="VBoxContainer" parent="."]
+[node name="NetworkPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -700.0
+offset_top = -400.0
+offset_right = 700.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 0.501961)
+
+[node name="Separator" type="ColorRect" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -350.0
+offset_right = 5.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 1)
+
+[node name="ButtonHolder" type="VBoxContainer" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
 offset_top = -100.0
-offset_right = 125.0
+offset_right = -225.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HostSteam" type="Button" parent="NetworkPanel"]
+[node name="HostSteam" type="Button" parent="NetworkPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "HOST STEAM"
 
-[node name="HostLocal" type="Button" parent="NetworkPanel"]
+[node name="HostLocal" type="Button" parent="NetworkPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "HOST LOCAL"
 
-[node name="Join" type="Button" parent="NetworkPanel"]
+[node name="Join" type="Button" parent="NetworkPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "JOIN
 "
 
-[node name="LobbyIDTextField" type="TextEdit" parent="NetworkPanel"]
+[node name="LobbyIDTextField" type="TextEdit" parent="NetworkPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 placeholder_text = "LOBBY ID"
+
+[node name="LobbySectionLabel" type="Label" parent="NetworkPanel"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = -330.0
+offset_right = 441.0
+offset_bottom = -307.0
+theme = ExtResource("4_ol48f")
+theme_type_variation = &"GraphFrameTitleLabel"
+text = "Friend Lobbies"
+
+[node name="LobbyListHolder" type="VBoxContainer" parent="NetworkPanel"]
+layout_mode = 2
+offset_left = 106.0
+offset_top = -272.0
+offset_right = 213.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LobbyEntry" parent="NetworkPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="RefreshLobbies" type="Button" parent="NetworkPanel"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 0
+offset_left = 274.0
+offset_top = 316.0
+offset_right = 419.0
+offset_bottom = 363.745
+text = "REFRESH LOBBIES"
 
 [node name="AmmoCounter" type="Label" parent="."]
 custom_minimum_size = Vector2(134.19, 0)
