@@ -10,7 +10,7 @@ normal_enabled = true
 normal_texture = ExtResource("3_rakxb")
 texture_filter = 0
 
-[node name="spinemaw" instance=ExtResource("1_qa1qx")]
+[node name="needler" instance=ExtResource("1_qa1qx")]
 
 [node name="Cube" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_0gp8n")

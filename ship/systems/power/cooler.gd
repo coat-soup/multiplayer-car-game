@@ -28,6 +28,6 @@ func on_break():
 	super.on_break()
 	toggle_particles(false)
 
-func on_fixed():
-	super.on_fixed()
+func on_fixed(source_id):
+	super.on_fixed(source_id)
 	if ship: toggle_particles(true)

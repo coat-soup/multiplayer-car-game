@@ -42,5 +42,5 @@ func rebuild_list():
 			component.health.healed.connect(update_label.bind(component))
 		labels[component] = label
 
-func update_label(component):
+func update_label(source, component):
 	if is_instance_valid(labels[component]): labels[component].text = get_component_display_text(component)

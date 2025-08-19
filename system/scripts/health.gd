@@ -18,7 +18,7 @@ func take_damage(amount: float, source_id : int = -1):
 	#print(get_owner().name, " taking ", str(amount), " damage")
 	
 	cur_health -= min(amount, cur_health)
-	took_damage.emit()
+	took_damage.emit(source_id)
 	
 	var player : Player = Util.get_player_from_id(str(source_id), self)
 	if player and player.is_multiplayer_authority():
@@ -33,10 +33,10 @@ func take_damage(amount: float, source_id : int = -1):
 
 
 @rpc("any_peer", "call_local")
-func heal(amount: float, _source_id : int = -1):
+func heal(amount: float, source_id : int = -1):
 	
 	cur_health = min(max_health, cur_health + amount)
-	healed.emit()
+	healed.emit(source_id)
 
 
 @rpc("any_peer", "call_local")

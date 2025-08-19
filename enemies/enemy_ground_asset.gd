@@ -31,7 +31,7 @@ func on_break():
 	queue_free()
 
 
-func on_fixed():
+func on_fixed(source_id):
 	if not is_broken: return
 	
 	if not health or health.cur_health >= health.max_health/2.0:

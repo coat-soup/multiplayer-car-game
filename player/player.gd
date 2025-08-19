@@ -30,11 +30,11 @@ func _ready() -> void:
 	global_position = network_manager.network_manager.ship.spawn_point.global_position
 
 
-func on_damaged():
+func on_damaged(source):
 	ui.update_health_bar(health.cur_health)
 	if health.cur_health == 0:
 		await get_tree().create_timer(0.2).timeout
-		on_damaged()
+		on_damaged(source)
 
 
 func on_died():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://davfqpyxnacaa"]
+[gd_scene load_steps=9 format=3 uid="uid://davfqpyxnacaa"]
 
 [ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature.gd" id="1_6sabu"]
 [ext_resource type="PackedScene" uid="uid://b4j1ksleua5dk" path="res://enemies/creatures/models/needler_model.tscn" id="2_8hri3"]
@@ -20,7 +20,10 @@ properties/1/replication_mode = 1
 [sub_resource type="BoxShape3D" id="BoxShape3D_38u20"]
 size = Vector3(1.125, 0.55, 0.604)
 
-[node name="SpinemawEnemy" type="CharacterBody3D" node_paths=PackedStringArray("health")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_kwux1"]
+radius = 20.0
+
+[node name="NeedlerEnemy" type="CharacterBody3D" node_paths=PackedStringArray("health")]
 motion_mode = 1
 script = ExtResource("1_6sabu")
 speed = 20.0
@@ -28,6 +31,7 @@ turn_speed = 5.0
 damage = 5
 attack_cooldown = 2.0
 health = NodePath("Health")
+player_target_chance = 0.5
 
 [node name="spinemaw" parent="." instance=ExtResource("2_8hri3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0.529383)
@@ -41,7 +45,6 @@ relation = 2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_vea3s")
-max_health = null
 
 [node name="BodyCol" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.995983, 0.0645679, 0.0620472, 0.0610224, 0.0177258, -0.997979, -0.0655373, 0.997756, 0.0137144, 0, 0, 0)
@@ -57,3 +60,8 @@ collision_mask = 17
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.446174)
 shape = SubResource("BoxShape3D_38u20")
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+shape = SubResource("SphereShape3D_kwux1")
