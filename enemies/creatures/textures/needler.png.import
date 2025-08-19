@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq63h64if4snw"
-path="res://.godot/imported/spinemaw.png-bff5adfff43eb224fec64a33460abeb9.ctex"
+path="res://.godot/imported/needler.png-5c0cd3f5c397ebdc8d763d7382343379.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/creatures/textures/spinemaw.png"
-dest_files=["res://.godot/imported/spinemaw.png-bff5adfff43eb224fec64a33460abeb9.ctex"]
+source_file="res://enemies/creatures/textures/needler.png"
+dest_files=["res://.godot/imported/needler.png-5c0cd3f5c397ebdc8d763d7382343379.ctex"]
 
 [params]
 

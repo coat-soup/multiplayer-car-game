@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyCreatureData" load_steps=2 format=3 uid="uid://hpr8f2ciqeen"]
+
+[ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature_data.gd" id="1_6bvun"]
+
+[resource]
+script = ExtResource("1_6bvun")
+creature_name = "Hammerhead"
+group_size = 4
+difficulty_rating = 1.0
+scene_path = "res://enemies/creatures/scenes/hammerhead_enemy.tscn"

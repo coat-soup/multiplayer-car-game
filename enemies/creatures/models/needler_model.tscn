@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4j1ksleua5dk"]
 
-[ext_resource type="PackedScene" uid="uid://cte326p20r1nt" path="res://enemies/creatures/models/spinemaw.glb" id="1_qa1qx"]
-[ext_resource type="Texture2D" uid="uid://cq63h64if4snw" path="res://enemies/creatures/textures/spinemaw.png" id="2_pf10r"]
-[ext_resource type="Texture2D" uid="uid://dpgsi5xjbdt7j" path="res://enemies/creatures/textures/spinemaw_n.png" id="3_rakxb"]
+[ext_resource type="PackedScene" uid="uid://cte326p20r1nt" path="res://enemies/creatures/models/needler.glb" id="1_qa1qx"]
+[ext_resource type="Texture2D" uid="uid://cq63h64if4snw" path="res://enemies/creatures/textures/needler.png" id="2_pf10r"]
+[ext_resource type="Texture2D" uid="uid://dpgsi5xjbdt7j" path="res://enemies/creatures/textures/needler_n.png" id="3_rakxb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gp8n"]
 albedo_texture = ExtResource("2_pf10r")

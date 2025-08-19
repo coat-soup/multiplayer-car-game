@@ -43,7 +43,8 @@ func _process(delta: float) -> void:
 		elif t_dir.dot(global_basis.z) < 0:
 			rotation_axis = global_basis.x
 			rotation_amount = turn_speed * delta
-		rotate(rotation_axis.normalized(), rotation_amount)
+		
+		if rotation_axis != Vector3.ZERO: rotate(rotation_axis.normalized(), rotation_amount)
 		
 		velocity = velocity.move_toward(global_basis.z * speed * (0.0 if time_to_attack > attack_cooldown*0.9 else 1.0), delta * 40.0)
 	else:

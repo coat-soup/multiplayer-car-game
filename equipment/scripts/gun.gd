@@ -80,10 +80,15 @@ func reload():
 func on_held():
 	update_ui()
 
-func on_unheld():
+func on_put_away():
+	super.on_put_away()
 	if held_by_auth:
 		held_player.ui.hide_ammo_counter()
 
+func on_dropped(player : Player):
+	super.on_dropped(player)
+	if player.is_multiplayer_authority():
+		player.ui.hide_ammo_counter()
 
 func update_ui():
 	if held_by_auth:

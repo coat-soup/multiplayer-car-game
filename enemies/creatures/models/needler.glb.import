@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cte326p20r1nt"
-path="res://.godot/imported/spinemaw.glb-d409c8508ebadb56656e71b8622fbb98.scn"
+path="res://.godot/imported/needler.glb-8e682cf5d609f17a2d35bb8bcfdb206f.scn"
 
 [deps]
 
-source_file="res://enemies/creatures/models/spinemaw.glb"
-dest_files=["res://.godot/imported/spinemaw.glb-d409c8508ebadb56656e71b8622fbb98.scn"]
+source_file="res://enemies/creatures/models/needler.glb"
+dest_files=["res://.godot/imported/needler.glb-8e682cf5d609f17a2d35bb8bcfdb206f.scn"]
 
 [params]
 

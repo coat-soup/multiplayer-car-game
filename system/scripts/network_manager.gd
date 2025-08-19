@@ -22,6 +22,7 @@ const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 const APP_ID = 2932440
 
+
 func _ready() -> void:
 	OS.set_environment("SteamAppID", str(APP_ID))
 	OS.set_environment("SteamGameID", str(APP_ID))

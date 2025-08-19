@@ -154,7 +154,7 @@ func drop_equipment(slot: int):
 		item.visible = true
 		item.interactable.active = true
 		#items[slot].raycast_position()
-		item.on_dropped()
+		item.on_dropped(player)
 		items[slot] = null
 		
 		dropped_item.emit(item)

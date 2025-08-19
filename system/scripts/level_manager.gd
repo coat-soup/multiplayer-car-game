@@ -11,6 +11,7 @@ var end_station : POIStation
 @export var mission_manager : MissionManager
 @export var ship : ShipManager
 @export var item_physics_manager : ItemPhysicsDupeManager
+@export var enemy_manager : EnemyManager
 
 @export var level_size := 2000.0
 var level_gen_seed : int = -1
@@ -30,6 +31,8 @@ func _ready() -> void:
 
 func setup(_multiplayer):
 	_multiplayer.peer_connected.connect(generate_for_new_connection)
+	enemy_manager.level_manager = self
+	enemy_manager.check_for_enemy_spawn()
 	reset_level()
 
 

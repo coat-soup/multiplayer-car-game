@@ -54,8 +54,8 @@ func on_picked_up():
 	beam.player = held_player
 
 
-func on_dropped():
-	super.on_dropped()
+func on_dropped(player):
+	super.on_dropped(player)
 	beam.stop_grab()
 	beam.player = null
 

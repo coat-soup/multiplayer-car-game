@@ -142,7 +142,7 @@ func on_put_away():
 	put_away.emit()
 
 
-func on_dropped():
+func on_dropped(player : Player):
 	dropped.emit()
 	if inventory_icon:
 		inventory_icon.reparent(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=34 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -9,9 +9,13 @@
 [ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_j3tm5"]
 [ext_resource type="PackedScene" uid="uid://cr88xshma2wh2" path="res://world/POIs/scenes/POI_asteroid_cluster.tscn" id="6_np7op"]
 [ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
+[ext_resource type="Script" path="res://system/scripts/enemy_manager.gd" id="8_6h73w"]
+[ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature_data.gd" id="9_hf5xa"]
 [ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="9_vonv0"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
 [ext_resource type="PackedScene" uid="uid://bjg4yqqkbjmks" path="res://equipment/fire_extinguisher.tscn" id="10_pckhk"]
+[ext_resource type="Resource" uid="uid://c606bca75c7xb" path="res://enemies/creatures/creature_data/creature_needler.tres" id="10_y2ywo"]
+[ext_resource type="Resource" uid="uid://hpr8f2ciqeen" path="res://enemies/creatures/creature_data/creature_hammerhead.tres" id="11_cjjpm"]
 [ext_resource type="PackedScene" uid="uid://bn5nh1kddwt62" path="res://equipment/wrench.tscn" id="11_frd7v"]
 [ext_resource type="PackedScene" uid="uid://fyxpmm5wifkc" path="res://equipment/tractor_tool.tscn" id="12_03ejh"]
 [ext_resource type="PackedScene" uid="uid://clqu8kjs60vvv" path="res://items/scenes/ammo_crate.tscn" id="13_rkede"]
@@ -64,7 +68,7 @@ volumetric_fog_ambient_inject = 0.13
 [sub_resource type="CompositorEffect" id="CompositorEffect_6x0jm"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
@@ -78,6 +82,7 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_6x0j
 script = ExtResource("1_b72io")
 
 [node name="CloudComputeTest" type="TextureRect" parent="." node_paths=PackedStringArray("texture_rect")]
+visible = false
 offset_right = 853.0
 offset_bottom = 480.0
 scale = Vector2(3, 3)
@@ -95,7 +100,7 @@ level_manager = NodePath("../LevelManager")
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 18.3342, 8, 22.0981)
 
-[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship", "item_physics_manager", "item_spawner")]
+[node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship", "item_physics_manager", "enemy_manager", "item_spawner")]
 script = ExtResource("3_xtqgv")
 friendly_station = ExtResource("4_xbgqd")
 POIs = Array[ExtResource("5_m7aus")]([SubResource("Resource_oefty")])
@@ -103,7 +108,14 @@ network_manager = NodePath("../NetworkManager")
 mission_manager = NodePath("../MissionManager")
 ship = NodePath("../ShipHolder/SmallShip")
 item_physics_manager = NodePath("../ItemPhysicsDupeManager")
+enemy_manager = NodePath("../EnemyManager")
 item_spawner = NodePath("../ItemSpawner")
+
+[node name="EnemyManager" type="Node3D" parent="." node_paths=PackedStringArray("level_manager", "multiplayer_spawner")]
+script = ExtResource("8_6h73w")
+spawnable_enemies = Array[ExtResource("9_hf5xa")]([ExtResource("10_y2ywo"), ExtResource("11_cjjpm")])
+level_manager = NodePath("../LevelManager")
+multiplayer_spawner = NodePath("../EnemySpawner")
 
 [node name="MissionManager" type="Node" parent="." node_paths=PackedStringArray("ship", "ui", "level_manager")]
 script = ExtResource("5_bqb5b")
@@ -234,3 +246,6 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../EnemyManager")
