@@ -44,6 +44,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("MovementManager/UsernameLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("MovementManager:velocity_sync")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera", "health") groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
@@ -56,7 +59,7 @@ health = NodePath("Health")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player")]
 script = ExtResource("2_yagft")
-third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton")]
+third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton/Armature_001")]
 username_label = NodePath("../MovementManager/UsernameLabel")
 player = NodePath("..")
 
@@ -68,9 +71,10 @@ camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera")
 camera_shake = NodePath("CameraPivot")
 
-[node name="PlayerSkeleton" parent="MovementManager" node_paths=PackedStringArray("cam_holder") instance=ExtResource("2_n2yes")]
+[node name="PlayerSkeleton" parent="MovementManager" node_paths=PackedStringArray("cam_holder", "movement_manager") instance=ExtResource("2_n2yes")]
 transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 0, -1, 0)
 cam_holder = NodePath("../CameraPivot")
+movement_manager = NodePath("..")
 
 [node name="SoundManager" type="Node3D" parent="MovementManager" node_paths=PackedStringArray("movement")]
 script = ExtResource("7_a862v")

@@ -41,6 +41,8 @@ var on_ship := false
 const PLAYER_RT = preload("res://player/player_RT.tscn")
 var remote_transform : RemoteTransform3D
 
+@export var velocity_sync : Vector3
+
 
 func _ready():
 	ship = player_manager.network_manager.network_manager.ship
@@ -111,7 +113,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
-	
+	velocity_sync = player.velocity
 	
 	# gravity
 	if not player.is_on_floor() and !debug_mode and on_ship:
