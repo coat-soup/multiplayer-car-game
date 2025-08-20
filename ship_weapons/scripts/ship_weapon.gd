@@ -19,7 +19,6 @@ const capacitor_boost_range := Vector2(0.5,1)
 @export var heat_per_shot := 10.0
 @onready var heat_manager : ComponentHeatManager = $ComponentHeatManager
 
-
 #var ui
 
 func _ready() -> void:
@@ -50,6 +49,11 @@ func fire_cannon():
 	get_tree().get_root().add_child(shell_obj)
 	shell_obj.global_position = barrel_end.global_position
 	shell_obj.global_rotation = barrel_end.global_rotation
+	
+	if weapons_controller.radar_targeter and weapons_controller.radar_targeter.cur_target: # convergence
+		var distance_to_lead = max(10.0, weapons_controller.radar_targeter.get_target_lead_position().distance_to(weapons_controller.global_position))
+		shell_obj.global_rotation = Util.get_rotation_towards(shell_obj.global_position, weapons_controller.to_global(Vector3.FORWARD * distance_to_lead))
+	
 	shell_obj.ui = ui
 	found_bullet_speed = shell_obj.speed
 	shell_obj.source = weapons_controller.controllable.using_player.name.to_int() if weapons_controller.controllable.using_player else -1

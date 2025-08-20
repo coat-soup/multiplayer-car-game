@@ -116,3 +116,14 @@ static func weighted_random(array : Array, weights : Array [float]) -> int:
 		if w <= 0:
 			return i
 	return 0
+
+
+static func get_rotation_towards(self_pos: Vector3, target_pos: Vector3) -> Vector3:
+	var forward = (target_pos - self_pos).normalized()
+	var up = Vector3.UP
+	
+	var right = up.cross(forward).normalized()
+	up = forward.cross(right).normalized()
+	
+	var basis = Basis(right, up, forward)
+	return basis.get_euler()

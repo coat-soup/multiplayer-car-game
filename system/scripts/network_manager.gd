@@ -44,11 +44,12 @@ func _on_host_pressed() -> void:
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
-	if level_manager: level_manager.setup(multiplayer)
-	
 	$Camera3D.queue_free()
 	add_player(multiplayer.get_unique_id())
 	ui.toggle_network_menu(false)
+	
+	await get_tree().create_timer(1.0).timeout
+	if level_manager: level_manager.setup(multiplayer)
 	
 	host_started.emit()
 
@@ -135,7 +136,7 @@ static func parse_lobby_code(code: String) -> int:
 
 func get_friends_in_lobbies() -> Dictionary:
 	var results: Dictionary = {}
-
+	
 	for i in range(0, Steam.getFriendCount()):
 		var steam_id: int = Steam.getFriendByIndex(i, Steam.FRIEND_FLAG_IMMEDIATE)
 		var game_info: Dictionary = Steam.getFriendGamePlayed(steam_id)
@@ -153,8 +154,9 @@ func get_friends_in_lobbies() -> Dictionary:
 			if app_id != Steam.getAppID():
 				# Not in this game 
 				results[steam_id] = -1
-			elif lobby is String:
+			elif lobby is String or lobby == 0:
 				results[steam_id] = -2 # Not in a lobby
-			else: results[steam_id] = lobby
+			else:
+				results[steam_id] = lobby
 	
 	return results

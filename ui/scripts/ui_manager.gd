@@ -194,6 +194,7 @@ func update_target_lock(signature : RadarSignature, target_position : Vector3, c
 	var aabb_calc = AABBHelper.get_2d_bounds_from_aabb(signature, mesh.get_aabb(), camera)
 	target_outline.size = aabb_calc[1]
 	target_outline.global_position = aabb_calc[0] #camera.unproject_position(signature.global_position) - aabb_calc[1]/2
+	radar_target_name.text = "TARGET: " + signature.signature_name + "\n" + str(round(camera.global_position.distance_to(target_position))) + "m"
 
 
 func setup_mounted_weapons(controller : MountedWeaponsController):
@@ -320,8 +321,7 @@ func build_lobby_list():
 			lobby_entry.get_node("JoinButton").visible = false
 			continue
 		
-		
-		lobby_entry.get_node("PlayerCountLabel").text = ""
+		lobby_entry.get_node("PlayerCountLabel").text = str(Steam.getNumLobbyMembers(data[steam_id])) + "/16 PLAYERS"
 		lobby_entry.get_node("PingLabel").text = ""
 		lobby_entry.get_node("JoinButton").pressed.connect(on_friend_lobby_join_pressed.bind(steam_id, data[steam_id]))
 

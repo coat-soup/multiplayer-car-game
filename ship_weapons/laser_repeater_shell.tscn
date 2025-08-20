@@ -12,23 +12,23 @@ emission_enabled = true
 emission = Color(0.87, 0, 0, 1)
 emission_energy_multiplier = 10.0
 
-[sub_resource type="Gradient" id="Gradient_w74vy"]
+[sub_resource type="Gradient" id="Gradient_aug2m"]
 offsets = PackedFloat32Array(0.1, 0.454545)
 colors = PackedColorArray(0.111197, 0.111197, 0.111197, 1, 0.529067, 0.529067, 0.529067, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sa8mb"]
-gradient = SubResource("Gradient_w74vy")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ggp74"]
+gradient = SubResource("Gradient_aug2m")
 
-[sub_resource type="Curve" id="Curve_j4bco"]
+[sub_resource type="Curve" id="Curve_yyk8s"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15942, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_yuu5n"]
-curve = SubResource("Curve_j4bco")
+[sub_resource type="CurveTexture" id="CurveTexture_xjdys"]
+curve = SubResource("Curve_yyk8s")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k7yca"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ml1x"]
 direction = Vector3(0, 0, 1)
-spread = 90.0
+spread = 30.638
 flatness = 0.663
 initial_velocity_min = 2.0
 initial_velocity_max = 20.0
@@ -36,8 +36,9 @@ gravity = Vector3(0, 2, 0)
 damping_min = 5.0
 damping_max = 8.0
 scale_min = 0.2
-scale_curve = SubResource("CurveTexture_yuu5n")
-color_ramp = SubResource("GradientTexture1D_sa8mb")
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_xjdys")
+color_ramp = SubResource("GradientTexture1D_ggp74")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqjcf"]
 vertex_color_use_as_albedo = true
@@ -64,10 +65,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_cstll")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
 emitting = false
+amount = 4
 lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_k7yca")
+process_material = SubResource("ParticleProcessMaterial_0ml1x")
 draw_pass_1 = SubResource("SphereMesh_xrywy")
 script = ExtResource("4_ridgg")
 

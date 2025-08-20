@@ -109,4 +109,4 @@ func player_target_died():
 func on_took_damage(source_id):
 	var player : Player = Util.get_player_from_id(str(source_id), self)
 	if player and player.active and not player.movement_manager.on_ship:
-		if player_target == null or randf() < player_target_chance: player_target = player.movement_manager
+		if player_target == null and randf() < player_target_chance: player_target = player.movement_manager

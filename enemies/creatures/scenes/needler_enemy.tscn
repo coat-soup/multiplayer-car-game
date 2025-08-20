@@ -39,7 +39,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 [node name="RadarSignature" parent="." instance=ExtResource("3_x4lw0")]
 transform = Transform3D(1.81809, 0, 0, 0, 1.33989, 0, 0, 0, 3.80903, 0, 0, 0)
 visible = false
-signature_name = "Spinemaw"
+signature_name = "Needler"
 emission_strength = 200.0
 relation = 2
 

@@ -14,10 +14,12 @@ var cur_target : RadarSignature
 var target_last_pos : Vector3
 var cached_local_player : Player
 
+var t_vel : Vector3
 
 func _ready() -> void:
 	controllable.control_started.connect(on_control_started)
 	controllable.control_ended.connect(on_control_ended)
+	weapons_controller.radar_targeter = self
 
 
 func _input(event: InputEvent) -> void:
@@ -39,11 +41,16 @@ func _process(delta: float) -> void:
 			cur_target = null
 			ui.end_target_lock()
 		elif weapons_controller:
-			var t_vel = (cur_target.global_position - target_last_pos) / delta
+			t_vel = (cur_target.global_position - target_last_pos) / delta
 			var vel = parent_ship.movement_manager.velocity_sync if parent_ship else parent_component.ship.movement_manager.velocity_sync if parent_component else Vector3.ZERO
-			ui.update_target_lock(cur_target, cur_target.global_position + (t_vel - vel) * cur_target.global_position.distance_to(global_position) / weapons_controller.bullet_speed, controllable.camera)
+			ui.update_target_lock(cur_target, get_target_lead_position(), controllable.camera)
 			
 			target_last_pos = cur_target.global_position
+
+
+func get_target_lead_position() -> Vector3:
+	var vel = parent_ship.movement_manager.velocity_sync if parent_ship else parent_component.ship.movement_manager.velocity_sync if parent_component else Vector3.ZERO
+	return cur_target.global_position + (t_vel - vel) * cur_target.global_position.distance_to(global_position) / weapons_controller.bullet_speed
 
 
 func get_forward_target() -> RadarSignature:

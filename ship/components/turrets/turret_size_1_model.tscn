@@ -97,25 +97,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6o6ra")
 surface_material_override/0 = SubResource("StandardMaterial3D_6o6ra")
 
 [node name="MountedWeaponsController" type="Node3D" parent="Yaw/Pitch" index="5" node_paths=PackedStringArray("hardpoints", "controllable")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56969, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00322247, 0)
 script = ExtResource("5_vb5bh")
 hardpoints = [NodePath("Size1WeaponHardpoint"), NodePath("Size1WeaponHardpoint2"), NodePath("Size1WeaponHardpoint3"), NodePath("Size1WeaponHardpoint4")]
 controllable = NodePath("../Controllable")
 
 [node name="Size1WeaponHardpoint" parent="Yaw/Pitch/MountedWeaponsController" index="0" instance=ExtResource("9_8tv2m")]
-transform = Transform3D(-0.707107, 0.707107, 6.18172e-08, 0.707107, 0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, 1.79307, 0.0459599)
+transform = Transform3D(-0.707107, 0.707107, 6.18172e-08, 0.707107, 0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, 0.226602, 0.0459599)
 visible = false
 
 [node name="Size1WeaponHardpoint2" parent="Yaw/Pitch/MountedWeaponsController" index="1" instance=ExtResource("9_8tv2m")]
-transform = Transform3D(0.707107, 0.707107, -6.18172e-08, 0.707107, -0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, 1.32623, 0.0459599)
+transform = Transform3D(0.707107, 0.707107, -6.18172e-08, 0.707107, -0.707107, -6.18172e-08, -8.74228e-08, 0, -1, 1.73495, -0.240237, 0.0459599)
 visible = false
 
 [node name="Size1WeaponHardpoint3" parent="Yaw/Pitch/MountedWeaponsController" index="2" instance=ExtResource("9_8tv2m")]
-transform = Transform3D(0.707107, -0.707107, -6.18172e-08, -0.707107, -0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, 1.32623, 0.0459599)
+transform = Transform3D(0.707107, -0.707107, -6.18172e-08, -0.707107, -0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, -0.240237, 0.0459599)
 visible = false
 
 [node name="Size1WeaponHardpoint4" parent="Yaw/Pitch/MountedWeaponsController" index="3" instance=ExtResource("9_8tv2m")]
-transform = Transform3D(-0.707107, -0.707107, 6.18172e-08, -0.707107, 0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, 1.79307, 0.0459599)
+transform = Transform3D(-0.707107, -0.707107, 6.18172e-08, -0.707107, 0.707107, 6.18172e-08, -8.74228e-08, 0, -1, -1.73466, 0.226602, 0.0459599)
 visible = false
 
 [node name="Crosshair" type="Sprite3D" parent="Yaw/Pitch" index="6"]

@@ -1,7 +1,11 @@
 extends Node3D
 class_name EnemyManager
 
-@export var target_local_difficulty := 2.0
+@export var max_local_difficulty := 3.0
+## target_diff = sin wave loop of this length. Half the time difficulty is negative: means peace
+@export var difficulty_wave_interval : float = 300.0
+
+@onready var target_local_difficulty : float = -max_local_difficulty
 var current_local_difficulty := 0.0
 
 @export var spawnable_enemies : Array[EnemyCreatureData]
@@ -17,8 +21,12 @@ var spawned_enemies = {}
 @export var level_manager : LevelManager
 @export var multiplayer_spawner : MultiplayerSpawner
 
+var time_start = 0
+
 
 func _ready() -> void:
+	time_start = Time.get_ticks_msec()
+	
 	spawnable_enemies.sort_custom(func(a, b): return a.difficulty_rating < b.difficulty_rating)
 	
 	for enemy in spawnable_enemies:
@@ -27,6 +35,10 @@ func _ready() -> void:
 
 func check_for_enemy_spawn():
 	if not multiplayer.is_server(): return
+	
+	var time_elapsed = Time.get_ticks_msec() - time_start
+	target_local_difficulty = max_local_difficulty * sin(2 * PI * time_elapsed / difficulty_wave_interval)
+	print("Current local difficulty target: ", target_local_difficulty)
 	
 	cleanup_out_of_range_enemies()
 	if update_current_local_difficulty() < target_local_difficulty:

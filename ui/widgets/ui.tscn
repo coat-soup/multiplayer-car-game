@@ -282,6 +282,7 @@ mouse_filter = 2
 texture = ExtResource("4_rw5hn")
 
 [node name="TargetOutline" type="NinePatchRect" parent="HUD/RadarTargetting"]
+modulate = Color(1, 0, 0, 1)
 texture_filter = 1
 layout_mode = 0
 offset_left = 1103.0
@@ -432,9 +433,9 @@ placeholder_text = "LOBBY ID"
 
 [node name="LobbySectionLabel" type="Label" parent="NetworkPanel"]
 layout_mode = 0
-offset_left = 256.0
+offset_left = 274.0
 offset_top = -330.0
-offset_right = 441.0
+offset_right = 459.0
 offset_bottom = -307.0
 theme = ExtResource("4_ol48f")
 theme_type_variation = &"GraphFrameTitleLabel"
@@ -455,9 +456,9 @@ layout_mode = 2
 [node name="RefreshLobbies" type="Button" parent="NetworkPanel"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 0
-offset_left = 274.0
+offset_left = 292.0
 offset_top = 316.0
-offset_right = 419.0
+offset_right = 437.0
 offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 

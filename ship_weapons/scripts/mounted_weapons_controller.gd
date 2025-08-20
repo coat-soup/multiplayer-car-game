@@ -10,6 +10,7 @@ var turret_station : TurretStation
 var ammo_crates : Array[AmmoCrate]
 
 var bullet_speed : float = 200 # TODO: Calculate this properl
+var radar_targeter : RadarTargeter
 
 
 func _ready():
