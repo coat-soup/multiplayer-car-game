@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cyk67kv73er43"]
+[gd_scene load_steps=22 format=3 uid="uid://cyk67kv73er43"]
 
 [ext_resource type="Script" path="res://player/player_movement.gd" id="1_u3ln2"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_wogeu"]
+[ext_resource type="PackedScene" uid="uid://dhhtqn4mah1gr" path="res://player/player_skeleton.tscn" id="2_n2yes"]
 [ext_resource type="Script" path="res://player/player_network_manager.gd" id="2_yagft"]
 [ext_resource type="Script" path="res://player/player_interaction_manager.gd" id="3_h4ya3"]
 [ext_resource type="Script" path="res://player/equipment_manager.gd" id="5_wjl74"]
@@ -55,7 +56,7 @@ health = NodePath("Health")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player")]
 script = ExtResource("2_yagft")
-third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel")]
+third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton")]
 username_label = NodePath("../MovementManager/UsernameLabel")
 player = NodePath("..")
 
@@ -66,6 +67,10 @@ player_manager = NodePath("..")
 camera_pivot = NodePath("CameraPivot")
 camera = NodePath("CameraPivot/Camera")
 camera_shake = NodePath("CameraPivot")
+
+[node name="PlayerSkeleton" parent="MovementManager" node_paths=PackedStringArray("cam_holder") instance=ExtResource("2_n2yes")]
+transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 0, -1, 0)
+cam_holder = NodePath("../CameraPivot")
 
 [node name="SoundManager" type="Node3D" parent="MovementManager" node_paths=PackedStringArray("movement")]
 script = ExtResource("7_a862v")
@@ -86,6 +91,7 @@ billboard = 1
 text = "STEAM USER"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MovementManager"]
+visible = false
 mesh = SubResource("CapsuleMesh_765p8")
 skeleton = NodePath("../..")
 
@@ -117,6 +123,7 @@ script = ExtResource("5_wjl74")
 player = NodePath("../../..")
 
 [node name="FaceModel" type="Node3D" parent="MovementManager/CameraPivot"]
+visible = false
 
 [node name="Eyes" type="MeshInstance3D" parent="MovementManager/CameraPivot/FaceModel"]
 transform = Transform3D(0.53311, 0, 0, 0, 0.27028, 0, 0, 0, 0.200378, 0, -0.167882, -0.420097)
