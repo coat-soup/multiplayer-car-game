@@ -37,8 +37,7 @@ func check_for_enemy_spawn():
 	if not multiplayer.is_server(): return
 	
 	var time_elapsed = Time.get_ticks_msec() - time_start
-	target_local_difficulty = max_local_difficulty * sin(2 * PI * time_elapsed / difficulty_wave_interval)
-	print("Current local difficulty target: ", target_local_difficulty)
+	target_local_difficulty = max_local_difficulty * -sin((2 * PI * time_elapsed) / (difficulty_wave_interval * 1000)) # time in milisec
 	
 	cleanup_out_of_range_enemies()
 	if update_current_local_difficulty() < target_local_difficulty:

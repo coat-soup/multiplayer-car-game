@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://cpyyrb1hi07nf"]
+
+[ext_resource type="Script" path="res://items/scripts/item_data.gd" id="1_de60a"]
+
+[resource]
+script = ExtResource("1_de60a")
+item_name = "Large Cargo Container"
+price = 80
+prefab_path = "res://items/scenes/test_large_cargo_item.tscn"
+crafting_recipes = Array[String]([])

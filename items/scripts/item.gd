@@ -118,7 +118,11 @@ func _physics_process(_delta: float) -> void:
 			snap_indicator.global_rotation = cargo_grid.get_snapped_world_rotation(self)
 			if not cargo_grid.can_put_item_there(self): snap_indicator.visible = false
 		else: snap_indicator.visible = false
-
+	
+	# force remote transform update
+	if not immovable and not on_ship:
+		physics_dupe.position += Vector3(0,0.00000001, 0)
+		physics_dupe.position -= Vector3(0,0.00000001, 0)
 
 @rpc("any_peer", "call_local")
 func request_initialise_on_load():

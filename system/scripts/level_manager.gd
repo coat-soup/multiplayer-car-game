@@ -36,56 +36,8 @@ func setup(_multiplayer):
 	reset_level()
 
 
-@rpc("any_peer", "call_local")
-func spawn_item_with_callback(file_path : String, pos : Vector3, sender : Node, callback_function : String):
-	var item = load(file_path).instantiate() as Item
-	ship.add_child(item, true)
-	item.global_position = pos
-
-
-func spawn_item_replicated(file_path : String, pos : Vector3) -> Item:
-	var item = load(file_path).instantiate() as Item
-	ship.add_child(item, true)
-	item.global_position = pos
-	
-	mission_manager.ui.display_chat_message("Starting item spawn for " + item.name)
-	
-	replicate_item_spawn.rpc(item.name, file_path, pos)
-	return item
-
-
-@rpc("any_peer", "call_remote")
-func replicate_item_spawn(node_name : String, file_path : String, pos : Vector3):
-	mission_manager.ui.display_chat_message("Syncing item spawn for " + node_name)
-	var item = load(file_path).instantiate() as Item
-	ship.add_child(item, true)
-	item.global_position = pos
-	item.name = node_name
-
-
-func test_spawn_function(value):
-	print("Custom spawn function called: ", value)
-	
-	return null
-
-
-@rpc("any_peer", "call_local")
-func spawn_item_synced_with_callback(file_path : String, pos : Vector3, sender_path : String, callback_function : String):
-	item_spawner.spawn_function = test_spawn_function
-	if not tracked_spawnable_items.has(file_path):
-		tracked_spawnable_items.append(file_path)
-		item_spawner.add_spawnable_scene(file_path)
-		
-	if not multiplayer.is_server(): return
-	add_item_to_spawner.rpc(file_path)
-	var item = load(file_path).instantiate() as Item
-	ship.add_child(item, true)
-	item.global_position = pos
-	return item
-
-
 func spawn_item_synced(file_path, pos) -> Item:
-	if not multiplayer.is_server(): return
+	if not multiplayer.is_server(): return null
 	
 	add_item_to_spawner.rpc(file_path)
 	var item = load(file_path).instantiate() as Item
@@ -99,18 +51,6 @@ func add_item_to_spawner(file_path : String):
 	if not tracked_spawnable_items.has(file_path):
 		tracked_spawnable_items.append(file_path)
 		item_spawner.add_spawnable_scene(file_path)
-
-
-func spawn_item(prefab : PackedScene, pos) -> Item:
-	#if not is_multiplayer_authority(): return
-	
-	#item_spawner.add_spawnable_scene(prefab.resource_path)
-	var item = prefab.instantiate() as Item
-	#var item = item_spawner.spawn(prefab)
-	print("spawned: ", item)
-	ship.add_child(item, true)
-	item.global_position = pos
-	return item
 
 
 func generate_level():
@@ -129,7 +69,7 @@ func generate_level():
 	end_station = friendly_station.instantiate() as POIStation
 	end_station.level_manager = self
 	add_child(end_station)
-	end_station.position = Util.random_point_in_sphere(level_size * 1.1, level_size * 0.9, r)
+	end_station.position = Util.random_point_in_sphere(level_size * 0.5, level_size * 0.6, r)
 	end_station.global_rotation = Util.random_point_in_sphere(1.0, 0.0, r)
 	
 	#await get_tree().process_frame
@@ -174,12 +114,3 @@ func reset_level():
 	
 	if is_multiplayer_authority():
 		generate_from_seed.rpc(randi())
-
-
-# DOESNT WORK - CANT RPC RESOURCES
-@rpc("any_peer", "call_local")
-func generate_from_world_state(state : WorldState):
-	print("\n Generating world for new player")
-	for item in state.loose_items:
-		spawn_item(load(item.item_prefab_path), item.world_position)
-		print("spawning loose item: ", item)

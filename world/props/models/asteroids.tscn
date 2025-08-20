@@ -28,7 +28,7 @@ data = PackedVector3Array(44.5348, -60.9957, 23.1973, 36.7614, -62.624, 23.791, 
 surface_material_override/0 = SubResource("ShaderMaterial_2k1a8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Asteroid_01" index="0"]
-collision_mask = 17
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroid_01/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_txf4d")
@@ -37,7 +37,7 @@ shape = SubResource("ConcavePolygonShape3D_txf4d")
 surface_material_override/0 = SubResource("ShaderMaterial_2k1a8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Asteroid_02" index="0"]
-collision_mask = 17
+collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroid_02/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_0go0j")

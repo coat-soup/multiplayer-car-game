@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dr4yd6t4v6g1r"]
+[gd_scene load_steps=61 format=3 uid="uid://dr4yd6t4v6g1r"]
 
 [ext_resource type="Script" path="res://ship/ship_manager.gd" id="1_qhgmn"]
 [ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="2_d7vex"]
@@ -33,7 +33,6 @@
 [ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="38_norgj"]
 [ext_resource type="PackedScene" uid="uid://yf3xyelwc04v" path="res://ui/ship_displays/component_status_panel.tscn" id="39_gnwpj"]
 [ext_resource type="PackedScene" uid="uid://v7qfnuqfojcw" path="res://ui/ship_displays/power_management_panel.tscn" id="40_0bg6f"]
-[ext_resource type="PackedScene" uid="uid://cvpnxfa666d7o" path="res://ship_weapons/repeater/repeater_size_1.tscn" id="40_i02lq"]
 [ext_resource type="PackedScene" uid="uid://ckooiwe35tmch" path="res://ship/components/ship_reactor_component.tscn" id="41_ivmgb"]
 [ext_resource type="PackedScene" uid="uid://0fkexj8olvfs" path="res://ship/components/sockets/capacitor_socket.tscn" id="42_bs1v8"]
 [ext_resource type="PackedScene" uid="uid://bc6cp7ikj2q7r" path="res://ship/components/turrets/turret_station.tscn" id="42_vesim"]
@@ -492,32 +491,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.87455, 1.23681, -3.49701)
 
 [node name="Weapons" type="Node3D" parent="."]
 
-[node name="repeater_size1" parent="Weapons" instance=ExtResource("40_i02lq")]
-transform = Transform3D(0.707107, 0.707107, 1.74846e-07, -0.707107, 0.707107, 0, -1.23635e-07, -1.23635e-07, 1, -2.9601, 5.564, 52.2872)
-
-[node name="repeater_size2" parent="Weapons" instance=ExtResource("40_i02lq")]
-transform = Transform3D(-0.707107, 0.707107, 1.74846e-07, -0.707107, -0.707107, 0, 1.23635e-07, -1.23635e-07, 1, -2.9601, 4.3225, 52.2872)
-
-[node name="repeater_size3" parent="Weapons" instance=ExtResource("40_i02lq")]
-transform = Transform3D(-0.707107, -0.707107, 1.74846e-07, 0.707107, -0.707107, 0, 1.23635e-07, 1.23635e-07, 1, -7.20439, 4.3225, 52.2872)
-
-[node name="repeater_size4" parent="Weapons" instance=ExtResource("40_i02lq")]
-transform = Transform3D(0.707107, -0.707107, 1.74846e-07, 0.707107, 0.707107, 0, -1.23635e-07, 1.23635e-07, 1, -7.20439, 5.564, 52.2872)
-
 [node name="autocannon_size1" parent="Weapons" instance=ExtResource("47_hloph")]
-transform = Transform3D(0.707107, 0.707107, 1.74846e-07, -0.707107, 0.707107, 0, -1.23635e-07, -1.23635e-07, 1, -2.9601, 20.564, 52.2872)
+transform = Transform3D(0.707107, 0.707107, 1.74846e-07, -0.707107, 0.707107, 0, -1.23635e-07, -1.23635e-07, 1, -2.9601, 5.564, 52.2872)
 exlcude_from_component_manager = true
 
 [node name="autocannon_size2" parent="Weapons" instance=ExtResource("47_hloph")]
-transform = Transform3D(-0.707107, 0.707107, 1.74846e-07, -0.707107, -0.707107, 0, 1.23635e-07, -1.23635e-07, 1, -2.9601, 19.3225, 52.2872)
+transform = Transform3D(-0.707107, 0.707107, 1.74846e-07, -0.707107, -0.707107, 0, 1.23635e-07, -1.23635e-07, 1, -2.9601, 4.3225, 52.2872)
 exlcude_from_component_manager = true
 
 [node name="autocannon_size3" parent="Weapons" instance=ExtResource("47_hloph")]
-transform = Transform3D(-0.707107, -0.707107, 1.74846e-07, 0.707107, -0.707107, 0, 1.23635e-07, 1.23635e-07, 1, -7.20439, 19.3225, 52.2872)
+transform = Transform3D(-0.707107, -0.707107, 1.74846e-07, 0.707107, -0.707107, 0, 1.23635e-07, 1.23635e-07, 1, -7.20439, 4.3225, 52.2872)
 exlcude_from_component_manager = true
 
 [node name="autocannon_size4" parent="Weapons" instance=ExtResource("47_hloph")]
-transform = Transform3D(0.707107, -0.707107, 1.74846e-07, 0.707107, 0.707107, 0, -1.23635e-07, 1.23635e-07, 1, -7.20439, 20.564, 52.2872)
+transform = Transform3D(0.707107, -0.707107, 1.74846e-07, 0.707107, 0.707107, 0, -1.23635e-07, 1.23635e-07, 1, -7.20439, 5.564, 52.2872)
 exlcude_from_component_manager = true
 
 [node name="autocannon_size5" parent="Weapons" instance=ExtResource("47_hloph")]

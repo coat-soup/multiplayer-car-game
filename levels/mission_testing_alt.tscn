@@ -109,11 +109,14 @@ mission_manager = NodePath("../MissionManager")
 ship = NodePath("../ShipHolder/SmallShip")
 item_physics_manager = NodePath("../ItemPhysicsDupeManager")
 enemy_manager = NodePath("../EnemyManager")
+level_size = 4000.0
 item_spawner = NodePath("../ItemSpawner")
 
 [node name="EnemyManager" type="Node3D" parent="." node_paths=PackedStringArray("level_manager", "multiplayer_spawner")]
 script = ExtResource("8_6h73w")
+difficulty_wave_interval = 180.0
 spawnable_enemies = Array[ExtResource("9_hf5xa")]([ExtResource("10_y2ywo"), ExtResource("11_cjjpm")])
+check_spawn_interval = 1.0
 level_manager = NodePath("../LevelManager")
 multiplayer_spawner = NodePath("../EnemySpawner")
 
@@ -246,6 +249,7 @@ _spawnable_scenes = PackedStringArray("res://player/player.tscn")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../ShipHolder/SmallShip")
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../EnemyManager")
