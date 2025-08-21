@@ -82,13 +82,14 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Pistol" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "interactable") groups=["equipment", "item"]]
+[node name="Pistol" type="CharacterBody3D" node_paths=PackedStringArray("barrel_end", "interactable", "hand_positions") groups=["equipment", "item"]]
 script = ExtResource("1_p8mvk")
 damage = 30.0
 fire_rate = 6.0
 mag_size = 12
 barrel_end = NodePath("pistol/BarrelEnd")
 interactable = NodePath("Interactable")
+hand_positions = [NodePath("pistol/Marker3D"), NodePath("pistol/Marker3D2")]
 item_data = ExtResource("2_e5f8g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -101,9 +102,15 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, 0, 
 [node name="BarrelEnd" type="Node3D" parent="pistol"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.89203e-08, 0.086442, 0.33081)
 
+[node name="Marker3D" type="Marker3D" parent="pistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0473862, 0, -0.0782214)
+
+[node name="Marker3D2" type="Marker3D" parent="pistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0325071, -0.101663, -0.154118)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ep00v")
+&"": SubResource("AnimationLibrary_ep00v")
 }
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

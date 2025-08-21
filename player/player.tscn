@@ -28,6 +28,7 @@ stream_4/stream = ExtResource("11_an08s")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_765p8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ybx0f"]
+radius = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_cp4tc"]
 

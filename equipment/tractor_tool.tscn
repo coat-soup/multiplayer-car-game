@@ -68,11 +68,12 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="TractorTool" type="CharacterBody3D" node_paths=PackedStringArray("interactable") groups=["equipment", "item"]]
+[node name="TractorTool" type="CharacterBody3D" node_paths=PackedStringArray("interactable", "hand_positions") groups=["equipment", "item"]]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bttfc")
 color_by_norm_dist_grad = SubResource("Gradient_1mqwj")
 interactable = NodePath("Interactable")
+hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 item_data = ExtResource("2_p7pmv")
 cargo_grid_dimensions = Vector3i(2, 1, 1)
 
@@ -114,3 +115,9 @@ stream = ExtResource("5_hv5w3")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rbftn")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0133401, 0.188092, 0.582918)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206752, 0.394489, 0.00759539)
