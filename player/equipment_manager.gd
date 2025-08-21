@@ -4,6 +4,8 @@ class_name EquipmentManager
 signal equipped_item
 signal dropped_item
 
+signal swapped_item
+
 @export var player : Player
 @export var num_slots := 8
 var items : Array[Holdable] = []
@@ -188,6 +190,8 @@ func swap_to_item(slot):
 		items[cur_slot].on_held()
 	
 	ui.select_hotbar_slot(cur_slot)
+	
+	swapped_item.emit()
 
 
 @rpc("any_peer", "call_local")

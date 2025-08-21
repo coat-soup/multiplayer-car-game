@@ -59,7 +59,7 @@ health = NodePath("Health")
 
 [node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player")]
 script = ExtResource("2_yagft")
-third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton/Armature_001")]
+third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton")]
 username_label = NodePath("../MovementManager/UsernameLabel")
 player = NodePath("..")
 

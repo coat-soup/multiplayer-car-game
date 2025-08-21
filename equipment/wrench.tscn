@@ -107,10 +107,11 @@ properties/1/path = NodePath(".:local_rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Wrench" type="CharacterBody3D" node_paths=PackedStringArray("anim", "interactable") groups=["equipment", "item"]]
+[node name="Wrench" type="CharacterBody3D" node_paths=PackedStringArray("anim", "interactable", "hand_positions") groups=["equipment", "item"]]
 script = ExtResource("1_mgupi")
 anim = NodePath("AnimationPlayer")
 interactable = NodePath("Interactable")
+hand_positions = [NodePath("HandPosition")]
 item_data = ExtResource("2_mcbsl")
 
 [node name="wrench3" parent="." instance=ExtResource("2_gkggd")]
@@ -147,3 +148,6 @@ stream = ExtResource("6_vx6kc")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qmvxg")
+
+[node name="HandPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0305234, 0.127763, 0)

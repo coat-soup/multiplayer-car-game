@@ -29,6 +29,8 @@ var prev_parent : Node3D = null
 
 @export var raycast_on_startup := true
 
+@export var hand_positions : Array[Node3D]
+
 var prev_layers : int
 
 
