@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://ckooiwe35tmch"]
 
-[ext_resource type="Script" path="res://ship/components/ship_reactor.gd" id="1_hkfen"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_cx84k"]
+[ext_resource type="Script" uid="uid://bpiuauogluv64" path="res://ship/components/ship_reactor.gd" id="1_hkfen"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="2_cx84k"]
 [ext_resource type="Resource" uid="uid://cj6y5hu2x5ghw" path="res://items/item_data/item_reactor.tres" id="2_p0vjw"]
 [ext_resource type="PackedScene" uid="uid://dwxq58hbqceca" path="res://world/props/models/reactor_model.tscn" id="2_wr0e7"]
-[ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_pjtu8"]
-[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="5_4c4cj"]
+[ext_resource type="Script" uid="uid://gqaycyn58do" path="res://ship/components/component_fire_hazard.gd" id="3_pjtu8"]
+[ext_resource type="Script" uid="uid://cngmblf4h3c03" path="res://items/scripts/item_snap_point.gd" id="5_4c4cj"]
 [ext_resource type="AudioStream" uid="uid://oybq3scycsao" path="res://sfx/reactor_hum.wav" id="6_87lrc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lc7kj"]

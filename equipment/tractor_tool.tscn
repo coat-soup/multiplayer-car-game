@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=4 uid="uid://fyxpmm5wifkc"]
 
-[ext_resource type="Script" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
-[ext_resource type="Script" path="res://system/scripts/tractor_beam.gd" id="2_dugx1"]
+[ext_resource type="Script" uid="uid://cyokfmabcd0o" path="res://equipment/tractor_tool.gd" id="1_bttfc"]
+[ext_resource type="Script" uid="uid://mbcvj6rke5xv" path="res://system/scripts/tractor_beam.gd" id="2_dugx1"]
 [ext_resource type="Resource" uid="uid://b5a1owq5v0ccj" path="res://items/item_data/item_tractor_tool.tres" id="2_p7pmv"]
 [ext_resource type="PackedScene" uid="uid://ch0bc52eqydbm" path="res://equipment/models/tractor_tool_model.tscn" id="2_t7tfp"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_e8735"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="4_e8735"]
 [ext_resource type="AudioStream" uid="uid://dkxuvx7bjudl7" path="res://sfx/tractor_hum.wav" id="4_uf7hw"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="5_hv5w3"]
 

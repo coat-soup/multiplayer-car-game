@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://5q8ojsaytb8m"]
 
-[ext_resource type="Script" path="res://equipment/scripts/holdable.gd" id="1_4ms06"]
+[ext_resource type="Script" uid="uid://c3d6w3iys5gxe" path="res://equipment/scripts/holdable.gd" id="1_4ms06"]
 [ext_resource type="Resource" uid="uid://dmdes4sw3sjmu" path="res://items/item_data/item_iron.tres" id="2_6u5v2"]
 [ext_resource type="PackedScene" uid="uid://bm2o8cxed6vxm" path="res://items/models/metal_chunk.glb" id="3_rvph4"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_sw0ic"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="5_cqlq7"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="5_cqlq7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mrjew"]
 properties/0/path = NodePath(".:local_position")

@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://jyhm57p6b4r4" path="res://ship/blockout/hangar_level.tscn" id="1_47j6l"]
 [ext_resource type="PackedScene" uid="uid://bingrexrqljg3" path="res://ship/blockout/salvage.tscn" id="2_67o8h"]
-[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="3_16skt"]
+[ext_resource type="Shader" uid="uid://cxxskw8rlchx7" path="res://ship/prototype_grid.gdshader" id="3_16skt"]
 [ext_resource type="PackedScene" uid="uid://xk45fu6cvrgo" path="res://world/props/models/human_reference.glb" id="4_8lisy"]
 [ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="5_0blf7"]
 [ext_resource type="PackedScene" uid="uid://bis7oyw47pkoh" path="res://world/props/models/wall_light.glb" id="6_4xyns"]
-[ext_resource type="Script" path="res://system/scripts/elevator.gd" id="6_xtomb"]
+[ext_resource type="Script" uid="uid://bwmxd42h8487q" path="res://system/scripts/elevator.gd" id="6_xtomb"]
 [ext_resource type="PackedScene" uid="uid://dce3os7dfxwv8" path="res://system/button.tscn" id="7_biyn4"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="9_187u4"]
 [ext_resource type="PackedScene" uid="uid://b1q502qy271v8" path="res://world/props/scenes/sliding_door_01.tscn" id="10_suvyu"]

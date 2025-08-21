@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://biiw4dt0cfd2n"]
 
-[ext_resource type="Script" path="res://ship/components/sockets/component_socket.gd" id="1_aun2p"]
-[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="3_1k8e7"]
+[ext_resource type="Script" uid="uid://bqu8oxkfeqe1c" path="res://ship/components/sockets/component_socket.gd" id="1_aun2p"]
+[ext_resource type="Script" uid="uid://cngmblf4h3c03" path="res://items/scripts/item_snap_point.gd" id="3_1k8e7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tw7bx"]
 radius = 0.434877

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bn5nh1kddwt62"]
 
-[ext_resource type="Script" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
+[ext_resource type="Script" uid="uid://danbihoir5dpc" path="res://equipment/scripts/wrench.gd" id="1_mgupi"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="2_bfpxh"]
 [ext_resource type="PackedScene" uid="uid://c8e5dm3neirpv" path="res://equipment/models/wrench.glb" id="2_gkggd"]
 [ext_resource type="Resource" uid="uid://l4g58tiq5jpu" path="res://items/item_data/item_wrench.tres" id="2_mcbsl"]
 [ext_resource type="PackedScene" uid="uid://ctosmn6mjroqq" path="res://equipment/models/wrench_model.tscn" id="3_yo5ni"]
@@ -95,8 +95,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep00v"]
 _data = {
-"RESET": SubResource("Animation_42rna"),
-"wrench_swing": SubResource("Animation_wa4qp")
+&"RESET": SubResource("Animation_42rna"),
+&"wrench_swing": SubResource("Animation_wa4qp")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qmvxg"]
@@ -137,7 +137,7 @@ shape = SubResource("BoxShape3D_fqgua")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ep00v")
+&"": SubResource("AnimationLibrary_ep00v")
 }
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]

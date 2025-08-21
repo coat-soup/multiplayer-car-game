@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://cygnn44j28j3x"]
 
-[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_gjlcg"]
-[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_22u1y"]
+[ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_gjlcg"]
+[ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_22u1y"]
 [ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="9_i2hlw"]
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="10_qn60d"]
-[ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="11_tpo8f"]
+[ext_resource type="Shader" uid="uid://cgt67uvg8xu82" path="res://vfx/shaders/space_sky.gdshader" id="11_tpo8f"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="12_kbht0"]
 [ext_resource type="PackedScene" uid="uid://ndvevtj1a6da" path="res://ship/blockout/carrier_blockout.tscn" id="14_8x01g"]
 

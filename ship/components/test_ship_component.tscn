@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cud5ky1pvb32i"]
 
-[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="1_qt3em"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_mn6i1"]
-[ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_awx5x"]
+[ext_resource type="Script" uid="uid://drfb58d5t7dmv" path="res://ship/components/ship_component.gd" id="1_qt3em"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="2_mn6i1"]
+[ext_resource type="Script" uid="uid://gqaycyn58do" path="res://ship/components/component_fire_hazard.gd" id="3_awx5x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qa2hr"]
 

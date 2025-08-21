@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://veqnmj5as5gq"]
 
-[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_oc8r8"]
+[ext_resource type="Script" uid="uid://bdnaisrsyfj1j" path="res://items/scripts/item.gd" id="1_oc8r8"]
 [ext_resource type="Resource" uid="uid://dadjihbawv8fa" path="res://items/item_data/item_cargo_container_small.tres" id="2_cw4yg"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_inbej"]
 [ext_resource type="PackedScene" uid="uid://bkokfx1y0ih10" path="res://world/props/models/cargo_crate_1x1x1_model.tscn" id="3_5nsto"]

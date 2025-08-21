@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bc6cp7ikj2q7r"]
 
 [ext_resource type="PackedScene" uid="uid://prsly7le0fu6" path="res://world/props/models/turret_station_model.tscn" id="1_3lfii"]
-[ext_resource type="Script" path="res://ship/components/turrets/turret_station.gd" id="1_62ct6"]
-[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_xkbn8"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_m8vh8"]
+[ext_resource type="Script" uid="uid://bjs66r3pcubq5" path="res://ship/components/turrets/turret_station.gd" id="1_62ct6"]
+[ext_resource type="Script" uid="uid://cngmblf4h3c03" path="res://items/scripts/item_snap_point.gd" id="2_xkbn8"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="3_m8vh8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgbq0"]
 size = Vector3(1.2, 0.6, 1.09302)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://56mh32px1stj"]
 
-[ext_resource type="Script" path="res://items/scripts/fuel_rod.gd" id="1_rb05m"]
+[ext_resource type="Script" uid="uid://d0jto5nkwe5b3" path="res://items/scripts/fuel_rod.gd" id="1_rb05m"]
 [ext_resource type="Resource" uid="uid://dfhwjhp82bjoo" path="res://items/item_data/item_fuel_rod.tres" id="2_8r1dq"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_12t3q"]
 [ext_resource type="PackedScene" uid="uid://forh4xk0kdga" path="res://world/props/models/fuel_rod_model.tscn" id="4_qey43"]

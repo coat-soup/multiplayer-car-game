@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SearchAndDestroyMission" load_steps=4 format=3 uid="uid://cnj4470pjg08i"]
 
-[ext_resource type="Script" path="res://missions/mission_objective.gd" id="1_qwiif"]
-[ext_resource type="Script" path="res://missions/search_and_destroy_mission.gd" id="2_vdora"]
+[ext_resource type="Script" uid="uid://bhm5u44jklbdk" path="res://missions/mission_objective.gd" id="1_qwiif"]
+[ext_resource type="Script" uid="uid://b75xglf3lveyo" path="res://missions/search_and_destroy_mission.gd" id="2_vdora"]
 [ext_resource type="PackedScene" uid="uid://c67a7v47cve4u" path="res://enemies/satellite_01.tscn" id="3_xxtat"]
 
 [resource]

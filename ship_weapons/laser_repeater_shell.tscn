@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://8rrllcm8rqp2"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_u4anq"]
-[ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_cmvh5"]
+[ext_resource type="Script" uid="uid://w6m7kk5jbwol" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_cmvh5"]
 [ext_resource type="PackedScene" uid="uid://f3je33lmcj5c" path="res://vfx/particles/small_explosion_particles.tscn" id="3_c8mll"]
-[ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="4_ridgg"]
+[ext_resource type="Script" uid="uid://b1ymg45krh40w" path="res://system/scripts/start_particles_on_spawn.gd" id="4_ridgg"]
 [ext_resource type="AudioStream" uid="uid://u2jyqk1nf5fk" path="res://sfx/explosion.wav" id="5_2nxda"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cstll"]

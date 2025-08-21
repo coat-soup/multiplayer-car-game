@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://baol6wgc4kuq6"]
 
-[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_p1mdd"]
+[ext_resource type="Script" uid="uid://bdnaisrsyfj1j" path="res://items/scripts/item.gd" id="1_p1mdd"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="2_mt44k"]
 [ext_resource type="PackedScene" uid="uid://crv73tl4bv8bi" path="res://world/props/models/storage_crate_model.tscn" id="2_pe0ab"]
 [ext_resource type="Resource" uid="uid://dxtjutk37c3d8" path="res://items/item_data/item_storage_crate.tres" id="2_y24bs"]
-[ext_resource type="Script" path="res://system/scripts/item_inventory.gd" id="5_dq2fy"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="6_dcj17"]
+[ext_resource type="Script" uid="uid://d3hvbovfpocwr" path="res://system/scripts/item_inventory.gd" id="5_dq2fy"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="6_dcj17"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vlt71"]
 size = Vector3(1.2, 0.9, 1)

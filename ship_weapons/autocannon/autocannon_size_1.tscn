@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://hbyqte87esm2"]
 
-[ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="2_5hunb"]
+[ext_resource type="Script" uid="uid://ujg67g73omv7" path="res://ship_weapons/scripts/ship_weapon.gd" id="2_5hunb"]
 [ext_resource type="Resource" uid="uid://bns5acf0ds7xp" path="res://items/item_data/item_autocannon_s1.tres" id="3_g3fsi"]
 [ext_resource type="PackedScene" uid="uid://cbt74wqwimjr6" path="res://ship_weapons/autocannon_shell.tscn" id="3_mw7yq"]
 [ext_resource type="PackedScene" uid="uid://cuedrhoog4y0p" path="res://ship_weapons/autocannon/autocannon_size_1_model.tscn" id="3_o3khy"]

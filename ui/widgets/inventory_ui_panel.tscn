@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvtvljrtqbpvo"]
 
-[ext_resource type="Script" path="res://ui/scripts/inventory_ui_panel_manager.gd" id="1_itufc"]
+[ext_resource type="Script" uid="uid://codgbsjj8v83s" path="res://ui/scripts/inventory_ui_panel_manager.gd" id="1_itufc"]
 [ext_resource type="PackedScene" uid="uid://dclr6k74xds6n" path="res://ui/scenes/inventory_slot.tscn" id="1_mmkj7"]
 
 [node name="InventoryUIPanel" type="Control"]

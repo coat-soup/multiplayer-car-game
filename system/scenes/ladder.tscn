@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bw0axgpyrynkn"]
 
 [ext_resource type="PackedScene" uid="uid://xb0fsqckhk7j" path="res://vehicles/models/Ladder.glb" id="1_8punn"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="1_77n6r"]
-[ext_resource type="Script" path="res://system/scripts/ladder.gd" id="1_ee1q8"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="1_77n6r"]
+[ext_resource type="Script" uid="uid://71b55nnu0mvg" path="res://system/scripts/ladder.gd" id="1_ee1q8"]
 [ext_resource type="Texture2D" uid="uid://c3bfgehturk3u" path="res://vehicles/textures/ladder.png" id="3_u2egp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wfpn"]

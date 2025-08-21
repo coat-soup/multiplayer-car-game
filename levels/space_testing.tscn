@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://blh5vmbo3xtwo"]
 
-[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_fir5i"]
-[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_4wxfc"]
+[ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_fir5i"]
+[ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_4wxfc"]
 [ext_resource type="PackedScene" uid="uid://bj01vh7sj7yne" path="res://ship/ship.tscn" id="3_1oyru"]
 [ext_resource type="PackedScene" uid="uid://djooi0jrmmym1" path="res://ship/ship_movement_clone.tscn" id="4_cl32f"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="4_diix6"]
-[ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="5_vb6jv"]
+[ext_resource type="Shader" uid="uid://cgt67uvg8xu82" path="res://vfx/shaders/space_sky.gdshader" id="5_vb6jv"]
 [ext_resource type="PackedScene" uid="uid://b6icnbs8qfg2f" path="res://stations/station_mockup.tscn" id="7_jqffu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hv1i0"]

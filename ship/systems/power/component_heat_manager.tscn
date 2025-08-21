@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8e8a2p2jypcg"]
 
-[ext_resource type="Script" path="res://ship/systems/power/component_heat_manager.gd" id="1_br1sm"]
+[ext_resource type="Script" uid="uid://cagvbc5jy3qya" path="res://ship/systems/power/component_heat_manager.gd" id="1_br1sm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8il2g"]
 properties/0/path = NodePath("ComponentHeatManager:cur_heat")

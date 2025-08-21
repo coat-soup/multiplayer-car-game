@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CargoTransportMission" load_steps=6 format=3 uid="uid://ctcpvp4csbcie"]
 
-[ext_resource type="Script" path="res://missions/mission_objective.gd" id="1_cj2ij"]
-[ext_resource type="Script" path="res://items/scripts/item_data.gd" id="1_tn3i0"]
-[ext_resource type="Script" path="res://missions/cargo_transport_mission.gd" id="2_1ee8w"]
+[ext_resource type="Script" uid="uid://bhm5u44jklbdk" path="res://missions/mission_objective.gd" id="1_cj2ij"]
+[ext_resource type="Script" uid="uid://bpay5opiaiwxr" path="res://items/scripts/item_data.gd" id="1_tn3i0"]
+[ext_resource type="Script" uid="uid://bv737xnvyi0j8" path="res://missions/cargo_transport_mission.gd" id="2_1ee8w"]
 [ext_resource type="Resource" uid="uid://cpyyrb1hi07nf" path="res://items/item_data/item_cargo_container_large.tres" id="2_wkdpl"]
 [ext_resource type="Resource" uid="uid://dadjihbawv8fa" path="res://items/item_data/item_cargo_container_small.tres" id="3_kyfp2"]
 

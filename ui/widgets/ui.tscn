@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://db1lqpw1tim4q"]
 
-[ext_resource type="Script" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
+[ext_resource type="Script" uid="uid://b0cljofsjyqua" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="2_5fnut"]
 [ext_resource type="Texture2D" uid="uid://bhjuq1vuqr43k" path="res://ui/textures/border_select_9patch.png" id="2_lnut8"]
 [ext_resource type="Texture2D" uid="uid://dlgn2mvd2b1vf" path="res://ui/textures/corner_select_9patch.png" id="2_nk33s"]
@@ -45,8 +45,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g04y5"]
 _data = {
-"RESET": SubResource("Animation_68x3x"),
-"chat_fade": SubResource("Animation_4x3be")
+&"RESET": SubResource("Animation_68x3x"),
+&"chat_fade": SubResource("Animation_4x3be")
 }
 
 [node name="UI" type="Control" groups=["ui"]]
@@ -154,7 +154,7 @@ vertical_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/ChatBox"]
 libraries = {
-"": SubResource("AnimationLibrary_g04y5")
+&"": SubResource("AnimationLibrary_g04y5")
 }
 
 [node name="VirtualJoystick" type="Control" parent="HUD"]

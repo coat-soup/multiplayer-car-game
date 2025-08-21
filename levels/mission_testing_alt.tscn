@@ -1,16 +1,16 @@
 [gd_scene load_steps=34 format=3 uid="uid://bxfgwvu4c6fo0"]
 
-[ext_resource type="Script" path="res://system/scripts/game_manager.gd" id="1_b72io"]
-[ext_resource type="Script" path="res://system/scripts/network_manager.gd" id="2_521wb"]
-[ext_resource type="Script" path="res://system/scripts/level_manager.gd" id="3_xtqgv"]
+[ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_b72io"]
+[ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_521wb"]
+[ext_resource type="Script" uid="uid://d4gwqh0ukxx3f" path="res://system/scripts/level_manager.gd" id="3_xtqgv"]
 [ext_resource type="PackedScene" uid="uid://b2s5an1qhg1si" path="res://stations/station_mockup_2.tscn" id="4_xbgqd"]
-[ext_resource type="Script" path="res://missions/mission_manager.gd" id="5_bqb5b"]
-[ext_resource type="Script" path="res://world/POIs/scripts/POI_listing.gd" id="5_m7aus"]
+[ext_resource type="Script" uid="uid://du6ftsms1wlmi" path="res://missions/mission_manager.gd" id="5_bqb5b"]
+[ext_resource type="Script" uid="uid://cgf10vecwx63e" path="res://world/POIs/scripts/POI_listing.gd" id="5_m7aus"]
 [ext_resource type="Resource" uid="uid://ctcpvp4csbcie" path="res://missions/templates/transport_crates_mission.tres" id="6_j3tm5"]
 [ext_resource type="PackedScene" uid="uid://cr88xshma2wh2" path="res://world/POIs/scenes/POI_asteroid_cluster.tscn" id="6_np7op"]
-[ext_resource type="Script" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
-[ext_resource type="Script" path="res://system/scripts/enemy_manager.gd" id="8_6h73w"]
-[ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature_data.gd" id="9_hf5xa"]
+[ext_resource type="Script" uid="uid://c55s76ikmv5n4" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
+[ext_resource type="Script" uid="uid://diut84o8dxae1" path="res://system/scripts/enemy_manager.gd" id="8_6h73w"]
+[ext_resource type="Script" uid="uid://5xpia22d6mha" path="res://enemies/creatures/scripts/enemy_creature_data.gd" id="9_hf5xa"]
 [ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="9_vonv0"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
 [ext_resource type="PackedScene" uid="uid://bjg4yqqkbjmks" path="res://equipment/fire_extinguisher.tscn" id="10_pckhk"]
@@ -23,10 +23,10 @@
 [ext_resource type="PackedScene" uid="uid://sc8dgmgtad4m" path="res://items/scenes/plant_pot.tscn" id="15_m6q4y"]
 [ext_resource type="PackedScene" uid="uid://56mh32px1stj" path="res://items/scenes/fuel_rod.tscn" id="16_clduo"]
 [ext_resource type="PackedScene" uid="uid://ccapb8n1iqflw" path="res://equipment/pistol.tscn" id="17_e2blg"]
-[ext_resource type="Shader" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
+[ext_resource type="Shader" uid="uid://cgt67uvg8xu82" path="res://vfx/shaders/space_sky.gdshader" id="19_55n7u"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/widgets/ui.tscn" id="20_4wwfl"]
-[ext_resource type="Script" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
-[ext_resource type="Script" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
+[ext_resource type="Script" uid="uid://1552dwe33jmf" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
+[ext_resource type="Script" uid="uid://c1e8gagqxlh6y" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
@@ -226,7 +226,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4447, -10.5, 17.3671)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.00081, -9.16505, 18.8112)
 
 [node name="ShipSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://auxcraft/scenes/fighter.tscn", "res://auxcraft/scenes/fighter_movement_clone.tscn")
+_spawnable_scenes = PackedStringArray("uid://bb54q17erdbsf", "uid://cvs55tafiwxnj")
 spawn_path = NodePath("../ShipHolder")
 
 [node name="World" type="Node3D" parent="."]
@@ -245,7 +245,7 @@ shadow_enabled = true
 network_manager = NodePath("../NetworkManager")
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player/player.tscn")
+_spawnable_scenes = PackedStringArray("uid://cyk67kv73er43")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="ItemSpawner" type="MultiplayerSpawner" parent="."]

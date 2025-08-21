@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://0fkexj8olvfs"]
 
 [ext_resource type="PackedScene" uid="uid://b8as1ttvkjs8f" path="res://world/props/models/capacitor_socket_model.tscn" id="2_d83rh"]
-[ext_resource type="Script" path="res://ship/components/sockets/component_socket.gd" id="2_meblv"]
-[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="4_5gs8h"]
+[ext_resource type="Script" uid="uid://bqu8oxkfeqe1c" path="res://ship/components/sockets/component_socket.gd" id="2_meblv"]
+[ext_resource type="Script" uid="uid://cngmblf4h3c03" path="res://items/scripts/item_snap_point.gd" id="4_5gs8h"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tw7bx"]
 radius = 0.84684

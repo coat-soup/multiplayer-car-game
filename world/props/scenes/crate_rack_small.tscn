@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://pwgcoen1ioeq"]
 
 [ext_resource type="PackedScene" uid="uid://dfddtr75y1pma" path="res://world/props/models/crate_rack_small.glb" id="1_wblyb"]
-[ext_resource type="Script" path="res://items/scripts/item_snap_point.gd" id="2_3ys7a"]
+[ext_resource type="Script" uid="uid://cngmblf4h3c03" path="res://items/scripts/item_snap_point.gd" id="2_3ys7a"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jgrsx"]
 points = PackedVector3Array(0.746768, 0.0516778, 0.60773, -0.746768, -0.0416683, -0.605768, -0.746768, 0.0516778, -0.605768, 0.746768, -0.0416683, -0.605768, -0.746768, -0.0416683, 0.60773, -0.746768, 0.0516778, 0.60773, 0.746768, 0.0516778, -0.605768, 0.746768, -0.0416683, 0.60773)

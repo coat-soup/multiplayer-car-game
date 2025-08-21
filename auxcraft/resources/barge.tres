@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="Ship" load_steps=4 format=3 uid="uid://b6r5sef7bj5v4"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=4 format=3 uid="uid://b6r5sef7bj5v4"]
 
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="1_8nqss"]
 [ext_resource type="PackedScene" uid="uid://bb54q17erdbsf" path="res://auxcraft/scenes/fighter.tscn" id="2_857xn"]
-[ext_resource type="Script" path="res://ship/ship_data.gd" id="3_pwe25"]
+[ext_resource type="Script" uid="uid://ctp2vxkrdaod0" path="res://ship/ship_data.gd" id="3_pwe25"]
 
 [resource]
 script = ExtResource("3_pwe25")

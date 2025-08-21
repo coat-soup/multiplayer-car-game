@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://djm40qegqwfy6"]
 
-[ext_resource type="Script" path="res://system/scripts/fire.gd" id="1_k3ns0"]
+[ext_resource type="Script" uid="uid://bs1c4xemeguyy" path="res://system/scripts/fire.gd" id="1_k3ns0"]
 [ext_resource type="PackedScene" uid="uid://d04akwrnaw7pu" path="res://vfx/particles/fire_particles.tscn" id="2_i5pd6"]
 [ext_resource type="AudioStream" uid="uid://dy5oa3x2m3agx" path="res://sfx/fire.wav" id="3_ub7vt"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cvpnxfa666d7o"]
 
-[ext_resource type="Script" path="res://ship_weapons/scripts/ship_weapon.gd" id="1_7wvoa"]
+[ext_resource type="Script" uid="uid://ujg67g73omv7" path="res://ship_weapons/scripts/ship_weapon.gd" id="1_7wvoa"]
 [ext_resource type="PackedScene" uid="uid://8rrllcm8rqp2" path="res://ship_weapons/laser_repeater_shell.tscn" id="2_jg0y5"]
 [ext_resource type="PackedScene" uid="uid://bt6gjy4t0uku3" path="res://ship_weapons/repeater/repeater_size_1_model.tscn" id="3_3atfn"]
 [ext_resource type="Resource" uid="uid://b1y348u13difx" path="res://items/item_data/item_repeater_s1.tres" id="3_ninx8"]

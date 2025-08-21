@@ -50,8 +50,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cktex"]
 _data = {
-"RESET": SubResource("Animation_ht5cn"),
-"trigger": SubResource("Animation_l24yx")
+&"RESET": SubResource("Animation_ht5cn"),
+&"trigger": SubResource("Animation_l24yx")
 }
 
 [node name="button" instance=ExtResource("1_ptgvg")]

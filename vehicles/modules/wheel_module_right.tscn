@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://1r7todw71qx7"]
 
 [ext_resource type="PackedScene" uid="uid://cvopkjr0dee22" path="res://vehicles/models/WheelModule.glb" id="1_mehgj"]
-[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="2_wm4cm"]
+[ext_resource type="Script" uid="uid://cckm1uof3qdeu" path="res://vehicles/scripts/vehicle_module.gd" id="2_wm4cm"]
 [ext_resource type="PackedScene" uid="uid://cvcuf46sfu4yb" path="res://vehicles/scenes/wheel_model.tscn" id="3_3d2wt"]
 [ext_resource type="Texture2D" uid="uid://cmadt4m72xgsg" path="res://vehicles/textures/wheel_module.png" id="4_wo3vx"]
 [ext_resource type="Texture2D" uid="uid://dsq1bbswn4jig" path="res://vehicles/textures/wheel_module_n.png" id="5_qp253"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://buwk3kfechuo7"]
 
-[ext_resource type="Script" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
+[ext_resource type="Script" uid="uid://uhqqofcptm21" path="res://ship/systems/power/cooler.gd" id="1_hxxg3"]
 [ext_resource type="Resource" uid="uid://d0hafmxddh1ue" path="res://items/item_data/item_cooler.tres" id="2_4qjeg"]
 [ext_resource type="PackedScene" uid="uid://bemq7kamgw881" path="res://world/props/models/cooler_model.tscn" id="2_c06p6"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="3_lhyqq"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="3_lhyqq"]
 [ext_resource type="Texture2D" uid="uid://b3abikc8ku3p4" path="res://vfx/textures/smoke_large.png" id="5_csud8"]
 [ext_resource type="AudioStream" uid="uid://b6um8vtxxp0fd" path="res://sfx/cooler_hum.wav" id="5_uxqcx"]
 
@@ -54,6 +54,7 @@ emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 1.5
+emission_ring_cone_angle = 90.0
 angle_min = -180.0
 angle_max = 180.0
 direction = Vector3(0, 0, 1)

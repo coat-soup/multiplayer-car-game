@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=4 uid="uid://clbihxv8snp87"]
 
 [ext_resource type="Texture2D" uid="uid://clahbkvppu7ti" path="res://ui/textures/radar_map_plane.png" id="1_or3ch"]
-[ext_resource type="Script" path="res://ship/systems/radar/radar_plane_map.gd" id="1_wo1b6"]
+[ext_resource type="Script" uid="uid://cs1jivf08fnrq" path="res://ship/systems/radar/radar_plane_map.gd" id="1_wo1b6"]
 [ext_resource type="Material" uid="uid://x223y683bm5w" path="res://ship/systems/radar/marker_materials/radar_marker_friendly.tres" id="3_i85v7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8axr2"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bhyxnxy63odi7"]
 
-[ext_resource type="Script" path="res://enemies/creatures/scripts/enemy_creature.gd" id="1_kur0v"]
+[ext_resource type="Script" uid="uid://b2k08vyvvu3i6" path="res://enemies/creatures/scripts/enemy_creature.gd" id="1_kur0v"]
 [ext_resource type="PackedScene" uid="uid://ciw1cvuv14kmr" path="res://enemies/creatures/models/hammerhead.glb" id="1_r13gk"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_80ntv"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="4_3smqp"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="4_3smqp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v2xhj"]
 radius = 1.22582

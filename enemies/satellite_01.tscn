@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://c67a7v47cve4u"]
 
 [ext_resource type="PackedScene" uid="uid://0nsrlhaiky60" path="res://enemies/satellite_01.glb" id="1_wp4nr"]
-[ext_resource type="Script" path="res://ship/components/ship_component.gd" id="2_dyt3j"]
+[ext_resource type="Script" uid="uid://drfb58d5t7dmv" path="res://ship/components/ship_component.gd" id="2_dyt3j"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="3_70s7j"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="3_b1cge"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="3_b1cge"]
 [ext_resource type="Material" uid="uid://bni5bs60b1joy" path="res://ship/systems/radar/marker_materials/radar_marker_enemy.tres" id="4_3ja0i"]
 [ext_resource type="PackedScene" uid="uid://cvsblvva5sf3y" path="res://ship/components/turrets/autocannon_component.tscn" id="6_weuec"]
-[ext_resource type="Script" path="res://enemies/ai_cannon_controller.gd" id="8_yjtjp"]
+[ext_resource type="Script" uid="uid://djo37pfh68m4o" path="res://enemies/ai_cannon_controller.gd" id="8_yjtjp"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_otbuj"]
 height = 15.836

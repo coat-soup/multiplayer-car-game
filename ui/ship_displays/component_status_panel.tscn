@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://yf3xyelwc04v"]
 
-[ext_resource type="Script" path="res://ui/ship_displays/component_status_panel.gd" id="1_cfiqt"]
+[ext_resource type="Script" uid="uid://phdv2g4cyji0" path="res://ui/ship_displays/component_status_panel.gd" id="1_cfiqt"]
 [ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="2_64xq4"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="3_52mbi"]
 

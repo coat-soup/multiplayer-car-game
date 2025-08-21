@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://v7qfnuqfojcw"]
 
-[ext_resource type="Script" path="res://ui/ship_displays/power_management_panel.gd" id="1_ubf36"]
+[ext_resource type="Script" uid="uid://chr3hi467s4sr" path="res://ui/ship_displays/power_management_panel.gd" id="1_ubf36"]
 [ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="2_kq6ch"]
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="3_byj1k"]
 [ext_resource type="PackedScene" uid="uid://c8srl8wi5j5om" path="res://ui/ship_displays/power_system_capacitor_stack.tscn" id="3_xyxnj"]
@@ -62,8 +62,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dsg20"]
 _data = {
-"Max Capacitor Shake": SubResource("Animation_iqcyg"),
-"RESET": SubResource("Animation_12vwk")
+&"Max Capacitor Shake": SubResource("Animation_iqcyg"),
+&"RESET": SubResource("Animation_12vwk")
 }
 
 [node name="PowerManagementPanel" type="Control"]

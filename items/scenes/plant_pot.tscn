@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://sc8dgmgtad4m"]
 
-[ext_resource type="Script" path="res://items/scripts/item.gd" id="1_ng4g6"]
+[ext_resource type="Script" uid="uid://bdnaisrsyfj1j" path="res://items/scripts/item.gd" id="1_ng4g6"]
 [ext_resource type="Resource" uid="uid://bpjvq4ltreou1" path="res://items/item_data/item_plant_pot.tres" id="2_m822q"]
 [ext_resource type="PackedScene" uid="uid://dhr3fnfrm5fme" path="res://world/props/models/plant_pot_model.tscn" id="3_pd4ah"]
 [ext_resource type="PackedScene" uid="uid://cn86312ku2n5v" path="res://world/foliage/scenes/tomato_plant.tscn" id="4_5qo5h"]

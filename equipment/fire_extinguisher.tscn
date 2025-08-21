@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://bjg4yqqkbjmks"]
 
-[ext_resource type="Script" path="res://equipment/scripts/fire_extinguisher.gd" id="1_sue74"]
+[ext_resource type="Script" uid="uid://b8oufi8mqakof" path="res://equipment/scripts/fire_extinguisher.gd" id="1_sue74"]
 [ext_resource type="PackedScene" uid="uid://bt5bosysuuexi" path="res://equipment/models/fire_extinguisher_model.tscn" id="2_42dcg"]
 [ext_resource type="Resource" uid="uid://bj78gdfe6blqg" path="res://items/item_data/item_fire_extinguisher.tres" id="2_em84o"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="3_gxao3"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="3_gxao3"]
 [ext_resource type="AudioStream" uid="uid://ba2gmv18h7gjy" path="res://sfx/fire_extinguisher.wav" id="4_ae8mx"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="5_222vs"]
 

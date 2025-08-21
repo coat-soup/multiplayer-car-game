@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dg0ius8wdpt8s"]
 
-[ext_resource type="Script" path="res://ship/components/capacitor.gd" id="1_mlgie"]
+[ext_resource type="Script" uid="uid://dbn2w00cv3twl" path="res://ship/components/capacitor.gd" id="1_mlgie"]
 [ext_resource type="Resource" uid="uid://deg523dpunmxq" path="res://items/item_data/item_capacitor.tres" id="2_d8qaw"]
 [ext_resource type="PackedScene" uid="uid://c77aq2gn11tis" path="res://world/props/models/capacitor_model.tscn" id="2_mfwnr"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="2_x4h4v"]
-[ext_resource type="Script" path="res://ship/components/component_fire_hazard.gd" id="3_o8t82"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="2_x4h4v"]
+[ext_resource type="Script" uid="uid://gqaycyn58do" path="res://ship/components/component_fire_hazard.gd" id="3_o8t82"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ojmsp"]
 size = Vector3(0.825, 1.9, 1.485)

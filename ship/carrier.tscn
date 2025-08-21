@@ -1,8 +1,10 @@
 [gd_scene load_steps=26 format=3 uid="uid://c4gr06kluiqeo"]
 
-[ext_resource type="PackedScene" uid="uid://dh3jei8vyvfjx" path="res://ship/carrier.glb" id="1_8icdk"]
 [ext_resource type="PackedScene" uid="uid://cdm4vcboo5os6" path="res://world/props/scenes/mega_wall_light.tscn" id="2_aukwm"]
-[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_pj3bv"]
+[ext_resource type="Shader" uid="uid://cxxskw8rlchx7" path="res://ship/prototype_grid.gdshader" id="2_pj3bv"]
+
+[sub_resource type="Resource" id="Resource_llxlf"]
+metadata/__load_path__ = "res://ship/carrier.glb"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rn5b5"]
 render_priority = 0
@@ -238,7 +240,7 @@ shader_parameter/albedo_alpha = 0.5
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i3kwk"]
 data = PackedVector3Array(-41.339, -1, 24.8025, -41.339, 1, -24.8025, -41.339, 1, 24.8025, -41.339, -1, 24.8025, -41.339, -1, -24.8025, -41.339, 1, -24.8025, -41.339, -1, -24.8025, 41.339, 1, -24.8025, -41.339, 1, -24.8025, -41.339, -1, -24.8025, 41.339, -1, -24.8025, 41.339, 1, -24.8025, 41.339, -1, -24.8025, 41.339, 1, 24.8025, 41.339, 1, -24.8025, 41.339, -1, -24.8025, 41.339, -1, 24.8025, 41.339, 1, 24.8025, 41.339, -1, 24.8025, -41.339, 1, 24.8025, 41.339, 1, 24.8025, 41.339, -1, 24.8025, -41.339, -1, 24.8025, -41.339, 1, 24.8025, -41.339, -1, -24.8025, 41.339, -1, 24.8025, 41.339, -1, -24.8025, -41.339, -1, -24.8025, -41.339, -1, 24.8025, 41.339, -1, 24.8025, 41.339, 1, -24.8025, -41.339, 1, 24.8025, -41.339, 1, -24.8025, 41.339, 1, -24.8025, 41.339, 1, 24.8025, -41.339, 1, 24.8025)
 
-[node name="carrier" instance=ExtResource("1_8icdk")]
+[node name="carrier"]
 
 [node name="FighterBlockout" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_rn5b5")

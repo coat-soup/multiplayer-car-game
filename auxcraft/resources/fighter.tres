@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Ship" load_steps=4 format=3 uid="uid://css45hbcbf211"]
+[gd_resource type="Resource" script_class="ShipData" load_steps=4 format=3 uid="uid://css45hbcbf211"]
 
 [ext_resource type="PackedScene" uid="uid://cvs55tafiwxnj" path="res://auxcraft/scenes/fighter_movement_clone.tscn" id="1_knbkj"]
-[ext_resource type="Script" path="res://ship/ship_data.gd" id="1_o23qk"]
+[ext_resource type="Script" uid="uid://ctp2vxkrdaod0" path="res://ship/ship_data.gd" id="1_o23qk"]
 [ext_resource type="PackedScene" uid="uid://t4p1tge6aikq" path="res://auxcraft/scenes/barge.tscn" id="2_f86yf"]
 
 [resource]

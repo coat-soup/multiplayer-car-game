@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Cannon Dust"
 run/main_scene="res://levels/mission_testing_alt.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -147,10 +147,6 @@ grab={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194328,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-
-[physics]
-
-3d/physics_engine="JoltPhysics3D"
 
 [rendering]
 

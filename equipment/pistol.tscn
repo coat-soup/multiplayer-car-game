@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://ccapb8n1iqflw"]
 
-[ext_resource type="Script" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
+[ext_resource type="Script" uid="uid://ci3k8uaivlnb5" path="res://equipment/scripts/gun.gd" id="1_p8mvk"]
 [ext_resource type="Resource" uid="uid://bnmghxvvubbm7" path="res://items/item_data/item_pistol.tres" id="2_e5f8g"]
 [ext_resource type="PackedScene" uid="uid://bdynvl73s0tyk" path="res://equipment/models/pistol_model.tscn" id="2_ox50e"]
 [ext_resource type="AudioStream" uid="uid://cabjhxhsimq1q" path="res://sfx/box_crash.wav" id="4_161ho"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="4_v0mk4"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="4_v0mk4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yrpc2"]
 size = Vector3(0.11, 0.396811, 0.621127)
@@ -69,9 +69,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep00v"]
 _data = {
-"RESET": SubResource("Animation_42rna"),
-"fire": SubResource("Animation_jauo7"),
-"reload": SubResource("Animation_gb502")
+&"RESET": SubResource("Animation_42rna"),
+&"fire": SubResource("Animation_jauo7"),
+&"reload": SubResource("Animation_gb502")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vecod"]

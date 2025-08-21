@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b75nuxh2j8oak"]
 
-[ext_resource type="Script" path="res://stations/station_cargo_bay.gd" id="1_5cnar"]
-[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_vctcq"]
+[ext_resource type="Script" uid="uid://c0uqvhdoyi03l" path="res://stations/station_cargo_bay.gd" id="1_5cnar"]
+[ext_resource type="Shader" uid="uid://cxxskw8rlchx7" path="res://ship/prototype_grid.gdshader" id="2_vctcq"]
 [ext_resource type="PackedScene" uid="uid://cbcq4tjxh8fmr" path="res://ship/systems/cargo_grid.tscn" id="3_2w25f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j0ecv"]

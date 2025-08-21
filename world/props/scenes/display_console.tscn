@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://g02ib35owvcf"]
 
 [ext_resource type="PackedScene" uid="uid://dsqyrf0w8tksa" path="res://world/props/models/display_console_model.tscn" id="1_7bebb"]
-[ext_resource type="Script" path="res://world/props/scripts/display_console.gd" id="1_prllk"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_jus6s"]
+[ext_resource type="Script" uid="uid://bhi4dfhovf3oi" path="res://world/props/scripts/display_console.gd" id="1_prllk"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="2_jus6s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_stunp"]
 

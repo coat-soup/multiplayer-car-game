@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2s5an1qhg1si"]
 
 [ext_resource type="PackedScene" uid="uid://bv1p65pnew75r" path="res://stations/station_mockup_2.glb" id="1_kninq"]
-[ext_resource type="Script" path="res://world/POIs/scripts/POI_station.gd" id="2_nn7fu"]
+[ext_resource type="Script" uid="uid://crwwiffekccx0" path="res://world/POIs/scripts/POI_station.gd" id="2_nn7fu"]
 [ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="2_ol42j"]
 [ext_resource type="PackedScene" uid="uid://b75nuxh2j8oak" path="res://stations/station_cargo_bay.tscn" id="8_62v5k"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bodxwf6u75vxl"]
 
-[ext_resource type="Script" path="res://ship/systems/radar/holotable.gd" id="1_rebjv"]
+[ext_resource type="Script" uid="uid://dt68j2ndr6efl" path="res://ship/systems/radar/holotable.gd" id="1_rebjv"]
 [ext_resource type="PackedScene" uid="uid://nma732l6b6uk" path="res://system/scenes/trajectory_visualiser.tscn" id="2_trmf2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6d6qo"]

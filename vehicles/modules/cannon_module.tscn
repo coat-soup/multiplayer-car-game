@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bnu5wdqrii2mc"]
 
-[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_q6e28"]
+[ext_resource type="Script" uid="uid://cckm1uof3qdeu" path="res://vehicles/scripts/vehicle_module.gd" id="1_q6e28"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://ship_weapons/massive_cannon/massive_cannon.tscn" id="2_7rnmu"]
-[ext_resource type="Script" path="res://system/scripts/health.gd" id="3_58adj"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="3_58adj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0cuh6"]
 size = Vector3(4, 3.225, 4)

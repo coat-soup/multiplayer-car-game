@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcc3ntnqh7ln7"]
 
-[ext_resource type="Script" path="res://system/scripts/planet.gd" id="1_ofno8"]
+[ext_resource type="Script" uid="uid://c2p8oflumsxyu" path="res://system/scripts/planet.gd" id="1_ofno8"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_0wn14"]
 [ext_resource type="Material" uid="uid://gihwiqdg76f2" path="res://ship/systems/radar/marker_materials/radar_marker_planet.tres" id="3_8568g"]
 [ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="4_v7nh6"]

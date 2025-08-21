@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://5gg45bhgfvk1" path="res://stations/station_mockup.glb" id="1_yw20t"]
 [ext_resource type="PackedScene" uid="uid://b8at3wds2wf86" path="res://ship_weapons/massive_cannon/massive_cannon.tscn" id="2_jlg5i"]
-[ext_resource type="Script" path="res://enemies/ai_cannon_controller.gd" id="3_86ble"]
+[ext_resource type="Script" uid="uid://djo37pfh68m4o" path="res://enemies/ai_cannon_controller.gd" id="3_86ble"]
 [ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="3_x20vd"]
 [ext_resource type="PackedScene" uid="uid://cxb87aa4s0d0k" path="res://ship_weapons/autocannon/autocannon.tscn" id="5_nbgoi"]
 

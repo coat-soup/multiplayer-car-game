@@ -10,18 +10,18 @@ render_priority = 0
 shader = ExtResource("2_o7wwj")
 shader_parameter/custom_colour = Color(0.67932, 0.361637, 0.201504, 1)
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/point_size = null
-shader_parameter/roughness = null
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = null
-shader_parameter/metallic = null
+shader_parameter/texture_albedo = ExtResource("2_v8q8x")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = ExtResource("3_x5hsf")
 shader_parameter/normal_scale = 1.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = null
-shader_parameter/uv2_scale = null
-shader_parameter/uv2_offset = null
-shader_parameter/texture_albedo = ExtResource("2_v8q8x")
-shader_parameter/texture_normal = ExtResource("3_x5hsf")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="cargo_crate_1x1x1" instance=ExtResource("1_t4gfk")]
 

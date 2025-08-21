@@ -1,10 +1,10 @@
 [gd_scene load_steps=20 format=4 uid="uid://fbwa111or64h"]
 
 [ext_resource type="PackedScene" uid="uid://c71iwas4otsi0" path="res://ship_weapons/shell.glb" id="1_0b4r6"]
-[ext_resource type="Script" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_sm41t"]
+[ext_resource type="Script" uid="uid://w6m7kk5jbwol" path="res://ship_weapons/scripts/cannon_shell.gd" id="2_sm41t"]
 [ext_resource type="PackedScene" uid="uid://61gee2tf6ccy" path="res://vfx/particles/bullet_impact.tscn" id="3_tjnrr"]
-[ext_resource type="Script" path="res://system/scripts/start_particles_on_spawn.gd" id="4_bjmly"]
-[ext_resource type="Script" path="res://ship_weapons/scripts/gun_bullet_visual.gd" id="4_hppjh"]
+[ext_resource type="Script" uid="uid://b1ymg45krh40w" path="res://system/scripts/start_particles_on_spawn.gd" id="4_bjmly"]
+[ext_resource type="Script" uid="uid://da48yw6u8xsha" path="res://ship_weapons/scripts/gun_bullet_visual.gd" id="4_hppjh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e60jp"]
 
@@ -109,8 +109,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l6itn"]
 _data = {
-"RESET": SubResource("Animation_dvtov"),
-"new_animation": SubResource("Animation_5snys")
+&"RESET": SubResource("Animation_dvtov"),
+&"new_animation": SubResource("Animation_5snys")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_43wmo"]

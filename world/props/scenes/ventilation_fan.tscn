@@ -44,8 +44,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qpqka"]
 _data = {
-"RESET": SubResource("Animation_fu4hb"),
-"spin": SubResource("Animation_ebxd6")
+&"RESET": SubResource("Animation_fu4hb"),
+&"spin": SubResource("Animation_ebxd6")
 }
 
 [sub_resource type="Gradient" id="Gradient_g2le0"]
@@ -63,8 +63,7 @@ point_count = 2
 curve = SubResource("Curve_f28ml")
 
 [sub_resource type="Curve" id="Curve_26vfe"]
-min_value = -200.0
-max_value = 200.0
+_limits = [-200.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, -68.1319), 0.0, 0.0, 0, 0, Vector2(0.15942, 68.1319), 0.0, 0.0, 0, 0, Vector2(0.347826, -63.7363), 0.0, 0.0, 0, 0, Vector2(0.463768, 76.9231), 0.0, 0.0, 0, 0, Vector2(0.608696, -72.5275), 0.0, 0.0, 0, 0, Vector2(0.768116, 85.7143), 0.0, 0.0, 0, 0, Vector2(0.913043, -63.7363), 0.0, 0.0, 0, 0, Vector2(1, 90.1099), 0.0, 0.0, 0, 0]
 point_count = 8
 

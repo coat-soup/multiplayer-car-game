@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://cbcq4tjxh8fmr"]
 
-[ext_resource type="Script" path="res://ship/cargo_grid.gd" id="1_cf5t5"]
+[ext_resource type="Script" uid="uid://cpd15gdng4wwm" path="res://ship/cargo_grid.gd" id="1_cf5t5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7f400"]
 

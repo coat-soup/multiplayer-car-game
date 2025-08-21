@@ -148,8 +148,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f6hl2"]
 _data = {
-"RESET": SubResource("Animation_amekb"),
-"explosion_particles": SubResource("Animation_7hxrw")
+&"RESET": SubResource("Animation_amekb"),
+&"explosion_particles": SubResource("Animation_7hxrw")
 }
 
 [node name="BulletImpact" type="GPUParticles3D"]

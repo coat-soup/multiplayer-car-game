@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://blr7e5cm7q8ts"]
 
-[ext_resource type="Script" path="res://ship/ship_movement_clone.gd" id="1_s2cre"]
-[ext_resource type="Shader" path="res://ship/prototype_grid.gdshader" id="2_s2kah"]
+[ext_resource type="Script" uid="uid://boe2qla15aj1l" path="res://ship/ship_movement_clone.gd" id="1_s2cre"]
+[ext_resource type="Shader" uid="uid://cxxskw8rlchx7" path="res://ship/prototype_grid.gdshader" id="2_s2kah"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51rqv"]
 render_priority = 0

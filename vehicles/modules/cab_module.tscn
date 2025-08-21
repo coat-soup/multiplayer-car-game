@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://k515kwg26oey"]
 
-[ext_resource type="Script" path="res://vehicles/scripts/vehicle_module.gd" id="1_ag7kx"]
+[ext_resource type="Script" uid="uid://cckm1uof3qdeu" path="res://vehicles/scripts/vehicle_module.gd" id="1_ag7kx"]
 [ext_resource type="PackedScene" uid="uid://d0jxhnjrfyeud" path="res://vehicles/models/CabModule.glb" id="1_f1g04"]
-[ext_resource type="Script" path="res://system/scripts/interactable.gd" id="2_j8rw6"]
-[ext_resource type="Script" path="res://system/scripts/controllable_object.gd" id="3_a4qmb"]
+[ext_resource type="Script" uid="uid://vpqlxhn3qq6o" path="res://system/scripts/interactable.gd" id="2_j8rw6"]
+[ext_resource type="Script" uid="uid://c1x8a7bxgiwge" path="res://system/scripts/controllable_object.gd" id="3_a4qmb"]
 [ext_resource type="Texture2D" uid="uid://dw4wv8hgj7obv" path="res://vehicles/textures/cab.png" id="3_jdc1i"]
 [ext_resource type="Texture2D" uid="uid://ortvkba0m0jo" path="res://vehicles/textures/cab_n.png" id="4_rtmq2"]
 [ext_resource type="PackedScene" uid="uid://bw0axgpyrynkn" path="res://system/scenes/ladder.tscn" id="7_mbb51"]
