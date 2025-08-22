@@ -1,4 +1,5 @@
 extends Node3D
+class_name PlayerSkeletonController
 
 @export var cam_holder : Node3D
 @export var movement_manager : PlayerMovement
@@ -30,6 +31,8 @@ func _ready() -> void:
 			await get_tree().process_frame
 		for rt in equipment_manager.remote_transforms:
 			rt.reparent(torso_ik)
+	
+	if movement_manager.player_manager.is_multiplayer_authority(): visible = false
 
 
 func _process(delta: float) -> void:
@@ -45,6 +48,11 @@ func _process(delta: float) -> void:
 	if held_item:
 		if len(held_item.hand_positions) > 0: hand_target_r.global_position = held_item.hand_positions[0].global_position
 		if len(held_item.hand_positions) > 1: hand_target_l.global_position = held_item.hand_positions[1].global_position
+
+
+func setup(shirt_colour : Color):
+	($Armature_001/Skeleton3D/Cube_011 as GeometryInstance3D).set_instance_shader_parameter("custom_colour", shirt_colour)
+	print("setting shirt color to ", shirt_colour)
 
 
 func on_item_equipped(item : Holdable):

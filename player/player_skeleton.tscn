@@ -1,7 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhhtqn4mah1gr"]
+[gd_scene load_steps=13 format=3 uid="uid://dhhtqn4mah1gr"]
 
 [ext_resource type="PackedScene" uid="uid://b58mng7dppykp" path="res://player/player.glb" id="1_8uaxt"]
 [ext_resource type="Script" uid="uid://cyau5po7j4go7" path="res://player/player_skeleton_controller.gd" id="2_kehbc"]
+[ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="3_xhlxj"]
+[ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="4_cj5lq"]
+[ext_resource type="Shader" uid="uid://chuygrkj68w4s" path="res://vfx/shaders/base_colorable.tres" id="5_cj5lq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fypyq"]
+albedo_texture = ExtResource("3_xhlxj")
+normal_enabled = true
+normal_texture = ExtResource("4_cj5lq")
+texture_filter = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fypyq"]
+render_priority = 0
+shader = ExtResource("5_cj5lq")
+shader_parameter/custom_colour_effect = 0.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_xhlxj")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = ExtResource("4_cj5lq")
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0, 0, 0)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omsbg"]
 animation = &"Idle"
@@ -42,35 +69,69 @@ right_arm_ik = [NodePath("Armature_001/Skeleton3D/UpperArmIK_R"), NodePath("Arma
 left_arm_ik = [NodePath("Armature_001/Skeleton3D/UpperArmIK_L"), NodePath("Armature_001/Skeleton3D/LowerArmIK_L"), NodePath("Armature_001/Skeleton3D/HandIK_L")]
 
 [node name="Skeleton3D" parent="Armature_001" index="0"]
-bones/0/position = Vector3(1.58819e-22, 0.878484, -0.0355277)
-bones/1/rotation = Quaternion(-3.55271e-15, 1.77636e-14, -4.03897e-28, 1)
-bones/2/rotation = Quaternion(0.0533006, 1.13451e-15, 1.27078e-08, 0.998579)
-bones/3/rotation = Quaternion(-0.00288137, -5.3344e-15, -6.86971e-10, 0.999996)
-bones/4/rotation = Quaternion(-2.32831e-10, -1.0126e-14, -6.82631e-16, 1)
-bones/6/rotation = Quaternion(-0.00075256, -0.00809918, -0.433414, 0.901158)
-bones/7/rotation = Quaternion(0.245302, -0.0104516, -0.12869, 0.96081)
+bones/0/position = Vector3(-8.88178e-16, 0.884431, -0.0355277)
+bones/1/rotation = Quaternion(-3.55271e-15, 1.42109e-14, -4.23517e-22, 1)
+bones/2/rotation = Quaternion(0.0533006, 1.17614e-15, 1.27078e-08, 0.998579)
+bones/3/rotation = Quaternion(-0.00288137, -5.14589e-15, -6.86972e-10, 0.999996)
+bones/4/rotation = Quaternion(-2.32831e-10, -6.49731e-15, 5.52602e-16, 1)
+bones/6/rotation = Quaternion(-0.024225, 0.00946562, -0.438543, 0.898334)
+bones/7/rotation = Quaternion(0.203914, -0.00829247, -0.121396, 0.971398)
 bones/9/rotation = Quaternion(0.0751256, -0.0160502, -0.0510486, 0.995737)
-bones/12/rotation = Quaternion(-0.0336716, -0.033578, 0.448865, 0.892334)
-bones/13/rotation = Quaternion(0.150345, 0.0349492, 0.101792, 0.982758)
+bones/12/rotation = Quaternion(-0.0142597, -0.0192436, 0.44039, 0.897487)
+bones/13/rotation = Quaternion(0.197167, 0.0366483, 0.11718, 0.972651)
 bones/15/rotation = Quaternion(0.0759328, -0.018788, 0.0476307, 0.995798)
-bones/17/rotation = Quaternion(-0.00292766, 0.12251, 0.991767, -0.0371733)
-bones/18/rotation = Quaternion(-0.409704, 0.000472063, -0.0399725, 0.911342)
-bones/19/rotation = Quaternion(0.721656, -0.0498048, 0.0596239, 0.687878)
-bones/20/rotation = Quaternion(0.183555, -0.0316036, 0.00693809, 0.982477)
-bones/21/rotation = Quaternion(-0.00250386, 0.0999694, 0.994822, 0.0181364)
-bones/22/rotation = Quaternion(-0.101647, 0.00497705, 0.0105454, 0.994752)
-bones/23/rotation = Quaternion(0.777217, 0.0630591, -0.0389339, 0.624853)
-bones/24/rotation = Quaternion(5.32021e-05, -0.00693079, -0.018042, 0.999813)
-bones/25/position = Vector3(0.153357, 0.139474, -0.212212)
+bones/17/rotation = Quaternion(-0.00274882, 0.25178, 0.966861, -0.0421789)
+bones/18/rotation = Quaternion(-0.4818, 0.00045321, -0.0470082, 0.875019)
+bones/19/rotation = Quaternion(0.752654, -0.0517077, 0.0558759, 0.654)
+bones/20/rotation = Quaternion(0.117206, -0.0190024, 0.011013, 0.992865)
+bones/21/rotation = Quaternion(-0.00266922, 0.0392454, 0.999068, 0.0177552)
+bones/22/rotation = Quaternion(-0.0961817, 0.00497985, 0.00997878, 0.995301)
+bones/23/rotation = Quaternion(0.739086, 0.059359, -0.0418594, 0.669683)
+bones/24/rotation = Quaternion(0.000660793, -0.00681571, -0.0180042, 0.999814)
+bones/25/position = Vector3(0.153346, 0.161036, -0.0931922)
 bones/25/rotation = Quaternion(0.00479742, -0.707091, 0.707091, -0.00479742)
-bones/26/position = Vector3(-0.153413, 0.0355187, 0.0346223)
+bones/26/position = Vector3(-0.153411, 0.0339277, -0.0624518)
 bones/26/rotation = Quaternion(0.00458585, 0.707092, -0.707092, -0.00458585)
 bones/27/rotation = Quaternion(-0.0126777, 0.706993, 0.706993, -0.0126777)
-bones/29/position = Vector3(0.336685, 0.968717, 0.0866623)
-bones/30/position = Vector3(-0.337047, 0.946425, -0.0515661)
+bones/29/position = Vector3(0.336901, 0.95849, 0.0232396)
+bones/30/position = Vector3(-0.337047, 0.956655, 0.0118566)
 
-[node name="Hair01_001" parent="Armature_001/Skeleton3D" index="11"]
-visible = false
+[node name="Cube" parent="Armature_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_001" parent="Armature_001/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_002" parent="Armature_001/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_003" parent="Armature_001/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_005" parent="Armature_001/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_006" parent="Armature_001/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_007" parent="Armature_001/Skeleton3D" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_009" parent="Armature_001/Skeleton3D" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_010" parent="Armature_001/Skeleton3D" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Cube_011" parent="Armature_001/Skeleton3D" index="9"]
+instance_shader_parameters/custom_colour = Color(0.407987, 0.732914, 0.859443, 1)
+surface_material_override/0 = SubResource("ShaderMaterial_fypyq")
+
+[node name="Cube_012" parent="Armature_001/Skeleton3D" index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
+
+[node name="Hair01" parent="Armature_001/Skeleton3D" index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
 
 [node name="TorsoIK" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0925, 0)
@@ -132,6 +193,10 @@ bone_name = "Hand.L"
 bone = 8
 forward_axis = 2
 primary_rotation_axis = 0
+
+[node name="Hair01_001" parent="Armature_001/Skeleton3D" index="19"]
+visible = false
+surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_0ew0c")

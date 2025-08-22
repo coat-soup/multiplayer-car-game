@@ -57,11 +57,12 @@ equipment_manager = NodePath("MovementManager/CameraPivot/EquipmentManager")
 camera = NodePath("MovementManager/CameraPivot/Camera")
 health = NodePath("Health")
 
-[node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player")]
+[node name="NetworkManager" type="Node3D" parent="." node_paths=PackedStringArray("third_person_models", "username_label", "player", "player_skeleton")]
 script = ExtResource("2_yagft")
-third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel"), NodePath("../MovementManager/PlayerSkeleton")]
+third_person_models = [NodePath("../MovementManager/CameraPivot/FaceModel"), NodePath("../MovementManager/UsernameLabel")]
 username_label = NodePath("../MovementManager/UsernameLabel")
 player = NodePath("..")
+player_skeleton = NodePath("../MovementManager/PlayerSkeleton")
 
 [node name="MovementManager" type="CharacterBody3D" parent="." node_paths=PackedStringArray("player", "player_manager", "camera_pivot", "camera", "camera_shake")]
 script = ExtResource("1_u3ln2")

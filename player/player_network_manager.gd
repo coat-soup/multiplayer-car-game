@@ -11,6 +11,8 @@ var username: String = ""
 var network_manager : NetworkManager
 var ui : UIManager
 
+@export var shirt_colour : Color
+@export var player_skeleton : PlayerSkeletonController
 
 func _enter_tree() -> void:
 	pass
@@ -18,6 +20,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	shirt_colour = [Color.DARK_RED, Color.WEB_GRAY, Color.BURLYWOOD, Color.DARK_OLIVE_GREEN].pick_random()
+	
 	network_manager = get_tree().get_first_node_in_group("network manager") as NetworkManager
 	assert(network_manager, "Network manager not found!!!")
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
@@ -34,13 +38,13 @@ func _ready() -> void:
 			m.visible = false
 	
 	await get_tree().create_timer(1.0).timeout
-	request_sync_username.rpc_id(str(get_owner().name).to_int())
+	request_sync_data.rpc_id(str(get_owner().name).to_int())
 	#try_sync()
 
 
 func try_sync(n := 0):
 	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == multiplayer.multiplayer_peer.CONNECTION_CONNECTED:
-		request_sync_username.rpc_id(str(get_owner().name).to_int())
+		request_sync_data.rpc_id(str(get_owner().name).to_int())
 		print("Synching username")
 	elif n < 20:
 		await get_tree().create_timer(0.2).timeout
@@ -52,16 +56,18 @@ func try_sync(n := 0):
 
 
 @rpc("any_peer", "call_local")
-func sync_username(new_username: String) -> void:
+func sync_data(new_username: String, shirt_col : Color) -> void:
 	username = new_username
+	shirt_colour = shirt_col
 	username_label.text = username
+	player_skeleton.setup(shirt_colour)
 	if ui and false:
 		ui.display_chat_message("username synced to " + username)
 
 
 @rpc("any_peer", "call_local")
-func request_sync_username():
+func request_sync_data():
 	if is_multiplayer_authority():
-		sync_username.rpc(username)
+		sync_data.rpc(username, shirt_colour)
 		if ui and false:
 			ui.display_chat_message("username sync request received")

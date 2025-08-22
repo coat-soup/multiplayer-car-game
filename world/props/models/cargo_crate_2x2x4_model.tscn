@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j66go"]
 render_priority = 0
 shader = ExtResource("2_uip2d")
-shader_parameter/custom_colour = Color(0.419805, 0.169599, 0.207644, 1)
+shader_parameter/custom_colour_effect = 1.0
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("3_jpgm2")
 shader_parameter/point_size = 0.0
