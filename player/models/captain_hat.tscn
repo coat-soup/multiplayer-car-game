@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://qjkgewa0k4mp"]
+
+[ext_resource type="PackedScene" uid="uid://1gxcouvdi6yg" path="res://player/models/captain_hat.glb" id="1_ixeyq"]
+[ext_resource type="Texture2D" uid="uid://k7fmtd8n1evj" path="res://player/textures/captain_hat.png" id="2_dnh06"]
+[ext_resource type="Texture2D" uid="uid://da8k0sy5c54vx" path="res://player/textures/captain_hat_n.png" id="3_femwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2v3o"]
+albedo_texture = ExtResource("2_dnh06")
+normal_enabled = true
+normal_texture = ExtResource("3_femwu")
+texture_filter = 0
+
+[node name="captain_hat" instance=ExtResource("1_ixeyq")]
+
+[node name="CaptainHat" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_w2v3o")

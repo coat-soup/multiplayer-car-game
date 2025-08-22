@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1y0hd1xlwf73"
-path="res://.godot/imported/player.png-6b43d50e99399c16362f65aba253a7af.ctex"
+uid="uid://b0rmcrbah6msm"
+path.s3tc="res://.godot/imported/chef_hat_n.png-28253c337f044538ec9c0ae728c992ed.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://player/textures/player.png"
-dest_files=["res://.godot/imported/player.png-6b43d50e99399c16362f65aba253a7af.ctex"]
+source_file="res://player/textures/chef_hat_n.png"
+dest_files=["res://.godot/imported/chef_hat_n.png-28253c337f044538ec9c0ae728c992ed.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -24,7 +25,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://player/textures/player.png"
+roughness/src_normal="res://player/textures/chef_hat_n.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

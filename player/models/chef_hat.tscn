@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq2skk76lej6c"]
+
+[ext_resource type="PackedScene" uid="uid://cw1jmxw0t3vbn" path="res://player/models/chef_hat.glb" id="1_7gi57"]
+[ext_resource type="Texture2D" uid="uid://biakgeo0n4sj3" path="res://player/textures/chef_hat.png" id="2_r7ybp"]
+[ext_resource type="Texture2D" uid="uid://b0rmcrbah6msm" path="res://player/textures/chef_hat_n.png" id="3_rgi6h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2ii7"]
+albedo_texture = ExtResource("2_r7ybp")
+normal_enabled = true
+normal_texture = ExtResource("3_rgi6h")
+texture_filter = 0
+
+[node name="chef_hat" instance=ExtResource("1_7gi57")]
+
+[node name="ChefHat" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i2ii7")

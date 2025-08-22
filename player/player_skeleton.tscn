@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://b58mng7dppykp" path="res://player/player.glb" id="1_8uaxt"]
 [ext_resource type="Script" uid="uid://cyau5po7j4go7" path="res://player/player_skeleton_controller.gd" id="2_kehbc"]
+[ext_resource type="PackedScene" uid="uid://qjkgewa0k4mp" path="res://player/models/captain_hat.tscn" id="3_fgr34"]
 [ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="3_xhlxj"]
 [ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="4_cj5lq"]
+[ext_resource type="PackedScene" uid="uid://cq2skk76lej6c" path="res://player/models/chef_hat.tscn" id="4_fgr34"]
 [ext_resource type="Shader" uid="uid://chuygrkj68w4s" path="res://vfx/shaders/base_colorable.tres" id="5_cj5lq"]
-[ext_resource type="PackedScene" uid="uid://1gxcouvdi6yg" path="res://player/models/captain_hat.glb" id="6_dicqt"]
-[ext_resource type="PackedScene" uid="uid://cw1jmxw0t3vbn" path="res://player/models/chef_hat.glb" id="7_fgr34"]
-[ext_resource type="PackedScene" uid="uid://b713p4lmld43w" path="res://player/models/goggles.glb" id="8_fgr34"]
+[ext_resource type="PackedScene" uid="uid://d1acwap4od4gs" path="res://player/models/goggles.tscn" id="5_fgr34"]
 [ext_resource type="PackedScene" uid="uid://c2dk4b216d43v" path="res://player/models/hair_long.tscn" id="9_11fmj"]
 [ext_resource type="PackedScene" uid="uid://csiybenmwhrp" path="res://player/models/hair_short.tscn" id="10_cwg4r"]
 [ext_resource type="PackedScene" uid="uid://csxa4nqdnioaa" path="res://player/models/mustache.tscn" id="11_35bag"]
@@ -46,13 +46,13 @@ nodes/walk_velocity/node = SubResource("AnimationNodeBlendSpace1D_iqfnt")
 nodes/walk_velocity/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"walk_velocity"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11fmj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3udco"]
 albedo_texture = ExtResource("3_xhlxj")
 normal_enabled = true
 normal_texture = ExtResource("4_cj5lq")
 texture_filter = 0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwg4r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11fmj"]
 render_priority = 0
 shader = ExtResource("5_cj5lq")
 shader_parameter/custom_colour_effect = 0.0
@@ -64,7 +64,7 @@ shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 shader_parameter/texture_normal = ExtResource("4_cj5lq")
-shader_parameter/normal_scale = 1.0
+shader_parameter/normal_scale = 0.500001
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 
@@ -99,36 +99,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0060913)
 [node name="UpperArmTarget_L" type="Marker3D" parent="HandTarget_L/LowerArmTarget_L" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.453691)
 
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+bones/0/position = Vector3(-8.88178e-16, 0.884602, -0.0355277)
+bones/1/rotation = Quaternion(-3.55271e-15, 1.42109e-14, -4.23517e-22, 1)
+bones/2/rotation = Quaternion(0.00288137, 3.59388e-15, 6.86971e-10, 0.999996)
+bones/3/rotation = Quaternion(-0.00288137, -1.06169e-14, -6.86971e-10, 0.999996)
+bones/6/rotation = Quaternion(-0.0300407, 0.0166983, -0.451362, 0.891679)
+bones/7/rotation = Quaternion(0.146264, -0.00677706, -0.0960762, 0.984546)
+bones/9/rotation = Quaternion(0.0751256, -0.0160502, -0.0510486, 0.995737)
+bones/12/rotation = Quaternion(-0.0161913, -0.0230147, 0.452071, 0.891538)
+bones/13/rotation = Quaternion(0.147057, 0.0357436, 0.0948569, 0.98392)
+bones/15/rotation = Quaternion(0.0776303, -0.0187576, 0.0471524, 0.99569)
+bones/17/rotation = Quaternion(0.00255319, 0.0250389, 0.999517, -0.0182176)
+bones/18/rotation = Quaternion(-0.114061, 0.000514509, -0.0111287, 0.993411)
+bones/19/rotation = Quaternion(0.764245, -0.0520819, 0.0528557, 0.640643)
+bones/20/rotation = Quaternion(-0.000562795, 0.00332745, 0.0180392, 0.999832)
+bones/21/rotation = Quaternion(-0.0025731, 0.0249566, 0.999505, 0.0189841)
+bones/22/rotation = Quaternion(-0.113989, 0.00497033, 0.0118262, 0.993399)
+bones/23/rotation = Quaternion(0.76499, 0.062663, -0.0406752, 0.639695)
+bones/24/rotation = Quaternion(-4.24541e-05, -0.00694891, -0.018048, 0.999813)
+bones/25/position = Vector3(0.153415, 0.0372633, -0.103784)
+bones/25/rotation = Quaternion(0.00479742, -0.707091, 0.707091, -0.00479742)
+bones/26/position = Vector3(-0.153415, 0.0372633, -0.103784)
+bones/26/rotation = Quaternion(0.00458585, 0.707092, -0.707092, -0.00458585)
+bones/27/rotation = Quaternion(-0.0126777, 0.706993, 0.706993, -0.0126777)
+bones/30/position = Vector3(-0.337047, 0.951551, 0.0184339)
+
 [node name="Cube" parent="Armature_001/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_001" parent="Armature_001/Skeleton3D" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_002" parent="Armature_001/Skeleton3D" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_003" parent="Armature_001/Skeleton3D" index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_005" parent="Armature_001/Skeleton3D" index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_006" parent="Armature_001/Skeleton3D" index="5"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_007" parent="Armature_001/Skeleton3D" index="6"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_010" parent="Armature_001/Skeleton3D" index="7"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="Cube_011" parent="Armature_001/Skeleton3D" index="8"]
-instance_shader_parameters/custom_colour = Color(0.698644, 0.673621, 0.855943, 1)
-surface_material_override/0 = SubResource("ShaderMaterial_cwg4r")
+instance_shader_parameters/custom_colour = Color(0.432896, 0.671835, 0.779869, 1)
+surface_material_override/0 = SubResource("ShaderMaterial_11fmj")
 
 [node name="Cube_012" parent="Armature_001/Skeleton3D" index="9"]
-surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_3udco")
 
 [node name="TorsoIK" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0925, 0)
@@ -192,21 +218,21 @@ forward_axis = 2
 primary_rotation_axis = 0
 
 [node name="HatHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="17"]
-transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+transform = Transform3D(1, 3.81142e-10, -7.08901e-14, -3.81142e-10, 0.999999, -0.00159859, -5.686e-13, 0.00159859, 0.999999, -1.18902e-10, 1.79311, -0.0327967)
 bone_name = "Head"
 bone_idx = 4
 
-[node name="captain_hat" parent="Armature_001/Skeleton3D/HatHolder" index="0" instance=ExtResource("6_dicqt")]
-transform = Transform3D(1, -7.09683e-15, -2.38419e-07, -7.1682e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.84405e-08, 0.999999, -7.2897e-09, 0.212637, 0.0298471)
+[node name="captain_hat" parent="Armature_001/Skeleton3D/HatHolder" index="0" instance=ExtResource("3_fgr34")]
+transform = Transform3D(1, -7.11681e-15, -2.38419e-07, -7.21645e-15, 0.999999, -6.1118e-08, 2.38419e-07, 5.84405e-08, 0.999999, -7.2897e-09, 0.212637, 0.0298471)
 
-[node name="chef_hat" parent="Armature_001/Skeleton3D/HatHolder" index="1" instance=ExtResource("7_fgr34")]
-transform = Transform3D(1, -7.12877e-15, -2.38419e-07, -7.14352e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.79748e-08, 0.999999, -8.93903e-09, 0.222302, 0.03673)
+[node name="chef_hat" parent="Armature_001/Skeleton3D/HatHolder" index="1" instance=ExtResource("4_fgr34")]
+transform = Transform3D(1, -7.14456e-15, -2.38419e-07, -7.21645e-15, 0.999999, -6.1118e-08, 2.38419e-07, 5.79748e-08, 0.999999, -8.93903e-09, 0.222302, 0.03673)
 
-[node name="goggles" parent="Armature_001/Skeleton3D/HatHolder" index="2" instance=ExtResource("8_fgr34")]
-transform = Transform3D(1, -7.12877e-15, -2.38419e-07, -7.14352e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.86733e-08, 0.999999, -8.0764e-09, 0.0891588, 0.0335442)
+[node name="goggles" parent="Armature_001/Skeleton3D/HatHolder" index="2" instance=ExtResource("5_fgr34")]
+transform = Transform3D(1, -7.14456e-15, -2.38419e-07, -7.21645e-15, 0.999999, -6.1118e-08, 2.38419e-07, 5.86733e-08, 0.999999, -8.0764e-09, 0.0891588, 0.0335442)
 
 [node name="HairHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="18"]
-transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+transform = Transform3D(1, 3.81142e-10, -7.08901e-14, -3.81142e-10, 0.999999, -0.00159859, -5.686e-13, 0.00159859, 0.999999, -1.18902e-10, 1.79311, -0.0327967)
 bone_name = "Head"
 bone_idx = 4
 
@@ -217,7 +243,7 @@ transform = Transform3D(1, -7.10543e-15, -2.38419e-07, -7.15131e-15, 1, -6.10016
 transform = Transform3D(1, -7.10543e-15, -2.38419e-07, -7.15131e-15, 1, -6.10016e-08, 2.38419e-07, 5.96047e-08, 1, -8.08544e-09, -1.79311, 0.0339128)
 
 [node name="FaceHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="19"]
-transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+transform = Transform3D(1, 3.81142e-10, -7.08901e-14, -3.81142e-10, 0.999999, -0.00159859, -5.686e-13, 0.00159859, 0.999999, -1.18902e-10, 1.79311, -0.0327967)
 bone_name = "Head"
 bone_idx = 4
 

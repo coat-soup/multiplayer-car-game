@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1acwap4od4gs"]
+
+[ext_resource type="PackedScene" uid="uid://b713p4lmld43w" path="res://player/models/goggles.glb" id="1_lm5vj"]
+[ext_resource type="Texture2D" uid="uid://dkrcv0vxlph3f" path="res://player/textures/goggles.png" id="2_p0xi4"]
+[ext_resource type="Texture2D" uid="uid://cksl3runj043q" path="res://player/textures/goggles_n.png" id="3_t81xj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u50k8"]
+albedo_texture = ExtResource("2_p0xi4")
+normal_enabled = true
+normal_texture = ExtResource("3_t81xj")
+texture_filter = 0
+
+[node name="goggles" instance=ExtResource("1_lm5vj")]
+
+[node name="Goggles" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_u50k8")

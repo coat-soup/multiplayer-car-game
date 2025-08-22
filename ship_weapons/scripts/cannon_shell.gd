@@ -34,7 +34,7 @@ func _ready():
 	await get_tree().create_timer(lifetime).timeout
 	shapecast.collision_mask = Util.layer_mask(layer_mask)
 	shapecast.target_position = Vector3(0,0, speed * 2 * get_physics_process_delta_time())
-	handle_impact()
+	handle_impact(global_position, "")
 
 
 func _physics_process(delta: float) -> void:
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 				if not ignore_list.has(shapecast.get_collider(i)):
 					global_position = shapecast.get_collision_point(i)
 					hit_obj = shapecast.get_collider(i)
-					handle_impact()#.rpc()
+					handle_impact.rpc(global_position, hit_obj.get_path())#.rpc()
 					break
 		elif do_move:
 			global_position += velocity * delta
@@ -53,10 +53,13 @@ func _physics_process(delta: float) -> void:
 
 
 @rpc("any_peer", "call_local")
-func handle_impact():
+func handle_impact(pos : Vector3, obj_path : String):
 	if not active:
 		return
 	active = false
+	
+	global_position = pos
+	if obj_path != "": hit_obj = get_tree().root.get_node(obj_path)
 	
 	$ExplosionAudio.pitch_scale = randf_range(0.9, 1.1)
 	$ExplosionAudio.play()
