@@ -1,34 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhhtqn4mah1gr"]
+[gd_scene load_steps=19 format=3 uid="uid://dhhtqn4mah1gr"]
 
 [ext_resource type="PackedScene" uid="uid://b58mng7dppykp" path="res://player/player.glb" id="1_8uaxt"]
 [ext_resource type="Script" uid="uid://cyau5po7j4go7" path="res://player/player_skeleton_controller.gd" id="2_kehbc"]
 [ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="3_xhlxj"]
 [ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="4_cj5lq"]
 [ext_resource type="Shader" uid="uid://chuygrkj68w4s" path="res://vfx/shaders/base_colorable.tres" id="5_cj5lq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fypyq"]
-albedo_texture = ExtResource("3_xhlxj")
-normal_enabled = true
-normal_texture = ExtResource("4_cj5lq")
-texture_filter = 0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fypyq"]
-render_priority = 0
-shader = ExtResource("5_cj5lq")
-shader_parameter/custom_colour_effect = 0.0
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("3_xhlxj")
-shader_parameter/point_size = 0.0
-shader_parameter/roughness = 0.0
-shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
-shader_parameter/specular = 0.0
-shader_parameter/metallic = 0.0
-shader_parameter/texture_normal = ExtResource("4_cj5lq")
-shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(0, 0, 0)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
+[ext_resource type="PackedScene" uid="uid://1gxcouvdi6yg" path="res://player/models/captain_hat.glb" id="6_dicqt"]
+[ext_resource type="PackedScene" uid="uid://cw1jmxw0t3vbn" path="res://player/models/chef_hat.glb" id="7_fgr34"]
+[ext_resource type="PackedScene" uid="uid://b713p4lmld43w" path="res://player/models/goggles.glb" id="8_fgr34"]
+[ext_resource type="PackedScene" uid="uid://c2dk4b216d43v" path="res://player/models/hair_long.tscn" id="9_11fmj"]
+[ext_resource type="PackedScene" uid="uid://csiybenmwhrp" path="res://player/models/hair_short.tscn" id="10_cwg4r"]
+[ext_resource type="PackedScene" uid="uid://csxa4nqdnioaa" path="res://player/models/mustache.tscn" id="11_35bag"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omsbg"]
 animation = &"Idle"
@@ -59,151 +41,47 @@ blend_point_2/pos = 1.0
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0ew0c"]
+graph_offset = Vector2(-283, 99)
 nodes/walk_velocity/node = SubResource("AnimationNodeBlendSpace1D_iqfnt")
 nodes/walk_velocity/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"walk_velocity"]
 
-[node name="PlayerSkeleton" node_paths=PackedStringArray("right_arm_ik", "left_arm_ik") instance=ExtResource("1_8uaxt")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11fmj"]
+albedo_texture = ExtResource("3_xhlxj")
+normal_enabled = true
+normal_texture = ExtResource("4_cj5lq")
+texture_filter = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwg4r"]
+render_priority = 0
+shader = ExtResource("5_cj5lq")
+shader_parameter/custom_colour_effect = 0.0
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_xhlxj")
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/texture_normal = ExtResource("4_cj5lq")
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[node name="PlayerSkeleton" node_paths=PackedStringArray("right_arm_ik", "left_arm_ik", "hat_holder", "hair_holder", "face_holder") instance=ExtResource("1_8uaxt")]
 script = ExtResource("2_kehbc")
 right_arm_ik = [NodePath("Armature_001/Skeleton3D/UpperArmIK_R"), NodePath("Armature_001/Skeleton3D/LowerArmIK_R"), NodePath("Armature_001/Skeleton3D/HandIK_R")]
 left_arm_ik = [NodePath("Armature_001/Skeleton3D/UpperArmIK_L"), NodePath("Armature_001/Skeleton3D/LowerArmIK_L"), NodePath("Armature_001/Skeleton3D/HandIK_L")]
+hat_holder = NodePath("Armature_001/Skeleton3D/HatHolder")
+hair_holder = NodePath("Armature_001/Skeleton3D/HairHolder")
+face_holder = NodePath("Armature_001/Skeleton3D/FaceHolder")
 
-[node name="Skeleton3D" parent="Armature_001" index="0"]
-bones/0/position = Vector3(-8.88178e-16, 0.884431, -0.0355277)
-bones/1/rotation = Quaternion(-3.55271e-15, 1.42109e-14, -4.23517e-22, 1)
-bones/2/rotation = Quaternion(0.0533006, 1.17614e-15, 1.27078e-08, 0.998579)
-bones/3/rotation = Quaternion(-0.00288137, -5.14589e-15, -6.86972e-10, 0.999996)
-bones/4/rotation = Quaternion(-2.32831e-10, -6.49731e-15, 5.52602e-16, 1)
-bones/6/rotation = Quaternion(-0.024225, 0.00946562, -0.438543, 0.898334)
-bones/7/rotation = Quaternion(0.203914, -0.00829247, -0.121396, 0.971398)
-bones/9/rotation = Quaternion(0.0751256, -0.0160502, -0.0510486, 0.995737)
-bones/12/rotation = Quaternion(-0.0142597, -0.0192436, 0.44039, 0.897487)
-bones/13/rotation = Quaternion(0.197167, 0.0366483, 0.11718, 0.972651)
-bones/15/rotation = Quaternion(0.0759328, -0.018788, 0.0476307, 0.995798)
-bones/17/rotation = Quaternion(-0.00274882, 0.25178, 0.966861, -0.0421789)
-bones/18/rotation = Quaternion(-0.4818, 0.00045321, -0.0470082, 0.875019)
-bones/19/rotation = Quaternion(0.752654, -0.0517077, 0.0558759, 0.654)
-bones/20/rotation = Quaternion(0.117206, -0.0190024, 0.011013, 0.992865)
-bones/21/rotation = Quaternion(-0.00266922, 0.0392454, 0.999068, 0.0177552)
-bones/22/rotation = Quaternion(-0.0961817, 0.00497985, 0.00997878, 0.995301)
-bones/23/rotation = Quaternion(0.739086, 0.059359, -0.0418594, 0.669683)
-bones/24/rotation = Quaternion(0.000660793, -0.00681571, -0.0180042, 0.999814)
-bones/25/position = Vector3(0.153346, 0.161036, -0.0931922)
-bones/25/rotation = Quaternion(0.00479742, -0.707091, 0.707091, -0.00479742)
-bones/26/position = Vector3(-0.153411, 0.0339277, -0.0624518)
-bones/26/rotation = Quaternion(0.00458585, 0.707092, -0.707092, -0.00458585)
-bones/27/rotation = Quaternion(-0.0126777, 0.706993, 0.706993, -0.0126777)
-bones/29/position = Vector3(0.336901, 0.95849, 0.0232396)
-bones/30/position = Vector3(-0.337047, 0.956655, 0.0118566)
-
-[node name="Cube" parent="Armature_001/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_001" parent="Armature_001/Skeleton3D" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_002" parent="Armature_001/Skeleton3D" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_003" parent="Armature_001/Skeleton3D" index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_005" parent="Armature_001/Skeleton3D" index="4"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_006" parent="Armature_001/Skeleton3D" index="5"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_007" parent="Armature_001/Skeleton3D" index="6"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_009" parent="Armature_001/Skeleton3D" index="7"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_010" parent="Armature_001/Skeleton3D" index="8"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Cube_011" parent="Armature_001/Skeleton3D" index="9"]
-instance_shader_parameters/custom_colour = Color(0.407987, 0.732914, 0.859443, 1)
-surface_material_override/0 = SubResource("ShaderMaterial_fypyq")
-
-[node name="Cube_012" parent="Armature_001/Skeleton3D" index="10"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="Hair01" parent="Armature_001/Skeleton3D" index="11"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="TorsoIK" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0925, 0)
-target_node = NodePath("TorsoTarget")
-bone_name = "TorsoLower"
-bone = 1
-primary_rotation_axis = 0
-
-[node name="TorsoTarget" type="Marker3D" parent="Armature_001/Skeleton3D/TorsoIK" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.626743)
-
-[node name="UpperArmIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="13"]
-active = false
-target_node = NodePath("../../../HandTarget_R/LowerArmTarget_R/UpperArmTarget_R")
-bone_name = "ArmUpper.R"
-bone = 12
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="LowerArmIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="14"]
-active = false
-target_node = NodePath("../../../HandTarget_R/LowerArmTarget_R")
-bone_name = "ArmLower.R"
-bone = 13
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="HandIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="15"]
-active = false
-target_node = NodePath("../../../HandTarget_R")
-bone_name = "Hand.R"
-bone = 14
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="UpperArmIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="16"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
-active = false
-target_node = NodePath("../../../HandTarget_L/LowerArmTarget_L/UpperArmTarget_L")
-bone_name = "ArmUpper.L"
-bone = 6
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="LowerArmIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="17"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
-active = false
-target_node = NodePath("../../../HandTarget_L/LowerArmTarget_L")
-bone_name = "ArmLower.L"
-bone = 7
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="HandIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="18"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
-active = false
-target_node = NodePath("../../../HandTarget_L")
-bone_name = "Hand.L"
-bone = 8
-forward_axis = 2
-primary_rotation_axis = 0
-
-[node name="Hair01_001" parent="Armature_001/Skeleton3D" index="19"]
-visible = false
-surface_material_override/0 = SubResource("StandardMaterial3D_fypyq")
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="0"]
 tree_root = SubResource("AnimationNodeBlendTree_0ew0c")
 anim_player = NodePath("../AnimationPlayer")
-parameters/walk_velocity/blend_position = 0.342338
+parameters/walk_velocity/blend_position = 0.0
 
-[node name="HandTarget_R" type="Marker3D" parent="." index="3"]
+[node name="HandTarget_R" type="Marker3D" parent="." index="1"]
 transform = Transform3D(0.704187, 0.502329, 0.501782, -0.679577, 0.681555, 0.271401, -0.20566, -0.532117, 0.821314, -0.380243, 1.58945, 0.562232)
 
 [node name="LowerArmTarget_R" type="Marker3D" parent="HandTarget_R" index="0"]
@@ -212,7 +90,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0060913)
 [node name="UpperArmTarget_R" type="Marker3D" parent="HandTarget_R/LowerArmTarget_R" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.453691)
 
-[node name="HandTarget_L" type="Marker3D" parent="." index="4"]
+[node name="HandTarget_L" type="Marker3D" parent="." index="2"]
 transform = Transform3D(0.132173, 0.886537, -0.443375, -0.988565, 0.150651, 0.0065303, 0.0725842, 0.437443, 0.896312, 0.229695, 1.40549, 0.564524)
 
 [node name="LowerArmTarget_L" type="Marker3D" parent="HandTarget_L" index="0"]
@@ -220,3 +98,128 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0060913)
 
 [node name="UpperArmTarget_L" type="Marker3D" parent="HandTarget_L/LowerArmTarget_L" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.453691)
+
+[node name="Cube" parent="Armature_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_001" parent="Armature_001/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_002" parent="Armature_001/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_003" parent="Armature_001/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_005" parent="Armature_001/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_006" parent="Armature_001/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_007" parent="Armature_001/Skeleton3D" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_010" parent="Armature_001/Skeleton3D" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="Cube_011" parent="Armature_001/Skeleton3D" index="8"]
+instance_shader_parameters/custom_colour = Color(0.698644, 0.673621, 0.855943, 1)
+surface_material_override/0 = SubResource("ShaderMaterial_cwg4r")
+
+[node name="Cube_012" parent="Armature_001/Skeleton3D" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_11fmj")
+
+[node name="TorsoIK" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0925, 0)
+target_node = NodePath("TorsoTarget")
+bone_name = "TorsoLower"
+bone = 1
+primary_rotation_axis = 0
+
+[node name="TorsoTarget" type="Marker3D" parent="Armature_001/Skeleton3D/TorsoIK" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.45247)
+
+[node name="UpperArmIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="11"]
+active = false
+target_node = NodePath("../../../HandTarget_R/LowerArmTarget_R/UpperArmTarget_R")
+bone_name = "ArmUpper.R"
+bone = 12
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="LowerArmIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="12"]
+active = false
+target_node = NodePath("../../../HandTarget_R/LowerArmTarget_R")
+bone_name = "ArmLower.R"
+bone = 13
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="HandIK_R" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="13"]
+active = false
+target_node = NodePath("../../../HandTarget_R")
+bone_name = "Hand.R"
+bone = 14
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="UpperArmIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
+active = false
+target_node = NodePath("../../../HandTarget_L/LowerArmTarget_L/UpperArmTarget_L")
+bone_name = "ArmUpper.L"
+bone = 6
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="LowerArmIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
+active = false
+target_node = NodePath("../../../HandTarget_L/LowerArmTarget_L")
+bone_name = "ArmLower.L"
+bone = 7
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="HandIK_L" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.264974, 1.17499, 0.329156)
+active = false
+target_node = NodePath("../../../HandTarget_L")
+bone_name = "Hand.L"
+bone = 8
+forward_axis = 2
+primary_rotation_axis = 0
+
+[node name="HatHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="17"]
+transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+bone_name = "Head"
+bone_idx = 4
+
+[node name="captain_hat" parent="Armature_001/Skeleton3D/HatHolder" index="0" instance=ExtResource("6_dicqt")]
+transform = Transform3D(1, -7.09683e-15, -2.38419e-07, -7.1682e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.84405e-08, 0.999999, -7.2897e-09, 0.212637, 0.0298471)
+
+[node name="chef_hat" parent="Armature_001/Skeleton3D/HatHolder" index="1" instance=ExtResource("7_fgr34")]
+transform = Transform3D(1, -7.12877e-15, -2.38419e-07, -7.14352e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.79748e-08, 0.999999, -8.93903e-09, 0.222302, 0.03673)
+
+[node name="goggles" parent="Armature_001/Skeleton3D/HatHolder" index="2" instance=ExtResource("8_fgr34")]
+transform = Transform3D(1, -7.12877e-15, -2.38419e-07, -7.14352e-15, 0.999999, -6.10016e-08, 2.38419e-07, 5.86733e-08, 0.999999, -8.0764e-09, 0.0891588, 0.0335442)
+
+[node name="HairHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="18"]
+transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+bone_name = "Head"
+bone_idx = 4
+
+[node name="hair_long" parent="Armature_001/Skeleton3D/HairHolder" index="0" instance=ExtResource("9_11fmj")]
+transform = Transform3D(1, -7.10543e-15, -2.38419e-07, -7.15131e-15, 1, -6.10016e-08, 2.38419e-07, 5.96047e-08, 1, -8.08544e-09, -1.79311, 0.0339128)
+
+[node name="hair_short" parent="Armature_001/Skeleton3D/HairHolder" index="1" instance=ExtResource("10_cwg4r")]
+transform = Transform3D(1, -7.10543e-15, -2.38419e-07, -7.15131e-15, 1, -6.10016e-08, 2.38419e-07, 5.96047e-08, 1, -8.08544e-09, -1.79311, 0.0339128)
+
+[node name="FaceHolder" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="19"]
+transform = Transform3D(1, 3.81123e-10, -6.38667e-14, -3.81122e-10, 0.999999, -0.00159851, -5.75623e-13, 0.00159851, 0.999999, -1.18914e-10, 1.79311, -0.0327967)
+bone_name = "Head"
+bone_idx = 4
+
+[node name="mustache" parent="Armature_001/Skeleton3D/FaceHolder" index="0" instance=ExtResource("11_35bag")]
+transform = Transform3D(1, -7.10543e-15, -2.38419e-07, -7.15131e-15, 1, -6.10016e-08, 2.38419e-07, 5.96047e-08, 1, -8.08544e-09, -1.79311, 0.0339128)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2dk4b216d43v"]
+
+[ext_resource type="PackedScene" uid="uid://cvpvnt6of2n5b" path="res://player/models/hair_long.glb" id="1_1ycge"]
+[ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="2_fxgef"]
+[ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="3_u0prx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cu6ry"]
+albedo_texture = ExtResource("2_fxgef")
+normal_enabled = true
+normal_texture = ExtResource("3_u0prx")
+texture_filter = 0
+
+[node name="hair_long" instance=ExtResource("1_1ycge")]
+
+[node name="Hair01_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_cu6ry")

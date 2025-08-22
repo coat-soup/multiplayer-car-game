@@ -26,16 +26,21 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 [node name="cargo_crate_2x2x4" instance=ExtResource("1_2mtyy")]
 
 [node name="Cube_003" parent="." index="0"]
+instance_shader_parameters/custom_colour = Color(0.54, 0.20016, 0.1944, 1)
 surface_material_override/0 = SubResource("ShaderMaterial_j66go")
 
 [node name="Cube_001" parent="." index="1"]
+instance_shader_parameters/custom_colour = Color(0.54, 0.20016, 0.1944, 1)
 surface_material_override/0 = SubResource("ShaderMaterial_j66go")
 
 [node name="Cube_002" parent="." index="2"]
+instance_shader_parameters/custom_colour = Color(0.54, 0.20016, 0.1944, 1)
 surface_material_override/0 = SubResource("ShaderMaterial_j66go")
 
 [node name="Cylinder" parent="." index="3"]
+instance_shader_parameters/custom_colour = Color(0.54, 0.20016, 0.1944, 1)
 surface_material_override/0 = SubResource("ShaderMaterial_j66go")
 
 [node name="Cube_005" parent="." index="4"]
+instance_shader_parameters/custom_colour = Color(0.54, 0.20016, 0.1944, 1)
 surface_material_override/0 = SubResource("ShaderMaterial_j66go")

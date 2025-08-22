@@ -14,17 +14,45 @@ class_name PlayerSkeletonController
 @onready var hand_target_r: Marker3D = $HandTarget_R
 @onready var hand_target_l: Marker3D = $HandTarget_L
 
-@onready var equipment_manager : EquipmentManager = movement_manager.player_manager.equipment_manager
+var equipment_manager : EquipmentManager
 
 var held_item
 
+@export var previw_model := false
+
+@export var hat_holder : Node3D
+@export var hair_holder : Node3D
+@export var face_holder : Node3D
+
+var hat_id : int = -1
+var hair_id : int = -1
+var face_id : int = -1
+
+var shirt_colour : Color
+
+
+func _enter_tree() -> void:
+	await get_tree().create_timer(0.5).timeout
+	if not previw_model and movement_manager.player_manager.is_multiplayer_authority():
+		var ref_skel : PlayerSkeletonController = (get_tree().get_first_node_in_group("ui") as UIManager).character_panel.skeleton
+		
+		shirt_colour = ref_skel.shirt_colour
+		hat_id = ref_skel.hat_id
+		hair_id = ref_skel.hair_id
+		face_id = ref_skel.face_id
+		#update()
+
 
 func _ready() -> void:
+	if previw_model: return
+	
+	equipment_manager = movement_manager.player_manager.equipment_manager
+	
 	equipment_manager.equipped_item.connect(on_item_equipped)
 	equipment_manager.dropped_item.connect(on_item_dropped)
 	equipment_manager.swapped_item.connect(on_item_swapped)
 	
-	torso_ik.position = skeleton.get_bone_pose_position(0)
+	#torso_ik.position = skeleton.get_bone_pose_position(0)
 	
 	if not movement_manager.player_manager.is_multiplayer_authority():
 		while len(equipment_manager.remote_transforms) == 0:
@@ -36,6 +64,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if previw_model: return
+	
 	if movement_manager.player_manager.is_multiplayer_authority():
 		torso_ik.active = false
 	
@@ -50,9 +80,34 @@ func _process(delta: float) -> void:
 		if len(held_item.hand_positions) > 1: hand_target_l.global_position = held_item.hand_positions[1].global_position
 
 
-func setup(shirt_colour : Color):
+func setup(shirt_col : Color, hat : int, hair : int, face : int):
+	shirt_colour = shirt_col
+	
 	($Armature_001/Skeleton3D/Cube_011 as GeometryInstance3D).set_instance_shader_parameter("custom_colour", shirt_colour)
-	print("setting shirt color to ", shirt_colour)
+	
+	hat_id = hat
+	hair_id = hair
+	face_id = face
+	
+	set_array_visible(hat_holder, hat_id)
+	set_array_visible(hair_holder, hair_id)
+	set_array_visible(face_holder, face_id)
+	print()
+
+
+func set_array_visible(parent : Node, index : int):
+	print("setting index ", index, " for array ", parent.get_children())
+	for child in parent.get_children():
+		if not child or not is_instance_valid(child):
+			continue
+		elif child.get_index() == index:
+			child.visible = true
+		else:
+			child.visible = false
+
+
+func update():
+	setup(shirt_colour, hat_id, hair_id, face_id)
 
 
 func on_item_equipped(item : Holdable):

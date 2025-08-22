@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://csiybenmwhrp"]
+
+[ext_resource type="PackedScene" uid="uid://ng5s0xox7iud" path="res://player/models/hair_short.glb" id="1_52tua"]
+[ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="2_18sjm"]
+[ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="3_ybwkf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoku7"]
+albedo_texture = ExtResource("2_18sjm")
+normal_enabled = true
+normal_texture = ExtResource("3_ybwkf")
+texture_filter = 0
+
+[node name="hair_short" instance=ExtResource("1_52tua")]
+
+[node name="Hair01" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qoku7")

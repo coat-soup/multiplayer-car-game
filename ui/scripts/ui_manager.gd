@@ -58,6 +58,8 @@ var chats : Array[String] = []
 var prompt_time_remaining := 0.0
 var chat_fade_timer : Timer
 
+@onready var character_panel: CharacterCustomisationPanelManager = $NetworkPanel/CharacterPanel
+
 
 func _ready():
 	host_steam.pressed.connect(network_manager._on_host_pressed)

@@ -11,8 +11,8 @@ var username: String = ""
 var network_manager : NetworkManager
 var ui : UIManager
 
-@export var shirt_colour : Color
 @export var player_skeleton : PlayerSkeletonController
+
 
 func _enter_tree() -> void:
 	pass
@@ -20,8 +20,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	shirt_colour = [Color.DARK_RED, Color.WEB_GRAY, Color.BURLYWOOD, Color.DARK_OLIVE_GREEN].pick_random()
-	
 	network_manager = get_tree().get_first_node_in_group("network manager") as NetworkManager
 	assert(network_manager, "Network manager not found!!!")
 	ui = get_tree().get_first_node_in_group("ui") as UIManager
@@ -56,18 +54,17 @@ func try_sync(n := 0):
 
 
 @rpc("any_peer", "call_local")
-func sync_data(new_username: String, shirt_col : Color) -> void:
+func sync_data(new_username: String, shirt_col : Color, hat, hair, face) -> void:
 	username = new_username
-	shirt_colour = shirt_col
 	username_label.text = username
-	player_skeleton.setup(shirt_colour)
-	if ui and false:
-		ui.display_chat_message("username synced to " + username)
+	player_skeleton.setup(shirt_col, hat, hair, face)
+	if ui:
+		print("username synced to " + username)
 
 
 @rpc("any_peer", "call_local")
 func request_sync_data():
 	if is_multiplayer_authority():
-		sync_data.rpc(username, shirt_colour)
+		sync_data.rpc_id(multiplayer.get_remote_sender_id(), username, player_skeleton.shirt_colour, player_skeleton.hat_id, player_skeleton.hair_id, player_skeleton.face_id)
 		if ui and false:
 			ui.display_chat_message("username sync request received")

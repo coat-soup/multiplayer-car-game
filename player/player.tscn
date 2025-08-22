@@ -104,7 +104,7 @@ skeleton = NodePath("../..")
 shape = SubResource("CapsuleShape3D_ybx0f")
 
 [node name="CameraPivot" type="Node3D" parent="MovementManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732802, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.894502, 0)
 script = ExtResource("11_xgngf")
 
 [node name="Camera" type="Camera3D" parent="MovementManager/CameraPivot"]

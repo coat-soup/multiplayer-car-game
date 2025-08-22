@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://csxa4nqdnioaa"]
+
+[ext_resource type="PackedScene" uid="uid://b4uxwvxfa512u" path="res://player/models/mustache.glb" id="1_xcbyy"]
+[ext_resource type="Texture2D" uid="uid://c1y0hd1xlwf73" path="res://player/textures/player.png" id="2_ddwk2"]
+[ext_resource type="Texture2D" uid="uid://cpfauk2j7vgv2" path="res://player/textures/player_n.png" id="3_pvdcj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1r4n1"]
+albedo_texture = ExtResource("2_ddwk2")
+normal_enabled = true
+normal_texture = ExtResource("3_pvdcj")
+texture_filter = 0
+
+[node name="mustache" instance=ExtResource("1_xcbyy")]
+
+[node name="Mustache" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1r4n1")

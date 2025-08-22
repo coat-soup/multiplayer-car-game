@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=21 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://b0cljofsjyqua" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://dyocjoar1hleq" path="res://ui/textures/cross.png" id="2_5fnut"]
@@ -12,6 +12,9 @@
 [ext_resource type="Theme" uid="uid://djj00ugs4ffua" path="res://ui/themes/ship_panel_theme.tres" id="6_5nekn"]
 [ext_resource type="Texture2D" uid="uid://bo5bx2yttegqf" path="res://ui/textures/corner_select_highlight.png" id="6_so58t"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/widgets/lobby_entry.tscn" id="10_yfaaw"]
+[ext_resource type="Texture2D" uid="uid://3bcj0iaejqnc" path="res://ui/textures/corner_arrow_marker.png" id="11_k0om4"]
+[ext_resource type="Script" uid="uid://crjivpr62g5q2" path="res://ui/scripts/character_customisation_panel.gd" id="11_u8i6j"]
+[ext_resource type="PackedScene" uid="uid://dhhtqn4mah1gr" path="res://player/player_skeleton.tscn" id="13_wqc2c"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
 length = 0.001
@@ -48,6 +51,15 @@ _data = {
 &"RESET": SubResource("Animation_68x3x"),
 &"chat_fade": SubResource("Animation_4x3be")
 }
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wqc2c"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_k0om4"]
+background_mode = 1
+background_energy_multiplier = 5.84
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="UI" type="Control" groups=["ui"]]
 layout_mode = 3
@@ -404,9 +416,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -475.0
-offset_top = -100.0
+offset_top = -366.0
 offset_right = -225.0
-offset_bottom = 100.0
+offset_bottom = -166.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -461,6 +473,122 @@ offset_top = 316.0
 offset_right = 437.0
 offset_bottom = 363.745
 text = "REFRESH LOBBIES"
+
+[node name="CharacterPanel" type="Control" parent="NetworkPanel" node_paths=PackedStringArray("skeleton")]
+anchors_preset = 0
+offset_left = -549.0
+offset_top = -189.0
+offset_right = -509.0
+offset_bottom = -149.0
+script = ExtResource("11_u8i6j")
+skeleton = NodePath("../../SubViewport/Camera3D/PlayerSkeleton")
+
+[node name="TextureRect" type="TextureRect" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = -96.0
+offset_right = 502.74
+offset_bottom = 598.74
+texture = SubResource("ViewportTexture_wqc2c")
+expand_mode = 2
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 310.0
+offset_right = 499.0
+offset_bottom = 341.0
+text = "SHIRT COLOUR"
+color = Color(0.67, 0.67, 0.67, 1)
+edit_alpha = false
+
+[node name="Label" type="Label" parent="NetworkPanel/CharacterPanel/ColorPickerButton"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -24.0
+offset_right = 120.0
+offset_bottom = -1.0
+text = "SHIRT COLOUR"
+
+[node name="HatA" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 98.6274
+offset_right = 110.0
+offset_bottom = 114.627
+rotation = -2.35619
+texture_normal = ExtResource("11_k0om4")
+
+[node name="HatB" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 76.6274
+offset_right = 331.0
+offset_bottom = 92.6274
+rotation = 0.785397
+texture_normal = ExtResource("11_k0om4")
+
+[node name="HairA" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 166.627
+offset_right = 110.0
+offset_bottom = 182.627
+rotation = -2.35619
+texture_normal = ExtResource("11_k0om4")
+
+[node name="HairB" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 144.627
+offset_right = 331.0
+offset_bottom = 160.627
+rotation = 0.785397
+texture_normal = ExtResource("11_k0om4")
+
+[node name="FaceA" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 231.627
+offset_right = 110.0
+offset_bottom = 247.627
+rotation = -2.35619
+texture_normal = ExtResource("11_k0om4")
+
+[node name="FaceB" type="TextureButton" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 209.627
+offset_right = 331.0
+offset_bottom = 225.627
+rotation = 0.785397
+texture_normal = ExtResource("11_k0om4")
+
+[node name="Label" type="Label" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 76.0
+offset_right = 71.0
+offset_bottom = 99.0
+text = "HAT"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 143.0
+offset_right = 71.0
+offset_bottom = 166.0
+text = "HAIR"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="NetworkPanel/CharacterPanel"]
+layout_mode = 0
+offset_left = -45.0
+offset_top = 209.0
+offset_right = 71.0
+offset_bottom = 232.0
+text = "FACE"
+horizontal_alignment = 2
 
 [node name="AmmoCounter" type="Label" parent="."]
 custom_minimum_size = Vector2(134.19, 0)
@@ -582,3 +710,16 @@ offset_bottom = 110.56
 theme = ExtResource("6_5nekn")
 bbcode_enabled = true
 text = "[b][color=red][pulse freq=2.0 color=transparent ease=-1.0]NO POWER[/pulse][/color][/b]"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(2048, 2048)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4000, 0)
+environment = SubResource("Environment_k0om4")
+size = 2.21
+
+[node name="PlayerSkeleton" parent="SubViewport/Camera3D" instance=ExtResource("13_wqc2c")]
+transform = Transform3D(0.96272, 0, 0.2705, 0.0301664, 0.993762, -0.107363, -0.268812, 0.111521, 0.956715, 0, -1.13525, -2.14174)
+previw_model = true
