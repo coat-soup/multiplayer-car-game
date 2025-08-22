@@ -87,8 +87,8 @@ static func random_point_in_circle(radius : float, min_radius : float = 0.0, r :
 	return (Vector2.UP * r.randf_range(min_radius, radius)).rotated(r.randf_range(0, 2*PI))
 
 
-static func get_scenes_in_folder(folder_path: String) -> Array[String]:
-	var scenes: Array[String] = []
+static func get_files_in_folder(folder_path: String, file_extension: String) -> Array[String]:
+	var files: Array[String] = []
 	var dir := DirAccess.open(folder_path)
 	
 	if dir:
@@ -96,14 +96,14 @@ static func get_scenes_in_folder(folder_path: String) -> Array[String]:
 		while true:
 			var file_name = dir.get_next()
 			if file_name == "": break
-			if not dir.current_is_dir() and file_name.ends_with(".tscn"):
+			if not dir.current_is_dir() and file_name.ends_with("." + file_extension):
 				var full_path = folder_path.path_join(file_name)
-				scenes.append(full_path)
+				files.append(full_path)
 		dir.list_dir_end()
 	else:
 		push_error("Failed to open directory: %s" % folder_path)
 
-	return scenes
+	return files
 
 
 static func weighted_random(array : Array, weights : Array [float]) -> int:

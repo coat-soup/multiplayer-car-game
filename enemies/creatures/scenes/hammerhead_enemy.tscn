@@ -33,11 +33,12 @@ health = NodePath("Health")
 
 [node name="hammerhead" parent="." instance=ExtResource("1_r13gk")]
 
-[node name="RadarSignature" parent="." instance=ExtResource("2_80ntv")]
+[node name="RadarSignature" parent="." node_paths=PackedStringArray("health_node") instance=ExtResource("2_80ntv")]
 transform = Transform3D(4.10737, 0, 0, 0, 2.66326, 0, 0, 0, 11.6513, 0, 0, 0)
 visible = false
 signature_name = "Hammerhead"
 relation = 2
+health_node = NodePath("../Health")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_3smqp")

@@ -129,13 +129,13 @@ properties/3/replication_mode = 2
 size = Vector3(31.2551, 5.3792, 65.8033)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_thd0o"]
-size = Vector3(14, 14, 13)
+size = Vector3(12.9805, 14, 13)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7wxxg"]
-size = Vector3(14, 11, 7)
+size = Vector3(13.1694, 11, 7)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_208ee"]
-size = Vector3(7, 10, 9)
+size = Vector3(4.39954, 10, 9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sw16b"]
 size = Vector3(26.3106, 8.1827, 63.4747)
@@ -245,21 +245,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 17)
 replication_config = SubResource("SceneReplicationConfig_tds0y")
 
 [node name="GravityBounds" type="Area3D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityBounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64354, -1.79655, 26.5491)
 shape = SubResource("BoxShape3D_xlqn0")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="GravityBounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0159895, 7.51385, 2.14743)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493776, 7.51385, 2.14743)
 shape = SubResource("BoxShape3D_thd0o")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="GravityBounds"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.0159895, 2.81028, 10.5652)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.399294, 2.81028, 10.5652)
 shape = SubResource("BoxShape3D_7wxxg")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="GravityBounds"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 6.48401, -1.07881, 10.2116)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 5.18378, -1.07881, 10.2116)
 shape = SubResource("BoxShape3D_208ee")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="GravityBounds"]
@@ -267,7 +268,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.355061, -8.54373, 25.282)
 shape = SubResource("BoxShape3D_sw16b")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.43991, 6.42249, 18.0154)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.329907, -9.41626, 20.0154)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("31_k1vjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.17139, 1.23681, -3.48261)

@@ -12,11 +12,12 @@ enum SignatureRelation {NEUTRAL, FRIENDLY, HOSTILE}
 @export var type : SignatureType = SignatureType.DYNAMIC
 @export var relation : SignatureRelation = SignatureRelation.NEUTRAL
 
+@export var health_node : Health
+
 
 func _ready() -> void:
-	var enemy = get_parent_node_3d() as EnemyCreature
-	if enemy:
-		enemy.health.died.connect(queue_free)
+	if health_node:
+		health_node.died.connect(queue_free)
 
 
 func set_marker_colour(marker : Node3D):
@@ -31,4 +32,5 @@ func _notification(what: int) -> void:
 		terminate()
 
 func terminate():
+	print("TERMINATING SIGNAL")
 	terminated.emit()

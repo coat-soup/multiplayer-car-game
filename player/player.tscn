@@ -50,7 +50,6 @@ properties/4/spawn = true
 properties/4/replication_mode = 1
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("network_manager", "movement_manager", "equipment_manager", "camera", "health") groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1605, 0)
 script = ExtResource("1_wogeu")
 network_manager = NodePath("NetworkManager")
 movement_manager = NodePath("MovementManager")

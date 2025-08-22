@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://t0evtqlsc30a"]
+[gd_scene load_steps=6 format=3 uid="uid://t0evtqlsc30a"]
 
 [ext_resource type="Script" uid="uid://d0owvdmqhrt4w" path="res://enemies/enemy_ground_asset.gd" id="1_3pttd"]
 [ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="1_gnj6v"]
 [ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="2_hlh1w"]
-[ext_resource type="Material" uid="uid://bni5bs60b1joy" path="res://ship/systems/radar/marker_materials/radar_marker_enemy.tres" id="3_1uqen"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wewu"]
 albedo_color = Color(1, 0, 0, 1)
@@ -19,10 +18,10 @@ health = NodePath("Hitbox/Health")
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_2wewu")
 
-[node name="RadarSignature" parent="." instance=ExtResource("2_hlh1w")]
+[node name="RadarSignature" parent="." node_paths=PackedStringArray("health_node") instance=ExtResource("2_hlh1w")]
 transform = Transform3D(19.1986, 0, 0, 0, 19.1986, 0, 0, 0, 19.1986, 0, 0, 0)
 visible = false
-marker_mat = ExtResource("3_1uqen")
+health_node = NodePath("../Hitbox/Health")
 
 [node name="Hitbox" type="StaticBody3D" parent="."]
 collision_layer = 9

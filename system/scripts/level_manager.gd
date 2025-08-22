@@ -25,8 +25,9 @@ var r : RandomNumberGenerator
 
 
 func _ready() -> void:
-	for scene in Util.get_scenes_in_folder("res://items/scenes/"):
-		item_spawner.add_spawnable_scene(scene)
+	for data_path in Util.get_files_in_folder("res://items/item_data/", "tres"):
+		var item_data : ItemData = load(data_path) as ItemData
+		item_spawner.add_spawnable_scene(item_data.prefab_path)
 
 
 func setup(_multiplayer):
@@ -39,7 +40,7 @@ func setup(_multiplayer):
 func spawn_item_synced(file_path, pos) -> Item:
 	if not multiplayer.is_server(): return null
 	
-	add_item_to_spawner.rpc(file_path)
+	#add_item_to_spawner.rpc(file_path)  # all item paths are loaded and added in _ready
 	var item = load(file_path).instantiate() as Item
 	ship.add_child(item, true)
 	item.global_position = pos

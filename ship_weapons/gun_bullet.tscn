@@ -117,7 +117,7 @@ _data = {
 
 [node name="shell" node_paths=PackedStringArray("shapecast") instance=ExtResource("1_0b4r6")]
 script = ExtResource("2_sm41t")
-speed = 500.0
+speed = 200.0
 particles = ExtResource("3_tjnrr")
 shapecast = NodePath("ShapeCast3D")
 
@@ -144,7 +144,7 @@ max_distance = 600.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_l6itn")
+&"": SubResource("AnimationLibrary_l6itn")
 }
 
 [node name="Cube" parent="." index="4"]
@@ -154,3 +154,4 @@ visible = false
 [node name="ShapeCast3D" type="ShapeCast3D" parent="." index="5"]
 shape = SubResource("SphereShape3D_43wmo")
 target_position = Vector3(0, 0, 1)
+collision_mask = 43

@@ -27,11 +27,14 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("target_radar_signature"):
 		var t = get_forward_target()
+		if cur_target: cur_target.terminated.disconnect(on_signal_terminated)
+		
 		if t == cur_target or t == null:
 			cur_target = null
 			ui.end_target_lock()
 		else:
 			cur_target = t
+			cur_target.terminated.connect(on_signal_terminated)
 			if cur_target: ui.start_target_lock(cur_target, weapons_controller != null)
 
 
@@ -73,3 +76,8 @@ func on_control_ended():
 	if cached_local_player:
 		ui.end_target_lock()
 		cached_local_player = null
+
+
+func on_signal_terminated():
+	cur_target = null
+	ui.end_target_lock()

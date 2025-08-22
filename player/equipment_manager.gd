@@ -173,6 +173,7 @@ func first_available_slot() -> int:
 func toggle_item_visibility(slot : int, value : bool):
 	if items[slot]:
 		items[slot].visible = value
+	swapped_item.emit()
 
 
 func swap_to_item(slot):
@@ -197,3 +198,4 @@ func swap_to_item(slot):
 @rpc("any_peer", "call_local")
 func sync_cur_slot(slot : int):
 	cur_slot = slot
+	swapped_item.emit()

@@ -29,9 +29,7 @@ func _ready() -> void:
 		while len(equipment_manager.remote_transforms) == 0:
 			await get_tree().process_frame
 		for rt in equipment_manager.remote_transforms:
-			print("REPARENTING ", rt)
 			rt.reparent(torso_ik)
-			print("rt parent now: ", rt.get_parent_node_3d())
 
 
 func _process(delta: float) -> void:
@@ -63,6 +61,7 @@ func on_item_dropped(item : Holdable):
 
 func on_item_swapped():
 	held_item = equipment_manager.items[equipment_manager.cur_slot]
+	print("SWAPPING ITEM TO ", held_item)
 	do_item_ik()
 
 

@@ -81,6 +81,7 @@ func on_body_entered_attack(body : Node3D):
 
 
 func on_died():
+	$RadarSignature.terminate()
 	dead = true
 
 

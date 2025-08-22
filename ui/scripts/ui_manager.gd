@@ -195,6 +195,10 @@ func update_target_lock(signature : RadarSignature, target_position : Vector3, c
 	target_outline.size = aabb_calc[1]
 	target_outline.global_position = aabb_calc[0] #camera.unproject_position(signature.global_position) - aabb_calc[1]/2
 	radar_target_name.text = "TARGET: " + signature.signature_name + "\n" + str(round(camera.global_position.distance_to(target_position))) + "m"
+	
+	var in_view = (-camera.global_basis.z).dot((target_position - camera.global_position).normalized()) > 0
+	lead_pip.visible = in_view
+	target_outline.visible = in_view
 
 
 func setup_mounted_weapons(controller : MountedWeaponsController):

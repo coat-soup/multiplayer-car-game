@@ -14,13 +14,14 @@ signal impacted
 @export var shapecast : ShapeCast3D
 
 var layer_mask := [1,2,4,6]
-var ignore_list : Array[RID] = [self]
+var ignore_list : Array[Node3D] = [self]
 
 var velocity := Vector3.ZERO
 
 var hit_obj : Node3D
 
 var active = true
+var do_move := false
 
 var fired_from_auth := false
 
@@ -31,30 +32,24 @@ var source : int
 func _ready():
 	velocity = transform.basis.z * speed
 	await get_tree().create_timer(lifetime).timeout
+	shapecast.collision_mask = Util.layer_mask(layer_mask)
+	shapecast.target_position = Vector3(0,0, speed * 2 * get_physics_process_delta_time())
 	handle_impact()
 
 
 func _physics_process(delta: float) -> void:
 	if active:
-		var space_state = get_world_3d().direct_space_state
-
-		var end = global_position + velocity * delta
-		var query = PhysicsRayQueryParameters3D.create(global_position, end, Util.layer_mask(layer_mask))
-		
-		query.exclude = ignore_list
-		
-		shapecast.target_position = Vector3(0,0, velocity.length() * delta)
-		
-		var result := space_state.intersect_ray(query)
-		
-		if shapecast.is_colliding(): #result:
-			global_position = shapecast.get_collision_point(0) #result.position
-			hit_obj = shapecast.get_collider(0) #result.collider
-			handle_impact()#.rpc()
-	
-	global_position += velocity * delta
-	#velocity.y -= drop_rate * delta
-	#look_at(global_position - velocity)
+		shapecast.force_shapecast_update()
+		if shapecast.is_colliding():
+			for i in range(shapecast.get_collision_count()):
+				if not ignore_list.has(shapecast.get_collider(i)):
+					global_position = shapecast.get_collision_point(i)
+					hit_obj = shapecast.get_collider(i)
+					handle_impact()#.rpc()
+					break
+		elif do_move:
+			global_position += velocity * delta
+		else: do_move = true # just to skip first movement frame
 
 
 @rpc("any_peer", "call_local")
@@ -73,6 +68,10 @@ func handle_impact():
 		elif hit_obj != null:
 			Util.spawn_particles_for_time(global_position, particles, get_tree().get_root(), 1.0)
 			var health = hit_obj.get_node_or_null("Health") as Health
+			
+			var player = hit_obj as PlayerMovement
+			if player: health = player.player_manager.health
+			
 			if health:
 				health.take_damage.rpc(damage, source)
 	else:

@@ -45,11 +45,11 @@ func fire():
 	bullet.damage = damage
 	bullet.source = held_player.name.to_int()
 	bullet.layer_mask = [1,2,6]
-	bullet.ignore_list.append(held_player.movement_manager.get_rid())
+	bullet.ignore_list.append(held_player.movement_manager)
 	get_tree().get_root().add_child(bullet)
 	bullet.global_position = held_player.camera.global_position# - held_player.camera.global_basis.z * 1
 	bullet.look_at(held_player.camera.global_position + held_player.camera.global_basis.z * 1)
-	bullet.get_child(0).global_position = barrel_end.global_position
+	bullet.global_position = barrel_end.global_position
 	bullet._ready()
 	
 	cur_ammo -= 1
