@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_q8vy5")
 item_name = "Cooler"
-price = 20
+price = 450
 prefab_path = "res://ship/components/cooler.tscn"
 crafting_recipes = Array[String]([])

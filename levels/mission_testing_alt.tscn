@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=37 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -81,8 +81,14 @@ saturation = 0.0
 [sub_resource type="Compositor" id="Compositor_ld8yr"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_6x0jm")])
 
-[node name="Root" type="Node3D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4fkui"]
+properties/0/path = NodePath(".:money")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Root" type="Node3D" node_paths=PackedStringArray("ui") groups=["game manager"]]
 script = ExtResource("1_b72io")
+ui = NodePath("UI")
 
 [node name="CloudComputeTest" type="TextureRect" parent="." node_paths=PackedStringArray("texture_rect")]
 visible = false
@@ -269,3 +275,6 @@ spawn_path = NodePath("../ShipHolder/SmallShip")
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../EnemyManager")
+
+[node name="StatSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4fkui")

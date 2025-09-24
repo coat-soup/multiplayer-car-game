@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_de60a")
 item_name = "Large Cargo Container"
-price = 80
+price = 350
 prefab_path = "res://items/scenes/test_large_cargo_item.tscn"
 crafting_recipes = Array[String]([])

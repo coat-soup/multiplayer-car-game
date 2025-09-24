@@ -96,7 +96,6 @@ func setup(shirt_col : Color, hat : int, hair : int, face : int):
 
 
 func set_array_visible(parent : Node, index : int):
-	print("setting index ", index, " for array ", parent.get_children())
 	for child in parent.get_children():
 		if not child or not is_instance_valid(child):
 			continue

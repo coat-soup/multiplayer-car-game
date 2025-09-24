@@ -268,7 +268,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.355061, -8.54373, 25.282)
 shape = SubResource("BoxShape3D_sw16b")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.329907, -9.41626, 20.0154)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 37.0395, -23.763, 20.0154)
 
 [node name="crate_rack_small" parent="." instance=ExtResource("31_k1vjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.17139, 1.23681, -3.48261)

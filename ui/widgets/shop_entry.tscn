@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6q0845ik35fq"]
+
+[ext_resource type="Theme" uid="uid://bp8hky8fmst5q" path="res://ui/themes/player_hud_theme.tres" id="1_jcnik"]
+
+[node name="ShopEntry" type="Control"]
+custom_minimum_size = Vector2(1055, 88)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 826.0
+offset_bottom = 48.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1055.0
+offset_bottom = 88.0
+theme = ExtResource("1_jcnik")
+color = Color(1, 1, 1, 0.278431)
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 26.0
+offset_right = 227.0
+offset_bottom = 62.0
+theme = ExtResource("1_jcnik")
+theme_override_font_sizes/font_size = 40
+text = "ITEM NAME"
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 26.0
+offset_right = 520.0
+offset_bottom = 62.0
+theme = ExtResource("1_jcnik")
+theme_override_font_sizes/font_size = 40
+text = "$9999"
+
+[node name="StockLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 26.0
+offset_right = 856.0
+offset_bottom = 62.0
+theme = ExtResource("1_jcnik")
+theme_override_font_sizes/font_size = 40
+text = "Stock: 100"
+
+[node name="BuyButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 23.0
+offset_right = 1030.0
+offset_bottom = 67.0
+theme = ExtResource("1_jcnik")
+theme_override_font_sizes/font_size = 40
+text = "BUY"

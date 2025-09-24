@@ -60,6 +60,8 @@ var chat_fade_timer : Timer
 
 @onready var character_panel: CharacterCustomisationPanelManager = $NetworkPanel/CharacterPanel
 
+@onready var money_label: Label = $HUD/MoneyPanel/MoneyLabel
+
 
 func _ready():
 	host_steam.pressed.connect(network_manager._on_host_pressed)
@@ -350,3 +352,7 @@ func on_friend_lobby_join_pressed(steam_id: int, lobby_id: int) -> bool:
 		return true
 	
 	return false
+
+
+func update_money_label(value : int):
+	money_label.text = "$%d" % value

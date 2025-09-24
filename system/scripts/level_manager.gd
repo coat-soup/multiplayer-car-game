@@ -37,6 +37,7 @@ func setup(_multiplayer):
 	reset_level()
 
 
+@rpc("call_local", "any_peer")
 func spawn_item_synced(file_path, pos) -> Item:
 	if not multiplayer.is_server(): return null
 	

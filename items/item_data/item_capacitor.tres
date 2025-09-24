@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_b6jpg")
 item_name = "Capacitor"
-price = 20
+price = 100
 prefab_path = "res://ship/components/capacitor.tscn"
 crafting_recipes = Array[String]([])

@@ -364,6 +364,20 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="MoneyPanel" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyLabel" type="Label" parent="HUD/MoneyPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 66.0
+offset_bottom = 62.0
+theme = ExtResource("4_ol48f")
+text = "$9999"
+
 [node name="NetworkPanel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 8

@@ -15,6 +15,10 @@ run/main_scene="res://levels/mission_testing_alt.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://system/scripts/global.gd"
+
 [display]
 
 window/size/viewport_width=2560
@@ -49,6 +53,7 @@ cooler=""
 "mounted weapon"=""
 "size 1"=""
 "ammo crate"=""
+"game manager"=""
 
 [input]
 

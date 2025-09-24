@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceobuknrxk1vw"]
+
+[ext_resource type="Script" uid="uid://b0xy4eiqejis7" path="res://ui/ship_displays/shop_panel.gd" id="1_uvu6r"]
+[ext_resource type="FontFile" uid="uid://cb0y6sjfugkbj" path="res://ui/fonts/HomeVideoBold-R90Dv.ttf" id="2_ofuqm"]
+[ext_resource type="Theme" uid="uid://bp8hky8fmst5q" path="res://ui/themes/player_hud_theme.tres" id="3_ofuqm"]
+[ext_resource type="PackedScene" uid="uid://b6q0845ik35fq" path="res://ui/widgets/shop_entry.tscn" id="3_uvu6r"]
+
+[node name="ShopPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uvu6r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118, 0.131667, 0.2, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -285.0
+offset_top = 10.0
+offset_right = 285.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.641639, 0.394769, 1.92523e-07, 1)
+theme_override_fonts/font = ExtResource("2_ofuqm")
+theme_override_font_sizes/font_size = 50
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -91.0
+offset_right = 152.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_ofuqm")
+theme_override_font_sizes/font_size = 46
+text = "FUNDS: $999"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1102.5
+offset_top = -403.0
+offset_right = 1102.5
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 95
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="ShopEntry" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry2" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry3" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry4" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry5" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry6" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry7" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry8" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry9" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry10" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry11" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry12" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2
+
+[node name="ShopEntry13" parent="GridContainer" instance=ExtResource("3_uvu6r")]
+layout_mode = 2

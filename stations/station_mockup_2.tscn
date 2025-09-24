@@ -1,14 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2s5an1qhg1si"]
+[gd_scene load_steps=11 format=3 uid="uid://b2s5an1qhg1si"]
 
 [ext_resource type="PackedScene" uid="uid://bv1p65pnew75r" path="res://stations/station_mockup_2.glb" id="1_kninq"]
 [ext_resource type="Script" uid="uid://crwwiffekccx0" path="res://world/POIs/scripts/POI_station.gd" id="2_nn7fu"]
 [ext_resource type="PackedScene" uid="uid://t0evtqlsc30a" path="res://enemies/enemy_ground_asset.tscn" id="2_ol42j"]
+[ext_resource type="Shader" uid="uid://cxxskw8rlchx7" path="res://ship/prototype_grid.gdshader" id="5_t4mtb"]
+[ext_resource type="PackedScene" uid="uid://g02ib35owvcf" path="res://world/props/scenes/display_console.tscn" id="6_omkmd"]
+[ext_resource type="PackedScene" uid="uid://ceobuknrxk1vw" path="res://ui/ship_displays/shop_panel.tscn" id="7_omkmd"]
 [ext_resource type="PackedScene" uid="uid://b75nuxh2j8oak" path="res://stations/station_cargo_bay.tscn" id="8_62v5k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ga5r"]
 size = Vector3(130, 30, 157.39)
 
-[node name="station_mockup_2" node_paths=PackedStringArray("docking_area") instance=ExtResource("1_kninq")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnl4k"]
+render_priority = 0
+shader = ExtResource("5_t4mtb")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 1
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_omkmd"]
+viewport_path = NodePath("ShopPlatform/DisplayConsole/Sprite3D/SubViewport")
+
+[node name="FriendlyStation" node_paths=PackedStringArray("docking_area") instance=ExtResource("1_kninq")]
 script = ExtResource("2_nn7fu")
 docking_area = NodePath("Area3D")
 POI_name = "Friendly Station"
@@ -42,3 +72,26 @@ transform = Transform3D(-5.73206e-15, -1, -1.31134e-07, -4.37114e-08, 1.31134e-0
 
 [node name="TestCargoDestination" parent="." index="7" instance=ExtResource("8_62v5k")]
 transform = Transform3D(-5.73206e-15, -1, -1.31134e-07, -4.37114e-08, 1.31134e-07, -1, 1, 0, -4.37114e-08, 73.5486, -2.00272, 259.474)
+
+[node name="ShopPlatform" type="CSGBox3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.28, 0, 287.468)
+use_collision = true
+size = Vector3(10, 1, 16)
+material = SubResource("ShaderMaterial_gnl4k")
+
+[node name="DisplayConsole" parent="ShopPlatform" index="0" instance=ExtResource("6_omkmd")]
+transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, -2, 0.477648, 6)
+
+[node name="Sprite3D" type="Sprite3D" parent="ShopPlatform/DisplayConsole" index="3"]
+transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709295, 0.949728, 0)
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_omkmd")
+
+[node name="SubViewport" type="SubViewport" parent="ShopPlatform/DisplayConsole/Sprite3D" index="0"]
+size = Vector2i(2560, 1440)
+
+[node name="ShopPanel" parent="ShopPlatform/DisplayConsole/Sprite3D/SubViewport" index="0" node_paths=PackedStringArray("item_spawn_point") instance=ExtResource("7_omkmd")]
+item_spawn_point = NodePath("../../../../ItemSpawnPoint")
+
+[node name="ItemSpawnPoint" type="Marker3D" parent="ShopPlatform" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91141, 0)
