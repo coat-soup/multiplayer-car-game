@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkpvq0ixpy8mb"]
+
+[ext_resource type="PackedScene" uid="uid://ciw1cvuv14kmr" path="res://enemies/creatures/models/hammerhead.glb" id="1_jepma"]
+[ext_resource type="Texture2D" uid="uid://p1wuppuctr2i" path="res://enemies/creatures/textures/hammerhead.png" id="2_e7rsp"]
+[ext_resource type="Texture2D" uid="uid://0pgxr0mv562v" path="res://enemies/creatures/textures/hammerhead_n.png" id="3_bh225"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rmkd"]
+albedo_texture = ExtResource("2_e7rsp")
+normal_enabled = true
+normal_texture = ExtResource("3_bh225")
+texture_filter = 0
+
+[node name="hammerhead" instance=ExtResource("1_jepma")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")
+
+[node name="Cube_001" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")
+
+[node name="Cube_003" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")
+
+[node name="Cube_004" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")
+
+[node name="Cube_005" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6rmkd")

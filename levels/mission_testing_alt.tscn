@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=39 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -28,6 +28,8 @@
 [ext_resource type="Script" uid="uid://1552dwe33jmf" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
 [ext_resource type="Script" uid="uid://c1e8gagqxlh6y" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
 [ext_resource type="Script" uid="uid://bcn3qhax0sdi8" path="res://system/scripts/item_spawn_tester.gd" id="28_4fkui"]
+[ext_resource type="PackedScene" uid="uid://bhyxnxy63odi7" path="res://enemies/creatures/scenes/hammerhead_enemy.tscn" id="29_btqne"]
+[ext_resource type="PackedScene" uid="uid://davfqpyxnacaa" path="res://enemies/creatures/scenes/needler_enemy.tscn" id="30_44mqy"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
@@ -278,3 +280,11 @@ spawn_path = NodePath("../EnemyManager")
 
 [node name="StatSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4fkui")
+
+[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("29_btqne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.389, 68.4055, -22.6104)
+target = NodePath("../ShipHolder/SmallShip")
+
+[node name="NeedlerEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("30_44mqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.119, 68.6946, -18.5468)
+target = NodePath("../ShipHolder/SmallShip")
