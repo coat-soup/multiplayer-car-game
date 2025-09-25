@@ -17,7 +17,8 @@ class_name UIManager
 @onready var host_steam: Button = $NetworkPanel/ButtonHolder/HostSteam
 @onready var host_local: Button = $NetworkPanel/ButtonHolder/HostLocal
 @onready var join: Button = $NetworkPanel/ButtonHolder/Join
-@onready var lobby_list_holder: VBoxContainer = $NetworkPanel/LobbyListHolder
+@onready var lobby_list_panel: ScrollContainer = $NetworkPanel/LobbyListPanel
+@onready var lobby_list_holder: VBoxContainer = $NetworkPanel/LobbyListPanel/LobbyListHolder
 @onready var refresh_lobbies: Button = $NetworkPanel/RefreshLobbies
 
 
@@ -71,6 +72,8 @@ func _ready():
 	chat_fade_timer = Timer.new()
 	add_child(chat_fade_timer)
 	chat_fade_timer.timeout.connect(fade_chat)
+	
+	Steam.avatar_loaded.connect(on_avatar_loaded)
 	
 	refresh_lobbies.pressed.connect(build_lobby_list)
 	build_lobby_list()
@@ -311,21 +314,26 @@ func build_lobby_list():
 	for child in lobby_list_holder.get_children():
 		child.queue_free()
 	
-	var data = network_manager.get_friends_in_lobbies()
-	for steam_id in data:
+	var data = network_manager.get_friends_in_lobbies(true, true)
+	var ids : Array = data.keys()
+	ids.sort_custom(func(a,b): return data[a] > data[b])
+	for steam_id in ids:
 		var lobby_entry = preload("res://ui/widgets/lobby_entry.tscn").instantiate()
 		lobby_list_holder.add_child(lobby_entry)
 		
 		lobby_entry.get_node("NameLabel").text = Steam.getFriendPersonaName(steam_id)
 		
+		Steam.getPlayerAvatar(Steam.AVATAR_SMALL, steam_id)
+		
 		var alt_m : String
 		match data[steam_id]:
-			-1: alt_m = "Not in game"
-			-2: alt_m = "In menus"
+			-1: alt_m = "In menus"
+			-2: alt_m = "Not in game"
+			-3: alt_m = "Offline"
 		
-		if data[steam_id] == -1 or data[steam_id] == -2:
-			lobby_entry.get_node("PlayerCountLabel").text = alt_m
-			lobby_entry.get_node("PingLabel").visible = false
+		if data[steam_id] < 0:
+			lobby_entry.get_node("PingLabel").text = alt_m
+			lobby_entry.get_node("PlayerCountLabel").visible = false
 			lobby_entry.get_node("JoinButton").visible = false
 			continue
 		
@@ -333,6 +341,17 @@ func build_lobby_list():
 		lobby_entry.get_node("PingLabel").text = ""
 		lobby_entry.get_node("JoinButton").pressed.connect(on_friend_lobby_join_pressed.bind(steam_id, data[steam_id]))
 
+
+func on_avatar_loaded(user_id: int, avatar_size: int, avatar_buffer: PackedByteArray) -> void:
+	for lobby_entry in lobby_list_holder.get_children():
+		if not lobby_entry.get_node("NameLabel").text == Steam.getFriendPersonaName(user_id):
+			continue
+		
+		var avatar_image: Image = Image.create_from_data(avatar_size, avatar_size, false, Image.FORMAT_RGBA8, avatar_buffer)
+		
+		var avatar_texture: ImageTexture = ImageTexture.create_from_image(avatar_image)
+		
+		lobby_entry.get_node("AvatarImage").set_texture(avatar_texture)
 
 
 func on_friend_lobby_join_pressed(steam_id: int, lobby_id: int) -> bool:

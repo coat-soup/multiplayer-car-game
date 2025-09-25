@@ -134,7 +134,7 @@ static func parse_lobby_code(code: String) -> int:
 	return id
 
 
-func get_friends_in_lobbies() -> Dictionary:
+func get_friends_in_lobbies(return_gameless_friends : bool = false, return_offline_friends : bool = false) -> Dictionary:
 	var results: Dictionary = {}
 	
 	for i in range(0, Steam.getFriendCount()):
@@ -145,7 +145,9 @@ func get_friends_in_lobbies() -> Dictionary:
 		
 		if game_info.is_empty():
 			# This friend is not playing a game
-			continue
+			if Steam.getFriendPersonaState(steam_id) == Steam.PERSONA_STATE_OFFLINE:
+				if return_offline_friends: results[steam_id] = -3 # Offline
+			elif return_gameless_friends: results[steam_id] = -2 # Not in game
 		else:
 			# They are playing a game, check if it's the same game as ours
 			var app_id: int = game_info['id']
@@ -153,9 +155,9 @@ func get_friends_in_lobbies() -> Dictionary:
 			
 			if app_id != Steam.getAppID():
 				# Not in this game 
-				results[steam_id] = -1
+				results[steam_id] = -2
 			elif lobby is String or lobby == 0:
-				results[steam_id] = -2 # Not in a lobby
+				results[steam_id] = -1 # Not in a lobby
 			else:
 				results[steam_id] = lobby
 	

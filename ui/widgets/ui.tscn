@@ -467,16 +467,26 @@ theme = ExtResource("4_ol48f")
 theme_type_variation = &"GraphFrameTitleLabel"
 text = "Friend Lobbies"
 
-[node name="LobbyListHolder" type="VBoxContainer" parent="NetworkPanel"]
+[node name="LobbyListPanel" type="ScrollContainer" parent="NetworkPanel"]
 layout_mode = 2
-offset_left = 106.0
-offset_top = -272.0
-offset_right = 213.0
-offset_bottom = -72.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 86.0
+offset_top = -265.0
+offset_right = 671.0
+offset_bottom = 266.0
 
-[node name="LobbyEntry" parent="NetworkPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+[node name="LobbyListHolder" type="VBoxContainer" parent="NetworkPanel/LobbyListPanel"]
+layout_mode = 2
+
+[node name="LobbyEntry" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry2" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry3" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry4" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
 layout_mode = 2
 
 [node name="RefreshLobbies" type="Button" parent="NetworkPanel"]
