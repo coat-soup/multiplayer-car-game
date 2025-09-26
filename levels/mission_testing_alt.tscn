@@ -28,13 +28,13 @@
 [ext_resource type="Script" uid="uid://1552dwe33jmf" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
 [ext_resource type="Script" uid="uid://c1e8gagqxlh6y" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
 [ext_resource type="Script" uid="uid://bcn3qhax0sdi8" path="res://system/scripts/item_spawn_tester.gd" id="28_4fkui"]
-[ext_resource type="PackedScene" uid="uid://bhyxnxy63odi7" path="res://enemies/creatures/scenes/hammerhead_enemy.tscn" id="29_btqne"]
-[ext_resource type="PackedScene" uid="uid://davfqpyxnacaa" path="res://enemies/creatures/scenes/needler_enemy.tscn" id="30_44mqy"]
+[ext_resource type="ArrayMesh" uid="uid://dnvcrwijkq0vq" path="res://world/planets/nebula_test.obj" id="29_vvspy"]
+[ext_resource type="Material" uid="uid://dn8c4jjhnqxsr" path="res://world/planets/nebula_mat.tres" id="30_arpqv"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
 scene = ExtResource("6_np7op")
-level_amount_range = Vector2(8, 10)
+level_amount_range = Vector2(15, 20)
 size_multiplier_range = Vector2(0.5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4fkui"]
@@ -261,7 +261,12 @@ compositor = SubResource("Compositor_ld8yr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)
+visible = false
 shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 91.2894)
+light_energy = 0.0
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -281,10 +286,7 @@ spawn_path = NodePath("../EnemyManager")
 [node name="StatSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4fkui")
 
-[node name="HammerheadEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("29_btqne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.389, 68.4055, -22.6104)
-target = NodePath("../ShipHolder/SmallShip")
-
-[node name="NeedlerEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("30_44mqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.119, 68.6946, -18.5468)
-target = NodePath("../ShipHolder/SmallShip")
+[node name="NebulaTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+mesh = ExtResource("29_vvspy")
+surface_material_override/0 = ExtResource("30_arpqv")
