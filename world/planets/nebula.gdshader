@@ -16,6 +16,7 @@ render_mode
 	ambient_light_disabled,
 	depth_draw_opaque;
 
+
 uniform float vertex_mask_power = 1.0;
 uniform float vertex_mask_overlay = 0.0;
 uniform float albedo_strength = 1.0;
@@ -43,6 +44,8 @@ uniform float fade_power = 2.0;
 uniform float rim_exponent = 0.5;
 
 const float pi = 3.1415926535;
+
+uniform float transparency = 0.5;
 
 
 void fragment()
@@ -89,4 +92,10 @@ void fragment()
 		+ fade * (1.0-fade_far) * current // Mesh color between fade in and fade out
 		+ (fade_far) * (albedo_ambient.rgb) // Adjusted by mask
 		;
+	
+	EMISSION = ALBEDO;
+
+	//ALPHA = mix(1.0, (ALBEDO.r + ALBEDO.g + ALBEDO.b), transparency);
+	//ALPHA = (ALBEDO.r + ALBEDO.g + ALBEDO.b);
+	//ALPHA = 1.0;
 }

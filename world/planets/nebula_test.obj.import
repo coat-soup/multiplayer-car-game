@@ -4,14 +4,11 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://dnvcrwijkq0vq"
-path="res://.godot/imported/nebula_test.obj-05a5d28d0dee86b3b805a9858137d48b.mesh"
+valid=false
 
 [deps]
 
-files=["res://.godot/imported/nebula_test.obj-05a5d28d0dee86b3b805a9858137d48b.mesh"]
-
 source_file="res://world/planets/nebula_test.obj"
-dest_files=["res://.godot/imported/nebula_test.obj-05a5d28d0dee86b3b805a9858137d48b.mesh", "res://.godot/imported/nebula_test.obj-05a5d28d0dee86b3b805a9858137d48b.mesh"]
 
 [params]
 

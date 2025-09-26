@@ -28,8 +28,8 @@
 [ext_resource type="Script" uid="uid://1552dwe33jmf" path="res://vfx/scripts/cloud_compute.gd" id="22_n1pkx"]
 [ext_resource type="Script" uid="uid://c1e8gagqxlh6y" path="res://vfx/scripts/compositor_effect_test.gd" id="22_rh104"]
 [ext_resource type="Script" uid="uid://bcn3qhax0sdi8" path="res://system/scripts/item_spawn_tester.gd" id="28_4fkui"]
-[ext_resource type="ArrayMesh" uid="uid://dnvcrwijkq0vq" path="res://world/planets/nebula_test.obj" id="29_vvspy"]
-[ext_resource type="Material" uid="uid://dn8c4jjhnqxsr" path="res://world/planets/nebula_mat.tres" id="30_arpqv"]
+[ext_resource type="PackedScene" uid="uid://dc6g0gf7gs0yo" path="res://world/planets/nebula_test.glb" id="29_vvspy"]
+[ext_resource type="Material" uid="uid://dvn0uuvykvpu0" path="res://world/planets/nebula_mat_orange.tres" id="30_btqne"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
@@ -63,9 +63,8 @@ ambient_light_energy = 0.01
 tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 0.08
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.001
-volumetric_fog_albedo = Color(0.4089, 0.462872, 0.47, 1)
+volumetric_fog_albedo = Color(0.81, 0.3915, 0, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 1024.0
 volumetric_fog_ambient_inject = 0.13
@@ -264,9 +263,27 @@ transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75,
 visible = false
 shadow_enabled = true
 
-[node name="SpotLight3D" type="SpotLight3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 91.2894)
-light_energy = 0.0
+[node name="WorldLightOrange" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.312075, 0.837185, -0.449145, 0.927742, 0.370402, 0.045799, 0.204707, -0.402398, -0.892284, 0, 0, 0)
+light_color = Color(0.71483, 0.392503, 0.28069, 1)
+shadow_enabled = true
+
+[node name="WorldLightOrange2" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.858052, -0.145927, 0.492394, 0.00290001, 0.960142, 0.279497, -0.513554, -0.238395, 0.824275, 0, 0, 0)
+light_color = Color(0.71483, 0.392503, 0.28069, 1)
+shadow_enabled = true
+
+[node name="WorldLightGreen" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.559005, -0.825461, 0.0782878, 0.829073, -0.557852, 0.0379398, 0.012355, 0.0861147, 0.996208, 0, 0, 0)
+visible = false
+light_color = Color(0.341176, 0.533333, 0.533333, 1)
+shadow_enabled = true
+
+[node name="WorldLightGreen2" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.551774, -0.742798, -0.379204, -0.820779, 0.564273, 0.088985, 0.147877, 0.360342, -0.921024, 0, 0, 0)
+visible = false
+light_color = Color(0.341176, 0.533333, 0.533333, 1)
+shadow_enabled = true
 
 [node name="Entities" type="Node3D" parent="."]
 
@@ -286,7 +303,10 @@ spawn_path = NodePath("../EnemyManager")
 [node name="StatSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4fkui")
 
-[node name="NebulaTest" type="MeshInstance3D" parent="."]
+[node name="nebula_test" parent="." instance=ExtResource("29_vvspy")]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
-mesh = ExtResource("29_vvspy")
-surface_material_override/0 = ExtResource("30_arpqv")
+
+[node name="Mball_048" parent="nebula_test" index="0"]
+surface_material_override/0 = ExtResource("30_btqne")
+
+[editable path="nebula_test"]
