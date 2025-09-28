@@ -192,7 +192,7 @@ script = ExtResource("17_5p78q")
 ship = NodePath("..")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.10553, -9.84315, 20.0154)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.10553, 12.018, 4.45275)
 
 [node name="respawn_screen" parent="." instance=ExtResource("18_o4kef")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.40301, 10.4891, -0.853249)
@@ -341,6 +341,35 @@ texture = SubResource("ViewportTexture_kof4r")
 size = Vector2i(2560, 1440)
 
 [node name="PowerManagementPanel" parent="DisplayConsole2/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager", "display_panel") instance=ExtResource("40_0bg6f")]
+power_manager = NodePath("../../../../PowerManager")
+display_panel = NodePath("../../..")
+
+[node name="DisplayConsole3" parent="." instance=ExtResource("38_norgj")]
+transform = Transform3D(-0.707106, 0, 0.707106, 0, 1, 0, -0.707106, 0, -0.707106, 1.31981, 9.52441, 6.48451)
+
+[node name="Sprite3D" type="Sprite3D" parent="DisplayConsole3"]
+transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709295, 0.949728, 0)
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_xm8uo")
+
+[node name="SubViewport" type="SubViewport" parent="DisplayConsole3/Sprite3D"]
+size = Vector2i(2560, 1440)
+
+[node name="ComponentStatusPanel" parent="DisplayConsole3/Sprite3D/SubViewport" node_paths=PackedStringArray("component_manager") instance=ExtResource("39_gnwpj")]
+component_manager = NodePath("../../../../ComponentManager")
+
+[node name="DisplayConsole4" parent="." instance=ExtResource("38_norgj")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -1.32, 9.524, 6.485)
+
+[node name="Sprite3D" type="Sprite3D" parent="DisplayConsole4"]
+transform = Transform3D(-3.09634e-08, -0.294063, 0.299878, 1.28539e-08, 0.299878, 0.294063, -0.42, 3.08566e-08, -1.31081e-08, 0.0709292, 0.949728, 3.16495e-09)
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_kof4r")
+
+[node name="SubViewport" type="SubViewport" parent="DisplayConsole4/Sprite3D"]
+size = Vector2i(2560, 1440)
+
+[node name="PowerManagementPanel" parent="DisplayConsole4/Sprite3D/SubViewport" node_paths=PackedStringArray("power_manager", "display_panel") instance=ExtResource("40_0bg6f")]
 power_manager = NodePath("../../../../PowerManager")
 display_panel = NodePath("../../..")
 

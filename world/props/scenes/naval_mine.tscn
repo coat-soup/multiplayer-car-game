@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbldgvjmhw8q3"]
+
+[ext_resource type="PackedScene" uid="uid://dpkx3oijjgya3" path="res://world/props/models/naval_mine.glb" id="1_qea0u"]
+[ext_resource type="Script" uid="uid://7rgrpun7eqb1" path="res://world/props/scripts/naval_mine.gd" id="2_gqwjy"]
+[ext_resource type="Script" uid="uid://c5crtodrr3gbq" path="res://system/scripts/health.gd" id="3_y5ubt"]
+[ext_resource type="PackedScene" uid="uid://cf6omujhtc7g7" path="res://ship/systems/radar/radar_signature.tscn" id="4_0e42n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qea0u"]
+albedo_color = Color(0.176419, 0.176419, 0.176419, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y5ubt"]
+radius = 60.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d1s17"]
+radius = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0e42n"]
+radius = 1.565
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0e42n"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="naval_mine" instance=ExtResource("1_qea0u")]
+script = ExtResource("2_gqwjy")
+
+[node name="Sphere" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_001" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_002" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_003" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_004" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_005" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_006" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="Cylinder_007" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qea0u")
+
+[node name="HomingTrigger" type="Area3D" parent="." index="9"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HomingTrigger" index="0"]
+shape = SubResource("SphereShape3D_y5ubt")
+
+[node name="DetonateTrigger" type="Area3D" parent="." index="10"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetonateTrigger" index="0"]
+shape = SubResource("SphereShape3D_d1s17")
+
+[node name="Hitbox" type="StaticBody3D" parent="." index="11"]
+
+[node name="Health" type="Node" parent="Hitbox" index="0"]
+script = ExtResource("3_y5ubt")
+metadata/_custom_type_script = "uid://c5crtodrr3gbq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="1"]
+shape = SubResource("SphereShape3D_0e42n")
+
+[node name="RadarSignature" parent="." index="12" node_paths=PackedStringArray("health_node") instance=ExtResource("4_0e42n")]
+transform = Transform3D(3.27886, 0, 0, 0, 3.27886, 0, 0, 0, 3.27886, 0, 0, 0)
+visible = false
+signature_name = "Mine"
+emission_strength = 200.0
+relation = 2
+health_node = NodePath("../Hitbox/Health")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="13"]
+replication_config = SubResource("SceneReplicationConfig_0e42n")

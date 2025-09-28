@@ -36,6 +36,7 @@ func passive_scan():
 			tracked_signatures.append(signature)
 			tracked_signature.emit(signature)
 			signature.terminated.connect(on_signature_terminated.bind(signature))
+			#signature.tree_exited.connect(on_signature_terminated.bind(signature))
 			#print("TRACKING ", signature.signature_name)
 		
 		elif tracked_id != -1 and strength <= untrack_emission_per_meter:
@@ -51,6 +52,7 @@ func get_relative_signature_strenth(signature : RadarSignature) -> float:
 
 
 func on_signature_terminated(sig : RadarSignature):
+	print("calling lose sig")
 	lose_signature(sig)
 
 
@@ -64,3 +66,4 @@ func lose_signature(sig : RadarSignature, id = -1):
 	
 	tracked_signatures.remove_at(id)
 	lost_signature.emit(sig, id)
+	print("losing signature ", id, ": ", sig)

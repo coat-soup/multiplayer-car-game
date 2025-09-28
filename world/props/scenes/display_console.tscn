@@ -25,3 +25,5 @@ shape = SubResource("BoxShape3D_stunp")
 
 [node name="CameraTransform" type="Marker3D" parent="."]
 transform = Transform3D(-4.47035e-08, -0.669623, 0.742701, 5.96046e-08, 0.742701, 0.669623, -1, 1.49012e-08, 0, 0.54791, 1.38049, 0)
+
+[node name="CameraRT" type="RemoteTransform3D" parent="."]

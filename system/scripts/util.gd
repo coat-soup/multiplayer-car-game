@@ -46,7 +46,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 	for result in results:
 		var collider = result.collider
 		if !damaged.has(collider):
-			print(collider.name)
+			#print(collider.name)
 			var health = collider.get_node_or_null("Health") as Health
 			if health:
 				health.take_damage.rpc(damage, source_id)
@@ -57,9 +57,11 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			player.movement_manager.add_velocity_impulse.rpc(30 * (player.global_position - position).normalized())
 			print("Hit player " + player.name)
 		
-		var v := collider as VehicleController
-		if v:
-			v.apply_impulse_rpc.rpc_id(v.get_multiplayer_authority(), (15 * (v.global_position - position).normalized()), position)
+		var ship := collider as ShipMovementClone
+		if ship:
+			for i in range(max(1, radius/5.0)):
+				ship.ship_manager.component_manager.take_damage_at_point(damage, position, source_id)
+			
 	
 	
 	spawn_particles_for_time(position, particles, parent, 1.0)

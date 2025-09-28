@@ -17,7 +17,9 @@ func take_damage_at_point(damage : int, point : Vector3, source : int):
 			else: weights.append(0)
 		
 		var selected = Util.weighted_random(components, weights)
-		if components[selected].health : components[selected].health.take_damage.rpc(damage, source) # can sometimes select non-damagable components if all components broken (all weights=0)
+		if components[selected].health:
+			components[selected].health.take_damage.rpc(damage, source) # can sometimes select non-damagable components if all components broken (all weights=0)
+			print("ship damaging ", components[selected])
 	
 	
 	for player in get_tree().get_nodes_in_group("player"):
@@ -30,7 +32,7 @@ func take_damage_at_point(damage : int, point : Vector3, source : int):
 	add_child(fx)
 	fx.global_position = point
 	var audio = fx.get_node("Audio") as AudioStreamPlayer3D
-	audio.pitch_scale = lerp(1.5, 0.7, damage/30.0) + randf_range(-0.1, 0.1)
+	audio.pitch_scale = clamp(lerp(1.5, 0.7, damage/30.0), 0.7, 1.5) + randf_range(-0.1, 0.1)
 	audio.play()
 	await audio.finished
 	fx.queue_free()

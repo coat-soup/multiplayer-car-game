@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bxfgwvu4c6fo0"]
+[gd_scene load_steps=42 format=3 uid="uid://bxfgwvu4c6fo0"]
 
 [ext_resource type="Script" uid="uid://b7v1homsv2g8h" path="res://system/scripts/game_manager.gd" id="1_b72io"]
 [ext_resource type="Script" uid="uid://2k28pm4evh6i" path="res://system/scripts/network_manager.gd" id="2_521wb"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cr88xshma2wh2" path="res://world/POIs/scenes/POI_asteroid_cluster.tscn" id="6_np7op"]
 [ext_resource type="Script" uid="uid://c55s76ikmv5n4" path="res://system/item_physics_dupe_manager.gd" id="7_ej4lj"]
 [ext_resource type="Script" uid="uid://diut84o8dxae1" path="res://system/scripts/enemy_manager.gd" id="8_6h73w"]
+[ext_resource type="PackedScene" uid="uid://b7j0vvp4u7grv" path="res://world/POIs/scenes/POI_mine_cluster.tscn" id="8_arpqv"]
 [ext_resource type="Script" uid="uid://5xpia22d6mha" path="res://enemies/creatures/scripts/enemy_creature_data.gd" id="9_hf5xa"]
 [ext_resource type="PackedScene" uid="uid://blr7e5cm7q8ts" path="res://ship/smallship_movement_clone.tscn" id="9_vonv0"]
 [ext_resource type="PackedScene" uid="uid://dr4yd6t4v6g1r" path="res://ship/smallship.tscn" id="10_go3cm"]
@@ -30,12 +31,20 @@
 [ext_resource type="Script" uid="uid://bcn3qhax0sdi8" path="res://system/scripts/item_spawn_tester.gd" id="28_4fkui"]
 [ext_resource type="PackedScene" uid="uid://dc6g0gf7gs0yo" path="res://world/planets/nebula_test.glb" id="29_vvspy"]
 [ext_resource type="Material" uid="uid://dvn0uuvykvpu0" path="res://world/planets/nebula_mat_orange.tres" id="30_btqne"]
+[ext_resource type="PackedScene" uid="uid://dbldgvjmhw8q3" path="res://world/props/scenes/naval_mine.tscn" id="31_44mqy"]
 
 [sub_resource type="Resource" id="Resource_oefty"]
 script = ExtResource("5_m7aus")
 scene = ExtResource("6_np7op")
 level_amount_range = Vector2(15, 20)
 size_multiplier_range = Vector2(0.5, 2)
+
+[sub_resource type="Resource" id="Resource_0a71w"]
+script = ExtResource("5_m7aus")
+scene = ExtResource("8_arpqv")
+level_amount_range = Vector2(10, 20)
+size_multiplier_range = Vector2(0.5, 2)
+metadata/_custom_type_script = "uid://cgf10vecwx63e"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4fkui"]
 
@@ -113,7 +122,7 @@ transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 
 [node name="LevelManager" type="Node3D" parent="." node_paths=PackedStringArray("network_manager", "mission_manager", "ship", "item_physics_manager", "enemy_manager", "item_spawner")]
 script = ExtResource("3_xtqgv")
 friendly_station = ExtResource("4_xbgqd")
-POIs = Array[ExtResource("5_m7aus")]([SubResource("Resource_oefty")])
+POIs = Array[ExtResource("5_m7aus")]([SubResource("Resource_oefty"), SubResource("Resource_0a71w")])
 network_manager = NodePath("../NetworkManager")
 mission_manager = NodePath("../MissionManager")
 ship = NodePath("../ShipHolder/SmallShip")
@@ -308,5 +317,8 @@ transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
 
 [node name="Mball_048" parent="nebula_test" index="0"]
 surface_material_override/0 = ExtResource("30_btqne")
+
+[node name="naval_mine" parent="." instance=ExtResource("31_44mqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8032, -0.205978, 129.317)
 
 [editable path="nebula_test"]

@@ -13,6 +13,8 @@ var cam_lerp_time = 0.2
 @onready var sub_viewport: SubViewport = $"Sprite3D/SubViewport"
 @onready var sprite_3d: Sprite3D = $"Sprite3D"
 
+@onready var camera_rt: RemoteTransform3D = $CameraRT
+
 
 func _ready() -> void:
 	interactable.interacted.connect(on_interacted)
@@ -22,8 +24,9 @@ func _process(delta: float) -> void:
 	if camera_lerp_timer >= 0 and focused_player:
 		camera_lerp_timer = max(0, camera_lerp_timer - delta)
 		var percent = camera_lerp_timer/cam_lerp_time if !is_focused else 1 - camera_lerp_timer/cam_lerp_time
-		focused_player.camera.position = lerp(Vector3.ZERO, focused_player.camera.get_parent_node_3d().to_local(camera_focus_transorm.global_position), percent)
-		focused_player.camera.rotation = lerp(Vector3.ZERO, (focused_player.camera.get_parent_node_3d().global_basis.inverse() * camera_focus_transorm.global_basis).get_euler(), percent)
+		camera_rt.position = lerp(to_local(focused_player.camera.get_parent_node_3d().global_position), camera_focus_transorm.position, percent)
+		camera_rt.rotation = lerp((global_basis.inverse() * focused_player.camera.get_parent_node_3d().global_basis).get_euler(), camera_focus_transorm.rotation, percent)
+	elif camera_rt.remote_path != NodePath(""): camera_rt.remote_path = ""
 
 
 func _input(event: InputEvent) -> void:
@@ -78,6 +81,7 @@ func toggle_focus(source):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		focused_player.active = false
 		interactable.active = false
+		camera_rt.remote_path = focused_player.camera.get_path()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		focused_player.active = true

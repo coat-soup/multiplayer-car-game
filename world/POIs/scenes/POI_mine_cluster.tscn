@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7j0vvp4u7grv"]
+
+[ext_resource type="Script" uid="uid://cworvjouqcrne" path="res://world/POIs/scripts/POI_mine_cluster.gd" id="1_jd6tb"]
+
+[node name="PoiMineCluster" type="Node3D"]
+script = ExtResource("1_jd6tb")
+POI_name = "Mine Cluster"
